@@ -1,0 +1,61 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="txtBrand_Name_ENg" required name="Brand_Name_ENg" type="text" class="form-control" placeholder="Brand Name Eng" 
+        (input)="resultChanged()" [(ngModel)]="brand.Brand_Name_ENg">
+    </div>
+    <div class="col-md-3">
+        <input id="txtBrand_Code" required name="txtBrandCode" type="text" class="form-control" placeholder="Brand Code"
+        (input)="resultChanged()" [(ngModel)]="brand.Brand_Code">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Brand" routerLink="/Brand"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+    </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Brand Id</th>
+        <th>Brand Code</th>
+        <th>Brand Name ENg</th>
+        <th>Brand Name Uni</th>
+        <th>Active</th>
+        <th>Creation Date</th>
+        <th>Created By</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let brand of brands">
+        <td>
+          <div>{{brand.Brand_Id}}</div>
+        </td>
+        <td>
+          <div>{{brand.Brand_Code}}</div>
+        </td>
+        <td>
+          {{brand.Brand_Name_ENg}}
+        </td>
+        <td>
+          <label class="col-md-3 col-form-label" style="text-anchor: unset">{{brand.Brand_Name_Uni}}</label>
+        </td>
+        <td [ngSwitch]="brand.IsActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td>
+          {{ brand.CreDate}}
+        </td>
+        <td>
+          {{ brand.CreatedBy }}
+        </td>
+        <td [ngSwitch]="1">
+          <button class="btn btn-primary" [disabled]="brand.Brand_Id === '0'"
+            [routerLink]="['/Brand/',brand.Brand_Id]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

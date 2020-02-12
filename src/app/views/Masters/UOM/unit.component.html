@@ -1,0 +1,59 @@
+<form #UOMForm="ngForm" (ngSubmit)="save(UOMForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>UOM</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtUOMCode">UOM Code</label>
+                            <div class="col-sm-4">
+                                <input id="txtUOMCode" [(ngModel)]="uom.UOM_Id" required name="UOMCode" type="text"
+                                    class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtUOMDescriptionEn">UOM Description
+                                (Eng)</label>
+                            <div class="col-sm-4">
+                                <input id="txtUOMDescriptionEn" required name="UOMDescriptionEn" type="text"
+                                    [(ngModel)]="uom.UOM_Description" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtUOMDescriptionUni">UOM Description
+                                (Uni)</label>
+                            <div class="col-sm-4">
+                                <input id="txtUOMDescriptionUni" required name="UOMDescriptionUni" type="text"
+                                    [(ngModel)]="uom.UOM_ShortDescription" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Reset</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div> {{uom | json}}</div>

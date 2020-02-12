@@ -1,0 +1,59 @@
+<div class="form-group row">
+  <div class="col-md-3">
+    <input id="txtUserName" required name="UserName" type="text" class="form-control" placeholder="User Name"
+      (input)="resultChanged()" [(ngModel)]="user1.UserName">
+  </div>
+  <div class="col-md-3">
+    <input id="txtUserId" required name="UserId" type="text" class="form-control" placeholder="UserId"
+      (input)="resultChanged()" [(ngModel)]="user1.UserNo">
+  </div>
+  <div class="col-md-1">
+    <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create User"
+      routerLink="/CreateUser/0"></button>
+  </div>
+  <div class="col-md-1">
+    <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px"
+      alt="Export To Excel" (click)="ExportToExcel()">
+  </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+  <thead class="thead-light">
+    <tr>
+      <th>User No</th>
+      <th>User Name</th>
+      <th>UserId</th>
+      <th>Active</th>
+      <th>Creation Date</th>
+      <th>Created By</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of user">
+      <td>
+        <div>{{u.UserNo}}</div>
+      </td>
+      <td>
+        {{u.UserName}}
+      </td>
+      <td>
+        <label class="col-md-3 col-form-label" style="text-anchor: unset">{{u.UserID}}</label>
+      </td>
+      <td [ngSwitch]="u.IsActive">
+        <span *ngSwitchCase="true">Yes</span>
+        <span *ngSwitchDefault>No</span>
+      </td>
+      <td>
+        {{ u.CreDate}}
+      </td>
+      <td>
+        {{ u.CreUser }}
+      </td>
+      <td [ngSwitch]="1">
+        <button class="btn btn-primary" [disabled]="u.UserNo === '0'"
+          [routerLink]="['/EditUser/',u.UserNo]">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

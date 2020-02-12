@@ -1,0 +1,57 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="txtUnitDescription" required name="UnitDescription" type="text" class="form-control" placeholder="Unit Short Description" 
+        (input)="resultChanged()" [(ngModel)]="country.UOM_ShortDescription">
+    </div>
+    <div class="col-md-3">
+        <input id="txtUnitId" required name="txtUnitId" type="text" class="form-control" placeholder="Unit Id"
+        (input)="resultChanged()" [(ngModel)]="country.UOM_Id">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create User" routerLink="/Country"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+    </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Unit Id</th>
+        <th>Unit Short Description</th>
+        <th>Unit Description</th>
+        <th>Active</th>
+        <th>Creation Date</th>
+        <th>Created By</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let countr of countrys">
+        <td>
+          <div>{{countr.Country_Id}}</div>
+        </td>
+        <td>
+          {{countr.Country_Name_ENg}}
+        </td>
+        <td>
+          <label class="col-md-3 col-form-label" style="text-anchor: unset">{{countr.Country_Name_Uni}}</label>
+        </td>
+        <td [ngSwitch]="countr.IsActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td>
+          {{ countr.CreDate}}
+        </td>
+        <td>
+          {{ countr.CreatedBy }}
+        </td>
+        <td [ngSwitch]="1">
+          <button class="btn btn-primary" [disabled]="countr.Country_Id === '0'"
+            [routerLink]="['/Country/',countr.Country_Id]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
