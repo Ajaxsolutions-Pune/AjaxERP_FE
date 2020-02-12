@@ -9,4 +9,5 @@ export class State {
     CreatedBy: string;
     ModifiedBy: string;
     ModDate: string;
+
 }
