@@ -62,6 +62,9 @@ import { UOM } from './Compound/Module/Masters/UOM.model';
 import { BrandListComponent } from './views/Masters/Brand/brand-list.component';
 import { BrandService } from './Compound/Services/Masters/BrandService';
 import { BrandComponent } from './views/Masters/Brand/brand.component';
+import { StateComponent } from './views/Masters/State/state.component';
+import { StateService } from './Compound/Services/Masters/StateService';
+import { StateListComponent } from './views/Masters/State/state-list.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -98,7 +101,9 @@ import { BrandComponent } from './views/Masters/Brand/brand.component';
     UnitComponent,
     CountryListComponent,
     BrandListComponent,
-    BrandComponent
+    BrandComponent,
+    StateComponent,
+    StateListComponent
   ],
   providers: [
     LogIn,
@@ -110,7 +115,7 @@ import { BrandComponent } from './views/Masters/Brand/brand.component';
     BnNgIdleService,
     DashboardService,
     UOMService,
-    CookieService, BrandService,
+    CookieService, BrandService, StateService,
     DefaultLayoutComponent,
     {
       provide: LocationStrategy,

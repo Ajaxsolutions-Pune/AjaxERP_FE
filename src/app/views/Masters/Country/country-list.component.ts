@@ -18,14 +18,14 @@ export class CountryListComponent implements OnInit {
   country: Country;
 
   constructor(private _router: Router,
-    private unitService: CountryService,
+    private countryService: CountryService,
     private route: ActivatedRoute) {
-    this.countrys = this.unitService.getCountrys();
+    this.countrys = this.countryService.getCountrys();
     this.WithoutFiltercountrys = this.countrys;
   }
 
   ngOnInit() {
-    this.countrys = this.unitService.getCountrys();
+    this.countrys = this.countryService.getCountrys();
     this.WithoutFiltercountrys = this.countrys;
     this.country = {
       Country_Id: null,

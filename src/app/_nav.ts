@@ -63,6 +63,11 @@ export const navItems: NavData[] = [
         name: 'Brand List',
         url: '/BrandList',
         icon: 'icon-puzzle'
+      },
+      {
+        name: 'State List',
+        url: '/StateList',
+        icon: 'icon-puzzle'
       }
 
     ]

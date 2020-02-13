@@ -16,6 +16,8 @@ import { CountryComponent } from './views/Masters/Country/country.component';
 import { CountryListComponent } from './views/Masters/Country/country-list.component';
 import { BrandListComponent } from './views/Masters/Brand/brand-list.component';
 import { BrandComponent } from './views/Masters/Brand/brand.component';
+import { StateComponent } from './views/Masters/State/state.component';
+import { StateListComponent } from './views/Masters/State/state-list.component';
 
 export const routes: Routes = [
   {
@@ -135,6 +137,27 @@ export const routes: Routes = [
         component: BrandComponent,
         data: {
           title: 'Update Brand'
+        }
+      },
+      {
+        path: 'State',
+        component: StateComponent,
+        data: {
+          title: 'Create State'
+        }
+      },
+      {
+        path: 'State/:id',
+        component: StateComponent,
+        data: {
+          title: 'Update Brand'
+        }
+      },
+      {
+        path: 'StateList',
+        component: StateListComponent,
+        data: {
+          title: 'State List'
         }
       },
     ]
