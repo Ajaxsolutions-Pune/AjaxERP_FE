@@ -22,18 +22,16 @@
         <th>State Name Eng</th>
         <th>State Name Uni</th>
         <th>Active</th>
-        <th>Creation Date</th>
-        <th>Created By</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let state1 of states">
         <td>
-          <div>{{state1.State_Id}}</div>
+          <div>{{state1.state_Code}}</div>
         </td>
         <td>
-          {{state1.State_Name_ENg}}
+         asd
         </td>
         <td>
           <label class="col-md-3 col-form-label" style="text-anchor: unset">{{state1.State_Name_Uni}}</label>
@@ -41,12 +39,6 @@
         <td [ngSwitch]="state1.IsActive">
           <span *ngSwitchCase="true">Yes</span>
           <span *ngSwitchDefault>No</span>
-        </td>
-        <td>
-          {{ state1.CreDate}}
-        </td>
-        <td>
-          {{ state1.CreatedBy }}
         </td>
         <td [ngSwitch]="1">
           <button class="btn btn-primary" [disabled]="state1.State_Id === '0'"

@@ -3,7 +3,6 @@ import { Observable, throwError } from 'rxjs';
 import { map, switchMap, debounceTime, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
-import { Country } from '../../Module/Masters/Country.model';
 import { Brand } from '../../Module/Masters/Brand.model';
 
 @Injectable()
@@ -14,35 +13,25 @@ export class BrandService {
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
         this.brands = [{
-            Brand_Id: 1,
-            Brand_Code: 'Brand_1',
-            Brand_Name_ENg: 'Meswak',
-            Brand_Name_Uni: 'मिस्वाक',
-            CreatedBy: 'SUPERADMIN',
-            ModifiedBy: 'SUPERADMIN',
-            CreDate: '08-03-2019',
-            ModDate: null,
-            IsActive: true
+            brandCode: 'Brand_1',
+            brandDesc: 'Brand_1',
+            brandDescUni: 'कोलगेट',
+            IsActive: 1
         }, {
-            Brand_Id: 2,
-            Brand_Code: 'Brand_2',
-            Brand_Name_ENg: 'Colgate',
-            Brand_Name_Uni: 'कोलगेट',
-            CreatedBy: 'SUPERADMIN',
-            ModifiedBy: 'SUPERADMIN',
-            CreDate: '08-03-2019',
-            ModDate: null,
-            IsActive: true
+            brandCode: 'Brand_1',
+            brandDesc: 'Brand_1',
+            brandDescUni: 'कोलगेट',
+            IsActive: 1
         },
         ];
     }
     ListBrand: Brand[];
-    getBrands(): Brand[] {
-        return this.brands;
+    getBrands(): Observable<Brand[]> {
+        return this.httpClient.get<Brand[]>(this.str + '/Brand/getList');
     }
 
-    getBrand(BrandId: number): Brand[] {
-        this.ListBrand = this.brands.filter(brands => brands.Brand_Id.toString().indexOf(BrandId.toString()) !== -1);
+    getBrand(brandCode: string): Brand[] {
+        this.ListBrand = this.brands.filter(brands => brands.brandCode.toString().indexOf(brandCode.toString()) !== -1);
         return this.brands;
     }
     getMaxBrandId(): number {
@@ -51,21 +40,22 @@ export class BrandService {
 
     getRole(): void {
     }
-    Save(brand: Brand): Brand {
-        this.brands.push(brand);
-        return brand;
-
+    Save(brand: Brand): Observable<Brand> {
+        console.log(brand.brandCode);
+        if (brand.brandCode === null) {
+            const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+            return this.httpClient.post<Brand>(this.str + '/Brand',
+                brand, httpOptions).pipe(catchError(this.handleError));
+        }
     }
 
     Update(brand: Brand): string {
-        const Index = this.brands.findIndex(a => a.Brand_Id === brand.Brand_Id);
+        const Index = this.brands.findIndex(a => a.brandCode === brand.brandCode);
         this.brands[Index] = brand;
         return '';
     }
     private handleError(errorResponse: HttpErrorResponse) {
-        if (errorResponse.error instanceof ErrorEvent) {
-            console.error('client side error', errorResponse.error.message);
-        }
+        console.error('client side error', errorResponse.error.message);
         return throwError('d');
     }
 }

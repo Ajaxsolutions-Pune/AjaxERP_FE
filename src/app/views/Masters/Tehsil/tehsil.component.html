@@ -1,0 +1,80 @@
+<form #tehsilForm="ngForm" (ngSubmit)="save(tehsilForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Tehsil</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtTehsilCode">Tehsil_Code</label>
+                            <div class="col-sm-4">
+                                <input id="Tehsil_Code" [(ngModel)]="tehsil.Tehsil_Code" name="Tehsil_Code" type="text"
+                                    class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtTehsil_DescriptionEng">TehsilName_ENG
+                                (Eng)</label>
+                            <div class="col-sm-4">
+                                <input id="txtTehsilNameEng" [(ngModel)]="tehsil.TehsilName_ENG" required name="TehsilNameEng"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtTehsilNameUni">
+                                TehsilName_UNI
+                                (Uni)</label>
+                            <div class="col-sm-4">
+                                <input id="txtTehsilNameUni" [(ngModel)]="tehsil.TehsilName_UNI" required name="TehsilNameUni"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3"></div>
+                          <label class="col-md-2 col-form-label">
+                            Tehsil</label>
+                          <div class="col-md-4">
+                            <select id="DistrictCode" name="DistrictCode" [(ngModel)]="tehsil.districtCode" class="form-control form-control-sm">
+                              <option value="-1">Select District Code</option>
+                              <option *ngFor="let Drpobj of districtCodeDrpList" [value]="Drpobj.districtCode">
+                                {{Drpobj.districtName}}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                            <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="chkTehsilActive">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="tehsil.IsActive" name="chkTehsilActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Reset</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div style="visibility: visible;"> {{tehsil | json}}</div>

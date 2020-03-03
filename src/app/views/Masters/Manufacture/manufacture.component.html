@@ -1,0 +1,65 @@
+<form  #MFGForm="ngForm" (ngSubmit)="save(MFGForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Manufacturer</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtMFGCode">Manufacturer Code</label>
+                            <div class="col-sm-4">
+                                <input id="txtMFGCode" [(ngModel)]="MFG.manufactureCode" name="MFGCode" type="text"
+                                    class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtMFGNameEn">Manufacturer Name
+                                (Eng)</label>
+                            <div class="col-sm-4">
+                                <input id="txtMFGEn"  name="MFGEn" type="text"  [(ngModel)]="MFG.manufactureDesc"
+                                   class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtMFGNameUni">Manufacturer Name
+                                (Uni)</label>
+                            <div class="col-sm-4">
+                                <input id="txtMFGNameUni"  name="MFGNameUni" type="text" [(ngModel)]="MFG.manufactureDescUni"
+                                  class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="chkMFGActive">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="MFG.isActive" name="chkMFGActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Reset</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>

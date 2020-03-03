@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { State } from '../../../Compound/Module/Masters/State.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StateService } from '../../../Compound/Services/Masters/StateService';
+import { StateEntity } from '../../../Compound/Module/Masters/StateEntity.model';
+import { StateTransfarmer } from '../../../Compound/Transformer/Masters/State.transformer';
 
 @Component({
   selector: 'app-state-list',
@@ -11,6 +13,7 @@ import { StateService } from '../../../Compound/Services/Masters/StateService';
 export class StateListComponent implements OnInit {
   @Input() stateInput: State;
   states: State[];
+  statesEntity: StateEntity[];
 
   WithoutFilterstates: State[];
   Resultstates: State[];
@@ -19,32 +22,37 @@ export class StateListComponent implements OnInit {
 
   constructor(private _router: Router,
     private stateService: StateService,
+    private stateTransfarmer: StateTransfarmer,
     private route: ActivatedRoute) {
-    this.states = this.stateService.getStates();
-    this.WithoutFilterstates = this.states;
+    this.statesEntity = this.route.snapshot.data['StateList'];
+    this.states = this.stateTransfarmer.StateTransfarmer(this.statesEntity);
   }
 
   ngOnInit() {
-    this.states = this.stateService.getStates();
-    this.WithoutFilterstates = this.states;
+    this.stateService.getStates().subscribe(
+      (par) => this.statesEntity = par,
+      (err: any) => console.log(err));
     this.state = {
-      Country_Id: null,
-      State_Code: null,
+      Country_Code: null,
+      CreDate: null,
+      CreatedBy: null,
+      IsActive: null,
+      ModDate: null,
+      ModifiedBy: null,
       State_Id: null,
       State_Name_ENg: null,
       State_Name_Uni: null,
-      CreatedBy: null,
-      ModifiedBy: null,
-      CreDate: null,
-      ModDate: null,
-      IsActive: null
+      isAuto: null,
+      state_Code: null,
     };
+    console.log(this.statesEntity);
+    this.states = this.stateTransfarmer.StateTransfarmer(this.statesEntity);
+    this.WithoutFilterstates = this.states;
   }
 
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultstates = this.WithoutFilterstates;
-    console.log(this.state.State_Id);
     if (this.state.State_Name_ENg !== null && this.state.State_Name_ENg !== '') {
       this.Resultstates = this.Resultstates.filter(SubResultcountry =>
         SubResultcountry.State_Name_ENg.toLowerCase().indexOf(this.state.State_Name_ENg.toString().toLowerCase()) !== -1);
@@ -52,7 +60,7 @@ export class StateListComponent implements OnInit {
     }
     if (this.state.State_Id !== null && this.state.State_Id.toString() !== '') {
       this.Resultstates = this.Resultstates.filter(SubResultcountry =>
-        SubResultcountry.Country_Id.toString().toLowerCase().indexOf(this.state.State_Id.toString().toLowerCase()) !== -1);
+        SubResultcountry.Country_Code.toString().toLowerCase().indexOf(this.state.State_Id.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
     if (this.SerachCri === 0) {

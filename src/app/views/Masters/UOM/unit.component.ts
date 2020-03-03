@@ -24,36 +24,42 @@ export class UnitComponent implements OnInit {
     console.log(status);
 
   }
-  save(uomForm: NgForm): void {
-    if (status !== 'Update') {
-      this.UomService.Save(this.uom);
-    } else {
-      this.UomService.Update(this.uom);
-    }
-    this.router.navigate(['UnitList']);
 
+  save(userForm: NgForm): void {
+    if (this.uom.id === null) {
+      this.UomService.Save(this.uom).subscribe(
+        () => {
+          userForm.reset();
+          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+            'Data saved successfully !', 'modal-info');
+          this.router.navigate(['UnitList']);
+        }
+      );
+    } else {
+      // this.UomService.UpdateUser(this.uom).subscribe(data => this.str = data);
+      // userForm.reset();
+      // this.defaultLayoutComponent.Massage('Update Sucsessfuly',
+      //  'Data saved successfully !', 'modal-info');
+      // this.router.navigate(['UserList']);
+    }
   }
 
   private getUom(Id: number) {
     this.uom = {
-      UOM_Id: null,
-      UOM_Description: null,
-      UOM_ShortDescription: null,
+      id: null,
+      uomCode: null,
+      uomDesc: null,
       CreatedBy: null,
       ModifiedBy: null,
-      CreDate: null,
-      ModDate: null,
       IsActive: null
     };
     if (Id !== null && Id === 0) {
       this.uom = {
-        UOM_Id: null,
-        UOM_Description: null,
-        UOM_ShortDescription: null,
+        id: null,
+        uomCode: null,
+        uomDesc: null,
         CreatedBy: null,
         ModifiedBy: null,
-        CreDate: null,
-        ModDate: null,
         IsActive: null
       };
 

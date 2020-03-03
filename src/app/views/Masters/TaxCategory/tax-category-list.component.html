@@ -1,0 +1,51 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="taxCategoryDescription" name="TaxCategoryDescription" type="text"
+        (input)="resultChanged()"  [(ngModel)]="TaxCategory.TaxCategory_Description"
+         class="form-control" placeholder="TaxCategory Name" 
+       >
+    </div>
+    <div class="col-md-3">
+        <input id="CastCategoryCode"
+        (input)="resultChanged()"  [(ngModel)]="TaxCategory.TaxCategory_Code"
+         name="txtCastCategoryCode" type="text" class="form-control"
+          placeholder="TaxCategory Code">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create User"
+         routerLink="/TaxCategory"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png"
+         height="30px" width="30px" alt="Export To Excel">
+    </div>
+  </div>
+  
+  <table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Tax Category Code</th>
+        <th>Tax Category Description</th>
+        <th>Active</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let obj of taxcategorys">
+        <td>
+          <div>{{obj.TaxCategory_Code}}</div>
+        </td>
+        <td>
+          <label class="col-md-3 col-form-label" style="text-anchor: unset">{{obj.TaxCategory_Description}}</label>
+        </td>
+        <td [ngSwitch]="obj.IsActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td>
+          <button class="btn btn-primary"
+            [routerLink]="['/TaxCategory/',obj.Id]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

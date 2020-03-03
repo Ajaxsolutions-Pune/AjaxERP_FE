@@ -39,8 +39,9 @@ export class StateComponent implements OnInit {
 
   private getstates(Id: number) {
     this.state = {
-      Country_Id: null,
-      State_Code: null,
+      Country_Code: '1',
+      isAuto: '1',
+      state_Code: null,
       State_Id: null,
       State_Name_ENg: null,
       State_Name_Uni: null,
@@ -53,8 +54,9 @@ export class StateComponent implements OnInit {
     };
     if (Id === null || Id === 0) {
       this.state = {
-        Country_Id: null,
-        State_Code: null,
+        Country_Code: '1',
+        isAuto: '1',
+        state_Code: null,
         State_Id: null,
         State_Name_ENg: null,
         State_Name_Uni: null,

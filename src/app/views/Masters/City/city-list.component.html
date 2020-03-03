@@ -1,0 +1,51 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="txtCityName" name="CityName" type="text"
+        (input)="resultChanged()"  [(ngModel)]="city.City_Name_ENG"
+         class="form-control" placeholder="City Name" 
+       >
+    </div>
+    <div class="col-md-3">
+        <input id="txtCityCode"
+        (input)="resultChanged()"  [(ngModel)]="city.City_Code"
+         name="txtCityCode" type="text" class="form-control"
+          placeholder="City Code">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create User"
+         routerLink="/City"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png"
+         height="30px" width="30px" alt="Export To Excel">
+    </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>City Code</th>
+        <th>City Description</th>
+        <th>Active</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let city of citys">
+        <td>
+          <div>{{city.City_Code}}</div>
+        </td>
+        <td>
+          <label class="col-md-3 col-form-label" style="text-anchor: unset">{{city.City_Name_ENG}}</label>
+        </td>
+        <td [ngSwitch]="city.IsActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td>
+          <button class="btn btn-primary"
+            [routerLink]="['/City/',city.ID]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

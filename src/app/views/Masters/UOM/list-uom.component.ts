@@ -20,46 +20,46 @@ export class ListUOMComponent implements OnInit {
   constructor(private _router: Router,
     private unitService: UOMService,
     private route: ActivatedRoute) {
-    this.Units = this.unitService.getUnits();
+    this.unitService.getUnits().subscribe(
+      (par) => this.Units = par,
+      (err: any) => console.log(err));
+
+    // this.Units = this.unitService.getUnits();
     this.WithoutFilterUnits = this.Units;
   }
 
   ngOnInit() {
-    this.Units = this.unitService.getUnits();
+    this.unitService.getUnits().subscribe(
+      (par) => this.Units = par,
+      (err: any) => console.log(err));
     this.WithoutFilterUnits = this.Units;
     this.Unit = {
-      UOM_Id: null,
-      UOM_Description: null,
-      UOM_ShortDescription: null,
+      id: null,
+      uomCode: null,
+      uomDesc: null,
       CreatedBy: null,
       ModifiedBy: null,
-      CreDate: null,
-      ModDate: null,
       IsActive: null
     };
-    console.log(this.Units);
   }
 
   resultChanged(): void {
     this.SerachCri = 0;
     this.ResultUnits = this.WithoutFilterUnits;
-    console.log(this.Unit.UOM_Id);
-    if (this.Unit.UOM_ShortDescription !== null && this.Unit.UOM_ShortDescription !== '') {
+    if (this.Unit.uomDesc !== null && this.Unit.uomDesc !== '') {
       this.ResultUnits = this.ResultUnits.filter(SubResultunit =>
-        SubResultunit.UOM_ShortDescription.toLowerCase().indexOf(this.Unit.UOM_ShortDescription.toString().toLowerCase()) !== -1);
+        SubResultunit.uomDesc.toLowerCase().indexOf(this.Unit.uomDesc.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
-    if (this.Unit.UOM_Id !== null && this.Unit.UOM_Id.toString() !== '') {
+    if (this.Unit.uomCode !== null && this.Unit.uomCode.toString() !== '') {
       this.ResultUnits = this.ResultUnits.filter(SubResultunit =>
-        SubResultunit.UOM_Id.toString().toLowerCase().indexOf(this.Unit.UOM_Id.toString().toLowerCase()) !== -1);
+        SubResultunit.uomCode.toString().toLowerCase().indexOf(this.Unit.uomCode.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
     if (this.SerachCri === 0) {
-      console.log('resul');
       this.ResultUnits = this.WithoutFilterUnits;
     }
     this.Units = this.ResultUnits;
-    console.log(this.Units);
   }
 
   ExportToExcel(): void {

@@ -1,10 +1,8 @@
 export class UOM {
-    UOM_Id: number;
-    UOM_ShortDescription: string;
-    UOM_Description: string;
+    id: number;
+    uomCode: string;
+    uomDesc: string;
     IsActive: boolean;
-    CreDate: string;
     CreatedBy: string;
     ModifiedBy: string;
-    ModDate: string;
 }

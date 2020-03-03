@@ -1,0 +1,64 @@
+<form #itemSubGroupForm="ngForm" (ngSubmit)="save(itemSubGroupForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Item Sub Group</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="Code">Group Sub Code</label>
+                            <div class="col-sm-4">
+                                <input id="Code" [(ngModel)]="itemSubGroup.SubGroup_Code" required name="Code"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtNameEn">Group Sub Name (Eng)</label>
+                            <div class="col-sm-4">
+                                <input id="txtNameEn" name="txtNameEn" type="text"
+                                    [(ngModel)]="itemSubGroup.SubGroup_Name_ENg" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="NameUni">Group Sub Name (Uni)</label>
+                            <div class="col-sm-4">
+                                <input id="NameUni" required name="NameUni" type="text"
+                                    [(ngModel)]="itemSubGroup.SubGroup_Name_Uni" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="itemSubGroup.IsActive" name="IsActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Reset</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div> {{itemSubGroup | json}}</div>

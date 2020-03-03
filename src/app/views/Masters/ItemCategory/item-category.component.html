@@ -1,0 +1,74 @@
+<form #itemcategoryForm="ngForm" (ngSubmit)="save(itemcategoryForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>ItemCategory</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtitemCategoryCode">ItemCategory_Code</label>
+                            <div class="col-sm-4">
+                                <input id="itemCategoryCode" [(ngModel)]="itemcategory.itemCategoryCode" name="itemCategoryCode" type="text"
+                                    class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <label class="col-md-2 col-form-label" for="oUCode">oU_Code</label>
+                                <div class="col-sm-4">
+                                    <input id="oUCode" [(ngModel)]="oU.oUCode" name="oUCode" type="text"
+                                        class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtitemCategoryNameEng">ItemCategoryName_ENG
+                                (Eng)</label>
+                            <div class="col-sm-4">
+                                <input id="txtitemCategoryNameEng" [(ngModel)]="txtitemCategory.txtitemCategoryNameEng" required name="txtitemCategoryNameEng"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtitemCategoryNameUni">ItemCategoryName_UNI
+                                (Uni)</label>
+                            <div class="col-sm-4">
+                                <input id="txtitemCategoryNameUni" [(ngModel)]="itemCategory.itemCategoryNameUni" required name="itemCategoryNameUni"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                            <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="chkItemCategoryActive">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="itemCategory.IsActive" name="chkItemCategoryActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Reset</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>

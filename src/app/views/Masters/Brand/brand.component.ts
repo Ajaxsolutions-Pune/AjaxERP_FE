@@ -21,12 +21,13 @@ export class BrandComponent implements OnInit {
   }
   ngOnInit() {
     status = '';
-    this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getcountrys(id); });
+    this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getcountrys(id.toString()); });
 
   }
   save(countryForm: NgForm): void {
     if (status !== 'Update') {
-      this.brand.Brand_Id = this.brandService.getMaxBrandId() + 1;
+      // this.brand.brandCode = this.brandService.getMaxBrandId() + 1;
+      this.brand.brandCode = null;
       this.brandService.Save(this.brand);
     } else {
       this.brandService.Update(this.brand);
@@ -35,38 +36,25 @@ export class BrandComponent implements OnInit {
 
   }
 
-  private getcountrys(Id: number) {
+  private getcountrys(Id: string) {
 
-    console.log(Id);
-    console.log(status);
     this.brand = {
-      Brand_Id: null,
-      Brand_Code: null,
-      Brand_Name_ENg: null,
-      Brand_Name_Uni: null,
-      CreDate: null,
-      CreatedBy: null,
-      IsActive: null,
-      ModDate: null,
-      ModifiedBy: null,
-
+      brandCode: null,
+      brandDesc: null,
+      brandDescUni: null,
+      IsActive: 1
     };
-    if (Id === null || Id === 0) {
+    console.log(Id);
+    if (Id === null || Id === '' || Id === '0') {
       this.brand = {
-        Brand_Id: null,
-        Brand_Code: null,
-        Brand_Name_ENg: null,
-        Brand_Name_Uni: null,
-        CreDate: null,
-        CreatedBy: null,
-        IsActive: null,
-        ModDate: null,
-        ModifiedBy: null,
+        brandCode: null,
+        brandDesc: null,
+        brandDescUni: null,
+        IsActive: 1
       };
       status = '';
 
     } else {
-
       this.brand = this.brandService.getBrand(Id)[0];
       status = 'Update';
     }
