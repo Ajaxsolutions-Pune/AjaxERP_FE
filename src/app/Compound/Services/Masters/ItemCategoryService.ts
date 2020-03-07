@@ -13,10 +13,6 @@ import { ItemCategory } from '../../Module/Masters/ItemCategory';
 
 @Injectable()
 export class ItemCategoryService {
-  getitemCategorys(): any[] {
-    throw new Error("Method not implemented.");
-  }
-
     str: string;
     ItemCategorys: ItemCategory[];
     env = environment;
@@ -24,14 +20,14 @@ export class ItemCategoryService {
         this.str = this.env.apiServiceIPPort;
         this.ItemCategorys = [{
             Id: 1,
-            oUCode:'aaa',
-            itemCategoryCode:'11',
+            oUCode: 'aaa',
+            itemCategoryCode: '11',
             itemCategoryNameEng: 'abc1',
             itemCategoryNameUni: 'abc3',
             isActive: true,
         }, {
             Id: 2,
-            oUCode:'aaa',
+            oUCode: 'aaa',
             itemCategoryCode: '12',
             itemCategoryNameEng: 'abc2',
             itemCategoryNameUni: 'abc3',
@@ -45,7 +41,8 @@ export class ItemCategoryService {
     }
 
     getItemCategory(itemCategoryCode: number): ItemCategory[] {
-        this.ListItemCategory = this.ItemCategorys.filter(ItemCategorys => ItemCategorys.itemCategoryCode.toString().indexOf(itemCategoryCode.toString()) !== -1);
+        this.ListItemCategory = this.ItemCategorys.
+            filter(ItemCategorys => ItemCategorys.itemCategoryCode.toString().indexOf(itemCategoryCode.toString()) !== -1);
         return this.ItemCategorys;
     }
     getMaxItemCategoryId(): number {

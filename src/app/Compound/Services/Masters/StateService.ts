@@ -5,13 +5,16 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../Module/environment';
 import { State } from '../../Module/Masters/State.model';
 import { StateEntity } from '../../Module/Masters/StateEntity.model';
+import { StateTransfarmer } from '../../Transformer/Masters/State.transformer';
 
 @Injectable()
 export class StateService {
     str: string;
     states: State[];
+    statesEntity: StateEntity;
     env = environment;
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient,
+        private stateTransfarmer: StateTransfarmer, ) {
         this.str = this.env.apiServiceIPPort;
         this.states = [{
             State_Id: '',
@@ -48,12 +51,7 @@ export class StateService {
     // }
 
     getStates(): Observable<StateEntity[]> {
-        //  return this.httpClient.get<StateEntity[]>('http://devserver:8085/AjaxErpBackEnd//State/getList');
-        console.log('http://devserver:8085/AjaxErpBackEnd/State/getList' + '1');
-        console.log(this.str + '/State/getList' + '2');
         return this.httpClient.get<StateEntity[]>(this.str + '/State/getList');
-        // return this.httpClient.get<State[]>('http://devserver:8085/AjaxErpBackEnd/State/getList').
-        //    pipe(catchError(this.handleError));
     }
     getState(StateId: number): State[] {
         // this.httpClient.get<State[]>(this.str + '/Master/getUser?UserNo=' + StateId + '&BranchNo=1');
@@ -66,18 +64,23 @@ export class StateService {
 
     getRole(): void {
     }
-    Save(state: State): State {
-        this.states.push(state);
-        return state;
+
+    Save(state: StateEntity): Observable<StateEntity> {
+        // this.statesEntity = this.stateTransfarmer.StateTransfarmer(state);
+        console.log(this.str + 'State');
+        console.log(JSON.parse(JSON.stringify(state)));
+        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.httpClient.post<StateEntity>(this.str + 'State', state, httpOptions).pipe(catchError(this.handleError));
 
     }
 
-    Update(state: State): string {
+    Update(state: State): boolean {
         const Index = this.states.findIndex(a => a.State_Id === state.State_Id);
         this.states[Index] = state;
-        return '';
+        return true;
     }
     private handleError(errorResponse: HttpErrorResponse) {
+        console.log('hii');
         if (errorResponse.error instanceof ErrorEvent) {
             console.error('client side error', errorResponse.error.message);
         }

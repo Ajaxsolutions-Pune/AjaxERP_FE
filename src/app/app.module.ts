@@ -102,6 +102,8 @@ import { ItemSubGroupListComponent } from './views/Masters/Item/item-sub-group-l
 import { StateTransfarmer } from './Compound/Transformer/Masters/State.transformer';
 import { BrandTransformer } from './Compound/Transformer/Masters/Brand.transformer';
 import { StateListResolverService } from './Compound/Resolver/State-List-Resolver.service';
+import { CountryResolverService } from './Compound/Resolver/Masters/CountryListResolverService';
+import { CountryTransfarmer } from './Compound/Transformer/Masters/CountryTransfarmer';
 @NgModule({
   imports: [
     BrowserModule,
@@ -140,8 +142,8 @@ import { StateListResolverService } from './Compound/Resolver/State-List-Resolve
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     BrandService, StateService, MFGService, CityGroupService, ItemSubGroupService,
-    StateTransfarmer,
-    StateListResolverService,
+    StateTransfarmer, CountryTransfarmer,
+    StateListResolverService, CountryResolverService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService,
     {

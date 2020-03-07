@@ -25,7 +25,7 @@ export class StateListComponent implements OnInit {
     private stateTransfarmer: StateTransfarmer,
     private route: ActivatedRoute) {
     this.statesEntity = this.route.snapshot.data['StateList'];
-    this.states = this.stateTransfarmer.StateTransfarmer(this.statesEntity);
+    this.states = this.stateTransfarmer.StateTransfarmers(this.statesEntity);
   }
 
   ngOnInit() {
@@ -45,8 +45,7 @@ export class StateListComponent implements OnInit {
       isAuto: null,
       state_Code: null,
     };
-    console.log(this.statesEntity);
-    this.states = this.stateTransfarmer.StateTransfarmer(this.statesEntity);
+    this.states = this.stateTransfarmer.StateTransfarmers(this.statesEntity);
     this.WithoutFilterstates = this.states;
   }
 
@@ -64,11 +63,9 @@ export class StateListComponent implements OnInit {
       this.SerachCri = 1;
     }
     if (this.SerachCri === 0) {
-      console.log('resul');
       this.Resultstates = this.WithoutFilterstates;
     }
     this.states = this.Resultstates;
-    console.log(this.states);
   }
 
   ExportToExcel(): void {

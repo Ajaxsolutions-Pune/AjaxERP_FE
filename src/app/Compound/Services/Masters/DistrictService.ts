@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient,  HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { District } from '../../Module/Masters/District';
 
@@ -13,21 +13,21 @@ export class DistrictService {
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
         this.Districts = [{
-           ID:1, 
-           districtCode:'12',
-           districtName:'Pune',
-           districtNameUni:'Pune',
-           stateCode:'27',
-           isActive:true,
-            
+            ID: 1,
+            districtCode: '12',
+            districtName: 'Pune',
+            districtNameUni: 'Pune',
+            stateCode: '27',
+            isActive: true,
+
         }, {
-            ID:2, 
-            districtCode:'2',
-            districtName:'Dhule',
-            districtNameUni:'Dhule',
-            stateCode:'27',
-            isActive:true,
-            
+            ID: 2,
+            districtCode: '2',
+            districtName: 'Dhule',
+            districtNameUni: 'Dhule',
+            stateCode: '27',
+            isActive: true,
+
         },
         ];
     }

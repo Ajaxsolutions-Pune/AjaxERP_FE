@@ -41,6 +41,7 @@ import { ItemGroupComponent } from './views/Masters/Item/item-group.component';
 import { ItemSubGroupListComponent } from './views/Masters/Item/item-sub-group-list.component';
 import { ItemSubGroupComponent } from './views/Masters/Item/item-sub-group.component';
 import { StateListResolverService } from './Compound/Resolver/State-List-Resolver.service';
+import { CountryResolverService } from './Compound/Resolver/Masters/CountryListResolverService';
 
 export const routes: Routes = [
   {
@@ -123,6 +124,10 @@ export const routes: Routes = [
       {
         path: 'CountryList',
         component: CountryListComponent,
+        resolve: {
+          CountryList: CountryResolverService,
+         // ProduReport: ProductionReportResolverService
+        },
         data: {
           title: 'Country List'
         }

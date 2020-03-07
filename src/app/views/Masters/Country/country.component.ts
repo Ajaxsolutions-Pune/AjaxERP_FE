@@ -39,7 +39,8 @@ export class CountryComponent implements OnInit {
     console.log(Id);
     console.log(status);
     this.country = {
-      Country_Id: null,
+      countryCode: null,
+      id: null,
       Country_Name_ENg: null,
       Country_Name_Uni: null,
       CreDate: null,
@@ -51,7 +52,8 @@ export class CountryComponent implements OnInit {
     };
     if (Id === null || Id === 0) {
       this.country = {
-        Country_Id: null,
+        countryCode: null,
+        id: null,
         Country_Name_ENg: null,
         Country_Name_Uni: null,
         CreDate: null,

@@ -6,6 +6,7 @@ import { StateService } from '../../../Compound/Services/Masters/StateService';
 import { NgForm } from '@angular/forms';
 import { Country } from '../../../Compound/Module/Masters/Country.model';
 import { CountryService } from '../../../Compound/Services/Masters/CountryService';
+import { StateTransfarmer } from '../../../Compound/Transformer/Masters/State.transformer';
 
 @Component({
   selector: 'app-state',
@@ -15,26 +16,32 @@ import { CountryService } from '../../../Compound/Services/Masters/CountryServic
 export class StateComponent implements OnInit {
   state: State;
   str: string;
+  insertflag: boolean;
   CountryList: Country[];
   constructor(private route: ActivatedRoute,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private stateService: StateService,
+    private stateTransfarmer: StateTransfarmer,
     private countryService: CountryService, private router: Router) {
     const status = '';
   }
   ngOnInit() {
     status = '';
     this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getstates(id); });
-    this.CountryList = this.countryService.getCountrys();
+   // this.CountryList = this.stateService.getStates();
   }
   save(stateForm: NgForm): void {
     if (status !== 'Update') {
+      this.insertflag = false;
       this.state.State_Id = this.stateService.getMaxBrandId() + 1;
-      this.stateService.Save(this.state);
+      console.log(this.stateTransfarmer.StateTransfarmer(this.state));
+      this.stateService.Save(this.stateTransfarmer.StateTransfarmer(this.state));
     } else {
-      this.stateService.Update(this.state);
+      this.insertflag = this.stateService.Update(this.state);
     }
-    this.router.navigate(['StateList']);
+    if (this.insertflag) {
+      this.router.navigate(['StateList']);
+    }
   }
 
   private getstates(Id: number) {

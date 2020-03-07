@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CountryService } from '../../../Compound/Services/Masters/CountryService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Country } from '../../../Compound/Module/Masters/Country.model';
+import { Country, CountryEntity } from '../../../Compound/Module/Masters/Country.model';
+import { CountryTransfarmer } from '../../../Compound/Transformer/Masters/CountryTransfarmer';
 
 @Component({
   selector: 'app-country-list',
@@ -11,6 +12,7 @@ import { Country } from '../../../Compound/Module/Masters/Country.model';
 export class CountryListComponent implements OnInit {
   @Input() countryInput: Country;
   countrys: Country[];
+  countrysEntitys: CountryEntity[];
 
   WithoutFiltercountrys: Country[];
   Resultcountrys: Country[];
@@ -19,39 +21,45 @@ export class CountryListComponent implements OnInit {
 
   constructor(private _router: Router,
     private countryService: CountryService,
+    private countryTransfarmer: CountryTransfarmer,
     private route: ActivatedRoute) {
-    this.countrys = this.countryService.getCountrys();
-    this.WithoutFiltercountrys = this.countrys;
+    this.countrysEntitys = this.route.snapshot.data['CountryList'];
+    console.log(this.countrysEntitys);
+    this.countrys = this.countryTransfarmer.CountryTransfarmers(this.countrysEntitys);
   }
 
   ngOnInit() {
-    this.countrys = this.countryService.getCountrys();
-    this.WithoutFiltercountrys = this.countrys;
+
+    this.countryService.getCountrys().subscribe(
+      (par) => this.countrysEntitys = par,
+      (err: any) => console.log(err));
     this.country = {
-      Country_Id: null,
       Country_Name_ENg: null,
       Country_Name_Uni: null,
       CreatedBy: null,
       ModifiedBy: null,
       CreDate: null,
       ModDate: null,
-      IsActive: null
+      IsActive: null,
+      countryCode: null,
+      id: null,
     };
-    console.log(this.countrys);
+    this.countrys = this.countryTransfarmer.CountryTransfarmers(this.countrysEntitys);
+    this.WithoutFiltercountrys = this.countrys;
   }
 
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultcountrys = this.WithoutFiltercountrys;
-    console.log(this.country.Country_Id);
+    console.log(this.country.id);
     if (this.country.Country_Name_ENg !== null && this.country.Country_Name_ENg !== '') {
       this.Resultcountrys = this.Resultcountrys.filter(SubResultcountry =>
         SubResultcountry.Country_Name_ENg.toLowerCase().indexOf(this.country.Country_Name_ENg.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
-    if (this.country.Country_Id !== null && this.country.Country_Id.toString() !== '') {
+    if (this.country.countryCode !== null && this.country.countryCode.toString() !== '') {
       this.Resultcountrys = this.Resultcountrys.filter(SubResultcountry =>
-        SubResultcountry.Country_Id.toString().toLowerCase().indexOf(this.country.Country_Id.toString().toLowerCase()) !== -1);
+        SubResultcountry.countryCode.toString().toLowerCase().indexOf(this.country.countryCode.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
     if (this.SerachCri === 0) {

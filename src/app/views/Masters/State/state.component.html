@@ -40,7 +40,7 @@
                             <div class="col-md-4">
                                 <select id="Country_Id" name="Country_Id" [(ngModel)]="state.Country_Id" required
                                     class="form-control">
-                                    <option value="-1">Select Country</option>
+                                    <option value="1">Select Country</option>
                                     <option *ngFor="let Country of CountryList" [value]="Country.Country_Id">
                                         {{Country.Country_Name_ENg}}
                                     </option>
