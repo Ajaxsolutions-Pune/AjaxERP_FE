@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BrandService } from '../../../Compound/Services/Masters/BrandService';
 import { Brand } from '../../../Compound/Module/Masters/Brand.model';
+import { BrandTransformer } from '../../../Compound/Transformer/Masters/Brand-Transformer';
 
 @Component({
   selector: 'app-brand-list',
@@ -16,27 +17,25 @@ export class BrandListComponent implements OnInit {
   Resultbrands: Brand[];
   SerachCri: number;
   brand: Brand;
-
   constructor(private _router: Router,
     private brandService: BrandService,
+    objTrans: BrandTransformer,
     private route: ActivatedRoute) {
-    this.brands = this.brandService.getBrands();
-    this.WithoutFilterBrands = this.brands;
+      this.brands = this.route.snapshot.data['BrandList'];
   }
 
   ngOnInit() {
-    this.brands = this.brandService.getBrands();
+    this.brandService.getBrands().subscribe(
+      (par) => this.brands = par,
+      (err: any) => console.log(err));
     this.WithoutFilterBrands = this.brands;
+    console.log(this.brands);
     this.brand = {
-      Brand_Code: null,
-      Brand_Id: null,
-      Brand_Name_ENg: null,
-      Brand_Name_Uni: null,
-      CreatedBy: null,
-      ModifiedBy: null,
-      CreDate: null,
-      ModDate: null,
-      IsActive: null
+      manufactureCode: null,
+      brandCode: null,
+      brandDesc: null,
+      brandDescUni: null,
+      isActive: 1
     };
     console.log(this.brands);
   }
@@ -44,14 +43,14 @@ export class BrandListComponent implements OnInit {
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultbrands = this.WithoutFilterBrands;
-    if (this.brand.Brand_Name_ENg !== null && this.brand.Brand_Name_ENg !== '') {
+    if (this.brand.brandDesc !== null && this.brand.brandDesc !== '') {
       this.Resultbrands = this.Resultbrands.filter(SubResult =>
-        SubResult.Brand_Name_ENg.toLowerCase().indexOf(this.brand.Brand_Name_ENg.toString().toLowerCase()) !== -1);
+        SubResult.brandDesc.toLowerCase().indexOf(this.brand.brandDesc.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
-    if (this.brand.Brand_Code !== null && this.brand.Brand_Code.toString() !== '') {
+    if (this.brand.brandCode !== null && this.brand.brandCode.toString() !== '') {
       this.Resultbrands = this.Resultbrands.filter(SubResult =>
-        SubResult.Brand_Code.toString().toLowerCase().indexOf(this.brand.Brand_Code.toString().toLowerCase()) !== -1);
+        SubResult.brandCode.toString().toLowerCase().indexOf(this.brand.brandCode.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
     if (this.SerachCri === 0) {

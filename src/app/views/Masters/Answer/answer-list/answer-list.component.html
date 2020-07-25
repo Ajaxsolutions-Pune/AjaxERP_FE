@@ -1,0 +1,45 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="txtAnswerID" required name="txtAnswerID" type="text" class="form-control" placeholder="Answer ID" 
+        (input)="resultChanged()" [(ngModel)]="answer.AnswerID">
+    </div>
+    <div class="col-md-3">
+        <input id="txtAnswer" required name="txtanswer" type="text" class="form-control" placeholder="Answer"
+        (input)="resultChanged()" [(ngModel)]="answer.Answer">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create answer" routerLink="/Answer"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+    </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Answer Id</th>
+        <th>Answer</th>
+        <th>Active</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Answer of Answers">
+        <td>
+          <div>{{Answer.AnswerID}}</div>
+        </td>
+        <td>
+          {{Answer.Answer}}
+        </td>
+        <td [ngSwitch]="Answer.IsActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td [ngSwitch]="1">
+          <button class="btn btn-primary" [disabled]="Answer.AnswerID === ''"
+            [routerLink]="['/Answer/',Answer.AnswerID]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

@@ -20,46 +20,39 @@ export class UnitComponent implements OnInit {
     private UomService: UOMService, private router: Router) {
   }
   ngOnInit() {
-    this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getUom(id); });
+    this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getUom(id.toString()); });
     console.log(status);
-
-  }
-  save(uomForm: NgForm): void {
-    if (status !== 'Update') {
-      this.UomService.Save(this.uom);
-    } else {
-      this.UomService.Update(this.uom);
-    }
-    this.router.navigate(['UnitList']);
-
   }
 
-  private getUom(Id: number) {
+  save(userForm: NgForm): void {
+    this.UomService.Save(this.uom).subscribe(
+      () => {
+        userForm.reset();
+        this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+          'Data saved successfully !', 'modal-info');
+        this.router.navigate(['UnitList']);
+      }
+    );
+  }
+
+  private getUom(Id: string) {
     this.uom = {
-      UOM_Id: null,
-      UOM_Description: null,
-      UOM_ShortDescription: null,
-      CreatedBy: null,
-      ModifiedBy: null,
-      CreDate: null,
-      ModDate: null,
-      IsActive: null
+      uomCode: null,
+      uomDesc: null,
+      isActive: null,
+      uomDescUni: null,
     };
-    if (Id !== null && Id === 0) {
+    if (Id === null || Id === '') {
       this.uom = {
-        UOM_Id: null,
-        UOM_Description: null,
-        UOM_ShortDescription: null,
-        CreatedBy: null,
-        ModifiedBy: null,
-        CreDate: null,
-        ModDate: null,
-        IsActive: null
+        uomCode: null,
+        uomDesc: null,
+        isActive: null,
+        uomDescUni: null
       };
-
     } else {
-      this.uom = this.UomService.getUser(Id)[0];
+      this.UomService.getUnit(Id).pipe().subscribe(product => this.uom = product);
       status = 'Update';
+      console.log('hii' + this.uom.uomCode);
     }
   }
 }

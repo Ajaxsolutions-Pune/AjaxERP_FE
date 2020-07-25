@@ -1,10 +1,18 @@
 export class Country {
-    Country_Id: number;
+    id: string;
+    countryCode: string;
     Country_Name_ENg: string;
     Country_Name_Uni: string;
-    IsActive: boolean;
+    IsActive: string;
     CreDate: string;
     CreatedBy: string;
     ModifiedBy: string;
     ModDate: string;
+}
+
+export class CountryEntity {
+    countryCode: string;
+    countryNameEng: string;
+    countryNameUni: string;
+    isActive: string;
 }

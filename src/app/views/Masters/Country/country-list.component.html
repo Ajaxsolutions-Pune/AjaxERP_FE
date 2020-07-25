@@ -30,7 +30,7 @@
     <tbody>
       <tr *ngFor="let countr of countrys">
         <td>
-          <div>{{countr.Country_Id}}</div>
+          <div>{{countr.countryCode}}</div>
         </td>
         <td>
           {{countr.Country_Name_ENg}}
@@ -50,7 +50,7 @@
         </td>
         <td [ngSwitch]="1">
           <button class="btn btn-primary" [disabled]="countr.Country_Id === '0'"
-            [routerLink]="['/Country/',countr.Country_Id]">Edit</button>
+            [routerLink]="['/Country/',countr.countryCode]">Edit</button>
         </td>
       </tr>
     </tbody>

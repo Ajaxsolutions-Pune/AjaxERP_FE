@@ -1,0 +1,45 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="txttypecode0000" required name="txttypecode" type="text" class="form-control" placeholder="Question Type Code" 
+        (input)="resultChanged()" [(ngModel)]="bindObj.ProcessID">
+    </div>
+    <div class="col-md-3">
+        <input id="txtQA_Type_Desc" required name="txtQA_Type_Desc" type="text" class="form-control" placeholder="Question Type Description"
+        (input)="resultChanged()" [(ngModel)]="bindObj.QA_Type_Desc">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Form" routerLink="/Process"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+    </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Question Type Code</th>
+        <th>Question Type Description</th>
+        <th>Active</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let obj of arrOject">
+        <td>
+          <div>{{obj.ProcessID}}</div>
+        </td>
+        <td>
+          {{obj.Process_Name}}
+        </td>
+        <td [ngSwitch]="obj.IsActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td [ngSwitch]="1">
+          <button class="btn btn-primary" [disabled]="obj.ProcessID === ''"
+            [routerLink]="['/Process/',obj.ProcessID]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

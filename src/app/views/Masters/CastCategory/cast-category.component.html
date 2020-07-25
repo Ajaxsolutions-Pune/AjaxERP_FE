@@ -1,0 +1,65 @@
+<form #castcategoryForm="ngForm" (ngSubmit)="save(castcategoryForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>CastCategory</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtCastCategoryCode">CastCategory_Code</label>
+                            <div class="col-sm-4">
+                                <input id="CastCategory_Code" [(ngModel)]="castcategory.CastCategory_Code" name="CastCategory_Code" type="text"
+                                    class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtCastCategory_DescriptionEng">CastCategory_Description_ENG
+                                (Eng)</label>
+                            <div class="col-sm-4">
+                                <input id="txtCastCategory_DescriptionEng" [(ngModel)]="castcategory.CastCategory_Description_ENG" required name="Category_DescriptionEng"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtCastCategory_DescriptionUni">CastCategory_Description_UNI
+                                (Uni)</label>
+                            <div class="col-sm-4">
+                                <input id="txtCastCategory_DescriptionUni" [(ngModel)]="castcategory.CastCategory_Description_UNI" required name="CastCategory_DescriptionUni"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                            <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="chkCastCategoryActive">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="castcategory.IsActive" name="chkCastCategoryActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Reset</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>

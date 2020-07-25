@@ -1,0 +1,80 @@
+<form #castForm="ngForm" (ngSubmit)="save(castForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Cast</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtCastCode">Cast_Code</label>
+                            <div class="col-sm-4">
+                                <input id="Cast_Code" [(ngModel)]="cast.Cast_Code" name="Cast_Code" type="text"
+                                    class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtCast_DescriptionEng">Cast_Description_ENG
+                                (Eng)</label>
+                            <div class="col-sm-4">
+                                <input id="txtCast_DescriptionEng" [(ngModel)]="cast.Cast_Description_ENG" required name="Cast_DescriptionEng"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtCast_DescriptionUni">
+                                Cast_Description_UNI
+                                (Uni)</label>
+                            <div class="col-sm-4">
+                                <input id="txtCast_DescriptionUni" [(ngModel)]="cast.Cast_Description_UNI" required name="Cast_DescriptionUni"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3"></div>
+                          <label class="col-md-2 col-form-label">
+                              Cast Category</label>
+                          <div class="col-md-4">
+                            <select id="CastCategory" name="CastCategory" [(ngModel)]="cast.CastCategory" class="form-control form-control-sm">
+                              <option value="-1">Select Cast Category</option>
+                              <option *ngFor="let Drpobj of categoryDrpList" [value]="Drpobj.CastCategory_Code">
+                                {{Drpobj.CastCategory_Description_ENG}}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                            <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="chkCastActive">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="cast.IsActive" name="chkCastActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Reset</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div style="visibility: visible;"> {{cast | json}}</div>

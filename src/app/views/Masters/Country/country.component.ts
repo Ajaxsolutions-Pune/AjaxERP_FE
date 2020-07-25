@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
 import { NgForm } from '@angular/forms';
 import { CountryService } from '../../../Compound/Services/Masters/CountryService';
-import { Country } from '../../../Compound/Module/Masters/Country.model';
+import { Country, CountryEntity } from '../../../Compound/Module/Masters/Country.model';
+import { CountryTransfarmer } from '../../../Compound/Transformer/Masters/Country-Transfarmer';
 
 @Component({
   selector: 'app-country',
@@ -12,34 +13,42 @@ import { Country } from '../../../Compound/Module/Masters/Country.model';
 })
 export class CountryComponent implements OnInit {
   country: Country;
+  countryEntity: CountryEntity;
   str: string;
   countryList: Country[];
   constructor(private route: ActivatedRoute,
     private defaultLayoutComponent: DefaultLayoutComponent,
+    private countryTransfarmer: CountryTransfarmer,
     private countryService: CountryService, private router: Router) {
     const status = '';
   }
   ngOnInit() {
     status = '';
-    this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getcountrys(id); });
+    this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getcountrys(id.toString()); });
 
   }
   save(countryForm: NgForm): void {
-    if (status !== 'Update') {
-      this.countryService.Save(this.country);
-    } else {
-      this.countryService.Update(this.country);
-    }
-    this.router.navigate(['CountryList']);
-
+    console.log(this.country.countryCode);
+    this.countryService.Save(this.country).subscribe(
+      () => {
+        countryForm.reset();
+        this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+          'Data saved successfully !', 'modal-info');
+        this.router.navigate(['CountryList']);
+      }
+    );
   }
 
-  private getcountrys(Id: number) {
-
-    console.log(Id);
-    console.log(status);
+  private getcountrys(Id: string) {
+    this.countryEntity = {
+      countryCode: null,
+      countryNameEng: null,
+      countryNameUni: null,
+      isActive: null,
+    };
     this.country = {
-      Country_Id: null,
+      countryCode: null,
+      id: null,
       Country_Name_ENg: null,
       Country_Name_Uni: null,
       CreDate: null,
@@ -49,9 +58,10 @@ export class CountryComponent implements OnInit {
       ModifiedBy: null,
 
     };
-    if (Id === null || Id === 0) {
+    if (Id === null || Id === '0' || Id === '') {
       this.country = {
-        Country_Id: null,
+        countryCode: null,
+        id: null,
         Country_Name_ENg: null,
         Country_Name_Uni: null,
         CreDate: null,
@@ -63,8 +73,10 @@ export class CountryComponent implements OnInit {
       status = '';
 
     } else {
-
-      this.country = this.countryService.getCountry(Id)[0];
+      this.countryService.getCountry(Id).pipe().subscribe(product => this.countryEntity = product);
+      console.log('Hiiii---  ' + this.countryEntity.countryCode);
+       this.country = this.countryTransfarmer.CountryTransfarmerOne(this.countryEntity);
+      JSON.stringify(this.countryEntity);
       status = 'Update';
     }
   }

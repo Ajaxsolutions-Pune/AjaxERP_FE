@@ -1,0 +1,55 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="txtTehsilName" name="txtTehsilName" type="text"
+        (input)="resultChanged()"  [(ngModel)]="tehsil.tehsilNameEng"
+         class="form-control" placeholder="Tehsil Name" 
+       >
+    </div>
+    <div class="col-md-3">
+        <input id="txttehsilCode"
+        (input)="resultChanged()"  [(ngModel)]="tehsil.tehsilCode"
+         name="txtCode" type="text" class="form-control"
+          placeholder="Tehsil Code">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Tehsil"
+         routerLink="/Tehsil"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png"
+         height="30px" width="30px" alt="Export To Excel">
+    </div>
+  </div>
+  
+  <table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Tehsil Code</th>
+        <th>TehsilName ENG</th>
+        <th>TehsilName UNI</th>
+        <th>Active</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Obj of tehsils">
+        <td>
+          <div>{{Obj.tehsilCode}}</div>
+        </td>
+        <td>
+          <label class="col-md-3 col-form-label" style="text-anchor: unset">{{Obj.tehsilNameEng}}</label>
+        </td>
+        <td>
+          <label class="col-md-3 col-form-label" style="text-anchor: unset">{{Obj.tehsilNameUni}}</label>
+        </td>
+        <td [ngSwitch]="Obj.isActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td>
+          <button class="btn btn-primary"
+            [routerLink]="['/Tehsil/',Obj.tehsilCode]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

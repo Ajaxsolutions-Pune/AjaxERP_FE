@@ -21,13 +21,21 @@ export class BrandComponent implements OnInit {
   }
   ngOnInit() {
     status = '';
-    this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getcountrys(id); });
+    this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getcountrys(id.toString()); });
 
   }
   save(countryForm: NgForm): void {
+    console.log(status);
     if (status !== 'Update') {
-      this.brand.Brand_Id = this.brandService.getMaxBrandId() + 1;
-      this.brandService.Save(this.brand);
+      this.brand.brandCode = null;
+      this.brandService.Save(this.brand).subscribe(
+        () => {
+          countryForm.reset();
+          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+            'Data saved successfully !', 'modal-info');
+          this.router.navigate(['BrandList']);
+        }
+      );
     } else {
       this.brandService.Update(this.brand);
     }
@@ -35,38 +43,26 @@ export class BrandComponent implements OnInit {
 
   }
 
-  private getcountrys(Id: number) {
-
-    console.log(Id);
-    console.log(status);
+  private getcountrys(Id: string) {
     this.brand = {
-      Brand_Id: null,
-      Brand_Code: null,
-      Brand_Name_ENg: null,
-      Brand_Name_Uni: null,
-      CreDate: null,
-      CreatedBy: null,
-      IsActive: null,
-      ModDate: null,
-      ModifiedBy: null,
-
+      manufactureCode: null,
+      brandCode: null,
+      brandDesc: null,
+      brandDescUni: null,
+      isActive: 1
     };
-    if (Id === null || Id === 0) {
+    console.log(Id);
+    if (Id === null || Id === '' || Id === '0') {
       this.brand = {
-        Brand_Id: null,
-        Brand_Code: null,
-        Brand_Name_ENg: null,
-        Brand_Name_Uni: null,
-        CreDate: null,
-        CreatedBy: null,
-        IsActive: null,
-        ModDate: null,
-        ModifiedBy: null,
+        manufactureCode: null,
+        brandCode: null,
+        brandDesc: null,
+        brandDescUni: null,
+        isActive: 1
       };
       status = '';
 
     } else {
-
       this.brand = this.brandService.getBrand(Id)[0];
       status = 'Update';
     }

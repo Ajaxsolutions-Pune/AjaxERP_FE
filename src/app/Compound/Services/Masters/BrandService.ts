@@ -3,69 +3,55 @@ import { Observable, throwError } from 'rxjs';
 import { map, switchMap, debounceTime, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
-import { Country } from '../../Module/Masters/Country.model';
 import { Brand } from '../../Module/Masters/Brand.model';
 
 @Injectable()
 export class BrandService {
     str: string;
     brands: Brand[];
+    brand: Brand;
     env = environment;
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
-        this.brands = [{
-            Brand_Id: 1,
-            Brand_Code: 'Brand_1',
-            Brand_Name_ENg: 'Meswak',
-            Brand_Name_Uni: 'मिस्वाक',
-            CreatedBy: 'SUPERADMIN',
-            ModifiedBy: 'SUPERADMIN',
-            CreDate: '08-03-2019',
-            ModDate: null,
-            IsActive: true
-        }, {
-            Brand_Id: 2,
-            Brand_Code: 'Brand_2',
-            Brand_Name_ENg: 'Colgate',
-            Brand_Name_Uni: 'कोलगेट',
-            CreatedBy: 'SUPERADMIN',
-            ModifiedBy: 'SUPERADMIN',
-            CreDate: '08-03-2019',
-            ModDate: null,
-            IsActive: true
-        },
-        ];
+        this.brands = [];
     }
-    ListBrand: Brand[];
-    getBrands(): Brand[] {
-        return this.brands;
+    ListUnits: Brand[];
+
+    getBrand(BrandCode: String): Observable<Brand[]> {
+        return this.httpClient.get<Brand[]>(this.str + 'Brand/getUser?UserNo=' +
+            BrandCode);
     }
 
-    getBrand(BrandId: number): Brand[] {
-        this.ListBrand = this.brands.filter(brands => brands.Brand_Id.toString().indexOf(BrandId.toString()) !== -1);
-        return this.brands;
+    getBrands(): Observable<Brand[]> {
+        console.log(this.str + 'Brand/getList');
+        return this.httpClient.get<Brand[]>(this.str + 'Brand/getList');
     }
-    getMaxBrandId(): number {
-        return this.brands.length;
-    }
-
-    getRole(): void {
-    }
-    Save(brand: Brand): Brand {
-        this.brands.push(brand);
-        return brand;
+    Save(Brand1: Brand): Observable<Brand> {
+        if (Brand1.brandCode === null) {
+            const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+            return this.httpClient.post<Brand>(this.str + 'Brand',
+                Brand1, httpOptions).pipe(catchError(this.handleError));
+        }
 
     }
 
-    Update(brand: Brand): string {
-        const Index = this.brands.findIndex(a => a.Brand_Id === brand.Brand_Id);
-        this.brands[Index] = brand;
+    Update(Brand1: Brand): string {
+        const Index = this.brands.findIndex(a => a.brandCode === Brand1.brandCode);
+        console.log(Index);
+        this.brands[Index] = Brand1;
+        console.log(this.brands[Index]);
         return '';
     }
+
+    // UserList(): Observable<LogIn[]> {
+    // tslint:disable-next-line:max-line-length
+    //    return this.httpClient.get<LogIn[]>(this.str + '/Master/getUser?UserNo=0&BranchNo=1').pipe(catchError(this.handleError));
+    // }
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {
             console.error('client side error', errorResponse.error.message);
         }
-        return throwError('d');
+        return throwError(errorResponse.error);
     }
 }
+

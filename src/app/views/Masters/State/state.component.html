@@ -1,0 +1,78 @@
+<form #stateForm="ngForm" (ngSubmit)="save(stateForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>State</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtstateCode">State Code</label>
+                            <div class="col-sm-4">
+                                <input id="txtstateCode" [(ngModel)]="state.state_Code" required name="StateCode"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtStateNameEn">State Name (Eng)</label>
+                            <div class="col-sm-4">
+                                <input id="txtStateNameEn" required name="StateNameEn" type="text"
+                                    [(ngModel)]="state.State_Name_Eng" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtStateNameUni">State Name (Uni)</label>
+                            <div class="col-sm-4">
+                                <input id="txtStateNameUni" required name="StateNameUni" type="text"
+                                    [(ngModel)]="state.State_Name_Uni" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label">Country Name</label>
+                            <div class="col-md-4">
+                                <select id="Country_Id" name="Country_Id" [(ngModel)]="state.Country_Code" required
+                                    class="form-control">
+                                    <option value="1">Select Country</option>
+                                    <option *ngFor="let Country of CountryList" [value]="Country.Country_Id">
+                                        {{Country.Country_Name_ENg}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="state.IsActive" name="IsActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Reset</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div> {{state | json}}</div>

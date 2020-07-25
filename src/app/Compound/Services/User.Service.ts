@@ -58,4 +58,10 @@ export class UserService {
         }
         return throwError('d');
     }
+
+    getToken(user: User): Observable<string>  {
+        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.httpClient.post<string>(this.str + '/authenticate',
+            user, httpOptions).pipe(catchError(this.handleError));
+    }
 }

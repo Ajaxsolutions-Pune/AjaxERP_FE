@@ -11,7 +11,7 @@
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label" for="txtbrandCode">brand Code</label>
                             <div class="col-sm-4">
-                                <input id="txtbrandCode" [(ngModel)]="brand.Brand_Code" required name="brandCode"
+                                <input id="txtbrandCode" [(ngModel)]="brand.manufactureCode" required name="brandCode"
                                     type="text" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
@@ -21,7 +21,7 @@
                             <label class="col-md-2 col-form-label" for="txtbrandNameEn">Brand Name (Eng)</label>
                             <div class="col-sm-4">
                                 <input id="txtbrandNameEn" required name="brandNameEn" type="text"
-                                    [(ngModel)]="brand.Brand_Name_ENg" class="form-control form-control-sm">
+                                    [(ngModel)]="brand.brandDesc" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
@@ -30,7 +30,7 @@
                             <label class="col-md-2 col-form-label" for="txtbrandNameUni">Brand Name (Uni)</label>
                             <div class="col-sm-4">
                                 <input id="txtbrandNameUni" required name="brandNameUni" type="text"
-                                    [(ngModel)]="brand.Brand_Name_Uni" class="form-control form-control-sm">
+                                    [(ngModel)]="brand.brandDescUni" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
@@ -53,7 +53,6 @@
                             </div>
                             <div class="col-md-5"></div>
                         </div>
-
                     </div>
                 </div>
             </div>

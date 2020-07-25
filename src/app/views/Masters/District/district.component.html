@@ -1,0 +1,66 @@
+<form #districtForm="ngForm" (ngSubmit)="save(districtForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>District</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtDistrictCode">District Code</label>
+                            <div class="col-sm-4">
+                                <input id="txtDistrictCode" [(ngModel)]="district.districtCode" name="DistrictCode" type="text"
+                                    class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtDistrictNameEn">District Name
+                                (Eng)</label>
+                            <div class="col-sm-4">
+                                <input id="txtDistrictNameEn" [(ngModel)]="district.districtNameEng" required name="DistrictNameEn"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtDistrictNameUni">District Name
+                                (Uni)</label>
+                            <div class="col-sm-4">
+                                <input id="txtDistrictNameUni" [(ngModel)]="district.districtNameUni" required name="DistrictNameUni"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="chkDistrictActive">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="district.IsActive" name="chkDistrictActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Reset</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+    <div> {{district | json}}</div>
+</form>

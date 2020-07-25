@@ -1,0 +1,45 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="txtFormId" required name="txtFormId" type="text" class="form-control" placeholder="Form Id" 
+        (input)="resultChanged()" [(ngModel)]="Form.FormId">
+    </div>
+    <div class="col-md-3">
+        <input id="txtFormName" required name="txtFormName" type="text" class="form-control" placeholder="Form Name"
+        (input)="resultChanged()" [(ngModel)]="Form.Form_Name">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Form" routerLink="/Form"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+    </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Form Id</th>
+        <th>From name</th>
+        <th>Active</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let form1 of forms">
+        <td>
+          <div>{{form1.FormId}}</div>
+        </td>
+        <td>
+          {{form1.Form_Name}}
+        </td>
+        <td [ngSwitch]="form1.IsActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td [ngSwitch]="1">
+          <button class="btn btn-primary" [disabled]="form1.FormId === ''"
+            [routerLink]="['/Forms/',form1.FormId]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

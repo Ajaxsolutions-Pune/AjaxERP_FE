@@ -1,0 +1,65 @@
+<form #citygroupForm="ngForm" (ngSubmit)="save(citygroupForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>CityGroup</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtCityGroupCode">CityGroup Code</label>
+                            <div class="col-sm-4">
+                                <input id="txtCityGroupCode" [(ngModel)]="citygroup.CityGroup_Code" name="CityGroupCode" type="text"
+                                    class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtCityGroupNameEn">CityGroup Name
+                                (Eng)</label>
+                            <div class="col-sm-4">
+                                <input id="txtCityGroupNameEn" [(ngModel)]="citygroup.CityGroup_Name_ENG" required name="CityGroupNameEn"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtCityGroupNameUni">CityGroup Name
+                                (Uni)</label>
+                            <div class="col-sm-4">
+                                <input id="txtCityGroupNameUni" [(ngModel)]="citygroup.CityGroup_Name_UNI" required name="CityGroupNameUni"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="chkCityGroupActive">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="citygroup.IsActive" name="chkCityGroupActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Reset</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>

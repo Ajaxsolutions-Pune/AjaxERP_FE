@@ -11,7 +11,7 @@
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label" for="txtUOMCode">UOM Code</label>
                             <div class="col-sm-4">
-                                <input id="txtUOMCode" [(ngModel)]="uom.UOM_Id" required name="UOMCode" type="text"
+                                <input id="txtUOMCode" [(ngModel)]="uom.uomCode" required name="UOMCode" type="text"
                                     class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
@@ -22,7 +22,7 @@
                                 (Eng)</label>
                             <div class="col-sm-4">
                                 <input id="txtUOMDescriptionEn" required name="UOMDescriptionEn" type="text"
-                                    [(ngModel)]="uom.UOM_Description" class="form-control form-control-sm">
+                                    [(ngModel)]="uom.uomDesc" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
@@ -32,7 +32,7 @@
                                 (Uni)</label>
                             <div class="col-sm-4">
                                 <input id="txtUOMDescriptionUni" required name="UOMDescriptionUni" type="text"
-                                    [(ngModel)]="uom.UOM_ShortDescription" class="form-control form-control-sm">
+                                    [(ngModel)]="uom.uomDescUni" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
