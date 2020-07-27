@@ -11,7 +11,7 @@
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label" for="txFormId">Form Id</label>
                             <div class="col-sm-4">
-                                <input id="txtFormId" [(ngModel)]="form.FormId" required name="FormId"
+                                <input id="txtFormId" [(ngModel)]="form.formId" required name="FormId"
                                     type="text" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
@@ -21,7 +21,7 @@
                             <label class="col-md-2 col-form-label" for="txtForm_Name">Form Name</label>
                             <div class="col-sm-4">
                                 <input id="txtForm_Name" required name="Form_Name" type="text"
-                                    [(ngModel)]="form.Form_Name" class="form-control form-control-sm">
+                                    [(ngModel)]="form.formName" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
@@ -29,7 +29,7 @@
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label">Active</label>
                             <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="form.Is_Active" name="IsActive"></div>
+                                <input type="checkbox" [(ngModel)]="form.isActive" name="IsActive"></div>
                             <div class="col-md-3"></div>
                         </div>
                     </div>

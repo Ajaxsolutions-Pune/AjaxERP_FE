@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Process } from '../../../../Compound/Module/Masters/Process.model';
+import { Process, ProcessEntity } from '../../../../Compound/Module/Masters/Process.model';
+import { ProcessTransfarmer1 } from '../../../../Compound/Transformer/Masters/Process-Transfarmer1';
 
 @Component({
   selector: 'app-process-list',
@@ -8,51 +9,54 @@ import { Process } from '../../../../Compound/Module/Masters/Process.model';
   styleUrls: ['./process-list.component.scss']
 })
 export class ProcessListComponent implements OnInit {
-  @Input() FormInput: Process;
-  arrOject: Process[];
+  @Input() processInput: Process;
+  processs: Process[];
+  processEntity: ProcessEntity[];
 
-  WithoutFilterForm: Process[];
-  ResultProcess: Process[];
+  WithoutFilterprocess: Process[];
+  Resultprocess: Process[];
   SerachCri: number;
   bindObj: Process;
   constructor(private _router: Router,
+     objTrans: ProcessTransfarmer1,
     private route: ActivatedRoute) {
-    this.arrOject = this.route.snapshot.data['ProcessList'];
+    this.processEntity = this.route.snapshot.data['ProcessList1'];
+    console.log(this.processEntity);
+     this.processs = objTrans.processTransfarmers(this.processEntity);
+    this.WithoutFilterprocess = this.processs;
   }
 
   ngOnInit() {
-    this.WithoutFilterForm = this.arrOject;
+    this.WithoutFilterprocess = this.processs;
     this.bindObj = {
-      ProcessID: null,
-      Process_Name: null,
-      Geofence: null,
-      Is_Active: null,
-      Is_Auto: null,
-      Sort_By: null
+      processId: null,
+      processName: null,
+      geofence: null,
+      isActive: null,
     };
   }
 
   resultChanged(): void {
     this.SerachCri = 0;
-    this.ResultProcess = this.WithoutFilterForm;
-    if (this.bindObj.ProcessID !== null && this.bindObj.ProcessID !== '') {
-      this.ResultProcess = this.ResultProcess.filter(SubResult =>
-        SubResult.ProcessID.toLowerCase().indexOf(this.bindObj.ProcessID.toString().toLowerCase()) !== -1);
+    this.Resultprocess = this.WithoutFilterprocess;
+    if (this.bindObj.processName !== null && this.bindObj.processName !== '') {
+      this.Resultprocess = this.Resultprocess.filter(SubResult =>
+        SubResult.processName.toLowerCase().indexOf(this.bindObj.processName.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
-    if (this.bindObj.Process_Name !== null && this.bindObj.Process_Name.toString() !== '') {
-      this.ResultProcess = this.ResultProcess.filter(SubResult =>
-        SubResult.Process_Name.toString().toLowerCase().indexOf(this.bindObj.Process_Name.toString().toLowerCase()) !== -1);
+    if (this.bindObj.processId !== null && this.bindObj.processId.toString() !== '') {
+      this.Resultprocess = this.Resultprocess.filter(SubResult =>
+        SubResult.processId.toString().toLowerCase().indexOf(this.bindObj.processId.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
     if (this.SerachCri === 0) {
-      this.ResultProcess = this.WithoutFilterForm;
+      this.Resultprocess = this.WithoutFilterprocess;
     }
-    this.arrOject = this.ResultProcess;
+    this.processs = this.Resultprocess;
   }
 
   ExportToExcel(): void {
-    alasql('SELECT Form_Code,Form_Id,Form_Name_ENg,Form_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("FormList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT process_Code,process_Id,process_Name_ENg,process_Name_Uni,CreatedBy,ModifiedBy,' +
+      'CreDate,ModDate,IsActive INTO XLSX("processList.xlsx",{headers:true}) FROM ?', [this.processs]);
   }
 }

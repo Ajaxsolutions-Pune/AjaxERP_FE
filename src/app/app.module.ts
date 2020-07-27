@@ -128,6 +128,9 @@ import { HttpModule } from '@angular/http';
 import { FormTransfarmer } from './Compound/Transformer/Masters/Form-Transfarmer';
 import { FormService } from './Compound/Services/Masters/FormService';
 import { FormListResolverService } from './Compound/Resolver/Masters/Form-List-Resolver.Service';
+import { ProcessService1 } from './Compound/Services/Masters/ProcessService1';
+import { ProcessListResolverService } from './Compound/Resolver/Masters/Process-List-Resolver.Service';
+import { ProcessTransfarmer1 } from './Compound/Transformer/Masters/Process-Transfarmer1';
 @NgModule({
   imports: [
     BrowserModule,
@@ -172,9 +175,9 @@ import { FormListResolverService } from './Compound/Resolver/Masters/Form-List-R
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
-    FormService,
+    FormService, ProcessService1,
     TehsilTransfarmer, TehsilListResolverService, TehsilMasterResolverService, AnswerTransfarmer,
-    FormListResolverService,
+    FormListResolverService, ProcessListResolverService, ProcessTransfarmer1,
     DistrictMasterResolverService, DistrictListResolverService,
     {
       provide: LocationStrategy,

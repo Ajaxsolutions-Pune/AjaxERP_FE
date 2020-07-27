@@ -1,11 +1,11 @@
 <div class="form-group row">
     <div class="col-md-3">
         <input id="txtProcessID" required name="txtProcessID" type="text" class="form-control" placeholder="Process Id" 
-        (input)="resultChanged()" [(ngModel)]="bindObj.ProcessID">
+        (input)="resultChanged()" [(ngModel)]="bindObj.processId">
     </div>
     <div class="col-md-3">
         <input id="txtProcess_Name" required name="txtProcess_Name" type="text" class="form-control" placeholder="Process Name"
-        (input)="resultChanged()" [(ngModel)]="bindObj.Process_Name">
+        (input)="resultChanged()" [(ngModel)]="bindObj.processName">
     </div>
     <div class="col-md-1">
         <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Form" routerLink="/Process"></button>
@@ -25,20 +25,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let obj of arrOject">
+      <tr *ngFor="let obj of processs">
         <td>
-          <div>{{obj.ProcessID}}</div>
+          <div>{{obj.processId}}</div>
         </td>
         <td>
-          {{obj.Process_Name}}
+          {{obj.IsActive}}
         </td>
         <td [ngSwitch]="obj.IsActive">
           <span *ngSwitchCase="true">Yes</span>
           <span *ngSwitchDefault>No</span>
         </td>
         <td [ngSwitch]="1">
-          <button class="btn btn-primary" [disabled]="obj.ProcessID === ''"
-            [routerLink]="['/Process/',obj.ProcessID]">Edit</button>
+          <button class="btn btn-primary" [disabled]="obj.processId === ''"
+            [routerLink]="['/Process/',obj.processId]">Edit</button>
         </td>
       </tr>
     </tbody>

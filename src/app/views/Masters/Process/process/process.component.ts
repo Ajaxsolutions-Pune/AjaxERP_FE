@@ -18,12 +18,10 @@ export class ProcessComponent implements OnInit {
   }
   ngOnInit() {
     this.process = {
-      ProcessID: null,
-      Process_Name: null,
-      Geofence: null,
-      Is_Active: null,
-      Is_Auto: null,
-      Sort_By: null,
+      processId: null,
+      processName: null,
+      geofence: null,
+      isActive: null,
     };
     status = '';
   }
