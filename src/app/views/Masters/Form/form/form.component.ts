@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Answer } from '../../../../Compound/Module/Masters/Answer.model';
 import { DefaultLayoutComponent } from '../../../../containers';
-import { Form } from '../../../../Compound/Module/Masters/Form.model';
+import { FormObj } from '../../../../Compound/Module/Masters/Form.model';
 
 @Component({
   selector: 'app-form',
@@ -11,20 +11,18 @@ import { Form } from '../../../../Compound/Module/Masters/Form.model';
   styleUrls: ['./Form.component.scss']
 })
 export class FormComponent implements OnInit {
-  form: Form;
+  form: FormObj;
   str: string;
-  formList: Form[];
+  formList: FormObj[];
   constructor(private route: ActivatedRoute,
     private defaultLayoutComponent: DefaultLayoutComponent, private router: Router) {
     const status = '';
   }
   ngOnInit() {
     this.form = {
-      Form_Name: null,
-      FormId: null,
-      Is_Active: null,
-      Is_Auto: null,
-      Sort_By: null,
+      formId: null,
+      formName: null,
+      isActive: null
     };
     status = '';
   }

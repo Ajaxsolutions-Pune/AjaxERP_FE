@@ -1,14 +1,10 @@
-export class Form {
-    FormId: string;
-    Form_Name: string;
-    Sort_By: string;
-    Is_Active: string;
-    Is_Auto: string;
+export class FormObj {
+    formId: string;
+    formName: string;
+    isActive: string;
 }
 export class FormEntity {
-    FormId: string;
-    Form_Name: string;
-    Sort_By: string;
-    Is_Active: string;
-    Is_Auto: string;
+    formId: string;
+    formName: string;
+    isActive: string;
 }

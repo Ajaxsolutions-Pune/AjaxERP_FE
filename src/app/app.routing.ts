@@ -53,6 +53,8 @@ import { FormListComponent } from './views/Masters/Form/form-list/form-list.comp
 import { ProcessListComponent } from './views/Masters/Process/process-list/process-list.component';
 import { ProcessComponent } from './views/Masters/Process/process/process.component';
 import { FormComponent } from './views/Masters/Form/form/form.component';
+import { AnswerListResolverService } from './Compound/Resolver/Masters/Answer-List-Resolver.Service';
+import { FormListResolverService } from './Compound/Resolver/Masters/Form-List-Resolver.Service';
 
 export const routes: Routes = [
   {
@@ -180,69 +182,6 @@ export const routes: Routes = [
         component: BrandComponent,
         data: {
           title: 'Update Brand'
-        }
-      },
-      {
-        path: 'AnswerList',
-        component: AnswerListComponent,
-        data: {
-          title: 'Answer List'
-        }
-      },
-      {
-        path: 'Answer',
-        component: AnswerComponent,
-        data: {
-          title: 'Create answer'
-        },
-      },
-      {
-        path: 'Answer/:id',
-        component: AnswerComponent,
-        data: {
-          title: 'Update answer'
-        }
-      },
-      {
-        path: 'FormList',
-        component: FormListComponent,
-        data: {
-          title: 'Form List'
-        }
-      },
-      {
-        path: 'Form',
-        component: FormComponent,
-        data: {
-          title: 'Create Form'
-        },
-      },
-      {
-        path: 'Form/:id',
-        component: FormComponent,
-        data: {
-          title: 'Update Form'
-        }
-      },
-      {
-        path: 'ProcessList',
-        component: ProcessListComponent,
-        data: {
-          title: 'Process List'
-        }
-      },
-      {
-        path: 'Process',
-        component: ProcessComponent,
-        data: {
-          title: 'Create Process'
-        },
-      },
-      {
-        path: 'Process/:id',
-        component: ProcessComponent,
-        data: {
-          title: 'Update Process'
         }
       },
       {
@@ -470,7 +409,7 @@ export const routes: Routes = [
         data: {
           title: 'Update  ItemCategory'
         }
-      }, /// Create by Dhanraj start
+      },
       {
         path: 'ItemGroupList',
         component: ItemGroupListComponent,
@@ -511,6 +450,76 @@ export const routes: Routes = [
         component: ItemSubGroupComponent,
         data: {
           title: 'Update Sub Item Group'
+        }
+      },
+      // ERP route
+      {
+        path: 'AnswerList',
+        component: AnswerListComponent,
+        data: {
+          title: 'Answer List'
+        },
+        resolve: {
+          AnswerList: AnswerListResolverService
+        },
+      },
+      {
+        path: 'Answer',
+        component: AnswerComponent,
+        data: {
+          title: 'Create answer'
+        },
+      },
+      {
+        path: 'Answer/:id',
+        component: AnswerComponent,
+        data: {
+          title: 'Update answer'
+        }
+      },
+      {
+        path: 'FormList',
+        component: FormListComponent,
+        data: {
+          title: 'Form List'
+        },
+        resolve: {
+          FormList: FormListResolverService
+        }
+      },
+      {
+        path: 'Form',
+        component: FormComponent,
+        data: {
+          title: 'Create Form'
+        },
+      },
+      {
+        path: 'Form/:id',
+        component: FormComponent,
+        data: {
+          title: 'Update Form'
+        }
+      },
+      {
+        path: 'ProcessList',
+        component: ProcessListComponent,
+        data: {
+          title: 'Process List'
+        }
+      },
+      {
+        path: 'Process',
+        component: ProcessComponent,
+        data: {
+          title: 'Create Process'
+        },
+      },
+      {
+        path: 'Process/:id',
+        component: ProcessComponent,
+        data: {
+          title: 'Update Process'
         }
       },
 

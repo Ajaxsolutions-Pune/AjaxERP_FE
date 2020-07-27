@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Answer } from '../../../../Compound/Module/Masters/Answer.model';
+import { Answer, AnswerEntity } from '../../../../Compound/Module/Masters/Answer.model';
 import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answer-Transfarmer';
 
 @Component({
@@ -10,7 +10,8 @@ import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answ
 })
 export class AnswerListComponent implements OnInit {
   @Input() AnswerInput: Answer;
-  Answers: Answer[];
+  answers: Answer[];
+  answersEntity: AnswerEntity[];
 
   WithoutFilterAnswer: Answer[];
   Resultanswer: Answer[];
@@ -19,43 +20,42 @@ export class AnswerListComponent implements OnInit {
   constructor(private _router: Router,
     objTrans: AnswerTransfarmer,
     private route: ActivatedRoute) {
-    this.Answers = this.route.snapshot.data['AnswerList'];
+      this.answersEntity = this.route.snapshot.data['AnswerList'];
+      this.answers = objTrans.AnswerTransfarmers(this.answersEntity);
+      this.WithoutFilterAnswer = this.answers;
   }
 
   ngOnInit() {
-    this.WithoutFilterAnswer = this.Answers;
-    console.log(this.Answers);
+    this.WithoutFilterAnswer = this.answers;
+    console.log(this.answers);
     this.answer = {
-      Answer: null,
-      AnswerID: null,
-      Is_Active: null,
-      Is_Auto: null,
-      Sort_By: null
+      answer: null,
+      answerId: null,
+      isActive: null
     };
-    console.log(this.Answers);
   }
 
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultanswer = this.WithoutFilterAnswer;
-    if (this.answer.Answer !== null && this.answer.Answer !== '') {
+    if (this.answer.answer !== null && this.answer.answer !== '') {
       this.Resultanswer = this.Resultanswer.filter(SubResult =>
-        SubResult.Answer.toLowerCase().indexOf(this.answer.Answer.toString().toLowerCase()) !== -1);
+        SubResult.answer.toLowerCase().indexOf(this.answer.answer.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
-    if (this.answer.AnswerID !== null && this.answer.AnswerID.toString() !== '') {
+    if (this.answer.answerId !== null && this.answer.answerId.toString() !== '') {
       this.Resultanswer = this.Resultanswer.filter(SubResult =>
-        SubResult.AnswerID.toString().toLowerCase().indexOf(this.answer.AnswerID.toString().toLowerCase()) !== -1);
+        SubResult.answerId.toString().toLowerCase().indexOf(this.answer.answerId.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
     if (this.SerachCri === 0) {
       this.Resultanswer = this.WithoutFilterAnswer;
     }
-    this.Answers = this.Resultanswer;
+    this.answers = this.Resultanswer;
   }
 
   ExportToExcel(): void {
     alasql('SELECT Answer_Code,Answer_Id,Answer_Name_ENg,Answer_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("AnswerList.xlsx",{headers:true}) FROM ?', [this.Answers]);
+      'CreDate,ModDate,IsActive INTO XLSX("AnswerList.xlsx",{headers:true}) FROM ?', [this.answers]);
   }
 }

@@ -26,13 +26,6 @@ export class StateService {
         console.log(this.str + '/State/' + StateCode);
         return this.httpClient.get<StateEntity[]>(this.str + 'State/' + StateCode).pipe(catchError(this.handleError));
     }
-    getMaxBrandId(): string {
-        return this.states.length.toString();
-    }
-
-    getRole(): void {
-    }
-
     Save(state: StateEntity): Observable<StateEntity> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<StateEntity>(this.str + 'State', state, httpOptions).pipe(catchError(this.handleError));

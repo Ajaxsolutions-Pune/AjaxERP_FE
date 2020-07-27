@@ -11,7 +11,7 @@
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label" for="txtanswerId">Answer Id</label>
                             <div class="col-sm-4">
-                                <input id="txtAnswerId" [(ngModel)]="answer.AnswerID" required name="AnswerID"
+                                <input id="txtAnswerId" [(ngModel)]="answer.answerId" required name="AnswerID"
                                     type="text" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
@@ -21,7 +21,7 @@
                             <label class="col-md-2 col-form-label" for="txtAnswer">Answer</label>
                             <div class="col-sm-4">
                                 <input id="txtAnswer" required name="Answer" type="text"
-                                    [(ngModel)]="answer.Answer" class="form-control form-control-sm">
+                                    [(ngModel)]="answer.answer" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
@@ -29,7 +29,7 @@
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label">Active</label>
                             <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="answer.Is_Active" name="IsActive"></div>
+                                <input type="checkbox" [(ngModel)]="answer.isActive" name="IsActive"></div>
                             <div class="col-md-3"></div>
                         </div>
                     </div>

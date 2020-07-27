@@ -17,15 +17,16 @@ export class BrandService {
     }
     ListUnits: Brand[];
 
+    getBrands(): Observable<Brand[]> {
+        console.log(this.str + 'Brand/getList');
+        return this.httpClient.get<Brand[]>(this.str + 'Brand/getList');
+    }
+
     getBrand(BrandCode: String): Observable<Brand[]> {
         return this.httpClient.get<Brand[]>(this.str + 'Brand/getUser?UserNo=' +
             BrandCode);
     }
 
-    getBrands(): Observable<Brand[]> {
-        console.log(this.str + 'Brand/getList');
-        return this.httpClient.get<Brand[]>(this.str + 'Brand/getList');
-    }
     Save(Brand1: Brand): Observable<Brand> {
         if (Brand1.brandCode === null) {
             const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

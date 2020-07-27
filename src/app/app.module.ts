@@ -122,7 +122,12 @@ import { FormComponent } from './views/Masters/Form/form/form.component';
 import { ProcessComponent } from './views/Masters/Process/process/process.component';
 import { ProcessListComponent } from './views/Masters/Process/process-list/process-list.component';
 import { QuestionTypeListComponent } from './views/Masters/Question/question-type-list.component';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { AnswerListResolverService } from './Compound/Resolver/Masters/Answer-List-Resolver.Service';
+import { AnswerService } from './Compound/Services/Masters/AnswerService';
+import { HttpModule } from '@angular/http';
+import { FormTransfarmer } from './Compound/Transformer/Masters/Form-Transfarmer';
+import { FormService } from './Compound/Services/Masters/FormService';
+import { FormListResolverService } from './Compound/Resolver/Masters/Form-List-Resolver.Service';
 @NgModule({
   imports: [
     BrowserModule,
@@ -133,7 +138,7 @@ import { Http, RequestOptions, Headers } from '@angular/http';
     AppFooterModule,
     AppHeaderModule,
     AppSidebarModule,
-    FormsModule,
+    FormsModule, HttpModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
@@ -155,19 +160,21 @@ import { Http, RequestOptions, Headers } from '@angular/http';
     CastCategoryListComponent, CastCategoryComponent, DefaultLayoutComponent, CastListComponent,
     CastComponent, TehsilListComponent, TehsilComponent, ItemCategoryListComponent, ItemCategoryComponent,
     ItemGroupComponent, ItemSubGroupComponent, ItemGroupListComponent, ItemSubGroupListComponent,
-    AnswerListComponent, AnswerComponent,
-    FormListComponent, FormComponent, ProcessComponent, ProcessListComponent, QuestionTypeListComponent,
+    AnswerListComponent, AnswerComponent, FormListComponent, FormComponent,
+    ProcessComponent, ProcessListComponent, QuestionTypeListComponent,
   ],
   providers: [
-    LogIn, LogInService, User, UOM, UserService, Http, RequestOptions, Headers,
+    LogIn, LogInService, User, UOM, UserService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     BrandService, StateService, MFGService, CityGroupService, ItemSubGroupService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
-    TehsilService, ItemCategoryService,
-    StateTransfarmer, CountryTransfarmer, DistrictTransfarmer,
+    TehsilService, ItemCategoryService, AnswerService, FormTransfarmer,
+    StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
+    FormService,
     TehsilTransfarmer, TehsilListResolverService, TehsilMasterResolverService, AnswerTransfarmer,
+    FormListResolverService,
     DistrictMasterResolverService, DistrictListResolverService,
     {
       provide: LocationStrategy,

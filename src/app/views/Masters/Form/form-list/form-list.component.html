@@ -1,11 +1,11 @@
 <div class="form-group row">
     <div class="col-md-3">
         <input id="txtFormId" required name="txtFormId" type="text" class="form-control" placeholder="Form Id" 
-        (input)="resultChanged()" [(ngModel)]="Form.FormId">
+        (input)="resultChanged()" [(ngModel)]="Form.formId">
     </div>
     <div class="col-md-3">
         <input id="txtFormName" required name="txtFormName" type="text" class="form-control" placeholder="Form Name"
-        (input)="resultChanged()" [(ngModel)]="Form.Form_Name">
+        (input)="resultChanged()" [(ngModel)]="Form.formName">
     </div>
     <div class="col-md-1">
         <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Form" routerLink="/Form"></button>
@@ -27,18 +27,18 @@
     <tbody>
       <tr *ngFor="let form1 of forms">
         <td>
-          <div>{{form1.FormId}}</div>
+          <div>{{form1.formId}}</div>
         </td>
         <td>
-          {{form1.Form_Name}}
+          {{form1.formName}}
         </td>
         <td [ngSwitch]="form1.IsActive">
           <span *ngSwitchCase="true">Yes</span>
           <span *ngSwitchDefault>No</span>
         </td>
         <td [ngSwitch]="1">
-          <button class="btn btn-primary" [disabled]="form1.FormId === ''"
-            [routerLink]="['/Forms/',form1.FormId]">Edit</button>
+          <button class="btn btn-primary" [disabled]="form1.formId === ''"
+            [routerLink]="['/Forms/',form1.formId]">Edit</button>
         </td>
       </tr>
     </tbody>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../../containers';
-import { Form } from '../../../../Compound/Module/Masters/Form.model';
 import { Process } from '../../../../Compound/Module/Masters/Process.model';
 
 @Component({

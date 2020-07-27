@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Form } from '../../../../Compound/Module/Masters/Form.model';
 import { Process } from '../../../../Compound/Module/Masters/Process.model';
 
 @Component({

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Form } from '../../../../Compound/Module/Masters/Form.model';
+import { FormObj, FormEntity } from '../../../../Compound/Module/Masters/Form.model';
+import { FormTransfarmer } from '../../../../Compound/Transformer/Masters/Form-Transfarmer';
 
 @Component({
   selector: 'app-form-list',
@@ -8,27 +9,29 @@ import { Form } from '../../../../Compound/Module/Masters/Form.model';
   styleUrls: ['./form-list.component.scss']
 })
 export class FormListComponent implements OnInit {
-  @Input() FormInput: Form;
-  forms: Form[];
+  @Input() FormInput: FormObj;
+  forms: FormObj[];
 
-  WithoutFilterForm: Form[];
-  ResultForm: Form[];
+  WithoutFilterForm: FormObj[];
+  ResultForm: FormObj[];
+  formEntity: FormEntity[];
   SerachCri: number;
-  Form: Form;
+  Form: FormObj;
   constructor(private _router: Router,
+    objTrans: FormTransfarmer,
     private route: ActivatedRoute) {
-    this.forms = this.route.snapshot.data['FormList'];
+      this.formEntity = this.route.snapshot.data['FormList'];
+      this.forms = objTrans.fTransfarmers(this.formEntity);
+      this.WithoutFilterForm = this.forms;
   }
 
   ngOnInit() {
     this.WithoutFilterForm = this.forms;
     console.log(this.forms);
     this.Form = {
-      FormId: null,
-      Form_Name: null,
-      Is_Active: null,
-      Is_Auto: null,
-      Sort_By: null
+      isActive: null,
+      formId: null,
+      formName: null
     };
     console.log(this.forms);
   }
@@ -36,14 +39,14 @@ export class FormListComponent implements OnInit {
   resultChanged(): void {
     this.SerachCri = 0;
     this.ResultForm = this.WithoutFilterForm;
-    if (this.Form.FormId !== null && this.Form.FormId !== '') {
+    if (this.Form.formId !== null && this.Form.formId !== '') {
       this.ResultForm = this.ResultForm.filter(SubResult =>
-        SubResult.FormId.toLowerCase().indexOf(this.Form.FormId.toString().toLowerCase()) !== -1);
+        SubResult.formId.toLowerCase().indexOf(this.Form.formId.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
-    if (this.Form.Form_Name !== null && this.Form.Form_Name.toString() !== '') {
+    if (this.Form.formName !== null && this.Form.formName.toString() !== '') {
       this.ResultForm = this.ResultForm.filter(SubResult =>
-        SubResult.Form_Name.toString().toLowerCase().indexOf(this.Form.Form_Name.toString().toLowerCase()) !== -1);
+        SubResult.formName.toString().toLowerCase().indexOf(this.Form.formName.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
     if (this.SerachCri === 0) {

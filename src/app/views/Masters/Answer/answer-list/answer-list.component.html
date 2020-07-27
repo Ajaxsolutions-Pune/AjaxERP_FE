@@ -1,11 +1,11 @@
 <div class="form-group row">
     <div class="col-md-3">
         <input id="txtAnswerID" required name="txtAnswerID" type="text" class="form-control" placeholder="Answer ID" 
-        (input)="resultChanged()" [(ngModel)]="answer.AnswerID">
+        (input)="resultChanged()" [(ngModel)]="answer.answerId">
     </div>
     <div class="col-md-3">
         <input id="txtAnswer" required name="txtanswer" type="text" class="form-control" placeholder="Answer"
-        (input)="resultChanged()" [(ngModel)]="answer.Answer">
+        (input)="resultChanged()" [(ngModel)]="answer.answer">
     </div>
     <div class="col-md-1">
         <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create answer" routerLink="/Answer"></button>
@@ -25,20 +25,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let Answer of Answers">
+      <tr *ngFor="let Answer of answers">
         <td>
-          <div>{{Answer.AnswerID}}</div>
+          <div>{{Answer.answerId}}</div>
         </td>
         <td>
-          {{Answer.Answer}}
+          {{Answer.answer}}
         </td>
-        <td [ngSwitch]="Answer.IsActive">
+        <td [ngSwitch]="Answer.isActive">
           <span *ngSwitchCase="true">Yes</span>
           <span *ngSwitchDefault>No</span>
         </td>
         <td [ngSwitch]="1">
-          <button class="btn btn-primary" [disabled]="Answer.AnswerID === ''"
-            [routerLink]="['/Answer/',Answer.AnswerID]">Edit</button>
+          <button class="btn btn-primary" [disabled]="Answer.answerId === ''"
+            [routerLink]="['/Answer/',Answer.answerId]">Edit</button>
         </td>
       </tr>
     </tbody>
