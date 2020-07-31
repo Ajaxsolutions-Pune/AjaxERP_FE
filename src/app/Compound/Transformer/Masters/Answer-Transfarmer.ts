@@ -38,7 +38,7 @@ export class AnswerTransfarmer {
         this.answerEntity.answerId = Answer1.answerId;
         this.answerEntity.answer = Answer1.answer;
         this.answerEntity.isActive = Answer1.isActive;
-        if (this.answer.isActive === 'true') { this.answer.isActive = '1'; } else { this.answer.isActive = '1'; }
+        if (Answer1.isActive === 'true') { this.answerEntity.isActive = '1'; } else { this.answerEntity.isActive = '0'; }
         return this.answerEntity;
     }
 }

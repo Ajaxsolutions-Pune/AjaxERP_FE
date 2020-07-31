@@ -35,10 +35,11 @@ export class FormTransfarmer {
 
     formTransfarmer(form1: FormObj): FormEntity {
         this.formEntity = new FormEntity();
-        this.formEntity.formId = form1.formName;
+        this.formEntity.formId = form1.formId;
         this.formEntity.formName = form1.formName;
         this.formEntity.isActive = form1.isActive;
-        if (this.form.isActive === 'true') { this.form.isActive = '1'; } else { this.form.isActive = '1'; }
+        if (form1.isActive === 'true') { this.formEntity.isActive = '1'; } else { this.formEntity.isActive = '0'; }
+        console.log(this.formEntity);
         return this.formEntity;
     }
 }

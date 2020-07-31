@@ -1,35 +1,48 @@
-<form #answerForm="ngForm" (ngSubmit)="save(answerForm);" autocomplete="off">
+<form #QuestionForm="ngForm" (ngSubmit)="save(QuestionForm);" autocomplete="off">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Answer</strong>
+                        <strong>Question</strong>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtanswerId">Answer Id</label>
+                            <label class="col-md-2 col-form-label" for="txtquestionId">Question Id</label>
                             <div class="col-sm-4">
-                                <input id="txtAnswerId" [(ngModel)]="answer.answerId" required name="AnswerID"
+                                <input id="txtquestionId" [(ngModel)]="question.questionId" required name="questionID"
                                     type="text" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
                         <div class="row">
                             <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtAnswer">Answer</label>
+                            <label class="col-md-2 col-form-label" for="txtquestion">Question</label>
                             <div class="col-sm-4">
-                                <input id="txtAnswer" required name="Answer" type="text"
-                                    [(ngModel)]="answer.answer" class="form-control form-control-sm">
+                                <input id="txtquestion" required name="question" type="text"
+                                    [(ngModel)]="question.question" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3"></div>
+                          <label class="col-md-2 col-form-label">
+                            Question Type</label>
+                          <div class="col-md-4">
+                            <select id="QuestionTy" name="QuestionTy" [(ngModel)]="question.qaTypeCode" class="form-control form-control-sm">
+                                <option value="-1">Select Question Type</option>
+                                <option value="LB">LB</option>
+                                <option value="IM">IM</option>
+                                <option value="LT">LT</option>
+                            </select>
+                          </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label">Active</label>
                             <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="answer.isActive" name="IsActive"></div>
+                                <input type="checkbox" [(ngModel)]="question.isActive" name="IsActive"></div>
                             <div class="col-md-3"></div>
                         </div>
                     </div>
@@ -39,8 +52,8 @@
                             <div class="col-md-2">
                                 <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
                                     Submit</button>
-                                    <button type="button" routerLink="/AnswerList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
-                                        Cancel</button>
+                                <button type="button" routerLink="/QuestionList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Cancel</button>
                             </div>
                             <div class="col-md-5"></div>
                         </div>
@@ -51,4 +64,4 @@
         <!--/.row-->
     </div>
 </form>
-<div> {{answer | json}}</div>
+<div> {{question | json}}</div>

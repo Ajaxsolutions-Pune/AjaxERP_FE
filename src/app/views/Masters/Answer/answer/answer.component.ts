@@ -14,34 +14,38 @@ import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answ
 export class AnswerComponent implements OnInit {
   answer: Answer;
   str: string;
-  insertflag: boolean;
-  answerList: Answer[];
   constructor(private route: ActivatedRoute,
+    private answerTransfarmer: AnswerTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,
-    private answerService: AnswerService,
-    private answerTransfarmer: AnswerTransfarmer, private router: Router) {
-    const status = '';
+    private answerService: AnswerService, private router: Router) {
   }
   ngOnInit() {
     status = '';
-    this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getanswers(id.toString()); });
+    this.answer = {
+      answer: null,
+      answerId: null,
+      isActive: null,
+    };
+    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getanswer(str); });
   }
   save(answerForm: NgForm): void {
     if (status !== 'Update') {
-
-      this.insertflag = false;
       this.answer.answerId = null;
+      console.log(this.answer);
+     // if (this.answer.isActive === 'true') { this.answer.isActive = '1'; } else { this.answer.isActive = '0'; }
+
       this.answerService.Save(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
-        () => {
+        (par) => {
+          console.log(par);
           answerForm.reset();
           this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
             'Data saved successfully !', 'modal-info');
-          this.router.navigate(['BrandList']);
+          this.router.navigate(['AnswerList']);
         }
       );
 
     } else {
-      this.answerService.Save(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
+      this.answerService.Update(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
         () => {
           answerForm.reset();
           this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
@@ -50,19 +54,15 @@ export class AnswerComponent implements OnInit {
         }
       );
     }
-    if (this.insertflag) {
-      this.router.navigate(['AnswerList']);
-    }
   }
 
-  private getanswers(answerCode: string) {
+  private getanswer(answer_Code: string) {
     this.answer = {
       answer: null,
       answerId: null,
       isActive: null,
-
     };
-    if (answerCode === null || answerCode === '') {
+    if (answer_Code === null || answer_Code === '') {
       this.answer = {
         answer: null,
         answerId: null,
@@ -71,12 +71,9 @@ export class AnswerComponent implements OnInit {
       status = '';
 
     } else {
-
-    this.answerService.getAnswer(answerCode).subscribe(
-      (par) => this.answer = par,
-      (err: any) => console.log(err));
-
-      console.log(this.answer);
+      this.answerService.getAnswer(answer_Code).subscribe(
+        (par) => this.answer = par,
+        (err: any) => console.log(err));
       status = 'Update';
     }
   }

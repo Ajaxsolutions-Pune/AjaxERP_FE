@@ -20,6 +20,7 @@
       <tr>
         <th>Process Id</th>
         <th>Process name</th>
+        <th>Geofence</th>
         <th>Active</th>
         <th>Action</th>
       </tr>
@@ -30,7 +31,10 @@
           <div>{{obj.processId}}</div>
         </td>
         <td>
-          {{obj.IsActive}}
+          {{obj.processName}}
+        </td>
+        <td>
+          {{obj.geofence}}
         </td>
         <td [ngSwitch]="obj.IsActive">
           <span *ngSwitchCase="true">Yes</span>

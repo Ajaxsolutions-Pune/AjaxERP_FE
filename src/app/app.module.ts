@@ -131,6 +131,15 @@ import { FormListResolverService } from './Compound/Resolver/Masters/Form-List-R
 import { ProcessService1 } from './Compound/Services/Masters/ProcessService1';
 import { ProcessListResolverService } from './Compound/Resolver/Masters/Process-List-Resolver.Service';
 import { ProcessTransfarmer1 } from './Compound/Transformer/Masters/Process-Transfarmer1';
+import { QuestionListComponent } from './views/Masters/Question/question-list.component';
+import { QuestionTransfarmer } from './Compound/Transformer/Masters/Question-Transfarmer';
+import { QuestionService } from './Compound/Services/Masters/QuestionService';
+import { QuestionListResolverService } from './Compound/Resolver/Masters/Question-List-Resolver-Service';
+import { QuestionComponent } from './views/Masters/Question/question.component';
+import { QuestionTypeComponent } from './views/Masters/Question/question-type.component';
+import { QaTypeTransfarmer } from './Compound/Transformer/Masters/QaType-Transfarmer';
+import { QaTypeListResolverService } from './Compound/Resolver/Masters/QaType-List-Resolver.Service';
+import { QaTypeService } from './Compound/Services/Masters/QaTypeService';
 @NgModule({
   imports: [
     BrowserModule,
@@ -149,9 +158,7 @@ import { ProcessTransfarmer1 } from './Compound/Transformer/Masters/Process-Tran
     HttpClientModule,
     ChartsModule,
     NgxWebstorageModule.forRoot(),
-    RouterModule.forRoot(routes, {
-      onSameUrlNavigation: 'reload'
-    })
+    RouterModule.forRoot(routes)
   ],
   declarations: [
     AppComponent, ...APP_CONTAINERS, P404Component, P500Component, LogInComponent,
@@ -164,21 +171,22 @@ import { ProcessTransfarmer1 } from './Compound/Transformer/Masters/Process-Tran
     CastComponent, TehsilListComponent, TehsilComponent, ItemCategoryListComponent, ItemCategoryComponent,
     ItemGroupComponent, ItemSubGroupComponent, ItemGroupListComponent, ItemSubGroupListComponent,
     AnswerListComponent, AnswerComponent, FormListComponent, FormComponent,
-    ProcessComponent, ProcessListComponent, QuestionTypeListComponent,
+    ProcessComponent, ProcessListComponent, QuestionTypeListComponent, QuestionListComponent, QuestionComponent, QuestionTypeComponent,
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
+    QaTypeService,
     BrandService, StateService, MFGService, CityGroupService, ItemSubGroupService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
-    TehsilService, ItemCategoryService, AnswerService, FormTransfarmer,
+    TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
-    FormService, ProcessService1,
-    TehsilTransfarmer, TehsilListResolverService, TehsilMasterResolverService, AnswerTransfarmer,
+    FormService, ProcessService1, QuestionService, QuestionListResolverService,
+    TehsilTransfarmer, TehsilListResolverService, TehsilMasterResolverService, QuestionTransfarmer, AnswerTransfarmer,
     FormListResolverService, ProcessListResolverService, ProcessTransfarmer1,
-    DistrictMasterResolverService, DistrictListResolverService,
+    DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy

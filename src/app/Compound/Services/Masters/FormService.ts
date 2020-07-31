@@ -20,15 +20,16 @@ export class FormService {
     }
 
     getForm(formCode: string): Observable<FormEntity> {
-        console.log(this.str + '/Form/' + formCode);
         return this.httpClient.get<FormEntity>(this.str + '/Form/' + formCode).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: FormEntity): Observable<FormEntity> {
+        saveEntityObj.formId = null;
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<FormEntity>(this.str + '/Form', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: FormEntity): Observable<FormEntity> {
+        console.log(this.str + '/Form');
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<FormEntity>(this.str + '/Form', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
     }

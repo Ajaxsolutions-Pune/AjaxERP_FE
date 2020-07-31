@@ -18,7 +18,7 @@ export class AnswerListComponent implements OnInit {
   SerachCri: number;
   answer: Answer;
   constructor(private _router: Router,
-    objTrans: AnswerTransfarmer,
+    private objTrans: AnswerTransfarmer,
     private route: ActivatedRoute) {
       this.answersEntity = this.route.snapshot.data['AnswerList'];
       this.answers = objTrans.AnswerTransfarmers(this.answersEntity);

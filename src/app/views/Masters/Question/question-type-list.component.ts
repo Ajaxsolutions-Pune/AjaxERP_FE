@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Process } from '../../../Compound/Module/Masters/Process.model';
-import { QaType } from '../../../Compound/Module/Masters/QA_Type.model';
+import { QaType, QaTypeEntity } from '../../../Compound/Module/Masters/QA_Type.model';
+import { QaTypeTransfarmer } from '../../../Compound/Transformer/Masters/QaType-Transfarmer';
 
 @Component({
   selector: 'app-question-type-list',
@@ -9,51 +10,53 @@ import { QaType } from '../../../Compound/Module/Masters/QA_Type.model';
   styleUrls: ['./question-type-list.component.scss']
 })
 export class QuestionTypeListComponent implements OnInit {
-  @Input() FormInput: QaType;
+  @Input() questionInput: QaType;
   arrOject: QaType[];
+  arrOjectEntity: QaTypeEntity[];
 
   WithoutFilterObj: QaType[];
-  ResultProcess: QaType[];
+  ResultOject: QaType[];
   SerachCri: number;
   bindObj: QaType;
   constructor(private _router: Router,
+    objTrans: QaTypeTransfarmer,
     private route: ActivatedRoute) {
-    this.arrOject = this.route.snapshot.data['ProcessList'];
+    this.arrOjectEntity = this.route.snapshot.data['QaTypeList'];
+    this.arrOject = objTrans.QaTypeTransfarmers(this.arrOjectEntity);
+    this.WithoutFilterObj = this.arrOject;
   }
 
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
+    console.log(this.arrOject);
     this.bindObj = {
-      ID: null,
-      QA_Type_Code: null,
-      QA_Type_Desc: null,
-      Is_Active: null,
-      Is_Auto: null,
-      Sort_By: null
+      qaTypeCode: null,
+      qaTypeDesc: null,
+      isActive: null,
     };
   }
 
   resultChanged(): void {
     this.SerachCri = 0;
-    this.ResultProcess = this.WithoutFilterObj;
-    if (this.bindObj.QA_Type_Code !== null && this.bindObj.QA_Type_Code !== '') {
-      this.ResultProcess = this.ResultProcess.filter(SubResult =>
-        SubResult.QA_Type_Code.toLowerCase().indexOf(this.bindObj.QA_Type_Code.toString().toLowerCase()) !== -1);
+    this.ResultOject = this.WithoutFilterObj;
+    if (this.bindObj.qaTypeDesc !== null && this.bindObj.qaTypeDesc !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.qaTypeDesc.toLowerCase().indexOf(this.bindObj.qaTypeDesc.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
-    if (this.bindObj.QA_Type_Desc !== null && this.bindObj.QA_Type_Desc.toString() !== '') {
-      this.ResultProcess = this.ResultProcess.filter(SubResult =>
-        SubResult.QA_Type_Desc.toString().toLowerCase().indexOf(this.bindObj.QA_Type_Desc.toString().toLowerCase()) !== -1);
+    if (this.bindObj.qaTypeCode !== null && this.bindObj.qaTypeCode.toString() !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.qaTypeCode.toString().toLowerCase().indexOf(this.bindObj.qaTypeCode.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
     if (this.SerachCri === 0) {
-      this.ResultProcess = this.WithoutFilterObj;
+      this.ResultOject = this.WithoutFilterObj;
     }
-    this.arrOject = this.ResultProcess;
+    this.arrOject = this.ResultOject;
   }
 
   ExportToExcel(): void {
-    alasql('SELECT Form_Code,Form_Id,Form_Name_ENg,Form_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("FormList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT question_Code,question_Id,question_Name_ENg,question_Name_Uni,CreatedBy,ModifiedBy,' +
+      'CreDate,ModDate,IsActive INTO XLSX("questionList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

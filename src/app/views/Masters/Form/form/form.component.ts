@@ -14,55 +14,55 @@ import { FormTransfarmer } from '../../../../Compound/Transformer/Masters/Form-T
 export class FormComponent implements OnInit {
   form: FormObj;
   str: string;
-  insertflag: boolean;
-  formList: FormObj[];
   constructor(private route: ActivatedRoute,
+    private formTransfarmer: FormTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,
-    private formService: FormService,
-    private formTransfarmer: FormTransfarmer, private router: Router) {
-    const status = '';
+    private formService: FormService, private router: Router) {
   }
   ngOnInit() {
     status = '';
-    this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getForms(id.toString()); });
-  }
-  save(formForm: NgForm): void {
-    if (status !== 'Update') {
-
-      this.insertflag = false;
-      this.form.formId = null;
-      this.formService.Save(this.formTransfarmer.formTransfarmer(this.form)).subscribe(
-        () => {
-          formForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['BrandList']);
-        }
-      );
-
-    } else {
-      this.formService.Save(this.formTransfarmer.formTransfarmer(this.form)).subscribe(
-        () => {
-          formForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['formList']);
-        }
-      );
-    }
-    if (this.insertflag) {
-      this.router.navigate(['FormList']);
-    }
-  }
-
-  private getForms(formCode: string) {
     this.form = {
       formId: null,
       formName: null,
       isActive: null
-
     };
-    if (formCode === null || formCode === '') {
+    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getForm(str); });
+  }
+  save(formForm: NgForm): void {
+    if (status !== 'Update') {
+      this.form.formId = null;
+      console.log(this.form);
+      // if (this.form.isActive === 'true') { this.form.isActive = '1'; } else { this.form.isActive = '0'; }
+
+      this.formService.Save(this.formTransfarmer.formTransfarmer(this.form)).subscribe(
+        (par) => {
+            console.log(par);
+          formForm.reset();
+          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+            'Data saved successfully !', 'modal-info');
+          this.router.navigate(['FormList']);
+        }
+      );
+
+    } else {
+      this.formService.Update(this.formTransfarmer.formTransfarmer(this.form)).subscribe(
+        () => {
+          formForm.reset();
+          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+            'Data saved successfully !', 'modal-info');
+          this.router.navigate(['FormList']);
+        }
+      );
+    }
+  }
+
+  private getForm(form_Code: string) {
+    this.form = {
+      formId: null,
+      formName: null,
+      isActive: null
+    };
+    if (form_Code === null || form_Code === '') {
       this.form = {
         formId: null,
         formName: null,
@@ -71,14 +71,10 @@ export class FormComponent implements OnInit {
       status = '';
 
     } else {
-
-      this.formService.getForm(formCode).subscribe(
+      this.formService.getForm(form_Code).subscribe(
         (par) => this.form = par,
         (err: any) => console.log(err));
-
-      console.log(this.form);
       status = 'Update';
     }
   }
-
 }

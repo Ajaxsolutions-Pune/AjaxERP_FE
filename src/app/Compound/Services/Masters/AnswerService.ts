@@ -20,17 +20,17 @@ export class AnswerService {
     }
 
     getAnswer(AnswerCode: string): Observable<AnswerEntity> {
-        console.log(this.str + '/Answer/' + AnswerCode);
         return this.httpClient.get<AnswerEntity>(this.str + '/Answer/' + AnswerCode).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: AnswerEntity): Observable<AnswerEntity> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<AnswerEntity>(this.str + 'Answer', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        saveEntityObj.answerId = null;
+        return this.httpClient.post<AnswerEntity>(this.str + '/Answer', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: AnswerEntity): Observable<AnswerEntity> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<AnswerEntity>(this.str + 'Answer', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<AnswerEntity>(this.str + '/Answer', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

@@ -59,6 +59,16 @@ export const navItems: NavData[] = [
         url: '/ProcessList',
         icon: 'icon-puzzle'
       },
+      {
+        name: 'QuestionType',
+        url: '/QuestionTypeList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Question',
+        url: '/QuestionList',
+        icon: 'icon-puzzle'
+      },
      // {
        // name: 'User',
      //   url: '/UserList',

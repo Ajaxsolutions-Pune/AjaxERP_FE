@@ -39,7 +39,7 @@ export class ProcessTransfarmer1 {
         this.processEntity.processName = process1.processName;
         this.processEntity.geofence = process1.geofence;
         this.processEntity.isActive = process1.isActive;
-        if (this.process.isActive === 'true') { this.process.isActive = '1'; } else { this.process.isActive = '1'; }
+        if (process1.isActive === 'true') { this.processEntity.isActive = '1'; } else { this.processEntity.isActive = '1'; }
         return this.processEntity;
     }
 }

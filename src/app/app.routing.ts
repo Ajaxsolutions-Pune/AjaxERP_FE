@@ -55,6 +55,13 @@ import { ProcessComponent } from './views/Masters/Process/process/process.compon
 import { FormComponent } from './views/Masters/Form/form/form.component';
 import { AnswerListResolverService } from './Compound/Resolver/Masters/Answer-List-Resolver.Service';
 import { FormListResolverService } from './Compound/Resolver/Masters/Form-List-Resolver.Service';
+import { QuestionListResolverService } from './Compound/Resolver/Masters/Question-List-Resolver-Service';
+import { QuestionListComponent } from './views/Masters/Question/question-list.component';
+import { QuestionComponent } from './views/Masters/Question/question.component';
+import { ProcessListResolverService } from './Compound/Resolver/Masters/Process-List-Resolver.Service';
+import { QuestionTypeListComponent } from './views/Masters/Question/question-type-list.component';
+import { QuestionTypeComponent } from './views/Masters/Question/question-type.component';
+import { QaTypeListResolverService } from './Compound/Resolver/Masters/QaType-List-Resolver.Service';
 
 export const routes: Routes = [
   {
@@ -502,10 +509,61 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'QuestionTypeList',
+        component: QuestionTypeListComponent,
+        data: {
+          title: 'Question Type List'
+        },
+        resolve: {
+          QaTypeList: QaTypeListResolverService
+        }
+      },
+      {
+        path: 'QuestionType',
+        component: QuestionTypeComponent,
+        data: {
+          title: 'Create Question Type '
+        }
+      },
+      {
+        path: 'QuestionType/:id',
+        component: QuestionTypeComponent,
+        data: {
+          title: 'Update Question Type '
+        }
+      },
+      {
+        path: 'QuestionList',
+        component: QuestionListComponent,
+        data: {
+          title: 'Question List'
+        },
+        resolve: {
+          QuestionList: QuestionListResolverService
+        }
+      },
+      {
+        path: 'Question',
+        component: QuestionComponent,
+        data: {
+          title: 'Create Question'
+        },
+      },
+      {
+        path: 'Question/:id',
+        component: QuestionComponent,
+        data: {
+          title: 'Update Question'
+        }
+      },
+      {
         path: 'ProcessList',
         component: ProcessListComponent,
         data: {
           title: 'Process List'
+        },
+        resolve: {
+          ProcessList1: ProcessListResolverService
         }
       },
       {

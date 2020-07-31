@@ -20,20 +20,18 @@ export class FormListComponent implements OnInit {
   constructor(private _router: Router,
     objTrans: FormTransfarmer,
     private route: ActivatedRoute) {
-      this.formEntity = this.route.snapshot.data['FormList1'];
-      // this.forms = objTrans.fTransfarmers(this.formEntity);
+      this.formEntity = this.route.snapshot.data['FormList'];
+      this.forms = objTrans.fTransfarmers(this.formEntity);
       this.WithoutFilterForm = this.forms;
   }
 
   ngOnInit() {
     this.WithoutFilterForm = this.forms;
-    console.log(this.forms);
     this.Form = {
       isActive: null,
       formId: null,
       formName: null
     };
-    console.log(this.forms);
   }
 
   resultChanged(): void {
