@@ -9,12 +9,13 @@ export class AnswerTransfarmer {
     str: string;
     answerEntity: AnswerEntity;
     answer: Answer;
-    answers: Answer[] = [];
+    answers: Answer[];
     env = environment;
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
     }
     AnswerTransfarmers(Entity: AnswerEntity[]): Answer[] {
+        this.answers = [];
         Entity.forEach(element => {
             this.answer = new Answer();
             this.answer.answerId = element.answerId;

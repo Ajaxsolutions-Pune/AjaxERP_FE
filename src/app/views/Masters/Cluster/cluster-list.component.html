@@ -1,0 +1,49 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="txtClusterCode" required name="txtClusterCode" type="text" class="form-control" placeholder="Cluster Code" 
+        (input)="resultChanged()" [(ngModel)]="bindObj.clusterCode">
+    </div>
+    <div class="col-md-3">
+        <input id="txtClusterNameENG" required name="txtClusterNameENG" type="text" class="form-control" placeholder="Cluster Name ENG"
+        (input)="resultChanged()" [(ngModel)]="bindObj.clusterNameENG">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Cluster" routerLink="/Cluster"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+    </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Cluster Code</th>
+        <th>Cluster Name ENG</th>
+        <th>Cluster Name UNI</th>
+        <th>Active</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Oject of arrOject">
+        <td>
+          <div>{{Oject.ClusterCode}}</div>
+        </td>
+        <td>
+          {{Oject.ClusterNameENG}}
+        </td>
+        <td>
+          {{Oject.ClusterNameUNI}}
+        </td>
+        <td [ngSwitch]="Oject.isActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td [ngSwitch]="1">
+          <button class="btn btn-primary" [disabled]="Oject.ClusterCode === ''"
+            [routerLink]="['/Cluster/',Oject.ClusterCode]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

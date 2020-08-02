@@ -1,0 +1,63 @@
+<form #ObjForm="ngForm" (ngSubmit)="save(ObjForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Colour</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtcolourCode">Colour Code</label>
+                            <div class="col-sm-4">
+                                <input id="txtcolourCode" [(ngModel)]="bindObj.colourCode" required name="colourCode"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtcolourNameENG">Colour Name ENG</label>
+                            <div class="col-sm-4">
+                                <input id="txtcolourNameENG" required name="colourNameENG" type="text"
+                                    [(ngModel)]="bindObj.colourNameENG" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtcolourNameUNI">Colour Name UNI</label>
+                            <div class="col-sm-4">
+                                <input id="txtcolourNameUNI" required name="colourNameUNI" type="text"
+                                    [(ngModel)]="bindObj.colourNameUNI" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="bindObj.isActive" name="IsActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="button" routerLink="/ColourList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Cancel</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div> {{bindObj | json}}</div>

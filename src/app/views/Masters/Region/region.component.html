@@ -1,0 +1,63 @@
+<form #ObjForm="ngForm" (ngSubmit)="save(ObjForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Region</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtregionCode">Region Code</label>
+                            <div class="col-sm-4">
+                                <input id="txtregionCode" [(ngModel)]="bindObj.regionCode" required name="regionCode"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtregionNameENG">Region Name ENG</label>
+                            <div class="col-sm-4">
+                                <input id="txtregionNameENG" required name="regionNameENG" type="text"
+                                    [(ngModel)]="bindObj.regionNameENG" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtregionNameUNI">Region Name UNI</label>
+                            <div class="col-sm-4">
+                                <input id="txtregionNameUNI" required name="regionNameUNI" type="text"
+                                    [(ngModel)]="bindObj.regionNameUNI" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="bindObj.isActive" name="IsActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="button" routerLink="/RegionList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Cancel</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div> {{bindObj | json}}</div>

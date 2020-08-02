@@ -16,6 +16,7 @@ export class AnswerService {
     }
     Listanswer: Answer[];
     getAnswers(): Observable<AnswerEntity[]> {
+        console.log(this.httpClient.get<AnswerEntity[]>(this.str + '/Answer/getList'));
         return this.httpClient.get<AnswerEntity[]>(this.str + '/Answer/getList');
     }
 

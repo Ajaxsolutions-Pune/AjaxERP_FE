@@ -140,6 +140,24 @@ import { QuestionTypeComponent } from './views/Masters/Question/question-type.co
 import { QaTypeTransfarmer } from './Compound/Transformer/Masters/QaType-Transfarmer';
 import { QaTypeListResolverService } from './Compound/Resolver/Masters/QaType-List-Resolver.Service';
 import { QaTypeService } from './Compound/Services/Masters/QaTypeService';
+import { ZoneListComponent } from './views/Masters/Zone/zone-list.component';
+import { ZoneComponent } from './views/Masters/Zone/zone.component';
+import { RegionComponent } from './views/Masters/Region/region.component';
+import { RegionListComponent } from './views/Masters/Region/region-list.component';
+import { ColourListComponent } from './views/Masters/Colour/colour-list.component';
+import { ColourComponent } from './views/Masters/Colour/colour.component';
+import { AssetGroupComponent } from './views/Masters/AssetGroup/asset-group.component';
+import { AssetGroupListComponent } from './views/Masters/AssetGroup/asset-group-list.component';
+import { CircleComponent } from './views/Masters/Circle/circle.component';
+import { CircleListComponent } from './views/Masters/Circle/circle-list.component';
+import { ClusterListComponent } from './views/Masters/Cluster/cluster-list.component';
+import { ClusterComponent } from './views/Masters/Cluster/cluster.component';
+import { AssetCategoryListComponent } from './views/Masters/AssetCategory/asset-category-list.component';
+import { AssetCategoryComponent } from './views/Masters/AssetCategory/asset-category.component';
+import { AssetComponent } from './views/Masters/Asset/asset.component';
+import { AssetListComponent } from './views/Masters/Asset/asset-list.component';
+import { DeviceListComponent } from './views/Masters/Device/device-list.component';
+import { DeviceComponent } from './views/Masters/Device/device.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -171,7 +189,13 @@ import { QaTypeService } from './Compound/Services/Masters/QaTypeService';
     CastComponent, TehsilListComponent, TehsilComponent, ItemCategoryListComponent, ItemCategoryComponent,
     ItemGroupComponent, ItemSubGroupComponent, ItemGroupListComponent, ItemSubGroupListComponent,
     AnswerListComponent, AnswerComponent, FormListComponent, FormComponent,
-    ProcessComponent, ProcessListComponent, QuestionTypeListComponent, QuestionListComponent, QuestionComponent, QuestionTypeComponent,
+    ProcessComponent, ProcessListComponent, QuestionTypeListComponent,
+    QuestionListComponent, QuestionComponent, QuestionTypeComponent,
+    ZoneListComponent, ZoneComponent, RegionComponent, RegionListComponent,
+    ColourListComponent, ColourComponent, AssetGroupComponent,
+     AssetGroupListComponent, CircleComponent, CircleListComponent,
+      ClusterListComponent, ClusterComponent,
+       AssetCategoryListComponent, AssetCategoryComponent, AssetComponent, AssetListComponent, DeviceListComponent, DeviceComponent,
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService,

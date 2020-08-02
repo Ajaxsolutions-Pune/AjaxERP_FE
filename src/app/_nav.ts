@@ -69,6 +69,81 @@ export const navItems: NavData[] = [
         url: '/QuestionList',
         icon: 'icon-puzzle'
       },
+      {
+        name: 'Zone',
+        url: '/ZoneList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Region',
+        url: '/RegionList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Colour',
+        url: '/ColourList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'AssetGroup',
+        url: '/AssetGroupList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Circle',
+        url: '/CircleList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Cluster',
+        url: '/ClusterList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'AssetCategory',
+        url: '/AssetCategoryList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Asset',
+        url: '/AssetList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Device',
+        url: '/DeviceList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Country',
+        url: '/CountryList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'State',
+        url: '/StateList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'District',
+        url: '/DistrictList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Tehsil',
+        url: '/TehsilList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'City',
+        url: '/CityList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'CityGroup',
+        url: '/CityGroupList',
+        icon: 'icon-puzzle'
+      },
      // {
        // name: 'User',
      //   url: '/UserList',
@@ -80,38 +155,13 @@ export const navItems: NavData[] = [
      //   icon: 'icon-puzzle'
      // },
      // {
-     //   name: 'Country',
-     //   url: '/CountryList',
-      //  icon: 'icon-puzzle'
-     // },
-     // {
      //   name: 'Brand',
        // url: '/BrandList',
       //  icon: 'icon-puzzle'
      // },
      // {
-       // name: 'State',
-       // url: '/StateList',
-       // icon: 'icon-puzzle'
-     // },
-     // {
-      //  name: 'City',
-       // url: '/CityList',
-       // icon: 'icon-puzzle'
-     // },
-     // {
      //   name: 'Manufacturer',
       //  url: '/ManufacturerList',
-      //  icon: 'icon-puzzle'
-     // },
-     // {
-      //  name: 'CityGroup',
-       // url: '/CityGroupList',
-      //  icon: 'icon-puzzle'
-      // },
-     // {
-     //   name: 'District',
-       // url: '/DistrictList',
       //  icon: 'icon-puzzle'
      // },
      // {
@@ -130,12 +180,6 @@ export const navItems: NavData[] = [
        // url: '/CastList',
        // icon: 'icon-puzzle'
      // },
-
-     // {
-    //    name: 'Tehsil',
-    //    url: '/TehsilList',
-    //    icon: 'icon-puzzle'
-    //  },
      // {
     //    name: 'Item Category',
     //    url: '/ItemCategoryList',

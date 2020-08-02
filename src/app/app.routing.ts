@@ -62,6 +62,24 @@ import { ProcessListResolverService } from './Compound/Resolver/Masters/Process-
 import { QuestionTypeListComponent } from './views/Masters/Question/question-type-list.component';
 import { QuestionTypeComponent } from './views/Masters/Question/question-type.component';
 import { QaTypeListResolverService } from './Compound/Resolver/Masters/QaType-List-Resolver.Service';
+import { ZoneComponent } from './views/Masters/Zone/zone.component';
+import { ZoneListComponent } from './views/Masters/Zone/zone-list.component';
+import { RegionListComponent } from './views/Masters/Region/region-list.component';
+import { RegionComponent } from './views/Masters/Region/region.component';
+import { ColourComponent } from './views/Masters/Colour/colour.component';
+import { ColourListComponent } from './views/Masters/Colour/colour-list.component';
+import { AssetGroupListComponent } from './views/Masters/AssetGroup/asset-group-list.component';
+import { AssetGroupComponent } from './views/Masters/AssetGroup/asset-group.component';
+import { CircleComponent } from './views/Masters/Circle/circle.component';
+import { CircleListComponent } from './views/Masters/Circle/circle-list.component';
+import { ClusterListComponent } from './views/Masters/Cluster/cluster-list.component';
+import { ClusterComponent } from './views/Masters/Cluster/cluster.component';
+import { AssetCategoryListComponent } from './views/Masters/AssetCategory/asset-category-list.component';
+import { AssetCategoryComponent } from './views/Masters/AssetCategory/asset-category.component';
+import { AssetListComponent } from './views/Masters/Asset/asset-list.component';
+import { AssetComponent } from './views/Masters/Asset/asset.component';
+import { DeviceComponent } from './views/Masters/Device/device.component';
+import { DeviceListComponent } from './views/Masters/Device/device-list.component';
 
 export const routes: Routes = [
   {
@@ -580,6 +598,195 @@ export const routes: Routes = [
           title: 'Update Process'
         }
       },
+      {
+        path: 'ZoneList',
+        component: ZoneListComponent,
+        data: {
+          title: 'Zone List'
+        }
+      },
+      {
+        path: 'Zone',
+        component: ZoneComponent,
+        data: {
+          title: 'Create Zone'
+        },
+      },
+      {
+        path: 'Zone/:id',
+        component: ZoneComponent,
+        data: {
+          title: 'Update Zone'
+        }
+      },
+      {
+        path: 'RegionList',
+        component: RegionListComponent,
+        data: {
+          title: 'Region List'
+        }
+      },
+      {
+        path: 'Region',
+        component: RegionComponent,
+        data: {
+          title: 'Create Region'
+        },
+      },
+      {
+        path: 'Region/:id',
+        component: RegionComponent,
+        data: {
+          title: 'Update Region'
+        }
+      },
+      {
+        path: 'ColourList',
+        component: ColourListComponent,
+        data: {
+          title: 'Colour List'
+        }
+      },
+      {
+        path: 'Colour',
+        component: ColourComponent,
+        data: {
+          title: 'Create Colour'
+        },
+      },
+      {
+        path: 'Colour/:id',
+        component: ColourComponent,
+        data: {
+          title: 'Update Colour'
+        }
+      },
+      {
+        path: 'AssetGroupList',
+        component: AssetGroupListComponent,
+        data: {
+          title: 'AssetGroup List'
+        }
+      },
+      {
+        path: 'AssetGroup',
+        component: AssetGroupComponent,
+        data: {
+          title: 'Create Asset Group'
+        },
+      },
+      {
+        path: 'AssetGroup/:id',
+        component: AssetGroupComponent,
+        data: {
+          title: 'Update Asset Group'
+        }
+      },
+      {
+        path: 'CircleList',
+        component: CircleListComponent,
+        data: {
+          title: 'Circle List'
+        }
+      },
+      {
+        path: 'Circle',
+        component: CircleComponent,
+        data: {
+          title: 'Create Circle'
+        },
+      },
+      {
+        path: 'Circle/:id',
+        component: CircleComponent,
+        data: {
+          title: 'Update Circle'
+        }
+      },
+      {
+        path: 'ClusterList',
+        component: ClusterListComponent,
+        data: {
+          title: 'Cluster List'
+        }
+      },
+      {
+        path: 'Cluster',
+        component: ClusterComponent,
+        data: {
+          title: 'Create Cluster'
+        },
+      },
+      {
+        path: 'Cluster/:id',
+        component: ClusterComponent,
+        data: {
+          title: 'Update Cluster'
+        }
+      },
+      {
+        path: 'AssetCategoryList',
+        component: AssetCategoryListComponent,
+        data: {
+          title: 'Cluster List'
+        }
+      },
+      {
+        path: 'AssetCategory',
+        component: AssetCategoryComponent,
+        data: {
+          title: 'Create Asset Category'
+        },
+      },
+      {
+        path: 'AssetCategory/:id',
+        component: AssetCategoryComponent,
+        data: {
+          title: 'Update Asset Category'
+        }
+      },
+      {
+        path: 'AssetList',
+        component: AssetListComponent,
+        data: {
+          title: 'Asset List'
+        }
+      },
+      {
+        path: 'Asset',
+        component: AssetComponent,
+        data: {
+          title: 'Create Asset'
+        },
+      },
+      {
+        path: 'Asset/:id',
+        component: AssetComponent,
+        data: {
+          title: 'Update Asset'
+        }
+      },
+      {
+        path: 'DeviceList',
+        component: DeviceListComponent,
+        data: {
+          title: 'Device List'
+        }
+      },
+      {
+        path: 'Device',
+        component: DeviceComponent,
+        data: {
+          title: 'Create Device'
+        },
+      },
+      {
+        path: 'Device/:id',
+        component: DeviceComponent,
+        data: {
+          title: 'Update Device'
+        }
+      }
 
     ]
   },

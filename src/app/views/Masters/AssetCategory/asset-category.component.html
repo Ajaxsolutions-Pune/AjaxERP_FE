@@ -1,0 +1,85 @@
+<form #ObjForm="ngForm" (ngSubmit)="save(ObjForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Asset Category</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtassetCategoryCode">Asset Category Code</label>
+                            <div class="col-sm-4">
+                                <input id="txtassetCategoryCode" [(ngModel)]="bindObj.assetCategoryCode" required name="assetCategoryCode"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtassetCategoryNameENG">Asset Category Name ENG</label>
+                            <div class="col-sm-4">
+                                <input id="txtassetCategoryNameENG" required name="assetCategoryNameENG" type="text"
+                                    [(ngModel)]="bindObj.assetCategoryNameENG" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtassetCategoryNameUNI">Asset Category Name UNI</label>
+                            <div class="col-sm-4">
+                                <input id="txtassetCategoryNameUNI" required name="assetCategoryNameUNI" type="text"
+                                    [(ngModel)]="bindObj.assetCategoryNameUNI" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3"></div>
+                          <label class="col-md-2 col-form-label">
+                            Asset Group</label>
+                          <div class="col-md-4">
+                            <select id="assetGroup" name="assetGroup" [(ngModel)]="bindObj.assetGroupCode" class="form-control form-control-sm">
+                                <option value="-1">Select Asset Group</option>
+                                <option value="1">NA</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3"></div>
+                          <label class="col-md-2 col-form-label">
+                            Colour</label>
+                          <div class="col-md-4">
+                            <select id="colourCode" name="colourCode" [(ngModel)]="bindObj.colourCode" class="form-control form-control-sm">
+                                <option value="-1">Select Colour</option>
+                                <option value="1">NA</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="bindObj.isActive" name="IsActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-assetCategory-o"></i>
+                                    Submit</button>
+                                <button type="button" routerLink="/AssetCategoryList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Cancel</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div> {{bindObj | json}}</div>

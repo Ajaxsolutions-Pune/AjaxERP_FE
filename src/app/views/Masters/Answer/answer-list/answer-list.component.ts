@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Answer, AnswerEntity } from '../../../../Compound/Module/Masters/Answer.model';
 import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answer-Transfarmer';
+import { AnswerService } from '../../../../Compound/Services/Masters/AnswerService';
 
 @Component({
   selector: 'app-answer-list',
@@ -18,16 +19,19 @@ export class AnswerListComponent implements OnInit {
   SerachCri: number;
   answer: Answer;
   constructor(private _router: Router,
-    private objTrans: AnswerTransfarmer,
+    objTrans: AnswerTransfarmer,
+    private answerService: AnswerService,
     private route: ActivatedRoute) {
-      this.answersEntity = this.route.snapshot.data['AnswerList'];
-      this.answers = objTrans.AnswerTransfarmers(this.answersEntity);
-      this.WithoutFilterAnswer = this.answers;
+    this.answersEntity = this.route.snapshot.data['AnswerList'];
+    console.log(this.route.snapshot.data['AnswerList']);
+    console.log(this.answersEntity);
+    this.answers =  objTrans.AnswerTransfarmers(this.answersEntity);
+    console.log(this.answers);
+    this.WithoutFilterAnswer = this.answers;
   }
 
   ngOnInit() {
     this.WithoutFilterAnswer = this.answers;
-    console.log(this.answers);
     this.answer = {
       answer: null,
       answerId: null,

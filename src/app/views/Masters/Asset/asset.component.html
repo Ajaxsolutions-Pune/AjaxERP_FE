@@ -1,0 +1,247 @@
+<form #ObjForm="ngForm" (ngSubmit)="save(ObjForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Asset</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <label class="col-md-2 col-form-label" for="txtassetCode">Asset Code</label>
+                            <div class="col-md-4">
+                                <input id="txtassetCode" [(ngModel)]="bindObj.assetCode" required name="assetCode"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-2 col-form-label" for="txtassetNameENG">Asset Name ENG</label>
+                            <div class="col-sm-4">
+                                <input id="txtassetNameENG" required name="assetNameENG" type="text"
+                                    [(ngModel)]="bindObj.assetNameENG" class="form-control form-control-sm">
+                            </div>
+                            <label class="col-md-2 col-form-label" for="txtassetNameUNI">Asset Name UNI</label>
+                            <div class="col-sm-4">
+                                <input id="txtassetNameUNI" required name="assetNameUNI" type="text"
+                                    [(ngModel)]="bindObj.assetNameUNI" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-2 col-form-label" for="txtplaceName">PlaceName</label>
+                            <div class="col-sm-4">
+                                <input id="txtplaceName" required name="placeName" type="text"
+                                    [(ngModel)]="bindObj.placeName" class="form-control form-control-sm">
+                            </div>
+                            <label class="col-md-2 col-form-label">
+                                Asset Group</label>
+                            <div class="col-md-4">
+                              <select id="assetGroup" name="assetGroup" [(ngModel)]="bindObj.assetGroupCode" class="form-control form-control-sm">
+                                  <option value="-1">Select Asset Group</option>
+                                  <option value="1">NA</option>
+                              </select>
+                            </div>
+                        </div>                        
+                        <div class="row">
+                            <label class="col-md-2 col-form-label">
+                                Customer</label>
+                            <div class="col-md-4">
+                              <select id="customerCode" name="customerCode" [(ngModel)]="bindObj.customerCode" class="form-control form-control-sm">
+                                  <option value="-1">Select Customer</option>
+                                  <option value="1">NA</option>
+                              </select>
+                            </div>
+                            <label class="col-md-2 col-form-label">
+                                Project</label>
+                            <div class="col-md-4">
+                              <select id="projectCode" name="projectCode" [(ngModel)]="bindObj.projectCode" class="form-control form-control-sm">
+                                  <option value="-1">Select Project</option>
+                                  <option value="1">NA</option>
+                              </select>
+                            </div>
+                        </div>
+                                           
+                        <div class="row">
+                            <label class="col-md-2 col-form-label">
+                                Zone</label>
+                            <div class="col-md-4">
+                              <select id="zoneCode" name="zoneCode" [(ngModel)]="bindObj.zoneCode" class="form-control form-control-sm">
+                                  <option value="-1">Select Zone</option>
+                                  <option value="1">NA</option>
+                              </select>
+                            </div>
+                          <label class="col-md-2 col-form-label">
+                            Circle</label>
+                          <div class="col-md-4">
+                            <select id="Zone" name="zone" [(ngModel)]="bindObj.circleCode" class="form-control form-control-sm">
+                                <option value="-1">Select Circle</option>
+                                <option value="1">NA</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-2 col-form-label">
+                                Cluster</label>
+                            <div class="col-md-4">
+                              <select id="clusterCode" name="clusterCode" [(ngModel)]="bindObj.clusterCode" class="form-control form-control-sm">
+                                  <option value="-1">Select Cluster</option>
+                                  <option value="1">NA</option>
+                              </select>
+                            </div>
+                          <label class="col-md-2 col-form-label">
+                            Region</label>
+                          <div class="col-md-4">
+                            <select id="regionCode" name="regionCode" [(ngModel)]="bindObj.regionCode" class="form-control form-control-sm">
+                                <option value="-1">Select Region</option>
+                                <option value="1">NA</option>
+                            </select>
+                          </div>
+                        </div>                        
+                        <div class="row">
+                            <label class="col-md-2 col-form-label">
+                                Country</label>
+                            <div class="col-md-4">
+                              <select id="countryCode" name="countryCode" [(ngModel)]="bindObj.countryCode" class="form-control form-control-sm">
+                                  <option value="-1">Select Country</option>
+                                  <option value="1">NA</option>
+                              </select>
+                            </div>
+                          <label class="col-md-2 col-form-label">
+                            State</label>
+                          <div class="col-md-4">
+                            <select id="stateCode" name="stateCode" [(ngModel)]="bindObj.stateCode" class="form-control form-control-sm">
+                                <option value="-1">Select State</option>
+                                <option value="1">NA</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-2 col-form-label" for="txtlatitude">
+                                Latitude</label>
+                            <div class="col-sm-4">
+                                <input id="txtlatitude" required name="latitude" type="text"
+                                    [(ngModel)]="bindObj.latitude" class="form-control form-control-sm">
+                            </div>
+                            <label class="col-md-2 col-form-label" for="txtlongitude">
+                                Longitude</label>
+                            <div class="col-sm-4">
+                                <input id="txtlongitude" required name="longitude" type="text"
+                                    [(ngModel)]="bindObj.longitude" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-2 col-form-label" for="txtredius">
+                                Redius</label>
+                            <div class="col-sm-4">
+                                <input id="txtredius" required name="redius" type="text"
+                                    [(ngModel)]="bindObj.redius" class="form-control form-control-sm">
+                            </div>
+                            <label class="col-md-2 col-form-label" for="txtpinCode">
+                                PIN Code</label>
+                            <div class="col-sm-4">
+                                <input id="txtpinCode" required name="pinCode" type="text"
+                                    [(ngModel)]="bindObj.pinCode" class="form-control form-control-sm">
+                            </div>
+                        </div>                 
+                        <div class="row">
+                            <label class="col-md-2 col-form-label">
+                                Colour</label>
+                            <div class="col-md-4">
+                              <select id="colourCode" name="colourCode" [(ngModel)]="bindObj.colourCode" class="form-control form-control-sm">
+                                  <option value="-1">Select Colour</option>
+                                  <option value="1">NA</option>
+                              </select>
+                            </div>
+                          <label class="col-md-2 col-form-label">
+                            Geofence</label>
+                          <div class="col-md-4">
+                            <select id="geofenceCode" name="geofenceCode" [(ngModel)]="bindObj.geofenceCode" class="form-control form-control-sm">
+                                <option value="-1">Select Geofence</option>
+                                <option value="1">NA</option>
+                            </select>
+                          </div>
+                        </div>                                     
+                        <div class="row">
+                            <label class="col-md-2 col-form-label">
+                                Shared</label>
+                            <div class="col-md-4">
+                              <select id="sharedCode" name="sharedCode" [(ngModel)]="bindObj.sharedCode" class="form-control form-control-sm">
+                                  <option value="-1">Select Shared</option>
+                                  <option value="1">NA</option>
+                              </select>
+                            </div>
+                          <label class="col-md-2 col-form-label">
+                            Circuit</label>
+                          <div class="col-md-4">
+                            <select id="circuitCode" name="circuitCode" [(ngModel)]="bindObj.circuitCode" class="form-control form-control-sm">
+                                <option value="-1">Select Circuit</option>
+                                <option value="1">NA</option>
+                            </select>
+                          </div>
+                        </div>                          
+                        <div class="row">
+                            <label class="col-md-2 col-form-label">
+                                Conductor</label>
+                            <div class="col-md-4">
+                              <select id="conductorCode" name="conductorCode" [(ngModel)]="bindObj.conductorCode" class="form-control form-control-sm">
+                                  <option value="-1">Select Conductor</option>
+                                  <option value="1">NA</option>
+                              </select>
+                            </div>
+                          <label class="col-md-2 col-form-label">
+                            Classification</label>
+                          <div class="col-md-4">
+                            <select id="classificationCode" name="classificationCode" [(ngModel)]="bindObj.classificationCode" class="form-control form-control-sm">
+                                <option value="-1">Select Classification</option>
+                                <option value="1">NA</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-2 col-form-label">
+                                Structure</label>
+                            <div class="col-md-4">
+                              <select id="structureCode" name="structureCode" [(ngModel)]="bindObj.structureCode" class="form-control form-control-sm">
+                                  <option value="-1">Select Structure</option>
+                                  <option value="1">NA</option>
+                              </select>
+                            </div>
+                          <label class="col-md-2 col-form-label">
+                            Position</label>
+                          <div class="col-md-4">
+                            <select id="positionCode" name="positionCode" [(ngModel)]="bindObj.positionCode" class="form-control form-control-sm">
+                                <option value="-1">Select Position</option>
+                                <option value="1">NA</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-2 col-form-label" for="txtaddress">
+                                Address</label>
+                            <div class="col-sm-4">
+                                <input id="txtaddress" required name="address" type="text"
+                                    [(ngModel)]="bindObj.address" class="form-control form-control-sm">
+                            </div>
+                            <label class="col-md-2 col-form-label">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="bindObj.isActive" name="IsActive"></div>
+                       </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-asset-o"></i>
+                                    Submit</button>
+                                <button type="button" routerLink="/AssetList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Cancel</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div style="display: none;"> {{bindObj | json}}</div>

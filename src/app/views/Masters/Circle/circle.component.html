@@ -1,0 +1,74 @@
+<form #ObjForm="ngForm" (ngSubmit)="save(ObjForm);" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Circle</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtcircleCode">Circle Code</label>
+                            <div class="col-sm-4">
+                                <input id="txtcircleCode" [(ngModel)]="bindObj.circleCode" required name="circleCode"
+                                    type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtcircleNameENG">Circle Name ENG</label>
+                            <div class="col-sm-4">
+                                <input id="txtcircleNameENG" required name="circleNameENG" type="text"
+                                    [(ngModel)]="bindObj.circleNameENG" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label" for="txtcircleNameUNI">Circle Name UNI</label>
+                            <div class="col-sm-4">
+                                <input id="txtcircleNameUNI" required name="circleNameUNI" type="text"
+                                    [(ngModel)]="bindObj.circleNameUNI" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3"></div>
+                          <label class="col-md-2 col-form-label">
+                            Zone</label>
+                          <div class="col-md-4">
+                            <select id="Zone" name="zone" [(ngModel)]="bindObj.zoneCode" class="form-control form-control-sm">
+                                <option value="-1">Select Zone</option>
+                                <option value="1">NA</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label">Active</label>
+                            <div class="col-sm-4">
+                                <input type="checkbox" [(ngModel)]="bindObj.isActive" name="IsActive"></div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                    Submit</button>
+                                <button type="button" routerLink="/CircleList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                                    Cancel</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div> {{bindObj | json}}</div>

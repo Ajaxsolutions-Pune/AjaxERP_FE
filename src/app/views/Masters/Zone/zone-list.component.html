@@ -1,0 +1,49 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="txtzoneCode" required name="txtzoneCode" type="text" class="form-control" placeholder="Zone Code" 
+        (input)="resultChanged()" [(ngModel)]="bindObj.zoneCode">
+    </div>
+    <div class="col-md-3">
+        <input id="txtzoneNameENG" required name="txtzoneNameENG" type="text" class="form-control" placeholder="zoneNameENG"
+        (input)="resultChanged()" [(ngModel)]="bindObj.zoneNameENG">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Zone" routerLink="/Zone"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+    </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Zone Code</th>
+        <th>Zone Name ENG</th>
+        <th>Zone Name UNI</th>
+        <th>Active</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Oject of arrOject">
+        <td>
+          <div>{{Oject.zoneCode}}</div>
+        </td>
+        <td>
+          {{Oject.zoneNameENG}}
+        </td>
+        <td>
+          {{Oject.zoneNameUNI}}
+        </td>
+        <td [ngSwitch]="Oject.isActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td [ngSwitch]="1">
+          <button class="btn btn-primary" [disabled]="Oject.zoneCode === ''"
+            [routerLink]="['/Zone/',Oject.zoneCode]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

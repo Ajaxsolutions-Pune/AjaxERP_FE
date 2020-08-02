@@ -1,0 +1,49 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="txtassetCategoryCode" required name="txtassetCategoryCode" type="text" class="form-control" placeholder="Asset Category Code" 
+        (input)="resultChanged()" [(ngModel)]="bindObj.assetCategoryCode">
+    </div>
+    <div class="col-md-3">
+        <input id="txtassetCategoryNameENG" required name="txtassetCategoryNameENG" type="text" class="form-control" placeholder="Asset Category Name ENG"
+        (input)="resultChanged()" [(ngModel)]="bindObj.assetCategoryNameENG">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create assetCategory" routerLink="/AssetCategory"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+    </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Asset Category Code</th>
+        <th>Asset Category Name ENG</th>
+        <th>Asset Category Name UNI</th>
+        <th>Active</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Oject of arrOject">
+        <td>
+          <div>{{Oject.assetCategoryCode}}</div>
+        </td>
+        <td>
+          {{Oject.assetCategoryNameENG}}
+        </td>
+        <td>
+          {{Oject.assetCategoryNameUNI}}
+        </td>
+        <td [ngSwitch]="Oject.isActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td [ngSwitch]="1">
+          <button class="btn btn-primary" [disabled]="Oject.assetCategoryCode === ''"
+            [routerLink]="['/AssetCategory/',Oject.assetCategoryCode]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

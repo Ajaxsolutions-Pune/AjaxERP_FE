@@ -1,0 +1,49 @@
+<div class="form-group row">
+    <div class="col-md-3">
+        <input id="txtcolourCode" required name="txtcolourCode" type="text" class="form-control" placeholder="Colour Code" 
+        (input)="resultChanged()" [(ngModel)]="bindObj.colourCode">
+    </div>
+    <div class="col-md-3">
+        <input id="txtcolourNameENG" required name="txtcolourNameENG" type="text" class="form-control" placeholder="Colour Name ENG"
+        (input)="resultChanged()" [(ngModel)]="bindObj.colourNameENG">
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Colour" routerLink="/Colour"></button>
+    </div>
+    <div class="col-md-1">
+        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+    </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Colour Code</th>
+        <th>Colour Name ENG</th>
+        <th>Colour Name UNI</th>
+        <th>Active</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Oject of arrOject">
+        <td>
+          <div>{{Oject.colourCode}}</div>
+        </td>
+        <td>
+          {{Oject.colourNameENG}}
+        </td>
+        <td>
+          {{Oject.colourNameUNI}}
+        </td>
+        <td [ngSwitch]="Oject.isActive">
+          <span *ngSwitchCase="true">Yes</span>
+          <span *ngSwitchDefault>No</span>
+        </td>
+        <td [ngSwitch]="1">
+          <button class="btn btn-primary" [disabled]="Oject.colourCode === ''"
+            [routerLink]="['/Colour/',Oject.colourCode]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
