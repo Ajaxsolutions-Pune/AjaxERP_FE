@@ -22,6 +22,7 @@ export class FormListComponent implements OnInit {
     private route: ActivatedRoute) {
       this.formEntity = this.route.snapshot.data['FormList'];
       this.forms = objTrans.fTransfarmers(this.formEntity);
+      console.log(this.forms[1].isActive);
       this.WithoutFilterForm = this.forms;
   }
 

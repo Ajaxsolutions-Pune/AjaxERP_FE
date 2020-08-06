@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -158,6 +159,14 @@ import { AssetComponent } from './views/Masters/Asset/asset.component';
 import { AssetListComponent } from './views/Masters/Asset/asset-list.component';
 import { DeviceListComponent } from './views/Masters/Device/device-list.component';
 import { DeviceComponent } from './views/Masters/Device/device.component';
+import { DialogService } from './Compound/Services/MatServices/Dialog.service';
+import { DialogTemplateComponent } from './Compound/Services/MatServices/dialog-template.component';
+import {
+  MatInputModule, MatDialogModule, MatButtonModule,
+  ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, MatFormFieldModule, MatIconModule,
+   MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule, MatSelectModule
+} from '@angular/material';
+import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -176,10 +185,18 @@ import { DeviceComponent } from './views/Masters/Device/device.component';
     HttpClientModule,
     ChartsModule,
     NgxWebstorageModule.forRoot(),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatInputModule, MatCheckboxModule,
+    MatInputModule, MatDialogModule, MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     AppComponent, ...APP_CONTAINERS, P404Component, P500Component, LogInComponent,
+    DialogTemplateComponent,
     ListUserComponent, UserMasterComponent, DashboardComponent, ListUOMComponent,
     CountryComponent, UnitComponent, CountryListComponent, BrandListComponent,
     BrandComponent, StateComponent, StateListComponent, CityListComponent, CityComponent,
@@ -193,9 +210,11 @@ import { DeviceComponent } from './views/Masters/Device/device.component';
     QuestionListComponent, QuestionComponent, QuestionTypeComponent,
     ZoneListComponent, ZoneComponent, RegionComponent, RegionListComponent,
     ColourListComponent, ColourComponent, AssetGroupComponent,
-     AssetGroupListComponent, CircleComponent, CircleListComponent,
-      ClusterListComponent, ClusterComponent,
-       AssetCategoryListComponent, AssetCategoryComponent, AssetComponent, AssetListComponent, DeviceListComponent, DeviceComponent,
+    AssetGroupListComponent, CircleComponent, CircleListComponent,
+    ClusterListComponent, ClusterComponent,
+    AssetCategoryListComponent, AssetCategoryComponent,
+    AssetComponent, AssetListComponent, DeviceListComponent,
+    DeviceComponent, AngularDemoComponent,
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService,
@@ -211,16 +230,19 @@ import { DeviceComponent } from './views/Masters/Device/device.component';
     TehsilTransfarmer, TehsilListResolverService, TehsilMasterResolverService, QuestionTransfarmer, AnswerTransfarmer,
     FormListResolverService, ProcessListResolverService, ProcessTransfarmer1,
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
+    DialogService,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
     },
     JwtHelperService],
+  entryComponents: [DialogTemplateComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Component } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { map, switchMap, debounceTime, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { Answer, AnswerEntity } from '../../Module/Masters/Answer.model';
+import { Insertstatus } from '../../Module/Masters/Insert_status.model';
+import { DialogService } from '../MatServices/Dialog.service';
 
 @Injectable()
 export class AnswerService {
@@ -11,7 +13,7 @@ export class AnswerService {
     answers: Answer[];
     env = environment;
     ListAnswer: Answer[];
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient, public dialogService: DialogService) {
         this.str = this.env.apiServiceIPPort;
     }
     Listanswer: Answer[];
@@ -23,15 +25,15 @@ export class AnswerService {
     getAnswer(AnswerCode: string): Observable<AnswerEntity> {
         return this.httpClient.get<AnswerEntity>(this.str + '/Answer/' + AnswerCode).pipe(catchError(this.handleError));
     }
-    Save(saveEntityObj: AnswerEntity): Observable<AnswerEntity> {
+    Save(saveEntityObj: AnswerEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         saveEntityObj.answerId = null;
-        return this.httpClient.post<AnswerEntity>(this.str + '/Answer', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Answer', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
     }
 
-    Update(updateEntityObj: AnswerEntity): Observable<AnswerEntity> {
+    Update(updateEntityObj: AnswerEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<AnswerEntity>(this.str + '/Answer', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Answer', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {
@@ -39,5 +41,14 @@ export class AnswerService {
             console.error('client side error', errorResponse.error.message);
         }
         return throwError('d');
-    }
+        const data = null; // call api
+        console.log(this.dialogService);
+        this.dialogService.openModal('Title1', 'Message Test', () => {
+            // confirmed
+            console.log('Yes');
+        }, () => {
+            // not confirmed
+            console.log('No');
+        });
+        }
 }

@@ -23,10 +23,7 @@ export class AnswerListComponent implements OnInit {
     private answerService: AnswerService,
     private route: ActivatedRoute) {
     this.answersEntity = this.route.snapshot.data['AnswerList'];
-    console.log(this.route.snapshot.data['AnswerList']);
-    console.log(this.answersEntity);
     this.answers =  objTrans.AnswerTransfarmers(this.answersEntity);
-    console.log(this.answers);
     this.WithoutFilterAnswer = this.answers;
   }
 

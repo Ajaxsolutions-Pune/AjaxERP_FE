@@ -18,12 +18,12 @@ export class CityListComponent implements OnInit {
   SerachCri: number;
   city: City;
 
-  constructor(private_router:Router,
+  constructor(private_router: Router,
     private cityService: CityService,
     private route: ActivatedRoute) {
-      this.citys = this.cityService.getCitys();
-      this.WithoutFilterCitys = this.citys;
-     }
+    this.citys = this.cityService.getCitys();
+    this.WithoutFilterCitys = this.citys;
+  }
 
   ngOnInit() {
     this.citys = this.cityService.getCitys();
@@ -44,16 +44,16 @@ export class CityListComponent implements OnInit {
       Modified_By: null,
       Modified_Date: null,
     };
-    console.log('City_Code '+ this.city.City_Code);
-    
-    console.log('City_Name'+ this.city.City_Name_ENG);
+    console.log('City_Code ' + this.city.City_Code);
+
+    console.log('City_Name' + this.city.City_Name_ENG);
   }
-  
+
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultcitys = this.WithoutFilterCitys;
     if (this.city.City_Name_ENG !== null && this.city.City_Name_ENG !== '') {
-      this.Resultcitys= this.Resultcitys.filter(SubResult =>
+      this.Resultcitys = this.Resultcitys.filter(SubResult =>
         SubResult.City_Name_ENG.toLowerCase().indexOf(this.city.City_Name_ENG.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }

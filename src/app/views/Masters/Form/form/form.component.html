@@ -1,54 +1,73 @@
-<form #formForm="ngForm" (ngSubmit)="save(formForm);" autocomplete="off">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-11 container">
-                <div class="card">
-                    <div class="card-header">
-                        <strong>Form</strong>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txFormId">Form Id</label>
-                            <div class="col-sm-4">
-                                <input id="txtFormId" [(ngModel)]="form.formId" required name="FormId"
-                                    type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+<main class="form-main">
+    <form #formForm="ngForm" [formGroup]="form" autocomplete="off">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Form</strong>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtForm_Name">Form Name</label>
-                            <div class="col-sm-4">
-                                <input id="txtForm_Name" required name="Form_Name" type="text"
-                                    [(ngModel)]="form.formName" class="form-control form-control-sm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4"></div>                            
+                                <mat-form-field class="col-md-2">
+                                    <input matInput
+                                    #formID
+                                    spellcheck="false" [(ngModel)]="formobj.formId"
+                                    placeholder="Form ID" disabled
+                                    formControlName="ControlformId">
+                                    <mat-error>
+                                    {{ formErrors['ControlformId'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-3"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label">Active</label>
-                            <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="form.isActive" name="IsActive"></div>
-                            <div class="col-md-3"></div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
-                                    Submit</button>
-                                    <button type="button" routerLink="/FormList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
-                                        Cancel</button>
+                            <div class="row">
+                                <div class="col-md-4"></div>       
+                                <mat-form-field class="col-md-4">
+                                  <input matInput
+                                    #formName
+                                    spellcheck="false" [(ngModel)]="formobj.formName"
+                                    placeholder="Form Name"
+                                    formControlName="ControlformName">
+                                  <mat-error>
+                                    {{ formErrors['ControlformName'] }}
+                                  </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-5"></div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-sm-4">                                    
+                                    <mat-checkbox name="chkisActive"
+                                    #chkisActive
+                                    formControlName="ControlisActive"
+                                     [(ngModel)]="formobj.isActive">Active
+                                    </mat-checkbox>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">                                    
+                                    <button mat-raised-button
+                                    [disabled]="!form.valid"
+                                    (click)="save(formForm)"
+                                    color="primary">Submit</button>
+                                        <button mat-raised-button color="warn"
+                                         routerLink="/FormList" ><i class="fa fa-ban"></i>
+                                            Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!--/.row-->
         </div>
-        <!--/.row-->
-    </div>
-</form>
-<div> {{form | json}}</div>
+    </form>
+    </main>
+    <div> {{formobj | json}}</div>

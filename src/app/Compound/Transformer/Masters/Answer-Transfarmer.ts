@@ -30,7 +30,11 @@ export class AnswerTransfarmer {
         this.answer = new Answer();
         this.answer.answerId = Entity.answerId;
         this.answer.answer = Entity.answer;
-        this.answer.isActive = Entity.isActive;
+        console.log(Entity.isActive.toString().trim() === '1');
+        console.log(Entity.isActive);
+         // tslint:disable-next-line:max-line-length
+         if (Entity.isActive === '1') { this.answer.isActive = 'true'.toString().trim(); } else { this.answer.isActive = ''.toString().trim(); }
+        console.log(this.answer.isActive);
         return this.answer;
     }
 
@@ -39,7 +43,7 @@ export class AnswerTransfarmer {
         this.answerEntity.answerId = Answer1.answerId;
         this.answerEntity.answer = Answer1.answer;
         this.answerEntity.isActive = Answer1.isActive;
-        if (Answer1.isActive === 'true') { this.answerEntity.isActive = '1'; } else { this.answerEntity.isActive = '0'; }
+         if (Answer1.isActive.toString().trim() === 'true') { this.answerEntity.isActive = '1'; } else { this.answerEntity.isActive = '0'; }
         return this.answerEntity;
     }
 }

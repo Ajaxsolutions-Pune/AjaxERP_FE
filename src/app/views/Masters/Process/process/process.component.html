@@ -1,4 +1,4 @@
-<form #processForm="ngForm" (ngSubmit)="save(processForm);" autocomplete="off">
+<form #processForm="ngForm" [formGroup]="form" autocomplete="off">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
@@ -8,51 +8,70 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txFormId">Process Id</label>
-                            <div class="col-sm-4">
-                                <input id="txtProcessID" [(ngModel)]="process.processId" required name="ProcessID"
-                                    type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>                            
+                            <mat-form-field class="col-md-2">
+                                <input matInput
+                                #processId
+                                spellcheck="false" [(ngModel)]="process.processId"
+                                placeholder="Process ID"
+                                formControlName="ControlprocessId">
+                                <mat-error>
+                                {{ formErrors['ControlprocessId'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtProcess_Name">Process Name</label>
-                            <div class="col-sm-4">
-                                <input id="txtProcess_Name" required name="Process_Name" type="text"
-                                    [(ngModel)]="process.processName" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>       
+                            <mat-form-field class="col-md-4">
+                              <input matInput
+                                #processName
+                                spellcheck="false" [(ngModel)]="process.processName"
+                                placeholder="Process Name"
+                                formControlName="ControlprocessName">
+                              <mat-error>
+                                {{ formErrors['ControlprocessName'] }}
+                              </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtGeofence">Geofence</label>
-                            <div class="col-sm-4">
-                                <input id="txtGeofence" required name="Geofence" type="text"
-                                    [(ngModel)]="process.geofence" class="form-control form-control-sm">
+                            <div class="col-md-4"></div>
+                            <div class="col-sm-4">                                    
+                                <mat-checkbox name="chkgeofence"
+                                #chkgeofence
+                                formControlName="Controlgeofence"
+                                 [(ngModel)]="process.geofence">Geofence
+                                </mat-checkbox>
                             </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label">Active</label>
-                            <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="process.isActive" name="IsActive"></div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <div class="col-sm-4">                                    
+                                <mat-checkbox name="chkisActive"
+                                #chkisActive
+                                formControlName="ControlisActive"
+                                 [(ngModel)]="process.isActive">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-sm btn-primary">
-                                    <i class="fa fa-dot-circle-o"></i>
-                                    Submit</button>
-                                    <button type="button" routerLink="/ProcessList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                        <div class="row">                            
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">                                    
+                                <button mat-raised-button
+                                [disabled]="!form.valid"
+                                (click)="save(processForm)"
+                                color="primary">Submit</button>
+                                    <button mat-raised-button color="warn"
+                                     routerLink="/ProcessList" ><i class="fa fa-ban"></i>
                                         Cancel</button>
                             </div>
-                            <div class="col-md-5"></div>
+                            <div class="col-md-4"></div>
+
                         </div>
                     </div>
                 </div>

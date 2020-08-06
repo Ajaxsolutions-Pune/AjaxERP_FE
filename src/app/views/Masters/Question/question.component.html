@@ -1,4 +1,4 @@
-<form #QuestionForm="ngForm" (ngSubmit)="save(QuestionForm);" autocomplete="off">
+<form #QuestionForm="ngForm" [formGroup]="form">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
@@ -8,54 +8,77 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtquestionId">Question Id</label>
-                            <div class="col-sm-4">
-                                <input id="txtquestionId" [(ngModel)]="question.questionId" required name="questionID"
-                                    type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Question Id"
+                                [(ngModel)]="question.questionId"
+                                formControlName="ControlquestionId"
+                                #txtquestionId
+                                name="txtquestionId">
+                                <mat-error>
+                                    {{ formErrors['ControlquestionId'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtquestion">Question</label>
-                            <div class="col-sm-4">
-                                <input id="txtquestion" required name="question" type="text"
-                                    [(ngModel)]="question.question" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Question"
+                                [(ngModel)]="question.question"
+                                formControlName="Controlquestion"
+                                #txtquestion
+                                name="txtquestion">
+                                <mat-error>
+                                    {{ formErrors['Controlquestion'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-md-3"></div>
-                          <label class="col-md-2 col-form-label">
-                            Question Type</label>
+                            <div class="col-md-4"></div>
                           <div class="col-md-4">
-                            <select id="QuestionTy" name="QuestionTy" [(ngModel)]="question.qaTypeCode" class="form-control form-control-sm">
-                                <option value="-1">Select Question Type</option>
-                                <option value="LB">LB</option>
-                                <option value="IM">IM</option>
-                                <option value="LT">LT</option>
-                            </select>
+                            <mat-form-field >
+                                <mat-label>Question Type</mat-label>
+                                <mat-select 
+                                formControlName="ControlqaTypeCode"
+                                [(ngModel)]="question.qaTypeCode">
+                                <mat-option *ngFor="let qaType of qaTypes" [value]="qaType.qaTypeCode">
+                                  {{qaType.qaTypeDesc}}
+                                </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlqaTypeCode'] }}
+                                </mat-error>
+                              </mat-form-field>
                           </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label">Active</label>
+                        <div class="row">                            
+                            <div class="col-md-4"></div>
                             <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="question.isActive" name="IsActive"></div>
-                            <div class="col-md-3"></div>
+                                <mat-checkbox name="chkisActive"
+                                #chkisActive
+                                formControlName="ControlisActive"
+                                 [(ngModel)]="question.isActive">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
-                                    Submit</button>
-                                <button type="button" routerLink="/QuestionList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button mat-raised-button [disabled]="!form.valid" (click)="save(QuestionForm)"
+                                    color="primary">Submit</button>
+                                <button mat-raised-button color="warn" routerLink="/QuestionList"><i
+                                        class="fa fa-ban"></i>
                                     Cancel</button>
                             </div>
-                            <div class="col-md-5"></div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QaType } from '../../../Compound/Module/Masters/QA_Type.model';
+import { QaType, QaTypeEntity } from '../../../Compound/Module/Masters/QA_Type.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QaTypeTransfarmer } from '../../../Compound/Transformer/Masters/QaType-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
@@ -13,6 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class QuestionTypeComponent implements OnInit {
   bindObj: QaType;
+  bindObjEntity: QaTypeEntity;
   str: string;
   constructor(private route: ActivatedRoute,
     private qaTypeTransfarmer: QaTypeTransfarmer,
@@ -31,23 +32,22 @@ export class QuestionTypeComponent implements OnInit {
   save(qaTypeForm: NgForm): void {
     if (status !== 'Update') {
       this.bindObj.qaTypeCode = null;
+      console.log('hii');
+      console.log(this.bindObj);
       this.qaTypeService.Save(this.qaTypeTransfarmer.QaTypeTransfarmer(this.bindObj)).subscribe(
         (par) => {
-          status = par,
           console.log(par);
-          qaTypeForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['qaTypeList']);
         }
       );
     } else {
       this.qaTypeService.Update(this.qaTypeTransfarmer.QaTypeTransfarmer(this.bindObj)).subscribe(
-        () => {
-          qaTypeForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['qaTypeList']);
+        (par) => {
+          if (par.status === 'Success') {
+            qaTypeForm.reset();
+            this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+              'Data saved successfully !', 'modal-info');
+            this.router.navigate(['AnswerList']);
+          }
         }
       );
     }
@@ -69,7 +69,10 @@ export class QuestionTypeComponent implements OnInit {
 
     } else {
       this.qaTypeService.getQaType(qaType_Code).subscribe(
-        (par) => this.bindObj = par,
+        (par) => {
+          this.bindObjEntity = par;
+          this.bindObj = this.qaTypeTransfarmer.QaTypeTransfarmerEntity(this.bindObjEntity);
+        },
         (err: any) => console.log(err));
       status = 'Update';
     }

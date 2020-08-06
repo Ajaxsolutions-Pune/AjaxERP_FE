@@ -4,6 +4,7 @@ import { map, switchMap, debounceTime, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { FormObj, FormEntity } from '../../Module/Masters/form.model';
+import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 
 @Injectable()
 export class FormService {
@@ -22,16 +23,16 @@ export class FormService {
     getForm(formCode: string): Observable<FormEntity> {
         return this.httpClient.get<FormEntity>(this.str + '/Form/' + formCode).pipe(catchError(this.handleError));
     }
-    Save(saveEntityObj: FormEntity): Observable<FormEntity> {
+    Save(saveEntityObj: FormEntity): Observable<Insertstatus> {
         saveEntityObj.formId = null;
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<FormEntity>(this.str + '/Form', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Form', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
     }
 
-    Update(updateEntityObj: FormEntity): Observable<FormEntity> {
+    Update(updateEntityObj: FormEntity): Observable<Insertstatus> {
         console.log(this.str + '/Form');
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<FormEntity>(this.str + '/Form', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Form', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

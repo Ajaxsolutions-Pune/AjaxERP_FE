@@ -14,6 +14,7 @@ export class ProcessTransfarmer1 {
         this.str = this.env.apiServiceIPPort;
     }
     processTransfarmers(Entity: ProcessEntity[]): Process[] {
+        this.processs = [];
         Entity.forEach(element => {
             this.process = new Process();
             this.process.processId = element.processId;
@@ -28,8 +29,14 @@ export class ProcessTransfarmer1 {
         this.process = new Process();
         this.process.processId = Entity.processId;
         this.process.processName = Entity.processName;
-        this.process.geofence = Entity.geofence;
-        this.process.isActive = Entity.isActive;
+        if (Entity.isActive === '1') {
+            this.process.isActive = 'true'.toString().trim();
+        } else { this.process.isActive = ''.toString().trim(); }
+
+        if (Entity.geofence === '1') {
+            this.process.geofence = 'true'.toString().trim();
+        } else { this.process.geofence = ''.toString().trim(); }
+
         return this.process;
     }
 
@@ -37,9 +44,18 @@ export class ProcessTransfarmer1 {
         this.processEntity = new ProcessEntity();
         this.processEntity.processId = process1.processId;
         this.processEntity.processName = process1.processName;
-        this.processEntity.geofence = process1.geofence;
-        this.processEntity.isActive = process1.isActive;
-        if (process1.isActive === 'true') { this.processEntity.isActive = '1'; } else { this.processEntity.isActive = '1'; }
+        console.log('hiiiiiii');
+        if (process1.geofence.toString().trim() === 'true') {
+            this.processEntity.geofence = '1';
+        } else {
+            this.processEntity.geofence = '0';
+        }
+        // this.processEntity.geofence = process1.geofence;
+        if (process1.isActive.toString().trim() === 'true') {
+            this.processEntity.isActive = '1';
+        } else {
+            this.processEntity.isActive = '0';
+        }
         return this.processEntity;
     }
 }

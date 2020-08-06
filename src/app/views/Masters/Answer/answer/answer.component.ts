@@ -1,25 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
+import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
+import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
+import { passwordsDoNotMatch } from '../../AngularDemo/infrastructure/passwords-do-not-match.validator';
+import { Answer, AnswerEntity } from '../../../../Compound/Module/Masters/Answer.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-import { Answer } from '../../../../Compound/Module/Masters/Answer.model';
+import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answer-Transfarmer';
 import { DefaultLayoutComponent } from '../../../../containers';
 import { AnswerService } from '../../../../Compound/Services/Masters/AnswerService';
-import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answer-Transfarmer';
 
 @Component({
   selector: 'app-answer',
   templateUrl: './Answer.component.html',
   styleUrls: ['./Answer.component.scss']
 })
-export class AnswerComponent implements OnInit {
+export class AnswerComponent extends FormComponentBase implements OnInit, AfterViewInit {
+  // @ts-ignore
+  @ViewChild('txtAnswerID') firstItem: ElementRef;
+  form!: FormGroup;
+  errorMatcher = new CrossFieldErrorMatcher();
   answer: Answer;
+  answerEntity: AnswerEntity;
   str: string;
   constructor(private route: ActivatedRoute,
     private answerTransfarmer: AnswerTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,
-    private answerService: AnswerService, private router: Router) {
+    private answerService: AnswerService,
+    private router: Router, private formBuilder: FormBuilder) {
+    super();
+    this.validationMessages = {
+      ControlAnswerID: {
+        required: 'Answer id is required.',
+      },
+      ControlAnswer: {
+        required: 'Answer is required.',
+      }
+    };
+
+    this.formErrors = {
+      ControlAnswerID: '',
+      ControlAnswer: '',
+    };
   }
   ngOnInit() {
+    this.form = this.formBuilder.group({
+      ControlAnswerID: ['', []],
+      ControlisActive: ['', []],
+      ControlAnswer: ['', [
+        Validators.required]]
+    });
+    this.form.controls['ControlAnswerID'].disable();
     status = '';
     this.answer = {
       answer: null,
@@ -28,15 +58,29 @@ export class AnswerComponent implements OnInit {
     };
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getanswer(str); });
   }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.firstItem.nativeElement.focus();
+    }, 250);
+    this.startControlMonitoring(this.form);
+  }
+
+  registerClicked(): void {
+    if (this.form.invalid) {
+      return;
+    }
+    alert('Registration Complete');
+  }
   save(answerForm: NgForm): void {
     if (status !== 'Update') {
       this.answer.answerId = null;
       console.log(this.answer);
-     // if (this.answer.isActive === 'true') { this.answer.isActive = '1'; } else { this.answer.isActive = '0'; }
+      // if (this.answer.isActive === 'true') { this.answer.isActive = '1'; } else { this.answer.isActive = '0'; }
 
       this.answerService.Save(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
         (par) => {
-          console.log(par);
+          console.log(par.status);
           answerForm.reset();
           this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
             'Data saved successfully !', 'modal-info');
@@ -46,11 +90,13 @@ export class AnswerComponent implements OnInit {
 
     } else {
       this.answerService.Update(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
-        () => {
-          answerForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['AnswerList']);
+        (par) => {
+          if (par.status === 'Success') {
+            answerForm.reset();
+            this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+              'Data saved successfully !', 'modal-info');
+            this.router.navigate(['AnswerList']);
+          }
         }
       );
     }
@@ -71,8 +117,16 @@ export class AnswerComponent implements OnInit {
       status = '';
 
     } else {
+      this.answerEntity = {
+        answer: null,
+        answerId: null,
+        isActive: null,
+      };
       this.answerService.getAnswer(answer_Code).subscribe(
-        (par) => this.answer = par,
+        (par) => {
+          this.answerEntity = par;
+          this.answer = this.answerTransfarmer.AnswerTransfarmerEntity(this.answerEntity);
+        },
         (err: any) => console.log(err));
       status = 'Update';
     }

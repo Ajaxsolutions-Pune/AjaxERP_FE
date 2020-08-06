@@ -80,6 +80,7 @@ import { AssetListComponent } from './views/Masters/Asset/asset-list.component';
 import { AssetComponent } from './views/Masters/Asset/asset.component';
 import { DeviceComponent } from './views/Masters/Device/device.component';
 import { DeviceListComponent } from './views/Masters/Device/device-list.component';
+import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.component';
 
 export const routes: Routes = [
   {
@@ -778,6 +779,13 @@ export const routes: Routes = [
         component: DeviceComponent,
         data: {
           title: 'Create Device'
+        },
+      },
+      {
+        path: 'Demo',
+        component: AngularDemoComponent,
+        data: {
+          title: 'Demo'
         },
       },
       {

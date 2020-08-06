@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { QaTypeEntity, QaType } from '../../Module/Masters/QA_Type.model';
+import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 
 @Injectable()
 export class QaTypeService {
@@ -18,17 +19,17 @@ export class QaTypeService {
     }
 
     getQaType(qaTypeCode: string): Observable<QaTypeEntity> {
-        return this.httpClient.get<QaTypeEntity>(this.str + '/QAType/' + qaTypeCode ).pipe(catchError(this.handleError));
+        return this.httpClient.get<QaTypeEntity>(this.str + '/QAType/' + qaTypeCode).pipe(catchError(this.handleError));
     }
-    Save(saveEntityObj: QaTypeEntity): Observable<string> {
+    Save(saveEntityObj: QaTypeEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<string>(this.str + '/QAType', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/QAType', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
     }
 
-    Update(updateEntityObj: QaTypeEntity): Observable<QaTypeEntity> {
+    Update(updateEntityObj: QaTypeEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<QaTypeEntity>(this.str + '/QAType', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/QAType', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

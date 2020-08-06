@@ -1,54 +1,73 @@
-<form #answerForm="ngForm" (ngSubmit)="save(answerForm);" autocomplete="off">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-11 container">
-                <div class="card">
-                    <div class="card-header">
-                        <strong>Answer</strong>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtanswerId">Answer Id</label>
-                            <div class="col-sm-4">
-                                <input id="txtAnswerId" [(ngModel)]="answer.answerId" required name="AnswerID"
-                                    type="text" class="form-control form-control-sm">
+<main class="form-main">
+    <form #answerForm="ngForm" [formGroup]="form">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Answer</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Answer ID"
+                                    [(ngModel)]="answer.answerId"
+                                    formControlName="ControlAnswerID"
+                                    #txtAnswerID
+                                    name="txtAnswerID">
+                                    <mat-error>
+                                        {{ formErrors['ControlAnswerID'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-3"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtAnswer">Answer</label>
-                            <div class="col-sm-4">
-                                <input id="txtAnswer" required name="Answer" type="text"
-                                    [(ngModel)]="answer.answer" class="form-control form-control-sm">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Answer"
+                                    [(ngModel)]="answer.answer"
+                                    formControlName="ControlAnswer"
+                                    #txtAnswer
+                                    name="txtAnswer">
+                                    <mat-error>
+                                        {{ formErrors['ControlAnswer'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-3"></div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-sm-4">
+                                    <mat-checkbox name="chkisActive"
+                                    #chkisActive
+                                    formControlName="ControlisActive"
+                                     [(ngModel)]="answer.isActive">Active
+                                    </mat-checkbox>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label">Active</label>
-                            <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="answer.isActive" name="IsActive"></div>
-                            <div class="col-md-3"></div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
-                                    Submit</button>
-                                    <button type="button" routerLink="/AnswerList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button [disabled]="!form.valid" (click)="save(answerForm)"
+                                        color="primary">Submit</button>
+                                    <button mat-raised-button color="warn" routerLink="/AnswerList"><i
+                                            class="fa fa-ban"></i>
                                         Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="col-md-5"></div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!--/.row-->
         </div>
-        <!--/.row-->
-    </div>
-</form>
+    </form>
+</main>
 <div> {{answer | json}}</div>

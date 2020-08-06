@@ -11,7 +11,7 @@
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label" for="txtquestionId">Question Type Id</label>
                             <div class="col-sm-4">
-                                <input id="txtquestionId" [(ngModel)]="bindObj.questionId" required name="questionID"
+                                <input id="txtquestionId" [(ngModel)]="bindObj.qaTypeCode" required name="questionID"
                                     type="text" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
@@ -21,7 +21,7 @@
                             <label class="col-md-2 col-form-label" for="txtquestion">Question Type D  esc</label>
                             <div class="col-sm-4">
                                 <input id="txtquestion" required name="question" type="text"
-                                    [(ngModel)]="bindObj.question" class="form-control form-control-sm">
+                                    [(ngModel)]="bindObj.qaTypeDesc" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
@@ -51,4 +51,4 @@
         <!--/.row-->
     </div>
 </form>
-<div> {{question | json}}</div>
+<div> {{bindObj | json}}</div>

@@ -13,6 +13,7 @@ export class QaTypeTransfarmer {
         this.str = this.env.apiServiceIPPort;
     }
     QaTypeTransfarmers(Entity: QaTypeEntity[]): QaType[] {
+        this.arrOject = [];
         Entity.forEach(element => {
             this.Oject = new QaType();
             this.Oject.qaTypeCode = element.qaTypeCode;
@@ -27,7 +28,10 @@ export class QaTypeTransfarmer {
         this.Oject = new QaType();
         this.Oject.qaTypeCode = Entity.qaTypeCode;
         this.Oject.qaTypeDesc = Entity.qaTypeDesc;
-        this.Oject.isActive = Entity.isActive;
+        if (Entity.isActive === '1') {
+            this.Oject.isActive = 'true'.toString().trim();
+        } else { this.Oject.isActive = ''.toString().trim(); }
+
         return this.Oject;
     }
 
@@ -37,6 +41,11 @@ export class QaTypeTransfarmer {
         this.OjectEntity.qaTypeDesc = qaType1.qaTypeDesc;
          if (qaType1.isActive === 'true') {  this.OjectEntity.isActive = '1';
              } else { this.OjectEntity.isActive = '0'; }
+        if (qaType1.isActive.toString().trim() === 'true') {
+            this.OjectEntity.isActive = '1';
+        } else {
+            this.OjectEntity.isActive = '0';
+        }
         return this.OjectEntity;
     }
 }

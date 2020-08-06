@@ -19,7 +19,7 @@
     <thead class="thead-light">
       <tr>
         <th>Form Id</th>
-        <th>From name</th>
+        <th>Form name</th>
         <th>Active</th>
         <th>Action</th>
       </tr>
@@ -32,9 +32,8 @@
         <td>
           {{form1.formName}}
         </td>
-        <td [ngSwitch]="form1.IsActive">
-          <span *ngSwitchCase="true">Yes</span>
-          <span *ngSwitchDefault>No</span>
+        <td>
+          <div>{{form1.isActive}}</div>
         </td>
         <td [ngSwitch]="1">
           <button class="btn btn-primary" [disabled]="form1.formId === ''"

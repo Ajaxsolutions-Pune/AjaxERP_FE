@@ -15,11 +15,14 @@ export class FormTransfarmer {
         this.str = this.env.apiServiceIPPort;
     }
     fTransfarmers(Entity: FormEntity[]): FormObj[] {
+        this.forms = [];
         Entity.forEach(element => {
             this.form = new FormObj();
             this.form.formId = element.formId;
             this.form.formName = element.formName;
-            this.form.isActive = element.isActive;
+            // tslint:disable-next-line:max-line-length
+            if (element.isActive.toString().trim() === '1') { this.form.isActive = 'Yes'.toString().trim(); } else { this.form.isActive = 'No'.toString().trim(); }
+
             this.forms.push(this.form);
         });
         return this.forms;
@@ -30,6 +33,8 @@ export class FormTransfarmer {
         this.form.formId = Entity.formId;
         this.form.formName = Entity.formName;
         this.form.isActive = Entity.isActive;
+        // tslint:disable-next-line:max-line-length
+        if (Entity.isActive === '1') { this.form.isActive = 'true'.toString().trim(); } else { this.form.isActive = ''.toString().trim(); }
         return this.form;
     }
 
@@ -38,8 +43,7 @@ export class FormTransfarmer {
         this.formEntity.formId = form1.formId;
         this.formEntity.formName = form1.formName;
         this.formEntity.isActive = form1.isActive;
-        if (form1.isActive === 'true') { this.formEntity.isActive = '1'; } else { this.formEntity.isActive = '0'; }
-        console.log(this.formEntity);
+        if (form1.isActive.toString().trim() === 'true') { this.formEntity.isActive = '1'; } else { this.formEntity.isActive = '0'; }
         return this.formEntity;
     }
 }
