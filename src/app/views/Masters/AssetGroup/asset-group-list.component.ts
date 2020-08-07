@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AssetGroup, AssetGroupEntity } from '../../../Compound/Module/Masters/AssetGroup.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AssetGroupTransfarmer } from '../../../Compound/Transformer/Masters/AssetGroup-Transfarmer';
 
 @Component({
   selector: 'app-asset-group-list',
@@ -16,7 +17,12 @@ export class AssetGroupListComponent implements OnInit {
   ResultOject: AssetGroup[];
   SerachCri: number;
   bindObj: AssetGroup;
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+    objTrans: AssetGroupTransfarmer,
+    private route: ActivatedRoute) {
+    this.arrOjectEntity = this.route.snapshot.data['AssetGroupList'];
+    this.arrOject = objTrans.AssetGroupTransfarmers(this.arrOjectEntity);
+    this.WithoutFilterObj = this.arrOject;
   }
 
   ngOnInit() {
@@ -31,6 +37,22 @@ export class AssetGroupListComponent implements OnInit {
   }
 
   resultChanged(): void {
+    this.SerachCri = 0;
+    this.ResultOject = this.WithoutFilterObj;
+    if (this.bindObj.assetGroupNameENG !== null && this.bindObj.assetGroupNameENG !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.assetGroupNameENG.toLowerCase().indexOf(this.bindObj.assetGroupNameENG.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.bindObj.assetGroupCode !== null && this.bindObj.assetGroupCode.toString() !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.assetGroupCode.toString().toLowerCase().indexOf(this.bindObj.assetGroupCode.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.SerachCri === 0) {
+      this.ResultOject = this.WithoutFilterObj;
+    }
+    this.arrOject = this.ResultOject;
   }
 
   ExportToExcel(): void {

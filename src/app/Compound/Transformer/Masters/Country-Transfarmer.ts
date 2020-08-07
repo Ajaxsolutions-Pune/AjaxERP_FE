@@ -16,7 +16,7 @@ export class CountryTransfarmer {
     constructor() {
     }
     CountryTransfarmers(Entity: CountryEntity[]): Country[] {
-        // this.states = new State()[Entity.length + 1];
+        this.countrys = [];
         Entity.forEach(element => {
             this.country = new Country();
             this.country.countryCode = element.countryCode;

@@ -7,7 +7,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     constructor() { }
     intercept(req, next) {
         // tslint:disable-next-line:max-line-length
-        const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMURwIiwiZXhwIjoxNTk2Njg4NjczLCJpYXQiOjE1OTY2MDIyNzN9.1i93xafnshtdVe21YhP5WDGw6bIb2WQlhtUG3CDnZdqVW-IveQMNZpZwLT8-gEjWK85kY6Q1r44ELXYKeufpVg';
+        const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMURwIiwiZXhwIjoxNTk2ODczNDE2LCJpYXQiOjE1OTY3ODcwMTZ9.BOaql1oFbNyFXZG31hfmM450rhsu07Vfftwkq2w3uyBS_xAPK-GsrWUJeTDofUZmOweHFQ0uSyVrFTHj3xOluw';
         const tokenizedReq = req.clone({
             setHeaders: {
                 Authorization: 'Bearer ' + token

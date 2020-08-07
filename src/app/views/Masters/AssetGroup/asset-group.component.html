@@ -1,5 +1,6 @@
-<form #ObjForm="ngForm" (ngSubmit)="save(ObjForm);" autocomplete="off">
+<form #ObjForm="ngForm" [formGroup]="form" autocomplete="off">
     <div class="animated fadeIn">
+                
         <div class="row">
             <div class="col-md-11 container">
                 <div class="card">
@@ -8,50 +9,75 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtassetGroupCode">Asset Group Code</label>
-                            <div class="col-sm-4">
-                                <input id="txtassetGroupCode" [(ngModel)]="bindObj.assetGroupCode" required name="assetGroupCode"
-                                    type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Asset Group Code"
+                                [(ngModel)]="bindObj.assetGroupCode"
+                                formControlName="ControlassetGroupCode"
+                                #txtassetGroupCode
+                                name="txtassetGroupCode">
+                                <mat-error>
+                                    {{ formErrors['ControlassetGroupCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtassetGroupNameENG">Asset Group Name ENG</label>
-                            <div class="col-sm-4">
-                                <input id="txtassetGroupNameENG" required name="assetGroupNameENG" type="text"
-                                    [(ngModel)]="bindObj.assetGroupNameENG" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Asset Group Name ENG"
+                                [(ngModel)]="bindObj.assetGroupNameENG" required
+                                formControlName="ControlassetGroupNameENG"
+                                #txtassetGroupNameENG
+                                name="txtassetGroupNameENG">
+                                <mat-error>
+                                    {{ formErrors['ControlassetGroupNameENG'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtassetGroupNameUNI">Asset Group Name UNI</label>
-                            <div class="col-sm-4">
-                                <input id="txtassetGroupNameUNI" required name="assetGroupNameUNI" type="text"
-                                    [(ngModel)]="bindObj.assetGroupNameUNI" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Asset Group Name UNI"
+                                [(ngModel)]="bindObj.assetGroupNameUNI"
+                                formControlName="ControlassetGroupNameUNI"
+                                #txtassetGroupNameUNI
+                                name="txtassetGroupNameUNI">
+                                <mat-error>
+                                    {{ formErrors['ControlregionNameUNI'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label">Active</label>
+                            <div class="col-md-4"></div>
                             <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="bindObj.isActive" name="IsActive"></div>
-                            <div class="col-md-3"></div>
+                                <mat-checkbox name="chkisActive"
+                                #chkisActive
+                                formControlName="ControlisActive"
+                                 [(ngModel)]="bindObj.isActive">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
-                                    Submit</button>
-                                <button type="button" routerLink="/AssetGroupList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button mat-raised-button [disabled]="!form.valid" 
+                                (click)="save(ObjForm)"
+                                    color="primary">Submit</button>
+                                <button mat-raised-button color="warn"
+                                 routerLink="/AssetGroupList">
+                                 <i class="fa fa-ban"></i>
                                     Cancel</button>
                             </div>
-                            <div class="col-md-5"></div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                 </div>

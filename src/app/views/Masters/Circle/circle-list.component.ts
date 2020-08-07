@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CircleEntity, Circle } from '../../../Compound/Module/Masters/Circle.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CircleTransfarmer } from '../../../Compound/Transformer/Masters/Circle-Transfarmer';
 
 @Component({
   selector: 'app-circle-list',
@@ -16,9 +17,13 @@ export class CircleListComponent implements OnInit {
   ResultOject: Circle[];
   SerachCri: number;
   bindObj: Circle;
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+    objTrans: CircleTransfarmer,
+    private route: ActivatedRoute) {
+    this.arrOjectEntity = this.route.snapshot.data['CircleList'];
+    this.arrOject = objTrans.CircleTransfarmers(this.arrOjectEntity);
+    this.WithoutFilterObj = this.arrOject;
   }
-
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
     console.log(this.arrOject);
@@ -32,10 +37,26 @@ export class CircleListComponent implements OnInit {
   }
 
   resultChanged(): void {
+    this.SerachCri = 0;
+    this.ResultOject = this.WithoutFilterObj;
+    if (this.bindObj.circleNameENG !== null && this.bindObj.circleNameENG !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.circleNameENG.toLowerCase().indexOf(this.bindObj.circleNameENG.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.bindObj.circleCode !== null && this.bindObj.circleCode.toString() !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.circleCode.toString().toLowerCase().indexOf(this.bindObj.circleCode.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.SerachCri === 0) {
+      this.ResultOject = this.WithoutFilterObj;
+    }
+    this.arrOject = this.ResultOject;
   }
 
   ExportToExcel(): void {
-    alasql('SELECT circleCode,circleNameENG,circleNameUNI,zoneCode,' +
+    alasql('SELECT circleCode,circleNameENG,circleNameUNI,circleCode,' +
       'isActive INTO XLSX("CircleList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

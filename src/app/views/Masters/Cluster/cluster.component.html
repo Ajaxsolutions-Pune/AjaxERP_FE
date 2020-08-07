@@ -1,74 +1,95 @@
-<form #ObjForm="ngForm" (ngSubmit)="save(ObjForm);" autocomplete="off">
+<form #ObjForm="ngForm"  [formGroup]="form" autocomplete="off">
     <div class="animated fadeIn">
+        
         <div class="row">
             <div class="col-md-11 container">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Cluster</strong>
+                        <strong>Circle</strong>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtclusterCode">Cluster Code</label>
-                            <div class="col-sm-4">
-                                <input id="txtclusterCode" [(ngModel)]="bindObj.clusterCode" required name="clusterCode"
-                                    type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Circle Code" 
+                                [(ngModel)]="bindObj.clusterCode"
+                                    formControlName="ControlclusterCode"
+                                     #txtclusterCode name="txtclusterCode">
+                                <mat-error>
+                                    {{ formErrors['ControlclusterCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtclusterNameENG">Cluster Name ENG</label>
-                            <div class="col-sm-4">
-                                <input id="txtclusterNameENG" required name="clusterNameENG" type="text"
-                                    [(ngModel)]="bindObj.clusterNameENG" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Cluster Name ENG" 
+                                [(ngModel)]="bindObj.clusterNameENG"
+                                    required formControlName="ControlclusterNameENG"
+                                     #txtclusterNameENG
+                                    name="txtclusterNameENG">
+                                <mat-error>
+                                    {{ formErrors['ControlclusterNameENG'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtclusterNameUNI">Cluster Name UNI</label>
-                            <div class="col-sm-4">
-                                <input id="txtclusterNameUNI" required name="clusterNameUNI" type="text"
-                                    [(ngModel)]="bindObj.clusterNameUNI" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-3"></div>
-                          <label class="col-md-2 col-form-label">
-                            Circle</label>
-                          <div class="col-md-4">
-                            <select id="Zone" name="zone" [(ngModel)]="bindObj.circleCode" class="form-control form-control-sm">
-                                <option value="-1">Select Circle</option>
-                                <option value="1">NA</option>
-                            </select>
-                          </div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Cluster Name UNI" 
+                                [(ngModel)]="bindObj.clusterNameUNI"
+                                    formControlName="ControlclusterNameUNI" 
+                                    #txtclusterNameUNI name="txtclusterNameUNI">
+                                <mat-error>
+                                    {{ formErrors['ControlclusterNameUNI'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label">Active</label>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Circle</mat-label>
+                                <mat-select required formControlName="ControlcircleCode"
+                                    [(ngModel)]="bindObj.circleCode">
+                                    <mat-option>Circle</mat-option>
+                                    <mat-option value="-1">
+                                        NA
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlcircleCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
                             <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="bindObj.isActive" name="IsActive"></div>
-                            <div class="col-md-3"></div>
+                                <mat-checkbox name="chkisActive" #chkisActive formControlName="ControlisActive"
+                                    [(ngModel)]="bindObj.isActive">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-cluster-o"></i>
-                                    Submit</button>
-                                <button type="button" routerLink="/ClusterList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button mat-raised-button [disabled]="!form.valid" (click)="save(ObjForm)"
+                                    color="primary">Submit</button>
+                                <button mat-raised-button color="warn" routerLink="/ClusterList">
+                                    <i class="fa fa-ban"></i>
                                     Cancel</button>
                             </div>
-                            <div class="col-md-5"></div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--/.row-->
     </div>
 </form>
 <div> {{bindObj | json}}</div>

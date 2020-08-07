@@ -164,9 +164,33 @@ import { DialogTemplateComponent } from './Compound/Services/MatServices/dialog-
 import {
   MatInputModule, MatDialogModule, MatButtonModule,
   ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, MatFormFieldModule, MatIconModule,
-   MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule, MatSelectModule
+  MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule, MatSelectModule
 } from '@angular/material';
 import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.component';
+import { AssetTransfarmer } from './Compound/Transformer/Masters/Asset-Transfarmer';
+import { AssetListResolverService } from './Compound/Resolver/Masters/Asset-List-Resolver.Service';
+import { AssetService } from './Compound/Services/Masters/AssetService';
+import { AssetGroupTransfarmer } from './Compound/Transformer/Masters/AssetGroup-Transfarmer';
+import { AssetGroupService } from './Compound/Services/Masters/AssetGroupService';
+import { AssetGroupListResolverService } from './Compound/Resolver/Masters/AssetGroup-List-Resolver-Service';
+import { ZoneService } from './Compound/Services/Masters/ZoneService';
+import { ZoneListResolverService } from './Compound/Resolver/Masters/Zone-List-Resolver.Service';
+import { ZoneTransfarmer } from './Compound/Transformer/Masters/ZoneTransfarmer';
+import { CircleListResolverService } from './Compound/Resolver/Masters/Circle-List-Resolver.Service';
+import { CircleTransfarmer } from './Compound/Transformer/Masters/Circle-Transfarmer';
+import { CircleService } from './Compound/Services/Masters/CircleService';
+import { ClusterService } from './Compound/Services/Masters/ClusterService';
+import { ClusterTransfarmer } from './Compound/Transformer/Masters/Cluster-Transfarmer';
+import { ClusterListResolverService } from './Compound/Resolver/Masters/Cluster-List-Resolver.Service';
+import { RegionService } from './Compound/Services/Masters/RegionService';
+import { RegionTransfarmer } from './Compound/Transformer/Masters/Region-Transfarmer';
+import { RegionListResolverService } from './Compound/Resolver/Masters/Region-List-Resolver-Service';
+import { ColourTransfarmer } from './Compound/Transformer/Masters/Colour-Transfarmer';
+import { ColourService } from './Compound/Services/Masters/ColourService';
+import { ColourListResolverService } from './Compound/Resolver/Masters/Colour-List-Resolver.Service';
+import { DeviceService } from './Compound/Services/Masters/DeviceService';
+import { DeviceTransfarmer } from './Compound/Transformer/Masters/Device-Transfarmer';
+import { DeviceListResolverService } from './Compound/Resolver/Masters/Device-List-Resolver-Service';
 @NgModule({
   imports: [
     BrowserModule,
@@ -220,16 +244,25 @@ import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.c
     LogIn, LogInService, User, UOM, UserService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
-    QaTypeService,
-    BrandService, StateService, MFGService, CityGroupService, ItemSubGroupService,
+    QaTypeService, BrandService, StateService, MFGService,
+    CityGroupService, ItemSubGroupService, RegionService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
-    StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, AnswerListResolverService,
+    AssetTransfarmer, AssetGroupTransfarmer, TehsilTransfarmer, QuestionTransfarmer,
+    AnswerTransfarmer, ProcessTransfarmer1, ZoneTransfarmer, CircleTransfarmer,
+    DeviceTransfarmer,
+    ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
+    StateTransfarmer, CountryTransfarmer, DistrictTransfarmer,
+    ZoneService, CircleService, ClusterService, ColourService, DeviceService,
+    FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
+    FormListResolverService, RegionListResolverService, ColourListResolverService,
+    AssetListResolverService, ProcessListResolverService, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
-    FormService, ProcessService1, QuestionService, QuestionListResolverService,
-    TehsilTransfarmer, TehsilListResolverService, TehsilMasterResolverService, QuestionTransfarmer, AnswerTransfarmer,
-    FormListResolverService, ProcessListResolverService, ProcessTransfarmer1,
+    QuestionListResolverService, TehsilListResolverService, TehsilMasterResolverService,
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
+    AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
+    DeviceListResolverService,
+    ClusterListResolverService,
     DialogService,
     {
       provide: LocationStrategy,

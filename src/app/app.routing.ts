@@ -81,6 +81,14 @@ import { AssetComponent } from './views/Masters/Asset/asset.component';
 import { DeviceComponent } from './views/Masters/Device/device.component';
 import { DeviceListComponent } from './views/Masters/Device/device-list.component';
 import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.component';
+import { AssetListResolverService } from './Compound/Resolver/Masters/Asset-List-Resolver.Service';
+import { AssetGroupListResolverService } from './Compound/Resolver/Masters/AssetGroup-List-Resolver-Service';
+import { ZoneListResolverService } from './Compound/Resolver/Masters/Zone-List-Resolver.Service';
+import { CircleListResolverService } from './Compound/Resolver/Masters/Circle-List-Resolver.Service';
+import { ClusterListResolverService } from './Compound/Resolver/Masters/Cluster-List-Resolver.Service';
+import { RegionListResolverService } from './Compound/Resolver/Masters/Region-List-Resolver-Service';
+import { ColourListResolverService } from './Compound/Resolver/Masters/Colour-List-Resolver.Service';
+import { DeviceListResolverService } from './Compound/Resolver/Masters/Device-List-Resolver-Service';
 
 export const routes: Routes = [
   {
@@ -604,6 +612,9 @@ export const routes: Routes = [
         component: ZoneListComponent,
         data: {
           title: 'Zone List'
+        },
+        resolve: {
+          ZoneList: ZoneListResolverService
         }
       },
       {
@@ -625,6 +636,9 @@ export const routes: Routes = [
         component: RegionListComponent,
         data: {
           title: 'Region List'
+        },
+        resolve: {
+          RegionList: RegionListResolverService
         }
       },
       {
@@ -646,6 +660,9 @@ export const routes: Routes = [
         component: ColourListComponent,
         data: {
           title: 'Colour List'
+        },
+        resolve: {
+          ColourList: ColourListResolverService
         }
       },
       {
@@ -667,6 +684,9 @@ export const routes: Routes = [
         component: AssetGroupListComponent,
         data: {
           title: 'AssetGroup List'
+        },
+        resolve: {
+          AssetGroupList: AssetGroupListResolverService
         }
       },
       {
@@ -688,6 +708,9 @@ export const routes: Routes = [
         component: CircleListComponent,
         data: {
           title: 'Circle List'
+        },
+        resolve: {
+          CircleList: CircleListResolverService
         }
       },
       {
@@ -695,7 +718,7 @@ export const routes: Routes = [
         component: CircleComponent,
         data: {
           title: 'Create Circle'
-        },
+        }
       },
       {
         path: 'Circle/:id',
@@ -709,6 +732,9 @@ export const routes: Routes = [
         component: ClusterListComponent,
         data: {
           title: 'Cluster List'
+        },
+        resolve: {
+          ClusterList: ClusterListResolverService
         }
       },
       {
@@ -751,6 +777,9 @@ export const routes: Routes = [
         component: AssetListComponent,
         data: {
           title: 'Asset List'
+        },
+        resolve: {
+          AssetList: AssetListResolverService
         }
       },
       {
@@ -759,6 +788,9 @@ export const routes: Routes = [
         data: {
           title: 'Create Asset'
         },
+        resolve: {
+          AssetList: AssetListResolverService
+        }
       },
       {
         path: 'Asset/:id',
@@ -772,6 +804,9 @@ export const routes: Routes = [
         component: DeviceListComponent,
         data: {
           title: 'Device List'
+        },
+        resolve: {
+          DeviceList: DeviceListResolverService
         }
       },
       {

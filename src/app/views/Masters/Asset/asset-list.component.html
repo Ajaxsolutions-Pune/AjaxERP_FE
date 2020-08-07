@@ -4,7 +4,7 @@
         (input)="resultChanged()" [(ngModel)]="bindObj.assetCode">
     </div>
     <div class="col-md-3">
-        <input id="txtassetNameENG" required name="txtassetNameENG" type="text" class="form-control" placeholder="Asset Name ENG"
+        <input id="txtassetNameENG" required name="txtassetNameENG" type="text" class="form-control" placeholder="Asset Name"
         (input)="resultChanged()" [(ngModel)]="bindObj.assetNameENG">
     </div>
     <div class="col-md-1">
@@ -20,7 +20,6 @@
       <tr>
         <th>Asset Code</th>
         <th>Asset Name ENG</th>
-        <th>Asset Name UNI</th>
         <th>Active</th>
         <th>Action</th>
       </tr>
@@ -32,9 +31,6 @@
         </td>
         <td>
           {{Oject.assetNameENG}}
-        </td>
-        <td>
-          {{Oject.assetNameUNI}}
         </td>
         <td [ngSwitch]="Oject.isActive">
           <span *ngSwitchCase="true">Yes</span>

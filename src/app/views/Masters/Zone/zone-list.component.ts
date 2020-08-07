@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Zone, ZoneEntity } from '../../../Compound/Module/Masters/Zone.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ZoneTransfarmer } from '../../../Compound/Transformer/Masters/ZoneTransfarmer';
 
 @Component({
   selector: 'app-zone-list',
@@ -16,9 +17,13 @@ export class ZoneListComponent implements OnInit {
   ResultOject: Zone[];
   SerachCri: number;
   bindObj: Zone;
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+    objTrans: ZoneTransfarmer,
+    private route: ActivatedRoute) {
+    this.arrOjectEntity = this.route.snapshot.data['ClusterList'];
+    this.arrOject = objTrans.ZoneTransfarmers(this.arrOjectEntity);
+    this.WithoutFilterObj = this.arrOject;
   }
-
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
     console.log(this.arrOject);
@@ -31,6 +36,22 @@ export class ZoneListComponent implements OnInit {
   }
 
   resultChanged(): void {
+    this.SerachCri = 0;
+    this.ResultOject = this.WithoutFilterObj;
+    if (this.bindObj.zoneNameENG !== null && this.bindObj.zoneNameENG !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.zoneNameENG.toLowerCase().indexOf(this.bindObj.zoneNameENG.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.bindObj.zoneCode !== null && this.bindObj.zoneCode.toString() !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.zoneCode.toString().toLowerCase().indexOf(this.bindObj.zoneCode.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.SerachCri === 0) {
+      this.ResultOject = this.WithoutFilterObj;
+    }
+    this.arrOject = this.ResultOject;
   }
 
   ExportToExcel(): void {

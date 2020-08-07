@@ -1,11 +1,11 @@
 <div class="form-group row">
     <div class="col-md-3">
         <input id="txtassetCode" required name="txtassetCode" type="text" class="form-control" placeholder="Asset Group Code" 
-        (input)="resultChanged()" [(ngModel)]="bindObj.assetCode">
+        (input)="resultChanged()" [(ngModel)]="bindObj.assetGroupCode">
     </div>
     <div class="col-md-3">
         <input id="txtassetNameENG" required name="txtassetNameENG" type="text" class="form-control" placeholder="Asset Group Name ENG"
-        (input)="resultChanged()" [(ngModel)]="bindObj.assetNameENG">
+        (input)="resultChanged()" [(ngModel)]="bindObj.assetGroupNameENG">
     </div>
     <div class="col-md-1">
         <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create asset" routerLink="/AssetGroup"></button>
@@ -28,21 +28,21 @@
     <tbody>
       <tr *ngFor="let Oject of arrOject">
         <td>
-          <div>{{Oject.assetCode}}</div>
+          <div>{{Oject.assetGroupCode}}</div>
         </td>
         <td>
-          {{Oject.assetNameENG}}
+          {{Oject.assetGroupNameENG}}
         </td>
         <td>
-          {{Oject.assetNameUNI}}
+          {{Oject.assetGroupNameUNI}}
         </td>
         <td [ngSwitch]="Oject.isActive">
           <span *ngSwitchCase="true">Yes</span>
           <span *ngSwitchDefault>No</span>
         </td>
         <td [ngSwitch]="1">
-          <button class="btn btn-primary" [disabled]="Oject.assetCode === ''"
-            [routerLink]="['/AssetGroup/',Oject.assetCode]">Edit</button>
+          <button class="btn btn-primary" [disabled]="Oject.assetGroupCode === ''"
+            [routerLink]="['/AssetGroup/',Oject.assetGroupCode]">Edit</button>
         </td>
       </tr>
     </tbody>

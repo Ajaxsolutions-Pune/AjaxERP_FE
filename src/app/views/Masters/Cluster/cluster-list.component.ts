@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Cluster, ClusterEntity } from '../../../Compound/Module/Masters/Cluster.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ClusterTransfarmer } from '../../../Compound/Transformer/Masters/Cluster-Transfarmer';
 
 @Component({
   selector: 'app-cluster-list',
@@ -16,7 +17,12 @@ export class ClusterListComponent implements OnInit {
   ResultOject: Cluster[];
   SerachCri: number;
   bindObj: Cluster;
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+    objTrans: ClusterTransfarmer,
+    private route: ActivatedRoute) {
+    this.arrOjectEntity = this.route.snapshot.data['ClusterList'];
+    this.arrOject = objTrans.ClusterTransfarmers(this.arrOjectEntity);
+    this.WithoutFilterObj = this.arrOject;
   }
 
   ngOnInit() {
@@ -32,6 +38,22 @@ export class ClusterListComponent implements OnInit {
   }
 
   resultChanged(): void {
+    this.SerachCri = 0;
+    this.ResultOject = this.WithoutFilterObj;
+    if (this.bindObj.clusterNameENG !== null && this.bindObj.clusterNameENG !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.clusterNameENG.toLowerCase().indexOf(this.bindObj.clusterNameENG.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.bindObj.clusterCode !== null && this.bindObj.clusterCode.toString() !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.clusterCode.toString().toLowerCase().indexOf(this.bindObj.clusterCode.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.SerachCri === 0) {
+      this.ResultOject = this.WithoutFilterObj;
+    }
+    this.arrOject = this.ResultOject;
   }
 
   ExportToExcel(): void {

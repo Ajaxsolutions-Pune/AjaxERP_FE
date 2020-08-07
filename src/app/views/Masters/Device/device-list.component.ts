@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Device, DeviceEntity } from '../../../Compound/Module/Masters/Device.model';
+import { DeviceTransfarmer } from '../../../Compound/Transformer/Masters/Device-Transfarmer';
 
 @Component({
   selector: 'app-device-list',
@@ -16,7 +17,12 @@ export class DeviceListComponent implements OnInit {
   ResultOject: Device[];
   SerachCri: number;
   bindObj: Device;
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+    objTrans: DeviceTransfarmer,
+    private route: ActivatedRoute) {
+     this.arrOjectEntity = this.route.snapshot.data['DeviceList'];
+     this.arrOject = objTrans.DeviceTransfarmers(this.arrOjectEntity);
+     this.WithoutFilterObj = this.arrOject;
   }
 
   ngOnInit() {
@@ -45,10 +51,25 @@ export class DeviceListComponent implements OnInit {
   }
 
   resultChanged(): void {
+    this.SerachCri = 0;
+    this.ResultOject = this.WithoutFilterObj;
+    if (this.bindObj.deviceName !== null && this.bindObj.deviceName !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.deviceName.toLowerCase().indexOf(this.bindObj.deviceName.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.bindObj.deviceId !== null && this.bindObj.deviceId.toString() !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.deviceId.toString().toLowerCase().indexOf(this.bindObj.deviceId.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.SerachCri === 0) {
+      this.ResultOject = this.WithoutFilterObj;
+    }
+    this.arrOject = this.ResultOject;
   }
-
   ExportToExcel(): void {
-    alasql('SELECT assetGroupCode,assetGroupNameENG,assetGroupNameUNI,' +
-      'isActive INTO XLSX("AssetGroupList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT deviceId,imei1,imei2,deviceName,model,osVersion,appVersion,' +
+      'isActive INTO XLSX("DeviceList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

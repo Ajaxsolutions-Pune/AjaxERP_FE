@@ -1,9 +1,8 @@
-<form #ObjForm="ngForm"  [formGroup]="form"
- autocomplete="off">
+<form #ObjForm="ngForm"  [formGroup]="form">
  <!--/.row (ngSubmit)="save(ObjForm); "-->
   <div class="animated fadeIn">
     <div class="row">
-      <div class="col-md-11 container">
+      <div class="col-md11 container">
         <div class="card">
           <div class="card-header">
             <strong>Asset</strong>
@@ -16,11 +15,18 @@
                 [(ngModel)]="bindObj.assetCode" #txtassetCode
                 formControlName="ControlassetCode"
                   name="txtassetCode">
-              </mat-form-field> </div>
+              </mat-form-field> 
+              <mat-form-field class="col-md-4" style="display: none;">
+                <input matInput placeholder="Asset Name UNI"
+                 [(ngModel)]="bindObj.assetNameUNI" #txtassetNameUNI
+                 formControlName="ControlassetNameUNI"
+                  name="txtassetNameUNI">
+              </mat-form-field>
+            </div>
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Asset Name ENG" required
+                <input matInput placeholder="Asset Name" required
                  [(ngModel)]="bindObj.assetNameENG" #txtassetNameENG
                  formControlName="ControlassetNameENG"
                   name="txtassetNameENG">
@@ -28,18 +34,18 @@
                   {{ formErrors['ControlassetNameENG'] }}
                   </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
-                <input matInput placeholder="Asset Name UNI"
-                 [(ngModel)]="bindObj.assetNameUNI" #txtassetNameUNI
-                 formControlName="ControlassetNameUNI"
-                  name="txtassetNameUNI">
-              </mat-form-field>
+              <div class="col-sm-4" style="padding-left: 12%;">
+                  <mat-checkbox name="chkisActive"
+                  #chkisActive
+                  formControlName="ControlisActive"
+                   [(ngModel)]="bindObj.isActive">Active
+                  </mat-checkbox>
+              </div>
               <div class="col-md-2"></div>
             </div>
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                
                 <input matInput placeholder="Place Name" required
                 formControlName="ControlplaceName"
                 [(ngModel)]="bindObj.placeName" #txtplaceName
@@ -54,8 +60,9 @@
                 formControlName="ControlassetGroupCode"
                 [(ngModel)]="bindObj.assetGroupCode">
                 <mat-option>Asset Group</mat-option>
-                <mat-option value="-1">
-                  NA
+                <mat-option *ngFor="let assetGroup of assetGroupObj"
+                 [value]="assetGroup.assetGroupCode">
+                  {{assetGroup.assetGroupNameENG}}
                 </mat-option>
                 </mat-select>
                 <mat-error>
@@ -67,12 +74,12 @@
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
                 <mat-label>Customer</mat-label>
-                <mat-select required formControlName="ControlcustomerCode"
+                <mat-select required 
+                formControlName="ControlcustomerCode"
                 [(ngModel)]="bindObj.customerCode">
                 <mat-option>Customer</mat-option>
-                <mat-option value="-1">
-                  NA
-                </mat-option>
+                <mat-option value="2"> Customer 2</mat-option>
+                <mat-option value="3"> Customer 3</mat-option>
                 </mat-select>
                 <mat-error>
                 {{ formErrors['ControlcustomerCode'] }}
@@ -84,9 +91,8 @@
                 formControlName="ControlprojectCode"
                 [(ngModel)]="bindObj.projectCode">
                 <mat-option>Project</mat-option>
-                <mat-option value="-1">
-                  NA
-                </mat-option>
+                <mat-option value="2"> Project 2</mat-option>
+                <mat-option value="3"> Project 3</mat-option>
                 </mat-select>
                 <mat-error>
                 {{ formErrors['ControlprojectCode'] }}
@@ -102,8 +108,9 @@
                 formControlName="ControlzoneCode"
                 [(ngModel)]="bindObj.zoneCode">
                 <mat-option>Zone</mat-option>
-                <mat-option value="-1">
-                  NA
+                <mat-option *ngFor="let zone of zoneObj"
+                 [value]="zone.zoneCode">
+                  {{zone.zoneNameENG}}
                 </mat-option>
                 </mat-select>
                 <mat-error>
@@ -116,8 +123,9 @@
                 formControlName="ControlcircleCode"
                 [(ngModel)]="bindObj.circleCode">
                 <mat-option>Circle</mat-option>
-                <mat-option value="-1">
-                  NA
+                <mat-option *ngFor="let circle of circleObj"
+                 [value]="circle.circleCode">
+                  {{circle.circleNameENG}}
                 </mat-option>
                 </mat-select>
                 <mat-error>
@@ -134,8 +142,9 @@
                 formControlName="ControlclusterCode"
                 [(ngModel)]="bindObj.clusterCode">
                 <mat-option>Cluster</mat-option>
-                <mat-option value="-1">
-                  NA
+                <mat-option *ngFor="let cluster of clusterObj"
+                 [value]="cluster.clusterCode">
+                  {{cluster.clusterNameENG}}
                 </mat-option>
                 </mat-select>
                 <mat-error>
@@ -148,8 +157,9 @@
                 formControlName="ControlregionCode"
                 [(ngModel)]="bindObj.regionCode">
                 <mat-option>Region</mat-option>
-                <mat-option value="-1">
-                  NA
+                <mat-option *ngFor="let region of regionObj"
+                 [value]="region.regionCode">
+                  {{region.regionNameENG}}
                 </mat-option>
                 </mat-select>
                 <mat-error>
@@ -166,8 +176,9 @@
                 formControlName="ControlcountryCode"
                 [(ngModel)]="bindObj.countryCode">
                 <mat-option>Country</mat-option>
-                <mat-option value="-1">
-                  NA
+                <mat-option *ngFor="let country1 of countryObj"
+                 [value]="country1.countryCode">
+                  {{country1.Country_Name_ENg}}
                 </mat-option>
                 </mat-select>
                 <mat-error>
@@ -180,8 +191,8 @@
                 formControlName="ControlstateCode"
                 [(ngModel)]="bindObj.stateCode">
                 <mat-option>State</mat-option>
-                <mat-option value="-1">
-                  NA
+                <mat-option *ngFor="let state of statesObj" [value]="state.state_Code">
+                  {{state.State_Name_Eng}}
                 </mat-option>
                 </mat-select>
                 <mat-error>
@@ -243,8 +254,9 @@
                 formControlName="ControlcolourCode"
                 [(ngModel)]="bindObj.colourCode">
                 <mat-option>Colour</mat-option>
-                <mat-option value="-1">
-                  NA
+                <mat-option *ngFor="let colour of colourObj"
+                 [value]="colour.colourCode">
+                  {{colour.colourNameENG}}
                 </mat-option>
                 </mat-select>
                 <mat-error>
@@ -257,9 +269,8 @@
                 formControlName="ControlgeofenceCode"
                 [(ngModel)]="bindObj.geofenceCode">
                 <mat-option>Geofence</mat-option>
-                <mat-option value="-1">
-                  NA
-                </mat-option>
+                <mat-option value="1">Yes</mat-option>
+                <mat-option value="0">No</mat-option>
                 </mat-select>
                 <mat-error>
                 {{ formErrors['ControlgeofenceCode'] }}
@@ -275,9 +286,8 @@
                 formControlName="ControlsharedCode"
                 [(ngModel)]="bindObj.sharedCode">
                 <mat-option>Shared</mat-option>
-                <mat-option value="-1">
-                  NA
-                </mat-option>
+                <mat-option value="1">Yes</mat-option>
+                <mat-option value="0">No</mat-option>
                 </mat-select>
                 <mat-error>
                 {{ formErrors['ControlsharedCode'] }}
@@ -289,9 +299,7 @@
                 formControlName="ControlcircuitCode"
                 [(ngModel)]="bindObj.circuitCode">
                 <mat-option>Circuit</mat-option>
-                <mat-option value="-1">
-                  NA
-                </mat-option>
+                <mat-option value="3">Double Circuit</mat-option>
                 </mat-select>
                 <mat-error>
                 {{ formErrors['ControlcircuitCode'] }}
@@ -307,7 +315,7 @@
                 formControlName="ControlconductorCode"
                 [(ngModel)]="bindObj.conductorCode">
                 <mat-option>Conductor</mat-option>
-                <mat-option value="-1">
+                <mat-option value="1">
                   NA
                 </mat-option>
                 </mat-select>
@@ -321,7 +329,7 @@
                 formControlName="ControlclassificationCode"
                 [(ngModel)]="bindObj.classificationCode">
                 <mat-option>Classification</mat-option>
-                <mat-option value="-1">
+                <mat-option value="1">
                   NA
                 </mat-option>
                 </mat-select>
@@ -339,7 +347,7 @@
                 formControlName="ControlstructureCode"
                 [(ngModel)]="bindObj.structureCode">
                 <mat-option>structure</mat-option>
-                <mat-option value="-1">
+                <mat-option value="1">
                   NA
                 </mat-option>
                 </mat-select>
@@ -353,7 +361,7 @@
                 formControlName="ControlpositionCode"
                 [(ngModel)]="bindObj.positionCode">
                 <mat-option>Position</mat-option>
-                <mat-option value="-1">
+                <mat-option value="1">
                   NA
                 </mat-option>
                 </mat-select>
@@ -372,17 +380,6 @@
                 formControlName="Controladdress"
                   name="txtaddress">
               </mat-form-field> </div>
-            <div class="row">                            
-              <div class="col-md-4"></div>
-              <div class="col-sm-4">
-                  <mat-checkbox name="chkisActive"
-                  #chkisActive
-                  formControlName="ControlisActive"
-                   [(ngModel)]="bindObj.isActive">Active
-                  </mat-checkbox>
-              </div>
-              <div class="col-md-4"></div>
-          </div>
           </div>
           <div class="card-footer">
               <div class="row">
@@ -403,4 +400,4 @@
     <!--/.row style="display: none;"-->
   </div>
 </form>
-<div > {{bindObj | json}}</div>
+<div style="display: none;"> {{bindObj | json}}</div>

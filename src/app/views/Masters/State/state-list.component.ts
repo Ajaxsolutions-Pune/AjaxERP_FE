@@ -14,7 +14,6 @@ export class StateListComponent implements OnInit {
   @Input() stateInput: State;
   states: State[];
   statesEntity: StateEntity[];
-
   WithoutFilterstates: State[];
   Resultstates: State[];
   SerachCri: number;

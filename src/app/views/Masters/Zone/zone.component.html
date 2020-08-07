@@ -1,4 +1,5 @@
-<form #ObjForm="ngForm" (ngSubmit)="save(ObjForm);" autocomplete="off">
+<form #ObjForm="ngForm" [formGroup]="form" autocomplete="off">
+    
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
@@ -8,50 +9,73 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtzoneCode">Zone Code</label>
-                            <div class="col-sm-4">
-                                <input id="txtzoneCode" [(ngModel)]="bindObj.zoneCode" required name="zoneCode"
-                                    type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Zone Code"
+                                [(ngModel)]="bindObj.zoneCode"
+                                formControlName="ControlzoneCode"
+                                #txtzoneCode
+                                name="txtzoneCode">
+                                <mat-error>
+                                    {{ formErrors['ControlzoneCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtzoneNameENG">Zone Name ENG</label>
-                            <div class="col-sm-4">
-                                <input id="txtzoneNameENG" required name="zoneNameENG" type="text"
-                                    [(ngModel)]="bindObj.zoneNameENG" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Zone Name ENG"
+                                [(ngModel)]="bindObj.zoneNameENG" required
+                                formControlName="ControlzoneNameENG"
+                                #txtzoneNameENG
+                                name="txtzoneNameENG">
+                                <mat-error>
+                                    {{ formErrors['ControlzoneNameENG'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtzoneNameUNI">Zone Name UNI</label>
-                            <div class="col-sm-4">
-                                <input id="txtzoneNameUNI" required name="zoneNameUNI" type="text"
-                                    [(ngModel)]="bindObj.zoneNameUNI" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Zone Name ENG"
+                                [(ngModel)]="bindObj.zoneNameUNI" required
+                                formControlName="ControlzoneNameUNI"
+                                #txtzoneNameUNI
+                                name="txtzoneNameUNI">
+                                <mat-error>
+                                    {{ formErrors['ControlzoneNameUNI'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label">Active</label>
+                            <div class="col-md-4"></div>
                             <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="bindObj.isActive" name="IsActive"></div>
-                            <div class="col-md-3"></div>
+                                <mat-checkbox name="chkisActive"
+                                #chkisActive
+                                formControlName="ControlisActive"
+                                 [(ngModel)]="bindObj.isActive">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
-                                    Submit</button>
-                                <button type="button" routerLink="/ZoneList" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button mat-raised-button [disabled]="!form.valid" (click)="save(ObjForm)"
+                                    color="primary">Submit</button>
+                                <button mat-raised-button color="warn" routerLink="/ZoneList"><i
+                                        class="fa fa-ban"></i>
                                     Cancel</button>
                             </div>
-                            <div class="col-md-5"></div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                 </div>

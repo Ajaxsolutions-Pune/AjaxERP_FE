@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Colour, ColourEntity } from '../../../Compound/Module/Masters/Colour.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ColourTransfarmer } from '../../../Compound/Transformer/Masters/Colour-Transfarmer';
 
 @Component({
   selector: 'app-colour-list',
@@ -16,7 +17,12 @@ export class ColourListComponent implements OnInit {
   ResultOject: Colour[];
   SerachCri: number;
   bindObj: Colour;
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+    objTrans: ColourTransfarmer,
+    private route: ActivatedRoute) {
+    this.arrOjectEntity = this.route.snapshot.data['ColourList'];
+    this.arrOject = objTrans.ColourTransfarmers(this.arrOjectEntity);
+    this.WithoutFilterObj = this.arrOject;
   }
 
   ngOnInit() {
@@ -31,10 +37,26 @@ export class ColourListComponent implements OnInit {
   }
 
   resultChanged(): void {
+    this.SerachCri = 0;
+    this.ResultOject = this.WithoutFilterObj;
+    if (this.bindObj.colourNameENG !== null && this.bindObj.colourNameENG !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.colourNameENG.toLowerCase().indexOf(this.bindObj.colourNameENG.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.bindObj.colourCode !== null && this.bindObj.colourCode.toString() !== '') {
+      this.ResultOject = this.ResultOject.filter(SubResult =>
+        SubResult.colourCode.toString().toLowerCase().indexOf(this.bindObj.colourCode.toString().toLowerCase()) !== -1);
+      this.SerachCri = 1;
+    }
+    if (this.SerachCri === 0) {
+      this.ResultOject = this.WithoutFilterObj;
+    }
+    this.arrOject = this.ResultOject;
   }
 
   ExportToExcel(): void {
-    alasql('SELECT zoneCode,zoneNameENG,zoneNameUNI,' +
+    alasql('SELECT colourCode,colourNameENG,zoneNameUNI,' +
       'isActive INTO XLSX("zoneList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

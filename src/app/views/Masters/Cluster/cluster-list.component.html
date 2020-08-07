@@ -28,13 +28,13 @@
     <tbody>
       <tr *ngFor="let Oject of arrOject">
         <td>
-          <div>{{Oject.ClusterCode}}</div>
+          <div>{{Oject.clusterCode}}</div>
         </td>
         <td>
-          {{Oject.ClusterNameENG}}
+          {{Oject.clusterNameENG}}
         </td>
         <td>
-          {{Oject.ClusterNameUNI}}
+          {{Oject.clusterNameUNI}}
         </td>
         <td [ngSwitch]="Oject.isActive">
           <span *ngSwitchCase="true">Yes</span>

@@ -17,7 +17,7 @@ export class StateTransfarmer {
     }
     ListState: State[];
     StateTransfarmers(Entity: StateEntity[]): State[] {
-        // this.states = new State()[Entity.length + 1];
+        this.states = [];
         Entity.forEach(element => {
             this.state = new State();
             this.state.state_Code = element.stateCode;

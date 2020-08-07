@@ -11,7 +11,7 @@ import { TaxCategory } from '../../Module/Masters/TaxCategory';
 
 @Injectable()
 export class TaxCategoryService {
- 
+
     str: string;
     TaxCategorys: TaxCategory[];
     env = environment;
@@ -19,17 +19,17 @@ export class TaxCategoryService {
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
         this.TaxCategorys = [{
-            Id:1,
-            TaxCategory_Code:'111',
-            TaxCategory_Description:'GST',
-            IsActive:true,
-            
+            Id: 1,
+            TaxCategory_Code: '111',
+            TaxCategory_Description: 'GST',
+            IsActive: true,
+
         }, {
-            Id:2,
-            TaxCategory_Code:'222',
-            TaxCategory_Description:'GST',
-            IsActive:true,
-            
+            Id: 2,
+            TaxCategory_Code: '222',
+            TaxCategory_Description: 'GST',
+            IsActive: true,
+
         },
         ];
     }
@@ -39,7 +39,9 @@ export class TaxCategoryService {
     }
 
     getTaxCategory(TaxCategory_Code: number): TaxCategory[] {
-        this.Listtaxcategory = this.TaxCategorys.filter(TaxCategorys => TaxCategorys.TaxCategory_Code.toString().indexOf(TaxCategory_Code.toString()) !== -1);
+        this.Listtaxcategory = this.TaxCategorys.filter(TaxCategorys =>
+            TaxCategorys.TaxCategory_Code.toString().indexOf(TaxCategory_Code.toString())
+            !== -1);
         return this.TaxCategorys;
     }
     getMaxTaxCategoryId(): number {

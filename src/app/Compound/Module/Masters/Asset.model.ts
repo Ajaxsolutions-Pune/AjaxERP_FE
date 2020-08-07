@@ -4,6 +4,7 @@ export class Asset {
     assetNameENG: string;
     assetNameUNI: string;
     placeName: string;
+    assetCategoryCode: string;
     assetGroupCode: string;
     customerCode: string;
     projectCode: string;
@@ -35,6 +36,7 @@ export class AssetEntity {
     assetNameUNI: string;
     placeName: string;
     assetGroupCode: string;
+    assetCategoryCode: string;
     customerCode: string;
     projectCode: string;
     zoneCode: string;

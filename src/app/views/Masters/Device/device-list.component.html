@@ -1,11 +1,11 @@
 <div class="form-group row">
     <div class="col-md-3">
         <input id="txtdeviceCode" required name="txtdeviceCode" type="text" class="form-control" placeholder="Device Code" 
-        (input)="resultChanged()" [(ngModel)]="bindObj.deviceCode">
+        (input)="resultChanged()" [(ngModel)]="bindObj.deviceId">
     </div>
     <div class="col-md-3">
         <input id="txtdeviceNameENG" required name="txtdeviceNameENG" type="text" class="form-control" placeholder="Device Name"
-        (input)="resultChanged()" [(ngModel)]="bindObj.deviceNameENG">
+        (input)="resultChanged()" [(ngModel)]="bindObj.deviceName">
     </div>
     <div class="col-md-1">
         <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Device" routerLink="/Device"></button>
@@ -19,7 +19,7 @@
     <thead class="thead-light">
       <tr>
         <th>Device Code</th>
-        <th>Device Name ENG</th>
+        <th>Device Name</th>
         <th>Active</th>
         <th>Action</th>
       </tr>
@@ -27,10 +27,10 @@
     <tbody>
       <tr *ngFor="let Oject of arrOject">
         <td>
-          <div>{{Oject.deviceCode}}</div>
+          <div>{{Oject.deviceId}}</div>
         </td>
         <td>
-          {{Oject.deviceNameENG}}
+          {{Oject.deviceName}}
         </td>
         <td [ngSwitch]="Oject.isActive">
           <span *ngSwitchCase="true">Yes</span>
@@ -38,7 +38,7 @@
         </td>
         <td [ngSwitch]="1">
           <button class="btn btn-primary" [disabled]="Oject.deviceCode === ''"
-            [routerLink]="['/Device/',Oject.deviceCode]">Edit</button>
+            [routerLink]="['/Device/',Oject.deviceId]">Edit</button>
         </td>
       </tr>
     </tbody>
