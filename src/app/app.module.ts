@@ -48,7 +48,6 @@ import { LogInService } from './Compound/Services/LogIn.service';
 import { LogInComponent } from './Compound/login/login.component';
 import { User } from './Compound/Module/User.model';
 import { UserService } from './Compound/Services/User.Service';
-import { AlertModule, ModalModule } from 'ngx-bootstrap';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { RouterModule } from '@angular/router';
 import { ListUserComponent } from './views/Masters/User/List-user.component';
@@ -194,6 +193,7 @@ import { DeviceListResolverService } from './Compound/Resolver/Masters/Device-Li
 import { AssetCategoryTransfarmer } from './Compound/Transformer/Masters/Asset-Category-Transfarmer';
 import { AssetCategoryService } from './Compound/Services/Masters/AssetCategory';
 import { AssetCategoryListResolverService } from './Compound/Resolver/Masters/Asset-Category-List-Resolver.Service';
+import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   imports: [
     BrowserModule,
