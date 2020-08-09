@@ -5,7 +5,6 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { DashboardProd } from '../../../Compound/Module/DashboardProd.model';
 import { DashboardProdCount } from '../../../Compound/Module/DashboardProdCount.model';
 import { LoginUser } from '../../../Compound/Module/LoginUser';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
 import { DatePipe } from '@angular/common';
 import { DashboardService } from '../../../Compound/Services/Dashboard.service';
 import { DashboardProdNextDay } from '../../../Compound/Module/DashboardProdNextDay.model';
