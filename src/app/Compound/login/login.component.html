@@ -1,39 +1,49 @@
-<div class="col-md-12 maindiv" style="justify-content: center;">
-  <div class="col-md-4">
-    <mat-card>
-      <mat-card-content>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <h2>Log In</h2>
-          <mat-error *ngIf="loginInvalid">
-            The username and password were not recognised
+<div class="maindiv">
+  <mat-card class="col-md-3">
+    <mat-card-content>
+      <form [formGroup]="form">
+        <h2>Log In</h2>
+        <mat-error *ngIf="loginInvalid">
+          
+          The username and password were not recognised
+        </mat-error>
+        <mat-form-field class="full-width-input">
+          <input matInput spellcheck="false" 
+          required placeholder="User name" formControlName="userName">
+          <mat-hint>
+            User name allowed characters are letters and numbers only. No spaces.
+          </mat-hint>
+          <mat-error>
+            Please provide a valid email address
           </mat-error>
-          <mat-form-field class="full-width-input">
-            <input matInput placeholder="Email" formControlName="username" required>
-            <mat-error>
-              Please provide a valid email address
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field class="full-width-input">
-            <input matInput type="password" placeholder="Password" formControlName="password" required>
-            <mat-error>
-              Please provide a valid password
-            </mat-error>
-          </mat-form-field>
-          <button mat-raised-button color="primary">Login</button>
-        </form>
-        <div class="row">
-          <div class="col-md-6">
-            <!-- <div class="col-md-8 p-2 grey" style="float: left;">
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input [type]="hidePassword ? 'password' : 'text'" 
+          matInput spellcheck="false" placeholder="Password"
+          required
+            formControlName="password">
+          <button mat-icon-button tabindex="-1" matSuffix (click)="hidePassword = !hidePassword"
+            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error>
+            Please provide a valid password
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="onSubmit();">Login</button>
+      </form>
+      <div class="row">
+        <div class="col-md-6">
+          <!-- <div class="col-md-8 p-2 grey" style="float: left;">
               <img src="../../../assets/img/brand/Logo.png" class="img-fluid" alt="Responsive image">
             </div> -->
-          </div>
-          <div class="col-md-6">
-            <div class="col-md-8 p-2 grey" style="float: right;">
-              <img src="../../../assets/img/brand/ajaxsolutionlogo.png" class="img-fluid" alt="Responsive image">
-            </div>
+        </div>
+        <div class="col-md-6">
+          <div class="col-md-8 p-2 grey" style="float: right;">
+            <img src="../../../assets/img/brand/ajaxsolutionlogo.png" class="img-fluid" alt="Responsive image">
           </div>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

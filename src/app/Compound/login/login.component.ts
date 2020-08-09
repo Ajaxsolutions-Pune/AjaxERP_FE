@@ -21,11 +21,15 @@ export class LogInComponent implements OnInit {
   public loginInvalid: boolean;
   private formSubmitAttempt: boolean;
   private returnUrl: string;
+  public loginobj: LogIn;
+  env = environment;
+
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private logInService: LogInService,
     private authService: AuthService
   ) {
   }
@@ -34,23 +38,30 @@ export class LogInComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/game';
 
     this.form = this.fb.group({
-      username: ['', Validators.email],
+      userName: ['', Validators.required],
       password: ['', Validators.required]
     });
 
-    if (true) {
-      await this.router.navigate([this.returnUrl]);
-    }
   }
-
   async onSubmit() {
     this.loginInvalid = false;
     this.formSubmitAttempt = false;
     if (this.form.valid) {
       try {
-        const username = this.form.get('username').value;
+        console.log('aa');
+        const username = this.form.get('userName').value;
         const password = this.form.get('password').value;
-        // await this.authService.login(username, password);
+        this.loginobj = {
+          ouCode: this.env.OuCode,
+          password: username,
+          username: password
+        };
+
+        this.authService.Login(this.loginobj).subscribe(
+          (par) => {
+            console.log(par);
+          },
+          (err: any) => console.log(err));
       } catch (err) {
         this.loginInvalid = true;
       }

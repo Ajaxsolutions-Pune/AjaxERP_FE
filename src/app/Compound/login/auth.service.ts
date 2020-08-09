@@ -14,15 +14,22 @@ import { catchError } from 'rxjs/operators';
 export class AuthService {
   str: string;
   env = environment;
-
   constructor(private router: Router, private httpClient: HttpClient) {
     this.str = this.env.apiServiceIPPort;
   }
   Login(loginEntityObj: LogIn): Observable<Insertstatus> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    // tslint:disable-next-line:max-line-length
-    return this.httpClient.post<Insertstatus>(this.str + '/authenticate', loginEntityObj,
-      httpOptions).pipe(catchError(this.handleError));
+    console.log(loginEntityObj);
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json'
+        }
+      )
+    };
+    return this.httpClient.post<Insertstatus>
+      ('http://ajaxdevdbcl.eastus.cloudapp.azure.com:8085/AjaxErpBackEnd/authenticate',
+        loginEntityObj,
+        httpOptions).pipe(catchError(this.handleError));
   }
   private handleError(errorResponse: HttpErrorResponse) {
     if (errorResponse.error instanceof ErrorEvent) {
