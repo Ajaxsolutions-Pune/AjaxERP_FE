@@ -1,113 +1,39 @@
-
-<form #loginForm="ngForm" (ngSubmit)="logIn();" autocomplete="off">
-  <div class="app-body">
-    <main class="main d-flex align-items-center">
-      <div class="container">
+<div class="col-md-12 maindiv" style="justify-content: center;">
+  <div class="col-md-4">
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <h2>Log In</h2>
+          <mat-error *ngIf="loginInvalid">
+            The username and password were not recognised
+          </mat-error>
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="Email" formControlName="username" required>
+            <mat-error>
+              Please provide a valid email address
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width-input">
+            <input matInput type="password" placeholder="Password" formControlName="password" required>
+            <mat-error>
+              Please provide a valid password
+            </mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary">Login</button>
+        </form>
         <div class="row">
-          <div class="col-md-8 mx-auto" style="margin-top: 15%">
-            <div class="card-group">
-              <div class="card p-4" style="width:44%">
-                <div class="card-body">
-                  <form>
-                    <h1>Login</h1>
-                    <p class="text-muted">Sign In to your account</p>
-
-                    <div class="input-group mb-3" [class.has-error]="UserName.invalid && UserName.touched"
-                      [class.has-success]="UserName.valid && UserName.touched">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="icon-user"></i></span>
-                      </div>
-                      <input type="text" class="form-control" name="UserName" #UserName="ngModel" value="admin"
-                        [(ngModel)]="login.UserName" placeholder="Username" autocomplete="UserName" required>
-
-                    </div>
-                    <div class="form-group">
-                      <span class="help-block" style="color: #f86c6b" *ngIf="UserName.invalid && UserName.touched">
-                        User Name is required
-                      </span>
-                    </div>
-                    <div class="input-group mb-4" [class.has-error]="Password.invalid && Password.touched" value="1234"
-                      [class.has-success]="Password.valid && Password.touched">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="icon-lock"></i></span>
-                      </div>
-                      <input type="password" class="form-control" placeholder="Password" name="Password"
-                        #Password="ngModel" [(ngModel)]="login.Password" autocomplete="current-password" required>
-                    </div>
-                    <div class="form-group">
-                      <span class="help-block" style="color: #f86c6b" *ngIf="Password.invalid && Password.touched">
-                        Password is required
-                      </span>
-                    </div>
-                    <div style="color: #f86c6b" class="form-group">
-                      {{login.RoleId}}
-                    </div>
-                    <div class="row">
-                      <div class="col-6">
-                        <button type="button" class="btn btn-primary px-4" (click)="logIn()"                        
-                          disable="loginForm.invalid">Login</button>
-                      </div>
-                      <div class="col-6 text-right">
-
-                       <!--<button visible="false" type="submit" (click)="ForgotPassword();"
-                          class="btn btn-link px-0">Forgot password? </button>--> 
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-5"></div>
-                      <div class="col-2 container">
-                        v1.3
-                      </div>
-                      <div class="col-5"></div>
-                  </div>
-                  </form>
-                </div>
-              </div>
-              <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
-                <div class="card-body text-center">
-                  <div>
-                    <img src="assets/img/brand/SKE_logo.jpg" style="width: 100%;height:100%" alt="admin@bootstrapmaster.com" />
-                  </div>
-                </div>
-              </div>
+          <div class="col-md-6">
+            <!-- <div class="col-md-8 p-2 grey" style="float: left;">
+              <img src="../../../assets/img/brand/Logo.png" class="img-fluid" alt="Responsive image">
+            </div> -->
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-8 p-2 grey" style="float: right;">
+              <img src="../../../assets/img/brand/ajaxsolutionlogo.png" class="img-fluid" alt="Responsive image">
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </mat-card-content>
+    </mat-card>
   </div>
-  <div class="container">
-      <div class="lds-roller" *ngIf="showLoddingIndicator">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <br />
-    </div>
-</form>
-
-<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content {{massageStyle}}">
-      <div class="modal-header">
-        <h4 class="modal-title">{{HederStr}}</h4>
-        <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>{{bodyStr}}&hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Close</button>
-      </div>
-
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+</div>

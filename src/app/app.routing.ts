@@ -89,6 +89,7 @@ import { ClusterListResolverService } from './Compound/Resolver/Masters/Cluster-
 import { RegionListResolverService } from './Compound/Resolver/Masters/Region-List-Resolver-Service';
 import { ColourListResolverService } from './Compound/Resolver/Masters/Colour-List-Resolver.Service';
 import { DeviceListResolverService } from './Compound/Resolver/Masters/Device-List-Resolver-Service';
+import { AssetCategoryListResolverService } from './Compound/Resolver/Masters/Asset-Category-List-Resolver.Service';
 
 export const routes: Routes = [
   {
@@ -756,6 +757,9 @@ export const routes: Routes = [
         component: AssetCategoryListComponent,
         data: {
           title: 'Cluster List'
+        },
+        resolve: {
+          AssetCategoryList1: AssetCategoryListResolverService
         }
       },
       {

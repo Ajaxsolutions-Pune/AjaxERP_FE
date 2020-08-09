@@ -4,7 +4,7 @@
         (input)="resultChanged()" [(ngModel)]="bindObj.assetCategoryCode">
     </div>
     <div class="col-md-3">
-        <input id="txtassetCategoryNameENG" required name="txtassetCategoryNameENG" type="text" class="form-control" placeholder="Asset Category Name ENG"
+        <input id="txtassetCategoryNameENG" required name="txtassetCategoryNameENG" type="text" class="form-control" placeholder="Asset Category Name"
         (input)="resultChanged()" [(ngModel)]="bindObj.assetCategoryNameENG">
     </div>
     <div class="col-md-1">
@@ -19,8 +19,7 @@
     <thead class="thead-light">
       <tr>
         <th>Asset Category Code</th>
-        <th>Asset Category Name ENG</th>
-        <th>Asset Category Name UNI</th>
+        <th>Asset Category Name</th>
         <th>Active</th>
         <th>Action</th>
       </tr>
@@ -32,9 +31,6 @@
         </td>
         <td>
           {{Oject.assetCategoryNameENG}}
-        </td>
-        <td>
-          {{Oject.assetCategoryNameUNI}}
         </td>
         <td [ngSwitch]="Oject.isActive">
           <span *ngSwitchCase="true">Yes</span>

@@ -164,7 +164,7 @@ import { DialogTemplateComponent } from './Compound/Services/MatServices/dialog-
 import {
   MatInputModule, MatDialogModule, MatButtonModule,
   ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, MatFormFieldModule, MatIconModule,
-  MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule, MatSelectModule
+  MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule, MatSelectModule, MatCardModule
 } from '@angular/material';
 import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.component';
 import { AssetTransfarmer } from './Compound/Transformer/Masters/Asset-Transfarmer';
@@ -191,6 +191,9 @@ import { ColourListResolverService } from './Compound/Resolver/Masters/Colour-Li
 import { DeviceService } from './Compound/Services/Masters/DeviceService';
 import { DeviceTransfarmer } from './Compound/Transformer/Masters/Device-Transfarmer';
 import { DeviceListResolverService } from './Compound/Resolver/Masters/Device-List-Resolver-Service';
+import { AssetCategoryTransfarmer } from './Compound/Transformer/Masters/Asset-Category-Transfarmer';
+import { AssetCategoryService } from './Compound/Services/Masters/AssetCategory';
+import { AssetCategoryListResolverService } from './Compound/Resolver/Masters/Asset-Category-List-Resolver.Service';
 @NgModule({
   imports: [
     BrowserModule,
@@ -216,6 +219,7 @@ import { DeviceListResolverService } from './Compound/Resolver/Masters/Device-Li
     MatFormFieldModule,
     MatIconModule,
     MatSelectModule,
+    MatCardModule,
     ReactiveFormsModule,
   ],
   declarations: [
@@ -250,14 +254,16 @@ import { DeviceListResolverService } from './Compound/Resolver/Masters/Device-Li
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
     AssetTransfarmer, AssetGroupTransfarmer, TehsilTransfarmer, QuestionTransfarmer,
     AnswerTransfarmer, ProcessTransfarmer1, ZoneTransfarmer, CircleTransfarmer,
-    DeviceTransfarmer,
+    DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
+    AssetCategoryService,
     FormListResolverService, RegionListResolverService, ColourListResolverService,
     AssetListResolverService, ProcessListResolverService, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
+    AssetCategoryListResolverService,
     QuestionListResolverService, TehsilListResolverService, TehsilMasterResolverService,
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,

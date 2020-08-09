@@ -16,6 +16,13 @@
                 formControlName="ControlassetCode"
                   name="txtassetCode">
               </mat-form-field> 
+              <div class="col-sm-4" style="padding-left: 12%;">
+                  <mat-checkbox name="chkisActive"
+                  #chkisActive
+                  formControlName="ControlisActive"
+                   [(ngModel)]="bindObj.isActive">Active
+                  </mat-checkbox>
+              </div>
               <mat-form-field class="col-md-4" style="display: none;">
                 <input matInput placeholder="Asset Name UNI"
                  [(ngModel)]="bindObj.assetNameUNI" #txtassetNameUNI
@@ -34,13 +41,21 @@
                   {{ formErrors['ControlassetNameENG'] }}
                   </mat-error>
               </mat-form-field>
-              <div class="col-sm-4" style="padding-left: 12%;">
-                  <mat-checkbox name="chkisActive"
-                  #chkisActive
-                  formControlName="ControlisActive"
-                   [(ngModel)]="bindObj.isActive">Active
-                  </mat-checkbox>
-              </div>
+              <mat-form-field class="col-md-4">
+                <mat-label>Asset Category</mat-label>
+                <mat-select required
+                formControlName="ControlAssetCategory"
+                [(ngModel)]="bindObj.assetCategoryCode">
+                <mat-option>Asset Category</mat-option>
+                <mat-option *ngFor="let assetCategory of assetCategoryObj"
+                 [value]="assetCategory.assetCategoryCode">
+                  {{assetCategory.assetCategoryNameENG}}
+                </mat-option>
+                </mat-select>
+                <mat-error>
+                {{ formErrors['ControlAssetCategory'] }}
+                </mat-error>
+              </mat-form-field>
               <div class="col-md-2"></div>
             </div>
             <div class="row">

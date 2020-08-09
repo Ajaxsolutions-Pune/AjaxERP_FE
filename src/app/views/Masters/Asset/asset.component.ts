@@ -31,6 +31,9 @@ import { ColourService } from '../../../Compound/Services/Masters/ColourService'
 import { AssetService } from '../../../Compound/Services/Masters/AssetService';
 import { AssetTransfarmer } from '../../../Compound/Transformer/Masters/Asset-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
+import { AssetCategoryService } from '../../../Compound/Services/Masters/AssetCategory';
+import { AssetCategoryTransfarmer } from '../../../Compound/Transformer/Masters/Asset-Category-Transfarmer';
+import { AssetCategory } from '../../../Compound/Module/Masters/AssetCategory.model';
 
 @Component({
   selector: 'app-asset',
@@ -52,6 +55,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
   regionObj: Region[];
   countryObj: Country[];
   colourObj: Colour[];
+  assetCategoryObj: AssetCategory[];
   constructor(private route: ActivatedRoute,
     private _router: Router,
     private defaultLayoutComponent: DefaultLayoutComponent,
@@ -73,6 +77,8 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
     private countryTransfarmer: CountryTransfarmer,
     private colourService: ColourService,
     private colourTransfarmer: ColourTransfarmer,
+    private assetCategoryService: AssetCategoryService,
+    private assetCategoryTransfarmer: AssetCategoryTransfarmer,
     private formBuilder: FormBuilder) {
     super();
     this.validationMessages = {
@@ -81,6 +87,9 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       },
       ControlassetNameENG: {
         required: 'Asset Name is required.',
+      },
+      ControlAssetCategory: {
+        required: 'Asset Category is required.',
       },
       ControlplaceName: {
         required: 'Place Name is required.',
@@ -156,6 +165,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
     this.formErrors = {
       ControlassetCode: '',
       ControlassetNameENG: '',
+      ControlAssetCategory: '',
       ControlplaceName: '',
       ControlassetGroupCode: '',
       ControlcustomerCode: '',
@@ -183,6 +193,8 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
     this.form = this.formBuilder.group({
       ControlassetCode: ['', []],
       ControlassetNameENG: ['', [
+        Validators.required]],
+      ControlAssetCategory: ['', [
         Validators.required]],
       ControlassetNameUNI: ['', []],
       ControlplaceName: ['', [
@@ -245,7 +257,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       assetNameUNI: null,
       placeName: null,
       assetGroupCode: null,
-      assetCategoryCode: '0',
+      assetCategoryCode: null,
       customerCode: null,
       projectCode: null,
       zoneCode: null,
@@ -293,6 +305,10 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
     this.colourService.getColours().subscribe(
       (par) => this.colourObj = this.colourTransfarmer.ColourTransfarmers(par),
       (err: any) => console.log(err));
+
+      this.assetCategoryService.getAssetCategorys().subscribe(
+        (par) => this.assetCategoryObj = this.assetCategoryTransfarmer.AssetCategoryTransfarmers(par),
+        (err: any) => console.log(err));
 
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getasset(str); });
 

@@ -1,4 +1,4 @@
-<form #ObjForm="ngForm" (ngSubmit)="save(ObjForm);" autocomplete="off">
+<form #ObjForm="ngForm"  [formGroup]="form">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
@@ -7,6 +7,23 @@
                         <strong>Asset Category</strong>
                     </div>
                     <div class="card-body">
+                        <div class="row">      
+                          <div class="col-md-2"></div>        
+                          <mat-form-field class="col-md-4">
+                            <input matInput placeholder="Asset Category Code"
+                             [(ngModel)]="bindObj.assetCategoryCode" #txtassetCategoryCode
+                             formControlName="ControlassetCategoryCode"
+                              name="txtassetCategoryCode">
+                          </mat-form-field>
+                          <div class="col-sm-4" style="padding-left: 12%;">
+                              <mat-checkbox name="chkisActive"
+                              #chkisActive
+                              formControlName="ControlisActive"
+                               [(ngModel)]="bindObj.isActive">Active
+                              </mat-checkbox>
+                          </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label" for="txtassetCategoryCode">Asset Category Code</label>
@@ -55,13 +72,6 @@
                                 <option value="1">NA</option>
                             </select>
                           </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label">Active</label>
-                            <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="bindObj.isActive" name="IsActive"></div>
-                            <div class="col-md-3"></div>
                         </div>
                     </div>
                     <div class="card-footer">
