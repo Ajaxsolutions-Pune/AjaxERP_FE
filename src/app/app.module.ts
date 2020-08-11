@@ -163,7 +163,8 @@ import { DialogTemplateComponent } from './Compound/Services/MatServices/dialog-
 import {
   MatInputModule, MatDialogModule, MatButtonModule,
   ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, MatFormFieldModule, MatIconModule,
-  MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule, MatSelectModule, MatCardModule
+  MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule, MatSelectModule, MatCardModule,
+  MatSortModule, MatTableModule, MatToolbarModule, MatPaginatorModule
 } from '@angular/material';
 import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.component';
 import { AssetTransfarmer } from './Compound/Transformer/Masters/Asset-Transfarmer';
@@ -194,9 +195,20 @@ import { AssetCategoryTransfarmer } from './Compound/Transformer/Masters/Asset-C
 import { AssetCategoryService } from './Compound/Services/Masters/AssetCategory';
 import { AssetCategoryListResolverService } from './Compound/Resolver/Masters/Asset-Category-List-Resolver.Service';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TreeGridModule, EditService, ToolbarService } from '@syncfusion/ej2-angular-treegrid';
+import { FormQueAnsMappingListComponent } from './views/Transaction/FormQueAnsMapping/form-que-ans-mapping-list.component';
+import { FormQueAnsMappingComponent } from './views/Transaction/FormQueAnsMapping/form-que-ans-mapping.component';
+import { TaskDataService } from './views/Transaction/task-data.service';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { AddDialogComponent } from './views/Transaction/FormQueAnsMapping/dialogs/add/add.dialog.component';
+import { EditDialogComponent } from './views/Transaction/FormQueAnsMapping/dialogs/edit/edit.dialog.component';
+import { DeleteDialogComponent } from './views/Transaction/FormQueAnsMapping/dialogs/delete/delete.dialog.component';
+import { DataService } from './views/Transaction/FormQueAnsMapping/data.service';
 @NgModule({
   imports: [
     BrowserModule,
+    TreeGridModule,
+    InMemoryWebApiModule.forRoot(TaskDataService),
     BrowserAnimationsModule,
     AppRoutingModule,
     AppAsideModule,
@@ -213,7 +225,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ChartsModule,
     NgxWebstorageModule.forRoot(),
     RouterModule.forRoot(routes),
-    BrowserAnimationsModule,
     MatInputModule, MatCheckboxModule,
     MatInputModule, MatDialogModule, MatButtonModule,
     MatFormFieldModule,
@@ -221,8 +232,25 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     MatSelectModule,
     MatCardModule,
     ReactiveFormsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule,
+    MatSortModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatPaginatorModule
+  ],
+  entryComponents: [
+    AddDialogComponent,
+    EditDialogComponent,
+    DeleteDialogComponent,
+    DialogTemplateComponent
   ],
   declarations: [
+    AddDialogComponent,
+    EditDialogComponent,
+    DeleteDialogComponent,
     AppComponent, ...APP_CONTAINERS, P404Component, P500Component, LogInComponent,
     DialogTemplateComponent,
     ListUserComponent, UserMasterComponent, DashboardComponent, ListUOMComponent,
@@ -242,10 +270,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ClusterListComponent, ClusterComponent,
     AssetCategoryListComponent, AssetCategoryComponent,
     AssetComponent, AssetListComponent, DeviceListComponent,
-    DeviceComponent, AngularDemoComponent,
+    DeviceComponent, AngularDemoComponent, FormQueAnsMappingListComponent, FormQueAnsMappingComponent,
   ],
   providers: [
-    LogIn, LogInService, User, UOM, UserService,
+    LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService,
@@ -259,7 +287,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
-    AssetCategoryService,
+    AssetCategoryService, DataService,
     FormListResolverService, RegionListResolverService, ColourListResolverService,
     AssetListResolverService, ProcessListResolverService, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
@@ -268,7 +296,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
     DeviceListResolverService,
-    ClusterListResolverService,
+    ClusterListResolverService, DialogTemplateComponent,
     DialogService,
     {
       provide: LocationStrategy,
@@ -281,7 +309,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
       multi: true
     },
     JwtHelperService],
-  entryComponents: [DialogTemplateComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

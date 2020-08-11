@@ -55,8 +55,13 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
-        name: 'Process',
+        name: 'FormQueAnsMapping',
         url: '/ProcessList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Mapping',
+        url: '/FormQueAnsMapping',
         icon: 'icon-puzzle'
       },
       // {

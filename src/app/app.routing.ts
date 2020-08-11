@@ -90,6 +90,7 @@ import { RegionListResolverService } from './Compound/Resolver/Masters/Region-Li
 import { ColourListResolverService } from './Compound/Resolver/Masters/Colour-List-Resolver.Service';
 import { DeviceListResolverService } from './Compound/Resolver/Masters/Device-List-Resolver-Service';
 import { AssetCategoryListResolverService } from './Compound/Resolver/Masters/Asset-Category-List-Resolver.Service';
+import { FormQueAnsMappingComponent } from './views/Transaction/FormQueAnsMapping/form-que-ans-mapping.component';
 
 export const routes: Routes = [
   {
@@ -833,7 +834,14 @@ export const routes: Routes = [
         data: {
           title: 'Update Device'
         }
-      }
+      },
+      {
+        path: 'FormQueAnsMapping',
+        component: FormQueAnsMappingComponent,
+        data: {
+          title: 'Create Device'
+        },
+      },
 
     ]
   },
