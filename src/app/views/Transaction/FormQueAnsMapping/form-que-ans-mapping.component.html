@@ -1,6 +1,8 @@
 
 <div class="container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+  <mat-table #table [dataSource]="dataSource"
+  [matSortDisableClear]="false"
+   matSort class="mat-cell">
     ng update @angular/cli @angular/core
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -15,11 +17,11 @@
       <mat-cell *matCellDef="let row"> {{row.Questions}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="QuestionsMandatory">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>QuestionsMandatory</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Mandatory</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.QuestionsMandatory}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="FormQuestionssequence">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>FormQuestions Sequence</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Sequence</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.FormQuestionssequence}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="answer">
@@ -31,28 +33,13 @@
       <mat-cell *matCellDef="let row"> {{row.QuestionsGroup}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="NextForm">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>NextForm</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Next Form</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.NextForm}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="Active">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Active</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.Active}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="url">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Url</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.url}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="created_at">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Created at</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.created_at}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="updated_at">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Updated at</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.updated_at}}</mat-cell>
-    </ng-container>
-
     <!-- actions -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
@@ -62,13 +49,18 @@
       </mat-header-cell>
 
       <mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
+        <button mat-icon-button color="accent" (click)="startEdit(i,
+        row.FormQuestionsAnswerMapping,
+         row.Questions, 
+         row.QuestionsMandatory,
+         row.FormQuestionssequence,
+         row.answer,
+         row.QuestionsGroup,
+         row.NextForm,
+         row.Active)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
 
-        <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
-          <mat-icon aria-label="Delete">delete</mat-icon>
-        </button>
       </mat-cell>
     </ng-container>
 

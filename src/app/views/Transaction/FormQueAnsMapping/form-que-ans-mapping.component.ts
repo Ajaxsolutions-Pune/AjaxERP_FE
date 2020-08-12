@@ -24,16 +24,15 @@ export class FormQueAnsMappingComponent implements OnInit {
   exampleDatabase: DataService | null;
   dataSource: ExampleDataSource | null;
   index: number;
-  id: number;
+  id: string;
 
   constructor(public httpClient: HttpClient,
     public dialog: MatDialog,
     public dataService: DataService) { }
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild('filter', { static: true }) filter: ElementRef;
-
+    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
+    @ViewChild('filter',  {static: true}) filter: ElementRef;
 
   ngOnInit() {
     this.loadData();
@@ -44,33 +43,48 @@ export class FormQueAnsMappingComponent implements OnInit {
   }
 
   addNew() {
+    console.log(this.dataSource);
     const dialogRef = this.dialog.open(AddDialogComponent, {
       data: { issue: Issue }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
         this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
         this.refreshTable();
       }
     });
   }
 
-  startEdit(i: number, id: number, Questions: string, title: string, state: string, url: string, created_at: string, updated_at: string) {
-    this.id = id;
+  startEdit(i: number,
+    FormQuestionsAnswerMapping: string,
+    Questions: string,
+    QuestionsMandatory: string,
+    FormQuestionssequence: string,
+    answer: string,
+    QuestionsGroup: string,
+    NextForm: string,
+    Active: string) {
+    this.id = FormQuestionsAnswerMapping;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
+    console.log(Active);
     console.log(this.index);
     const dialogRef = this.dialog.open(EditDialogComponent, {
-      data: { id: id, Questions: state, title: title, state: state, url: url, created_at: created_at, updated_at: updated_at }
+      data: {
+        FormQuestionsAnswerMapping: FormQuestionsAnswerMapping,
+        Questions: Questions, QuestionsMandatory: QuestionsMandatory,
+        FormQuestionssequence: FormQuestionssequence, answer: answer,
+        QuestionsGroup: QuestionsGroup,
+        NextForm: NextForm,
+        Active: Active
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.id === this.id);
+        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.FormQuestionsAnswerMapping === this.id);
         // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
         // And lastly refresh table
@@ -78,17 +92,23 @@ export class FormQueAnsMappingComponent implements OnInit {
       }
     });
   }
-
-  deleteItem(i: number, id: number, title: string, state: string, url: string) {
+  deleteItem(i: number, FormQuestionsAnswerMapping: string, Questions: string, QuestionsMandatory: string,
+    FormQuestionssequence: string, answer: string, QuestionsGroup: string, NextForm: string) {
     this.index = i;
-    this.id = id;
+    this.id = FormQuestionsAnswerMapping;
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { id: id, title: title, state: state, url: url }
+      data: {
+        FormQuestionsAnswerMapping: FormQuestionsAnswerMapping,
+        Questions: Questions, QuestionsMandatory: QuestionsMandatory,
+        FormQuestionssequence: FormQuestionssequence, answer: answer,
+        QuestionsGroup: QuestionsGroup, NextForm: NextForm
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.id === this.id);
+        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x =>
+          x.FormQuestionsAnswerMapping === this.id);
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
@@ -123,19 +143,19 @@ export class FormQueAnsMappingComponent implements OnInit {
 
 
 
-  public loadData() {
-    this.exampleDatabase = new DataService(this.httpClient);
-    this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator, this.sort);
-    fromEvent(this.filter.nativeElement, 'keyup')
-      // .debounceTime(150)
-      // .distinctUntilChanged()
-      .subscribe(() => {
-        if (!this.dataSource) {
-          return;
-        }
-        this.dataSource.filter = this.filter.nativeElement.value;
-      });
-  }
+    public loadData() {
+      this.exampleDatabase = new DataService(this.httpClient);
+      this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator, this.sort);
+      fromEvent(this.filter.nativeElement, 'keyup')
+        // .debounceTime(150)
+        // .distinctUntilChanged()
+        .subscribe(() => {
+          if (!this.dataSource) {
+            return;
+          }
+          this.dataSource.filter = this.filter.nativeElement.value;
+        });
+    }
 }
 
 export class ExampleDataSource extends DataSource<Issue> {
@@ -176,7 +196,8 @@ export class ExampleDataSource extends DataSource<Issue> {
     return merge(...displayDataChanges).pipe(map(() => {
       // Filter data
       this.filteredData = this._exampleDatabase.data.slice().filter((issue: Issue) => {
-        const searchStr = (issue.id + issue.title + issue.url + issue.created_at).toLowerCase();
+        const searchStr = (issue.FormQuestionsAnswerMapping + issue.Questions
+          + issue.QuestionsGroup + issue.Active).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
 
@@ -205,12 +226,13 @@ export class ExampleDataSource extends DataSource<Issue> {
       let propertyB: number | string = '';
 
       switch (this._sort.active) {
-        case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-        case 'title': [propertyA, propertyB] = [a.title, b.title]; break;
-        case 'state': [propertyA, propertyB] = [a.state, b.state]; break;
-        case 'url': [propertyA, propertyB] = [a.url, b.url]; break;
-        case 'created_at': [propertyA, propertyB] = [a.created_at, b.created_at]; break;
-        case 'updated_at': [propertyA, propertyB] = [a.updated_at, b.updated_at]; break;
+        case 'FormQuestionsAnswerMapping': [propertyA, propertyB] = [a.FormQuestionsAnswerMapping, b.FormQuestionsAnswerMapping]; break;
+        case 'FormQuestionssequence': [propertyA, propertyB] = [a.FormQuestionssequence, b.FormQuestionssequence]; break;
+        case 'NextForm': [propertyA, propertyB] = [a.NextForm, b.NextForm]; break;
+        case 'Questions': [propertyA, propertyB] = [a.Questions, b.Questions]; break;
+        case 'QuestionsGroup': [propertyA, propertyB] = [a.QuestionsGroup, b.QuestionsGroup]; break;
+        case 'QuestionsMandatory': [propertyA, propertyB] = [a.QuestionsMandatory,
+        b.QuestionsMandatory]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

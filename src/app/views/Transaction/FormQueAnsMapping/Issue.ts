@@ -7,10 +7,4 @@ export class Issue {
     QuestionsGroup: string;
     NextForm: string;
     Active: string;
-    id: number;
-    title: string;
-    state: string;
-    url: string;
-    created_at: string;
-    updated_at: string;
 }

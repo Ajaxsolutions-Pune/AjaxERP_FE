@@ -9,9 +9,7 @@
          [(ngModel)]="data.FormQuestionsAnswerMapping" name="FormQuestionsAnswerMapping" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div>
-    
-
+    </div>   
     <div class="form">
       <mat-form-field color="accent">        
         <mat-label>Questions</mat-label>
@@ -19,8 +17,10 @@
         #input
         [(ngModel)]="data.Questions">
         <mat-option>Questions</mat-option>
-        <mat-option value="Tower Name">Tower Name</mat-option>
-        <mat-option value="Checkin Selfie">Checkin Selfie</mat-option>
+        <mat-option *ngFor="let question of questionsObj"
+         [value]="question.question">
+          {{question.question}}
+        </mat-option>
         </mat-select>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
@@ -54,8 +54,10 @@
         #input
         [(ngModel)]="data.answer">
         <mat-option>Answer</mat-option>
-        <mat-option value="Tower Name">Tower Name</mat-option>
-        <mat-option value="No Issue">No Issue</mat-option>
+        <mat-option *ngFor="let answers of answersObj"
+         [value]="answers.answer">
+          {{answers.answer}}
+        </mat-option>
         </mat-select>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
@@ -75,8 +77,10 @@
         #input
         [(ngModel)]="data.NextForm">
         <mat-option>Next Form</mat-option>
-        <mat-option value="Soil levelling">Soil levelling</mat-option>
-        <mat-option value="Coping Muffing">Coping Muffing</mat-option>
+        <mat-option *ngFor="let form of formObj"
+         [value]="form.formName">
+          {{form.formName}}
+        </mat-option>
         </mat-select>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
@@ -91,13 +95,6 @@
         <mat-option value="Yes">Yes</mat-option>
         <mat-option value="No">No</mat-option>
         </mat-select>
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
-    </div>
-    <!--Textarea for demo purposes-->
-    <div class="form">
-      <mat-form-field color="accent">
-        <textarea matInput #input class="form-control" placeholder="Title" [(ngModel)]="data.title" name="title" required ></textarea>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>

@@ -208,7 +208,6 @@ import { DataService } from './views/Transaction/FormQueAnsMapping/data.service'
   imports: [
     BrowserModule,
     TreeGridModule,
-    InMemoryWebApiModule.forRoot(TaskDataService),
     BrowserAnimationsModule,
     AppRoutingModule,
     AppAsideModule,

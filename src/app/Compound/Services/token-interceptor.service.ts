@@ -9,7 +9,7 @@ export class TokenInterceptorService implements HttpInterceptor {
         console.log('localStorage');
         console.log(localStorage.getItem('user'));
         // tslint:disable-next-line:max-line-length
-        const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMURwIiwiZXhwIjoxNTk3MjA1MTA3LCJpYXQiOjE1OTcxMTg3MDd9.bVLyJDLrumCo3Pp8P8qRKH_gvsUqmI89p4zixSBDYcGmk0JNex_ANtV2KAsvOQzHfmBi40Kuqu6QJ8UjniN8Vg';
+        const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMURwIiwiZXhwIjoxNTk3MzI2MzcyLCJpYXQiOjE1OTcyMzk5NzJ9.OuK-3hUHhete2pF9GCqgnk2xa0kz6Wovexva92cw77rD-7sIBj0kKZzukjF8c7bNTK53Aray0ebxSnJhV2GK8Q';
         const tokenizedReq = req.clone({
             setHeaders: {
                 Authorization: 'Bearer ' + token

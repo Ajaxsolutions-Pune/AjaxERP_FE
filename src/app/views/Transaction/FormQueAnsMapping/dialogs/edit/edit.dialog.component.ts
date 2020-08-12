@@ -1,7 +1,8 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { DataService } from '../../data.service';
+import { Issue } from '../../Issue';
 
 @Component({
   selector: 'app-baza.dialog',
@@ -11,7 +12,9 @@ import { DataService } from '../../data.service';
 export class EditDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<EditDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: DataService) { }
+    @Inject(MAT_DIALOG_DATA) public data: Issue, public dataService: DataService) {
+    console.log(data);
+  }
 
   formControl = new FormControl('', [
     Validators.required
@@ -33,6 +36,7 @@ export class EditDialogComponent {
   }
 
   stopEdit(): void {
+    console.log(this.data);
     this.dataService.updateIssue(this.data);
   }
 }
