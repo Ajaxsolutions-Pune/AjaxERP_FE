@@ -1,6 +1,10 @@
 .errorMessage{
   color: red;
 }
+
+.exportexcel {
+  content: url("../../../assets/img/Content/excel.png");
+}
 .lds-roller {
     top: 50%;
     left: 50%;

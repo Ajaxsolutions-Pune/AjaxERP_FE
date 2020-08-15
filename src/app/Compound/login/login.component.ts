@@ -24,6 +24,8 @@ export class LogInComponent implements OnInit {
   private formSubmitAttempt: boolean;
   public loginobj: LogIn;
   public loginstatus: Insertstatus;
+
+  public logo = 'ajaxsolutionlogo';
   env = environment;
   insertstatus = Insertstatus;
   constructor(
