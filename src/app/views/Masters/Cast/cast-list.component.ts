@@ -23,32 +23,35 @@ export class CastListComponent implements OnInit {
   WithoutFilterCast: any[];
   Resultcasts: any;
 
-  constructor(private_router:Router,
+  constructor(private _router: Router,
     private castsService: CastService,
     private route: ActivatedRoute) {
-      this.Casts = this.castsService.getCasts();
-      this.WithoutFilterCasts = this.Casts;
-     }
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      this._router.navigate(['login']);
+    }
+    this.Casts = this.castsService.getCasts();
+    this.WithoutFilterCasts = this.Casts;
+  }
 
   ngOnInit() {
     this.Casts = this.castsService.getCasts();
     this.WithoutFilterCasts = this.Casts;
     console.log(this.Casts);
     this.cast = {
-      CastCategory:null,
-      Id:null,
-      Cast_Code:null,
-      Cast_Description_ENG:null,
-      Cast_Description_UNI:null,
-      IsActive:true,
+      CastCategory: null,
+      Id: null,
+      Cast_Code: null,
+      Cast_Description_ENG: null,
+      Cast_Description_UNI: null,
+      IsActive: true,
     };
   }
-  
+
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultcast = this.WithoutFilterCasts;
     if (this.cast.Cast_Description_ENG !== null && this.cast.Cast_Description_ENG !== '') {
-      this.Resultcast= this.Resultcast.filter(SubResult =>
+      this.Resultcast = this.Resultcast.filter(SubResult =>
         SubResult.Cast_Description_ENG.toLowerCase().indexOf(this.cast.Cast_Description_ENG.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }

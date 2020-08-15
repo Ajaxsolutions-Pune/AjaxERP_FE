@@ -21,6 +21,9 @@ export class BrandListComponent implements OnInit {
     private brandService: BrandService,
     objTrans: BrandTransformer,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
       this.brands = this.route.snapshot.data['BrandList'];
   }
 

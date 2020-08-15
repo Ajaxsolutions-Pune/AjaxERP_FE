@@ -14,21 +14,25 @@ export class RegionService {
         this.str = this.env.apiServiceIPPort;
     }
     getRegions(): Observable<RegionEntity[]> {
-        return this.httpClient.get<RegionEntity[]>(this.str + '/Region/getList');
+        return this.httpClient.get<RegionEntity[]>(this.str + '/Region/getList'
+        , this.env.httpOptions);
     }
 
     getRegion(qaTypeCode: string): Observable<RegionEntity> {
-        return this.httpClient.get<RegionEntity>(this.str + '/Region/' + qaTypeCode).pipe(catchError(this.handleError));
+        return this.httpClient.get<RegionEntity>(this.str + '/Region/' + qaTypeCode
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: RegionEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<Insertstatus>(this.str + '/Region', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Region', saveEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: RegionEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<Insertstatus>(this.str + '/Region', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Region', updateEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

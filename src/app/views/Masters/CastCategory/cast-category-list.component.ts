@@ -21,9 +21,12 @@ export class CastCategoryListComponent implements OnInit {
   WithoutFilterCastCategory: any[];
   Resultcastcategorys: any;
 
-  constructor(private_router: Router,
+  constructor(private _router: Router,
     private castcategorysService: CastCategoryService,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.CastCategorys = this.castcategorysService.getCastCategorys();
     this.WithoutFilterCastCategorys = this.CastCategorys;
   }

@@ -14,22 +14,26 @@ export class AssetCategoryService {
         this.str = this.env.apiServiceIPPort;
     }
     getAssetCategorys(): Observable<AssetCategoryEntity[]> {
-        return this.httpClient.get<AssetCategoryEntity[]>(this.str + '/AssetCategory/getList');
+        return this.httpClient.get<AssetCategoryEntity[]>(this.str
+            + '/AssetCategory/getList', this.env.httpOptions);
     }
 
     getAssetCategory(qaTypeCode: string): Observable<AssetCategoryEntity> {
-        return this.httpClient.get<AssetCategoryEntity>(this.str + '/AssetCategory/' + qaTypeCode).pipe(catchError(this.handleError));
+        return this.httpClient.get<AssetCategoryEntity>(this.str
+             + '/AssetCategory/' + qaTypeCode, this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: AssetCategoryEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<Insertstatus>(this.str
-            + '/AssetCategory', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+            + '/AssetCategory', saveEntityObj, this.env.httpOptions
+            ).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: AssetCategoryEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<Insertstatus>(this.str + '/AssetCategory', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/AssetCategory',
+         updateEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

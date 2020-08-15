@@ -14,21 +14,25 @@ export class DeviceService {
         this.str = this.env.apiServiceIPPort;
     }
     getDevices(): Observable<DeviceEntity[]> {
-        return this.httpClient.get<DeviceEntity[]>(this.str + '/Device/getList');
+        return this.httpClient.get<DeviceEntity[]>(this.str + '/Device/getList'
+        , this.env.httpOptions);
     }
 
     getDevice(qaTypeCode: string): Observable<DeviceEntity> {
-        return this.httpClient.get<DeviceEntity>(this.str + '/Device/' + qaTypeCode).pipe(catchError(this.handleError));
+        return this.httpClient.get<DeviceEntity>(this.str + '/Device/' + qaTypeCode
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: DeviceEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<Insertstatus>(this.str + '/Device', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Device', saveEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: DeviceEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<Insertstatus>(this.str + '/Device', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Device', updateEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

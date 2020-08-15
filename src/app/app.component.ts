@@ -7,25 +7,36 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { CookieService } from 'ngx-cookie-service';
 
 import { DefaultLayoutComponent } from './containers/default-layout/default-layout.component';
+import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   template: '<router-outlet></router-outlet>'
 })
 export class AppComponent implements OnInit {
+
+  env = environment;
   constructor(private router: Router,
     private UserSessionStorage: LocalStorageService,
     private cookieService: CookieService,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private bnIdle: BnNgIdleService) {
+    console.log('AppComponent');
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      this.router.navigate(['login']);
+    }
+    const httpOptions = {
+      headers:
+        new HttpHeaders({
+          'Content-Type': 'application/json',
+          // tslint:disable-next-line:max-line-length
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        })
+    };
+    this.env.httpOptions = httpOptions;
     this.bnIdle.startWatching(environment.SessionTimeOut * 60).subscribe((res) => {
       if (res) {
-        // LoginUser.UserID = '';
-        // LoginUser.UserName = '';
-        //  LoginUser.UserNo = 0;
-        //  LoginUser.BranchNo = 0;
-        // LoginUser.Password = '';
-        // LoginUser.RoleName = '';
-        //  this.router.navigate(['login']);
+       // localStorage.removeItem('token');
+       // this.router.navigate(['login']);
       }
     });
   }

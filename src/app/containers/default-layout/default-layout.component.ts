@@ -7,6 +7,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Utils } from 'ngx-bootstrap/utils/ngx-bootstrap-utils';
 import { LogInService } from '../../Compound/Services/LogIn.service';
 import { Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../Compound/Module/environment';
+import { LogInComponent } from '../../Compound/login/login.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,11 +32,15 @@ export class DefaultLayoutComponent implements OnDestroy {
   private changes: MutationObserver;
   public element: HTMLElement;
   myDate = new Date();
+  env = environment;
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private loginservice: LogInService,
     @Inject(DOCUMENT) _document?: any) {
-
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      this.router.navigate(['/login']);
+    }
     this.router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {
         this.showLoddingIndicator = true;
@@ -60,19 +67,8 @@ export class DefaultLayoutComponent implements OnDestroy {
     this.myModal.show();
   }
   Logout() {
-    this.str = '';
-    this.loginservice.Logout(LoginUser.BranchNo.toString(), '55').subscribe(
-      (data) => console.log(data), (err: any) => console.error(err)
-    );
-
-    LoginUser.UserID = '';
-    LoginUser.UserName = '';
-    LoginUser.UserNo = 0;
-    LoginUser.BranchNo = 0;
-    LoginUser.Password = '';
-    LoginUser.RoleId = 0;
-    LoginUser.IsActive = false;
-    LoginUser.EmpId = 0;
-    this.router.navigate(['login']);
+     this.router.navigate(['login']);
+    console.log('hh');
+    // localStorage.removeItem('token');
   }
 }

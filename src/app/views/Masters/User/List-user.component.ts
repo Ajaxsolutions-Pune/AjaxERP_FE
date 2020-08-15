@@ -23,6 +23,9 @@ export class ListUserComponent implements OnInit {
   constructor(private _router: Router,
     private userService: UserService,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.user = this.userService.getUsers();
     this.WithoutFilteruser = this.user;
   }

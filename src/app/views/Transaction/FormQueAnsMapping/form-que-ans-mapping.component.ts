@@ -18,9 +18,9 @@ import { Issue } from './Issue';
   styleUrls: ['./form-que-ans-mapping.component.scss']
 })
 export class FormQueAnsMappingComponent implements OnInit {
-  displayedColumns = ['FormQuestionsAnswerMapping', 'Questions'
-    , 'QuestionsMandatory', 'FormQuestionssequence', 'answer',
-    'QuestionsGroup', 'NextForm', 'Active', 'actions'];
+  displayedColumns = ['FormQuestionsAnswerMapping', 'QuestionsText'
+    , 'QuestionsMandatoryText', 'FormQuestionssequence', 'answerText',
+    'QuestionsGroup', 'NextFormText', 'ActiveText', 'actions'];
   exampleDatabase: DataService | null;
   dataSource: ExampleDataSource | null;
   index: number;

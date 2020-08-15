@@ -19,6 +19,9 @@ export class ItemSubGroupListComponent implements OnInit {
   constructor(private _router: Router,
     private itemSubGroupService: ItemSubGroupService,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.itemSubGroups = this.itemSubGroupService.getItemSubGroups();
     this.WithoutFilteritemSubGroups = this.itemSubGroups;
   }

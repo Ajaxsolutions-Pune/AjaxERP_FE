@@ -18,9 +18,12 @@ export class CityListComponent implements OnInit {
   SerachCri: number;
   city: City;
 
-  constructor(private_router: Router,
+  constructor(private _router: Router,
     private cityService: CityService,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.citys = this.cityService.getCitys();
     this.WithoutFilterCitys = this.citys;
   }

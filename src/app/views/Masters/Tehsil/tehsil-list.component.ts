@@ -20,10 +20,13 @@ export class TehsilListComponent implements OnInit {
   tehsil: Tehsil;
   WithoutFilterTehsils: any[];
 
-  constructor(private_router: Router,
+  constructor(private _router: Router,
     private tehsilsService: TehsilService,
     private tehsilsTransfarmer: TehsilTransfarmer,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.tehsilsEntity = this.route.snapshot.data['TehsilList'];
     this.tehsils = this.tehsilsTransfarmer.TehsilTransfarmers(this.tehsilsEntity);
     this.WithoutFilterTehsils = this.tehsils;

@@ -13,21 +13,25 @@ export class QuestionService {
         this.str = this.env.apiServiceIPPort;
     }
     getQuestions(): Observable<QuestionEntity[]> {
-        return this.httpClient.get<QuestionEntity[]>(this.str + '/Question/getList');
+        return this.httpClient.get<QuestionEntity[]>(this.str + '/Question/getList'
+        , this.env.httpOptions);
     }
 
     getQuestion(questionCode: string): Observable<QuestionEntity> {
-        return this.httpClient.get<QuestionEntity>(this.str + '/Question/' + questionCode).pipe(catchError(this.handleError));
+        return this.httpClient.get<QuestionEntity>(this.str + '/Question/' + questionCode
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: QuestionEntity): Observable<string> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<string>(this.str + '/Question', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<string>(this.str + '/Question', saveEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: QuestionEntity): Observable<QuestionEntity> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<QuestionEntity>(this.str + '/Question', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<QuestionEntity>(this.str + '/Question', updateEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

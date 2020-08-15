@@ -19,21 +19,22 @@ export class AnswerService {
     Listanswer: Answer[];
     getAnswers(): Observable<AnswerEntity[]> {
         console.log(this.httpClient.get<AnswerEntity[]>(this.str + '/Answer/getList'));
-        return this.httpClient.get<AnswerEntity[]>(this.str + '/Answer/getList');
+        return this.httpClient.get<AnswerEntity[]>(this.str + '/Answer/getList', this.env.httpOptions);
     }
 
     getAnswer(AnswerCode: string): Observable<AnswerEntity> {
         return this.httpClient.get<AnswerEntity>(this.str + '/Answer/' + AnswerCode).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: AnswerEntity): Observable<Insertstatus> {
-        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         saveEntityObj.answerId = null;
-        return this.httpClient.post<Insertstatus>(this.str + '/Answer', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Answer',
+            saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: AnswerEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<Insertstatus>(this.str + '/Answer', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str
+            + '/Answer', updateEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {
@@ -50,5 +51,5 @@ export class AnswerService {
             // not confirmed
             console.log('No');
         });
-        }
+    }
 }

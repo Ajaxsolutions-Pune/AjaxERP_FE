@@ -19,6 +19,9 @@ export class ItemGroupListComponent implements OnInit {
   constructor(private _router: Router,
     private itemGroupService: ItemGroupService,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.itemGroups = this.itemGroupService.getItemGroups();
     this.WithoutFilteritemGroups = this.itemGroups;
   }

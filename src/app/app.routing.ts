@@ -94,6 +94,11 @@ import { FormQueAnsMappingComponent } from './views/Transaction/FormQueAnsMappin
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
     path: '404',
     component: P404Component,
     data: {
@@ -844,6 +849,13 @@ export const routes: Routes = [
       },
 
     ]
+  },
+  {
+    path: 'login',
+    component: LogInComponent,
+    data: {
+      title: 'Login Page'
+    }
   },
   { path: '**', component: P404Component }
 ];

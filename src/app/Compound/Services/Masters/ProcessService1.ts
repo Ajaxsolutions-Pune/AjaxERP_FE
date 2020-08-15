@@ -16,21 +16,25 @@ export class ProcessService1 {
     }
     getprocesss(): Observable<ProcessEntity[]> {
         console.log(this.str + '/Process/getList');
-        return this.httpClient.get<ProcessEntity[]>(this.str + '/Process/getList');
+        return this.httpClient.get<ProcessEntity[]>(this.str + '/Process/getList'
+        , this.env.httpOptions);
     }
 
     getprocess(processCode: string): Observable<ProcessEntity> {
-        return this.httpClient.get<ProcessEntity>(this.str + '/Process/' + processCode).pipe(catchError(this.handleError));
+        return this.httpClient.get<ProcessEntity>(this.str + '/Process/' + processCode
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: ProcessEntity): Observable<ProcessEntity> {
         saveEntityObj.processId = null;
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<ProcessEntity>(this.str + '/Process', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<ProcessEntity>(this.str + '/Process', saveEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: ProcessEntity): Observable<ProcessEntity> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<ProcessEntity>(this.str + '/Process', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<ProcessEntity>(this.str + '/Process', updateEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

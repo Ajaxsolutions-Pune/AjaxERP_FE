@@ -26,19 +26,6 @@
       </mat-form-field>
     </div>
     <div class="form">
-      <mat-form-field color="accent">        
-        <mat-label>Questions Mandatory</mat-label>
-        <mat-select required name="QuestionsMandatory" 
-        #input
-        [(ngModel)]="data.QuestionsMandatory">
-        <mat-option>Questions Mandatory</mat-option>
-        <mat-option value="Yes">Yes</mat-option>
-        <mat-option value="No">No</mat-option>
-        </mat-select>
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="form">
       <mat-form-field color="accent">
         <input matInput #input class="form-control" 
         #input
@@ -71,29 +58,21 @@
       </mat-form-field>
     </div>     
     <div class="form">
-      <mat-form-field color="accent">        
-        <mat-label>Next Form</mat-label>
-        <mat-select required name="NextForm" 
-        #input
-        [(ngModel)]="data.NextForm">
-        <mat-option>Next Form</mat-option>
-        <mat-option *ngFor="let form of formObj"
-         [value]="form.formName">
-          {{form.formName}}
-        </mat-option>
-        </mat-select>
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
+      <mat-checkbox name="chkQuestionsMandatory"
+      [(ngModel)]="data.QuestionsMandatory">Questions Mandatory</mat-checkbox>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <mat-checkbox name="chkActive" [(ngModel)]="data.Active">Active</mat-checkbox>
     </div>
     <div class="form">
       <mat-form-field color="accent">        
-        <mat-label>Active</mat-label>
-        <mat-select required name="Active" 
+        <mat-label>Next Form</mat-label>
+        <mat-select (selectionChange)="onWriterChange($event)" required name="NextForm" 
         #input
-        [(ngModel)]="data.Active">
-        <mat-option>Active</mat-option>
-        <mat-option value="Yes">Yes</mat-option>
-        <mat-option value="No">No</mat-option>
+        [(ngModel)]="data.NextForm">
+          <mat-option *ngFor="let form of formObj" [value]="form.formName">
+            {{form.formName}}
+          </mat-option>
         </mat-select>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>

@@ -15,21 +15,25 @@ export class QaTypeService {
         this.str = this.env.apiServiceIPPort;
     }
     getQaTypes(): Observable<QaTypeEntity[]> {
-        return this.httpClient.get<QaTypeEntity[]>(this.str + '/QAType/getList');
+        return this.httpClient.get<QaTypeEntity[]>(this.str + '/QAType/getList'
+        , this.env.httpOptions);
     }
 
     getQaType(qaTypeCode: string): Observable<QaTypeEntity> {
-        return this.httpClient.get<QaTypeEntity>(this.str + '/QAType/' + qaTypeCode).pipe(catchError(this.handleError));
+        return this.httpClient.get<QaTypeEntity>(this.str + '/QAType/' + qaTypeCode
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: QaTypeEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<Insertstatus>(this.str + '/QAType', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/QAType', saveEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: QaTypeEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<Insertstatus>(this.str + '/QAType', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/QAType', updateEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

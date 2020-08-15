@@ -18,32 +18,35 @@ export class TaxCategoryListComponent implements OnInit {
   SerachCri: number;
   taxcategory: TaxCategory;
   WithoutFilterTaxCategorys: any[];
-  Resulttaxcategory:  TaxCategory[];
+  Resulttaxcategory: TaxCategory[];
 
-  constructor(private_router:Router,
+  constructor(private _router: Router,
     private taxcategorysService: TaxCategoryService,
     private route: ActivatedRoute) {
-      this.taxcategorys = this.taxcategorysService.getTaxCategorys();
-      this.WithoutFilterTaxCategorys = this.taxcategorys;
-     }
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      this._router.navigate(['login']);
+    }
+    this.taxcategorys = this.taxcategorysService.getTaxCategorys();
+    this.WithoutFilterTaxCategorys = this.taxcategorys;
+  }
 
   ngOnInit() {
     this.taxcategorys = this.taxcategorysService.getTaxCategorys();
     this.WithoutFilterTaxCategorys = this.taxcategorys;
     console.log(this.taxcategorys);
     this.TaxCategory = {
-      Id:null,
-      TaxCategory_Code:null,
-      TaxCategory_Description:null,
-      IsActive:true,
+      Id: null,
+      TaxCategory_Code: null,
+      TaxCategory_Description: null,
+      IsActive: true,
     };
   }
-  
+
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resulttaxcategory = this.WithoutFilterTaxCategorys;
     if (this.TaxCategory.TaxCategory_Description !== null && this.TaxCategory.TaxCategory_Description !== '') {
-      this.Resulttaxcategory= this.Resulttaxcategory.filter(SubResult =>
+      this.Resulttaxcategory = this.Resulttaxcategory.filter(SubResult =>
         SubResult.TaxCategory_Description.toLowerCase().indexOf(this.TaxCategory.TaxCategory_Description.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }

@@ -20,6 +20,9 @@ export class ColourListComponent implements OnInit {
   constructor(private _router: Router,
     objTrans: ColourTransfarmer,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.arrOjectEntity = this.route.snapshot.data['ColourList'];
     this.arrOject = objTrans.ColourTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;

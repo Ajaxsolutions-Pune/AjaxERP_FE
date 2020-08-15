@@ -26,19 +26,20 @@ export class UOMService {
             headers: headers_object
         };
 
-        return this.httpClient.get<UOM>(this.str + 'Uom/' + UnitsId, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.get<UOM>(this.str + 'Uom/' + UnitsId,
+         this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     getUnits(): Observable<UOM[]> {
         console.log('hii');
-        return this.httpClient.get<UOM[]>(this.str + '/Uom/getList');
+        return this.httpClient.get<UOM[]>(this.str + '/Uom/getList', this.env.httpOptions);
     }
     getRole(): void {
     }
     Save(Unit: UOM): Observable<UOM> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<UOM>(this.str + '/Uom',
-            Unit, httpOptions).pipe(catchError(this.handleError));
+            Unit, this.env.httpOptions).pipe(catchError(this.handleError));
 
     }
 

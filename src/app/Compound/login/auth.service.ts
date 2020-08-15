@@ -19,13 +19,7 @@ export class AuthService {
   }
   Login(loginEntityObj: LogIn): Observable<Insertstatus> {
     console.log(loginEntityObj);
-    const httpOptions = {
-      headers: new HttpHeaders(
-        {
-          'Content-Type': 'application/json'
-        }
-      )
-    };
+    const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
     return this.httpClient.post<Insertstatus>
       ('http://ajaxdevdbcl.eastus.cloudapp.azure.com:8085/AjaxErpBackEnd/authenticate',
         loginEntityObj,

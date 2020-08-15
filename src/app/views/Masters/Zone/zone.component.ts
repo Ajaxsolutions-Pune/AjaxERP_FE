@@ -21,6 +21,9 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
     private defaultLayoutComponent: DefaultLayoutComponent, private router: Router,
     private formBuilder: FormBuilder) {
     super();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      this.router.navigate(['login']);
+    }
     this.validationMessages = {
       ControlzoneCode: {
         required: 'Zone Code is required.',

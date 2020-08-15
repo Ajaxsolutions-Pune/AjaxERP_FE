@@ -20,6 +20,9 @@ export class ListUOMComponent implements OnInit {
   constructor(private _router: Router,
     private unitService: UOMService,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.unitService.getUnits().subscribe(
       (par) => this.Units = par,
       (err: any) => console.log(err));

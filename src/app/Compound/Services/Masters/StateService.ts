@@ -20,20 +20,24 @@ export class StateService {
     ListState: State[];
 
     getStates(): Observable<StateEntity[]> {
-        return this.httpClient.get<StateEntity[]>(this.str + '/State/getList').pipe(catchError(this.handleError));
+        return this.httpClient.get<StateEntity[]>(this.str + '/State/getList'
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     getState(StateCode: string): Observable<StateEntity[]> {
         console.log(this.str + '/State/' + StateCode);
-        return this.httpClient.get<StateEntity[]>(this.str + 'State/' + StateCode).pipe(catchError(this.handleError));
+        return this.httpClient.get<StateEntity[]>(this.str + 'State/' + StateCode
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(state: StateEntity): Observable<StateEntity> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<StateEntity>(this.str + 'State', state, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<StateEntity>(this.str + 'State', state
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(state: StateEntity): Observable<StateEntity> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<StateEntity>(this.str + 'State', state, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<StateEntity>(this.str + 'State', state
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {

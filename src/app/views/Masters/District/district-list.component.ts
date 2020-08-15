@@ -21,10 +21,13 @@ export class DistrictListComponent implements OnInit {
   district: District;
   WithoutFilterDistricts: any[];
 
-  constructor(private_router: Router,
+  constructor(private _router: Router,
     private districtService: DistrictService,
     private districtTransfarmer: DistrictTransfarmer,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.districtEntity = this.route.snapshot.data['DistrictList'];
     this.districts = this.districtTransfarmer.DistrictTransfarmers(this.districtEntity);
     this.WithoutFilterDistricts = this.districts;

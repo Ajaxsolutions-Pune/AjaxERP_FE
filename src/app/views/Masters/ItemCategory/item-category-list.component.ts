@@ -21,9 +21,12 @@ export class ItemCategoryListComponent implements OnInit {
   Resultitemcategorys: ItemCategory[];
   SerachCri: number;
 
-  constructor(private_router: Router,
+  constructor(private _router: Router,
     private itemcategorysService: ItemCategoryService,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.ItemCategorys = this.itemcategorysService.getItemCategorys();
     this.WithoutFilterItemCategorys = this.ItemCategorys;
   }

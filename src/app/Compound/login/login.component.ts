@@ -9,6 +9,8 @@ import { environment } from '../Module/environment';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { AuthService } from './auth.service';
+import { Insertstatus } from '../Module/Masters/Insert_status.model';
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -20,22 +22,19 @@ export class LogInComponent implements OnInit {
   form: FormGroup;
   public loginInvalid: boolean;
   private formSubmitAttempt: boolean;
-  private returnUrl: string;
   public loginobj: LogIn;
+  public loginstatus: Insertstatus;
   env = environment;
-
-
+  insertstatus = Insertstatus;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private logInService: LogInService,
-    private authService: AuthService
+    private logInService: LogInService
   ) {
   }
 
   async ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/game';
 
     this.form = this.fb.group({
       userName: ['', Validators.required],
@@ -53,13 +52,29 @@ export class LogInComponent implements OnInit {
         const password = this.form.get('password').value;
         this.loginobj = {
           ouCode: this.env.OuCode,
-          password: username,
-          username: password
+          password: password,
+          username: username
         };
 
-        this.authService.Login(this.loginobj).subscribe(
+        this.logInService.Login(this.loginobj).subscribe(
           (par) => {
-            console.log(par);
+            this.loginstatus = par;
+            if (this.loginstatus.status.toLowerCase() === 'success') {
+
+              localStorage.setItem('token', this.loginstatus.token);
+              const httpOptions = {
+                headers:
+                  new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    // tslint:disable-next-line:max-line-length
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                  })
+              };
+              this.env.httpOptions = httpOptions;
+              this.router.navigate(['AnswerList']);
+            } else {
+              this.loginInvalid = true;
+            }
           },
           (err: any) => console.log(err));
       } catch (err) {

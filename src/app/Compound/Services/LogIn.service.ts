@@ -6,6 +6,7 @@ import { map, switchMap, debounceTime, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../Module/environment';
 import { User } from '../Module/User.model';
+import { Insertstatus } from '../Module/Masters/Insert_status.model';
 
 @Injectable()
 export class LogInService {
@@ -16,16 +17,18 @@ export class LogInService {
     }
     login: LogIn;
 
-    LogIn(username: string, password: string): Observable<User> {
-        console.log(this.str + '/User/LogIn?BranchNo=1&UserId=' + username + '&Password=' + password);
-        // tslint:disable-next-line:max-line-length
-        return this.httpClient.get<User>(this.str + '/User/LogIn?BranchNo=1&UserId='
-         + username + '&Password=' + password).pipe(catchError(this.handleError));
+    Login(loginEntityObj: LogIn): Observable<Insertstatus> {
+        console.log(loginEntityObj);
+        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.httpClient.post<Insertstatus>
+            ('http://ajaxdevdbcl.eastus.cloudapp.azure.com:8085/AjaxErpBackEnd/authenticate',
+                loginEntityObj,
+                httpOptions).pipe(catchError(this.handleError));
     }
 
     Logout(branchNo: string, userId: string): Observable<string> {
         // tslint:disable-next-line:max-line-length
-        return  this.httpClient.get<string>(this.str + '/Master/LogOut?BranchNo=' + branchNo + '&UserId=' + userId + '').pipe(catchError(this.handleError));
+        return this.httpClient.get<string>(this.str + '/Master/LogOut?BranchNo=' + branchNo + '&UserId=' + userId + '').pipe(catchError(this.handleError));
     }
     UserList(): Observable<LogIn[]> {
         // tslint:disable-next-line:max-line-length

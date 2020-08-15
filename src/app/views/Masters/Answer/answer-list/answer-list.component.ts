@@ -22,6 +22,9 @@ export class AnswerListComponent implements OnInit {
     objTrans: AnswerTransfarmer,
     private answerService: AnswerService,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.answersEntity = this.route.snapshot.data['AnswerList'];
     this.answers =  objTrans.AnswerTransfarmers(this.answersEntity);
     this.WithoutFilterAnswer = this.answers;

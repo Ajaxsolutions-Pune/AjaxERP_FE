@@ -20,6 +20,9 @@ export class DeviceListComponent implements OnInit {
   constructor(private _router: Router,
     objTrans: DeviceTransfarmer,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
      this.arrOjectEntity = this.route.snapshot.data['AssetCategoryList1'];
      this.arrOject = objTrans.DeviceTransfarmers(this.arrOjectEntity);
      this.WithoutFilterObj = this.arrOject;

@@ -35,8 +35,9 @@ export class CastCategoryService {
 
     getCastCategory(CastCategory_Code: number): CastCategory[] {
         this.ListCastCategory =
-            this.CastCategorys.filter(CastCategorys => CastCategorys.CastCategory_Code.toString()
-            .indexOf(CastCategory_Code.toString()) !== -1);
+            this.CastCategorys.filter(CastCategorys =>
+                CastCategorys.CastCategory_Code.toString()
+                    .indexOf(CastCategory_Code.toString()) !== -1);
         return this.CastCategorys;
     }
     getMaxTaxCategoryId(): number {

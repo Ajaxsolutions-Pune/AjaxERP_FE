@@ -18,16 +18,19 @@ export class TehsilService {
     ListDistrict: Tehsil[];
     getTehsils(): Observable<Tehsil[]> {
         console.log('ji');
-        return this.httpClient.get<Tehsil[]>(this.str + '/Tehsil/getList');
+        return this.httpClient.get<Tehsil[]>(this.str + '/Tehsil/getList'
+        , this.env.httpOptions);
     }
 
     getDistricts(): Observable<District[]> {
-        return this.httpClient.get<District[]>(this.str + '/District/getList');
+        return this.httpClient.get<District[]>(this.str + '/District/getList'
+        , this.env.httpOptions);
     }
 
     getTehsil(TehsilCode: number): Observable<TehsilEntity> {
         console.log(this.str + 'Tehsil/' + TehsilCode);
-        return this.httpClient.get<TehsilEntity>(this.str + 'Tehsil/' + TehsilCode);
+        return this.httpClient.get<TehsilEntity>(this.str + 'Tehsil/' + TehsilCode
+        , this.env.httpOptions);
 
     }
     getMaxTehsilId(): number {
@@ -41,7 +44,8 @@ export class TehsilService {
     Update(tehsil: Tehsil): Observable<TehsilEntity> {
         console.log(this.str + 'Tehsil/');
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<TehsilEntity>(this.str + 'State', tehsil, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<TehsilEntity>(this.str + 'State', tehsil
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

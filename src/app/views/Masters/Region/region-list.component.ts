@@ -20,6 +20,9 @@ export class RegionListComponent implements OnInit {
   constructor(private _router: Router,
     objTrans: RegionTransfarmer,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.arrOjectEntity = this.route.snapshot.data['RegionList'];
     this.arrOject = objTrans.RegionTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;

@@ -20,6 +20,9 @@ export class AssetCategoryListComponent implements OnInit {
   constructor(private _router: Router,
     objTrans: AssetCategoryTransfarmer,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.arrOjectEntity = this.route.snapshot.data['AssetCategoryList1'];
     console.log('this.arrOjectEntity');
     console.log(this.arrOjectEntity);

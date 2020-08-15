@@ -19,19 +19,19 @@ export class BrandService {
 
     getBrands(): Observable<Brand[]> {
         console.log(this.str + 'Brand/getList');
-        return this.httpClient.get<Brand[]>(this.str + 'Brand/getList');
+        return this.httpClient.get<Brand[]>(this.str + 'Brand/getList', this.env.httpOptions);
     }
 
     getBrand(BrandCode: String): Observable<Brand[]> {
         return this.httpClient.get<Brand[]>(this.str + 'Brand/getUser?UserNo=' +
-            BrandCode);
+            BrandCode, this.env.httpOptions);
     }
 
     Save(Brand1: Brand): Observable<Brand> {
         if (Brand1.brandCode === null) {
             const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
             return this.httpClient.post<Brand>(this.str + 'Brand',
-                Brand1, httpOptions).pipe(catchError(this.handleError));
+                Brand1, this.env.httpOptions).pipe(catchError(this.handleError));
         }
 
     }

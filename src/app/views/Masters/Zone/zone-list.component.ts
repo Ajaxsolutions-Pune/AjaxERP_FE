@@ -20,6 +20,9 @@ export class ZoneListComponent implements OnInit {
   constructor(private _router: Router,
     objTrans: ZoneTransfarmer,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.arrOjectEntity = this.route.snapshot.data['ClusterList'];
     this.arrOject = objTrans.ZoneTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;

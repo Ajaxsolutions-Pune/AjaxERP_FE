@@ -14,21 +14,25 @@ export class CircleService {
         this.str = this.env.apiServiceIPPort;
     }
     getCircles(): Observable<CircleEntity[]> {
-        return this.httpClient.get<CircleEntity[]>(this.str + '/Circle/getList');
+        return this.httpClient.get<CircleEntity[]>(this.str + '/Circle/getList'
+        , this.env.httpOptions);
     }
 
     getCircle(qaTypeCode: string): Observable<CircleEntity> {
-        return this.httpClient.get<CircleEntity>(this.str + '/Circle/' + qaTypeCode).pipe(catchError(this.handleError));
+        return this.httpClient.get<CircleEntity>(this.str + '/Circle/' + qaTypeCode
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: CircleEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<Insertstatus>(this.str + '/Circle', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Circle', saveEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: CircleEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<Insertstatus>(this.str + '/Circle', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Circle', updateEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

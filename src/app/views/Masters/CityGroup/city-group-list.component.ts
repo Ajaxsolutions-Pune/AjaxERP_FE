@@ -22,33 +22,36 @@ export class CityGroupListComponent implements OnInit {
   WithoutFilterCitys: any;
   Resultcitygroups: any;
 
-  constructor(private_router:Router,
+  constructor(private _router: Router,
     private citygroupService: CityGroupService,
     private route: ActivatedRoute) {
-      this.citygroups = this.citygroupService.getCityGroups();
-      this.WithoutFilterCityGroups = this.citygroups;
-     }
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
+    this.citygroups = this.citygroupService.getCityGroups();
+    this.WithoutFilterCityGroups = this.citygroups;
+  }
 
   ngOnInit() {
     this.citygroups = this.citygroupService.getCityGroups();
     this.citygroup = {
-      Id:null,
-      CityGroup_Code:null,
-      CityGroup_Name_ENG:null,
-      CityGroup_Name_UNI:null,
-      IsActive:true,
-  
+      Id: null,
+      CityGroup_Code: null,
+      CityGroup_Name_ENG: null,
+      CityGroup_Name_UNI: null,
+      IsActive: true,
+
     };
-    console.log('CityGroup_Code '+ this.citygroup.CityGroup_Code);
-    
-    console.log('CityGroup_Name'+ this.citygroup.CityGroup_Name_ENG);
+    console.log('CityGroup_Code ' + this.citygroup.CityGroup_Code);
+
+    console.log('CityGroup_Name' + this.citygroup.CityGroup_Name_ENG);
   }
-  
+
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultcitygroups = this.WithoutFilterCityGroups;
     if (this.citygroup.CityGroup_Name_ENG !== null && this.citygroup.CityGroup_Name_ENG !== '') {
-      this.Resultcitygroups= this.Resultcitygroups.filter(SubResult =>
+      this.Resultcitygroups = this.Resultcitygroups.filter(SubResult =>
         SubResult.CityGroup_Name_ENG.toLowerCase().indexOf(this.citygroup.CityGroup_Name_ENG.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }

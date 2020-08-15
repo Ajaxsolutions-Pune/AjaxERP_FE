@@ -37,6 +37,9 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
     this.formErrors = {
       ControlformName: '',
     };
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      this. router.navigate(['login']);
+    }
   }
   ngOnInit() {
     this.form = this.formBuilder.group({

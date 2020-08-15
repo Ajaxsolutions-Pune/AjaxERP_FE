@@ -16,12 +16,14 @@ export class DistrictService {
     }
     ListDistrict: District[];
     getDistricts(): Observable<DistrictEntity[]> {
-        return this.httpClient.get<DistrictEntity[]>(this.str + '/District/getList');
+        return this.httpClient.get<DistrictEntity[]>(this.str + '/District/getList',
+         this.env.httpOptions);
     }
 
     getDistrict(DistrictCode: number): Observable<DistrictEntity> {
         console.log(this.str + 'District/' + DistrictCode);
-        return this.httpClient.get<DistrictEntity>(this.str + 'District/' + DistrictCode);
+        return this.httpClient.get<DistrictEntity>(this.str + 'District/' + DistrictCode
+        , this.env.httpOptions);
 
     }
     getMaxDistrictId(): number {

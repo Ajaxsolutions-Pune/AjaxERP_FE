@@ -24,6 +24,7 @@ export class AddDialogComponent implements OnInit {
   questionsObj: Question[];
   answersObj: Answer[];
   formObj: FormObj[];
+  objNextFormText: string;
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Issue,
     private questionsService: QuestionService,
@@ -44,12 +45,12 @@ export class AddDialogComponent implements OnInit {
     this.questionsService.getQuestions().subscribe(
       (par) => this.questionsObj = this.questionsTransfarmer.QuestionTransfarmers(par),
       (err: any) => console.log(err));
-      this.answersService.getAnswers().subscribe(
-        (par) => this.answersObj = this.answersTransfarmer.AnswerTransfarmers(par),
-        (err: any) => console.log(err));
-        this.formService.getForms().subscribe(
-          (par) => this.formObj = this.formTransfarmer.fTransfarmers(par),
-          (err: any) => console.log(err));
+    this.answersService.getAnswers().subscribe(
+      (par) => this.answersObj = this.answersTransfarmer.AnswerTransfarmers(par),
+      (err: any) => console.log(err));
+    this.formService.getForms().subscribe(
+      (par) => this.formObj = this.formTransfarmer.fTransfarmers(par),
+      (err: any) => console.log(err));
   }
   getErrorMessage() {
     return this.formControl.hasError('required') ? 'Required field' :
@@ -65,7 +66,19 @@ export class AddDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  onWriterChange(event) {
+    console.log(event.value);
+    this.objNextFormText = event.value;
+  }
+  OnChange($event) {
+    console.log($event);
+    $event.source.toggle();
+    // MatCheckboxChange {checked,MatCheckbox}
+  }
+
   public confirmAdd(): void {
+    this.data.NextFormText = this.objNextFormText;
+
     this.dataService.addIssue(this.data);
   }
 }

@@ -14,21 +14,25 @@ export class AssetGroupService {
         this.str = this.env.apiServiceIPPort;
     }
     getAssetGroups(): Observable<AssetGroupEntity[]> {
-        return this.httpClient.get<AssetGroupEntity[]>(this.str + '/AssetGroup/getList');
+        return this.httpClient.get<AssetGroupEntity[]>(this.str
+             + '/AssetGroup/getList', this.env.httpOptions);
     }
 
     getAssetGroup(qaTypeCode: string): Observable<AssetGroupEntity> {
-        return this.httpClient.get<AssetGroupEntity>(this.str + '/AssetGroup/' + qaTypeCode).pipe(catchError(this.handleError));
+        return this.httpClient.get<AssetGroupEntity>(this.str + '/AssetGroup/' + qaTypeCode
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: AssetGroupEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<Insertstatus>(this.str + '/AssetGroup', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/AssetGroup', saveEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: AssetGroupEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<Insertstatus>(this.str + '/AssetGroup', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/AssetGroup', updateEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

@@ -19,9 +19,12 @@ export class ManufactureListComponent implements OnInit {
   SerachCri: number;
   mfg: MFG;
 
-  constructor(private_router: Router,
+  constructor(private _router: Router,
     private mfgService: MFGService,
     private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
     this.MFGs = this.mfgService.getMFGS();
     this.WithoutFiltermfgs = this.MFGs;
   }

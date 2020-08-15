@@ -14,21 +14,25 @@ export class ClusterService {
         this.str = this.env.apiServiceIPPort;
     }
     getClusters(): Observable<ClusterEntity[]> {
-        return this.httpClient.get<ClusterEntity[]>(this.str + '/Cluster/getList');
+        return this.httpClient.get<ClusterEntity[]>(this.str + '/Cluster/getList',
+            this.env.httpOptions);
     }
 
     getCluster(qaTypeCode: string): Observable<ClusterEntity> {
-        return this.httpClient.get<ClusterEntity>(this.str + '/Cluster/' + qaTypeCode).pipe(catchError(this.handleError));
+        return this.httpClient.get<ClusterEntity>(this.str + '/Cluster/' + qaTypeCode
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: ClusterEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<Insertstatus>(this.str + '/Cluster', saveEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Cluster', saveEntityObj
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: ClusterEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<Insertstatus>(this.str + '/Cluster', updateEntityObj, httpOptions).pipe(catchError(this.handleError));
+        return this.httpClient.post<Insertstatus>(this.str + '/Cluster', updateEntityObj
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

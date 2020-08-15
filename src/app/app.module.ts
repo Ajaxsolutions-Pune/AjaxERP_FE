@@ -302,11 +302,6 @@ import { DataService } from './views/Transaction/FormQueAnsMapping/data.service'
       useClass: HashLocationStrategy
     },
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptorService,
-      multi: true
-    },
     JwtHelperService],
   bootstrap: [AppComponent]
 })
