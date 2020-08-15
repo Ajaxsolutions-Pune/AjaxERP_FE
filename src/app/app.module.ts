@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { CookieService } from 'ngx-cookie-service';
@@ -302,6 +302,7 @@ import { DataService } from './views/Transaction/FormQueAnsMapping/data.service'
       useClass: HashLocationStrategy
     },
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
     JwtHelperService],
   bootstrap: [AppComponent]
 })
