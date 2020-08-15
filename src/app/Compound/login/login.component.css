@@ -11,6 +11,10 @@ mat-card {
   background-position: center;
 }
 
+.ajaxlog {
+  content: url("../../../assets/img/brand/ajaxsolutionlogo.png");
+}
+
 mat-form-field {
   display: block;
 }
