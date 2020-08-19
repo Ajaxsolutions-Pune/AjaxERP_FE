@@ -17,6 +17,7 @@ export class FormService {
     }
     ListForm: FormObj[];
     getForms(): Observable<FormEntity[]> {
+        console.log(this.str + '/Form/getList');
         return this.httpClient.get<FormEntity[]>(this.str + '/Form/getList', this.env.httpOptions);
     }
 

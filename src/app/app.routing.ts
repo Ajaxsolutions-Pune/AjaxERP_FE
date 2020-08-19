@@ -508,14 +508,14 @@ export const routes: Routes = [
         path: 'Answer',
         component: AnswerComponent,
         data: {
-          title: 'Create answer'
+          title: 'Add Answer'
         },
       },
       {
         path: 'Answer/:id',
         component: AnswerComponent,
         data: {
-          title: 'Update answer'
+          title: 'Edit Answer'
         }
       },
       {
@@ -844,7 +844,7 @@ export const routes: Routes = [
         path: 'FormQueAnsMapping',
         component: FormQueAnsMappingComponent,
         data: {
-          title: 'Create Device'
+          title: 'Mapping'
         },
       },
 

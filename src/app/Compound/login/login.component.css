@@ -6,9 +6,10 @@ mat-card {
   height: 100vh;
   display: flex;
   justify-content: center;
+  background-repeat: no-repeat;
   align-items: center;
   background-image: url("../../../assets/img/Content/electricity.jpg"); 
-  background-position: center;
+  background-size: cover;
 }
 
 .ajaxlog {

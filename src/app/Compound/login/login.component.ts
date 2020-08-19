@@ -23,6 +23,7 @@ export class LogInComponent implements OnInit {
   public loginInvalid: boolean;
   private formSubmitAttempt: boolean;
   public loginobj: LogIn;
+  hidePassword: boolean = true;
   public loginstatus: Insertstatus;
 
   public logo = 'ajaxsolutionlogo';
@@ -37,7 +38,7 @@ export class LogInComponent implements OnInit {
   }
 
   async ngOnInit() {
-
+    this.loginInvalid = false;
     this.form = this.fb.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]
@@ -49,7 +50,6 @@ export class LogInComponent implements OnInit {
     this.formSubmitAttempt = false;
     if (this.form.valid) {
       try {
-        console.log('aa');
         const username = this.form.get('userName').value;
         const password = this.form.get('password').value;
         this.loginobj = {
@@ -73,7 +73,7 @@ export class LogInComponent implements OnInit {
                   })
               };
               this.env.httpOptions = httpOptions;
-              this.router.navigate(['AnswerList']);
+              this.router.navigate(['dashboard']);
             } else {
               this.loginInvalid = true;
             }

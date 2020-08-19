@@ -23,7 +23,8 @@ export class AnswerService {
     }
 
     getAnswer(AnswerCode: string): Observable<AnswerEntity> {
-        return this.httpClient.get<AnswerEntity>(this.str + '/Answer/' + AnswerCode).pipe(catchError(this.handleError));
+        return this.httpClient.get<AnswerEntity>(this.str + '/Answer/' + AnswerCode,
+         this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: AnswerEntity): Observable<Insertstatus> {
         saveEntityObj.answerId = null;

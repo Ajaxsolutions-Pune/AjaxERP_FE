@@ -1,81 +1,110 @@
 
-<div class="container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource"
-  [matSortDisableClear]="false"
-   matSort class="mat-cell">
-    ng update @angular/cli @angular/core
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <ng-container matColumnDef="FormQuestionsAnswerMapping">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Mapping Id</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.FormQuestionsAnswerMapping}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="QuestionsText">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Questions</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.QuestionsText}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="QuestionsMandatoryText">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Mandatory</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.QuestionsMandatoryText}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="FormQuestionssequence">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Sequence</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.FormQuestionssequence}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="answerText">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Answer</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.answerText}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="QuestionsGroup">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Questions Group</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.QuestionsGroup}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="NextFormText">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Next Form</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.NextFormTextText}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="ActiveText">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Active</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.ActiveText}}</mat-cell>
-    </ng-container>
-    <!-- actions -->
-    <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button color="primary" (click)="addNew()">
-          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-        </button>
-      </mat-header-cell>
-
-      <mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button color="accent" (click)="startEdit(i,
-        row.FormQuestionsAnswerMapping,
-         row.Questions, 
-         row.QuestionsMandatory,
-         row.FormQuestionssequence,
-         row.answer,
-         row.QuestionsGroup,
-         row.NextForm,
-         row.Active)">
-          <mat-icon aria-label="Edit">edit</mat-icon>
-        </button>
-
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-
-
-  <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-    No results
-  </div>
-  <mat-paginator #paginator style="display: none;"
-                 [length]="dataSource.filteredData.length"
-                 [pageIndex]="0"
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 25, 100]">
-  </mat-paginator>
+<div class="row">
+  <div class="col-md-4"></div>
+  <mat-form-field class="col-md-4">
+      <mat-label>Form</mat-label>
+      <mat-select required formControlName="ControlFormCode">
+          <mat-option>Form</mat-option>
+          <mat-option *ngFor="let form of formObj" [value]="form.formName">
+            {{form.formName}}
+          </mat-option>
+      </mat-select>
+      <mat-error>
+          {{ formErrors['ControlFormCode'] }}
+      </mat-error>
+  </mat-form-field>
 </div>
+
+  <div class="container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource"
+    [matSortDisableClear]="false"
+    matSort class="mat-cell">
+      ng update @angular/cli @angular/core
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <ng-container matColumnDef="FormQuestionsAnswerMapping">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.FormQuestionsAnswerMapping}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="QuestionsText">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Questions</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.QuestionsText}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="QuestionsMandatoryText">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Mandatory</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.QuestionsMandatoryText}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="FormQuestionssequence">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Form Que Seq</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.FormQuestionssequence}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="answerText">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Answer</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.answerText}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="QuestionsGroup">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Que Group</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.QuestionsGroup}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="NextFormText">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Next Form</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.NextFormText}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="ActiveText">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Active</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.ActiveText}}</mat-cell>
+      </ng-container>
+      <!-- actions -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <button mat-icon-button color="primary" (click)="addNew()">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          </button>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let row; let i=index;">
+          <button mat-icon-button color="accent" (click)="startEdit(i,
+          row.FormQuestionsAnswerMapping,
+          row.Questions, 
+          row.QuestionsMandatory,
+          row.FormQuestionssequence,
+          row.answer,
+          row.QuestionsGroup,
+          row.NextForm,
+          row.Active)">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+
+    <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+      No results
+    </div>
+    <mat-paginator #paginator style="display: none;"
+                  [length]="dataSource.filteredData.length"
+                  [pageIndex]="0"
+                  [pageSize]="10"
+                  [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <button mat-raised-button
+            color="primary">Submit</button>
+        <button mat-raised-button color="warn">
+            <i class="fa fa-ban"></i>
+            Cancel</button>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<div> {{dataSource.filteredData | json}}</div>

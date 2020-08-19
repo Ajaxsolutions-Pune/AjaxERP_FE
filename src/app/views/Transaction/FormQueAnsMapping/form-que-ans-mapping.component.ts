@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,30 +11,67 @@ import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { Issue } from './Issue';
+import { FormComponentBase } from '../../Masters/AngularDemo/infrastructure/form-component-base';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CrossFieldErrorMatcher } from '../../Masters/AngularDemo/infrastructure/cross-field-error-matcher';
+import { FormObj } from '../../../Compound/Module/Masters/Form.model';
+import { FormService } from '../../../Compound/Services/Masters/FormService';
+import { FormTransfarmer } from '../../../Compound/Transformer/Masters/Form-Transfarmer';
 
 @Component({
   selector: 'app-form-que-ans-mapping',
   templateUrl: './form-que-ans-mapping.component.html',
   styleUrls: ['./form-que-ans-mapping.component.scss']
 })
-export class FormQueAnsMappingComponent implements OnInit {
+export class FormQueAnsMappingComponent extends FormComponentBase implements OnInit, AfterViewInit {
+
+  formObj: FormObj[];
   displayedColumns = ['FormQuestionsAnswerMapping', 'QuestionsText'
     , 'QuestionsMandatoryText', 'FormQuestionssequence', 'answerText',
     'QuestionsGroup', 'NextFormText', 'ActiveText', 'actions'];
   exampleDatabase: DataService | null;
   dataSource: ExampleDataSource | null;
   index: number;
-  id: string;
+  id: number;
+  mappingId: number;
+  addObjIssue: Issue;
+  form!: FormGroup;
+  errorMatcher = new CrossFieldErrorMatcher();
 
   constructor(public httpClient: HttpClient,
+    private formService: FormService,
+    private formTransfarmer: FormTransfarmer,
     public dialog: MatDialog,
-    public dataService: DataService) { }
+    public dataService: DataService,
+    private formBuilder: FormBuilder) {
+    super();
+    this.validationMessages = {
+      ControlFormCode: {
+        required: 'Form is required.',
+      }
+    };
+    this.formErrors = {
+      ControlisActive: '',
+    };
+  }
 
-    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-    @ViewChild(MatSort, {static: true}) sort: MatSort;
-    @ViewChild('filter',  {static: true}) filter: ElementRef;
-
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild('filter', { static: true }) filter: ElementRef;
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+    }, 250);
+    this.startControlMonitoring(this.form);
+  }
   ngOnInit() {
+    this.form = this.formBuilder.group({
+      ControlFormCode: ['', [
+        Validators.required]]
+    });
+
+    this.formService.getForms().subscribe(
+      (par) => this.formObj = this.formTransfarmer.fTransfarmers(par),
+      (err: any) => console.log(err));
     this.loadData();
   }
 
@@ -43,21 +80,53 @@ export class FormQueAnsMappingComponent implements OnInit {
   }
 
   addNew() {
-    console.log(this.dataSource);
-    const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: { issue: Issue }
-    });
+    this.addObjIssue = null;
+    this.mappingId = null;
+    let maxId = 0;
+    if (this.dataSource.filteredData.length > 0) {
+      this.dataSource.filteredData.forEach(e => {
+        if (e.FormQuestionsAnswerMapping > maxId) {
+          maxId = e.FormQuestionsAnswerMapping;
+        }
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
-        this.refreshTable();
-      }
-    });
+      this.mappingId =
+        maxId + 1;
+      const dialogRef = this.dialog.open(AddDialogComponent, {
+        data: {
+          FormQuestionsAnswerMapping: this.mappingId,
+          QuestionsMandatory: ''.toString(),
+          Active: ''.toString()
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === 1) {
+          this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
+          this.refreshTable();
+        }
+      });
+
+
+    } else {
+      const dialogRef = this.dialog.open(AddDialogComponent, {
+        data: {
+          FormQuestionsAnswerMapping: 1,
+          QuestionsMandatory: ''.toString(),
+          Active: ''.toString()
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === 1) {
+          this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
+          this.refreshTable();
+        }
+      });
+    }
   }
 
   startEdit(i: number,
-    FormQuestionsAnswerMapping: string,
+    FormQuestionsAnswerMapping: number,
     Questions: string,
     QuestionsMandatory: string,
     FormQuestionssequence: string,
@@ -92,7 +161,7 @@ export class FormQueAnsMappingComponent implements OnInit {
       }
     });
   }
-  deleteItem(i: number, FormQuestionsAnswerMapping: string, Questions: string, QuestionsMandatory: string,
+  deleteItem(i: number, FormQuestionsAnswerMapping: number, Questions: string, QuestionsMandatory: string,
     FormQuestionssequence: string, answer: string, QuestionsGroup: string, NextForm: string) {
     this.index = i;
     this.id = FormQuestionsAnswerMapping;
@@ -143,19 +212,19 @@ export class FormQueAnsMappingComponent implements OnInit {
 
 
 
-    public loadData() {
-      this.exampleDatabase = new DataService(this.httpClient);
-      this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator, this.sort);
-      fromEvent(this.filter.nativeElement, 'keyup')
-        // .debounceTime(150)
-        // .distinctUntilChanged()
-        .subscribe(() => {
-          if (!this.dataSource) {
-            return;
-          }
-          this.dataSource.filter = this.filter.nativeElement.value;
-        });
-    }
+  public loadData() {
+    this.exampleDatabase = new DataService(this.httpClient);
+    this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator, this.sort);
+    fromEvent(this.filter.nativeElement, 'keyup')
+      // .debounceTime(150)
+      // .distinctUntilChanged()
+      .subscribe(() => {
+        if (!this.dataSource) {
+          return;
+        }
+        this.dataSource.filter = this.filter.nativeElement.value;
+      });
+  }
 }
 
 export class ExampleDataSource extends DataSource<Issue> {

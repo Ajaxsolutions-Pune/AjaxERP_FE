@@ -25,6 +25,9 @@ export class AddDialogComponent implements OnInit {
   answersObj: Answer[];
   formObj: FormObj[];
   objNextFormText: string;
+  objQuestionsTex: string;
+  objanswerText: string;
+
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Issue,
     private questionsService: QuestionService,
@@ -62,23 +65,52 @@ export class AddDialogComponent implements OnInit {
     // emppty stuff
   }
 
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  onWriterChange(event) {
-    console.log(event.value);
-    this.objNextFormText = event.value;
+  NextFormChange(event) {
+    const target = event.source.selected._element.nativeElement;
+    const selectedData = {
+      value: event.value,
+      text: target.innerText.trim()
+    };
+    this.objNextFormText = selectedData.text;
+    console.log(this.objNextFormText);
   }
-  OnChange($event) {
-    console.log($event);
-    $event.source.toggle();
-    // MatCheckboxChange {checked,MatCheckbox}
+  QuestionsChange(event) {
+    const target = event.source.selected._element.nativeElement;
+    const selectedData = {
+      value: event.value,
+      text: target.innerText.trim()
+    };
+    this.objQuestionsTex = selectedData.text;
+  }
+
+  AnswerTextChange(event) {
+    const target = event.source.selected._element.nativeElement;
+    const selectedData = {
+      value: event.value,
+      text: target.innerText.trim()
+    };
+    this.objanswerText = selectedData.text;
   }
 
   public confirmAdd(): void {
     this.data.NextFormText = this.objNextFormText;
-
+    this.data.QuestionsText = this.objQuestionsTex;
+    this.data.answerText = this.objanswerText;
+    if (this.data.QuestionsMandatory.toString() === 'true') {
+      this.data.QuestionsMandatoryText = 'Yes';
+    } else {
+      this.data.QuestionsMandatoryText = 'No';
+    }
+    if (this.data.Active.toString() === 'true') {
+      this.data.ActiveText = 'Yes';
+    } else {
+      this.data.ActiveText = 'No';
+    }
     this.dataService.addIssue(this.data);
   }
 }

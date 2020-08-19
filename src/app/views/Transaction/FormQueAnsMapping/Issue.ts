@@ -1,5 +1,5 @@
 export class Issue {
-    FormQuestionsAnswerMapping: string;
+    FormQuestionsAnswerMapping: number;
     Questions: string;
     QuestionsText: string;
     QuestionsMandatory: string;

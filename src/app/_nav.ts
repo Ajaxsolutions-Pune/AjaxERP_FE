@@ -40,28 +40,28 @@ export const navItems: NavData[] = [
     }
   },
   {
-    name: 'Masters',
+    name: 'Monitoring Masters',
     url: '/Masters',
     icon: 'icon-puzzle',
     children: [
-      {
-        name: 'Answer',
-        url: '/AnswerList',
-        icon: 'icon-puzzle'
-      },
       {
         name: 'Form',
         url: '/FormList',
         icon: 'icon-puzzle'
       },
       {
-        name: 'FormQueAnsMapping',
-        url: '/ProcessList',
+        name: 'Question',
+        url: '/QuestionList',
         icon: 'icon-puzzle'
       },
       {
-        name: 'Mapping',
-        url: '/FormQueAnsMapping',
+        name: 'Answer',
+        url: '/AnswerList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Process',
+        url: '/ProcessList',
         icon: 'icon-puzzle'
       },
       // {
@@ -70,28 +70,8 @@ export const navItems: NavData[] = [
       //   icon: 'icon-puzzle'
       // },
       {
-        name: 'Question',
-        url: '/QuestionList',
-        icon: 'icon-puzzle'
-      },
-      {
         name: 'Zone',
         url: '/ZoneList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Region',
-        url: '/RegionList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Colour',
-        url: '/ColourList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'AssetGroup',
-        url: '/AssetGroupList',
         icon: 'icon-puzzle'
       },
       {
@@ -105,8 +85,18 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
-        name: 'AssetCategory',
+        name: 'Region',
+        url: '/RegionList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Asset Category',
         url: '/AssetCategoryList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Asset Group',
+        url: '/AssetGroupList',
         icon: 'icon-puzzle'
       },
       {
@@ -117,6 +107,11 @@ export const navItems: NavData[] = [
       {
         name: 'Device',
         url: '/DeviceList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Colour',
+        url: '/ColourList',
         icon: 'icon-puzzle'
       },
       {
@@ -145,87 +140,87 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
-        name: 'CityGroup',
+        name: 'City Group',
         url: '/CityGroupList',
         icon: 'icon-puzzle'
       },
-     // {
-       // name: 'User',
-     //   url: '/UserList',
-       // icon: 'icon-puzzle'
-     // },
-     // {
-     //   name: 'Unit',
-     //   url: '/UnitList',
-     //   icon: 'icon-puzzle'
-     // },
-     // {
-     //   name: 'Brand',
-       // url: '/BrandList',
+      {
+        name: 'User',
+        url: '/UserList',
+        icon: 'icon-puzzle'
+      },
+      // {
+      //   name: 'Unit',
+      //   url: '/UnitList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'Brand',
+      // url: '/BrandList',
       //  icon: 'icon-puzzle'
-     // },
-     // {
-     //   name: 'Manufacturer',
+      // },
+      // {
+      //   name: 'Manufacturer',
       //  url: '/ManufacturerList',
       //  icon: 'icon-puzzle'
-     // },
-     // {
-     //   name: 'TaxCategory',
-     //   url: '/TaxCategoryList',
-     //   icon: 'icon-puzzle'
-    //  },
-    //  {
-     //   name: 'Cast Category',
-     //   url: '/CastCategoryList',
+      // },
+      // {
+      //   name: 'TaxCategory',
+      //   url: '/TaxCategoryList',
+      //   icon: 'icon-puzzle'
+      //  },
+      //  {
+      //   name: 'Cast Category',
+      //   url: '/CastCategoryList',
       //  icon: 'icon-puzzle'
       // },
 
-     // {
-       // name: 'Cast',
-       // url: '/CastList',
-       // icon: 'icon-puzzle'
-     // },
-     // {
-    //    name: 'Item Category',
-    //    url: '/ItemCategoryList',
-    //    icon: 'icon-puzzle'
-    //  }, /// Create by Dhanraj start
-    //  {
-   //     name: 'Item Group',
-   //     url: '/ItemGroupList',
-  //      icon: 'icon-puzzle'
-  //    },
-  //    {
-  //      name: 'Item Sub Group',
-   //     url: '/ItemSubGroupList',
-  //      icon: 'icon-puzzle'
-  //    },
+      // {
+      // name: 'Cast',
+      // url: '/CastList',
+      // icon: 'icon-puzzle'
+      // },
+      // {
+      //    name: 'Item Category',
+      //    url: '/ItemCategoryList',
+      //    icon: 'icon-puzzle'
+      //  }, /// Create by Dhanraj start
+      //  {
+      //     name: 'Item Group',
+      //     url: '/ItemGroupList',
+      //      icon: 'icon-puzzle'
+      //    },
+      //    {
+      //      name: 'Item Sub Group',
+      //     url: '/ItemSubGroupList',
+      //      icon: 'icon-puzzle'
+      //    },
 
 
     ]
   },
   {
-    name: 'Transaction',
-    url: '/Transaction',
-    icon: 'cui-shield',
+    name: 'Monitoring Mapping',
+    url: '/Mapping',
+    icon: 'icon-puzzle',
     children: [
       {
-        name: 'Production Details',
-        url: '/ProductionList',
+        name: 'Form Que Ans',
+        url: '/FormQueAnsMapping',
         icon: 'icon-puzzle'
-      }
+      },
+      {
+        name: 'Process Form',
+        url: '/FormQueAnsMapping',
+        icon: 'icon-puzzle'
+      },
     ]
   },
   {
-    name: 'Reports',
+    name: 'Monitoring Reports',
     url: '/Reports',
     icon: 'fa fa-newspaper-o',
     children: [
-      {
-        name: 'Production',
-        url: '/ReportList',
-        icon: 'icon-puzzle'
-      }
     ]
 
   }
