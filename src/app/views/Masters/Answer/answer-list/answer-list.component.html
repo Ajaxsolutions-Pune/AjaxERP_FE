@@ -21,8 +21,8 @@
       <select id="ShiftId" name="ShiftId" (change)="resultChanged()" [(ngModel)]="objAnswer.isActive"
         class="form-control">
         <option value="3" selected>All</option>
-        <option value="1">Yes</option>
-        <option value="0">No</option>
+        <option value="1">Active</option>
+        <option value="0">Inactive</option>
       </select>
     </div>
     <div class="col-md-1">
@@ -54,13 +54,13 @@
         {{Answer.answer}}
       </td>
       <td [ngSwitch]="Answer.isActive">
-        <span *ngSwitchCase="true">Yes</span>
-        <span *ngSwitchDefault>No</span>
+        <span *ngSwitchCase="true">Active</span>
+        <span *ngSwitchDefault>Inactive</span>
       </td>
       <td [ngSwitch]="1">
           <button mat-icon-button [routerLink]="['/Answer/',Answer.answerId]"
            color="accent">
-            <mat-icon aria-label="Edit">edit</mat-icon>
+            <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>
           </button>
       </td>
     </tr>

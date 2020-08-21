@@ -1,7 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators, Form } from '@angular/forms';
-import { Issue } from '../../Issue';
 import { DataService } from '../../data.service';
 import { Question } from '../../../../../Compound/Module/Masters/Question.model';
 import { QuestionTransfarmer } from '../../../../../Compound/Transformer/Masters/Question-Transfarmer';
@@ -12,6 +11,7 @@ import { AnswerTransfarmer } from '../../../../../Compound/Transformer/Masters/A
 import { FormService } from '../../../../../Compound/Services/Masters/FormService';
 import { FormTransfarmer } from '../../../../../Compound/Transformer/Masters/Form-Transfarmer';
 import { FormObj } from '../../../../../Compound/Module/Masters/Form.model';
+import { FormQueAnsMapping } from '../../../../../Compound/Module/ProcessSetup/FormQueAnsMapping.model';
 
 @Component({
   selector: 'app-add.dialog',
@@ -24,12 +24,12 @@ export class AddDialogComponent implements OnInit {
   questionsObj: Question[];
   answersObj: Answer[];
   formObj: FormObj[];
-  objNextFormText: string;
-  objQuestionsTex: string;
-  objanswerText: string;
+  objnextFormIdText: string;
+  objquestionIdText: string;
+  objanswerIdText: string;
 
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Issue,
+    @Inject(MAT_DIALOG_DATA) public data: FormQueAnsMapping,
     private questionsService: QuestionService,
     private questionsTransfarmer: QuestionTransfarmer,
     private answersService: AnswerService,
@@ -76,8 +76,7 @@ export class AddDialogComponent implements OnInit {
       value: event.value,
       text: target.innerText.trim()
     };
-    this.objNextFormText = selectedData.text;
-    console.log(this.objNextFormText);
+    this.objnextFormIdText = selectedData.text;
   }
   QuestionsChange(event) {
     const target = event.source.selected._element.nativeElement;
@@ -85,7 +84,7 @@ export class AddDialogComponent implements OnInit {
       value: event.value,
       text: target.innerText.trim()
     };
-    this.objQuestionsTex = selectedData.text;
+    this.objquestionIdText = selectedData.text;
   }
 
   AnswerTextChange(event) {
@@ -94,23 +93,23 @@ export class AddDialogComponent implements OnInit {
       value: event.value,
       text: target.innerText.trim()
     };
-    this.objanswerText = selectedData.text;
+    this.objanswerIdText = selectedData.text;
   }
 
   public confirmAdd(): void {
-    this.data.NextFormText = this.objNextFormText;
-    this.data.QuestionsText = this.objQuestionsTex;
-    this.data.answerText = this.objanswerText;
-    if (this.data.QuestionsMandatory.toString() === 'true') {
-      this.data.QuestionsMandatoryText = 'Yes';
+    this.data.nextFormIdText = this.objnextFormIdText;
+    this.data.questionIdText = this.objquestionIdText;
+    this.data.answerIdText = this.objanswerIdText;
+    if (this.data.isQuestionMandatory.toString() === 'true') {
+      this.data.isQuestionMandatoryText = 'Yes';
     } else {
-      this.data.QuestionsMandatoryText = 'No';
+      this.data.isQuestionMandatoryText = 'No';
     }
-    if (this.data.Active.toString() === 'true') {
-      this.data.ActiveText = 'Yes';
+    if (this.data.isActive.toString() === 'true') {
+      this.data.isActiveText = 'Active';
     } else {
-      this.data.ActiveText = 'No';
+      this.data.isActiveText = 'Inactive';
     }
-    this.dataService.addIssue(this.data);
+    this.dataService.addFormQueAnsMapping(this.data);
   }
 }

@@ -2,14 +2,9 @@ import { Component, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { navItems } from '../../_nav';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { LoginUser } from '../../Compound/Module/LoginUser';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Utils } from 'ngx-bootstrap/utils/ngx-bootstrap-utils';
-import { LogInService } from '../../Compound/Services/LogIn.service';
 import { Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
-import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../Compound/Module/environment';
-import { LogInComponent } from '../../Compound/login/login.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,8 +30,6 @@ export class DefaultLayoutComponent implements OnDestroy {
   env = environment;
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private loginservice: LogInService,
     @Inject(DOCUMENT) _document?: any) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       this.router.navigate(['/login']);

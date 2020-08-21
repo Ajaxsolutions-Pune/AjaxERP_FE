@@ -200,7 +200,7 @@ export const navItems: NavData[] = [
     ]
   },
   {
-    name: 'Monitoring Mapping',
+    name: 'Process Setup',
     url: '/Mapping',
     icon: 'icon-puzzle',
     children: [

@@ -196,14 +196,14 @@ import { AssetCategoryService } from './Compound/Services/Masters/AssetCategory'
 import { AssetCategoryListResolverService } from './Compound/Resolver/Masters/Asset-Category-List-Resolver.Service';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TreeGridModule, EditService, ToolbarService } from '@syncfusion/ej2-angular-treegrid';
-import { FormQueAnsMappingListComponent } from './views/Transaction/FormQueAnsMapping/form-que-ans-mapping-list.component';
-import { FormQueAnsMappingComponent } from './views/Transaction/FormQueAnsMapping/form-que-ans-mapping.component';
-import { TaskDataService } from './views/Transaction/task-data.service';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { AddDialogComponent } from './views/Transaction/FormQueAnsMapping/dialogs/add/add.dialog.component';
-import { EditDialogComponent } from './views/Transaction/FormQueAnsMapping/dialogs/edit/edit.dialog.component';
-import { DeleteDialogComponent } from './views/Transaction/FormQueAnsMapping/dialogs/delete/delete.dialog.component';
-import { DataService } from './views/Transaction/FormQueAnsMapping/data.service';
+import { AddDialogComponent } from './views/ProcessSetup/FormQueAnsMapping/dialogs/add/add.dialog.component';
+import { EditDialogComponent } from './views/ProcessSetup/FormQueAnsMapping/dialogs/edit/edit.dialog.component';
+import { DeleteDialogComponent } from './views/ProcessSetup/FormQueAnsMapping/dialogs/delete/delete.dialog.component';
+import { FormQueAnsMappingListComponent } from './views/ProcessSetup/FormQueAnsMapping/form-que-ans-mapping-list.component';
+import { FormQueAnsMappingComponent } from './views/ProcessSetup/FormQueAnsMapping/form-que-ans-mapping.component';
+import { DataService } from './views/ProcessSetup/FormQueAnsMapping/data.service';
+import { FormQueAnsMappingService } from './Compound/Services/ProcessSetup/FormQueAnsMappingService';
+import { FormQueAnsMappingTransfarmer } from './Compound/Transformer/ProcessSetup/FormQueAnsMapping-Transfarmer';
 @NgModule({
   imports: [
     BrowserModule,
@@ -269,18 +269,20 @@ import { DataService } from './views/Transaction/FormQueAnsMapping/data.service'
     ClusterListComponent, ClusterComponent,
     AssetCategoryListComponent, AssetCategoryComponent,
     AssetComponent, AssetListComponent, DeviceListComponent,
-    DeviceComponent, AngularDemoComponent, FormQueAnsMappingListComponent, FormQueAnsMappingComponent,
+    DeviceComponent, AngularDemoComponent, FormQueAnsMappingListComponent,
+    FormQueAnsMappingComponent,
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService,
-    CityGroupService, ItemSubGroupService, RegionService,
+    CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
     AssetTransfarmer, AssetGroupTransfarmer, TehsilTransfarmer, QuestionTransfarmer,
     AnswerTransfarmer, ProcessTransfarmer1, ZoneTransfarmer, CircleTransfarmer,
+    FormQueAnsMappingTransfarmer,
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer,

@@ -90,7 +90,7 @@ import { RegionListResolverService } from './Compound/Resolver/Masters/Region-Li
 import { ColourListResolverService } from './Compound/Resolver/Masters/Colour-List-Resolver.Service';
 import { DeviceListResolverService } from './Compound/Resolver/Masters/Device-List-Resolver-Service';
 import { AssetCategoryListResolverService } from './Compound/Resolver/Masters/Asset-Category-List-Resolver.Service';
-import { FormQueAnsMappingComponent } from './views/Transaction/FormQueAnsMapping/form-que-ans-mapping.component';
+import { FormQueAnsMappingComponent } from './views/ProcessSetup/FormQueAnsMapping/form-que-ans-mapping.component';
 
 export const routes: Routes = [
   {

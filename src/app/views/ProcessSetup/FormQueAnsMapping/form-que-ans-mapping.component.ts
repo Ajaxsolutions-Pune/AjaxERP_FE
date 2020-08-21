@@ -10,37 +10,44 @@ import { DeleteDialogComponent } from './dialogs/delete/delete.dialog.component'
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DataService } from './data.service';
-import { Issue } from './Issue';
 import { FormComponentBase } from '../../Masters/AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../../Masters/AngularDemo/infrastructure/cross-field-error-matcher';
 import { FormObj } from '../../../Compound/Module/Masters/Form.model';
 import { FormService } from '../../../Compound/Services/Masters/FormService';
 import { FormTransfarmer } from '../../../Compound/Transformer/Masters/Form-Transfarmer';
+import { FormQueAnsMapping } from '../../../Compound/Module/ProcessSetup/FormQueAnsMapping.model';
+import { FormQueAnsMappingTransfarmer } from '../../../Compound/Transformer/ProcessSetup/FormQueAnsMapping-Transfarmer';
+import { FormQueAnsMappingService } from '../../../Compound/Services/ProcessSetup/FormQueAnsMappingService';
 
 @Component({
   selector: 'app-form-que-ans-mapping',
   templateUrl: './form-que-ans-mapping.component.html',
   styleUrls: ['./form-que-ans-mapping.component.scss']
 })
-export class FormQueAnsMappingComponent extends FormComponentBase implements OnInit, AfterViewInit {
+export class FormQueAnsMappingComponent extends FormComponentBase
+  implements OnInit {
 
   formObj: FormObj[];
   displayedColumns = ['FormQuestionsAnswerMapping', 'QuestionsText'
     , 'QuestionsMandatoryText', 'FormQuestionssequence', 'answerText',
-    'QuestionsGroup', 'NextFormText', 'ActiveText', 'actions'];
+    'QuestionsGroup', 'nextQueGroup', 'NextFormText', 'ActiveText', 'actions'];
   exampleDatabase: DataService | null;
   dataSource: ExampleDataSource | null;
+  objFormQueAnsMapping: FormQueAnsMapping[];
   index: number;
   id: number;
+  FormId: string;
   mappingId: number;
-  addObjIssue: Issue;
+  addObjFormQueAnsMapping: FormQueAnsMapping;
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
 
   constructor(public httpClient: HttpClient,
     private formService: FormService,
     private formTransfarmer: FormTransfarmer,
+    private formQueAnsMappingTransfarmer: FormQueAnsMappingTransfarmer,
+    private formQueAnsMappingService: FormQueAnsMappingService,
     public dialog: MatDialog,
     public dataService: DataService,
     private formBuilder: FormBuilder) {
@@ -58,19 +65,15 @@ export class FormQueAnsMappingComponent extends FormComponentBase implements OnI
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-    }, 250);
-    this.startControlMonitoring(this.form);
-  }
+
+
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlFormCode: ['', [
-        Validators.required]]
-    });
 
     this.formService.getForms().subscribe(
-      (par) => this.formObj = this.formTransfarmer.fTransfarmers(par),
+      (par) => {
+        this.formObj = this.formTransfarmer.fTransfarmers(par);
+        this.FormId = '55';
+      },
       (err: any) => console.log(err));
     this.loadData();
   }
@@ -80,80 +83,76 @@ export class FormQueAnsMappingComponent extends FormComponentBase implements OnI
   }
 
   addNew() {
-    this.addObjIssue = null;
-    this.mappingId = null;
-    let maxId = 0;
-    if (this.dataSource.filteredData.length > 0) {
-      this.dataSource.filteredData.forEach(e => {
-        if (e.FormQuestionsAnswerMapping > maxId) {
-          maxId = e.FormQuestionsAnswerMapping;
-        }
-      });
-
-      this.mappingId =
-        maxId + 1;
-      const dialogRef = this.dialog.open(AddDialogComponent, {
-        data: {
-          FormQuestionsAnswerMapping: this.mappingId,
-          QuestionsMandatory: ''.toString(),
-          Active: ''.toString()
-        }
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result === 1) {
-          this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
-          this.refreshTable();
-        }
-      });
+    const dialogRef = this.dialog.open(AddDialogComponent, {
+      data: {
+        isQuestionMandatory: ''.toString(),
+        isActive: ''.toString()
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
+        this.refreshTable();
+      }
+    });
 
 
-    } else {
-      const dialogRef = this.dialog.open(AddDialogComponent, {
-        data: {
-          FormQuestionsAnswerMapping: 1,
-          QuestionsMandatory: ''.toString(),
-          Active: ''.toString()
-        }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        if (result === 1) {
-          this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
-          this.refreshTable();
-        }
-      });
-    }
   }
 
+  FormChange(event) {
+    const target = event.source.selected._element.nativeElement;
+    const selectedData = {
+      value: event.value,
+      text: target.innerText.trim()
+    };
+    this.objFormQueAnsMapping = [];
+
+    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.refreshTable();
+    this.formQueAnsMappingService.getFormQueAnsMapping(selectedData.value).subscribe(
+      (par) => {
+        this.objFormQueAnsMapping = this.formQueAnsMappingTransfarmer.
+          FormQueAnsMappingTransfarmers(par);
+        this.objFormQueAnsMapping.forEach(a => {
+          a.formId = selectedData.value;
+        });
+        this.objFormQueAnsMapping.forEach(element => {
+          this.exampleDatabase.dataChange.value.push(element);
+          this.refreshTable();
+        });
+
+      },
+      (err: any) => console.log(err));
+  }
   startEdit(i: number,
-    FormQuestionsAnswerMapping: number,
-    Questions: string,
-    QuestionsMandatory: string,
-    FormQuestionssequence: string,
-    answer: string,
-    QuestionsGroup: string,
-    NextForm: string,
-    Active: string) {
-    this.id = FormQuestionsAnswerMapping;
+    fqamId: number,
+    questionId: string,
+    isQuestionMandatory: string,
+    formQueSeqNo: string,
+    answerId: string,
+    queGroup: string,
+    nextQueGroup: string,
+    nextFormId: string,
+    isActive: string) {
+    this.id = fqamId;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
-    console.log(Active);
-    console.log(this.index);
     const dialogRef = this.dialog.open(EditDialogComponent, {
       data: {
-        FormQuestionsAnswerMapping: FormQuestionsAnswerMapping,
-        Questions: Questions, QuestionsMandatory: QuestionsMandatory,
-        FormQuestionssequence: FormQuestionssequence, answer: answer,
-        QuestionsGroup: QuestionsGroup,
-        NextForm: NextForm,
-        Active: Active
+        fqamId: fqamId,
+        questionId: questionId, isQuestionMandatory: isQuestionMandatory,
+        formQueSeqNo: formQueSeqNo, answerId: answerId,
+        queGroup: queGroup,
+        nextQueGroup: nextQueGroup,
+        nextFormId: nextFormId,
+        isActive: isActive
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.FormQuestionsAnswerMapping === this.id);
+        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.fqamId === this.id);
         // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
         // And lastly refresh table
@@ -161,6 +160,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase implements OnI
       }
     });
   }
+
   deleteItem(i: number, FormQuestionsAnswerMapping: number, Questions: string, QuestionsMandatory: string,
     FormQuestionssequence: string, answer: string, QuestionsGroup: string, NextForm: string) {
     this.index = i;
@@ -177,7 +177,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase implements OnI
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x =>
-          x.FormQuestionsAnswerMapping === this.id);
+          x.fqamId === this.id);
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
@@ -189,45 +189,17 @@ export class FormQueAnsMappingComponent extends FormComponentBase implements OnI
   private refreshTable() {
     // Refreshing table using paginator
     // Thanks yeager-j for tips
-    // https://github.com/marinantonio/angular-mat-table-crud/issues/12
+    // https://github.com/marinantonio/angular-mat-table-crud/FormQueAnsMappings/12
     this.paginator._changePageSize(this.paginator.pageSize);
   }
-
-
-  /*   // If you don't need a filter or a pagination this can be simplified, you just use code from else block
-    // OLD METHOD:
-    // if there's a paginator active we're using it for refresh
-    if (this.dataSource._paginator.hasNextPage()) {
-      this.dataSource._paginator.nextPage();
-      this.dataSource._paginator.previousPage();
-      // in case we're on last page this if will tick
-    } else if (this.dataSource._paginator.hasPreviousPage()) {
-      this.dataSource._paginator.previousPage();
-      this.dataSource._paginator.nextPage();
-      // in all other cases including active filter we do it like this
-    } else {
-      this.dataSource.filter = '';
-      this.dataSource.filter = this.filter.nativeElement.value;
-    }*/
-
-
-
   public loadData() {
     this.exampleDatabase = new DataService(this.httpClient);
     this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator, this.sort);
-    fromEvent(this.filter.nativeElement, 'keyup')
-      // .debounceTime(150)
-      // .distinctUntilChanged()
-      .subscribe(() => {
-        if (!this.dataSource) {
-          return;
-        }
-        this.dataSource.filter = this.filter.nativeElement.value;
-      });
+
   }
 }
 
-export class ExampleDataSource extends DataSource<Issue> {
+export class ExampleDataSource extends DataSource<FormQueAnsMapping> {
   _filterChange = new BehaviorSubject('');
 
   get filter(): string {
@@ -238,8 +210,8 @@ export class ExampleDataSource extends DataSource<Issue> {
     this._filterChange.next(filter);
   }
 
-  filteredData: Issue[] = [];
-  renderedData: Issue[] = [];
+  filteredData: FormQueAnsMapping[] = [];
+  renderedData: FormQueAnsMapping[] = [];
 
   constructor(public _exampleDatabase: DataService,
     public _paginator: MatPaginator,
@@ -250,7 +222,7 @@ export class ExampleDataSource extends DataSource<Issue> {
   }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Issue[]> {
+  connect(): Observable<FormQueAnsMapping[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
@@ -259,14 +231,14 @@ export class ExampleDataSource extends DataSource<Issue> {
       this._paginator.page
     ];
 
-    this._exampleDatabase.getAllIssues();
+    this._exampleDatabase.getAllFormQueAnsMappings();
 
 
     return merge(...displayDataChanges).pipe(map(() => {
       // Filter data
-      this.filteredData = this._exampleDatabase.data.slice().filter((issue: Issue) => {
-        const searchStr = (issue.FormQuestionsAnswerMapping + issue.Questions
-          + issue.QuestionsGroup + issue.Active).toLowerCase();
+      this.filteredData = this._exampleDatabase.data.slice().filter((formQueAnsMapping: FormQueAnsMapping) => {
+        const searchStr = (formQueAnsMapping.fqamId + formQueAnsMapping.isQuestionMandatoryText
+          + formQueAnsMapping.queGroup + formQueAnsMapping.isActiveText).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
 
@@ -285,7 +257,7 @@ export class ExampleDataSource extends DataSource<Issue> {
 
 
   /** Returns a sorted copy of the database data. */
-  sortData(data: Issue[]): Issue[] {
+  sortData(data: FormQueAnsMapping[]): FormQueAnsMapping[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
@@ -295,13 +267,13 @@ export class ExampleDataSource extends DataSource<Issue> {
       let propertyB: number | string = '';
 
       switch (this._sort.active) {
-        case 'FormQuestionsAnswerMapping': [propertyA, propertyB] = [a.FormQuestionsAnswerMapping, b.FormQuestionsAnswerMapping]; break;
-        case 'FormQuestionssequence': [propertyA, propertyB] = [a.FormQuestionssequence, b.FormQuestionssequence]; break;
-        case 'NextForm': [propertyA, propertyB] = [a.NextForm, b.NextForm]; break;
-        case 'Questions': [propertyA, propertyB] = [a.Questions, b.Questions]; break;
-        case 'QuestionsGroup': [propertyA, propertyB] = [a.QuestionsGroup, b.QuestionsGroup]; break;
-        case 'QuestionsMandatory': [propertyA, propertyB] = [a.QuestionsMandatory,
-        b.QuestionsMandatory]; break;
+        case 'FormQuestionsAnswerMapping': [propertyA, propertyB] = [a.fqamId, b.fqamId]; break;
+        case 'FormQuestionssequence': [propertyA, propertyB] = [a.formQueSeqNo, b.formQueSeqNo]; break;
+        case 'NextForm': [propertyA, propertyB] = [a.nextFormIdText, b.nextFormIdText]; break;
+        case 'Questions': [propertyA, propertyB] = [a.questionIdText, b.questionIdText]; break;
+        case 'QuestionsGroup': [propertyA, propertyB] = [a.queGroup, b.queGroup]; break;
+        case 'QuestionsMandatory': [propertyA, propertyB] = [a.isQuestionMandatoryText,
+        b.isQuestionMandatoryText]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

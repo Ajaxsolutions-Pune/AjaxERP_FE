@@ -2,7 +2,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DataService } from '../../data.service';
-import { Issue } from '../../Issue';
 import { Question } from '../../../../../Compound/Module/Masters/Question.model';
 import { Answer } from '../../../../../Compound/Module/Masters/Answer.model';
 import { FormObj } from '../../../../../Compound/Module/Masters/Form.model';
@@ -13,6 +12,7 @@ import { AnswerTransfarmer } from '../../../../../Compound/Transformer/Masters/A
 import { FormService } from '../../../../../Compound/Services/Masters/FormService';
 import { FormTransfarmer } from '../../../../../Compound/Transformer/Masters/Form-Transfarmer';
 import { elementAt } from 'rxjs/operators';
+import { FormQueAnsMapping } from '../../../../../Compound/Module/ProcessSetup/FormQueAnsMapping.model';
 
 @Component({
   selector: 'app-baza.dialog',
@@ -23,9 +23,9 @@ export class EditDialogComponent implements OnInit {
   questionsObj: Question[];
   answersObj: Answer[];
   formObj: FormObj[];
-  objNextFormText: string;
-  objQuestionsTex: string;
-  objanswerText: string;
+  objnextFormIdText: string;
+  objquestionIdText: string;
+  objanswerIdText: string;
 
   constructor(public dialogRef: MatDialogRef<EditDialogComponent>,
     private questionsService: QuestionService,
@@ -34,7 +34,8 @@ export class EditDialogComponent implements OnInit {
     private answersTransfarmer: AnswerTransfarmer,
     private formService: FormService,
     private formTransfarmer: FormTransfarmer,
-    @Inject(MAT_DIALOG_DATA) public data: Issue, public dataService: DataService) {
+    @Inject(MAT_DIALOG_DATA) public data: FormQueAnsMapping, public dataService: DataService) {
+      console.log(data);
   }
   formControl = new FormControl('', [
     Validators.required
@@ -51,6 +52,7 @@ export class EditDialogComponent implements OnInit {
     this.answersService.getAnswers().subscribe(
       (par) => {
         this.answersObj = this.answersTransfarmer.AnswerTransfarmers(par);
+        this.data.answerId = '2';
       },
       (err: any) => console.log(err));
     this.formService.getForms().subscribe(
@@ -75,8 +77,7 @@ export class EditDialogComponent implements OnInit {
       value: event.value,
       text: target.innerText.trim()
     };
-    this.objNextFormText = selectedData.text;
-    console.log(this.objNextFormText);
+    this.objnextFormIdText = selectedData.text;
   }
   QuestionsChange(event) {
     const target = event.source.selected._element.nativeElement;
@@ -84,7 +85,7 @@ export class EditDialogComponent implements OnInit {
       value: event.value,
       text: target.innerText.trim()
     };
-    this.objQuestionsTex = selectedData.text;
+    this.objquestionIdText = selectedData.text;
   }
 
   AnswerTextChange(event) {
@@ -93,7 +94,7 @@ export class EditDialogComponent implements OnInit {
       value: event.value,
       text: target.innerText.trim()
     };
-    this.objanswerText = selectedData.text;
+    this.objanswerIdText = selectedData.text;
   }
 
   onNoClick(): void {
@@ -101,25 +102,26 @@ export class EditDialogComponent implements OnInit {
   }
 
   stopEdit(): void {
-    this.data.NextFormText = this.objNextFormText;
-    this.data.QuestionsText = this.objQuestionsTex;
-    this.data.answerText = this.objanswerText;
-    this.objanswerText = this.answersObj.
-      find(element => element.answerId === this.data.answer).answer;
-      this.objQuestionsTex = this.questionsObj.
-        find(element => element.questionId === this.data.Questions).question;
-      this.objNextFormText = this.formObj.
-        find(element => element.formId === this.data.NextForm).formName;
-    if (this.data.QuestionsMandatory.toString() === 'true') {
-      this.data.QuestionsMandatoryText = 'Yes';
-    } else {
-      this.data.QuestionsMandatoryText = 'No';
-    }
-    if (this.data.Active.toString() === 'true') {
-      this.data.ActiveText = 'Yes';
-    } else {
-      this.data.ActiveText = 'No';
-    }
-    this.dataService.updateIssue(this.data);
+    this.objanswerIdText = this.answersObj.
+      find(element => element.answerId === this.data.answerId).answer;
+    this.objquestionIdText = this.questionsObj.
+      find(element => element.questionId === this.data.questionId).question;
+    this.objnextFormIdText = this.formObj.
+      find(element => element.formId === this.data.nextFormId).formName;
+
+      this.data.nextFormIdText = this.objnextFormIdText;
+      this.data.questionIdText = this.objquestionIdText;
+      this.data.answerIdText = this.objanswerIdText;
+      if (this.data.isQuestionMandatory.toString() === 'true') {
+        this.data.isQuestionMandatoryText = 'Yes';
+      } else {
+        this.data.isQuestionMandatoryText = 'No';
+      }
+      if (this.data.isActive.toString() === 'true') {
+        this.data.isActiveText = 'Active';
+      } else {
+        this.data.isActiveText = 'Inactive';
+      }
+    this.dataService.updateFormQueAnsMapping(this.data);
   }
 }
