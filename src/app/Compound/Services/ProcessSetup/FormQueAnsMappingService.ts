@@ -29,9 +29,9 @@ export class FormQueAnsMappingService {
             '?formId=' + formId
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-    Save(saveEntityObj: FormQueAnsMappingEntity): Observable<Insertstatus> {
+    Save(saveEntityObj: FormQueAnsMappingEntity[]): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<Insertstatus>(this.str + '/FormQueAnsMapping', saveEntityObj
+        return this.httpClient.post<Insertstatus>(this.str + '/FormQueAnsMapping/createList', saveEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 

@@ -7,6 +7,7 @@ export class FormQueAnsMappingTransfarmer {
     OjectEntity: FormQueAnsMappingEntity;
     Oject: FormQueAnsMapping;
     arrOject: FormQueAnsMapping[] = [];
+    arrOjectEntity: FormQueAnsMappingEntity[] = [];
     env = environment;
     constructor() {
         this.str = this.env.apiServiceIPPort;
@@ -39,6 +40,36 @@ export class FormQueAnsMappingTransfarmer {
             this.arrOject.push(this.Oject);
         });
         return this.arrOject;
+    }
+
+    ObjectToEntityFormQueAnsMappingTransfarmers(Entity: FormQueAnsMapping[]): FormQueAnsMappingEntity[] {
+        this.arrOjectEntity = [];
+        Entity.forEach(element => {
+            this.Oject = new FormQueAnsMappingEntity();
+            this.Oject.fqamId = element.fqamId;
+            this.Oject.formId = element.formId;
+            this.Oject.formQueSeqNo = element.formQueSeqNo;
+            this.Oject.questionId = element.questionId;
+            this.Oject.questionIdText = element.questionIdText;
+            this.Oject.questionIdText = element.questionIdText;
+            this.Oject.isQuestionMandatory = element.isQuestionMandatory;
+            this.Oject.isQuestionMandatoryText = element.isQuestionMandatoryText;
+            this.Oject.answerId = element.answerId.toString();
+            this.Oject.answerIdText = element.answerIdText;
+            this.Oject.queGroup = element.queGroup;
+            this.Oject.nextQueGroup = element.nextQueGroup;
+            this.Oject.nextFormId = element.nextFormId;
+            this.Oject.nextFormIdText = element.nextFormIdText;
+            this.Oject.isActiveText = element.isActiveText;
+            if (element.isQuestionMandatory === '1') {
+                this.Oject.isQuestionMandatory = 'true'.toString().trim();
+            } else { this.Oject.isQuestionMandatory = ''.toString().trim(); }
+            if (element.isActive === '1') {
+                this.Oject.isActive = 'true'.toString().trim();
+            } else { this.Oject.isActive = ''.toString().trim(); }
+            this.arrOjectEntity.push(this.Oject);
+        });
+        return this.arrOjectEntity;
     }
     FormQueAnsMappingTransfarmerEntity(Entity: FormQueAnsMappingEntity): FormQueAnsMapping {
         console.log(Entity);
@@ -83,8 +114,9 @@ export class FormQueAnsMappingTransfarmer {
         this.OjectEntity.nextFormId = element.nextFormId;
         this.OjectEntity.nextFormIdText = element.nextFormIdText;
         this.OjectEntity.isActiveText = element.isActiveText;
-         if (element.isActive === 'true') {  this.OjectEntity.isActive = '1';
-             } else { this.OjectEntity.isActive = '0'; }
+        if (element.isActive === 'true') {
+            this.OjectEntity.isActive = '1';
+        } else { this.OjectEntity.isActive = '0'; }
         if (element.isActive.toString().trim() === 'true') {
             this.OjectEntity.isActive = '1';
         } else {

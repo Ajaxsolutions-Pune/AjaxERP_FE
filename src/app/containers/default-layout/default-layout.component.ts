@@ -5,7 +5,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { environment } from '../../Compound/Module/environment';
-
+import '../../../js/hello.js';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html',

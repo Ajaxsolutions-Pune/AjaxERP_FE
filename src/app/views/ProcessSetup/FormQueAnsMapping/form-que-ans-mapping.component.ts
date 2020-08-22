@@ -19,6 +19,8 @@ import { FormTransfarmer } from '../../../Compound/Transformer/Masters/Form-Tran
 import { FormQueAnsMapping } from '../../../Compound/Module/ProcessSetup/FormQueAnsMapping.model';
 import { FormQueAnsMappingTransfarmer } from '../../../Compound/Transformer/ProcessSetup/FormQueAnsMapping-Transfarmer';
 import { FormQueAnsMappingService } from '../../../Compound/Services/ProcessSetup/FormQueAnsMappingService';
+import { DefaultLayoutComponent } from '../../../containers';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-que-ans-mapping',
@@ -44,6 +46,8 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   errorMatcher = new CrossFieldErrorMatcher();
 
   constructor(public httpClient: HttpClient,
+    private router: Router,
+    private defaultLayoutComponent: DefaultLayoutComponent,
     private formService: FormService,
     private formTransfarmer: FormTransfarmer,
     private formQueAnsMappingTransfarmer: FormQueAnsMappingTransfarmer,
@@ -71,7 +75,6 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     this.formService.fillDrpForms().subscribe(
       (par) => {
         this.formObj = this.formTransfarmer.fTransfarmers(par);
-        this.FormId = '1';
       },
       (err: any) => console.log(err));
     this.loadData();
@@ -85,6 +88,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     const dialogRef = this.dialog.open(AddDialogComponent, {
       data: {
         isQuestionMandatory: ''.toString(),
+        formId: this.FormId,
         isActive: ''.toString()
       }
     });
@@ -98,6 +102,21 @@ export class FormQueAnsMappingComponent extends FormComponentBase
 
   }
 
+  save(): void {
+    this.formQueAnsMappingService.Save(this.formQueAnsMappingTransfarmer
+      .ObjectToEntityFormQueAnsMappingTransfarmers(this.dataSource.filteredData)).subscribe(
+        (par) => {
+          console.log(par);
+          if (par.status === 'Success') {
+            console.log(par.status);
+            this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+              'Data saved successfully !', 'modal-info');
+            this.router.navigate(['FormList']);
+          }
+        }
+      );
+
+  }
   FormChange(event) {
     const target = event.source.selected._element.nativeElement;
     const selectedData = {

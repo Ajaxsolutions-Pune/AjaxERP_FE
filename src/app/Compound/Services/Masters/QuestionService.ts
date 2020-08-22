@@ -19,7 +19,7 @@ export class QuestionService {
 
     fillDrpQuestions(): Observable<QuestionEntity[]> {
         return this.httpClient.get<QuestionEntity[]>(this.str +
-            '/Question/getList/getList?status=1'
+            '/Question/getList?status=1'
         , this.env.httpOptions);
     }
     getQuestion(questionCode: string): Observable<QuestionEntity> {
