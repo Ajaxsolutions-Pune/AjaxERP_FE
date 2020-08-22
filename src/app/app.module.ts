@@ -204,6 +204,8 @@ import { FormQueAnsMappingComponent } from './views/ProcessSetup/FormQueAnsMappi
 import { DataService } from './views/ProcessSetup/FormQueAnsMapping/data.service';
 import { FormQueAnsMappingService } from './Compound/Services/ProcessSetup/FormQueAnsMappingService';
 import { FormQueAnsMappingTransfarmer } from './Compound/Transformer/ProcessSetup/FormQueAnsMapping-Transfarmer';
+import { TaxRateListComponent } from './views/Masters/TaxRate/tax-rate-list.component';
+import { MyErrorStateMatcher } from './views/Masters/AngularDemo/MyErrorStateMatcher.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -254,6 +256,7 @@ import { FormQueAnsMappingTransfarmer } from './Compound/Transformer/ProcessSetu
     DialogTemplateComponent,
     ListUserComponent, UserMasterComponent, DashboardComponent, ListUOMComponent,
     CountryComponent, UnitComponent, CountryListComponent, BrandListComponent,
+    TaxRateListComponent, MyErrorStateMatcher,
     BrandComponent, StateComponent, StateListComponent, CityListComponent, CityComponent,
     ManufactureListComponent, manufactureComponent, DistrictListComponent, DistrictComponent,
     CityGroupListComponent, CityGroupComponent, TaxCategoryListComponent, TaxCategoryComponent,
