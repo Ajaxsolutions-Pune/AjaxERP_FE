@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtitemCategoryCode">ItemCategory_Code</label>
+                            <label class="col-md-2 col-form-label" for="itemCategoryCode">ItemCategory_Code</label>
                             <div class="col-sm-4">
                                 <input id="itemCategoryCode" [(ngModel)]="itemcategory.itemCategoryCode" name="itemCategoryCode" type="text"
                                     class="form-control form-control-sm">
@@ -21,7 +21,7 @@
                                 <div class="col-md-3"></div>
                                 <label class="col-md-2 col-form-label" for="oUCode">oU_Code</label>
                                 <div class="col-sm-4">
-                                    <input id="oUCode" [(ngModel)]="oU.oUCode" name="oUCode" type="text"
+                                    <input id="oUCode" [(ngModel)]="itemcategory.oUCode" name="oUCode" type="text"
                                         class="form-control form-control-sm">
                                 </div>
                                 <div class="col-md-3"></div>
@@ -31,7 +31,7 @@
                             <label class="col-md-2 col-form-label" for="txtitemCategoryNameEng">ItemCategoryName_ENG
                                 (Eng)</label>
                             <div class="col-sm-4">
-                                <input id="txtitemCategoryNameEng" [(ngModel)]="txtitemCategory.txtitemCategoryNameEng" required name="txtitemCategoryNameEng"
+                                <input id="txtitemCategoryNameEng" [(ngModel)]="itemcategory.itemCategoryNameEng" required name="txtitemCategoryNameEng"
                                     type="text" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
@@ -41,7 +41,8 @@
                             <label class="col-md-2 col-form-label" for="txtitemCategoryNameUni">ItemCategoryName_UNI
                                 (Uni)</label>
                             <div class="col-sm-4">
-                                <input id="txtitemCategoryNameUni" [(ngModel)]="itemCategory.itemCategoryNameUni" required name="itemCategoryNameUni"
+                                <input id="txtitemCategoryNameUni" [(ngModel)]="itemcategory.itemCategoryNameUni" 
+                                required name="itemCategoryNameUni"
                                     type="text" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
@@ -50,7 +51,7 @@
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label" for="chkItemCategoryActive">Active</label>
                             <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="itemCategory.IsActive" name="chkItemCategoryActive"></div>
+                                <input type="checkbox" [(ngModel)]="itemcategory.isActive" name="chkItemCategoryActive"></div>
                             <div class="col-md-3"></div>
                         </div>
                     </div>

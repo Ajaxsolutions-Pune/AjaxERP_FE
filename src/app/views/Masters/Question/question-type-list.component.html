@@ -1,11 +1,11 @@
 <div class="form-group row">
     <div class="col-md-3">
         <input id="txttypecode0000" required name="txttypecode" type="text" class="form-control" placeholder="Question Type Code" 
-        (input)="resultChanged()" [(ngModel)]="bindObj.ProcessID">
+        (input)="resultChanged()" [(ngModel)]="bindObj.qaTypeCode">
     </div>
     <div class="col-md-3">
         <input id="txtQA_Type_Desc" required name="txtQA_Type_Desc" type="text" class="form-control" placeholder="Question Type Description"
-        (input)="resultChanged()" [(ngModel)]="bindObj.QA_Type_Desc">
+        (input)="resultChanged()" [(ngModel)]="bindObj.qaTypeDesc">
     </div>
     <div class="col-md-1">
         <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Form" routerLink="/QuestionType"></button>

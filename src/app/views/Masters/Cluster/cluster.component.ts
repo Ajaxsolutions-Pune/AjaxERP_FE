@@ -4,7 +4,6 @@ import { Cluster } from '../../../Compound/Module/Masters/Cluster.model';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-
 @Component({
   selector: 'app-cluster',
   templateUrl: './cluster.component.html',

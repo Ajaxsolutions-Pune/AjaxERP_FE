@@ -1,11 +1,11 @@
 <div class="form-group row">
     <div class="col-md-3">
         <input id="txtUnitDescription" required name="UnitDescription" type="text" class="form-control" placeholder="Unit Short Description" 
-        (input)="resultChanged()" [(ngModel)]="country.UOM_ShortDescription">
+        (input)="resultChanged()" [(ngModel)]="country.Country_Name_ENg">
     </div>
     <div class="col-md-3">
         <input id="txtUnitId" required name="txtUnitId" type="text" class="form-control" placeholder="Unit Id"
-        (input)="resultChanged()" [(ngModel)]="country.UOM_Id">
+        (input)="resultChanged()" [(ngModel)]="country.id">
     </div>
     <div class="col-md-1">
         <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create User" routerLink="/Country"></button>
