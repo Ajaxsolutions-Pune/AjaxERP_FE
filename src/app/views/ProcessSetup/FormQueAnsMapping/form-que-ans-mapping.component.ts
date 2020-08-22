@@ -68,11 +68,10 @@ export class FormQueAnsMappingComponent extends FormComponentBase
 
 
   ngOnInit() {
-
-    this.formService.getForms().subscribe(
+    this.formService.fillDrpForms().subscribe(
       (par) => {
         this.formObj = this.formTransfarmer.fTransfarmers(par);
-        this.FormId = '55';
+        this.FormId = '1';
       },
       (err: any) => console.log(err));
     this.loadData();

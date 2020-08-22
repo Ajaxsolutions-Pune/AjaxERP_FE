@@ -7,6 +7,16 @@
         <input id="txtFormName" required name="txtFormName" type="text" class="form-control" placeholder="Form Name"
         (input)="resultChanged()" [(ngModel)]="Form.formName">
     </div>
+    
+    <div class="col-md-2">
+      <select id="ShiftId" name="ShiftId" (change)="resultChanged()"
+       [(ngModel)]="Form.isActive"
+        class="form-control">
+        <option value="3" selected>All</option>
+        <option value="1">Active</option>
+        <option value="0">Inactive</option>
+      </select>
+    </div>
     <div class="col-md-1">
         <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Form" routerLink="/Form"></button>
     </div>
@@ -20,7 +30,7 @@
       <tr>
         <th>Form Id</th>
         <th>Form name</th>
-        <th>Active</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
     </thead>

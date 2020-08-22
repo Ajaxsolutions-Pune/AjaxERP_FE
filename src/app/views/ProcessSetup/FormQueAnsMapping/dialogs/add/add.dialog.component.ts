@@ -45,13 +45,13 @@ export class AddDialogComponent implements OnInit {
   ]);
 
   ngOnInit() {
-    this.questionsService.getQuestions().subscribe(
+    this.questionsService.fillDrpQuestions().subscribe(
       (par) => this.questionsObj = this.questionsTransfarmer.QuestionTransfarmers(par),
       (err: any) => console.log(err));
-    this.answersService.getAnswers().subscribe(
+    this.answersService.fillDrpAnswers().subscribe(
       (par) => this.answersObj = this.answersTransfarmer.AnswerTransfarmers(par),
       (err: any) => console.log(err));
-    this.formService.getForms().subscribe(
+    this.formService.fillDrpForms().subscribe(
       (par) => this.formObj = this.formTransfarmer.fTransfarmers(par),
       (err: any) => console.log(err));
   }

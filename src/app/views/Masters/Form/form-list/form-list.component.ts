@@ -20,13 +20,13 @@ export class FormListComponent implements OnInit {
   constructor(private _router: Router,
     objTrans: FormTransfarmer,
     private route: ActivatedRoute) {
-      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
-      }
-      this.formEntity = this.route.snapshot.data['FormList'];
-      this.forms = objTrans.fTransfarmers(this.formEntity);
-      console.log(this.forms[1].isActive);
-      this.WithoutFilterForm = this.forms;
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      this._router.navigate(['login']);
+    }
+    this.formEntity = this.route.snapshot.data['FormList'];
+    this.forms = objTrans.fTransfarmers(this.formEntity);
+    console.log(this.forms[1].isActive);
+    this.WithoutFilterForm = this.forms;
   }
 
   ngOnInit() {
@@ -56,6 +56,17 @@ export class FormListComponent implements OnInit {
     }
     if (this.SerachCri === 0) {
       this.ResultForm = this.WithoutFilterForm;
+    }
+
+    if (this.Form.isActive !== null && this.Form.isActive.toString() !== '-1') {
+      if (this.Form.isActive.toString() === '3') {
+        this.ResultForm = this.ResultForm.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === '1' || SubResultProd.isActive.toString() === '0');
+      } else {
+        this.ResultForm = this.ResultForm.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === this.Form.isActive.toString());
+      }
+      this.SerachCri = 1;
     }
     this.forms = this.ResultForm;
   }

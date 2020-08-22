@@ -38,7 +38,7 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
       ControlformName: '',
     };
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this. router.navigate(['login']);
+      this.router.navigate(['login']);
     }
   }
   ngOnInit() {
@@ -77,11 +77,14 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
       this.formobj.formId = null;
       this.formService.Save(this.formTransfarmer.formTransfarmer(this.formobj)).subscribe(
         (par) => {
-          console.log(par.status);
-          formForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['FormList']);
+
+          if (par.status === 'Success') {
+            console.log(par.status);
+            formForm.reset();
+            this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+              'Data saved successfully !', 'modal-info');
+            this.router.navigate(['FormList']);
+          }
         }
       );
 

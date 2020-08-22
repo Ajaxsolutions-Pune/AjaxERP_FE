@@ -54,7 +54,7 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
     this.answer = {
       answer: null,
       answerId: null,
-      isActive: null,
+      isActive: 'true',
     };
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getanswer(str); });
   }

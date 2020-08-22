@@ -21,7 +21,12 @@ export class FormTransfarmer {
             this.form.formId = element.formId;
             this.form.formName = element.formName;
             // tslint:disable-next-line:max-line-length
-            if (element.isActive.toString().trim() === '1') { this.form.isActive = 'Yes'.toString().trim(); } else { this.form.isActive = 'No'.toString().trim(); }
+            if (element.isActive.toString().trim() === '1') {
+                this.form.isActive =
+                'Active'.toString().trim();
+            } else {
+                this.form.isActive = 'InActive'.toString().trim();
+            }
 
             this.forms.push(this.form);
         });

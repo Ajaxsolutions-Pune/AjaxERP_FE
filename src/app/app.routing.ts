@@ -844,7 +844,7 @@ export const routes: Routes = [
         path: 'FormQueAnsMapping',
         component: FormQueAnsMappingComponent,
         data: {
-          title: 'Mapping'
+          title: 'Form Question Answer Mapping'
         },
       },
 

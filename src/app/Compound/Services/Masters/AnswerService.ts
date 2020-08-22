@@ -22,9 +22,14 @@ export class AnswerService {
         return this.httpClient.get<AnswerEntity[]>(this.str + '/Answer/getList', this.env.httpOptions);
     }
 
+    fillDrpAnswers(): Observable<AnswerEntity[]> {
+        console.log(this.httpClient.get<AnswerEntity[]>(this.str + '/Answer/getList'));
+        return this.httpClient.get<AnswerEntity[]>(this.str + '/Answer/getList?status=1', this.env.httpOptions);
+    }
+
     getAnswer(AnswerCode: string): Observable<AnswerEntity> {
         return this.httpClient.get<AnswerEntity>(this.str + '/Answer/' + AnswerCode,
-         this.env.httpOptions).pipe(catchError(this.handleError));
+            this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: AnswerEntity): Observable<Insertstatus> {
         saveEntityObj.answerId = null;

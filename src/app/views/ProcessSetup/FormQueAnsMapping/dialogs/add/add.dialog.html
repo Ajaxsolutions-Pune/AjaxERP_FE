@@ -1,11 +1,11 @@
 <div class="container">
-  <h3 mat-dialog-title>Add New Form Questions Answer Mapping</h3>
+  <h3 mat-dialog-title>Add New Form Question Answer Mapping</h3>
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="Id"
+        <input matInput #fqamId class="form-control" placeholder="Id" 
         disabled
          [(ngModel)]="data.fqamId" name="fqamId" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
@@ -13,14 +13,14 @@
     </div>   
     <div class="form">
       <mat-form-field color="accent">        
-        <mat-label>Questions</mat-label>
+        <mat-label>Question</mat-label>
         <mat-select  (selectionChange)="QuestionsChange($event)"
         required name="Questions" #input
         [(ngModel)]="data.questionId">
         <mat-option>Questions</mat-option>
         <mat-option *ngFor="let question of questionsObj"
          [value]="question.questionId">
-          {{question.question}}
+         {{question.questionId}} - {{question.question}}
         </mat-option>
         </mat-select>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
@@ -28,11 +28,15 @@
     </div>
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #input class="form-control" 
+        <input matInput #formQueSeqNo class="form-control" maxlength="5"
+        type="number"
+        oninput="javascript: if (this.value.length > this.maxLength) 
+        this.value = this.value.slice(0, this.maxLength);"
         #input
-        placeholder="Form Questions Sequence"
+        placeholder="Form Question Sequence"
          [(ngModel)]="data.formQueSeqNo" name="formQueSeqNo" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-hint align="end">{{formQueSeqNo.value?.length || 0}}/5</mat-hint>
       </mat-form-field>
     </div>    
     <div class="form">
@@ -44,7 +48,7 @@
         <mat-option>Answer</mat-option>
         <mat-option *ngFor="let answers of answersObj"
          [value]="answers.answerId">
-          {{answers.answer}}
+         {{answers.answerId}} - {{answers.answer}}
         </mat-option>
         </mat-select>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
@@ -52,8 +56,10 @@
     </div>
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="Questions Group"
-        #input
+        <input matInput #input class="form-control" placeholder="Question Group"
+        #input  maxlength="5" type="number"
+        oninput="javascript: if (this.value.length > this.maxLength) 
+        this.value = this.value.slice(0, this.maxLength);"
          [(ngModel)]="data.queGroup" name="queGroup" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
@@ -62,14 +68,16 @@
     <div class="form">
       <mat-form-field color="accent">
         <input matInput #input class="form-control" placeholder="Next Que Group"
-        #input
+        #input  maxlength="5" type="number"
+        oninput="javascript: if (this.value.length > this.maxLength) 
+        this.value = this.value.slice(0, this.maxLength);"
          [(ngModel)]="data.nextQueGroup" name="queGroup" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>  
     <div class="form">
       <mat-checkbox name="chkQuestionsMandatory"
-      [(ngModel)]="data.isQuestionMandatory">Questions Mandatory</mat-checkbox>
+      [(ngModel)]="data.isQuestionMandatory">Question Mandatory</mat-checkbox>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <mat-checkbox name="chkActive" [(ngModel)]="data.isActive">Active</mat-checkbox>
@@ -81,7 +89,7 @@
         #input
         [(ngModel)]="data.nextFormId">
           <mat-option *ngFor="let form of formObj" [value]="form.formId">
-            {{form.formName}}
+            {{form.formId}} -  {{form.formName}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>

@@ -7,7 +7,7 @@
        (selectionChange)="FormChange($event)">
           <mat-option>Form</mat-option>
           <mat-option *ngFor="let form of formObj" [value]="form.formId">
-            {{form.formName}}
+            {{form.formId}} - {{form.formName}}
           </mat-option>
       </mat-select>
       <mat-error>
@@ -25,25 +25,25 @@
             The actual rendered columns are set as a property on the row definition" -->
 
       <ng-container matColumnDef="FormQuestionsAnswerMapping">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>MapId</mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.fqamId}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="QuestionsText">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Questions</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.questionIdText}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Question</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.questionId}}-{{row.questionIdText}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="QuestionsMandatoryText">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Mandatory</mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.isQuestionMandatoryText}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="FormQuestionssequence">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Form Que Seq</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Que Seq.</mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.formQueSeqNo}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="answerText">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Answer</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.answerIdText}}</mat-cell>
+        <mat-cell *matCellDef="let row"> {{row.answerId}}-{{row.answerIdText}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="QuestionsGroup">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Que Group</mat-header-cell>
@@ -55,10 +55,10 @@
       </ng-container>
       <ng-container matColumnDef="NextFormText">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Next Form</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.nextFormIdText}}</mat-cell>
+        <mat-cell *matCellDef="let row"> {{row.nextFormId}}-{{row.nextFormIdText}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="ActiveText">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Active</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.isActiveText}}</mat-cell>
       </ng-container>
       <!-- actions -->

@@ -13,7 +13,13 @@ export class FormQueAnsMappingService {
         this.str = this.env.apiServiceIPPort;
     }
     getFormQueAnsMappings(): Observable<FormQueAnsMappingEntity[]> {
-        return this.httpClient.get<FormQueAnsMappingEntity[]>(this.str + '/FormQueAnsMapping/getList',
+        return this.httpClient.get<FormQueAnsMappingEntity[]>(this.str +
+            '/FormQueAnsMapping/getList',
+            this.env.httpOptions);
+    }
+    filldrpFormQueAnsMappings(): Observable<FormQueAnsMappingEntity[]> {
+        return this.httpClient.get<FormQueAnsMappingEntity[]>(this.str +
+            '/FormQueAnsMapping/getList?status=1',
             this.env.httpOptions);
     }
 
