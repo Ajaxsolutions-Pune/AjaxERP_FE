@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { AssetGroup, AssetGroupEntity } from '../../../Compound/Module/Masters/AssetGroup.model';
 import { Router } from '@angular/router';
-import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
 
 @Component({
@@ -15,6 +15,9 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
   bindObj: AssetGroup;
+  validationMessages: { ControlassetGroupCode:
+    { required: string; }; ControlassetGroupNameENG: { required: string; }; ControlzregionNameUNI: { required: string; }; };
+  formErrors: { ControlisActive: string; };
   constructor(private _router: Router,
     private formBuilder: FormBuilder) {
     super();
@@ -38,6 +41,9 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
     setTimeout(() => {
     }, 250);
     this.startControlMonitoring(this.form);
+  }
+  startControlMonitoring(form: FormGroup) {
+    throw new Error('Method not implemented.');
   }
 
   ngOnInit() {

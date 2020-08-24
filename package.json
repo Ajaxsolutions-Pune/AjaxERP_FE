@@ -1,7 +1,7 @@
 {
   "name": "@coreui/coreui-free-angular-admin-template",
   "version": "2.5.2",
-  "description": "CoreUI Free Angular 2+ Admin Template",
+  "description": "Ajax Solutions",
   "author": {
     "name": "Łukasz Holeczek",
     "url": "http://holeczek.pl",
@@ -14,8 +14,8 @@
       "url": "https://github.com/xidedix"
     }
   ],
-  "homepage": "https://coreui.io/angular",
-  "copyright": "Copyright 2019 creativeLabs Łukasz Holeczek",
+  "homepage": "http://www.ajaxsolutions.in/",
+  "copyright": "Copyright 2020",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

@@ -103,6 +103,11 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   }
 
   save(): void {
+    this.dataSource.filteredData.forEach(element => {
+      element.formId = this.FormId;
+      console.log(element.formId);
+    });
+    return;
     this.formQueAnsMappingService.Save(this.formQueAnsMappingTransfarmer
       .ObjectToEntityFormQueAnsMappingTransfarmers(this.dataSource.filteredData)).subscribe(
         (par) => {
@@ -111,7 +116,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
             console.log(par.status);
             this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
               'Data saved successfully !', 'modal-info');
-            this.router.navigate(['FormList']);
+            this.router.navigate(['FormQueAnsMapping']);
           }
         }
       );

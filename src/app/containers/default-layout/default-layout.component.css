@@ -1,3 +1,8 @@
+.navbar{
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+}
 .errorMessage{
   color: red;
 }
@@ -93,5 +98,18 @@
   
 .logo {
   content: url("../../../assets/img/brand/Logo.png");
+  width: 200px;
+  height: 50px;
+}
+.uselog {
+  content: url("../../../assets/img/Content/UserLogin.jpg");
+}
+.ajaxlog {
+  content: url("../../../assets/img/brand/ajax_logo.png");
+  height: 50px;
+}
+.navH {
+  height: 50px;;
+  background-color: white;
 }
 

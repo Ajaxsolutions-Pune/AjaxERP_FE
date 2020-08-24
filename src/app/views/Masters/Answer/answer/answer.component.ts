@@ -1,13 +1,12 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
-import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
-import { passwordsDoNotMatch } from '../../AngularDemo/infrastructure/passwords-do-not-match.validator';
 import { Answer, AnswerEntity } from '../../../../Compound/Module/Masters/Answer.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answer-Transfarmer';
 import { DefaultLayoutComponent } from '../../../../containers';
 import { AnswerService } from '../../../../Compound/Services/Masters/AnswerService';
+import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
+import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
 
 @Component({
   selector: 'app-answer',
