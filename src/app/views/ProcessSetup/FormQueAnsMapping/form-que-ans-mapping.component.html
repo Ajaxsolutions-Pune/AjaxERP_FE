@@ -5,8 +5,7 @@
       <mat-label>Form</mat-label>
       <mat-select required  [(ngModel)]="FormId"
        (selectionChange)="FormChange($event)">
-       <mat-option>Form</mat-option>
-          <mat-option *ngFor="let form of formObj" [value]="FormId">
+          <mat-option *ngFor="let form of formObj" [value]="form.formId">
             {{form.formId}} - {{form.formName}}
           </mat-option>
       </mat-select>

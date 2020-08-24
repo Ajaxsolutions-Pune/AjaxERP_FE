@@ -107,7 +107,6 @@ export class FormQueAnsMappingComponent extends FormComponentBase
       element.formId = this.FormId;
       console.log(element.formId);
     });
-    return;
     this.formQueAnsMappingService.Save(this.formQueAnsMappingTransfarmer
       .ObjectToEntityFormQueAnsMappingTransfarmers(this.dataSource.filteredData)).subscribe(
         (par) => {
