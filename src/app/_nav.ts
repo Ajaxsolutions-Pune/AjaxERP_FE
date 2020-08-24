@@ -209,11 +209,11 @@ export const navItems: NavData[] = [
         url: '/FormQueAnsMapping',
         icon: 'icon-puzzle'
       },
-      {
-        name: 'Process Form',
-        url: '/FormQueAnsMapping',
-        icon: 'icon-puzzle'
-      },
+     // {
+       // name: 'Process Form',
+       // url: '/FormQueAnsMapping',
+     //   icon: 'icon-puzzle'
+      // },
     ]
   },
   {
