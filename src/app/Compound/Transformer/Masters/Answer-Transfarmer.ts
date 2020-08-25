@@ -20,7 +20,9 @@ export class AnswerTransfarmer {
             this.answer = new Answer();
             this.answer.answerId = element.answerId;
             this.answer.answer = element.answer;
-            this.answer.isActive = element.isActive;
+            if (element.isActive === '1') {
+                this.answer.isActive = 'Active'.toString().trim();
+            } else { this.answer.isActive = 'Inactive'.toString().trim(); }
             this.answers.push(this.answer);
         });
         return this.answers;

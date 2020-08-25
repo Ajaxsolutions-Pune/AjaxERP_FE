@@ -40,7 +40,7 @@
                                 <div class="col-md-4"></div>
                                 <div class="col-sm-4">                                    
                                     <mat-checkbox name="chkisActive"
-                                    #chkisActive
+                                    #chkisActive 
                                     formControlName="ControlisActive"
                                      [(ngModel)]="formobj.isActive">Active
                                     </mat-checkbox>
@@ -55,7 +55,7 @@
                                     <button mat-raised-button
                                     [disabled]="!form.valid"
                                     (click)="save(formForm)"
-                                    color="primary">Submit</button>
+                                    color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp;
                                         <button mat-raised-button color="warn"
                                          routerLink="/FormList" ><i class="fa fa-ban"></i>
                                             Cancel</button>

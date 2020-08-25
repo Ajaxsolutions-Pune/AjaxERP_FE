@@ -108,6 +108,10 @@
   content: url("../../../assets/img/brand/ajax_logo.png");
   height: 50px;
 }
+.excelLogo {
+  content: url("../../../assets/img/Content/excel.png");
+  height: 50px;
+}
 .navH {
   height: 50px;;
   background-color: white;

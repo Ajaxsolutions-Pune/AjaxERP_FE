@@ -3,7 +3,7 @@
 
     <div class="col-md-3">Answer ID</div>
     <div class="col-md-3">Answer</div>
-    <div class="col-md-2">Active</div>
+    <div class="col-md-2">Status</div>
   </div>
 
   <div class="row">
@@ -21,8 +21,8 @@
       <select id="ShiftId" name="ShiftId" (change)="resultChanged()" [(ngModel)]="objAnswer.isActive"
         class="form-control">
         <option value="3" selected>All</option>
-        <option value="1">Active</option>
-        <option value="0">Inactive</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
       </select>
     </div>
     <div class="col-md-1">
@@ -30,8 +30,7 @@
         routerLink="/Answer"></button>
     </div>
     <div class="col-md-1">
-      <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px"
-        alt="Export To Excel" (click)="ExportToExcel()">
+      <i class="fa fa-file-excel-o"  style="font-size:35px;color: #20a8d8" aria-hidden="true" (click)="ExportToExcel()"></i>
     </div>
   </div>
 </div>
@@ -41,7 +40,7 @@
     <tr>
       <th>Answer Id</th>
       <th>Answer</th>
-      <th>Active</th>
+      <th>Status</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -53,9 +52,8 @@
       <td>
         {{Answer.answer}}
       </td>
-      <td [ngSwitch]="Answer.isActive">
-        <span *ngSwitchCase="true">Active</span>
-        <span *ngSwitchDefault>Inactive</span>
+      <td>
+        {{Answer.isActive}}
       </td>
       <td [ngSwitch]="1">
           <button mat-icon-button [routerLink]="['/Answer/',Answer.answerId]"

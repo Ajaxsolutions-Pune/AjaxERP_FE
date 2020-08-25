@@ -19,7 +19,9 @@ export class QuestionTransfarmer {
             this.question.questionId = element.questionId;
             this.question.question = element.question;
             this.question.qaTypeCode = element.qaTypeCode;
-            this.question.isActive = element.isActive;
+            if (element.isActive === '1') {
+                this.question.isActive = 'Active'.toString().trim();
+            } else { this.question.isActive = 'Inactive'.toString().trim(); }
             this.questions.push(this.question);
         });
         return this.questions;

@@ -1,28 +1,40 @@
-<div class="form-group row">
+<div class="form-group">
+  <div class="row">
+
+    <div class="col-md-3">Form ID</div>
+    <div class="col-md-3">Form</div>
+    <div class="col-md-2">Active</div>
+  </div>
+  <div class="row">
     <div class="col-md-3">
-        <input id="txtFormId" required name="txtFormId" type="text" class="form-control" placeholder="Form Id" 
+        <input id="txtFormId" required name="txtFormId" type="text"
+         class="form-control" placeholder="Form Id" 
+         #keywordsInput
         (input)="resultChanged()" [(ngModel)]="Form.formId">
     </div>
     <div class="col-md-3">
-        <input id="txtFormName" required name="txtFormName" type="text" class="form-control" placeholder="Form Name"
+        <input id="txtFormName" required name="txtFormName" type="text" class="form-control"
+         placeholder="Form Name"
         (input)="resultChanged()" [(ngModel)]="Form.formName">
     </div>
     
     <div class="col-md-2">
       <select id="ShiftId" name="ShiftId" (change)="resultChanged()"
+      #keywordsInput
        [(ngModel)]="Form.isActive"
         class="form-control">
-        <option value="3" selected>All</option>
-        <option value="1">Active</option>
-        <option value="0">Inactive</option>
+        <option value="3">All</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
       </select>
     </div>
     <div class="col-md-1">
         <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Form" routerLink="/Form"></button>
     </div>
     <div class="col-md-1">
-        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+      <i class="fa fa-file-excel-o"  style="font-size:35px;color: #20a8d8" aria-hidden="true" (click)="ExportToExcel()"></i>
     </div>
+  </div>
 </div>
 
 <table class="table table-responsive-sm table-hover table-outline mb-0">
@@ -43,11 +55,13 @@
           {{form1.formName}}
         </td>
         <td>
-          <div>{{form1.isActive}}</div>
+          {{form1.isActive}}
         </td>
         <td [ngSwitch]="1">
-          <button class="btn btn-primary" [disabled]="form1.formId === ''"
-            [routerLink]="['/Form/',form1.formId]">Edit</button>
+            <button mat-icon-button [routerLink]="['/Form/',form1.formId]"
+             color="accent">
+              <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+            </button>
         </td>
       </tr>
     </tbody>

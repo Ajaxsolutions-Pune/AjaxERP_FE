@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormObj, FormEntity } from '../../../../Compound/Module/Masters/Form.model';
 import { FormTransfarmer } from '../../../../Compound/Transformer/Masters/Form-Transfarmer';
+import * as alasql from 'alasql';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
   selector: 'app-form-list',
@@ -35,7 +37,7 @@ export class FormListComponent implements OnInit {
     }
     this.WithoutFilterForm = this.forms;
     this.Form = {
-      isActive: null,
+      isActive: '3',
       formId: null,
       formName: null
     };
@@ -54,25 +56,27 @@ export class FormListComponent implements OnInit {
         SubResult.formName.toString().toLowerCase().indexOf(this.Form.formName.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
-    if (this.SerachCri === 0) {
-      this.ResultForm = this.WithoutFilterForm;
-    }
 
     if (this.Form.isActive !== null && this.Form.isActive.toString() !== '-1') {
       if (this.Form.isActive.toString() === '3') {
         this.ResultForm = this.ResultForm.filter(SubResultProd =>
-          SubResultProd.isActive.toString() === '1' || SubResultProd.isActive.toString() === '0');
+          SubResultProd.isActive.toString() === 'Active'
+          || SubResultProd.isActive.toString() === 'Inactive');
       } else {
         this.ResultForm = this.ResultForm.filter(SubResultProd =>
           SubResultProd.isActive.toString() === this.Form.isActive.toString());
+        console.log(this.ResultForm);
       }
       this.SerachCri = 1;
+    }
+    if (this.SerachCri === 0) {
+      this.ResultForm = this.WithoutFilterForm;
     }
     this.forms = this.ResultForm;
   }
 
   ExportToExcel(): void {
-    alasql('SELECT Form_Code,Form_Id,Form_Name_ENg,Form_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("FormList.xlsx",{headers:true}) FROM ?', [this.forms]);
+    alasql('SELECT formId Form_Id,formName Form_Name,isActive Is_Active' +
+      ' INTO XLSX("FormList.xlsx",{headers:true}) FROM ?', [this.forms]);
   }
 }

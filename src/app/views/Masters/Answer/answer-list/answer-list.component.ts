@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Answer, AnswerEntity } from '../../../../Compound/Module/Masters/Answer.model';
 import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answer-Transfarmer';
 import { AnswerService } from '../../../../Compound/Services/Masters/AnswerService';
+import * as alasql from 'alasql';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
   selector: 'app-answer-list',
@@ -57,7 +59,8 @@ export class AnswerListComponent implements OnInit {
     if (this.objAnswer.isActive !== null && this.objAnswer.isActive.toString() !== '-1') {
       if (this.objAnswer.isActive.toString() === '3') {
         this.Resultanswer = this.Resultanswer.filter(SubResultProd =>
-          SubResultProd.isActive.toString() === '1' || SubResultProd.isActive.toString() === '0');
+          SubResultProd.isActive.toString() === 'Active'
+           || SubResultProd.isActive.toString() === 'Inactive');
       } else {
         this.Resultanswer = this.Resultanswer.filter(SubResultProd =>
           SubResultProd.isActive.toString() === this.objAnswer.isActive.toString());
@@ -71,7 +74,7 @@ export class AnswerListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT Answer_Code,Answer_Id,Answer_Name_ENg,Answer_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("AnswerList.xlsx",{headers:true}) FROM ?', [this.answers]);
+    alasql('SELECT answerId Answer_Id,answer Answer,isActive Is_Active' +
+      ' INTO XLSX("AnswerList.xlsx",{headers:true}) FROM ?', [this.answers]);
   }
 }

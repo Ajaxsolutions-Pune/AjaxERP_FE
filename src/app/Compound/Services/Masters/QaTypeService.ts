@@ -18,6 +18,10 @@ export class QaTypeService {
         return this.httpClient.get<QaTypeEntity[]>(this.str + '/QAType/getList'
         , this.env.httpOptions);
     }
+    fillQaTypes(): Observable<QaTypeEntity[]> {
+        return this.httpClient.get<QaTypeEntity[]>(this.str + '/QAType/getList?status=1'
+        , this.env.httpOptions);
+    }
 
     getQaType(qaTypeCode: string): Observable<QaTypeEntity> {
         return this.httpClient.get<QaTypeEntity>(this.str + '/QAType/' + qaTypeCode

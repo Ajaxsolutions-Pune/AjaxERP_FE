@@ -20,20 +20,15 @@ export class FormTransfarmer {
             this.form = new FormObj();
             this.form.formId = element.formId;
             this.form.formName = element.formName;
-            // tslint:disable-next-line:max-line-length
-            if (element.isActive.toString().trim() === '1') {
-                this.form.isActive =
-                'Active'.toString().trim();
-            } else {
-                this.form.isActive = 'InActive'.toString().trim();
-            }
-
+            this.form.isActive = element.isActive;
+            if (element.isActive === '1') {
+                this.form.isActive = 'Active'.toString().trim();
+            } else { this.form.isActive = 'Inactive'.toString().trim(); }
             this.forms.push(this.form);
         });
         return this.forms;
     }
     formTransfarmerEntity(Entity: FormEntity): FormObj {
-        console.log(Entity);
         this.form = new FormObj();
         this.form.formId = Entity.formId;
         this.form.formName = Entity.formName;

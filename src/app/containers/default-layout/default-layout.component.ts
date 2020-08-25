@@ -60,7 +60,7 @@ export class DefaultLayoutComponent implements OnDestroy {
     this.myModal.show();
   }
   Logout() {
-     this.router.navigate(['/login']);
+     this.router.navigate(['./404']);
     console.log('hh');
     // localStorage.removeItem('token');
   }

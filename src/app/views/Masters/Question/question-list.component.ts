@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Question, QuestionEntity } from '../../../Compound/Module/Masters/Question.model';
 import { QuestionTransfarmer } from '../../../Compound/Transformer/Masters/Question-Transfarmer';
 import { Router, ActivatedRoute } from '@angular/router';
+import * as alasql from 'alasql';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 
 @Component({
@@ -21,9 +23,9 @@ export class QuestionListComponent implements OnInit {
   constructor(private _router: Router,
     objTrans: QuestionTransfarmer,
     private route: ActivatedRoute) {
-      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
-      }
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      this._router.navigate(['login']);
+    }
     this.arrOjectEntity = this.route.snapshot.data['QuestionList'];
     this.arrOject = objTrans.QuestionTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
@@ -33,7 +35,7 @@ export class QuestionListComponent implements OnInit {
     this.WithoutFilterObj = this.arrOject;
     console.log(this.arrOject);
     this.bindObj = {
-      isActive: null,
+      isActive: '3',
       qaTypeCode: null,
       question: null,
       questionId: null
@@ -53,6 +55,16 @@ export class QuestionListComponent implements OnInit {
         SubResult.questionId.toString().toLowerCase().indexOf(this.bindObj.questionId.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
+    if (this.bindObj.isActive !== null && this.bindObj.isActive.toString() !== '-1') {
+      if (this.bindObj.isActive.toString() === '3') {
+        this.ResultOject = this.ResultOject.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === 'Active' || SubResultProd.isActive.toString() === 'Inactive');
+      } else {
+        this.ResultOject = this.ResultOject.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === this.bindObj.isActive.toString());
+      }
+      this.SerachCri = 1;
+    }
     if (this.SerachCri === 0) {
       this.ResultOject = this.WithoutFilterObj;
     }
@@ -60,7 +72,7 @@ export class QuestionListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT question_Code,question_Id,question_Name_ENg,question_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("questionList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT question Question,questionId Question_Id,' +
+      'qaTypeCode Question_Type_Code,isActive Is_Active INTO XLSX("questionList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

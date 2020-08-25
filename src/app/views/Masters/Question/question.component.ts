@@ -5,9 +5,11 @@ import { Question } from '../../../Compound/Module/Masters/Question.model';
 import { QuestionService } from '../../../Compound/Services/Masters/QuestionService';
 import { QuestionTransfarmer } from '../../../Compound/Transformer/Masters/Question-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
+import { QaType } from '../../../Compound/Module/Masters/QA_Type.model';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-import { QaType } from '../../../Compound/Module/Masters/QA_Type.model';
+import { QaTypeTransfarmer } from '../../../Compound/Transformer/Masters/QaType-Transfarmer';
+import { QaTypeService } from '../../../Compound/Services/Masters/QaTypeService';
 
 @Component({
   selector: 'app-question',
@@ -21,14 +23,12 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
   question: Question;
   str: string;
 
-  qaTypes: QaType[] = [
-    { qaTypeCode: 'LB', qaTypeDesc: 'LB', isActive: '1' },
-    { qaTypeCode: 'IM', qaTypeDesc: 'IM', isActive: '1' },
-    { qaTypeCode: 'LT', qaTypeDesc: 'LT', isActive: '1' }
-  ];
+  qaTypes: QaType[];
   constructor(private route: ActivatedRoute,
     private questionTransfarmer: QuestionTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,
+    private qaTypeTransfarmer: QaTypeTransfarmer,
+    private qaTypeService: QaTypeService,
     private questionService: QuestionService, private router: Router,
     private formBuilder: FormBuilder) {
     super();
@@ -54,10 +54,15 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
     });
     this.form.controls['ControlquestionId'].disable();
 
+    this.qaTypeService.fillQaTypes().subscribe(
+      (par) => {
+        this.qaTypes = this.qaTypeTransfarmer.QaTypeTransfarmers(par);
+      },
+      (err: any) => console.log(err));
     status = '';
     this.question = {
       qaTypeCode: null,
-      isActive: null,
+      isActive: 'true',
       question: null,
       questionId: null,
     };
@@ -111,14 +116,14 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
       qaTypeCode: null,
       question: null,
       questionId: null,
-      isActive: null
+      isActive: 'true'
     };
     if (Question_Code === null || Question_Code === '') {
       this.question = {
         qaTypeCode: null,
         question: null,
         questionId: null,
-        isActive: null
+        isActive: 'true'
       };
       status = '';
 

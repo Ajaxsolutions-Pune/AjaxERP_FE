@@ -95,7 +95,7 @@ import { FormQueAnsMappingComponent } from './views/ProcessSetup/FormQueAnsMappi
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {

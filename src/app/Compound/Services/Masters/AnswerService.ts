@@ -33,14 +33,16 @@ export class AnswerService {
     }
     Save(saveEntityObj: AnswerEntity): Observable<Insertstatus> {
         saveEntityObj.answerId = null;
+        console.log(this.str + '/Answer');
         return this.httpClient.post<Insertstatus>(this.str + '/Answer',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: AnswerEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<Insertstatus>(this.str
-            + '/Answer', updateEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
+        // tslint:disable-next-line:max-line-length
+        return this.httpClient.post<Insertstatus>(this.str + '/Answer', updateEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

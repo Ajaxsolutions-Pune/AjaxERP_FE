@@ -53,7 +53,7 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
     this.answer = {
       answer: null,
       answerId: null,
-      isActive: 'true',
+      isActive: null,
     };
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getanswer(str); });
   }
@@ -71,15 +71,16 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
     }
     alert('Registration Complete');
   }
+
   save(answerForm: NgForm): void {
     if (status !== 'Update') {
       this.answer.answerId = null;
       console.log(this.answer);
-      // if (this.answer.isActive === 'true') { this.answer.isActive = '1'; } else { this.answer.isActive = '0'; }
+      // if (this.question.isActive === 'true') { this.question.isActive = '1'; } else { this.question.isActive = '0'; }
 
       this.answerService.Save(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
         (par) => {
-          console.log(par.status);
+          console.log(par);
           answerForm.reset();
           this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
             'Data saved successfully !', 'modal-info');
@@ -89,13 +90,11 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
 
     } else {
       this.answerService.Update(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
-        (par) => {
-          if (par.status === 'Success') {
-            answerForm.reset();
-            this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-              'Data saved successfully !', 'modal-info');
-            this.router.navigate(['AnswerList']);
-          }
+        () => {
+          answerForm.reset();
+          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+            'Data saved successfully !', 'modal-info');
+          this.router.navigate(['AnswerList']);
         }
       );
     }
@@ -105,13 +104,13 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
     this.answer = {
       answer: null,
       answerId: null,
-      isActive: null,
+      isActive: 'true',
     };
     if (answer_Code === null || answer_Code === '') {
       this.answer = {
         answer: null,
         answerId: null,
-        isActive: null,
+        isActive:  'true',
       };
       status = '';
 

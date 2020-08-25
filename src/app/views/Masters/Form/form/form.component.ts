@@ -1,13 +1,12 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm, Form } from '@angular/forms';
-import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
-import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
-import { passwordsDoNotMatch } from '../../AngularDemo/infrastructure/passwords-do-not-match.validator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../../containers';
 import { FormObj, FormEntity } from '../../../../Compound/Module/Masters/Form.model';
 import { FormTransfarmer } from '../../../../Compound/Transformer/Masters/Form-Transfarmer';
 import { FormService } from '../../../../Compound/Services/Masters/FormService';
+import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
+import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
 
 @Component({
   selector: 'app-form',
@@ -54,7 +53,7 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
     this.formobj = {
       formId: null,
       formName: null,
-      isActive: null,
+      isActive: 'true',
     };
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getform(str); });
   }
@@ -72,31 +71,30 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
     }
     alert('Registration Complete');
   }
+
   save(formForm: NgForm): void {
     if (status !== 'Update') {
       this.formobj.formId = null;
+      console.log(this.formobj);
+      // if (this.question.isActive === 'true') { this.question.isActive = '1'; } else { this.question.isActive = '0'; }
+
       this.formService.Save(this.formTransfarmer.formTransfarmer(this.formobj)).subscribe(
         (par) => {
-
-          if (par.status === 'Success') {
-            console.log(par.status);
-            formForm.reset();
-            this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-              'Data saved successfully !', 'modal-info');
-            this.router.navigate(['FormList']);
-          }
+          console.log(par);
+          formForm.reset();
+          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+            'Data saved successfully !', 'modal-info');
+          this.router.navigate(['FormList']);
         }
       );
 
     } else {
       this.formService.Update(this.formTransfarmer.formTransfarmer(this.formobj)).subscribe(
-        (par) => {
-          if (par.status === 'Success') {
-            formForm.reset();
-            this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-              'Data saved successfully !', 'modal-info');
-            this.router.navigate(['FormList']);
-          }
+        () => {
+          formForm.reset();
+          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+            'Data saved successfully !', 'modal-info');
+          this.router.navigate(['FormList']);
         }
       );
     }
@@ -106,13 +104,13 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
     this.formobj = {
       formName: null,
       formId: null,
-      isActive: null,
+      isActive: 'true',
     };
     if (form_Code === null || form_Code === '') {
       this.formobj = {
         formName: null,
         formId: null,
-        isActive: null,
+        isActive: 'true',
       };
       status = '';
 
