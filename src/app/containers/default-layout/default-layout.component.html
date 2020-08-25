@@ -1,22 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light navH">
-  <div class="logo"></div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="nav navbar-nav ml-auto">
-      <li class="nav-item dropdown" dropdown placement="bottom right">
-        <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
-          dropdownToggle (click)="false">
-          <img class="uselog"
-            alt="Image Not Found" />
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-          <a class="dropdown-item" (click)="Logout()"><i class="fa fa-lock"></i> Logout</a>
-        </div>
-      </li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="row col-md-12" style="background-color: white; margin:0px; padding:0px;
+  border-bottom: 1px solid #23282c;">
+    <div class="logo"></div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item dropdown" dropdown placement="bottom right">
+          <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+            dropdownToggle (click)="false">
+            <img class="uselog" alt="Image Not Found" />
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+            <a class="dropdown-item" (click)="Logout()"><i class="fa fa-lock"></i> Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
 <div class="app-body">
@@ -25,7 +27,7 @@
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
   <!-- Main content -->
-  <main class="main" style="border-top: 1px solid black;">
+  <main class="main">
     <!-- Breadcrumb -->
     <!-- breaking change 'cui-breadcrumb' -->
     <cui-breadcrumb>
@@ -56,12 +58,11 @@
 </div>
 <app-footer>
   <span>Copyright
-     &copy; 2020 Ajax Solutions. All rights reserved.</span>
+    &copy; 2020 Ajax Solutions. All rights reserved.</span>
   <span class="ml-auto">Powered by
-    
+
     <a href="http://www.ajaxsolutions.in/" target="_blank">
-        <img
-         class="img-fluid ajaxlog" style="height: 40px;" alt="Responsive image">
+      <img class="img-fluid ajaxlog" style="height: 40px;" alt="Responsive image">
     </a></span>
 </app-footer>
 

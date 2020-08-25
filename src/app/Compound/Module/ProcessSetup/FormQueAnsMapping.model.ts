@@ -14,6 +14,7 @@ export class FormQueAnsMapping {
     nextFormIdText: string;
     isActive: string;
     isActiveText: string;
+    updateFlag: string;
 }
 export class FormQueAnsMappingEntity {
     fqamId: number;
@@ -31,4 +32,5 @@ export class FormQueAnsMappingEntity {
     nextFormIdText: string;
     isActive: string;
     isActiveText: string;
+    updateFlag: string;
 }

@@ -89,7 +89,8 @@ export class FormQueAnsMappingComponent extends FormComponentBase
       data: {
         isQuestionMandatory: ''.toString(),
         formId: this.FormId,
-        isActive: ''.toString()
+        isActive: ''.toString(),
+        updateFlag: '1'
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -105,8 +106,14 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   save(): void {
     this.dataSource.filteredData.forEach(element => {
       element.formId = this.FormId;
-      console.log(element.formId);
+      element.updateFlag = this.FormId;
     });
+
+    this.objFormQueAnsMapping = [];
+    this.objFormQueAnsMapping = this.dataSource.filteredData.filter(e => {
+      console.log(e.updateFlag);
+    });
+    console.log(this.objFormQueAnsMapping);
     this.formQueAnsMappingService.Save(this.formQueAnsMappingTransfarmer
       .ObjectToEntityFormQueAnsMappingTransfarmers(this.dataSource.filteredData)).subscribe(
         (par) => {
@@ -115,7 +122,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
             console.log(par.status);
             this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
               'Data saved successfully !', 'modal-info');
-            this.router.navigate(['FormQueAnsMapping']);
+            this.router.navigate(['dashboard']);
           }
         }
       );
@@ -167,7 +174,8 @@ export class FormQueAnsMappingComponent extends FormComponentBase
         queGroup: queGroup,
         nextQueGroup: nextQueGroup,
         nextFormId: nextFormId,
-        isActive: isActive
+        isActive: isActive,
+        updateFlag: '1'
       }
     });
 
