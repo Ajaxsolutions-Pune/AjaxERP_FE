@@ -1,8 +1,12 @@
+<div class="subdiv">
 <div class="maindiv">
-  <mat-card class="col-md-3">
-    <mat-card-content>
+  <mat-card class="col-md-3" style="margin: 0px; padding: 0px;">
+    <div class="row">
+      <div class="col-md-12 logo"></div>
+    </div>
+    
+    <mat-card-content class="col-md-12" style="padding-top: 20px;">
       <form [formGroup]="form">
-        <h2>Log In</h2>
         <mat-error *ngIf="loginInvalid">
           The username and password were not recognised
         </mat-error>
@@ -28,20 +32,18 @@
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="onSubmit();">Login</button>
       </form>
-      <div class="row">
-        <div class="col-md-6">
-          <!-- <div class="col-md-8 p-2 grey" style="float: left;">
-              <img src="../../../assets/img/brand/Logo.png" class="img-fluid" alt="Responsive image">
-            </div> -->
-        </div>
-        <div class="col-md-6">
-          <div class="col-md-8 p-2 grey" style="float: right;">
-            <img 
-             class="img-fluid ajaxlog" alt="Responsive image"><br/>
-             <h6 class="font-italic">V-1.0</h6>
-          </div>
-        </div>
+      <div class="row" style="padding-top: 30px;">
+        <div class="col-md-12" style="text-decoration: none;" align="center">
+          <h6>V-1.0</h6></div>
       </div>
     </mat-card-content>
   </mat-card>
 </div>
+<footer>
+    <div class="col-md-12">
+      <div class="col-md-1 p-2 grey" style="float: right;">
+        <img 
+         class="img-fluid ajaxlog" alt="Responsive image"><br/>
+      </div>
+    </div>
+</footer></div>

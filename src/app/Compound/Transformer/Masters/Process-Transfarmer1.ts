@@ -20,7 +20,9 @@ export class ProcessTransfarmer1 {
             this.process.processId = element.processId;
             this.process.processName = element.processName;
             this.process.geofence = element.geofence;
-            this.process.isActive = element.isActive;
+            if (element.isActive === '1') {
+                this.process.isActive = 'Active'.toString().trim();
+            } else { this.process.isActive = 'Inactive'.toString().trim(); }
             this.processs.push(this.process);
         });
         return this.processs;

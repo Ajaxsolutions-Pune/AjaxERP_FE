@@ -23,7 +23,7 @@ export class ZoneListComponent implements OnInit {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
         this._router.navigate(['login']);
       }
-    this.arrOjectEntity = this.route.snapshot.data['ClusterList'];
+    this.arrOjectEntity = this.route.snapshot.data['ZoneList'];
     this.arrOject = objTrans.ZoneTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
   }
@@ -34,7 +34,7 @@ export class ZoneListComponent implements OnInit {
       zoneCode: null,
       zoneNameENG: null,
       zoneNameUNI: null,
-      isActive: null
+      isActive: null,
     };
   }
 

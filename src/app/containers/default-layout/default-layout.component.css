@@ -99,10 +99,10 @@
 .logo {
   content: url("../../../assets/img/brand/Logo_2.jpg");
   width: 200px;
-  height: 70px;
 }
 .uselog {
   content: url("../../../assets/img/Content/UserLogin.jpg");
+  height: 50px;
 }
 .ajaxlog {
   content: url("../../../assets/img/brand/ajax_logo.png");

@@ -30,6 +30,7 @@ export class DefaultLayoutComponent implements OnDestroy {
   env = environment;
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     @Inject(DOCUMENT) _document?: any) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       this.router.navigate(['/login']);
@@ -60,8 +61,15 @@ export class DefaultLayoutComponent implements OnDestroy {
     this.myModal.show();
   }
   Logout() {
-     this.router.navigate(['./404']);
+    this.router.navigate(['login']);
     console.log('hh');
     // localStorage.removeItem('token');
+  }
+
+  redirect_to_parent() {
+    this.router.navigate(['login'], {
+      relativeTo: this.activatedRoute, queryParams:
+        { GfG: 'Geeks for Geeks' }
+    });
   }
 }

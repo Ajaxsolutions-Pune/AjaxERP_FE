@@ -102,15 +102,14 @@
   </div>
   
   <div class="row" style="padding-top: 20px;">
-    <div class="col-md-5"></div>
-    <div class="col-md-2">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
         <button mat-raised-button
         (click)="save()"
             color="primary">Submit</button>
         <button mat-raised-button color="warn" routerLink="/dashboard">
-            <i class="fa fa-ban"></i>
             Cancel</button>
     </div>
-    <div class="col-md-5"></div>
+    <div class="col-md-4"></div>
 </div>
 <div style="display:none"> {{dataSource.filteredData | json}}</div>

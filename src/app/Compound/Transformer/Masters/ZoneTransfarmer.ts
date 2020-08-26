@@ -14,6 +14,7 @@ export class ZoneTransfarmer {
     }
     ZoneTransfarmers(Entity: ZoneEntity[]): Zone[] {
         this.arrOject = [];
+        console.log(Entity);
         Entity.forEach(element => {
             this.Oject = new Zone();
             this.Oject.zoneCode = element.zoneCode;

@@ -3,17 +3,27 @@ mat-card {
   text-align: center;
 }
 .maindiv {
-  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+  height: 92vh;
   display: flex;
   justify-content: center;
   background-repeat: no-repeat;
-  align-items: center;
-  background-image: url("../../../assets/img/Content/electricity.jpg"); 
-  background-size: cover;
+  align-items: center;; 
 }
 
+.subdiv {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../../../assets/img/Content/electricity.jpg"); 
+}
+
+.logo {
+  width: 100%;
+  content: url("../../../assets/img/brand/Logo_2.jpg");
+}
 .ajaxlog {
-  content: url("../../../assets/img/brand/ajaxsolutionlogo.png");
+  content: url("../../../assets/img/brand/ajax_logo.png");
 }
 
 mat-form-field {

@@ -46,7 +46,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let Oject of arrOject">
+    <tr *ngFor="let Oject of arrOject | paginate: config">
       <td>
         <div>{{Oject.questionId}}</div>
       </td>
@@ -69,3 +69,4 @@
     </tr>
   </tbody>
 </table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

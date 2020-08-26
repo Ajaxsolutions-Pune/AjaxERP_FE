@@ -47,7 +47,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let form1 of forms">
+      <tr *ngFor="let form1 of forms | paginate: config">
         <td>
           <div>{{form1.formId}}</div>
         </td>
@@ -66,3 +66,4 @@
       </tr>
     </tbody>
   </table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

@@ -106,6 +106,13 @@ export const routes: Routes = [
     }
   },
   {
+    path: '#',
+    component: LogInComponent,
+    data: {
+      title: 'Login Page'
+    }
+  },
+  {
     path: '500',
     component: P500Component,
     data: {
@@ -141,7 +148,7 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'CreateUser/:id',
+        path: 'AddUser/:id',
         component: UserMasterComponent,
         data: {
           title: 'User Master'
@@ -151,7 +158,7 @@ export const routes: Routes = [
         path: 'EditUser/:id',
         component: UserMasterComponent,
         data: {
-          title: 'Update User'
+          title: 'Edit User'
         }
       },
       {
@@ -165,14 +172,14 @@ export const routes: Routes = [
         path: 'Unit',
         component: UnitComponent,
         data: {
-          title: 'Create Unit'
+          title: 'Add Unit'
         }
       },
       {
         path: 'Unit/:id',
         component: UnitComponent,
         data: {
-          title: 'Update Unit'
+          title: 'Edit Unit'
         }
       },
       {
@@ -190,14 +197,14 @@ export const routes: Routes = [
         path: 'Country',
         component: CountryComponent,
         data: {
-          title: 'Create Country'
+          title: 'Add Country'
         }
       },
       {
         path: 'Country/:id',
         component: CountryComponent,
         data: {
-          title: 'Update Country'
+          title: 'Edit Country'
         }
       },
       {
@@ -211,7 +218,7 @@ export const routes: Routes = [
         path: 'Brand',
         component: BrandComponent,
         data: {
-          title: 'Create Brand'
+          title: 'Add Brand'
         },
         resolve: {
           BrandList: BrandListResolverService,
@@ -222,21 +229,21 @@ export const routes: Routes = [
         path: 'Brand/:id',
         component: BrandComponent,
         data: {
-          title: 'Update Brand'
+          title: 'Edit Brand'
         }
       },
       {
         path: 'State',
         component: StateComponent,
         data: {
-          title: 'Create State'
+          title: 'Add State'
         }
       },
       {
         path: 'State/:id',
         component: StateComponent,
         data: {
-          title: 'Update Brand'
+          title: 'Edit Brand'
         }
       },
       {
@@ -261,14 +268,14 @@ export const routes: Routes = [
         path: 'City',
         component: CityComponent,
         data: {
-          title: 'Create City'
+          title: 'Add City'
         }
       },
       {
         path: 'City/:id',
         component: CityComponent,
         data: {
-          title: 'Update City'
+          title: 'Edit City'
         }
       },
       {
@@ -282,7 +289,7 @@ export const routes: Routes = [
         path: 'MFG',
         component: manufactureComponent,
         data: {
-          title: 'Create Manufacture'
+          title: 'Add Manufacture'
         }
       },
       {
@@ -300,14 +307,14 @@ export const routes: Routes = [
         path: 'District',
         component: DistrictComponent,
         data: {
-          title: 'Create District'
+          title: 'Add District'
         }
       },
       {
         path: 'District/:id',
         component: DistrictComponent,
         data: {
-          title: 'Update District'
+          title: 'Edit District'
         },
         resolve: {
           District: DistrictMasterResolverService,
@@ -325,14 +332,14 @@ export const routes: Routes = [
         path: 'CityGroup',
         component: CityGroupComponent,
         data: {
-          title: 'Create CityGroup'
+          title: 'Add CityGroup'
         }
       },
       {
         path: 'CityGroup/:id',
         component: CityGroupComponent,
         data: {
-          title: 'Update CityGroup'
+          title: 'Edit CityGroup'
         }
       },
       {
@@ -346,14 +353,14 @@ export const routes: Routes = [
         path: 'TaxCategory',
         component: TaxCategoryComponent,
         data: {
-          title: 'Create TaxCategory'
+          title: 'Add TaxCategory'
         }
       },
       {
         path: 'TaxCategory/:id',
         component: TaxCategoryComponent,
         data: {
-          title: 'Update TaxCategory'
+          title: 'Edit TaxCategory'
         }
       },
       {
@@ -367,14 +374,14 @@ export const routes: Routes = [
         path: 'CastCategory',
         component: CastCategoryComponent,
         data: {
-          title: 'Create  CastCategory'
+          title: 'Add  CastCategory'
         }
       },
       {
         path: 'CastCategory/:id',
         component: CastCategoryComponent,
         data: {
-          title: 'Update  CastCategory'
+          title: 'Edit  CastCategory'
         }
       },
       {
@@ -388,14 +395,14 @@ export const routes: Routes = [
         path: 'Cast',
         component: CastComponent,
         data: {
-          title: 'Create  Cast'
+          title: 'Add  Cast'
         }
       },
       {
         path: 'Cast/:id',
         component: CastComponent,
         data: {
-          title: 'Update  Cast'
+          title: 'Edit  Cast'
         }
       },
       {
@@ -413,7 +420,7 @@ export const routes: Routes = [
         path: 'Tehsil',
         component: TehsilComponent,
         data: {
-          title: 'Create  Tehsil'
+          title: 'Add  Tehsil'
         },
         resolve: {
           DistrictList: DistrictListResolverService
@@ -423,7 +430,7 @@ export const routes: Routes = [
         path: 'Tehsil/:id',
         component: TehsilComponent,
         data: {
-          title: 'Update  Tehsil'
+          title: 'Edit  Tehsil'
         },
         resolve: {
           Tehsil: TehsilMasterResolverService,
@@ -441,14 +448,14 @@ export const routes: Routes = [
         path: 'ItemCategory',
         component: ItemCategoryComponent,
         data: {
-          title: 'Create  ItemCategory'
+          title: 'Add  ItemCategory'
         }
       },
       {
         path: 'ItemCategory/:id',
         component: ItemCategoryComponent,
         data: {
-          title: 'Update  ItemCategory'
+          title: 'Edit  ItemCategory'
         }
       },
       {
@@ -462,14 +469,14 @@ export const routes: Routes = [
         path: 'ItemGroup',
         component: ItemGroupComponent,
         data: {
-          title: 'Create Item Group'
+          title: 'Add Item Group'
         }
       },
       {
         path: 'ItemGroup/:id',
         component: ItemGroupComponent,
         data: {
-          title: 'Update Item Group'
+          title: 'Edit Item Group'
         }
       },
       {
@@ -483,14 +490,14 @@ export const routes: Routes = [
         path: 'ItemSubGroup',
         component: ItemSubGroupComponent,
         data: {
-          title: 'Create Sub Item Group'
+          title: 'Add Sub Item Group'
         }
       },
       {
         path: 'ItemSubGroup/:id',
         component: ItemSubGroupComponent,
         data: {
-          title: 'Update Sub Item Group'
+          title: 'Edit Sub Item Group'
         }
       },
       // ERP route
@@ -532,14 +539,14 @@ export const routes: Routes = [
         path: 'Form',
         component: FormComponent,
         data: {
-          title: 'Create Form'
+          title: 'Add Form'
         },
       },
       {
         path: 'Form/:id',
         component: FormComponent,
         data: {
-          title: 'Update Form'
+          title: 'Edit Form'
         }
       },
       {
@@ -556,14 +563,14 @@ export const routes: Routes = [
         path: 'QuestionType',
         component: QuestionTypeComponent,
         data: {
-          title: 'Create Question Type '
+          title: 'Add Question Type '
         }
       },
       {
         path: 'QuestionType/:id',
         component: QuestionTypeComponent,
         data: {
-          title: 'Update Question Type '
+          title: 'Edit Question Type '
         }
       },
       {
@@ -580,14 +587,14 @@ export const routes: Routes = [
         path: 'Question',
         component: QuestionComponent,
         data: {
-          title: 'Create Question'
+          title: 'Add Question'
         },
       },
       {
         path: 'Question/:id',
         component: QuestionComponent,
         data: {
-          title: 'Update Question'
+          title: 'Edit Question'
         }
       },
       {
@@ -604,14 +611,14 @@ export const routes: Routes = [
         path: 'Process',
         component: ProcessComponent,
         data: {
-          title: 'Create Process'
+          title: 'Add Process'
         },
       },
       {
         path: 'Process/:id',
         component: ProcessComponent,
         data: {
-          title: 'Update Process'
+          title: 'Edit Process'
         }
       },
       {
@@ -628,14 +635,14 @@ export const routes: Routes = [
         path: 'Zone',
         component: ZoneComponent,
         data: {
-          title: 'Create Zone'
+          title: 'Add Zone'
         },
       },
       {
         path: 'Zone/:id',
         component: ZoneComponent,
         data: {
-          title: 'Update Zone'
+          title: 'Edit Zone'
         }
       },
       {
@@ -652,14 +659,14 @@ export const routes: Routes = [
         path: 'Region',
         component: RegionComponent,
         data: {
-          title: 'Create Region'
+          title: 'Add Region'
         },
       },
       {
         path: 'Region/:id',
         component: RegionComponent,
         data: {
-          title: 'Update Region'
+          title: 'Edit Region'
         }
       },
       {
@@ -676,14 +683,14 @@ export const routes: Routes = [
         path: 'Colour',
         component: ColourComponent,
         data: {
-          title: 'Create Colour'
+          title: 'Add Colour'
         },
       },
       {
         path: 'Colour/:id',
         component: ColourComponent,
         data: {
-          title: 'Update Colour'
+          title: 'Edit Colour'
         }
       },
       {
@@ -700,14 +707,14 @@ export const routes: Routes = [
         path: 'AssetGroup',
         component: AssetGroupComponent,
         data: {
-          title: 'Create Asset Group'
+          title: 'Add Asset Group'
         },
       },
       {
         path: 'AssetGroup/:id',
         component: AssetGroupComponent,
         data: {
-          title: 'Update Asset Group'
+          title: 'Edit Asset Group'
         }
       },
       {
@@ -724,14 +731,14 @@ export const routes: Routes = [
         path: 'Circle',
         component: CircleComponent,
         data: {
-          title: 'Create Circle'
+          title: 'Add Circle'
         }
       },
       {
         path: 'Circle/:id',
         component: CircleComponent,
         data: {
-          title: 'Update Circle'
+          title: 'Edit Circle'
         }
       },
       {
@@ -748,14 +755,14 @@ export const routes: Routes = [
         path: 'Cluster',
         component: ClusterComponent,
         data: {
-          title: 'Create Cluster'
+          title: 'Add Cluster'
         },
       },
       {
         path: 'Cluster/:id',
         component: ClusterComponent,
         data: {
-          title: 'Update Cluster'
+          title: 'Edit Cluster'
         }
       },
       {
@@ -772,14 +779,14 @@ export const routes: Routes = [
         path: 'AssetCategory',
         component: AssetCategoryComponent,
         data: {
-          title: 'Create Asset Category'
+          title: 'Add Asset Category'
         },
       },
       {
         path: 'AssetCategory/:id',
         component: AssetCategoryComponent,
         data: {
-          title: 'Update Asset Category'
+          title: 'Edit Asset Category'
         }
       },
       {
@@ -796,7 +803,7 @@ export const routes: Routes = [
         path: 'Asset',
         component: AssetComponent,
         data: {
-          title: 'Create Asset'
+          title: 'Add Asset'
         },
         resolve: {
           AssetList: AssetListResolverService
@@ -806,7 +813,7 @@ export const routes: Routes = [
         path: 'Asset/:id',
         component: AssetComponent,
         data: {
-          title: 'Update Asset'
+          title: 'Edit Asset'
         }
       },
       {
@@ -823,7 +830,7 @@ export const routes: Routes = [
         path: 'Device',
         component: DeviceComponent,
         data: {
-          title: 'Create Device'
+          title: 'Add Device'
         },
       },
       {
@@ -837,7 +844,7 @@ export const routes: Routes = [
         path: 'Device/:id',
         component: DeviceComponent,
         data: {
-          title: 'Update Device'
+          title: 'Edit Device'
         }
       },
       {

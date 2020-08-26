@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormObj, FormEntity } from '../../../../Compound/Module/Masters/Form.model';
 import { FormTransfarmer } from '../../../../Compound/Transformer/Masters/Form-Transfarmer';
 import * as alasql from 'alasql';
+import { environment } from '../../../../Compound/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
@@ -19,6 +20,8 @@ export class FormListComponent implements OnInit {
   formEntity: FormEntity[];
   SerachCri: number;
   Form: FormObj;
+  config: any;
+  env = environment;
   constructor(private _router: Router,
     objTrans: FormTransfarmer,
     private route: ActivatedRoute) {
@@ -29,8 +32,16 @@ export class FormListComponent implements OnInit {
     this.forms = objTrans.fTransfarmers(this.formEntity);
     console.log(this.forms[1].isActive);
     this.WithoutFilterForm = this.forms;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.forms.length
+    };
   }
 
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
   ngOnInit() {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       this._router.navigate(['login']);
@@ -73,6 +84,11 @@ export class FormListComponent implements OnInit {
       this.ResultForm = this.WithoutFilterForm;
     }
     this.forms = this.ResultForm;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.forms.length
+    };
   }
 
   ExportToExcel(): void {

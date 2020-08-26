@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     this.env.httpOptions = httpOptions;
     this.bnIdle.startWatching(environment.SessionTimeOut * 60).subscribe((res) => {
       if (res) {
-       // localStorage.removeItem('token');
+        localStorage.removeItem('token');
        // this.router.navigate(['login']);
       }
     });

@@ -7,6 +7,7 @@ import { DefaultLayoutComponent } from '../../../../containers';
 import { AnswerService } from '../../../../Compound/Services/Masters/AnswerService';
 import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
+import { environment } from '../../../../Compound/Module/environment';
 
 @Component({
   selector: 'app-answer',
@@ -21,6 +22,7 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
   answer: Answer;
   answerEntity: AnswerEntity;
   str: string;
+  env = environment;
   constructor(private route: ActivatedRoute,
     private answerTransfarmer: AnswerTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,

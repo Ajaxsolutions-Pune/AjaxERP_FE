@@ -8,67 +8,56 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4"></div>                            
+                            <div class="col-md-4"></div>
                             <mat-form-field class="col-md-2">
-                                <input matInput
-                                #processId
-                                spellcheck="false" [(ngModel)]="process.processId"
-                                placeholder="Process ID"
-                                formControlName="ControlprocessId">
+                                <input matInput #processId spellcheck="false" [(ngModel)]="process.processId"
+                                    placeholder="Process ID" formControlName="ControlprocessId">
                                 <mat-error>
-                                {{ formErrors['ControlprocessId'] }}
+                                    {{ formErrors['ControlprocessId'] }}
                                 </mat-error>
                             </mat-form-field>
                             <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"></div>       
+                            <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
-                              <input matInput
-                                #processName
-                                spellcheck="false" [(ngModel)]="process.processName"
-                                placeholder="Process Name"
-                                formControlName="ControlprocessName">
-                              <mat-error>
-                                {{ formErrors['ControlprocessName'] }}
-                              </mat-error>
+                                <input matInput #processName spellcheck="false" [(ngModel)]="process.processName"
+                                    placeholder="Process Name" formControlName="ControlprocessName">
+                                <mat-error>
+                                    {{ formErrors['ControlprocessName'] }}
+                                </mat-error>
                             </mat-form-field>
                             <div class="col-md-4"></div>
                         </div>
                         <div class="row">
                             <div class="col-md-4"></div>
-                            <div class="col-sm-4">                                    
-                                <mat-checkbox name="chkgeofence"
-                                #chkgeofence
-                                formControlName="Controlgeofence"
-                                 [(ngModel)]="process.geofence">Geofence
+                            <div class="col-sm-4" style="padding-top: 20px;">
+                                <mat-checkbox name="chkgeofence" #chkgeofence formControlName="Controlgeofence"
+                                    [(ngModel)]="process.geofence">Geofence
                                 </mat-checkbox>
                             </div>
                             <div class="col-md-4"></div>
                         </div>
                         <div class="row">
                             <div class="col-md-4"></div>
-                            <div class="col-sm-4">                                    
-                                <mat-checkbox name="chkisActive"
-                                #chkisActive
-                                formControlName="ControlisActive"
-                                 [(ngModel)]="process.isActive">Active
+                            <div class="col-sm-4" style="padding-top: 20px;">
+                                <mat-checkbox name="chkisActive" #chkisActive formControlName="ControlisActive"
+                                    [(ngModel)]="process.isActive">Active
                                 </mat-checkbox>
                             </div>
                             <div class="col-md-4"></div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <div class="row">                            
+                        <div class="row">
                             <div class="col-md-4"></div>
-                            <div class="col-md-4">                                    
-                                <button mat-raised-button
-                                [disabled]="!form.valid"
-                                (click)="save(processForm)"
-                                color="primary">Submit</button>
-                                    <button mat-raised-button color="warn"
-                                     routerLink="/ProcessList" ><i class="fa fa-ban"></i>
-                                        Cancel</button>
+                            <div class="col-md-4">
+                                <button mat-raised-button [disabled]="!form.valid" (click)="save(processForm)"
+                                    color="primary">Submit</button>
+                                &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button mat-raised-button color="warn" routerLink="/ProcessList"><i
+                                        class="fa fa-ban"></i>
+                                    Cancel</button>
                             </div>
                             <div class="col-md-4"></div>
 
@@ -80,4 +69,4 @@
         <!--/.row-->
     </div>
 </form>
-<div> {{process | json}}</div>
+<div style="display: none;"> {{process | json}}</div>

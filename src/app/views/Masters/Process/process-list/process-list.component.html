@@ -1,49 +1,68 @@
-<div class="form-group row">
+<div class="form-group">
+  <div class="row">
+
+    <div class="col-md-3">Process Id</div>
+    <div class="col-md-3">Process</div>
+    <div class="col-md-2">Status</div>
+  </div>
+  <div class="row">
     <div class="col-md-3">
-        <input id="txtProcessID" required name="txtProcessID" type="text" class="form-control" placeholder="Process Id" 
+      <input id="txtProcessID" required name="txtProcessID" type="text" class="form-control" placeholder="Process Id"
         (input)="resultChanged()" [(ngModel)]="bindObj.processId">
     </div>
     <div class="col-md-3">
-        <input id="txtProcess_Name" required name="txtProcess_Name" type="text" class="form-control" placeholder="Process Name"
-        (input)="resultChanged()" [(ngModel)]="bindObj.processName">
+      <input id="txtProcess_Name" required name="txtProcess_Name" type="text" class="form-control"
+        placeholder="Process Name" (input)="resultChanged()" [(ngModel)]="bindObj.processName">
+    </div>
+    <div class="col-md-2">
+      <select id="Active" name="Active" (change)="resultChanged()"
+       [(ngModel)]="bindObj.isActive" class="form-control">
+        <option value="3">All</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
     </div>
     <div class="col-md-1">
-        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Form" routerLink="/Process"></button>
+      <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Form"
+        routerLink="/Process"></button>
     </div>
     <div class="col-md-1">
-        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+      <i class="fa fa-file-excel-o" style="font-size:35px;color: #20a8d8" aria-hidden="true"
+        (click)="ExportToExcel()"></i>
     </div>
+  </div>
 </div>
 
 <table class="table table-responsive-sm table-hover table-outline mb-0">
-    <thead class="thead-light">
-      <tr>
-        <th>Process Id</th>
-        <th>Process name</th>
-        <th>Geofence</th>
-        <th>Active</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let obj of processs">
-        <td>
-          <div>{{obj.processId}}</div>
-        </td>
-        <td>
-          {{obj.processName}}
-        </td>
-        <td>
-          {{obj.geofence}}
-        </td>
-        <td [ngSwitch]="obj.IsActive">
-          <span *ngSwitchCase="true">Yes</span>
-          <span *ngSwitchDefault>No</span>
-        </td>
-        <td [ngSwitch]="1">
-          <button class="btn btn-primary" [disabled]="obj.processId === ''"
-            [routerLink]="['/Process/',obj.processId]">Edit</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <thead class="thead-light">
+    <tr>
+      <th>Process Id</th>
+      <th>Process name</th>
+      <th>Geofence</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let obj of processs">
+      <td>
+        <div>{{obj.processId}}</div>
+      </td>
+      <td>
+        {{obj.processName}}
+      </td>
+      <td>
+        {{obj.geofence}}
+      </td>
+      <td>
+        {{obj.isActive}}
+      </td>
+      <td [ngSwitch]="1">
+          <button mat-icon-button [routerLink]="['/Process/',obj.processId]"
+           color="accent">
+            <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+          </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

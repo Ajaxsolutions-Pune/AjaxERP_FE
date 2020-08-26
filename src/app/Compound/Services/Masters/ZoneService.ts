@@ -14,8 +14,8 @@ export class ZoneService {
         this.str = this.env.apiServiceIPPort;
     }
     getZones(): Observable<ZoneEntity[]> {
-        return this.httpClient.get<ZoneEntity[]>(this.str + '/Zone/getList'
-        , this.env.httpOptions);
+        console.log(this.httpClient.get<ZoneEntity[]>(this.str + '/Zone/getList'));
+        return this.httpClient.get<ZoneEntity[]>(this.str + '/Zone/getList', this.env.httpOptions);
     }
 
     getZone(qaTypeCode: string): Observable<ZoneEntity> {

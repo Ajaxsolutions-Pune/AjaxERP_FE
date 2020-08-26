@@ -4,6 +4,7 @@ import { Answer, AnswerEntity } from '../../../../Compound/Module/Masters/Answer
 import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answer-Transfarmer';
 import { AnswerService } from '../../../../Compound/Services/Masters/AnswerService';
 import * as alasql from 'alasql';
+import { environment } from '../../../../Compound/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
@@ -15,6 +16,8 @@ export class AnswerListComponent implements OnInit {
   @Input() AnswerInput: Answer;
   answers: Answer[];
   answersEntity: AnswerEntity[];
+  config: any;
+  env = environment;
 
   WithoutFilterAnswer: Answer[];
   Resultanswer: Answer[];
@@ -30,6 +33,11 @@ export class AnswerListComponent implements OnInit {
     this.answersEntity = this.route.snapshot.data['AnswerList'];
     this.answers = objTrans.AnswerTransfarmers(this.answersEntity);
     this.WithoutFilterAnswer = this.answers;
+    this.config = {
+      itemsPerPage:  this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.answers.length
+    };
   }
 
   ngOnInit() {
@@ -41,6 +49,9 @@ export class AnswerListComponent implements OnInit {
     };
   }
 
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultanswer = this.WithoutFilterAnswer;
@@ -60,7 +71,7 @@ export class AnswerListComponent implements OnInit {
       if (this.objAnswer.isActive.toString() === '3') {
         this.Resultanswer = this.Resultanswer.filter(SubResultProd =>
           SubResultProd.isActive.toString() === 'Active'
-           || SubResultProd.isActive.toString() === 'Inactive');
+          || SubResultProd.isActive.toString() === 'Inactive');
       } else {
         this.Resultanswer = this.Resultanswer.filter(SubResultProd =>
           SubResultProd.isActive.toString() === this.objAnswer.isActive.toString());
@@ -71,6 +82,11 @@ export class AnswerListComponent implements OnInit {
       this.Resultanswer = this.WithoutFilterAnswer;
     }
     this.answers = this.Resultanswer;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.answers.length
+    };
   }
 
   ExportToExcel(): void {

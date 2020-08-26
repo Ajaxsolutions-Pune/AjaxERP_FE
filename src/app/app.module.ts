@@ -206,6 +206,7 @@ import { FormQueAnsMappingService } from './Compound/Services/ProcessSetup/FormQ
 import { FormQueAnsMappingTransfarmer } from './Compound/Transformer/ProcessSetup/FormQueAnsMapping-Transfarmer';
 import { TaxRateListComponent } from './views/Masters/TaxRate/tax-rate-list.component';
 import { MyErrorStateMatcher } from './views/Masters/AngularDemo/MyErrorStateMatcher.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   imports: [
     BrowserModule,
@@ -240,7 +241,9 @@ import { MyErrorStateMatcher } from './views/Masters/AngularDemo/MyErrorStateMat
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+
+    NgxPaginationModule
   ],
   entryComponents: [
     AddDialogComponent,

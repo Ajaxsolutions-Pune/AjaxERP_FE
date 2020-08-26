@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Process, ProcessEntity } from '../../../../Compound/Module/Masters/Process.model';
 import { ProcessTransfarmer1 } from '../../../../Compound/Transformer/Masters/Process-Transfarmer1';
+import * as alasql from 'alasql';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
   selector: 'app-process-list',
@@ -35,7 +37,7 @@ export class ProcessListComponent implements OnInit {
       processId: null,
       processName: null,
       geofence: null,
-      isActive: null,
+      isActive: '3',
     };
   }
 
@@ -52,6 +54,16 @@ export class ProcessListComponent implements OnInit {
         SubResult.processId.toString().toLowerCase().indexOf(this.bindObj.processId.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
+    if (this.bindObj.isActive !== null && this.bindObj.isActive.toString() !== '-1') {
+      if (this.bindObj.isActive.toString() === '3') {
+        this.Resultprocess = this.Resultprocess.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === 'Active' || SubResultProd.isActive.toString() === 'Inactive');
+      } else {
+        this.Resultprocess = this.Resultprocess.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === this.bindObj.isActive.toString());
+      }
+      this.SerachCri = 1;
+    }
     if (this.SerachCri === 0) {
       this.Resultprocess = this.WithoutFilterprocess;
     }
@@ -59,7 +71,7 @@ export class ProcessListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT process_Code,process_Id,process_Name_ENg,process_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("processList.xlsx",{headers:true}) FROM ?', [this.processs]);
+    alasql('SELECT processId,processName,geofence,geofence,isActive' +
+      ' INTO XLSX("processList.xlsx",{headers:true}) FROM ?', [this.processs]);
   }
 }

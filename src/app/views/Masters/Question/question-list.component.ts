@@ -3,6 +3,7 @@ import { Question, QuestionEntity } from '../../../Compound/Module/Masters/Quest
 import { QuestionTransfarmer } from '../../../Compound/Transformer/Masters/Question-Transfarmer';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as alasql from 'alasql';
+import { environment } from '../../../Compound/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
 
 
@@ -20,6 +21,8 @@ export class QuestionListComponent implements OnInit {
   ResultOject: Question[];
   SerachCri: number;
   bindObj: Question;
+  config: any;
+  env = environment;
   constructor(private _router: Router,
     objTrans: QuestionTransfarmer,
     private route: ActivatedRoute) {
@@ -29,6 +32,11 @@ export class QuestionListComponent implements OnInit {
     this.arrOjectEntity = this.route.snapshot.data['QuestionList'];
     this.arrOject = objTrans.QuestionTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.arrOject.length
+    };
   }
 
   ngOnInit() {
@@ -42,6 +50,9 @@ export class QuestionListComponent implements OnInit {
     };
   }
 
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
   resultChanged(): void {
     this.SerachCri = 0;
     this.ResultOject = this.WithoutFilterObj;
@@ -69,6 +80,11 @@ export class QuestionListComponent implements OnInit {
       this.ResultOject = this.WithoutFilterObj;
     }
     this.arrOject = this.ResultOject;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.arrOject.length
+    };
   }
 
   ExportToExcel(): void {
