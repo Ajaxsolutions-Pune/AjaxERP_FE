@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Cluster, ClusterEntity } from '../../../Compound/Module/Masters/Cluster.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClusterTransfarmer } from '../../../Compound/Transformer/Masters/Cluster-Transfarmer';
+import { environment } from '../../../Compound/Module/environment';
+import * as alasql from 'alasql';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
   selector: 'app-cluster-list',
@@ -17,6 +20,8 @@ export class ClusterListComponent implements OnInit {
   ResultOject: Cluster[];
   SerachCri: number;
   bindObj: Cluster;
+  config: any;
+  env = environment;
   constructor(private _router: Router,
     objTrans: ClusterTransfarmer,
     private route: ActivatedRoute) {
@@ -26,8 +31,16 @@ export class ClusterListComponent implements OnInit {
     this.arrOjectEntity = this.route.snapshot.data['ClusterList'];
     this.arrOject = objTrans.ClusterTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
+    this.config = {
+      itemsPerPage:  this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.arrOject.length
+    };
   }
 
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
     console.log(this.arrOject);
@@ -36,7 +49,7 @@ export class ClusterListComponent implements OnInit {
       clusterNameENG: null,
       clusterNameUNI: null,
       circleCode: null,
-      isActive: null
+      isActive: '3'
     };
   }
 
@@ -56,11 +69,27 @@ export class ClusterListComponent implements OnInit {
     if (this.SerachCri === 0) {
       this.ResultOject = this.WithoutFilterObj;
     }
+    if (this.bindObj.isActive !== null && this.bindObj.isActive.toString() !== '-1') {
+      if (this.bindObj.isActive.toString() === '3') {
+        this.ResultOject = this.ResultOject.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === 'Active'
+          || SubResultProd.isActive.toString() === 'Inactive');
+      } else {
+        this.ResultOject = this.ResultOject.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === this.bindObj.isActive.toString());
+      }
+      this.SerachCri = 1;
+    }
     this.arrOject = this.ResultOject;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.arrOject.length
+    };
   }
 
   ExportToExcel(): void {
-    alasql('SELECT assetGroupCode,assetGroupNameENG,assetGroupNameUNI,' +
-      'isActive INTO XLSX("AssetGroupList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT clusterCode Cluster_Code,clusterNameENG Cluster_Name,isActive Is_Active' +
+      ' INTO XLSX("clusterList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

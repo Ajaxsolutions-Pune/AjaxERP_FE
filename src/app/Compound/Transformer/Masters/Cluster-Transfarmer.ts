@@ -20,7 +20,9 @@ export class ClusterTransfarmer {
             this.Oject.clusterNameENG = element.clusterNameENG;
             this.Oject.clusterNameUNI = element.clusterNameUNI;
             this.Oject.circleCode = element.circleCode;
-            this.Oject.isActive = element.isActive;
+            if (element.isActive === '1') {
+                this.Oject.isActive = 'Active'.toString().trim();
+            } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
             this.arrOject.push(this.Oject);
         });
         return this.arrOject;
@@ -45,6 +47,7 @@ export class ClusterTransfarmer {
         this.OjectEntity.clusterNameENG = qaType1.clusterNameENG;
         this.OjectEntity.clusterNameUNI = qaType1.clusterNameUNI;
         this.OjectEntity.circleCode = qaType1.circleCode;
+        console.log(qaType1.circleCode);
          if (qaType1.isActive === 'true') {  this.OjectEntity.isActive = '1';
              } else { this.OjectEntity.isActive = '0'; }
         if (qaType1.isActive.toString().trim() === 'true') {

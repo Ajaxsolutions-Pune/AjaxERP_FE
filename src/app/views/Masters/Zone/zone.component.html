@@ -43,7 +43,7 @@
                             <mat-form-field class="col-md-4">
                                 <input matInput
                                 placeholder="Zone Name ENG"
-                                [(ngModel)]="bindObj.zoneNameUNI" required
+                                [(ngModel)]="bindObj.zoneNameUNI"
                                 formControlName="ControlzoneNameUNI"
                                 #txtzoneNameUNI
                                 name="txtzoneNameUNI">
@@ -69,10 +69,11 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <button mat-raised-button [disabled]="!form.valid" (click)="save(ObjForm)"
-                                    color="primary">Submit</button>
-                                <button mat-raised-button color="warn" routerLink="/ZoneList"><i
-                                        class="fa fa-ban"></i>
+                                <button mat-raised-button [disabled]="!form.valid" 
+                                (click)="save(ObjForm)"
+                                    color="primary">Submit</button> &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button mat-raised-button color="warn" routerLink="/AnswerList">
                                     Cancel</button>
                             </div>
                             <div class="col-md-4"></div>

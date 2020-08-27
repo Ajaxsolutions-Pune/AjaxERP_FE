@@ -4,8 +4,8 @@ import { Answer, AnswerEntity } from '../../../../Compound/Module/Masters/Answer
 import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answer-Transfarmer';
 import { AnswerService } from '../../../../Compound/Services/Masters/AnswerService';
 import * as alasql from 'alasql';
-import { environment } from '../../../../Compound/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
+import { environment } from '../../../../Compound/Module/environment';
 
 @Component({
   selector: 'app-answer-list',

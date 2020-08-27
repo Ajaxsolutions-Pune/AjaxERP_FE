@@ -5,8 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-import { ZoneTransfarmer } from '../../../Compound/Transformer/Masters/ZoneTransfarmer';
 import { ZoneService } from '../../../Compound/Services/Masters/ZoneService';
+import { ZoneTransfarmer } from '../../../Compound/Transformer/Masters/ZoneTransfarmer';
 @Component({
   selector: 'app-zone',
   templateUrl: './zone.component.html',
@@ -19,7 +19,8 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
   bindObj: Zone;
   str: string;
   constructor(private route: ActivatedRoute,
-    private defaultLayoutComponent: DefaultLayoutComponent, private router: Router,
+    private defaultLayoutComponent: DefaultLayoutComponent,
+    private router: Router,
     private zoneTransfarmer: ZoneTransfarmer,
     private zoneService: ZoneService,
     private formBuilder: FormBuilder) {
@@ -63,60 +64,35 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
       zoneCode: null,
       zoneNameENG: null,
       zoneNameUNI: null,
-      isActive: null,
+      isActive: null
     };
-    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id');
-     this.getZone(str); });
+    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getquestion(str); });
   }
-  save(ObjForm: NgForm): void {
+  save(zoneForm: NgForm): void {
     if (status !== 'Update') {
       this.bindObj.zoneCode = null;
       this.zoneService.Save(this.zoneTransfarmer.ZoneTransfarmer(this.bindObj)).subscribe(
         (par) => {
-          if (par.status === 'Success') {
-            console.log(par.status);
-            this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-              'Data saved successfully !', 'modal-info');
-            this.router.navigate(['dashboard']);
-          }
+          console.log(par);
+          zoneForm.reset();
+          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+            'Data saved successfully !', 'modal-info');
+          this.router.navigate(['ZoneList']);
         }
       );
 
     } else {
       this.zoneService.Update(this.zoneTransfarmer.ZoneTransfarmer(this.bindObj)).subscribe(
-        (par) => {
-          if (par.status === 'Success') {
-            console.log(par.status);
-            this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-              'Data saved successfully !', 'modal-info');
-            this.router.navigate(['dashboard']);
-          }
+        () => {
+          zoneForm.reset();
+          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+            'Data saved successfully !', 'modal-info');
+          this.router.navigate(['ZoneList']);
         }
       );
     }
   }
 
-  private getZone(zoneCode: string) {
-    this.bindObj = {
-      zoneCode: null,
-      zoneNameENG: null,
-      zoneNameUNI: null,
-      isActive: 'true',
-    };
-    if (zoneCode === null || zoneCode === '') {
-      this.bindObj = {
-        zoneCode: null,
-        zoneNameENG: null,
-        zoneNameUNI: null,
-        isActive: 'true',
-      };
-      status = '';
-
-    } else {
-      this.zoneService.getZone(zoneCode).subscribe(
-        (par) => this.bindObj = par,
-        (err: any) => console.log(err));
-      status = 'Update';
-    }
+  private getquestion(Question_Code: string) {
   }
 }

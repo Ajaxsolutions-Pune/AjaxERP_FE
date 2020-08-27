@@ -25,8 +25,8 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
   env = environment;
   constructor(private route: ActivatedRoute,
     private answerTransfarmer: AnswerTransfarmer,
-    private defaultLayoutComponent: DefaultLayoutComponent,
     private answerService: AnswerService,
+    private defaultLayoutComponent: DefaultLayoutComponent,
     private router: Router, private formBuilder: FormBuilder) {
     super();
     this.validationMessages = {
@@ -83,20 +83,31 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
       this.answerService.Save(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
         (par) => {
           console.log(par);
-          answerForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['AnswerList']);
+          if (par.status === 'Success') {
+            console.log(par.status);
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            this.router.navigate(['AnswerList']);
+          }   else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
+          }
         }
       );
 
     } else {
       this.answerService.Update(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
-        () => {
-          answerForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['AnswerList']);
+        (par) => {
+          console.log(par);
+          if (par.status === 'Updated') {
+            console.log(par.status);
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            this.router.navigate(['AnswerList']);
+          }   else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-danger');
+          }
         }
       );
     }

@@ -17,22 +17,26 @@ export class ZoneService {
         console.log(this.httpClient.get<ZoneEntity[]>(this.str + '/Zone/getList'));
         return this.httpClient.get<ZoneEntity[]>(this.str + '/Zone/getList', this.env.httpOptions);
     }
+    fillZoneDrp(): Observable<ZoneEntity[]> {
+        return this.httpClient.get<ZoneEntity[]>(this.str
+            + '/Zone/getList?status=1', this.env.httpOptions);
+    }
 
     getZone(qaTypeCode: string): Observable<ZoneEntity> {
         return this.httpClient.get<ZoneEntity>(this.str + '/Zone/' + qaTypeCode
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: ZoneEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<Insertstatus>(this.str + '/Zone', saveEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: ZoneEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
         return this.httpClient.post<Insertstatus>(this.str + '/Zone', updateEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

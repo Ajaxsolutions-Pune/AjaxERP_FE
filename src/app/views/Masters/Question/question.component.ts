@@ -27,8 +27,8 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
   constructor(private route: ActivatedRoute,
     private questionTransfarmer: QuestionTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,
-    private qaTypeTransfarmer: QaTypeTransfarmer,
     private qaTypeService: QaTypeService,
+    private qaTypeTransfarmer: QaTypeTransfarmer,
     private questionService: QuestionService, private router: Router,
     private formBuilder: FormBuilder) {
     super();
@@ -85,27 +85,32 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
   save(QuestionForm: NgForm): void {
     if (status !== 'Update') {
       this.question.questionId = null;
-      console.log(this.question);
-      // if (this.question.isActive === 'true') { this.question.isActive = '1'; } else { this.question.isActive = '0'; }
-
       this.questionService.Save(this.questionTransfarmer.QuestionTransfarmer(this.question)).subscribe(
         (par) => {
-          status = par,
-            console.log(par);
-          QuestionForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['QuestionList']);
+          if (par !== null) {
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+              QuestionForm.reset();
+            this.router.navigate(['QuestionList']);
+          }   else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
+          }
         }
       );
 
     } else {
       this.questionService.Update(this.questionTransfarmer.QuestionTransfarmer(this.question)).subscribe(
-        () => {
-          QuestionForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['QuestionList']);
+        (par) => {
+          if (par !== null) {
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+              QuestionForm.reset();
+            this.router.navigate(['QuestionList']);
+          }   else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
+          }
         }
       );
     }

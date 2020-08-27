@@ -33,8 +33,11 @@ export class FormTransfarmer {
         this.form.formId = Entity.formId;
         this.form.formName = Entity.formName;
         this.form.isActive = Entity.isActive;
-        // tslint:disable-next-line:max-line-length
-        if (Entity.isActive === '1') { this.form.isActive = 'true'.toString().trim(); } else { this.form.isActive = ''.toString().trim(); }
+        if (Entity.isActive === '1') {
+            this.form.isActive = 'true'.toString().trim();
+        } else {
+            this.form.isActive = ''.toString().trim();
+        }
         return this.form;
     }
 

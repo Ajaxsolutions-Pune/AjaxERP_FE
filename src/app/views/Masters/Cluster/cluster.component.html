@@ -1,4 +1,4 @@
-<form #ObjForm="ngForm"  [formGroup]="form" autocomplete="off">
+<form #ObjCluster="ngForm"  [formGroup]="form" autocomplete="off">
     <div class="animated fadeIn">
         
         <div class="row">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4"></div>
-                            <mat-form-field class="col-md-4">
+                            <mat-form-field class="col-md-4" style="display: none;">
                                 <input matInput placeholder="Cluster Name UNI" 
                                 [(ngModel)]="bindObj.clusterNameUNI"
                                     formControlName="ControlclusterNameUNI" 
@@ -55,8 +55,9 @@
                                 <mat-select required formControlName="ControlcircleCode"
                                     [(ngModel)]="bindObj.circleCode">
                                     <mat-option>Circle</mat-option>
-                                    <mat-option value="-1">
-                                        NA
+                                    <mat-option *ngFor="let obj of circledrp"
+                                     [value]="obj.circleCode">
+                                      {{obj.circleNameENG}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error>
@@ -66,7 +67,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4"></div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4" style="padding-top: 20px;">
                                 <mat-checkbox name="chkisActive" #chkisActive formControlName="ControlisActive"
                                     [(ngModel)]="bindObj.isActive">Active
                                 </mat-checkbox>
@@ -79,10 +80,10 @@
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
                                 <button mat-raised-button [disabled]="!form.valid" 
-                                
+                                (click)="save(ObjCluster)"                                
                                     color="primary">Submit</button>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                 <button mat-raised-button color="warn" routerLink="/ClusterList">
-                                    <i class="fa fa-ban"></i>
                                     Cancel</button>
                             </div>
                             <div class="col-md-4"></div>
@@ -93,4 +94,4 @@
         </div>
     </div>
 </form>
-<div> {{bindObj | json}}</div>
+<div style="display: none;"> {{bindObj | json}}</div>

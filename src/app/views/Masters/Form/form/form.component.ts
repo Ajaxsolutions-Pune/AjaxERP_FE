@@ -81,20 +81,31 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
       this.formService.Save(this.formTransfarmer.formTransfarmer(this.formobj)).subscribe(
         (par) => {
           console.log(par);
-          formForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['FormList']);
+          if (par.status === 'Success') {
+            console.log(par.status);
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            this.router.navigate(['FormList']);
+          }   else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
+          }
         }
       );
 
     } else {
       this.formService.Update(this.formTransfarmer.formTransfarmer(this.formobj)).subscribe(
-        () => {
-          formForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['FormList']);
+        (par) => {
+          console.log(par);
+          if (par.status === 'Updated') {
+            console.log(par.status);
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            this.router.navigate(['FormList']);
+          }   else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
+          }
         }
       );
     }

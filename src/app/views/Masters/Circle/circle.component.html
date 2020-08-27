@@ -1,4 +1,4 @@
-<form #ObjForm="ngForm" [formGroup]="form" autocomplete="off">
+<form #Objcircle="ngForm" [formGroup]="form" autocomplete="off">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
@@ -21,7 +21,7 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
-                                <input matInput placeholder="Circle Name ENG" [(ngModel)]="bindObj.circleNameENG"
+                                <input matInput placeholder="Circle Name" [(ngModel)]="bindObj.circleNameENG"
                                     required formControlName="ControlcircleNameENG" #txtcircleNameENG
                                     name="txtcircleNameENG">
                                 <mat-error>
@@ -30,11 +30,13 @@
                             </mat-form-field>
                             <div class="col-md-4"></div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="display: none;">
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
-                                <input matInput placeholder="Circle Name UNI" [(ngModel)]="bindObj.circleNameUNI"
-                                    formControlName="ControlcircleNameUNI" #txtcircleNameUNI name="txtcircleNameUNI">
+                                <input matInput placeholder="Circle Name UNI"
+                                 [(ngModel)]="bindObj.circleNameUNI"
+                                    formControlName="ControlcircleNameUNI"
+                                     #txtcircleNameUNI name="txtcircleNameUNI">
                                 <mat-error>
                                     {{ formErrors['ControlcircleNameUNI'] }}
                                 </mat-error>
@@ -48,8 +50,9 @@
                                 <mat-select required formControlName="ControlzoneCode"
                                     [(ngModel)]="bindObj.zoneCode">
                                     <mat-option>Zone</mat-option>
-                                    <mat-option value="-1">
-                                        NA
+                                    <mat-option *ngFor="let obj of zonedrp"
+                                     [value]="obj.zoneCode">
+                                      {{obj.zoneNameENG}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error>
@@ -59,7 +62,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4"></div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4" style="padding-top: 20px;">
                                 <mat-checkbox name="chkisActive" #chkisActive formControlName="ControlisActive"
                                     [(ngModel)]="bindObj.isActive">Active
                                 </mat-checkbox>
@@ -71,11 +74,10 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <button mat-raised-button [disabled]="!form.valid" 
-                                
-                                    color="primary">Submit</button>
-                                <button mat-raised-button color="warn" routerLink="/RegionList">
-                                    <i class="fa fa-ban"></i>
+                                <button mat-raised-button [disabled]="!form.valid"                                 
+                                    color="primary" (click)="save(Objcircle)">Submit</button>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button mat-raised-button color="warn" routerLink="/CircleList">
                                     Cancel</button>
                             </div>
                             <div class="col-md-4"></div>
@@ -87,4 +89,4 @@
         <!--/.row-->
     </div>
 </form>
-<div> {{bindObj | json}}</div>
+<div style="display: none;"> {{bindObj | json}}</div>

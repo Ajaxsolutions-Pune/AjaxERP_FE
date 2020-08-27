@@ -20,7 +20,9 @@ export class CircleTransfarmer {
             this.Oject.circleNameENG = element.circleNameENG;
             this.Oject.circleNameUNI = element.circleNameUNI;
             this.Oject.zoneCode = element.zoneCode;
-            this.Oject.isActive = element.isActive;
+            if (element.isActive === '1') {
+                this.Oject.isActive = 'Active'.toString().trim();
+            } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
             this.arrOject.push(this.Oject);
         });
         return this.arrOject;
@@ -34,13 +36,16 @@ export class CircleTransfarmer {
         this.Oject.zoneCode = Entity.zoneCode;
         if (Entity.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
-        } else { this.Oject.isActive = ''.toString().trim(); }
+        } else {
+            this.Oject.isActive = ''.toString().trim();
+        }
 
         return this.Oject;
     }
 
     CircleTransfarmer(qaType1: Circle): CircleEntity {
         this.OjectEntity = new CircleEntity();
+        this.OjectEntity.circleCode = qaType1.circleCode;
         this.OjectEntity.zoneCode = qaType1.zoneCode;
         this.OjectEntity.circleNameENG = qaType1.circleNameENG;
         this.OjectEntity.circleNameUNI = qaType1.circleNameUNI;

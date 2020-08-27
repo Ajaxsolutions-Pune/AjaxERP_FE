@@ -42,7 +42,7 @@ export const navItems: NavData[] = [
   {
     name: 'Monitoring Masters',
     url: '/Masters',
-    icon: 'icon-puzzle',
+  //  icon: 'nav-icon icon-layers',
     children: [
       {
         name: 'Form',
@@ -202,7 +202,7 @@ export const navItems: NavData[] = [
   {
     name: 'Process Setup',
     url: '/Mapping',
-    icon: 'icon-puzzle',
+    icon: '',
     children: [
       {
         name: 'Form Que Ans',
@@ -219,7 +219,7 @@ export const navItems: NavData[] = [
   {
     name: 'Monitoring Reports',
     url: '/Reports',
-    icon: 'fa fa-newspaper-o',
+ //   icon: 'fa fa-newspaper-o',
     children: [
     ]
 

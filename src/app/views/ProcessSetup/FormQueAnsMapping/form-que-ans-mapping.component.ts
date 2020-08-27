@@ -104,6 +104,17 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   }
 
   save(): void {
+    console.log(this.FormId);
+    if (this.FormId === undefined) {
+      this.defaultLayoutComponent.Massage('Somethig Wrong',
+        'Please select form name', 'modal-danger');
+        return;
+    }
+    if (this.objFormQueAnsMapping.length < 1) {
+      this.defaultLayoutComponent.Massage('Somethig Wrong',
+        'No Item Found', 'modal-danger');
+        return;
+    }
     this.dataSource.filteredData.forEach(element => {
       element.formId = this.FormId;
       element.updateFlag = this.FormId;

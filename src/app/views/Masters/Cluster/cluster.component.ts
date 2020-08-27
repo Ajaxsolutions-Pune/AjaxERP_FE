@@ -1,9 +1,15 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Cluster } from '../../../Compound/Module/Masters/Cluster.model';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
+import { CircleService } from '../../../Compound/Services/Masters/CircleService';
+import { CircleTransfarmer } from '../../../Compound/Transformer/Masters/Circle-Transfarmer';
+import { ClusterService } from '../../../Compound/Services/Masters/ClusterService';
+import { ClusterTransfarmer } from '../../../Compound/Transformer/Masters/Cluster-Transfarmer';
+import { Circle } from '../../../Compound/Module/Masters/Circle.model';
+import { DefaultLayoutComponent } from '../../../containers';
 @Component({
   selector: 'app-cluster',
   templateUrl: './cluster.component.html',
@@ -15,7 +21,14 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
   errorMatcher = new CrossFieldErrorMatcher();
   @Input() CircleInput: Cluster;
   bindObj: Cluster;
-  constructor(private _router: Router,
+  circledrp: Circle[];
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private defaultLayoutComponent: DefaultLayoutComponent,
+    private circleService: CircleService,
+    private circleTransfarmer: CircleTransfarmer,
+    private clusterService: ClusterService,
+    private clusterTransfarmer: ClusterTransfarmer,
     private formBuilder: FormBuilder) {
     super();
     this.validationMessages = {
@@ -45,12 +58,17 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
       ControlclusterCode: ['', []],
       ControlclusterNameENG: ['', [
         Validators.required]],
-        ControlcircleCode: ['', [
+      ControlcircleCode: ['', [
         Validators.required]],
-        ControlclusterNameUNI: ['', []],
+      ControlclusterNameUNI: ['', []],
       ControlisActive: ['', []],
     });
     this.form.controls['ControlclusterCode'].disable();
+    this.circleService.fillCircleDrp().subscribe(
+      (par) => {
+        this.circledrp = this.circleTransfarmer.CircleTransfarmers(par);
+      },
+      (err: any) => console.log(err));
     this.bindObj = {
       clusterCode: null,
       clusterNameENG: null,
@@ -58,8 +76,69 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
       circleCode: null,
       isActive: null
     };
+    this.route.paramMap.subscribe(parameterMap => {
+      const str = parameterMap.get('id');
+      this.getCluster(str);
+    });
   }
 
-  resultChanged(): void {
+  private getCluster(Cluster_Code: string) {
+    this.bindObj = {
+      clusterCode: null,
+      clusterNameENG: null,
+      clusterNameUNI: null,
+      circleCode: null,
+      isActive: null
+    };
+    if (Cluster_Code === null || Cluster_Code === '') {
+      this.bindObj = {
+        clusterCode: null,
+        clusterNameENG: null,
+        clusterNameUNI: null,
+        circleCode: null,
+        isActive: null
+      };
+      status = '';
+
+    } else {
+      this.clusterService.getCluster(Cluster_Code).subscribe(
+        (par) => this.bindObj = this.clusterTransfarmer.ClusterTransfarmerEntity(par),
+        (err: any) => console.log(err));
+      status = 'Update';
+    }
   }
+  save(clusterForm: NgForm): void {
+    if (status !== 'Update') {
+      this.bindObj.clusterCode = null;
+      this.clusterService.Save(this.clusterTransfarmer.ClusterTransfarmer(this.bindObj)).subscribe(
+        (par) => {
+          if (par !== null) {
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            clusterForm.reset();
+            this.router.navigate(['ClusterList']);
+          }   else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
+          }
+        }
+      );
+
+    } else {
+      this.clusterService.Update(this.clusterTransfarmer.ClusterTransfarmer(this.bindObj)).subscribe(
+        (par) => {
+          if (par !== null) {
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            clusterForm.reset();
+            this.router.navigate(['ClusterList']);
+          }   else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
+          }
+        }
+      );
+    }
+  }
+
 }
