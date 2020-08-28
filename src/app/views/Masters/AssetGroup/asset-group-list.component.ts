@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AssetGroup, AssetGroupEntity } from '../../../Compound/Module/Masters/AssetGroup.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AssetGroupTransfarmer } from '../../../Compound/Transformer/Masters/AssetGroup-Transfarmer';
+import { environment } from '../../../Compound/Module/environment';
 
 @Component({
   selector: 'app-asset-group-list',
@@ -17,6 +18,8 @@ export class AssetGroupListComponent implements OnInit {
   ResultOject: AssetGroup[];
   SerachCri: number;
   bindObj: AssetGroup;
+  config: any;
+  env = environment;
   constructor(private _router: Router,
     objTrans: AssetGroupTransfarmer,
     private route: ActivatedRoute) {
@@ -26,8 +29,17 @@ export class AssetGroupListComponent implements OnInit {
     this.arrOjectEntity = this.route.snapshot.data['AssetGroupList'];
     this.arrOject = objTrans.AssetGroupTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
+    this.WithoutFilterObj = this.arrOject;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.arrOject.length
+    };
   }
 
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
     console.log(this.arrOject);
@@ -35,7 +47,7 @@ export class AssetGroupListComponent implements OnInit {
       assetGroupCode: null,
       assetGroupNameENG: null,
       assetGroupNameUNI: null,
-      isActive: null
+      isActive: '3'
     };
   }
 
@@ -52,10 +64,25 @@ export class AssetGroupListComponent implements OnInit {
         SubResult.assetGroupCode.toString().toLowerCase().indexOf(this.bindObj.assetGroupCode.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
+    if (this.bindObj.isActive !== null && this.bindObj.isActive.toString() !== '-1') {
+      if (this.bindObj.isActive.toString() === '3') {
+        this.ResultOject = this.ResultOject.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === 'Active' || SubResultProd.isActive.toString() === 'Inactive');
+      } else {
+        this.ResultOject = this.ResultOject.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === this.bindObj.isActive.toString());
+      }
+      this.SerachCri = 1;
+    }
     if (this.SerachCri === 0) {
       this.ResultOject = this.WithoutFilterObj;
     }
     this.arrOject = this.ResultOject;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.arrOject.length
+    };
   }
 
   ExportToExcel(): void {

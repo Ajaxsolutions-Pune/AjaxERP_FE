@@ -17,7 +17,10 @@ export class ColourService {
         return this.httpClient.get<ColourEntity[]>(this.str + '/Colour/getList'
         , this.env.httpOptions);
     }
-
+    fillColoursDrp(): Observable<ColourEntity[]> {
+        return this.httpClient.get<ColourEntity[]>(this.str + '/Colour/getList?status=1'
+        , this.env.httpOptions);
+    }
     getColour(qaTypeCode: string): Observable<ColourEntity> {
         return this.httpClient.get<ColourEntity>(this.str + '/Colour/' + qaTypeCode
         , this.env.httpOptions).pipe(catchError(this.handleError));

@@ -17,6 +17,10 @@ export class AssetGroupService {
         return this.httpClient.get<AssetGroupEntity[]>(this.str
              + '/AssetGroup/getList', this.env.httpOptions);
     }
+    fillAssetGroupDrp(): Observable<AssetGroupEntity[]> {
+        return this.httpClient.get<AssetGroupEntity[]>(this.str + '/AssetGroup/getList?status=1'
+        , this.env.httpOptions);
+    }
 
     getAssetGroup(qaTypeCode: string): Observable<AssetGroupEntity> {
         return this.httpClient.get<AssetGroupEntity>(this.str + '/AssetGroup/' + qaTypeCode

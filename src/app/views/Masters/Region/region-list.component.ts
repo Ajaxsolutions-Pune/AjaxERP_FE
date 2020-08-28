@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Region, RegionEntity } from '../../../Compound/Module/Masters/Region.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RegionTransfarmer } from '../../../Compound/Transformer/Masters/Region-Transfarmer';
+import * as alasql from 'alasql';
+import { environment } from '../../../Compound/Module/environment';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
   selector: 'app-region-list',
@@ -17,6 +20,8 @@ export class RegionListComponent implements OnInit {
   ResultOject: Region[];
   SerachCri: number;
   bindObj: Region;
+  config: any;
+  env = environment;
   constructor(private _router: Router,
     objTrans: RegionTransfarmer,
     private route: ActivatedRoute) {
@@ -26,8 +31,16 @@ export class RegionListComponent implements OnInit {
     this.arrOjectEntity = this.route.snapshot.data['RegionList'];
     this.arrOject = objTrans.RegionTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.arrOject.length
+    };
   }
 
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
     console.log(this.arrOject);
@@ -35,7 +48,7 @@ export class RegionListComponent implements OnInit {
       regionCode: null,
       regionNameENG: null,
       regionNameUNI: null,
-      isActive: null
+      isActive: '3'
     };
   }
 
@@ -52,14 +65,29 @@ export class RegionListComponent implements OnInit {
         SubResult.regionCode.toString().toLowerCase().indexOf(this.bindObj.regionCode.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
+    if (this.bindObj.isActive !== null && this.bindObj.isActive.toString() !== '-1') {
+      if (this.bindObj.isActive.toString() === '3') {
+        this.ResultOject = this.ResultOject.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === 'Active' || SubResultProd.isActive.toString() === 'Inactive');
+      } else {
+        this.ResultOject = this.ResultOject.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === this.bindObj.isActive.toString());
+      }
+      this.SerachCri = 1;
+    }
     if (this.SerachCri === 0) {
       this.ResultOject = this.WithoutFilterObj;
     }
     this.arrOject = this.ResultOject;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.arrOject.length
+    };
   }
 
   ExportToExcel(): void {
-    alasql('SELECT regionCode,regionNameENG,zoneNameUNI,' +
-      'isActive INTO XLSX("zoneList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT regionCode Region_Code,regionNameENG Region_Name,isActive Active' +
+      ' INTO XLSX("RegionList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

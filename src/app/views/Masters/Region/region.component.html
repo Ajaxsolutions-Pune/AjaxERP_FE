@@ -1,11 +1,10 @@
 <form #ObjForm="ngForm" [formGroup]="form" autocomplete="off">
-    <div class="animated fadeIn">
-        
+    <div class="animated fadeIn">        
         <div class="row">
             <div class="col-md-11 container">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Zone</strong>
+                        <strong>Region</strong>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -27,8 +26,9 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Region Name ENG"
+                                placeholder="Region Name"
                                 [(ngModel)]="bindObj.regionNameENG" required
+                                (keypress)="omit_special_char($event)" 
                                 formControlName="ControlregionNameENG"
                                 #txtregionNameENG
                                 name="txtregionNameENG">
@@ -38,7 +38,7 @@
                             </mat-form-field>
                             <div class="col-md-4"></div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="display: none;">
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
@@ -55,7 +55,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4"></div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4" style="padding-top: 20px;">
                                 <mat-checkbox name="chkisActive"
                                 #chkisActive
                                 formControlName="ControlisActive"
@@ -72,9 +72,9 @@
                                 <button mat-raised-button [disabled]="!form.valid" 
                                 (click)="save(ObjForm)"
                                     color="primary">Submit</button>
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
                                 <button mat-raised-button color="warn"
                                  routerLink="/RegionList">
-                                 <i class="fa fa-ban"></i>
                                     Cancel</button>
                             </div>
                             <div class="col-md-4"></div>

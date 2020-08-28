@@ -38,7 +38,7 @@
                             </mat-form-field>
                             <div class="col-md-4"></div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="display: none;">
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
@@ -53,7 +53,7 @@
                             </mat-form-field>
                             <div class="col-md-4"></div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="padding-top: 20px;">
                             <div class="col-md-4"></div>
                             <div class="col-sm-4">
                                 <mat-checkbox name="chkisActive"
@@ -70,10 +70,11 @@
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
                                 <button mat-raised-button [disabled]="!form.valid" 
+                                (click)="save(ObjForm)"
                                     color="primary">Submit</button>
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
                                 <button mat-raised-button color="warn"
                                  routerLink="/AssetGroupList">
-                                 <i class="fa fa-ban"></i>
                                     Cancel</button>
                             </div>
                             <div class="col-md-4"></div>

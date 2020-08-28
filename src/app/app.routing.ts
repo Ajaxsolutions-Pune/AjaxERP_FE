@@ -769,7 +769,7 @@ export const routes: Routes = [
         path: 'AssetCategoryList',
         component: AssetCategoryListComponent,
         data: {
-          title: 'Cluster List'
+          title: 'Asset Category List'
         },
         resolve: {
           AssetCategoryList1: AssetCategoryListResolverService

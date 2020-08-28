@@ -1,18 +1,40 @@
-<div class="form-group row">
+<div class="form-group">
+  <div class="row">
+
+    <div class="col-md-3">Asset Id</div>
+    <div class="col-md-3">Asset</div>
+    <div class="col-md-2">Status</div>
+  </div>
+  <div class="row">
     <div class="col-md-3">
-        <input id="txtassetCategoryCode" required name="txtassetCategoryCode" type="text" class="form-control" placeholder="Asset Category Code" 
+        <input id="txtassetCategoryCode" required name="txtassetCategoryCode" 
+        type="text" class="form-control" placeholder="Asset Category Code" 
         (input)="resultChanged()" [(ngModel)]="bindObj.assetCategoryCode">
     </div>
     <div class="col-md-3">
-        <input id="txtassetCategoryNameENG" required name="txtassetCategoryNameENG" type="text" class="form-control" placeholder="Asset Category Name"
-        (input)="resultChanged()" [(ngModel)]="bindObj.assetCategoryNameENG">
+        <input id="txtassetCategoryNameENG" required 
+        name="txtassetCategoryNameENG" type="text" class="form-control" 
+        placeholder="Asset Category"
+        (input)="resultChanged()" 
+        [(ngModel)]="bindObj.assetCategoryNameENG">
+    </div>
+    <div class="col-md-2">
+      <select id="ShiftId" name="ShiftId" (change)="resultChanged()" [(ngModel)]="bindObj.isActive"
+        class="form-control">
+        <option value="3">All</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
     </div>
     <div class="col-md-1">
-        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create assetCategory" routerLink="/AssetCategory"></button>
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" 
+        title="Create assetCategory" routerLink="/AssetCategory"></button>
     </div>
     <div class="col-md-1">
-        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+      <i class="fa fa-file-excel-o" style="font-size:35px;color: #20a8d8" aria-hidden="true"
+        (click)="ExportToExcel()"></i>
     </div>
+</div>
 </div>
 
 <table class="table table-responsive-sm table-hover table-outline mb-0">
@@ -20,26 +42,28 @@
       <tr>
         <th>Asset Category Code</th>
         <th>Asset Category Name</th>
-        <th>Active</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let Oject of arrOject">
+      <tr *ngFor="let Oject of arrOject | paginate: config">
         <td>
           <div>{{Oject.assetCategoryCode}}</div>
         </td>
         <td>
           {{Oject.assetCategoryNameENG}}
         </td>
-        <td [ngSwitch]="Oject.isActive">
-          <span *ngSwitchCase="true">Yes</span>
-          <span *ngSwitchDefault>No</span>
+        <td>
+          {{Oject.isActive}}
         </td>
-        <td [ngSwitch]="1">
-          <button class="btn btn-primary" [disabled]="Oject.assetCategoryCode === ''"
-            [routerLink]="['/AssetCategory/',Oject.assetCategoryCode]">Edit</button>
-        </td>
+        <td>
+        <button mat-icon-button [routerLink]="['/AssetCategory/',Oject.assetCategoryCode]"
+         color="accent">
+          <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+        </button>
+      </td>
       </tr>
     </tbody>
   </table>
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

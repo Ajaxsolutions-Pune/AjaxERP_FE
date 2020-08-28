@@ -44,7 +44,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let obj of processs">
+    <tr *ngFor="let obj of processs | paginate: config">
       <td>
         <div>{{obj.processId}}</div>
       </td>
@@ -66,3 +66,4 @@
     </tr>
   </tbody>
 </table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

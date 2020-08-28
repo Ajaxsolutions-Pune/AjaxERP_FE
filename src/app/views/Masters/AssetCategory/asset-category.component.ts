@@ -1,9 +1,18 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { AssetCategory } from '../../../Compound/Module/Masters/AssetCategory.model';
-import { Router } from '@angular/router';
+import { AssetCategory, AssetCategoryEntity } from '../../../Compound/Module/Masters/AssetCategory.model';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
+import { AssetGroupEntity, AssetGroup } from '../../../Compound/Module/Masters/AssetGroup.model';
+import { Colour } from '../../../Compound/Module/Masters/Colour.model';
+import { ColourTransfarmer } from '../../../Compound/Transformer/Masters/Colour-Transfarmer';
+import { ColourService } from '../../../Compound/Services/Masters/ColourService';
+import { AssetGroupService } from '../../../Compound/Services/Masters/AssetGroupService';
+import { AssetGroupTransfarmer } from '../../../Compound/Transformer/Masters/AssetGroup-Transfarmer';
+import { AssetCategoryService } from '../../../Compound/Services/Masters/AssetCategory';
+import { AssetCategoryTransfarmer } from '../../../Compound/Transformer/Masters/Asset-Category-Transfarmer';
+import { DefaultLayoutComponent } from '../../../containers';
 
 @Component({
   selector: 'app-asset-category',
@@ -14,43 +23,149 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
 
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
-  @Input() CircleInput: AssetCategory;
   bindObj: AssetCategory;
-  constructor(private _router: Router,
+  str: string;
+  assetGroupdrp: AssetGroup[];
+  colourdrp: Colour[];
+  bindObjEntity: AssetCategoryEntity;
+  constructor(private _router: Router, private route: ActivatedRoute,
+    private assetGroupService: AssetGroupService,
+    private assetGroupTransfarmer: AssetGroupTransfarmer,
+    private assetCategoryService: AssetCategoryService,
+    private defaultLayoutComponent: DefaultLayoutComponent,
+    private router: Router,
+    private assetCategoryTransfarmer: AssetCategoryTransfarmer,
+    private colourService: ColourService,
+    private colourTransfarmer: ColourTransfarmer,
     private formBuilder: FormBuilder) {
     super();
     this.validationMessages = {
       ControlassetCategoryCode: {
         required: 'Category Code is required.',
+      },
+      ControlCategoryNameENG: {
+        required: 'Category Name is required.',
+      },
+      ControlassetGroup: {
+        required: 'Asset Group is required.',
+      },
+      ControlassetCategoryNameUNI: {
+        required: 'Category Name UNI is required.',
+      },
+      Controlcolour: {
+        required: 'Colour is required.',
       }
     };
     this.formErrors = {
-      ControlassetCategoryCode: '',
+      ControlisActive: '',
     };
   }
+
   ngOnInit() {
     this.form = this.formBuilder.group({
-      ControlassetCategoryCode: ['', [
+      ControlassetCategoryCode: ['', []],
+      ControlCategoryNameENG: ['', [
         Validators.required]],
-        ControlisActive: ['', []],
+      ControlassetCategoryNameUNI: ['', []],
+      ControlassetGroup: ['', [
+        Validators.required]],
+      Controlcolour: ['', [
+        Validators.required]],
+      ControlisActive: ['', []],
     });
     this.form.controls['ControlassetCategoryCode'].disable();
+    status = '';
+    this.colourService.fillColoursDrp().subscribe(
+      (par) => {
+        this.colourdrp = this.colourTransfarmer.ColourTransfarmers(par);
+      },
+      (err: any) => console.log(err));
+    this.assetGroupService.fillAssetGroupDrp().subscribe(
+      (par) => {
+        this.assetGroupdrp = this.assetGroupTransfarmer.AssetGroupTransfarmers(par);
+      },
+      (err: any) => console.log(err));
     this.bindObj = {
       assetCategoryCode: null,
       assetCategoryNameENG: null,
       assetCategoryNameUNI: null,
       assetGroupCode: null,
       colourCode: null,
-      isActive: null,
+      isActive: 'true'
     };
+    this.route.paramMap.subscribe(parameterMap => {
+      const str = parameterMap.get('id');
+      this.getregion(str);
+    });
   }
-
   ngAfterViewInit(): void {
     setTimeout(() => {
     }, 250);
     this.startControlMonitoring(this.form);
   }
 
-  resultChanged(): void {
+  save(ObjForm: NgForm): void {
+    if (status !== 'Update') {
+      this.bindObj.assetCategoryCode = null;
+      this.assetCategoryService.Save(this.assetCategoryTransfarmer.AssetCategoryTransfarmer(this.bindObj)).subscribe(
+        (par) => {
+          if (par !== null) {
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            ObjForm.reset();
+            this.router.navigate(['AssetCategoryList']);
+          } else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
+          }
+        }
+      );
+
+    } else {
+      this.assetCategoryService.Update(this.assetCategoryTransfarmer.AssetCategoryTransfarmer(this.bindObj)).subscribe(
+        (par) => {
+          if (par !== null) {
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            ObjForm.reset();
+            this.router.navigate(['AssetCategoryList']);
+          } else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
+          }
+        }
+      );
+    }
+  }
+  private getregion(assetCategory_Code: string) {
+    this.bindObj = {
+      assetCategoryCode: null,
+      assetCategoryNameENG: null,
+      assetCategoryNameUNI: null,
+      assetGroupCode: null,
+      colourCode: null,
+      isActive: 'true'
+    };
+    if (assetCategory_Code === null || assetCategory_Code === '') {
+      this.bindObj = {
+        assetCategoryCode: null,
+        assetCategoryNameENG: null,
+        assetCategoryNameUNI: null,
+        assetGroupCode: null,
+        colourCode: null,
+        isActive: 'true'
+      };
+      status = '';
+
+    } else {
+      this.assetCategoryService.getAssetCategory(assetCategory_Code).subscribe(
+        (par) => {
+          this.bindObjEntity = par;
+          this.bindObj = this.assetCategoryTransfarmer.
+            AssetCategoryTransfarmerEntity(this.bindObjEntity);
+        },
+        (err: any) => console.log(err));
+      status = 'Update';
+    }
   }
 }

@@ -19,7 +19,9 @@ export class AssetGroupTransfarmer {
             this.Oject.assetGroupCode = element.assetGroupCode;
             this.Oject.assetGroupNameENG = element.assetGroupNameENG;
             this.Oject.assetGroupNameUNI = element.assetGroupNameUNI;
-            this.Oject.isActive = element.isActive;
+            if (element.isActive === '1') {
+                this.Oject.isActive = 'Active'.toString().trim();
+            } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
             this.arrOject.push(this.Oject);
         });
         return this.arrOject;

@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AssetCategory, AssetCategoryEntity } from '../../../Compound/Module/Masters/AssetCategory.model';
 import { AssetCategoryTransfarmer } from '../../../Compound/Transformer/Masters/Asset-Category-Transfarmer';
+import { environment } from '../../../Compound/Module/environment';
+import * as alasql from 'alasql';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
   selector: 'app-asset-category-list',
@@ -17,6 +20,8 @@ export class AssetCategoryListComponent implements OnInit {
   ResultOject: AssetCategory[];
   SerachCri: number;
   bindObj: AssetCategory;
+  config: any;
+  env = environment;
   constructor(private _router: Router,
     objTrans: AssetCategoryTransfarmer,
     private route: ActivatedRoute) {
@@ -24,10 +29,13 @@ export class AssetCategoryListComponent implements OnInit {
         this._router.navigate(['login']);
       }
     this.arrOjectEntity = this.route.snapshot.data['AssetCategoryList1'];
-    console.log('this.arrOjectEntity');
-    console.log(this.arrOjectEntity);
     this.arrOject = objTrans.AssetCategoryTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.arrOject.length
+    };
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
@@ -38,7 +46,7 @@ export class AssetCategoryListComponent implements OnInit {
       assetCategoryNameUNI: null,
       assetGroupCode: null,
       colourCode: null,
-      isActive: null,
+      isActive: '3'
     };
   }
 
@@ -55,14 +63,29 @@ export class AssetCategoryListComponent implements OnInit {
         SubResult.assetCategoryCode.toString().toLowerCase().indexOf(this.bindObj.assetCategoryCode.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
+    if (this.bindObj.isActive !== null && this.bindObj.isActive.toString() !== '-1') {
+      if (this.bindObj.isActive.toString() === '3') {
+        this.ResultOject = this.ResultOject.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === 'Active' || SubResultProd.isActive.toString() === 'Inactive');
+      } else {
+        this.ResultOject = this.ResultOject.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === this.bindObj.isActive.toString());
+      }
+      this.SerachCri = 1;
+    }
     if (this.SerachCri === 0) {
       this.ResultOject = this.WithoutFilterObj;
     }
     this.arrOject = this.ResultOject;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.arrOject.length
+    };
   }
 
   ExportToExcel(): void {
-    alasql('SELECT assetGroupCode,assetGroupNameENG,assetGroupNameUNI,' +
+    alasql('SELECT assetCategoryCode Asset_Category_Code,assetGroupNameENG Asset_GroupName,' +
       'isActive INTO XLSX("AssetGroupList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

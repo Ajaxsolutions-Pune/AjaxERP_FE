@@ -19,7 +19,9 @@ export class RegionTransfarmer {
             this.Oject.regionCode = element.regionCode;
             this.Oject.regionNameENG = element.regionNameENG;
             this.Oject.regionNameUNI = element.regionNameUNI;
-            this.Oject.isActive = element.isActive;
+            if (element.isActive === '1') {
+                this.Oject.isActive = 'Active'.toString().trim();
+            } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
             this.arrOject.push(this.Oject);
         });
         return this.arrOject;

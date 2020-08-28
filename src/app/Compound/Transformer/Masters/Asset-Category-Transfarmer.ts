@@ -21,7 +21,9 @@ export class AssetCategoryTransfarmer {
             this.Oject.assetCategoryNameUNI = element.assetCategoryNameUNI;
             this.Oject.assetGroupCode = element.assetGroupCode;
             this.Oject.colourCode = element.colourCode;
-            this.Oject.isActive = element.isActive;
+            if (element.isActive === '1') {
+                this.Oject.isActive = 'Active'.toString().trim();
+            } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
             this.arrOject.push(this.Oject);
         });
         console.log('this.arrOject');

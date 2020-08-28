@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Process, ProcessEntity } from '../../../../Compound/Module/Masters/Process.model';
 import { ProcessTransfarmer1 } from '../../../../Compound/Transformer/Masters/Process-Transfarmer1';
 import * as alasql from 'alasql';
+import { environment } from '../../../../Compound/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
@@ -19,6 +20,8 @@ export class ProcessListComponent implements OnInit {
   Resultprocess: Process[];
   SerachCri: number;
   bindObj: Process;
+  config: any;
+  env = environment;
   constructor(private _router: Router,
      objTrans: ProcessTransfarmer1,
     private route: ActivatedRoute) {
@@ -29,6 +32,11 @@ export class ProcessListComponent implements OnInit {
     console.log(this.processEntity);
      this.processs = objTrans.processTransfarmers(this.processEntity);
     this.WithoutFilterprocess = this.processs;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.processs.length
+    };
   }
 
   ngOnInit() {
@@ -41,6 +49,9 @@ export class ProcessListComponent implements OnInit {
     };
   }
 
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultprocess = this.WithoutFilterprocess;
@@ -68,6 +79,11 @@ export class ProcessListComponent implements OnInit {
       this.Resultprocess = this.WithoutFilterprocess;
     }
     this.processs = this.Resultprocess;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.processs.length
+    };
   }
 
   ExportToExcel(): void {

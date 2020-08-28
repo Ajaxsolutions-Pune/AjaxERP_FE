@@ -16,7 +16,8 @@ export class AssetService {
     }
     getAssets(): Observable<AssetEntity[]> {
         console.log(this.str + '/Asset/getList');
-        return this.httpClient.get<AssetEntity[]>(this.str + '/Asset/getList');
+        return this.httpClient.get<AssetEntity[]>(this.str + '/Asset/getList'
+        , this.env.httpOptions);
     }
 
     getAsset(qaTypeCode: string): Observable<AssetEntity> {

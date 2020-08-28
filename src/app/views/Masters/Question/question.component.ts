@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Question } from '../../../Compound/Module/Masters/Question.model';
+import { Question, QuestionEntity } from '../../../Compound/Module/Masters/Question.model';
 import { QuestionService } from '../../../Compound/Services/Masters/QuestionService';
 import { QuestionTransfarmer } from '../../../Compound/Transformer/Masters/Question-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
@@ -22,6 +22,7 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
   errorMatcher = new CrossFieldErrorMatcher();
   question: Question;
   str: string;
+  questionEntity: QuestionEntity;
 
   qaTypes: QaType[];
   constructor(private route: ActivatedRoute,
@@ -90,9 +91,9 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
-              QuestionForm.reset();
+            QuestionForm.reset();
             this.router.navigate(['QuestionList']);
-          }   else {
+          } else {
             this.defaultLayoutComponent.Massage('',
               'Somethig Wrong', 'modal-info');
           }
@@ -105,9 +106,9 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
-              QuestionForm.reset();
+            QuestionForm.reset();
             this.router.navigate(['QuestionList']);
-          }   else {
+          } else {
             this.defaultLayoutComponent.Massage('',
               'Somethig Wrong', 'modal-info');
           }
@@ -134,7 +135,10 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
 
     } else {
       this.questionService.getQuestion(Question_Code).subscribe(
-        (par) => this.question = par,
+        (par) => {
+          this.questionEntity = par;
+          this.question = this.questionTransfarmer.QuestionTransfarmerEntity(this.questionEntity);
+        },
         (err: any) => console.log(err));
       status = 'Update';
     }
