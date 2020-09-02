@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Colour, ColourEntity } from '../../../Compound/Module/Masters/Colour.model';
+import { Colour, ColourEntity } from '../../../Components/Module/Masters/Colour.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ColourTransfarmer } from '../../../Compound/Transformer/Masters/Colour-Transfarmer';
+import { ColourTransfarmer } from '../../../Components/Transformer/Masters/Colour-Transfarmer';
 
 @Component({
   selector: 'app-colour-list',

@@ -6,7 +6,7 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
-import { LogInComponent } from './Compound/login/login.component';
+import { LogInComponent } from './Components/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component';
 import { UserMasterComponent } from './views/Masters/User/user-master.component';
 import { ListUserComponent } from './views/Masters/User/List-user.component';
@@ -40,28 +40,28 @@ import { ItemGroupListComponent } from './views/Masters/Item/item-group-list.com
 import { ItemGroupComponent } from './views/Masters/Item/item-group.component';
 import { ItemSubGroupListComponent } from './views/Masters/Item/item-sub-group-list.component';
 import { ItemSubGroupComponent } from './views/Masters/Item/item-sub-group.component';
-import { StateListResolverService } from './Compound/Resolver/State-List-Resolver.service';
-import { CountryResolverService } from './Compound/Resolver/Masters/CountryListResolverService';
-import { BrandListResolverService } from './Compound/Resolver/Masters/Brand-List-Resolver.Service';
-import { DistrictListResolverService } from './Compound/Resolver/Masters/District-List-Resolver-Service';
-import { DistrictMasterResolverService } from './Compound/Resolver/Masters/District-MasterResolver';
-import { TehsilListResolverService } from './Compound/Resolver/Masters/Tehsil-List-Resolver.Service';
-import { TehsilMasterResolverService } from './Compound/Resolver/Masters/Tehsil-Master-Resolver.Service';
+import { StateListResolverService } from './Components/Resolver/State-List-Resolver.service';
+import { CountryResolverService } from './Components/Resolver/Masters/CountryListResolverService';
+import { BrandListResolverService } from './Components/Resolver/Masters/Brand-List-Resolver.Service';
+import { DistrictListResolverService } from './Components/Resolver/Masters/District-List-Resolver-Service';
+import { DistrictMasterResolverService } from './Components/Resolver/Masters/District-MasterResolver';
+import { TehsilListResolverService } from './Components/Resolver/Masters/Tehsil-List-Resolver.Service';
+import { TehsilMasterResolverService } from './Components/Resolver/Masters/Tehsil-Master-Resolver.Service';
 import { AnswerListComponent } from './views/Masters/Answer/answer-list/answer-list.component';
 import { AnswerComponent } from './views/Masters/Answer/answer/answer.component';
 import { FormListComponent } from './views/Masters/Form/form-list/form-list.component';
 import { ProcessListComponent } from './views/Masters/Process/process-list/process-list.component';
 import { ProcessComponent } from './views/Masters/Process/process/process.component';
 import { FormComponent } from './views/Masters/Form/form/form.component';
-import { AnswerListResolverService } from './Compound/Resolver/Masters/Answer-List-Resolver.Service';
-import { FormListResolverService } from './Compound/Resolver/Masters/Form-List-Resolver.Service';
-import { QuestionListResolverService } from './Compound/Resolver/Masters/Question-List-Resolver-Service';
+import { AnswerListResolverService } from './Components/Resolver/Masters/Answer-List-Resolver.Service';
+import { FormListResolverService } from './Components/Resolver/Masters/Form-List-Resolver.Service';
+import { QuestionListResolverService } from './Components/Resolver/Masters/Question-List-Resolver-Service';
 import { QuestionListComponent } from './views/Masters/Question/question-list.component';
 import { QuestionComponent } from './views/Masters/Question/question.component';
-import { ProcessListResolverService } from './Compound/Resolver/Masters/Process-List-Resolver.Service';
+import { ProcessListResolverService } from './Components/Resolver/Masters/Process-List-Resolver.Service';
 import { QuestionTypeListComponent } from './views/Masters/Question/question-type-list.component';
 import { QuestionTypeComponent } from './views/Masters/Question/question-type.component';
-import { QaTypeListResolverService } from './Compound/Resolver/Masters/QaType-List-Resolver.Service';
+import { QaTypeListResolverService } from './Components/Resolver/Masters/QaType-List-Resolver.Service';
 import { ZoneComponent } from './views/Masters/Zone/zone.component';
 import { ZoneListComponent } from './views/Masters/Zone/zone-list.component';
 import { RegionListComponent } from './views/Masters/Region/region-list.component';
@@ -81,15 +81,15 @@ import { AssetComponent } from './views/Masters/Asset/asset.component';
 import { DeviceComponent } from './views/Masters/Device/device.component';
 import { DeviceListComponent } from './views/Masters/Device/device-list.component';
 import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.component';
-import { AssetListResolverService } from './Compound/Resolver/Masters/Asset-List-Resolver.Service';
-import { AssetGroupListResolverService } from './Compound/Resolver/Masters/AssetGroup-List-Resolver-Service';
-import { ZoneListResolverService } from './Compound/Resolver/Masters/Zone-List-Resolver.Service';
-import { CircleListResolverService } from './Compound/Resolver/Masters/Circle-List-Resolver.Service';
-import { ClusterListResolverService } from './Compound/Resolver/Masters/Cluster-List-Resolver.Service';
-import { RegionListResolverService } from './Compound/Resolver/Masters/Region-List-Resolver-Service';
-import { ColourListResolverService } from './Compound/Resolver/Masters/Colour-List-Resolver.Service';
-import { DeviceListResolverService } from './Compound/Resolver/Masters/Device-List-Resolver-Service';
-import { AssetCategoryListResolverService } from './Compound/Resolver/Masters/Asset-Category-List-Resolver.Service';
+import { AssetListResolverService } from './Components/Resolver/Masters/Asset-List-Resolver.Service';
+import { AssetGroupListResolverService } from './Components/Resolver/Masters/AssetGroup-List-Resolver-Service';
+import { ZoneListResolverService } from './Components/Resolver/Masters/Zone-List-Resolver.Service';
+import { CircleListResolverService } from './Components/Resolver/Masters/Circle-List-Resolver.Service';
+import { ClusterListResolverService } from './Components/Resolver/Masters/Cluster-List-Resolver.Service';
+import { RegionListResolverService } from './Components/Resolver/Masters/Region-List-Resolver-Service';
+import { ColourListResolverService } from './Components/Resolver/Masters/Colour-List-Resolver.Service';
+import { DeviceListResolverService } from './Components/Resolver/Masters/Device-List-Resolver-Service';
+import { AssetCategoryListResolverService } from './Components/Resolver/Masters/Asset-Category-List-Resolver.Service';
 import { FormQueAnsMappingComponent } from './views/ProcessSetup/FormQueAnsMapping/form-que-ans-mapping.component';
 
 export const routes: Routes = [
@@ -697,7 +697,7 @@ export const routes: Routes = [
         path: 'AssetGroupList',
         component: AssetGroupListComponent,
         data: {
-          title: 'AssetGroup List'
+          title: 'Asset Group List'
         },
         resolve: {
           AssetGroupList: AssetGroupListResolverService

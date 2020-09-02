@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { Circle } from '../../../Compound/Module/Masters/Circle.model';
+import { Circle } from '../../../Components/Module/Masters/Circle.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-import { ZoneService } from '../../../Compound/Services/Masters/ZoneService';
-import { ZoneTransfarmer } from '../../../Compound/Transformer/Masters/ZoneTransfarmer';
-import { Zone } from '../../../Compound/Module/Masters/Zone.model';
-import { CircleService } from '../../../Compound/Services/Masters/CircleService';
-import { CircleTransfarmer } from '../../../Compound/Transformer/Masters/Circle-Transfarmer';
+import { ZoneService } from '../../../Components/Services/Masters/ZoneService';
+import { ZoneTransfarmer } from '../../../Components/Transformer/Masters/ZoneTransfarmer';
+import { Zone } from '../../../Components/Module/Masters/Zone.model';
+import { CircleService } from '../../../Components/Services/Masters/CircleService';
+import { CircleTransfarmer } from '../../../Components/Transformer/Masters/Circle-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
 
 @Component({

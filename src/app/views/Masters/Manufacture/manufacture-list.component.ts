@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MFG } from '../../../Compound/Module/Masters/MFG';
-import { MFGService } from '../../../Compound/Services/Masters/MFGService';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MFG } from '../../../Components/Module/Masters/MFG';
+import { MFGService } from '../../../Components/Services/Masters/MFGService';
 
 @Component({
   selector: 'app-manufacture-list',

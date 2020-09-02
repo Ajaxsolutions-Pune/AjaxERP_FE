@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle'; // import it to your component
-import { LoginUser } from './Compound/Module/LoginUser';
-import { environment } from './Compound/Module/environment';
+import { LoginUser } from './Components/Module/LoginUser';
+import { environment } from './Components/Module/environment';
 import { LocalStorageService } from 'ngx-webstorage';
 import { CookieService } from 'ngx-cookie-service';
 

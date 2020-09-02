@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
 import { NgForm } from '@angular/forms';
-import { ItemGroup } from '../../../Compound/Module/Masters/ItemGroup.model';
-import { ItemGroupService } from '../../../Compound/Services/Masters/ItemGroupService';
+import { ItemGroup } from '../../../Components/Module/Masters/ItemGroup.model';
+import { ItemGroupService } from '../../../Components/Services/Masters/ItemGroupService';
 @Component({
   selector: 'app-item-group',
   templateUrl: './item-group.component.html',

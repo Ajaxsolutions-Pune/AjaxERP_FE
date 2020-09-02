@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Question, QuestionEntity } from '../../../Compound/Module/Masters/Question.model';
-import { QuestionTransfarmer } from '../../../Compound/Transformer/Masters/Question-Transfarmer';
+import { Question, QuestionEntity } from '../../../Components/Module/Masters/Question.model';
+import { QuestionTransfarmer } from '../../../Components/Transformer/Masters/Question-Transfarmer';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as alasql from 'alasql';
-import { environment } from '../../../Compound/Module/environment';
+import { environment } from '../../../Components/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
 
 

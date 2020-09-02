@@ -1,17 +1,17 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { AssetCategory, AssetCategoryEntity } from '../../../Compound/Module/Masters/AssetCategory.model';
+import { AssetCategory, AssetCategoryEntity } from '../../../Components/Module/Masters/AssetCategory.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-import { AssetGroupEntity, AssetGroup } from '../../../Compound/Module/Masters/AssetGroup.model';
-import { Colour } from '../../../Compound/Module/Masters/Colour.model';
-import { ColourTransfarmer } from '../../../Compound/Transformer/Masters/Colour-Transfarmer';
-import { ColourService } from '../../../Compound/Services/Masters/ColourService';
-import { AssetGroupService } from '../../../Compound/Services/Masters/AssetGroupService';
-import { AssetGroupTransfarmer } from '../../../Compound/Transformer/Masters/AssetGroup-Transfarmer';
-import { AssetCategoryService } from '../../../Compound/Services/Masters/AssetCategory';
-import { AssetCategoryTransfarmer } from '../../../Compound/Transformer/Masters/Asset-Category-Transfarmer';
+import { AssetGroupEntity, AssetGroup } from '../../../Components/Module/Masters/AssetGroup.model';
+import { Colour } from '../../../Components/Module/Masters/Colour.model';
+import { ColourTransfarmer } from '../../../Components/Transformer/Masters/Colour-Transfarmer';
+import { ColourService } from '../../../Components/Services/Masters/ColourService';
+import { AssetGroupService } from '../../../Components/Services/Masters/AssetGroupService';
+import { AssetGroupTransfarmer } from '../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
+import { AssetCategoryService } from '../../../Components/Services/Masters/AssetCategory';
+import { AssetCategoryTransfarmer } from '../../../Components/Transformer/Masters/Asset-Category-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
 
 @Component({

@@ -1,13 +1,15 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { Answer, AnswerEntity } from '../../../../Compound/Module/Masters/Answer.model';
+import { Answer, AnswerEntity } from '../../../../Components/Module/Masters/Answer.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answer-Transfarmer';
+import { AnswerTransfarmer } from '../../../../Components/Transformer/Masters/Answer-Transfarmer';
 import { DefaultLayoutComponent } from '../../../../containers';
-import { AnswerService } from '../../../../Compound/Services/Masters/AnswerService';
+import { AnswerService } from '../../../../Components/Services/Masters/AnswerService';
 import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
-import { environment } from '../../../../Compound/Module/environment';
+import { environment } from '../../../../Components/Module/environment';
+import { GlobalService } from '../../../../Components/Services/GlobalServices/Global.service';
+import { LoginUser } from '../../../../Components/Module/LoginUser';
 
 @Component({
   selector: 'app-answer',
@@ -26,9 +28,11 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
   constructor(private route: ActivatedRoute,
     private answerTransfarmer: AnswerTransfarmer,
     private answerService: AnswerService,
+    private globalService: GlobalService,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private router: Router, private formBuilder: FormBuilder) {
     super();
+    console.log(localStorage.getItem('username'));
     this.validationMessages = {
       ControlAnswerID: {
         required: 'Answer id is required.',
@@ -55,7 +59,11 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
     this.answer = {
       answer: null,
       answerId: null,
-      isActive: null,
+      isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getanswer(str); });
   }
@@ -77,13 +85,13 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
   save(answerForm: NgForm): void {
     if (status !== 'Update') {
       this.answer.answerId = null;
-      console.log(this.answer);
+      console.log(this.answerTransfarmer.AnswerTransfarmer(this.answer));
       // if (this.question.isActive === 'true') { this.question.isActive = '1'; } else { this.question.isActive = '0'; }
 
       this.answerService.Save(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
         (par) => {
           console.log(par);
-          if (par.status === 'Success') {
+          if (par.status === 'Inserted') {
             console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
@@ -96,6 +104,7 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
       );
 
     } else {
+      console.log(this.answerTransfarmer.AnswerTransfarmer(this.answer));
       this.answerService.Update(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
         (par) => {
           console.log(par);
@@ -118,12 +127,20 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
       answer: null,
       answerId: null,
       isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     if (answer_Code === null || answer_Code === '') {
       this.answer = {
         answer: null,
         answerId: null,
         isActive:  'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
       status = '';
 
@@ -132,11 +149,19 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
         answer: null,
         answerId: null,
         isActive: null,
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
       this.answerService.getAnswer(answer_Code).subscribe(
         (par) => {
           this.answerEntity = par;
           this.answer = this.answerTransfarmer.AnswerTransfarmerEntity(this.answerEntity);
+          this.answer.createdBy = localStorage.getItem('username');
+          this.answer.modifiedBy = localStorage.getItem('username');
+          this.answer.createdDate = this.globalService.GerCurrntDateStamp();
+          this.answer.modifiedDate = this.globalService.GerCurrntDateStamp();
         },
         (err: any) => console.log(err));
       status = 'Update';

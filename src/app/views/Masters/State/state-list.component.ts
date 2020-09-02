@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { State } from '../../../Compound/Module/Masters/State.model';
+import { State } from '../../../Components/Module/Masters/State.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { StateService } from '../../../Compound/Services/Masters/StateService';
-import { StateEntity } from '../../../Compound/Module/Masters/StateEntity.model';
-import { StateTransfarmer } from '../../../Compound/Transformer/Masters/State-transformer';
+import { StateService } from '../../../Components/Services/Masters/StateService';
+import { StateEntity } from '../../../Components/Module/Masters/StateEntity.model';
+import { StateTransfarmer } from '../../../Components/Transformer/Masters/State-transformer';
 
 @Component({
   selector: 'app-state-list',

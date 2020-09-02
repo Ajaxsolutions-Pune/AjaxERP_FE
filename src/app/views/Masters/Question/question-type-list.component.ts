@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Process } from '../../../Compound/Module/Masters/Process.model';
-import { QaType, QaTypeEntity } from '../../../Compound/Module/Masters/QA_Type.model';
-import { QaTypeTransfarmer } from '../../../Compound/Transformer/Masters/QaType-Transfarmer';
+import { Process } from '../../../Components/Module/Masters/Process.model';
+import { QaType, QaTypeEntity } from '../../../Components/Module/Masters/QA_Type.model';
+import { QaTypeTransfarmer } from '../../../Components/Transformer/Masters/QaType-Transfarmer';
 
 @Component({
   selector: 'app-question-type-list',

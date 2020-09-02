@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AssetGroup, AssetGroupEntity } from '../../../Compound/Module/Masters/AssetGroup.model';
+import { AssetGroup, AssetGroupEntity } from '../../../Components/Module/Masters/AssetGroup.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AssetGroupTransfarmer } from '../../../Compound/Transformer/Masters/AssetGroup-Transfarmer';
-import { environment } from '../../../Compound/Module/environment';
+import { AssetGroupTransfarmer } from '../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
+import { environment } from '../../../Components/Module/environment';
 
 @Component({
   selector: 'app-asset-group-list',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
-import { CityService } from '../../../Compound/Services/Masters/CityService';
+import { CityService } from '../../../Components/Services/Masters/CityService';
 import { NgForm } from '@angular/forms';
-import { City } from '../../../Compound/Module/City';
+import { City } from '../../../Components/Module/City';
 
 @Component({
   selector: 'app-city',

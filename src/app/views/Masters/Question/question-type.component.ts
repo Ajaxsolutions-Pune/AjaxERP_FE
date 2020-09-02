@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { QaType, QaTypeEntity } from '../../../Compound/Module/Masters/QA_Type.model';
+import { QaType, QaTypeEntity } from '../../../Components/Module/Masters/QA_Type.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QaTypeTransfarmer } from '../../../Compound/Transformer/Masters/QaType-Transfarmer';
+import { QaTypeTransfarmer } from '../../../Components/Transformer/Masters/QaType-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
-import { QaTypeService } from '../../../Compound/Services/Masters/QaTypeService';
+import { QaTypeService } from '../../../Components/Services/Masters/QaTypeService';
 import { NgForm } from '@angular/forms';
 
 @Component({

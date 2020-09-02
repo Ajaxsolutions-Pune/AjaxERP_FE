@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormObj, FormEntity } from '../../../../Compound/Module/Masters/Form.model';
-import { FormTransfarmer } from '../../../../Compound/Transformer/Masters/Form-Transfarmer';
+import { FormObj, FormEntity } from '../../../../Components/Module/Masters/Form.model';
+import { FormTransfarmer } from '../../../../Components/Transformer/Masters/Form-Transfarmer';
 import * as alasql from 'alasql';
-import { environment } from '../../../../Compound/Module/environment';
+import { environment } from '../../../../Components/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({

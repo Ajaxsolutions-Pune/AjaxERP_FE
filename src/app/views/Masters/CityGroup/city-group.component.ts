@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
 import { NgForm } from '@angular/forms';
-import { City } from '../../../Compound/Module/City';
-import { CityGroupService } from '../../../Compound/Services/Masters/CityGroupService';
-import { CityGroup } from '../../../Compound/Module/Masters/CityGroup';
+import { City } from '../../../Components/Module/City';
+import { CityGroupService } from '../../../Components/Services/Masters/CityGroupService';
+import { CityGroup } from '../../../Components/Module/Masters/CityGroup';
 
 @Component({
   selector: 'app-citygroup',

@@ -33,7 +33,15 @@ export class DeviceTransfarmer {
             this.Oject.sim2Provider = element.sim2Provider;
             this.Oject.sim1MobleNo = element.sim1MobleNo;
             this.Oject.sim2MobleNo = element.sim2MobleNo;
-            this.Oject.isActive = element.isActive;
+            this.Oject.isTracking = element.isTracking;
+            this.Oject.trackingIntervalMin = element.trackingIntervalMin;
+            this.Oject.createdBy = element.createdBy;
+            this.Oject.createdDate = element.createdDate;
+            this.Oject.modifiedBy = element.modifiedBy;
+            this.Oject.modifiedDate = element.modifiedDate;
+            if (element.isActive === '1') {
+                this.Oject.isActive = 'Active'.toString().trim();
+            } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
             this.arrOject.push(this.Oject);
         });
         return this.arrOject;
@@ -58,7 +66,12 @@ export class DeviceTransfarmer {
         this.Oject.sim2Provider = element.sim2Provider;
         this.Oject.sim1MobleNo = element.sim1MobleNo;
         this.Oject.sim2MobleNo = element.sim2MobleNo;
-        this.Oject.isActive = element.isActive;
+        this.Oject.isTracking = element.isTracking;
+        this.Oject.trackingIntervalMin = element.trackingIntervalMin;
+        this.Oject.createdBy = element.createdBy;
+        this.Oject.createdDate = element.createdDate;
+        this.Oject.modifiedBy = element.modifiedBy;
+        this.Oject.modifiedDate = element.modifiedDate;
         if (element.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
         } else { this.Oject.isActive = ''.toString().trim(); }
@@ -84,7 +97,12 @@ export class DeviceTransfarmer {
         this.OjectEntity.sim2Provider = element.sim2Provider;
         this.OjectEntity.sim1MobleNo = element.sim1MobleNo;
         this.OjectEntity.sim2MobleNo = element.sim2MobleNo;
-        this.OjectEntity.isActive = element.isActive;
+        this.OjectEntity.isTracking = element.isTracking;
+        this.OjectEntity.trackingIntervalMin = element.trackingIntervalMin;
+        this.OjectEntity.createdBy = element.createdBy;
+        this.OjectEntity.createdDate = element.createdDate;
+        this.OjectEntity.modifiedBy = element.modifiedBy;
+        this.OjectEntity.modifiedDate = element.modifiedDate;
          if (element.isActive === 'true') {  this.OjectEntity.isActive = '1';
              } else { this.OjectEntity.isActive = '0'; }
         if (element.isActive.toString().trim() === 'true') {

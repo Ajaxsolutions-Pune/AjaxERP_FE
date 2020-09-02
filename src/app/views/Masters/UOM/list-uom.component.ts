@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UOMService } from '../../../Compound/Services/Masters/UOMService';
-import { UOM } from '../../../Compound/Module/Masters/UOM.model';
+import { UOMService } from '../../../Components/Services/Masters/UOMService';
+import { UOM } from '../../../Components/Module/Masters/UOM.model';
 
 @Component({
   selector: 'app-list-uom',

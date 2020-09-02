@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
 import { NgForm } from '@angular/forms';
-import { Tehsil, TehsilEntity } from '../../../Compound/Module/Masters/Tehsil';
-import { DistrictService } from '../../../Compound/Services/Masters/DistrictService';
-import { District } from '../../../Compound/Module/Masters/District';
-import { TehsilService } from '../../../Compound/Services/Masters/TehsilService';
-import { TehsilTransfarmer } from '../../../Compound/Transformer/Masters/Tehsil-Transfarmer';
-import { DistrictTransfarmer } from '../../../Compound/Transformer/Masters/District-Transformer';
-import { DistrictEntity } from '../../../Compound/Module/Masters/DistrictEntity.model';
+import { Tehsil, TehsilEntity } from '../../../Components/Module/Masters/Tehsil';
+import { DistrictService } from '../../../Components/Services/Masters/DistrictService';
+import { District } from '../../../Components/Module/Masters/District';
+import { TehsilService } from '../../../Components/Services/Masters/TehsilService';
+import { TehsilTransfarmer } from '../../../Components/Transformer/Masters/Tehsil-Transfarmer';
+import { DistrictTransfarmer } from '../../../Components/Transformer/Masters/District-Transformer';
+import { DistrictEntity } from '../../../Components/Module/Masters/DistrictEntity.model';
 
 @Component({
   selector: 'app-tehsil',

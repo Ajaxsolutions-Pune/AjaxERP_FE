@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { FormQueAnsMapping } from '../../../Compound/Module/ProcessSetup/FormQueAnsMapping.model';
+import { FormQueAnsMapping } from '../../../Components/Module/ProcessSetup/FormQueAnsMapping.model';
 @Injectable()
 export class DataService {
   // private readonly API_URL = 'https://api.github.com/repos/angular/angular/issues';

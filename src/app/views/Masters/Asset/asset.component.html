@@ -95,6 +95,7 @@
                 <mat-option>Customer</mat-option>
                 <mat-option value="2"> Customer 2</mat-option>
                 <mat-option value="3"> Customer 3</mat-option>
+                <mat-option value="11"> Customer 11</mat-option>
                 </mat-select>
                 <mat-error>
                 {{ formErrors['ControlcustomerCode'] }}
@@ -106,6 +107,7 @@
                 formControlName="ControlprojectCode"
                 [(ngModel)]="bindObj.projectCode">
                 <mat-option>Project</mat-option>
+                <mat-option value="1"> Project 1</mat-option>
                 <mat-option value="2"> Project 2</mat-option>
                 <mat-option value="3"> Project 3</mat-option>
                 </mat-select>
@@ -314,7 +316,7 @@
                 formControlName="ControlcircuitCode"
                 [(ngModel)]="bindObj.circuitCode">
                 <mat-option>Circuit</mat-option>
-                <mat-option value="3">Double Circuit</mat-option>
+                <mat-option value="1">Double Circuit</mat-option>
                 </mat-select>
                 <mat-error>
                 {{ formErrors['ControlcircuitCode'] }}
@@ -402,8 +404,8 @@
                   <div class="col-md-4">
                       <button mat-raised-button [disabled]="!form.valid" (click)="save(ObjForm)"
                           color="primary">Submit</button>
-                      <button mat-raised-button color="warn" routerLink="/AssetList"><i
-                              class="fa fa-ban"></i>
+                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                      <button mat-raised-button color="warn" routerLink="/AssetList">
                           Cancel</button>
                   </div>
                   <div class="col-md-4"></div>

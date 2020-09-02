@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CircleEntity, Circle } from '../../../Compound/Module/Masters/Circle.model';
+import { CircleEntity, Circle } from '../../../Components/Module/Masters/Circle.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CircleTransfarmer } from '../../../Compound/Transformer/Masters/Circle-Transfarmer';
-import { environment } from '../../../Compound/Module/environment';
+import { CircleTransfarmer } from '../../../Components/Transformer/Masters/Circle-Transfarmer';
+import { environment } from '../../../Components/Module/environment';
 import * as alasql from 'alasql';
 alasql['private'].externalXlsxLib = require('xlsx');
 

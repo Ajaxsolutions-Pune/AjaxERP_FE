@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Process, ProcessEntity } from '../../../../Compound/Module/Masters/Process.model';
-import { ProcessTransfarmer1 } from '../../../../Compound/Transformer/Masters/Process-Transfarmer1';
+import { Process, ProcessEntity } from '../../../../Components/Module/Masters/Process.model';
+import { ProcessTransfarmer1 } from '../../../../Components/Transformer/Masters/Process-Transfarmer1';
 import * as alasql from 'alasql';
-import { environment } from '../../../../Compound/Module/environment';
+import { environment } from '../../../../Components/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({

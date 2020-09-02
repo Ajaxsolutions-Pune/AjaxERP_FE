@@ -15,37 +15,17 @@ export class CountryService {
     constructor(private httpClient: HttpClient,
         private countryTransfarmer: CountryTransfarmer) {
         this.str = this.env.apiServiceIPPort;
-        this.countrys = [{
-            countryCode: null,
-            id: null,
-            Country_Name_ENg: 'India',
-            Country_Name_Uni: 'भारत',
-            CreatedBy: 'SUPERADMIN',
-            ModifiedBy: 'SUPERADMIN',
-            CreDate: '08-03-2019',
-            ModDate: null,
-            IsActive: ''
-        }, {
-            countryCode: null,
-            id: null,
-            Country_Name_ENg: 'pakistan ',
-            Country_Name_Uni: 'पाकिस्तान',
-            CreatedBy: 'SUPERADMIN',
-            ModifiedBy: 'SUPERADMIN',
-            CreDate: '08-03-2019',
-            ModDate: null,
-            IsActive: 'true'
-        },
-        ];
+        this.countrys = [];
     }
     ListCountry: CountryEntity[];
     getCountrys(): Observable<CountryEntity[]> {
-        return this.httpClient.get<CountryEntity[]>(this.str + '/Country/getList');
+        return this.httpClient.get<CountryEntity[]>(this.str + '/Country/getList', this.env.httpOptions);
     }
 
     getCountry(countrysId: string): Observable<CountryEntity> {
         console.log(this.str + 'Country/' + countrysId);
-        return this.httpClient.get<CountryEntity>(this.str + 'Country/' + countrysId).pipe(catchError(this.handleError));
+        return this.httpClient.get<CountryEntity>(this.str + 'Country/'
+            + countrysId, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     getRole(): void {
@@ -55,9 +35,7 @@ export class CountryService {
         this.countryEntity.countryCode = null;
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<CountryEntity>(this.str + '/Country',
-            this.countryEntity, httpOptions).pipe(catchError(this.handleError));
-
-
+            this.countryEntity, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(country: Country): string {

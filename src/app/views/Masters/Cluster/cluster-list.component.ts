@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Cluster, ClusterEntity } from '../../../Compound/Module/Masters/Cluster.model';
+import { Cluster, ClusterEntity } from '../../../Components/Module/Masters/Cluster.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ClusterTransfarmer } from '../../../Compound/Transformer/Masters/Cluster-Transfarmer';
-import { environment } from '../../../Compound/Module/environment';
+import { ClusterTransfarmer } from '../../../Components/Transformer/Masters/Cluster-Transfarmer';
+import { environment } from '../../../Components/Module/environment';
 import * as alasql from 'alasql';
 alasql['private'].externalXlsxLib = require('xlsx');
 

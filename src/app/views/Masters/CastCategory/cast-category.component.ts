@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
-import { CityService } from '../../../Compound/Services/Masters/CityService';
+import { CityService } from '../../../Components/Services/Masters/CityService';
 import { NgForm } from '@angular/forms';
-import { DistrictService } from '../../../Compound/Services/Masters/DistrictService';
-import { District } from '../../../Compound/Module/Masters/District';
-import { TaxCategory } from '../../../Compound/Module/Masters/TaxCategory';
-import { TaxCategoryService } from '../../../Compound/Services/Masters/TaxCategoryService';
-import { CastCategory } from '../../../Compound/Module/Masters/CastCategory';
-import { CastCategoryService } from '../../../Compound/Services/Masters/CastCategoryService';
+import { DistrictService } from '../../../Components/Services/Masters/DistrictService';
+import { District } from '../../../Components/Module/Masters/District';
+import { TaxCategory } from '../../../Components/Module/Masters/TaxCategory';
+import { TaxCategoryService } from '../../../Components/Services/Masters/TaxCategoryService';
+import { CastCategory } from '../../../Components/Module/Masters/CastCategory';
+import { CastCategoryService } from '../../../Components/Services/Masters/CastCategoryService';
 
 @Component({
   selector: 'app-castcategory',

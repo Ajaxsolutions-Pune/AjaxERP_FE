@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { State } from '../../../Compound/Module/Masters/State.model';
+import { State } from '../../../Components/Module/Masters/State.model';
 import { Router, Route, ActivatedRoute } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
-import { StateService } from '../../../Compound/Services/Masters/StateService';
+import { StateService } from '../../../Components/Services/Masters/StateService';
 import { NgForm } from '@angular/forms';
-import { Country } from '../../../Compound/Module/Masters/Country.model';
-import { CountryService } from '../../../Compound/Services/Masters/CountryService';
-import { StateTransfarmer } from '../../../Compound/Transformer/Masters/State-transformer';
+import { Country } from '../../../Components/Module/Masters/Country.model';
+import { CountryService } from '../../../Components/Services/Masters/CountryService';
+import { StateTransfarmer } from '../../../Components/Transformer/Masters/State-transformer';
 
 @Component({
   selector: 'app-state',

@@ -17,6 +17,12 @@ export class Device {
     sim1MobleNo: string;
     sim2MobleNo: string;
     isActive: string;
+    createdBy: string;
+    createdDate: string;
+    modifiedBy: string;
+    modifiedDate: string;
+    isTracking: string;
+    trackingIntervalMin: string;
 }
 export class DeviceEntity {
     deviceId: string;
@@ -37,4 +43,10 @@ export class DeviceEntity {
     sim1MobleNo: string;
     sim2MobleNo: string;
     isActive: string;
+    createdBy: string;
+    createdDate: string;
+    modifiedBy: string;
+    modifiedDate: string;
+    isTracking: string;
+    trackingIntervalMin: string;
 }

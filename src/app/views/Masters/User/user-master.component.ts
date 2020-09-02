@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, Route, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { DefaultLayoutComponent } from '../../../containers';
-import { User } from '../../../Compound/Module/User.model';
-import { UserService } from '../../../Compound/Services/User.Service';
-import { LoginUser } from '../../../Compound/Module/LoginUser';
+import { User } from '../../../Components/Module/User.model';
+import { UserService } from '../../../Components/Services/User.Service';
+import { LoginUser } from '../../../Components/Module/LoginUser';
 @Component({
   selector: 'app-user-master',
   templateUrl: './user-master.component.html',
@@ -48,14 +48,14 @@ export class UserMasterComponent implements OnInit {
       UserNo: null,
       UserName: null,
       UserID: null,
-      BranchNo: LoginUser.BranchNo,
+      BranchNo: 1,
       Password: null,
       // RoleName: null,
       RoleId: -1,
       IsActive: null,
-      CreUser: LoginUser.UserName,
+      CreUser: 'LoginUser.UserName',
       CreDate: null,
-      ModUser: LoginUser.UserName,
+      ModUser: 'LoginUser.UserName',
       ModDate: null,
       EmpId: -1,
       status: null
@@ -65,14 +65,14 @@ export class UserMasterComponent implements OnInit {
         UserNo: null,
         UserName: null,
         UserID: null,
-        BranchNo: LoginUser.BranchNo,
+        BranchNo: 1,
         Password: null,
         //   RoleName: null,
         RoleId: -1,
         IsActive: null,
-        CreUser: LoginUser.UserName,
+        CreUser: 'LoginUser.UserName',
         CreDate: null,
-        ModUser: LoginUser.UserName,
+        ModUser: 'LoginUser.UserName',
         ModDate: null,
         EmpId: -1,
         status: null

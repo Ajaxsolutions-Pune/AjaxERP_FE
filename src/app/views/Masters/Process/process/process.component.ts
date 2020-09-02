@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../../containers';
-import { Process, ProcessEntity } from '../../../../Compound/Module/Masters/Process.model';
-import { ProcessTransfarmer1 } from '../../../../Compound/Transformer/Masters/Process-Transfarmer1';
-import { ProcessService1 } from '../../../../Compound/Services/Masters/ProcessService1';
+import { Process, ProcessEntity } from '../../../../Components/Module/Masters/Process.model';
+import { ProcessTransfarmer1 } from '../../../../Components/Transformer/Masters/Process-Transfarmer1';
+import { ProcessService1 } from '../../../../Components/Services/Masters/ProcessService1';
 import { NgForm, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';

@@ -1,18 +1,20 @@
 
 import { Injectable } from '@angular/core';
-import { LogIn } from '../../Compound/Module/login.model';
+import { LogIn } from '../../Components/Module/login.model';
 import { Observable, throwError, observable } from 'rxjs';
 import { map, switchMap, debounceTime, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../Module/environment';
 import { User } from '../Module/User.model';
 import { Insertstatus } from '../Module/Masters/Insert_status.model';
+import { DatePipe } from '@angular/common';
 
 @Injectable()
 export class LogInService {
     str: string;
     env = environment;
-    constructor(private httpClient: HttpClient) {
+    constructor(
+        private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
     }
     login: LogIn;
@@ -21,7 +23,7 @@ export class LogInService {
         console.log(loginEntityObj);
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<Insertstatus>
-            ('http://ajaxdevdbcl.eastus.cloudapp.azure.com:8085/AjaxErpBackEnd/authenticate',
+            (this.str + '/authenticate',
                 loginEntityObj,
                 httpOptions).pipe(catchError(this.handleError));
     }

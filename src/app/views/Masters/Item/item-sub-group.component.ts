@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
 import { NgForm } from '@angular/forms';
-import { ItemGroup } from '../../../Compound/Module/Masters/ItemGroup.model';
-import { ItemGroupService } from '../../../Compound/Services/Masters/ItemGroupService';
-import { ItemSubGroupService } from '../../../Compound/Services/Masters/ItemSubGroupService';
-import { ItemSubGroup } from '../../../Compound/Module/Masters/ItemSubGroup.model';
+import { ItemGroup } from '../../../Components/Module/Masters/ItemGroup.model';
+import { ItemGroupService } from '../../../Components/Services/Masters/ItemGroupService';
+import { ItemSubGroupService } from '../../../Components/Services/Masters/ItemSubGroupService';
+import { ItemSubGroup } from '../../../Components/Module/Masters/ItemSubGroup.model';
 @Component({
   selector: 'app-item-sub-group',
   templateUrl: './item-sub-group.component.html',

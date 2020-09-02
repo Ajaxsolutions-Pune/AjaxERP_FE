@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { Colour, ColourEntity } from '../../../Compound/Module/Masters/Colour.model';
+import { Colour, ColourEntity } from '../../../Components/Module/Masters/Colour.model';
 import { Router } from '@angular/router';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';

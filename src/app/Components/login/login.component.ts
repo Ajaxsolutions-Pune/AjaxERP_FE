@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LogIn } from '../../Compound/Module/login.model';
 import { Router, Route, ActivatedRoute } from '@angular/router';
-import { LogInService } from '../../Compound/Services/LogIn.service';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginUser } from '../Module/LoginUser';
 import { User } from '../Module/User.model';
@@ -11,6 +9,10 @@ import { Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationErro
 import { AuthService } from './auth.service';
 import { Insertstatus } from '../Module/Masters/Insert_status.model';
 import { HttpHeaders } from '@angular/common/http';
+import { LogInService } from '../Services/LogIn.service';
+import { LogIn } from '../Module/login.model';
+import { DatePipe } from '@angular/common';
+import { GlobalService } from '../Services/GlobalServices/Global.service';
 
 
 @Component({
@@ -29,20 +31,30 @@ export class LogInComponent implements OnInit {
   public logo = 'ajaxsolutionlogo';
   env = environment;
   insertstatus = Insertstatus;
+  myDate = new Date();
   constructor(
     private fb: FormBuilder,
+    private globalService: GlobalService,
     private route: ActivatedRoute,
+    private datePipe: DatePipe,
     private router: Router,
     private logInService: LogInService
   ) {
   }
 
   async ngOnInit() {
+    console.log(this.globalService.GerCurrntDateStamp());
     this.loginInvalid = false;
     this.form = this.fb.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]
     });
+    // tslint:disable-next-line:no-unused-expression
+    const today = (new Date(), 'yyyy-MM-dd HH:mm:ss Z');
+    // console.log(today);
+
+    const date = new Date();
+    console.log(Date.now);
 
   }
   async onSubmit() {
@@ -62,6 +74,7 @@ export class LogInComponent implements OnInit {
           (par) => {
             this.loginstatus = par;
             if (this.loginstatus.status.toLowerCase() === 'success') {
+            //  localStorage.setItem('username',  'Dp1');
 
               localStorage.setItem('token', this.loginstatus.token);
               const httpOptions = {
@@ -73,6 +86,9 @@ export class LogInComponent implements OnInit {
                   })
               };
               this.env.httpOptions = httpOptions;
+              LoginUser.ouCode = this.env.OuCode;
+              localStorage.setItem('username',  'Dp');
+              LoginUser.status = 'Login';
               this.router.navigate(['dashboard']);
             } else {
               this.loginInvalid = true;

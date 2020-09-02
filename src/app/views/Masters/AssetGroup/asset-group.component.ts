@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { AssetGroup, AssetGroupEntity } from '../../../Compound/Module/Masters/AssetGroup.model';
+import { AssetGroup, AssetGroupEntity } from '../../../Components/Module/Masters/AssetGroup.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-import { AssetGroupService } from '../../../Compound/Services/Masters/AssetGroupService';
-import { AssetGroupTransfarmer } from '../../../Compound/Transformer/Masters/AssetGroup-Transfarmer';
+import { AssetGroupService } from '../../../Components/Services/Masters/AssetGroupService';
+import { AssetGroupTransfarmer } from '../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
 
 @Component({

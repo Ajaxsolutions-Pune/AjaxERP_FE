@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { District } from '../../../Compound/Module/Masters/District';
-import { DistrictService } from '../../../Compound/Services/Masters/DistrictService';
-import { TaxCategory } from '../../../Compound/Module/Masters/TaxCategory';
-import { TaxCategoryService } from '../../../Compound/Services/Masters/TaxCategoryService';
-import { CastCategory } from '../../../Compound/Module/Masters/CastCategory';
-import { CastCategoryService } from '../../../Compound/Services/Masters/CastCategoryService';
+import { District } from '../../../Components/Module/Masters/District';
+import { DistrictService } from '../../../Components/Services/Masters/DistrictService';
+import { TaxCategory } from '../../../Components/Module/Masters/TaxCategory';
+import { TaxCategoryService } from '../../../Components/Services/Masters/TaxCategoryService';
+import { CastCategory } from '../../../Components/Module/Masters/CastCategory';
+import { CastCategoryService } from '../../../Components/Services/Masters/CastCategoryService';
 
 @Component({
   selector: 'app-castcategory-list',

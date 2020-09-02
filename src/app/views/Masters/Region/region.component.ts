@@ -1,12 +1,12 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Region, RegionEntity } from '../../../Compound/Module/Masters/Region.model';
+import { Region, RegionEntity } from '../../../Components/Module/Masters/Region.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers/default-layout/default-layout.component';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-import { RegionTransfarmer } from '../../../Compound/Transformer/Masters/Region-Transfarmer';
-import { RegionService } from '../../../Compound/Services/Masters/RegionService';
+import { RegionTransfarmer } from '../../../Components/Transformer/Masters/Region-Transfarmer';
+import { RegionService } from '../../../Components/Services/Masters/RegionService';
 
 @Component({
   selector: 'app-region',

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Zone, ZoneEntity } from '../../../Compound/Module/Masters/Zone.model';
+import { Zone, ZoneEntity } from '../../../Components/Module/Masters/Zone.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ZoneTransfarmer } from '../../../Compound/Transformer/Masters/ZoneTransfarmer';
+import { ZoneTransfarmer } from '../../../Components/Transformer/Masters/ZoneTransfarmer';
 
 @Component({
   selector: 'app-zone-list',

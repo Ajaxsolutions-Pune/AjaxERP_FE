@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Cluster } from '../../../Compound/Module/Masters/Cluster.model';
+import { Cluster } from '../../../Components/Module/Masters/Cluster.model';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-import { CircleService } from '../../../Compound/Services/Masters/CircleService';
-import { CircleTransfarmer } from '../../../Compound/Transformer/Masters/Circle-Transfarmer';
-import { ClusterService } from '../../../Compound/Services/Masters/ClusterService';
-import { ClusterTransfarmer } from '../../../Compound/Transformer/Masters/Cluster-Transfarmer';
-import { Circle } from '../../../Compound/Module/Masters/Circle.model';
+import { CircleService } from '../../../Components/Services/Masters/CircleService';
+import { CircleTransfarmer } from '../../../Components/Transformer/Masters/Circle-Transfarmer';
+import { ClusterService } from '../../../Components/Services/Masters/ClusterService';
+import { ClusterTransfarmer } from '../../../Components/Transformer/Masters/Cluster-Transfarmer';
+import { Circle } from '../../../Components/Module/Masters/Circle.model';
 import { DefaultLayoutComponent } from '../../../containers';
 @Component({
   selector: 'app-cluster',

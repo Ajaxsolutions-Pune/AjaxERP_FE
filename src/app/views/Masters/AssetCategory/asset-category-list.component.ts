@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AssetCategory, AssetCategoryEntity } from '../../../Compound/Module/Masters/AssetCategory.model';
-import { AssetCategoryTransfarmer } from '../../../Compound/Transformer/Masters/Asset-Category-Transfarmer';
-import { environment } from '../../../Compound/Module/environment';
+import { AssetCategory, AssetCategoryEntity } from '../../../Components/Module/Masters/AssetCategory.model';
+import { AssetCategoryTransfarmer } from '../../../Components/Transformer/Masters/Asset-Category-Transfarmer';
+import { environment } from '../../../Components/Module/environment';
 import * as alasql from 'alasql';
 alasql['private'].externalXlsxLib = require('xlsx');
 

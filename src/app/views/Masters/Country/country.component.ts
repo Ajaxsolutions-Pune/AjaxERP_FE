@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
 import { NgForm } from '@angular/forms';
-import { CountryService } from '../../../Compound/Services/Masters/CountryService';
-import { Country, CountryEntity } from '../../../Compound/Module/Masters/Country.model';
-import { CountryTransfarmer } from '../../../Compound/Transformer/Masters/Country-Transfarmer';
+import { CountryService } from '../../../Components/Services/Masters/CountryService';
+import { Country, CountryEntity } from '../../../Components/Module/Masters/Country.model';
+import { CountryTransfarmer } from '../../../Components/Transformer/Masters/Country-Transfarmer';
 
 @Component({
   selector: 'app-country',

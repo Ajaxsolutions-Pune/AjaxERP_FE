@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
-import { ItemCategory } from '../../../Compound/Module/Masters/ItemCategory';
-import { ItemCategoryService } from '../../../Compound/Services/Masters/ItemCategoryService';
+import { ItemCategory } from '../../../Components/Module/Masters/ItemCategory';
+import { ItemCategoryService } from '../../../Components/Services/Masters/ItemCategoryService';
 import { NgForm } from '@angular/forms';
 
 @Component({

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { City } from '../../../Compound/Module/City';
-import { CityService } from '../../../Compound/Services/Masters/CityService';
+import { City } from '../../../Components/Module/City';
+import { CityService } from '../../../Components/Services/Masters/CityService';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CityGroup } from '../../../Compound/Module/Masters/CityGroup';
-import { CityGroupService } from '../../../Compound/Services/Masters/CityGroupService';
+import { CityGroup } from '../../../Components/Module/Masters/CityGroup';
+import { CityGroupService } from '../../../Components/Services/Masters/CityGroupService';
 
 @Component({
   selector: 'app-citygroup-list',

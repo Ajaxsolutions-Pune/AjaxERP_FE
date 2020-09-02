@@ -13,12 +13,12 @@ import { DataService } from './data.service';
 import { FormComponentBase } from '../../Masters/AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../../Masters/AngularDemo/infrastructure/cross-field-error-matcher';
-import { FormObj } from '../../../Compound/Module/Masters/Form.model';
-import { FormService } from '../../../Compound/Services/Masters/FormService';
-import { FormTransfarmer } from '../../../Compound/Transformer/Masters/Form-Transfarmer';
-import { FormQueAnsMapping } from '../../../Compound/Module/ProcessSetup/FormQueAnsMapping.model';
-import { FormQueAnsMappingTransfarmer } from '../../../Compound/Transformer/ProcessSetup/FormQueAnsMapping-Transfarmer';
-import { FormQueAnsMappingService } from '../../../Compound/Services/ProcessSetup/FormQueAnsMappingService';
+import { FormObj } from '../../../Components/Module/Masters/Form.model';
+import { FormService } from '../../../Components/Services/Masters/FormService';
+import { FormTransfarmer } from '../../../Components/Transformer/Masters/Form-Transfarmer';
+import { FormQueAnsMapping } from '../../../Components/Module/ProcessSetup/FormQueAnsMapping.model';
+import { FormQueAnsMappingTransfarmer } from '../../../Components/Transformer/ProcessSetup/FormQueAnsMapping-Transfarmer';
+import { FormQueAnsMappingService } from '../../../Components/Services/ProcessSetup/FormQueAnsMappingService';
 import { DefaultLayoutComponent } from '../../../containers';
 import { Router } from '@angular/router';
 

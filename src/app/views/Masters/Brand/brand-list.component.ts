@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BrandService } from '../../../Compound/Services/Masters/BrandService';
-import { Brand } from '../../../Compound/Module/Masters/Brand.model';
-import { BrandTransformer } from '../../../Compound/Transformer/Masters/Brand-Transformer';
+import { BrandService } from '../../../Components/Services/Masters/BrandService';
+import { Brand } from '../../../Components/Module/Masters/Brand.model';
+import { BrandTransformer } from '../../../Components/Transformer/Masters/Brand-Transformer';
 
 @Component({
   selector: 'app-brand-list',

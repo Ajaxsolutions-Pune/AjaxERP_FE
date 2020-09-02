@@ -1,15 +1,15 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Question, QuestionEntity } from '../../../Compound/Module/Masters/Question.model';
-import { QuestionService } from '../../../Compound/Services/Masters/QuestionService';
-import { QuestionTransfarmer } from '../../../Compound/Transformer/Masters/Question-Transfarmer';
+import { Question, QuestionEntity } from '../../../Components/Module/Masters/Question.model';
+import { QuestionService } from '../../../Components/Services/Masters/QuestionService';
+import { QuestionTransfarmer } from '../../../Components/Transformer/Masters/Question-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
-import { QaType } from '../../../Compound/Module/Masters/QA_Type.model';
+import { QaType } from '../../../Components/Module/Masters/QA_Type.model';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-import { QaTypeTransfarmer } from '../../../Compound/Transformer/Masters/QaType-Transfarmer';
-import { QaTypeService } from '../../../Compound/Services/Masters/QaTypeService';
+import { QaTypeTransfarmer } from '../../../Components/Transformer/Masters/QaType-Transfarmer';
+import { QaTypeService } from '../../../Components/Services/Masters/QaTypeService';
 
 @Component({
   selector: 'app-question',

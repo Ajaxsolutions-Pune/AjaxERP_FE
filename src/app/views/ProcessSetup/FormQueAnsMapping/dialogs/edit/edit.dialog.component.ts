@@ -2,17 +2,17 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DataService } from '../../data.service';
-import { Question } from '../../../../../Compound/Module/Masters/Question.model';
-import { Answer } from '../../../../../Compound/Module/Masters/Answer.model';
-import { FormObj } from '../../../../../Compound/Module/Masters/Form.model';
-import { QuestionService } from '../../../../../Compound/Services/Masters/QuestionService';
-import { QuestionTransfarmer } from '../../../../../Compound/Transformer/Masters/Question-Transfarmer';
-import { AnswerService } from '../../../../../Compound/Services/Masters/AnswerService';
-import { AnswerTransfarmer } from '../../../../../Compound/Transformer/Masters/Answer-Transfarmer';
-import { FormService } from '../../../../../Compound/Services/Masters/FormService';
-import { FormTransfarmer } from '../../../../../Compound/Transformer/Masters/Form-Transfarmer';
+import { Question } from '../../../../../Components/Module/Masters/Question.model';
+import { Answer } from '../../../../../Components/Module/Masters/Answer.model';
+import { FormObj } from '../../../../../Components/Module/Masters/Form.model';
+import { QuestionService } from '../../../../../Components/Services/Masters/QuestionService';
+import { QuestionTransfarmer } from '../../../../../Components/Transformer/Masters/Question-Transfarmer';
+import { AnswerService } from '../../../../../Components/Services/Masters/AnswerService';
+import { AnswerTransfarmer } from '../../../../../Components/Transformer/Masters/Answer-Transfarmer';
+import { FormService } from '../../../../../Components/Services/Masters/FormService';
+import { FormTransfarmer } from '../../../../../Components/Transformer/Masters/Form-Transfarmer';
 import { elementAt } from 'rxjs/operators';
-import { FormQueAnsMapping } from '../../../../../Compound/Module/ProcessSetup/FormQueAnsMapping.model';
+import { FormQueAnsMapping } from '../../../../../Components/Module/ProcessSetup/FormQueAnsMapping.model';
 
 @Component({
   selector: 'app-baza.dialog',

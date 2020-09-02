@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ItemGroup } from '../../../Compound/Module/Masters/ItemGroup.model';
-import { ItemGroupService } from '../../../Compound/Services/Masters/ItemGroupService';
+import { ItemGroup } from '../../../Components/Module/Masters/ItemGroup.model';
+import { ItemGroupService } from '../../../Components/Services/Masters/ItemGroupService';
 @Component({
   selector: 'app-item-group-list',
   templateUrl: './item-group-list.component.html',

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CountryService } from '../../../Compound/Services/Masters/CountryService';
+import { CountryService } from '../../../Components/Services/Masters/CountryService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Country, CountryEntity } from '../../../Compound/Module/Masters/Country.model';
-import { CountryTransfarmer } from '../../../Compound/Transformer/Masters/Country-Transfarmer';
+import { Country, CountryEntity } from '../../../Components/Module/Masters/Country.model';
+import { CountryTransfarmer } from '../../../Components/Transformer/Masters/Country-Transfarmer';
 
 @Component({
   selector: 'app-country-list',

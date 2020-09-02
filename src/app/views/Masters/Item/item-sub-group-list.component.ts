@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ItemSubGroup } from '../../../Compound/Module/Masters/ItemSubGroup.model';
-import { ItemSubGroupService } from '../../../Compound/Services/Masters/ItemSubGroupService';
+import { ItemSubGroup } from '../../../Components/Module/Masters/ItemSubGroup.model';
+import { ItemSubGroupService } from '../../../Components/Services/Masters/ItemSubGroupService';
 @Component({
   selector: 'app-item-sub-group-list',
   templateUrl: './item-sub-group-list.component.html',

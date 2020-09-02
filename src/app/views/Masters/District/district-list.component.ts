@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { District} from '../../../Compound/Module/Masters/District';
-import { DistrictService } from '../../../Compound/Services/Masters/DistrictService';
-import { DistrictTransfarmer } from '../../../Compound/Transformer/Masters/District-Transformer';
-import { DistrictEntity } from '../../../Compound/Module/Masters/DistrictEntity.model';
+import { District} from '../../../Components/Module/Masters/District';
+import { DistrictService } from '../../../Components/Services/Masters/DistrictService';
+import { DistrictTransfarmer } from '../../../Components/Transformer/Masters/District-Transformer';
+import { DistrictEntity } from '../../../Components/Module/Masters/DistrictEntity.model';
 
 @Component({
   selector: 'app-district-list',

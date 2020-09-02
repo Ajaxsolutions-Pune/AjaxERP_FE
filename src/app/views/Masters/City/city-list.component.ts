@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { City } from '../../../Compound/Module/City';
-import { CityService } from '../../../Compound/Services/Masters/CityService';
+import { City } from '../../../Components/Module/City';
+import { CityService } from '../../../Components/Services/Masters/CityService';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({

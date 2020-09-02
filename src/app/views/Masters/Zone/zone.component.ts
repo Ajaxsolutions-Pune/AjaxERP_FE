@@ -1,12 +1,12 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Zone } from '../../../Compound/Module/Masters/Zone.model';
+import { Zone } from '../../../Components/Module/Masters/Zone.model';
 import { DefaultLayoutComponent } from '../../../containers/default-layout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-import { ZoneService } from '../../../Compound/Services/Masters/ZoneService';
-import { ZoneTransfarmer } from '../../../Compound/Transformer/Masters/ZoneTransfarmer';
+import { ZoneService } from '../../../Components/Services/Masters/ZoneService';
+import { ZoneTransfarmer } from '../../../Components/Transformer/Masters/ZoneTransfarmer';
 @Component({
   selector: 'app-zone',
   templateUrl: './zone.component.html',

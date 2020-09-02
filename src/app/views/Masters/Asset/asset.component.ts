@@ -1,39 +1,39 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Asset, AssetEntity } from '../../../Compound/Module/Masters/Asset.model';
+import { Asset, AssetEntity } from '../../../Components/Module/Masters/Asset.model';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-import { StateService } from '../../../Compound/Services/Masters/StateService';
-import { StateTransfarmer } from '../../../Compound/Transformer/Masters/State-transformer';
-import { State } from '../../../Compound/Module/Masters/State.model';
-import { AssetGroup } from '../../../Compound/Module/Masters/AssetGroup.model';
-import { AssetGroupTransfarmer } from '../../../Compound/Transformer/Masters/AssetGroup-Transfarmer';
-import { AssetGroupService } from '../../../Compound/Services/Masters/AssetGroupService';
-import { Zone } from '../../../Compound/Module/Masters/Zone.model';
-import { ZoneService } from '../../../Compound/Services/Masters/ZoneService';
-import { ZoneTransfarmer } from '../../../Compound/Transformer/Masters/ZoneTransfarmer';
-import { Circle } from '../../../Compound/Module/Masters/Circle.model';
-import { CircleService } from '../../../Compound/Services/Masters/CircleService';
-import { CircleTransfarmer } from '../../../Compound/Transformer/Masters/Circle-Transfarmer';
-import { Cluster } from '../../../Compound/Module/Masters/Cluster.model';
-import { ClusterTransfarmer } from '../../../Compound/Transformer/Masters/Cluster-Transfarmer';
-import { ClusterService } from '../../../Compound/Services/Masters/ClusterService';
-import { Region } from '../../../Compound/Module/Masters/Region.model';
-import { RegionService } from '../../../Compound/Services/Masters/RegionService';
-import { RegionTransfarmer } from '../../../Compound/Transformer/Masters/Region-Transfarmer';
-import { Country } from '../../../Compound/Module/Masters/Country.model';
-import { CountryService } from '../../../Compound/Services/Masters/CountryService';
-import { CountryTransfarmer } from '../../../Compound/Transformer/Masters/Country-Transfarmer';
-import { Colour } from '../../../Compound/Module/Masters/Colour.model';
-import { ColourTransfarmer } from '../../../Compound/Transformer/Masters/Colour-Transfarmer';
-import { ColourService } from '../../../Compound/Services/Masters/ColourService';
-import { AssetService } from '../../../Compound/Services/Masters/AssetService';
-import { AssetTransfarmer } from '../../../Compound/Transformer/Masters/Asset-Transfarmer';
+import { StateService } from '../../../Components/Services/Masters/StateService';
+import { StateTransfarmer } from '../../../Components/Transformer/Masters/State-transformer';
+import { State } from '../../../Components/Module/Masters/State.model';
+import { AssetGroup } from '../../../Components/Module/Masters/AssetGroup.model';
+import { AssetGroupTransfarmer } from '../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
+import { AssetGroupService } from '../../../Components/Services/Masters/AssetGroupService';
+import { Zone } from '../../../Components/Module/Masters/Zone.model';
+import { ZoneService } from '../../../Components/Services/Masters/ZoneService';
+import { ZoneTransfarmer } from '../../../Components/Transformer/Masters/ZoneTransfarmer';
+import { Circle } from '../../../Components/Module/Masters/Circle.model';
+import { CircleService } from '../../../Components/Services/Masters/CircleService';
+import { CircleTransfarmer } from '../../../Components/Transformer/Masters/Circle-Transfarmer';
+import { Cluster } from '../../../Components/Module/Masters/Cluster.model';
+import { ClusterTransfarmer } from '../../../Components/Transformer/Masters/Cluster-Transfarmer';
+import { ClusterService } from '../../../Components/Services/Masters/ClusterService';
+import { Region } from '../../../Components/Module/Masters/Region.model';
+import { RegionService } from '../../../Components/Services/Masters/RegionService';
+import { RegionTransfarmer } from '../../../Components/Transformer/Masters/Region-Transfarmer';
+import { Country } from '../../../Components/Module/Masters/Country.model';
+import { CountryService } from '../../../Components/Services/Masters/CountryService';
+import { CountryTransfarmer } from '../../../Components/Transformer/Masters/Country-Transfarmer';
+import { Colour } from '../../../Components/Module/Masters/Colour.model';
+import { ColourTransfarmer } from '../../../Components/Transformer/Masters/Colour-Transfarmer';
+import { ColourService } from '../../../Components/Services/Masters/ColourService';
+import { AssetService } from '../../../Components/Services/Masters/AssetService';
+import { AssetTransfarmer } from '../../../Components/Transformer/Masters/Asset-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
-import { AssetCategoryService } from '../../../Compound/Services/Masters/AssetCategory';
-import { AssetCategoryTransfarmer } from '../../../Compound/Transformer/Masters/Asset-Category-Transfarmer';
-import { AssetCategory } from '../../../Compound/Module/Masters/AssetCategory.model';
+import { AssetCategoryService } from '../../../Components/Services/Masters/AssetCategory';
+import { AssetCategoryTransfarmer } from '../../../Components/Transformer/Masters/Asset-Category-Transfarmer';
+import { AssetCategory } from '../../../Components/Module/Masters/AssetCategory.model';
 
 @Component({
   selector: 'app-asset',
@@ -279,7 +279,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       classificationCode: null,
       structureCode: null,
       positionCode: null,
-      isActive: null,
+      isActive: 'true',
     };
     this.stateService.getStates().subscribe(
       (par) => this.statesObj = this.stateTransfarmer.StateTransfarmers(par),
@@ -344,7 +344,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       classificationCode: null,
       structureCode: null,
       positionCode: null,
-      isActive: null,
+      isActive: 'true',
     };
     if (asset_Code === null || asset_Code === '') {
       this.bindObj = {
@@ -376,7 +376,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         classificationCode: null,
         structureCode: null,
         positionCode: null,
-        isActive: null,
+        isActive: 'true',
       };
       status = '';
 
@@ -410,7 +410,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         classificationCode: null,
         structureCode: null,
         positionCode: null,
-        isActive: null,
+        isActive: 'true',
       };
       this.assetService.getAsset(asset_Code).subscribe(
         (par) => {

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Region, RegionEntity } from '../../../Compound/Module/Masters/Region.model';
+import { Region, RegionEntity } from '../../../Components/Module/Masters/Region.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { RegionTransfarmer } from '../../../Compound/Transformer/Masters/Region-Transfarmer';
+import { RegionTransfarmer } from '../../../Components/Transformer/Masters/Region-Transfarmer';
 import * as alasql from 'alasql';
-import { environment } from '../../../Compound/Module/environment';
+import { environment } from '../../../Components/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({

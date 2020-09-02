@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Brand } from '../../../Compound/Module/Masters/Brand.model';
+import { Brand } from '../../../Components/Module/Masters/Brand.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
-import { BrandService } from '../../../Compound/Services/Masters/BrandService';
+import { BrandService } from '../../../Components/Services/Masters/BrandService';
 import { NgForm } from '@angular/forms';
 
 @Component({

@@ -46,7 +46,9 @@ export class AssetTransfarmer {
             this.Oject.classificationCode = element.classificationCode;
             this.Oject.structureCode = element.structureCode;
             this.Oject.positionCode = element.positionCode;
-            this.Oject.isActive = element.isActive;
+            if (element.isActive === '1') {
+                this.Oject.isActive = 'Active'.toString().trim();
+            } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
             this.arrOject.push(this.Oject);
         });
         return this.arrOject;
@@ -124,13 +126,6 @@ export class AssetTransfarmer {
         if (element.isActive === 'true') {
             this.OjectEntity.isActive = '1';
         } else { this.OjectEntity.isActive = '0'; }
-        if (element.isActive.toString().trim() === 'true') {
-            this.OjectEntity.isActive = '1';
-        } else {
-            this.OjectEntity.isActive = '0';
-        }
-        console.log(this.OjectEntity);
-        console.log('hh');
         return this.OjectEntity;
     }
 }

@@ -2,21 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../containers';
 import { NgForm } from '@angular/forms';
-import { MFG } from '../../../Compound/Module/Masters/MFG';
-import { MFGService } from '../../../Compound/Services/Masters/MFGService';
+import { MFG } from '../../../Components/Module/Masters/MFG';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'app-MFG',
   templateUrl: './manufacture.component.html',
   styleUrls: ['./manufacture.component.scss']
 })
+// tslint:disable-next-line:class-name
 export class manufactureComponent implements OnInit {
   MFG: MFG;
   str: string;
   MFGList: MFG[];
   constructor(private route: ActivatedRoute,
-    private defaultLayoutComponent: DefaultLayoutComponent,
-    private MFGService: MFGService, private router: Router) {
+    private defaultLayoutComponent: DefaultLayoutComponent, private router: Router) {
     const status = '';
   }
   ngOnInit() {
@@ -25,12 +25,6 @@ export class manufactureComponent implements OnInit {
 
   }
   save(countryForm: NgForm): void {
-    if (status !== 'Update') {
-      this.MFG.ID = this.MFGService.getMaxMFGId() + 1;
-      this.MFGService.Save(this.MFG);
-    } else {
-      this.MFGService.Update(this.MFG);
-    }
     this.router.navigate(['ManufacturerList']);
 
   }
@@ -41,7 +35,7 @@ export class manufactureComponent implements OnInit {
       manufactureDesc: null,
       manufactureDescUni: null,
       isActive: null
-    }
+    };
     if (Id === null || Id === 0) {
       this.MFG = {
         ID: null,
@@ -53,7 +47,6 @@ export class manufactureComponent implements OnInit {
       status = '';
 
     } else {
-      this.MFG = this.MFGService.getMFG(Id)[0];
       status = 'Update';
     }
   }

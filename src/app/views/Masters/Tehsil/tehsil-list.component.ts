@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Tehsil, TehsilEntity } from '../../../Compound/Module/Masters/Tehsil';
-import { TehsilService } from '../../../Compound/Services/Masters/TehsilService';
-import { TehsilTransfarmer } from '../../../Compound/Transformer/Masters/Tehsil-Transfarmer';
+import { Tehsil, TehsilEntity } from '../../../Components/Module/Masters/Tehsil';
+import { TehsilService } from '../../../Components/Services/Masters/TehsilService';
+import { TehsilTransfarmer } from '../../../Components/Transformer/Masters/Tehsil-Transfarmer';
 
 @Component({
   selector: 'app-tehsil-list',

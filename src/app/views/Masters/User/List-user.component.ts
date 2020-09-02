@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, Route, ActivatedRoute } from '@angular/router';
 import * as alasql from 'alasql';
-import { User } from '../../../Compound/Module/User.model';
-import { UserService } from '../../../Compound/Services/User.Service';
-import { LoginUser } from '../../../Compound/Module/LoginUser';
+import { User } from '../../../Components/Module/User.model';
+import { UserService } from '../../../Components/Services/User.Service';
+import { LoginUser } from '../../../Components/Module/LoginUser';
 alasql['private'].externalXlsxLib = require('xlsx');
+import { DatePipe } from '@angular/common';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -20,24 +21,27 @@ export class ListUserComponent implements OnInit {
   ResultUser: User[];
   SerachCri: number;
   user1: User;
+  myDate = new Date();
   constructor(private _router: Router,
     private userService: UserService,
+    private datePipe: DatePipe,
     private route: ActivatedRoute) {
-      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
-      }
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      this._router.navigate(['login']);
+    }
     this.user = this.userService.getUsers();
     this.WithoutFilteruser = this.user;
   }
 
   ngOnInit() {
+    console.log(this.datePipe.transform(this.myDate, 'yyyy-MM-dd'));
     this.user = this.userService.getUsers();
     this.WithoutFilteruser = this.user;
     this.user1 = {
       UserNo: null,
       UserName: null,
       UserID: null,
-      BranchNo: LoginUser.BranchNo,
+      BranchNo: 1,
       Password: null,
       RoleId: -1,
       IsActive: null,
@@ -45,8 +49,9 @@ export class ListUserComponent implements OnInit {
       ModDate: null,
       EmpId: -1,
       status: null,
-      CreUser: LoginUser.UserName,
-      ModUser: LoginUser.UserName,
+      CreUser: '',
+      ModUser: ''
+      // ModUser: LoginUser.UserName,
     };
   }
 

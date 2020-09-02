@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Answer, AnswerEntity } from '../../../../Compound/Module/Masters/Answer.model';
-import { AnswerTransfarmer } from '../../../../Compound/Transformer/Masters/Answer-Transfarmer';
-import { AnswerService } from '../../../../Compound/Services/Masters/AnswerService';
+import { Answer, AnswerEntity } from '../../../../Components/Module/Masters/Answer.model';
+import { AnswerTransfarmer } from '../../../../Components/Transformer/Masters/Answer-Transfarmer';
+import { AnswerService } from '../../../../Components/Services/Masters/AnswerService';
 import * as alasql from 'alasql';
 alasql['private'].externalXlsxLib = require('xlsx');
-import { environment } from '../../../../Compound/Module/environment';
+import { environment } from '../../../../Components/Module/environment';
 
 @Component({
   selector: 'app-answer-list',
@@ -45,6 +45,10 @@ export class AnswerListComponent implements OnInit {
     this.objAnswer = {
       answer: null,
       answerId: null,
+      createdBy: null,
+      createdDate: null,
+      modifiedBy: null,
+      modifiedDate: null,
       isActive: '3'
     };
   }

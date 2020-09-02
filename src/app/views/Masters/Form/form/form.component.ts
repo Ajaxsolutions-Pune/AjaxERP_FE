@@ -2,9 +2,9 @@ import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angula
 import { FormBuilder, FormGroup, Validators, NgForm, Form } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DefaultLayoutComponent } from '../../../../containers';
-import { FormObj, FormEntity } from '../../../../Compound/Module/Masters/Form.model';
-import { FormTransfarmer } from '../../../../Compound/Transformer/Masters/Form-Transfarmer';
-import { FormService } from '../../../../Compound/Services/Masters/FormService';
+import { FormObj, FormEntity } from '../../../../Components/Module/Masters/Form.model';
+import { FormTransfarmer } from '../../../../Components/Transformer/Masters/Form-Transfarmer';
+import { FormService } from '../../../../Components/Services/Masters/FormService';
 import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
 
