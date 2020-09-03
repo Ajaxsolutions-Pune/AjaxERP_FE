@@ -39,7 +39,8 @@
               "node_modules/chart.js/dist/Chart.min.js",
               "src/assets/js/jquery-2.1.3.js",
               "src/assets/js/jspdf.js",
-              "src/assets/js/pdfFromHTML.js"
+              "src/assets/js/pdfFromHTML.js",
+              "src/assets/js/Global.js"
             ]
           },
           "configurations": {

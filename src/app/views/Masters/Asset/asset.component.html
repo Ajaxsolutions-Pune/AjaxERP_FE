@@ -388,7 +388,25 @@
               </mat-form-field>
               <div class="col-md-2"></div>
             </div>   
-            
+            <div class="row">
+              <div class="col-md-2"></div>
+              <mat-form-field class="col-md-4">
+                <mat-label>Device</mat-label>
+                <mat-select required
+                formControlName="ControldeviceIdCode"
+                [(ngModel)]="bindObj.deviceId">
+                <mat-option>Device</mat-option>
+                <mat-option *ngFor="let device of deviceObj"
+                 [value]="device.deviceId">
+                  {{device.deviceName}}
+                </mat-option>
+                </mat-select>
+                <mat-error>
+                {{ formErrors['ControldeviceIdCode'] }}
+                </mat-error>
+              </mat-form-field>
+              <div class="col-md-2"></div>
+            </div>
             <div class="row">      
               <div class="col-md-2"></div>        
               <mat-form-field class="col-md-8">

@@ -28,6 +28,13 @@ export class Asset {
     structureCode: string;
     positionCode: string;
     isActive: string;
+    createdBy: string;
+    createdDate: string;
+    modifiedBy: string;
+    modifiedDate: string;
+    sortBy: string;
+    source: string;
+    deviceId: string;
 }
 export class AssetEntity {
     ouCode: string;
@@ -59,4 +66,13 @@ export class AssetEntity {
     structureCode: string;
     positionCode: string;
     isActive: string;
+    createdBy: string;
+    createdDate: string;
+    modifiedBy: string;
+    modifiedDate: string;
+    isRetag: string;
+    sortBy: string;
+    source: string;
+    deviceId: string;
+
 }

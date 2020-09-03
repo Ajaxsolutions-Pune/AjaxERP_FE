@@ -18,6 +18,9 @@ export class DeviceService {
         , this.env.httpOptions);
     }
 
+    fillDrpAnswers(): Observable<DeviceEntity[]> {
+        return this.httpClient.get<DeviceEntity[]>(this.str + '/Device', this.env.httpOptions);
+    }
     getDevice(qaTypeCode: string): Observable<DeviceEntity> {
         return this.httpClient.get<DeviceEntity>(this.str + '/Device/' + qaTypeCode
         , this.env.httpOptions).pipe(catchError(this.handleError));

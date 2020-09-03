@@ -90,7 +90,6 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
 
       this.answerService.Save(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Inserted') {
             console.log(par.status);
             this.defaultLayoutComponent.Massage('',

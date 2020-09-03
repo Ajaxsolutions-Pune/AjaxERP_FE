@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle'; // import it to your component
-import { LoginUser } from './Components/Module/LoginUser';
 import { environment } from './Components/Module/environment';
 import { LocalStorageService } from 'ngx-webstorage';
 import { CookieService } from 'ngx-cookie-service';
@@ -35,7 +34,7 @@ export class AppComponent implements OnInit {
     this.bnIdle.startWatching(environment.SessionTimeOut * 60).subscribe((res) => {
       if (res) {
         localStorage.removeItem('token');
-       // this.router.navigate(['login']);
+        this.router.navigate(['login']);
       }
     });
   }

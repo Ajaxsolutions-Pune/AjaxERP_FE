@@ -46,7 +46,11 @@ export class QuestionListComponent implements OnInit {
       isActive: '3',
       qaTypeCode: null,
       question: null,
-      questionId: null
+      questionId: null,
+      createdBy: null,
+      createdDate: null,
+      modifiedBy: null,
+      modifiedDate: null,
     };
   }
 

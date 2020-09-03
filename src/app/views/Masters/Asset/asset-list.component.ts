@@ -74,7 +74,14 @@ export class AssetListComponent implements OnInit {
       classificationCode: null,
       structureCode: null,
       positionCode: null,
-      isActive: '3'
+      isActive: '3',
+      createdBy: null,
+      createdDate: null,
+      modifiedBy: null,
+      modifiedDate: null,
+      deviceId: null,
+      sortBy: null,
+      source: null,
     };
   }
 

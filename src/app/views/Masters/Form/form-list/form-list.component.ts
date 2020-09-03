@@ -50,7 +50,11 @@ export class FormListComponent implements OnInit {
     this.Form = {
       isActive: '3',
       formId: null,
-      formName: null
+      formName: null,
+      createdBy: null,
+      createdDate: null,
+      modifiedBy: null,
+      modifiedDate: null,
     };
   }
 

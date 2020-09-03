@@ -10,6 +10,7 @@ import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
 import { QaTypeTransfarmer } from '../../../Components/Transformer/Masters/QaType-Transfarmer';
 import { QaTypeService } from '../../../Components/Services/Masters/QaTypeService';
+import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-question',
@@ -29,6 +30,7 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
     private questionTransfarmer: QuestionTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private qaTypeService: QaTypeService,
+    private globalService: GlobalService,
     private qaTypeTransfarmer: QaTypeTransfarmer,
     private questionService: QuestionService, private router: Router,
     private formBuilder: FormBuilder) {
@@ -66,6 +68,10 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
       isActive: 'true',
       question: null,
       questionId: null,
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getquestion(str); });
   }
@@ -86,19 +92,23 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
   save(QuestionForm: NgForm): void {
     if (status !== 'Update') {
       this.question.questionId = null;
-      this.questionService.Save(this.questionTransfarmer.QuestionTransfarmer(this.question)).subscribe(
-        (par) => {
-          if (par !== null) {
-            this.defaultLayoutComponent.Massage('',
-              'Data saved successfully !', 'modal-info');
-            QuestionForm.reset();
-            this.router.navigate(['QuestionList']);
-          } else {
-            this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+      this.question.createdBy = localStorage.getItem('username'),
+        this.question.createdDate = this.globalService.GerCurrntDateStamp(),
+        this.question.modifiedBy = localStorage.getItem('username'),
+        this.question.modifiedDate = this.globalService.GerCurrntDateStamp(),
+        this.questionService.Save(this.questionTransfarmer.QuestionTransfarmer(this.question)).subscribe(
+          (par) => {
+            if (par !== null) {
+              this.defaultLayoutComponent.Massage('',
+                'Data saved successfully !', 'modal-info');
+              QuestionForm.reset();
+              this.router.navigate(['QuestionList']);
+            } else {
+              this.defaultLayoutComponent.Massage('',
+                'Somethig Wrong', 'modal-info');
+            }
           }
-        }
-      );
+        );
 
     } else {
       this.questionService.Update(this.questionTransfarmer.QuestionTransfarmer(this.question)).subscribe(
@@ -122,14 +132,22 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
       qaTypeCode: null,
       question: null,
       questionId: null,
-      isActive: 'true'
+      isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     if (Question_Code === null || Question_Code === '') {
       this.question = {
         qaTypeCode: null,
         question: null,
         questionId: null,
-        isActive: 'true'
+        isActive: 'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
       status = '';
 

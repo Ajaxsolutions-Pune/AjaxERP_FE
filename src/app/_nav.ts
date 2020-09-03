@@ -69,36 +69,36 @@ export const navItems: NavData[] = [
       //   url: '/QuestionTypeList',
       //   icon: 'icon-puzzle'
       // },
-      {
-        name: 'Zone',
-        url: '/ZoneList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Circle',
-        url: '/CircleList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Cluster',
-        url: '/ClusterList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Region',
-        url: '/RegionList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Asset Category',
-        url: '/AssetCategoryList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Asset Group',
-        url: '/AssetGroupList',
-        icon: 'icon-puzzle'
-      },
+      // {
+      //   name: 'Zone',
+      //   url: '/ZoneList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'Circle',
+      //   url: '/CircleList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'Cluster',
+      //   url: '/ClusterList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'Region',
+      //   url: '/RegionList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'Asset Category',
+      //   url: '/AssetCategoryList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'Asset Group',
+      //   url: '/AssetGroupList',
+      //   icon: 'icon-puzzle'
+      // },
       {
         name: 'Asset',
         url: '/AssetList',
@@ -109,46 +109,46 @@ export const navItems: NavData[] = [
         url: '/DeviceList',
         icon: 'icon-puzzle'
       },
-      {
-        name: 'Colour',
-        url: '/ColourList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Country',
-        url: '/CountryList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'State',
-        url: '/StateList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'District',
-        url: '/DistrictList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Tehsil',
-        url: '/TehsilList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'City',
-        url: '/CityList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'City Group',
-        url: '/CityGroupList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'User',
-        url: '/UserList',
-        icon: 'icon-puzzle'
-      },
+      // {
+      //   name: 'Colour',
+      //   url: '/ColourList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'Country',
+      //   url: '/CountryList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'State',
+      //   url: '/StateList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'District',
+      //   url: '/DistrictList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'Tehsil',
+      //   url: '/TehsilList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'City',
+      //   url: '/CityList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'City Group',
+      //   url: '/CityGroupList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'User',
+      //   url: '/UserList',
+      //   icon: 'icon-puzzle'
+      // },
       // {
       //   name: 'Unit',
       //   url: '/UnitList',

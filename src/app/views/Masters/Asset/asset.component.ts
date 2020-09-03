@@ -34,6 +34,10 @@ import { DefaultLayoutComponent } from '../../../containers';
 import { AssetCategoryService } from '../../../Components/Services/Masters/AssetCategory';
 import { AssetCategoryTransfarmer } from '../../../Components/Transformer/Masters/Asset-Category-Transfarmer';
 import { AssetCategory } from '../../../Components/Module/Masters/AssetCategory.model';
+import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import { DeviceService } from '../../../Components/Services/Masters/DeviceService';
+import { DeviceTransfarmer } from '../../../Components/Transformer/Masters/Device-Transfarmer';
+import { Device } from '../../../Components/Module/Masters/Device.model';
 
 @Component({
   selector: 'app-asset',
@@ -55,12 +59,16 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
   regionObj: Region[];
   countryObj: Country[];
   colourObj: Colour[];
+  deviceObj: Device[];
   assetCategoryObj: AssetCategory[];
   constructor(private route: ActivatedRoute,
     private _router: Router,
+    private globalService: GlobalService,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private assetService: AssetService,
     private assetTransfarmer: AssetTransfarmer,
+    private deviceService: DeviceService,
+    private deviceTransfarmer: DeviceTransfarmer,
     private stateService: StateService,
     private stateTransfarmer: StateTransfarmer,
     private assetGroupService: AssetGroupService,
@@ -137,6 +145,9 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       ControlRedius: {
         required: 'Redius is required.',
       },
+      ControldeviceIdCode: {
+        required: 'Device is required.',
+      },
       ControlcolourCode: {
         required: 'Colour is required.',
       },
@@ -192,6 +203,8 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
   ngOnInit() {
     this.form = this.formBuilder.group({
       ControlassetCode: ['', []],
+      ControldeviceIdCode: ['', [
+      Validators.required]],
       ControlassetNameENG: ['', [
         Validators.required]],
       ControlAssetCategory: ['', [
@@ -254,6 +267,9 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       ouCode: '12',
       assetCode: null,
       assetNameENG: null,
+      deviceId: null,
+      sortBy: null,
+      source: null,
       assetNameUNI: null,
       placeName: null,
       assetGroupCode: null,
@@ -280,7 +296,16 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       structureCode: null,
       positionCode: null,
       isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
+
+    this.deviceService.getDevices().subscribe(
+      (par) => this.deviceObj = this.deviceTransfarmer.DeviceTransfarmers(par),
+      (err: any) => console.log(err));
+
     this.stateService.getStates().subscribe(
       (par) => this.statesObj = this.stateTransfarmer.StateTransfarmers(par),
       (err: any) => console.log(err));
@@ -306,9 +331,9 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       (par) => this.colourObj = this.colourTransfarmer.ColourTransfarmers(par),
       (err: any) => console.log(err));
 
-      this.assetCategoryService.getAssetCategorys().subscribe(
-        (par) => this.assetCategoryObj = this.assetCategoryTransfarmer.AssetCategoryTransfarmers(par),
-        (err: any) => console.log(err));
+    this.assetCategoryService.getAssetCategorys().subscribe(
+      (par) => this.assetCategoryObj = this.assetCategoryTransfarmer.AssetCategoryTransfarmers(par),
+      (err: any) => console.log(err));
 
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getasset(str); });
 
@@ -344,7 +369,14 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       classificationCode: null,
       structureCode: null,
       positionCode: null,
+      deviceId: null,
+      sortBy: null,
+      source: null,
       isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     if (asset_Code === null || asset_Code === '') {
       this.bindObj = {
@@ -376,7 +408,14 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         classificationCode: null,
         structureCode: null,
         positionCode: null,
+        deviceId: null,
+        sortBy: null,
+        source: null,
         isActive: 'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
       status = '';
 
@@ -411,6 +450,13 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         structureCode: null,
         positionCode: null,
         isActive: 'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
+        deviceId: null,
+        sortBy: null,
+        source: null,
       };
       this.assetService.getAsset(asset_Code).subscribe(
         (par) => {
@@ -436,21 +482,30 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       console.log(this.bindObj);
       this.assetService.Save(this.assetTransfarmer.AssetTransfarmer(this.bindObj)).subscribe(
         (par) => {
-          console.log(par);
-          AssetForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this._router.navigate(['AssetList']);
+          if (par.status === 'Inserted') {
+            console.log(par.status);
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            this._router.navigate(['AssetList']);
+          }   else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
+          }
         }
       );
 
     } else {
       this.assetService.Update(this.assetTransfarmer.AssetTransfarmer(this.bindObj)).subscribe(
-        () => {
-          AssetForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
-            'Data saved successfully !', 'modal-info');
-          this._router.navigate(['AssetList']);
+        (par) => {
+          if (par.status === 'Inserted') {
+            console.log(par.status);
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            this._router.navigate(['AssetList']);
+          }   else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
+          }
         }
       );
     }

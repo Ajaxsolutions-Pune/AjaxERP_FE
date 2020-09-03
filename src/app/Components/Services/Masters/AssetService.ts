@@ -24,11 +24,11 @@ export class AssetService {
         return this.httpClient.get<AssetEntity>(this.str + '/Asset/' + qaTypeCode
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-    Save(saveEntityObj: AssetEntity): Observable<any> {
+    Save(saveEntityObj: AssetEntity): Observable<Insertstatus> {
         console.log('service');
         console.log(AssetEntity);
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<any>(this.str + '/Asset', saveEntityObj
+        return this.httpClient.post<Insertstatus>(this.str + '/Asset', saveEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 

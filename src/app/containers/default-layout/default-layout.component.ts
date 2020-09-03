@@ -5,7 +5,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { environment } from '../../Components/Module/environment';
-import '../../../js/hello.js';
+import '../../../assets/JS/Global.js';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html',
@@ -65,12 +65,6 @@ export class DefaultLayoutComponent implements OnDestroy {
     localStorage.removeItem('token');
   }
 
-  redirect_to_parent() {
-    this.router.navigate(['login'], {
-      relativeTo: this.activatedRoute, queryParams:
-        { GfG: 'Geeks for Geeks' }
-    });
-  }
   omit_special_char(event) {
     console.log('omit_special_char');
     let k;

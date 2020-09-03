@@ -20,6 +20,10 @@ export class ProcessTransfarmer1 {
             this.process.processId = element.processId;
             this.process.processName = element.processName;
             this.process.geofence = element.geofence;
+            this.process.createdBy = element.createdBy;
+            this.process.createdDate = element.createdDate;
+            this.process.modifiedBy = element.modifiedBy;
+            this.process.modifiedDate = element.modifiedDate;
             if (element.isActive === '1') {
                 this.process.isActive = 'Active'.toString().trim();
             } else { this.process.isActive = 'Inactive'.toString().trim(); }
@@ -31,6 +35,11 @@ export class ProcessTransfarmer1 {
         this.process = new Process();
         this.process.processId = Entity.processId;
         this.process.processName = Entity.processName;
+
+        this.process.createdBy = Entity.createdBy;
+        this.process.createdDate = Entity.createdDate;
+        this.process.modifiedBy = Entity.modifiedBy;
+        this.process.modifiedDate = Entity.modifiedDate;
         if (Entity.isActive === '1') {
             this.process.isActive = 'true'.toString().trim();
         } else { this.process.isActive = ''.toString().trim(); }
@@ -46,7 +55,12 @@ export class ProcessTransfarmer1 {
         this.processEntity = new ProcessEntity();
         this.processEntity.processId = process1.processId;
         this.processEntity.processName = process1.processName;
-        console.log('hiiiiiii');
+
+        this.processEntity.createdBy = process1.createdBy;
+        this.processEntity.createdDate = process1.createdDate;
+        this.processEntity.modifiedBy = process1.modifiedBy;
+        this.processEntity.modifiedDate = process1.modifiedDate;
+
         if (process1.geofence.toString().trim() === 'true') {
             this.processEntity.geofence = '1';
         } else {

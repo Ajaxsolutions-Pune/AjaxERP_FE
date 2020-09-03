@@ -7,6 +7,7 @@ import { ProcessService1 } from '../../../../Components/Services/Masters/Process
 import { NgForm, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
+import { GlobalService } from '../../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-process',
@@ -23,6 +24,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
   str: string;
   constructor(private route: ActivatedRoute,
     private processTransfarmer: ProcessTransfarmer1,
+    private globalService: GlobalService,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private processService: ProcessService1, private router: Router,
     private formBuilder: FormBuilder) {
@@ -47,10 +49,14 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     this.form.controls['ControlprocessId'].disable();
     status = '';
     this.process = {
-      geofence: null,
-      isActive: null,
+      geofence: '',
+      isActive: 'true',
       processId: null,
       processName: null,
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getprocess(str); });
   }
@@ -62,9 +68,15 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     this.startControlMonitoring(this.form);
   }
   save(processForm: NgForm): void {
+
     if (status !== 'Update') {
       this.process.processId = null;
-      console.log(this.process);
+
+      this.process.createdBy = localStorage.getItem('username'),
+        this.process.createdDate = this.globalService.GerCurrntDateStamp(),
+        this.process.modifiedBy = localStorage.getItem('username'),
+        this.process.modifiedDate = this.globalService.GerCurrntDateStamp(),
+        console.log(this.process);
       this.processService.Save(this.processTransfarmer.processTransfarmer(this.process)).subscribe(
         (par) => {
           console.log(par);
@@ -89,17 +101,25 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
 
   private getprocess(process_Code: string) {
     this.process = {
-      geofence: null,
-      isActive: null,
+      geofence: '',
+      isActive: 'true',
       processId: null,
       processName: null,
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     if (process_Code === null || process_Code === '') {
       this.process = {
         processId: null,
         processName: null,
-        geofence: null,
-        isActive: null,
+        geofence: '',
+        isActive: 'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
       status = '';
 

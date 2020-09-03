@@ -1,17 +1,17 @@
 {
-  "name": "@coreui/coreui-free-angular-admin-template",
+  "name": "ajaxerp",
   "version": "2.5.2",
   "description": "Ajax Solutions",
   "author": {
-    "name": "Łukasz Holeczek",
-    "url": "http://holeczek.pl",
-    "github": "https://github.com/mrholek",
-    "twitter": "https://twitter.com/lukaszholeczek"
+    "name": "Ajax Solutions",
+    "url": "http://AjaxErp.com",
+    "github": "https://",
+    "twitter": "https://"
   },
   "contributors": [
     {
-      "name": "Andrzej Kopański",
-      "url": "https://github.com/xidedix"
+      "name": "",
+      "url": "https://"
     }
   ],
   "homepage": "http://www.ajaxsolutions.in/",
