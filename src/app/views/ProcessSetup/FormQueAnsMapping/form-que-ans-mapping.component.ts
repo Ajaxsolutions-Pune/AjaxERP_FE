@@ -21,6 +21,7 @@ import { FormQueAnsMappingTransfarmer } from '../../../Components/Transformer/Pr
 import { FormQueAnsMappingService } from '../../../Components/Services/ProcessSetup/FormQueAnsMappingService';
 import { DefaultLayoutComponent } from '../../../containers';
 import { Router } from '@angular/router';
+import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-form-que-ans-mapping',
@@ -54,6 +55,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     private formQueAnsMappingService: FormQueAnsMappingService,
     public dialog: MatDialog,
     public dataService: DataService,
+    private globalService: GlobalService,
     private formBuilder: FormBuilder) {
     super();
     this.validationMessages = {
@@ -108,18 +110,23 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     if (this.FormId === undefined) {
       this.defaultLayoutComponent.Massage('Somethig Wrong',
         'Please select form name', 'modal-danger');
-        return;
+      return;
     }
-    if (this.objFormQueAnsMapping.length < 1) {
+    if (this.dataSource.filteredData.length < 1) {
       this.defaultLayoutComponent.Massage('Somethig Wrong',
         'No Item Found', 'modal-danger');
-        return;
+      return;
     }
     this.dataSource.filteredData.forEach(element => {
       element.formId = this.FormId;
       element.updateFlag = this.FormId;
+      element.createdBy = localStorage.getItem('username');
+      element.createdDate = this.globalService.GerCurrntDateStamp();
+      element.modifiedBy = localStorage.getItem('username');
+      element.modifiedDate = this.globalService.GerCurrntDateStamp();
     });
-
+    console.log(this.formQueAnsMappingTransfarmer
+      .ObjectToEntityFormQueAnsMappingTransfarmers(this.dataSource.filteredData));
     this.objFormQueAnsMapping = [];
     this.objFormQueAnsMapping = this.dataSource.filteredData.filter(e => {
       console.log(e.updateFlag);

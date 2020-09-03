@@ -62,8 +62,7 @@ export class DefaultLayoutComponent implements OnDestroy {
   }
   Logout() {
     this.router.navigate(['login']);
-    console.log('hh');
-    // localStorage.removeItem('token');
+    localStorage.removeItem('token');
   }
 
   redirect_to_parent() {

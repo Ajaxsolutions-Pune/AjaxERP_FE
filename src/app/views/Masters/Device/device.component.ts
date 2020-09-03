@@ -206,8 +206,6 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
   save(DeviceForm: NgForm): void {
     if (status !== 'Update') {
       this.bindObj.deviceId = null;
-      console.log('this.bindObj');
-      console.log(this.deviceTransfarmer.DeviceTransfarmer(this.bindObj));
       this.deviceService.Save(this.deviceTransfarmer.DeviceTransfarmer(this.bindObj)).subscribe(
         (par) => {
           console.log(par);
@@ -226,9 +224,7 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
     } else {
       this.deviceService.Update(this.deviceTransfarmer.DeviceTransfarmer(this.bindObj)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Updated') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this._router.navigate(['DeviceList']);

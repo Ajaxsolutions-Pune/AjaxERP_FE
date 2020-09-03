@@ -61,6 +61,12 @@ export class FormQueAnsMappingTransfarmer {
             this.Oject.nextFormId = element.nextFormId;
             this.Oject.nextFormIdText = element.nextFormIdText;
             this.Oject.isActiveText = element.isActiveText;
+
+            this.Oject.createdBy = element.createdBy;
+            this.Oject.createdDate = element.createdDate;
+            this.Oject.modifiedBy = element.modifiedBy;
+            this.Oject.modifiedDate = element.modifiedDate;
+
             if (element.isQuestionMandatory === '1') {
                 this.Oject.isQuestionMandatory = 'true'.toString().trim();
             } else { this.Oject.isQuestionMandatory = ''.toString().trim(); }
@@ -90,6 +96,10 @@ export class FormQueAnsMappingTransfarmer {
         this.Oject.nextFormIdText = Entity.nextFormIdText;
         this.Oject.isActiveText = Entity.isActiveText;
         this.Oject.isActive = Entity.isActive;
+        this.Oject.createdBy = Entity.createdBy;
+        this.Oject.createdDate = Entity.createdDate;
+        this.Oject.modifiedBy = Entity.modifiedBy;
+        this.Oject.modifiedDate = Entity.modifiedDate;
         if (Entity.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
         } else { this.Oject.isActive = ''.toString().trim(); }
@@ -114,6 +124,11 @@ export class FormQueAnsMappingTransfarmer {
         this.OjectEntity.nextFormId = element.nextFormId;
         this.OjectEntity.nextFormIdText = element.nextFormIdText;
         this.OjectEntity.isActiveText = element.isActiveText;
+
+        this.OjectEntity.createdBy = element.createdBy;
+        this.OjectEntity.createdDate = element.createdDate;
+        this.OjectEntity.modifiedBy = element.modifiedBy;
+        this.OjectEntity.modifiedDate = element.modifiedDate;
         if (element.isActive === 'true') {
             this.OjectEntity.isActive = '1';
         } else { this.OjectEntity.isActive = '0'; }

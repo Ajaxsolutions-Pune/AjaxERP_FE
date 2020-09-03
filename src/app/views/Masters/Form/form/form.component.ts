@@ -7,6 +7,7 @@ import { FormTransfarmer } from '../../../../Components/Transformer/Masters/Form
 import { FormService } from '../../../../Components/Services/Masters/FormService';
 import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
+import { GlobalService } from '../../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-form',
@@ -25,6 +26,7 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
     private formTransfarmer: FormTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private formService: FormService,
+    private globalService: GlobalService,
     private router: Router, private formBuilder: FormBuilder) {
     super();
     this.validationMessages = {
@@ -54,6 +56,10 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
       formId: null,
       formName: null,
       isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getform(str); });
   }
@@ -73,15 +79,16 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
   }
 
   save(formForm: NgForm): void {
+    this.formobj.createdBy = localStorage.getItem('username');
+    this.formobj.createdDate = this.globalService.GerCurrntDateStamp();
+    this.formobj.modifiedBy = localStorage.getItem('username');
+    this.formobj.modifiedDate = this.globalService.GerCurrntDateStamp();
     if (status !== 'Update') {
       this.formobj.formId = null;
-      console.log(this.formobj);
-      // if (this.question.isActive === 'true') { this.question.isActive = '1'; } else { this.question.isActive = '0'; }
-
       this.formService.Save(this.formTransfarmer.formTransfarmer(this.formobj)).subscribe(
         (par) => {
           console.log(par);
-          if (par.status === 'Success') {
+          if (par.status === 'Inserted') {
             console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
@@ -116,12 +123,20 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
       formName: null,
       formId: null,
       isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     if (form_Code === null || form_Code === '') {
       this.formobj = {
         formName: null,
         formId: null,
         isActive: 'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
       status = '';
 
