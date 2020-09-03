@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { DefaultLayoutComponent } from './containers/default-layout/default-layout.component';
 import { HttpHeaders } from '@angular/common/http';
+declare function logout(): any;
 @Component({
   selector: 'app-root',
   template: '<router-outlet></router-outlet>'
@@ -33,8 +34,7 @@ export class AppComponent implements OnInit {
     this.env.httpOptions = httpOptions;
     this.bnIdle.startWatching(environment.SessionTimeOut * 60).subscribe((res) => {
       if (res) {
-        localStorage.removeItem('token');
-        this.router.navigate(['login']);
+        logout();
       }
     });
   }
