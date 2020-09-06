@@ -52,7 +52,7 @@ export class EditDialogComponent implements OnInit {
     this.answersService.fillDrpAnswers().subscribe(
       (par) => {
         this.answersObj = this.answersTransfarmer.AnswerTransfarmers(par);
-        this.data.answerId = '2';
+       // this.data.answerId = '2';
       },
       (err: any) => console.log(err));
     this.formService.fillDrpForms().subscribe(

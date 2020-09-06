@@ -156,7 +156,8 @@ export class FormQueAnsMappingComponent extends FormComponentBase
             console.log(par.status);
             this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
               'Data saved successfully !', 'modal-info');
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['FormQueAnsMapping']);
+            this.FormId = this.FormId;
           }
         }
       );
