@@ -36,6 +36,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     , 'QuestionsMandatoryText', 'FormQuestionssequence', 'answerText',
     'QuestionsGroup', 'nextQueGroup', 'NextFormText', 'ActiveText', 'actions'];
   exampleDatabase: DataService | null;
+  insertData: DataService | null;
   dataSource: ExampleDataSource | null;
   objFormQueAnsMapping: FormQueAnsMapping[];
   index: number;
@@ -98,6 +99,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
+        this.insertData.dataChange.value.push(this.dataService.getDialogData());  
         this.refreshTable();
       }
     });
@@ -131,9 +133,23 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     this.objFormQueAnsMapping = this.dataSource.filteredData.filter(e => {
       console.log(e.updateFlag);
     });
-    console.log(this.objFormQueAnsMapping);
+
+    // Added by Rahul 
+    this.insertData.dataChange.value.forEach(element => {
+      console.log('Id ->'+element.fqamId +' Is_active -->'+element.isActive);  
+      console.log('ansId ->'+element.answerId +' AnsText -->'+element.answerIdText);
+      console.log('CreatedDate ->'+element.createdBy +' CreatedDate -->'+element.createdDate);
+      console.log('FormId ->'+element.formId +' FormQueSeqNo -->'+element.formQueSeqNo);
+      console.log('isQueMandatory ->'+element.isQuestionMandatory +' NextFormId -->'+element.nextFormId);
+      console.log('ModifyBy ->'+element.modifiedBy +' ModifyDate -->'+element.modifiedDate);
+      console.log('NextQueGrp ->'+element.nextQueGroup +' Que Grp -->'+element.queGroup);
+      console.log('Que Id ->'+element.questionId +' Question ID -->'+element.questionIdText);
+      console.log('Update flag ->'+element.updateFlag );     
+    });
+    
+    console.log('DataChange -->'+this.insertData.dataChange.value);
     this.formQueAnsMappingService.Save(this.formQueAnsMappingTransfarmer
-      .ObjectToEntityFormQueAnsMappingTransfarmers(this.dataSource.filteredData)).subscribe(
+      .ObjectToEntityFormQueAnsMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
         (par) => {
           console.log(par);
           if (par.status === 'Success') {
@@ -153,6 +169,9 @@ export class FormQueAnsMappingComponent extends FormComponentBase
       text: target.innerText.trim()
     };
     this.objFormQueAnsMapping = [];
+     
+    // Added by Rahul 
+    this.insertData.dataChange.value.splice(0);
 
     this.exampleDatabase.dataChange.value.splice(0, 100);
     this.refreshTable();
@@ -203,6 +222,15 @@ export class FormQueAnsMappingComponent extends FormComponentBase
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.fqamId === this.id);
         // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
+        
+        // Added by Rahul
+        const findInsertIndex = this.insertData.dataChange.value.findIndex(x => x.fqamId === this.id);
+        if(findInsertIndex > -1){
+          this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData(); 
+        }else{
+          this.insertData.dataChange.value.push(this.exampleDatabase.dataChange.value[foundIndex]);
+        }
+        
         // And lastly refresh table
         this.refreshTable();
       }
@@ -235,13 +263,11 @@ export class FormQueAnsMappingComponent extends FormComponentBase
 
 
   private refreshTable() {
-    // Refreshing table using paginator
-    // Thanks yeager-j for tips
-    // https://github.com/marinantonio/angular-mat-table-crud/FormQueAnsMappings/12
     this.paginator._changePageSize(this.paginator.pageSize);
   }
   public loadData() {
     this.exampleDatabase = new DataService(this.httpClient);
+    this.insertData = new DataService(this.httpClient);
     this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator, this.sort);
 
   }

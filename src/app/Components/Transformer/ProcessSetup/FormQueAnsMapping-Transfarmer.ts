@@ -51,8 +51,6 @@ export class FormQueAnsMappingTransfarmer {
             this.Oject.formQueSeqNo = element.formQueSeqNo;
             this.Oject.questionId = element.questionId;
             this.Oject.questionIdText = element.questionIdText;
-            this.Oject.questionIdText = element.questionIdText;
-            this.Oject.isQuestionMandatory = element.isQuestionMandatory;
             this.Oject.isQuestionMandatoryText = element.isQuestionMandatoryText;
             this.Oject.answerId = element.answerId.toString();
             this.Oject.answerIdText = element.answerIdText;
@@ -67,13 +65,17 @@ export class FormQueAnsMappingTransfarmer {
             this.Oject.modifiedBy = element.modifiedBy;
             this.Oject.modifiedDate = element.modifiedDate;
 
-            if (element.isQuestionMandatory === '1') {
-                this.Oject.isQuestionMandatory = 'true'.toString().trim();
-            } else { this.Oject.isQuestionMandatory = ''.toString().trim(); }
-            if (element.isActive === '1') {
-                this.Oject.isActive = 'true'.toString().trim();
-            } else { this.Oject.isActive = ''.toString().trim(); }
+            if (element.isQuestionMandatory.toString().trim() === 'true') {
+                this.Oject.isQuestionMandatory = '1';
+            } else { this.Oject.isQuestionMandatory = '0' }
+
+            if (element.isActive.toString().trim() === 'true') {
+                this.Oject.isActive = '1';
+            } else {
+                this.Oject.isActive = '0';
+            }
             this.arrOjectEntity.push(this.Oject);
+            console.log('##### Transform -->>'+this.arrOjectEntity.values.toString); 
         });
         return this.arrOjectEntity;
     }

@@ -56,9 +56,12 @@
       <td>
         {{Oject.qaTypeCode}}
       </td>
-      <td [ngSwitch]="Oject.isActive">
-        <span *ngSwitchCase="true">Active</span>
+      <!--<td [ngSwitch]="Oject.isActive">
+        <span *ngSwitchCase="Active">Active</span>
         <span *ngSwitchDefault>Inactive</span>
+      </td> -->
+      <td>
+        {{Oject.isActive}}
       </td>
       <td [ngSwitch]="1">
           <button mat-icon-button [routerLink]="['/Question/',Oject.questionId]"
