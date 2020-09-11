@@ -27,11 +27,11 @@
                                 <div class="col-md-4"></div>
                                 <mat-form-field class="col-md-4">
                                     <input matInput
-                                    placeholder="Answer"
+                                    placeholder="Answer * "
                                     [(ngModel)]="answer.answer"
                                     formControlName="ControlAnswer"
                                     #txtAnswer
-                                    name="txtAnswer">
+                                    name="txtAnswer" maxlength="100">
                                     <mat-error>
                                         {{ formErrors['ControlAnswer'] }}
                                     </mat-error>
@@ -71,4 +71,4 @@
         </div>
     </form>
 </main>
-<div> {{answer | json}}</div>
+<!-- <div> {{answer | json}}</div> -->

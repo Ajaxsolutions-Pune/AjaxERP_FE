@@ -7,9 +7,11 @@
     
     <mat-card-content class="col-md-12" style="padding-top: 20px;">
       <form [formGroup]="form">
+
         <mat-error *ngIf="loginInvalid">
           The username and password were not recognised
         </mat-error>
+
         <mat-form-field class="full-width-input">
           <input matInput spellcheck="false" 
           required placeholder="User name" formControlName="userName">
@@ -17,11 +19,13 @@
             Please provide a valid email address
           </mat-error>
         </mat-form-field>
+
         <mat-form-field class="full-width-input">
           <input [type]="hidePassword ? 'password' : 'text'" 
           matInput spellcheck="false" placeholder="Password"
           required
             formControlName="password">
+            
           <button mat-icon-button tabindex="-1" matSuffix (click)="hidePassword = !hidePassword"
             [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
             <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -30,6 +34,8 @@
             Please provide a valid password
           </mat-error>
         </mat-form-field>
+
+
         <button mat-raised-button color="primary" (click)="onSubmit();">Login</button>
       </form>
       <div class="row" style="padding-top: 30px;">

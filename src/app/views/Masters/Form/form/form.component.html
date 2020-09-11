@@ -8,6 +8,7 @@
                             <strong>Form</strong>
                         </div>
                         <div class="card-body">
+                           <!--<h6 class="text-right">* - Mandatory fields</h6>--> 
                             <div class="row">
                                 <div class="col-md-4"></div>                            
                                 <mat-form-field class="col-md-2">
@@ -15,7 +16,7 @@
                                     #formID
                                     spellcheck="false" [(ngModel)]="formobj.formId"
                                     placeholder="Form ID" disabled
-                                    formControlName="ControlformId">
+                                    formControlName="ControlformId" >
                                     <mat-error>
                                     {{ formErrors['ControlformId'] }}
                                     </mat-error>
@@ -23,17 +24,19 @@
                                 <div class="col-md-4"></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"></div>       
+                                <div class="col-md-4"></div>   
+                               <!--<span class="Mandatory_Icon">*</span>-->  
                                 <mat-form-field class="col-md-4">
                                   <input matInput
                                     #formName
                                     spellcheck="false" [(ngModel)]="formobj.formName"
-                                    placeholder="Form Name"
-                                    formControlName="ControlformName">
+                                    placeholder="Form Name *"
+                                    formControlName="ControlformName" maxlength="50">                                    
                                   <mat-error>
-                                    {{ formErrors['ControlformName'] }}
+                                    {{ formErrors['ControlformName']}}
                                   </mat-error>
                                 </mat-form-field>
+                               
                                 <div class="col-md-4"></div>
                             </div>
                             <div class="row">

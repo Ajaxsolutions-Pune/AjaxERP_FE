@@ -68,20 +68,19 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     this.startControlMonitoring(this.form);
   }
   save(processForm: NgForm): void {
-
+    this.process.createdBy = localStorage.getItem('username');
+    this.process.createdDate = this.globalService.GerCurrntDateStamp();
+    this.process.modifiedBy = localStorage.getItem('username');
+    this.process.modifiedDate = this.globalService.GerCurrntDateStamp();
+    
     if (status !== 'Update') {
-      this.process.processId = null;
-
-      this.process.createdBy = localStorage.getItem('username'),
-        this.process.createdDate = this.globalService.GerCurrntDateStamp(),
-        this.process.modifiedBy = localStorage.getItem('username'),
-        this.process.modifiedDate = this.globalService.GerCurrntDateStamp(),
+      this.process.processId = null;    
         console.log(this.process);
       this.processService.Save(this.processTransfarmer.processTransfarmer(this.process)).subscribe(
         (par) => {
           console.log(par);
           processForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+          this.defaultLayoutComponent.Massage('',
             'Data saved successfully !', 'modal-info');
           this.router.navigate(['ProcessList']);
         }
@@ -91,7 +90,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       this.processService.Update(this.processTransfarmer.processTransfarmer(this.process)).subscribe(
         () => {
           processForm.reset();
-          this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+          this.defaultLayoutComponent.Massage('',
             'Data saved successfully !', 'modal-info');
           this.router.navigate(['ProcessList']);
         }

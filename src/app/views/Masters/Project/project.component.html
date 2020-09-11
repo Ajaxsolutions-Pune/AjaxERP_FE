@@ -1,0 +1,176 @@
+<main class="form-main">
+    <form #projectForm="ngForm" [formGroup]="form">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Project</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Project ID"
+                                    [(ngModel)]="project.projectCode"
+                                    formControlName="ControlProjectID"
+                                    #txtProjectID
+                                    name="txtProjectID">
+                                    <mat-error>
+                                        {{ formErrors['ControlProjectID'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Project"
+                                    [(ngModel)]="project.projectName"
+                                    formControlName="ControlProject"
+                                    #txtProject
+                                    name="txtProject">
+                                    <mat-error>
+                                        {{ formErrors['ControlProject'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+                          <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Project Description"
+                                    [(ngModel)]="project.projectDescription"    
+                                    formControlName="ControlProjectDesc"        
+                                    #txtProjectDesc        
+                                    name="txtProjectDesc">                                  
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Start Date"
+                                    [(ngModel)]="project.startDate"  
+                                    formControlName="ControlStartDate"   
+                                    #txtProjectStartDate                               
+                                    name="txtProjectStartDate">                                  
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="End Date"
+                                    [(ngModel)]="project.endDate"    
+                                    formControlName="ControlEndDate"    
+                                    #txtProjectEndDate                         
+                                    name="txtProjectEndDate">                                    
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Access Type"
+                                    [(ngModel)]="project.accessType"  
+                                    formControlName="ControlAccessType"    
+                                    #txtAccessType                          
+                                    name="txtAccessType">                                    
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Priority"
+                                    [(ngModel)]="project.priority"   
+                                    formControlName="ControlPriority"       
+                                    #txtPriority                         
+                                   name="txtPriority">                                   
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-sm-4" style="padding-top: 20px;">
+                                    <mat-checkbox name="chkisTimesheetRequire"   
+                                    formControlName="ControlisTimesheetRequire"                                
+                                    [(ngModel)]="project.timesheetRequired">Time Sheet Required
+                                    </mat-checkbox>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Main Account Code"
+                                    [(ngModel)]="project.mainAccountHeadCode"   
+                                    formControlName="ControlAccountCode"          
+                                    #txtMainAccountCode                          
+                                    name="txtMainAccountCode">                                   
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Budget"
+                                    [(ngModel)]="project.budget" 
+                                    formControlName="ControlBudget"         
+                                    #txtBudget                          
+                                    name="txtBudget">                                   
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-sm-4" style="padding-top: 20px;">
+                                    <mat-checkbox name="chkisActive"
+                                    #chkisActive
+                                    formControlName="ControlisActive"
+                                     [(ngModel)]="project.isActive">Active
+                                    </mat-checkbox>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div> 
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button [disabled]="!form.valid" 
+                                    (click)="save(projectForm)"
+                                        color="primary">Submit</button>
+                                         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button mat-raised-button color="warn" routerLink="/ProjectList">
+                                        Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </form>
+</main>
+<div> {{project | json}}</div>

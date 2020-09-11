@@ -74,7 +74,7 @@ export class LogInComponent implements OnInit {
           (par) => {
             this.loginstatus = par;
             if (this.loginstatus.status.toLowerCase() === 'success') {
-            //  localStorage.setItem('username',  'Dp1');
+             
 
               localStorage.setItem('token', this.loginstatus.token);
               const httpOptions = {
@@ -87,7 +87,8 @@ export class LogInComponent implements OnInit {
               };
               this.env.httpOptions = httpOptions;
               LoginUser.ouCode = this.env.OuCode;
-              localStorage.setItem('username',  'Dp');
+              
+              localStorage.setItem('username',username)
               LoginUser.status = 'Login';
               this.router.navigate(['dashboard']);
             } else {

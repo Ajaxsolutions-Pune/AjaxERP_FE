@@ -19,7 +19,12 @@ export class ProcessTransfarmer1 {
             this.process = new Process();
             this.process.processId = element.processId;
             this.process.processName = element.processName;
-            this.process.geofence = element.geofence;
+            //this.process.geofence = element.geofence;
+            
+            if (element.geofence === '1') {
+                this.process.geofence = 'Yes'.toString().trim();
+            } else { this.process.geofence = 'No'.toString().trim(); }
+
             this.process.createdBy = element.createdBy;
             this.process.createdDate = element.createdDate;
             this.process.modifiedBy = element.modifiedBy;

@@ -476,6 +476,12 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
   resultChanged(): void {
   }
   save(AssetForm: NgForm): void {
+
+    this.bindObj.createdBy = localStorage.getItem('username');
+    this.bindObj.createdDate = this.globalService.GerCurrntDateStamp();
+    this.bindObj.modifiedBy = localStorage.getItem('username');
+    this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
+
     if (status !== 'Update') {
       this.bindObj.assetCode = null;
       console.log('this.bindObj');

@@ -1,0 +1,152 @@
+<main class="form-main">
+    <form #roleForm="ngForm" [formGroup]="form">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Role</strong>
+                        </div>
+                        <div class="card-body">
+
+                            
+
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Role ID"
+                                    [(ngModel)]="role.roleId"
+                                    formControlName="ControlroleID"
+                                    #txtRoleID
+                                    name="txtRoleID">
+                                    <mat-error>
+                                        {{ formErrors['ControlroleID'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Role Name"
+                                    [(ngModel)]="role.roleName"
+                                    formControlName="ControlroleName"
+                                    #txtAnswer
+                                    name="txtRoleName">
+                                    <mat-error>
+                                        {{ formErrors['ControlroleName'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Role Description"
+                                    [(ngModel)]="role.roleDescription"
+                                    formControlName="ControlroleDescription"
+                                    #txtAnswer
+                                    name="txtRoleDescription">
+                                    <mat-error>
+                                        {{ formErrors['ControlroleDescription'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Role Create For"
+                                    [(ngModel)]="role.roleCreateFor"
+                                    formControlName="ControlroleCreateFor"
+                                    #txtAnswer
+                                    name="txtRoleCreateFor">
+                                    <mat-error>
+                                        {{ formErrors['ControlroleCreateFor'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    placeholder="Role Level"
+                                    [(ngModel)]="role.roleLevel"
+                                    formControlName="ControlroleLevel"
+                                    #txtRoleLevel
+                                    name="txtRoleCreateFor">
+                                    <mat-error>
+                                        {{ formErrors['ControlroleLevel'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+                            
+                          <!--  <div class="form-group row">
+                                <div class="col-md-4"></div>
+                              <div class="col-md-4">
+                                <mat-form-field >
+                                    <mat-label>Role Level</mat-label>
+                                    <mat-select 
+                                    formControlName="ControlroleLevel"
+                                    [(ngModel)]="question.qaTypeCode">
+                                    <mat-option *ngFor="let qaType of qaTypes" [value]="qaType.qaTypeCode">
+                                      {{qaType.qaTypeDesc}}
+                                    </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        {{ formErrors['ControlroleLevel'] }}
+                                    </mat-error>
+                                  </mat-form-field>
+                              </div>
+                            </div>-->
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-sm-4" style="padding-top: 20px;">
+                                    <mat-checkbox name="chkisActive"
+                                    #chkisActive
+                                    formControlName="ControlisActive"
+                                     [(ngModel)]="role.isActive">Active
+                                    </mat-checkbox>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                            
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button [disabled] = "!form.valid"
+                                    (click)="save(roleForm)"
+                                        color="primary">Submit</button> &nbsp;
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button mat-raised-button color="warn" routerLink="/RoleList"><i
+                                            class="fa fa-ban"></i>
+                                        Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </form>
+</main>
+<div style="display: none;"> {{role | json}}</div>
+
+

@@ -92,6 +92,14 @@ import { DeviceListResolverService } from './Components/Resolver/Masters/Device-
 import { AssetCategoryListResolverService } from './Components/Resolver/Masters/Asset-Category-List-Resolver.Service';
 import { FormQueAnsMappingComponent } from './views/ProcessSetup/FormQueAnsMapping/form-que-ans-mapping.component';
 
+import { RoleComponent } from './views/Masters/Role/role.component';
+import { RoleListComponent } from './views/Masters/Role/role-list.component';
+import { RoleListResolverService } from './Components/Resolver/Masters/Role-List-Resolver-Services';
+
+import { ProjectComponent } from './views/Masters/Project/project.component';
+import { ProjectListComponent } from './views/Masters/Project/project-list.component';
+import { ProjectListResolverService } from './Components/Resolver/Masters/Project-List-Resolver.Service';
+
 export const routes: Routes = [
   {
     path: '',
@@ -853,6 +861,61 @@ export const routes: Routes = [
         data: {
           title: 'Form Question Answer Mapping'
         },
+      },
+
+      {
+        path: 'RoleList',
+        component: RoleListComponent,
+        data: {
+          title: 'Role List'
+        },
+        resolve: {
+          RoleList: RoleListResolverService
+        },
+      },
+      
+      {
+        path: 'Role',
+        component : RoleComponent,
+        data:{
+          title: 'Add Role'          
+        }
+      },
+
+      {
+        path: 'Role/:id',
+        component: RoleComponent,
+        data: {
+          title: 'Edit Role'
+        }
+      },
+
+
+      {
+        path: 'ProjectList',
+        component: ProjectListComponent,
+        data: {
+          title: 'Project List'
+        },
+        resolve: {
+          ProjectList: ProjectListResolverService
+        },
+      },
+      
+      {
+        path: 'Project',
+        component : ProjectComponent,
+        data:{
+          title: 'Add Project'          
+        }
+      },
+
+      {
+        path: 'Project/:id',
+        component: ProjectComponent,
+        data: {
+          title: 'Edit Project'
+        }
       },
 
     ]

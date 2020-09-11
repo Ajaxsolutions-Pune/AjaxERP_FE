@@ -96,5 +96,7 @@ export class AnswerListComponent implements OnInit {
   ExportToExcel(): void {
     alasql('SELECT answerId Answer_Id,answer Answer,isActive Is_Active' +
       ' INTO XLSX("AnswerList.xlsx",{headers:true}) FROM ?', [this.answers]);
+
+
   }
 }

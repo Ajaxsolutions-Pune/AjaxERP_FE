@@ -83,6 +83,11 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
   }
 
   save(answerForm: NgForm): void {
+    this.answer.createdBy = localStorage.getItem('username');
+    this.answer.createdDate = this.globalService.GerCurrntDateStamp();
+    this.answer.modifiedBy = localStorage.getItem('username');
+    this.answer.modifiedDate = this.globalService.GerCurrntDateStamp();
+
     if (status !== 'Update') {
       this.answer.answerId = null;
       console.log(this.answerTransfarmer.AnswerTransfarmer(this.answer));

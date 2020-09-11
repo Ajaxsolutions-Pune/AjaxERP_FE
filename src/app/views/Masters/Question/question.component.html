@@ -27,11 +27,11 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Question"
+                                placeholder="Question * "
                                 [(ngModel)]="question.question"
                                 formControlName="Controlquestion"
                                 #txtquestion
-                                name="txtquestion">
+                                name="txtquestion" maxlength="100">
                                 <mat-error>
                                     {{ formErrors['Controlquestion'] }}
                                 </mat-error>

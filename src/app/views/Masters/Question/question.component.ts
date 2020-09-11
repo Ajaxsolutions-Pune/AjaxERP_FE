@@ -90,12 +90,14 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
   }
 
   save(QuestionForm: NgForm): void {
+      this.question.createdBy = localStorage.getItem('username');
+      this.question.createdDate = this.globalService.GerCurrntDateStamp();
+      this.question.modifiedBy = localStorage.getItem('username');
+      this.question.modifiedDate = this.globalService.GerCurrntDateStamp();
+      
     if (status !== 'Update') {
       this.question.questionId = null;
-      this.question.createdBy = localStorage.getItem('username'),
-        this.question.createdDate = this.globalService.GerCurrntDateStamp(),
-        this.question.modifiedBy = localStorage.getItem('username'),
-        this.question.modifiedDate = this.globalService.GerCurrntDateStamp(),
+        
         this.questionService.Save(this.questionTransfarmer.QuestionTransfarmer(this.question)).subscribe(
           (par) => {
             if (par !== null) {
