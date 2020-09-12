@@ -65,23 +65,23 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
 
-      {
+      /*{
         name: 'Role',
         url: '/RoleList',
         icon: 'icon-puzzle'
       },
 
-     /* {
+      {
         name: 'Role Level',
         url: '/Role-level',
         icon: 'icon-puzzle'
-      },*/
+      },
 
       {
         name: 'Project',
         url: '/ProjectList',
         icon: 'icon-puzzle'
-      },
+      },*/
 
       // {
       //   name: 'QuestionType',
@@ -118,7 +118,7 @@ export const navItems: NavData[] = [
       //   url: '/AssetGroupList',
       //   icon: 'icon-puzzle'
       // },
-      {
+      /*{
         name: 'Asset',
         url: '/AssetList',
         icon: 'icon-puzzle'
@@ -127,7 +127,7 @@ export const navItems: NavData[] = [
         name: 'Device',
         url: '/DeviceList',
         icon: 'icon-puzzle'
-      },
+      },*/
       // {
       //   name: 'Colour',
       //   url: '/ColourList',
