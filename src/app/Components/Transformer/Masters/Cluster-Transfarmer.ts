@@ -20,6 +20,11 @@ export class ClusterTransfarmer {
             this.Oject.clusterNameENG = element.clusterNameENG;
             this.Oject.clusterNameUNI = element.clusterNameUNI;
             this.Oject.circleCode = element.circleCode;
+
+            this.Oject.createdBy = element.createdBy;
+            this.Oject.createdDate = element.createdDate;
+            this.Oject.modifiedBy = element.modifiedBy;
+            this.Oject.modifiedDate = element.modifiedDate;
             if (element.isActive === '1') {
                 this.Oject.isActive = 'Active'.toString().trim();
             } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
@@ -33,6 +38,12 @@ export class ClusterTransfarmer {
         this.Oject.clusterCode = Entity.clusterCode;
         this.Oject.clusterNameENG = Entity.clusterNameENG;
         this.Oject.clusterNameUNI = Entity.clusterNameUNI;
+
+        this.Oject.createdBy = Entity.createdBy;
+        this.Oject.createdDate = Entity.createdDate;
+        this.Oject.modifiedBy = Entity.modifiedBy;
+        this.Oject.modifiedDate = Entity.modifiedDate;
+
         this.Oject.circleCode = Entity.circleCode;
         if (Entity.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
@@ -41,16 +52,23 @@ export class ClusterTransfarmer {
         return this.Oject;
     }
 
-    ClusterTransfarmer(qaType1: Cluster): ClusterEntity {
+    ClusterTransfarmer(element: Cluster): ClusterEntity {
         this.OjectEntity = new ClusterEntity();
-        this.OjectEntity.clusterCode = qaType1.clusterCode;
-        this.OjectEntity.clusterNameENG = qaType1.clusterNameENG;
-        this.OjectEntity.clusterNameUNI = qaType1.clusterNameUNI;
-        this.OjectEntity.circleCode = qaType1.circleCode;
-        console.log(qaType1.circleCode);
-         if (qaType1.isActive === 'true') {  this.OjectEntity.isActive = '1';
-             } else { this.OjectEntity.isActive = '0'; }
-        if (qaType1.isActive.toString().trim() === 'true') {
+        this.OjectEntity.clusterCode = element.clusterCode;
+        this.OjectEntity.clusterNameENG = element.clusterNameENG;
+        this.OjectEntity.clusterNameUNI = element.clusterNameUNI;
+        this.OjectEntity.circleCode = element.circleCode;
+
+        this.OjectEntity.createdBy = element.createdBy;
+        this.OjectEntity.createdDate = element.createdDate;
+        this.OjectEntity.modifiedBy = element.modifiedBy;
+        this.OjectEntity.modifiedDate = element.modifiedDate;
+
+        console.log(element.circleCode);
+        if (element.isActive === 'true') {
+            this.OjectEntity.isActive = '1';
+        } else { this.OjectEntity.isActive = '0'; }
+        if (element.isActive.toString().trim() === 'true') {
             this.OjectEntity.isActive = '1';
         } else {
             this.OjectEntity.isActive = '0';

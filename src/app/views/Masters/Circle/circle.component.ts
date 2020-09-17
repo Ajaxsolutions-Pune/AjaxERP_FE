@@ -10,6 +10,7 @@ import { Zone } from '../../../Components/Module/Masters/Zone.model';
 import { CircleService } from '../../../Components/Services/Masters/CircleService';
 import { CircleTransfarmer } from '../../../Components/Transformer/Masters/Circle-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
+import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-circle',
@@ -28,6 +29,7 @@ export class CircleComponent extends FormComponentBase implements OnInit, AfterV
     private defaultLayoutComponent: DefaultLayoutComponent,
     private zoneTransfarmer: ZoneTransfarmer,
     private circleService: CircleService,
+    private globalService: GlobalService,
     private circleTransfarmer: CircleTransfarmer,
     private zoneService: ZoneService,
     private formBuilder: FormBuilder) {
@@ -76,7 +78,11 @@ export class CircleComponent extends FormComponentBase implements OnInit, AfterV
       circleNameENG: null,
       circleNameUNI: null,
       zoneCode: null,
-      isActive: null
+      isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
@@ -124,7 +130,11 @@ export class CircleComponent extends FormComponentBase implements OnInit, AfterV
       circleNameENG: null,
       circleNameUNI: null,
       zoneCode: null,
-      isActive: null
+      isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     if (Circle_Code === null || Circle_Code === '') {
       this.bindObj = {
@@ -132,7 +142,11 @@ export class CircleComponent extends FormComponentBase implements OnInit, AfterV
         circleNameENG: null,
         circleNameUNI: null,
         zoneCode: null,
-        isActive: null
+        isActive: 'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
       status = '';
 

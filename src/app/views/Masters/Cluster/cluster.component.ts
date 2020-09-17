@@ -10,6 +10,7 @@ import { ClusterService } from '../../../Components/Services/Masters/ClusterServ
 import { ClusterTransfarmer } from '../../../Components/Transformer/Masters/Cluster-Transfarmer';
 import { Circle } from '../../../Components/Module/Masters/Circle.model';
 import { DefaultLayoutComponent } from '../../../containers';
+import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 @Component({
   selector: 'app-cluster',
   templateUrl: './cluster.component.html',
@@ -28,6 +29,7 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
     private circleService: CircleService,
     private circleTransfarmer: CircleTransfarmer,
     private clusterService: ClusterService,
+    private globalService: GlobalService,
     private clusterTransfarmer: ClusterTransfarmer,
     private formBuilder: FormBuilder) {
     super();
@@ -74,7 +76,11 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
       clusterNameENG: null,
       clusterNameUNI: null,
       circleCode: null,
-      isActive: null
+      isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
@@ -88,7 +94,11 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
       clusterNameENG: null,
       clusterNameUNI: null,
       circleCode: null,
-      isActive: null
+      isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     if (Cluster_Code === null || Cluster_Code === '') {
       this.bindObj = {
@@ -96,7 +106,11 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
         clusterNameENG: null,
         clusterNameUNI: null,
         circleCode: null,
-        isActive: null
+        isActive: 'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
       status = '';
 

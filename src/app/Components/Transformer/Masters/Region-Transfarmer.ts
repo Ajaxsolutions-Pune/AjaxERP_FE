@@ -19,6 +19,12 @@ export class RegionTransfarmer {
             this.Oject.regionCode = element.regionCode;
             this.Oject.regionNameENG = element.regionNameENG;
             this.Oject.regionNameUNI = element.regionNameUNI;
+
+            this.Oject.createdBy = element.createdBy;
+            this.Oject.createdDate = element.createdDate;
+            this.Oject.modifiedBy = element.modifiedBy;
+            this.Oject.modifiedDate = element.modifiedDate;
+
             if (element.isActive === '1') {
                 this.Oject.isActive = 'Active'.toString().trim();
             } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
@@ -27,11 +33,16 @@ export class RegionTransfarmer {
         return this.arrOject;
     }
     RegionTransfarmerEntity(Entity: RegionEntity): Region {
-        console.log(Entity);
         this.Oject = new Region();
         this.Oject.regionCode = Entity.regionCode;
         this.Oject.regionNameENG = Entity.regionNameENG;
         this.Oject.regionNameUNI = Entity.regionNameUNI;
+
+        this.Oject.createdBy = Entity.createdBy;
+        this.Oject.createdDate = Entity.createdDate;
+        this.Oject.modifiedBy = Entity.modifiedBy;
+        this.Oject.modifiedDate = Entity.modifiedDate;
+
         if (Entity.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
         } else { this.Oject.isActive = ''.toString().trim(); }
@@ -39,14 +50,21 @@ export class RegionTransfarmer {
         return this.Oject;
     }
 
-    RegionTransfarmer(qaType1: Region): RegionEntity {
+    RegionTransfarmer(element: Region): RegionEntity {
         this.OjectEntity = new RegionEntity();
-        this.OjectEntity.regionCode = qaType1.regionCode;
-        this.OjectEntity.regionNameENG = qaType1.regionNameENG;
-        this.OjectEntity.regionNameUNI = qaType1.regionNameUNI;
-         if (qaType1.isActive === 'true') {  this.OjectEntity.isActive = '1';
-             } else { this.OjectEntity.isActive = '0'; }
-        if (qaType1.isActive.toString().trim() === 'true') {
+        this.OjectEntity.regionCode = element.regionCode;
+        this.OjectEntity.regionNameENG = element.regionNameENG;
+        this.OjectEntity.regionNameUNI = element.regionNameUNI;
+
+        this.OjectEntity.createdBy = element.createdBy;
+        this.OjectEntity.createdDate = element.createdDate;
+        this.OjectEntity.modifiedBy = element.modifiedBy;
+        this.OjectEntity.modifiedDate = element.modifiedDate;
+
+        if (element.isActive === 'true') {
+            this.OjectEntity.isActive = '1';
+        } else { this.OjectEntity.isActive = '0'; }
+        if (element.isActive.toString().trim() === 'true') {
             this.OjectEntity.isActive = '1';
         } else {
             this.OjectEntity.isActive = '0';

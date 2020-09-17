@@ -48,7 +48,11 @@ export class RegionListComponent implements OnInit {
       regionCode: null,
       regionNameENG: null,
       regionNameUNI: null,
-      isActive: '3'
+      isActive: '3',
+      createdBy: localStorage.getItem('username'),
+      createdDate:  null,
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate:  null,
     };
   }
 

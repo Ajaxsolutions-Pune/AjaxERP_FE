@@ -15,11 +15,16 @@ export class CircleTransfarmer {
     CircleTransfarmers(Entity: CircleEntity[]): Circle[] {
         this.arrOject = [];
         Entity.forEach(element => {
+            console.log(element);
             this.Oject = new Circle();
             this.Oject.circleCode = element.circleCode;
             this.Oject.circleNameENG = element.circleNameENG;
             this.Oject.circleNameUNI = element.circleNameUNI;
             this.Oject.zoneCode = element.zoneCode;
+            this.Oject.createdBy = element.createdBy;
+            this.Oject.createdDate = element.createdDate;
+            this.Oject.modifiedBy = element.modifiedBy;
+            this.Oject.modifiedDate = element.modifiedDate;
             if (element.isActive === '1') {
                 this.Oject.isActive = 'Active'.toString().trim();
             } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
@@ -39,24 +44,32 @@ export class CircleTransfarmer {
         } else {
             this.Oject.isActive = ''.toString().trim();
         }
-
+        this.Oject.createdBy = Entity.createdBy;
+        this.Oject.createdDate = Entity.createdDate;
+        this.Oject.modifiedBy = Entity.modifiedBy;
+        this.Oject.modifiedDate = Entity.modifiedDate;
         return this.Oject;
     }
 
-    CircleTransfarmer(qaType1: Circle): CircleEntity {
+    CircleTransfarmer(Obj: Circle): CircleEntity {
         this.OjectEntity = new CircleEntity();
-        this.OjectEntity.circleCode = qaType1.circleCode;
-        this.OjectEntity.zoneCode = qaType1.zoneCode;
-        this.OjectEntity.circleNameENG = qaType1.circleNameENG;
-        this.OjectEntity.circleNameUNI = qaType1.circleNameUNI;
-        this.OjectEntity.zoneCode = qaType1.zoneCode;
-         if (qaType1.isActive === 'true') {  this.OjectEntity.isActive = '1';
-             } else { this.OjectEntity.isActive = '0'; }
-        if (qaType1.isActive.toString().trim() === 'true') {
+        this.OjectEntity.circleCode = Obj.circleCode;
+        this.OjectEntity.zoneCode = Obj.zoneCode;
+        this.OjectEntity.circleNameENG = Obj.circleNameENG;
+        this.OjectEntity.circleNameUNI = Obj.circleNameUNI;
+        this.OjectEntity.zoneCode = Obj.zoneCode;
+        if (Obj.isActive === 'true') {
+            this.OjectEntity.isActive = '1';
+        } else { this.OjectEntity.isActive = '0'; }
+        if (Obj.isActive.toString().trim() === 'true') {
             this.OjectEntity.isActive = '1';
         } else {
             this.OjectEntity.isActive = '0';
         }
+        this.OjectEntity.createdBy = Obj.createdBy;
+        this.OjectEntity.createdDate = Obj.createdDate;
+        this.OjectEntity.modifiedBy = Obj.modifiedBy;
+        this.OjectEntity.modifiedDate = Obj.modifiedDate;
         return this.OjectEntity;
     }
 }

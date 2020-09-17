@@ -42,7 +42,7 @@ export const navItems: NavData[] = [
   {
     name: 'Monitoring Masters',
     url: '/Masters',
-  //  icon: 'nav-icon icon-layers',
+    //  icon: 'nav-icon icon-layers',
     children: [
       {
         name: 'Form',
@@ -88,26 +88,26 @@ export const navItems: NavData[] = [
       //   url: '/QuestionTypeList',
       //   icon: 'icon-puzzle'
       // },
-      // {
-      //   name: 'Zone',
-      //   url: '/ZoneList',
-      //   icon: 'icon-puzzle'
-      // },
-      // {
-      //   name: 'Circle',
-      //   url: '/CircleList',
-      //   icon: 'icon-puzzle'
-      // },
-      // {
-      //   name: 'Cluster',
-      //   url: '/ClusterList',
-      //   icon: 'icon-puzzle'
-      // },
-      // {
-      //   name: 'Region',
-      //   url: '/RegionList',
-      //   icon: 'icon-puzzle'
-      // },
+      {
+        name: 'Zone',
+        url: '/ZoneList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Circle',
+        url: '/CircleList',
+        icon: 'icon-puzzle'
+      },
+       {
+         name: 'Cluster',
+         url: '/ClusterList',
+         icon: 'icon-puzzle'
+       },
+       {
+         name: 'Region',
+         url: '/RegionList',
+         icon: 'icon-puzzle'
+       },
       // {
       //   name: 'Asset Category',
       //   url: '/AssetCategoryList',
@@ -228,17 +228,17 @@ export const navItems: NavData[] = [
         url: '/FormQueAnsMapping',
         icon: 'icon-puzzle'
       },
-     // {
-       // name: 'Process Form',
-       // url: '/FormQueAnsMapping',
-     //   icon: 'icon-puzzle'
+      // {
+      // name: 'Process Form',
+      // url: '/FormQueAnsMapping',
+      //   icon: 'icon-puzzle'
       // },
     ]
   },
   {
     name: 'Monitoring Reports',
     url: '/Reports',
- //   icon: 'fa fa-newspaper-o',
+    //   icon: 'fa fa-newspaper-o',
     children: [
     ]
 

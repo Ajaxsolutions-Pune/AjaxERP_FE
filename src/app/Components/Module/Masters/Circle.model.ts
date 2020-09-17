@@ -4,6 +4,10 @@ export class Circle {
     circleNameUNI: string;
     zoneCode: string;
     isActive: string;
+    createdBy: string;
+    createdDate: string;
+    modifiedBy: string;
+    modifiedDate: string;
 }
 export class CircleEntity {
     circleCode: string;
@@ -11,4 +15,8 @@ export class CircleEntity {
     circleNameUNI: string;
     zoneCode: string;
     isActive: string;
+    createdBy: string;
+    createdDate: string;
+    modifiedBy: string;
+    modifiedDate: string;
 }
