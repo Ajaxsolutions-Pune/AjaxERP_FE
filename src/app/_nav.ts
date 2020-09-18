@@ -108,26 +108,26 @@ export const navItems: NavData[] = [
          url: '/RegionList',
          icon: 'icon-puzzle'
        },
-      // {
-      //   name: 'Asset Category',
-      //   url: '/AssetCategoryList',
-      //   icon: 'icon-puzzle'
-      // },
-      // {
-      //   name: 'Asset Group',
-      //   url: '/AssetGroupList',
-      //   icon: 'icon-puzzle'
-      // },
+       {
+         name: 'Asset Category',
+         url: '/AssetCategoryList',
+         icon: 'icon-puzzle'
+       },
+       {
+         name: 'Asset Group',
+         url: '/AssetGroupList',
+         icon: 'icon-puzzle'
+       },
       /*{
         name: 'Asset',
         url: '/AssetList',
         icon: 'icon-puzzle'
-      },
+      },*/
       {
         name: 'Device',
         url: '/DeviceList',
         icon: 'icon-puzzle'
-      },*/
+      },
       // {
       //   name: 'Colour',
       //   url: '/ColourList',

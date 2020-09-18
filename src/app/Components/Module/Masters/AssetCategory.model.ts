@@ -5,6 +5,10 @@ export class AssetCategory {
     assetGroupCode: string;
     colourCode: string;
     isActive: string;
+    createdBy: string;
+    createdDate: string;
+    modifiedBy: string;
+    modifiedDate: string;
 }
 export class AssetCategoryEntity {
     assetCategoryCode: string;
@@ -13,4 +17,8 @@ export class AssetCategoryEntity {
     assetGroupCode: string;
     colourCode: string;
     isActive: string;
+    createdBy: string;
+    createdDate: string;
+    modifiedBy: string;
+    modifiedDate: string;
 }

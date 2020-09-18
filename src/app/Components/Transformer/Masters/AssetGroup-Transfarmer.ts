@@ -19,6 +19,10 @@ export class AssetGroupTransfarmer {
             this.Oject.assetGroupCode = element.assetGroupCode;
             this.Oject.assetGroupNameENG = element.assetGroupNameENG;
             this.Oject.assetGroupNameUNI = element.assetGroupNameUNI;
+            this.Oject.createdBy = element.createdBy;
+            this.Oject.createdDate = element.createdDate;
+            this.Oject.modifiedBy = element.modifiedBy;
+            this.Oject.modifiedDate = element.modifiedDate;
             if (element.isActive === '1') {
                 this.Oject.isActive = 'Active'.toString().trim();
             } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
@@ -32,6 +36,10 @@ export class AssetGroupTransfarmer {
         this.Oject.assetGroupCode = Entity.assetGroupCode;
         this.Oject.assetGroupNameENG = Entity.assetGroupNameENG;
         this.Oject.assetGroupNameUNI = Entity.assetGroupNameUNI;
+        this.Oject.createdBy = Entity.createdBy;
+        this.Oject.createdDate = Entity.createdDate;
+        this.Oject.modifiedBy = Entity.modifiedBy;
+        this.Oject.modifiedDate = Entity.modifiedDate;
         if (Entity.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
         } else { this.Oject.isActive = ''.toString().trim(); }
@@ -39,14 +47,18 @@ export class AssetGroupTransfarmer {
         return this.Oject;
     }
 
-    AssetGroupTransfarmer(qaType1: AssetGroup): AssetGroupEntity {
+    AssetGroupTransfarmer(element: AssetGroup): AssetGroupEntity {
         this.OjectEntity = new AssetGroupEntity();
-        this.OjectEntity.assetGroupCode = qaType1.assetGroupCode;
-        this.OjectEntity.assetGroupNameENG = qaType1.assetGroupNameENG;
-        this.OjectEntity.assetGroupNameUNI = qaType1.assetGroupNameUNI;
-         if (qaType1.isActive === 'true') {  this.OjectEntity.isActive = '1';
+        this.OjectEntity.assetGroupCode = element.assetGroupCode;
+        this.OjectEntity.assetGroupNameENG = element.assetGroupNameENG;
+        this.OjectEntity.assetGroupNameUNI = element.assetGroupNameUNI;
+        this.OjectEntity.createdBy = element.createdBy;
+        this.OjectEntity.createdDate = element.createdDate;
+        this.OjectEntity.modifiedBy = element.modifiedBy;
+        this.OjectEntity.modifiedDate = element.modifiedDate;
+         if (element.isActive === 'true') {  this.OjectEntity.isActive = '1';
              } else { this.OjectEntity.isActive = '0'; }
-        if (qaType1.isActive.toString().trim() === 'true') {
+        if (element.isActive.toString().trim() === 'true') {
             this.OjectEntity.isActive = '1';
         } else {
             this.OjectEntity.isActive = '0';

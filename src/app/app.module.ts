@@ -209,13 +209,13 @@ import { MyErrorStateMatcher } from './views/Masters/AngularDemo/MyErrorStateMat
 import { NgxPaginationModule } from 'ngx-pagination';
 import { GlobalService } from './Components/Services/GlobalServices/Global.service';
 
-import { RoleListComponent} from './views/Masters/Role/role-list.component';
+import { RoleListComponent } from './views/Masters/Role/role-list.component';
 import { RoleComponent } from './views/Masters/Role/role.component';
 import { RoleTransfarmer } from './Components/Transformer/Masters/Role-Transfarmer';
 import { RoleService } from './Components/Services/Masters/RoleService';
 import { RoleListResolverService } from './Components/Resolver/Masters/Role-List-Resolver-Services';
 
-import { ProjectListComponent} from './views/Masters/Project/project-list.component';
+import { ProjectListComponent } from './views/Masters/Project/project-list.component';
 import { ProjectComponent } from './views/Masters/Project/project.component';
 import { ProjectTransfarmer } from './Components/Transformer/Masters/Project-Transfarmer';
 import { ProjectService } from './Components/Services/Masters/ProjectService';
@@ -292,8 +292,8 @@ import { ProjectListResolverService } from './Components/Resolver/Masters/Projec
     AssetComponent, AssetListComponent, DeviceListComponent,
     DeviceComponent, AngularDemoComponent, FormQueAnsMappingListComponent,
     FormQueAnsMappingComponent,
-    RoleComponent,RoleListComponent,
-    ProjectComponent, ProjectListComponent, 
+    RoleComponent, RoleListComponent,
+    ProjectComponent, ProjectListComponent,
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
@@ -322,7 +322,7 @@ import { ProjectListResolverService } from './Components/Resolver/Masters/Projec
     DeviceListResolverService,
     ClusterListResolverService, DialogTemplateComponent,
     DialogService,
-    RoleService,RoleTransfarmer,RoleListResolverService,
+    RoleService, RoleTransfarmer, RoleListResolverService,
     ProjectService, ProjectTransfarmer, ProjectListResolverService,
     {
       provide: LocationStrategy,

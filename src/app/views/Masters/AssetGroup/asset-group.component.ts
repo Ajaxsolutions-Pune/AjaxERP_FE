@@ -7,6 +7,7 @@ import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-fiel
 import { AssetGroupService } from '../../../Components/Services/Masters/AssetGroupService';
 import { AssetGroupTransfarmer } from '../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
+import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-asset-group',
@@ -26,6 +27,7 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
     private assetGroupTransfarmer: AssetGroupTransfarmer,
     private assetGroupService: AssetGroupService,
     private route: ActivatedRoute,
+    private globalService: GlobalService,
     private defaultLayoutComponent: DefaultLayoutComponent, private router: Router,
     private formBuilder: FormBuilder) {
     super();
@@ -64,7 +66,11 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
       assetGroupCode: null,
       assetGroupNameENG: null,
       assetGroupNameUNI: null,
-      isActive:  'true'
+      isActive:  'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
@@ -77,14 +83,22 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
       assetGroupCode: null,
       assetGroupNameENG: null,
       assetGroupNameUNI: null,
-      isActive:  'true'
+      isActive:  'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     if (assetGroup_Code === null || assetGroup_Code === '') {
       this.bindObj = {
         assetGroupCode: null,
         assetGroupNameENG: null,
         assetGroupNameUNI: null,
-        isActive:  'true'
+        isActive:  'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
       status = '';
 
@@ -98,6 +112,10 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
     }
   }
   save(ObjForm: NgForm): void {
+    this.bindObj.createdBy = localStorage.getItem('username');
+    this.bindObj.createdDate = this.globalService.GerCurrntDateStamp();
+    this.bindObj.modifiedBy = localStorage.getItem('username');
+    this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
     if (status !== 'Update') {
       this.bindObj.assetGroupCode = null;
       this.assetGroupService.Save(this.assetGroupTransfarmer.AssetGroupTransfarmer(this.bindObj)).subscribe(

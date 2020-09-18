@@ -37,8 +37,7 @@
   <thead class="thead-light">
     <tr>
       <th>Zone Code</th>
-      <th>Zone Name ENG</th>
-      <th>Zone Name UNI</th>
+      <th>Zone Name</th>
       <th>Active</th>
       <th>Action</th>
     </tr>
@@ -52,14 +51,12 @@
         {{Oject.zoneNameENG}}
       </td>
       <td>
-        {{Oject.zoneNameUNI}}
-      </td>
-      <td>
         {{Oject.isActive}}
       </td>
       <td [ngSwitch]="1">
-        <button class="btn btn-primary" [disabled]="Oject.zoneCode === ''"
-          [routerLink]="['/Zone/',Oject.zoneCode]">Edit</button>
+        <button mat-icon-button [routerLink]="['/Zone/',Oject.zoneCode]"
+         color="accent">
+          <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon></button>
       </td>
     </tr>
   </tbody>

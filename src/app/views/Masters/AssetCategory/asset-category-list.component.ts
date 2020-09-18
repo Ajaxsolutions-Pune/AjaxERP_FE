@@ -46,7 +46,11 @@ export class AssetCategoryListComponent implements OnInit {
       assetCategoryNameUNI: null,
       assetGroupCode: null,
       colourCode: null,
-      isActive: '3'
+      isActive: '3',
+      createdBy: null,
+      createdDate: null,
+      modifiedBy: null,
+      modifiedDate: null,
     };
   }
 
