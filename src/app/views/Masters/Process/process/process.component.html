@@ -10,8 +10,9 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-2">
-                                <input matInput #processId spellcheck="false" [(ngModel)]="process.processId"
-                                    placeholder="Process ID" formControlName="ControlprocessId">
+                                <input matInput #processId spellcheck="false" 
+                                [(ngModel)]="process.processId"
+                                    placeholder="Process Code" formControlName="ControlprocessId">
                                 <mat-error>
                                     {{ formErrors['ControlprocessId'] }}
                                 </mat-error>

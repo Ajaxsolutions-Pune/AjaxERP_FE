@@ -7,6 +7,7 @@ export class Region {
     createdDate: string;
     modifiedBy: string;
     modifiedDate: string;
+    sortBy: string;
 }
 export class RegionEntity {
     regionCode: string;
@@ -17,4 +18,5 @@ export class RegionEntity {
     createdDate: string;
     modifiedBy: string;
     modifiedDate: string;
+    sortBy: string;
 }

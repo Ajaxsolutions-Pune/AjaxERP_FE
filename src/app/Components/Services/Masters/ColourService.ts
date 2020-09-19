@@ -32,8 +32,6 @@ export class ColourService {
     }
 
     Update(updateEntityObj: ColourEntity): Observable<Insertstatus> {
-        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        // tslint:disable-next-line:max-line-length
         return this.httpClient.post<Insertstatus>(this.str + '/Colour', updateEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }

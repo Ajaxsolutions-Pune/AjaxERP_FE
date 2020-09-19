@@ -54,6 +54,9 @@ export class AssetCategoryListComponent implements OnInit {
     };
   }
 
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
   resultChanged(): void {
     this.SerachCri = 0;
     this.ResultOject = this.WithoutFilterObj;

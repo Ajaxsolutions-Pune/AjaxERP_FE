@@ -23,7 +23,7 @@ export class RegionService {
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: RegionEntity): Observable<Insertstatus> {
-        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        console.log(saveEntityObj);
         return this.httpClient.post<Insertstatus>(this.str + '/Region', saveEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }

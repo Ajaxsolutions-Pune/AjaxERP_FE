@@ -118,21 +118,21 @@ export const navItems: NavData[] = [
          url: '/AssetGroupList',
          icon: 'icon-puzzle'
        },
-      /*{
-        name: 'Asset',
-        url: '/AssetList',
-        icon: 'icon-puzzle'
-      },*/
+      // {
+      //   name: 'Asset',
+      //   url: '/AssetList',
+      //   icon: 'icon-puzzle'
+      // },
       {
         name: 'Device',
         url: '/DeviceList',
         icon: 'icon-puzzle'
       },
-      // {
-      //   name: 'Colour',
-      //   url: '/ColourList',
-      //   icon: 'icon-puzzle'
-      // },
+       {
+         name: 'Colour',
+         url: '/ColourList',
+         icon: 'icon-puzzle'
+       },
       // {
       //   name: 'Country',
       //   url: '/CountryList',

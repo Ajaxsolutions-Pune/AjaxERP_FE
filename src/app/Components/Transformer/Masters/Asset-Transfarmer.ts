@@ -46,16 +46,19 @@ export class AssetTransfarmer {
             this.Oject.classificationCode = element.classificationCode;
             this.Oject.structureCode = element.structureCode;
             this.Oject.positionCode = element.positionCode;
-
             this.Oject.deviceId = element.deviceId;
             this.Oject.sortBy = element.sortBy;
             this.Oject.source = element.source;
-
             this.Oject.createdBy = element.createdBy;
             this.Oject.createdDate = element.createdDate;
             this.Oject.modifiedBy = element.modifiedBy;
             this.Oject.modifiedDate = element.modifiedDate;
-
+            this.Oject.isRetag = element.isRetag;
+            this.Oject.locationName = element.locationName;
+            this.Oject.tlCode = element.tlCode;
+            this.Oject.hubCode = element.hubCode;
+            this.Oject.mobileNo = element.mobileNo;
+            this.Oject.emailId = element.emailId;
             if (element.isActive === '1') {
                 this.Oject.isActive = 'Active'.toString().trim();
             } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
@@ -96,15 +99,20 @@ export class AssetTransfarmer {
         this.Oject.structureCode = element.structureCode;
         this.Oject.positionCode = element.positionCode;
         this.Oject.isActive = element.isActive;
-
         this.Oject.createdBy = element.createdBy;
         this.Oject.createdDate = element.createdDate;
         this.Oject.modifiedBy = element.modifiedBy;
         this.Oject.modifiedDate = element.modifiedDate;
-
         this.Oject.deviceId = element.deviceId;
         this.Oject.sortBy = element.sortBy;
         this.Oject.source = element.source;
+
+        this.Oject.isRetag = element.isRetag;
+        this.Oject.locationName = element.locationName;
+        this.Oject.tlCode = element.tlCode;
+        this.Oject.hubCode = element.hubCode;
+        this.Oject.mobileNo = element.mobileNo;
+        this.Oject.emailId = element.emailId;
 
         if (element.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
@@ -143,16 +151,20 @@ export class AssetTransfarmer {
         this.OjectEntity.classificationCode = element.classificationCode;
         this.OjectEntity.structureCode = element.structureCode;
         this.OjectEntity.positionCode = element.positionCode;
-
         this.OjectEntity.createdBy = element.createdBy;
         this.OjectEntity.createdDate = element.createdDate;
         this.OjectEntity.modifiedBy = element.modifiedBy;
         this.OjectEntity.modifiedDate = element.modifiedDate;
-
-
         this.OjectEntity.deviceId = element.deviceId;
         this.OjectEntity.sortBy = element.sortBy;
         this.OjectEntity.source = element.source;
+
+        this.OjectEntity.isRetag = element.isRetag;
+        this.OjectEntity.locationName = element.locationName;
+        this.OjectEntity.tlCode = element.tlCode;
+        this.OjectEntity.hubCode = element.hubCode;
+        this.OjectEntity.mobileNo = element.mobileNo;
+        this.OjectEntity.emailId = element.emailId;
 
         if (element.isActive === 'true') {
             this.OjectEntity.isActive = '1';

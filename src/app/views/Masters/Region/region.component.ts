@@ -55,6 +55,7 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
       this.bindObj.regionCode = null;
       this.regionService.Save(this.regionTransfarmer.RegionTransfarmer(this.bindObj)).subscribe(
         (par) => {
+          console.log(par);
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
@@ -97,6 +98,7 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
       regionCode: null,
       regionNameENG: null,
       regionNameUNI: null,
+      sortBy: null,
       isActive: 'true',
       createdBy: localStorage.getItem('username'),
       createdDate: this.globalService.GerCurrntDateStamp(),
@@ -118,6 +120,7 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
   private getregion(region_Code: string) {
     this.bindObj = {
       regionCode: null,
+      sortBy: null,
       regionNameENG: null,
       regionNameUNI: null,
       isActive: 'true',
@@ -128,6 +131,7 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
     };
     if (region_Code === null || region_Code === '') {
       this.bindObj = {
+        sortBy: null,
         regionCode: null,
         regionNameENG: null,
         regionNameUNI: null,

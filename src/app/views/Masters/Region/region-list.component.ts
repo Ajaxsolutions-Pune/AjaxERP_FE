@@ -46,6 +46,7 @@ export class RegionListComponent implements OnInit {
     console.log(this.arrOject);
     this.bindObj = {
       regionCode: null,
+      sortBy: null,
       regionNameENG: null,
       regionNameUNI: null,
       isActive: '3',

@@ -1,7 +1,7 @@
 <div class="form-group">
   <div class="row">
-    <div class="col-md-3">Zone ID</div>
-    <div class="col-md-3">Zone</div>
+    <div class="col-md-3">Zone Code</div>
+    <div class="col-md-3">Zone Name</div>
     <div class="col-md-2">Active</div>
   </div>
   <div class="row">
@@ -10,7 +10,8 @@
         (input)="resultChanged()" [(ngModel)]="bindObj.zoneCode">
     </div>
     <div class="col-md-3">
-      <input id="txtzoneNameENG" required name="txtzoneNameENG" type="text" class="form-control" placeholder="Zone Name"
+      <input id="txtzoneNameENG" required name="txtzoneNameENG" type="text" 
+      class="form-control" placeholder="Zone Name"
         (input)="resultChanged()" [(ngModel)]="bindObj.zoneNameENG">
     </div>
     <div class="col-md-2">

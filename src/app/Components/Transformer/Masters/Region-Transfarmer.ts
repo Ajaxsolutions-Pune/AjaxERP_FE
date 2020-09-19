@@ -24,6 +24,7 @@ export class RegionTransfarmer {
             this.Oject.createdDate = element.createdDate;
             this.Oject.modifiedBy = element.modifiedBy;
             this.Oject.modifiedDate = element.modifiedDate;
+            this.Oject.sortBy = element.sortBy;
 
             if (element.isActive === '1') {
                 this.Oject.isActive = 'Active'.toString().trim();
@@ -42,7 +43,7 @@ export class RegionTransfarmer {
         this.Oject.createdDate = Entity.createdDate;
         this.Oject.modifiedBy = Entity.modifiedBy;
         this.Oject.modifiedDate = Entity.modifiedDate;
-
+        this.Oject.sortBy = Entity.sortBy;
         if (Entity.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
         } else { this.Oject.isActive = ''.toString().trim(); }
@@ -60,6 +61,7 @@ export class RegionTransfarmer {
         this.OjectEntity.createdDate = element.createdDate;
         this.OjectEntity.modifiedBy = element.modifiedBy;
         this.OjectEntity.modifiedDate = element.modifiedDate;
+        this.OjectEntity.sortBy = element.sortBy;
 
         if (element.isActive === 'true') {
             this.OjectEntity.isActive = '1';
