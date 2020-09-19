@@ -13,14 +13,20 @@ export class DeviceService {
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
     }
+    
     getDevices(): Observable<DeviceEntity[]> {
         return this.httpClient.get<DeviceEntity[]>(this.str + '/Device/getList'
         , this.env.httpOptions);
     }
 
     fillDrpAnswers(): Observable<DeviceEntity[]> {
-        return this.httpClient.get<DeviceEntity[]>(this.str + '/Device', this.env.httpOptions);
+        return this.httpClient.get<DeviceEntity[]>(this.str + '/Device/getList', this.env.httpOptions);
     }
+
+    fillDrpDevices(): Observable<DeviceEntity[]> {
+        return this.httpClient.get<DeviceEntity[]>(this.str + '/Device/getList', this.env.httpOptions);
+    }
+
     getDevice(qaTypeCode: string): Observable<DeviceEntity> {
         return this.httpClient.get<DeviceEntity>(this.str + '/Device/' + qaTypeCode
         , this.env.httpOptions).pipe(catchError(this.handleError));

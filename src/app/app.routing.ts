@@ -100,6 +100,10 @@ import { ProjectComponent } from './views/Masters/Project/project.component';
 import { ProjectListComponent } from './views/Masters/Project/project-list.component';
 import { ProjectListResolverService } from './Components/Resolver/Masters/Project-List-Resolver.Service';
 
+import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
+import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
+
+
 export const routes: Routes = [
   {
     path: '',
@@ -855,6 +859,7 @@ export const routes: Routes = [
           title: 'Edit Device'
         }
       },
+      
       {
         path: 'FormQueAnsMapping',
         component: FormQueAnsMappingComponent,
@@ -863,6 +868,22 @@ export const routes: Routes = [
         },
       },
 
+      {
+        path: 'ProcessFormMapping',
+        component: ProcessFormMappingComponent,
+        data: {
+          title: 'Process Form Mapping'
+        },
+      },
+
+      {
+        path: 'UserDeviceMapping',
+        component: UserDeviceMappingComponent,
+        data: {
+          title: 'User Device Mapping'
+        },
+      },
+      
       {
         path: 'RoleList',
         component: RoleListComponent,

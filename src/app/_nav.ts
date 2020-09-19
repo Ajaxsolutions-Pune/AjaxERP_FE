@@ -228,17 +228,22 @@ export const navItems: NavData[] = [
         url: '/FormQueAnsMapping',
         icon: 'icon-puzzle'
       },
-     // {
-       // name: 'Process Form',
-       // url: '/FormQueAnsMapping',
-     //   icon: 'icon-puzzle'
-      // },
+      {
+        name: 'Process Form',
+        url: '/ProcessFormMapping',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'User Device Map',
+        url: '/UserDeviceMapping',
+        icon: 'icon-puzzle'
+      },
     ]
   },
   {
     name: 'Monitoring Reports',
     url: '/Reports',
- //   icon: 'fa fa-newspaper-o',
+    //icon: 'fa fa-newspaper-o',
     children: [
     ]
 

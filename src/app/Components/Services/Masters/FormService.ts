@@ -25,10 +25,18 @@ export class FormService {
         console.log(this.str + '/Form/getList');
         return this.httpClient.get<FormEntity[]>(this.str + '/Form/getList?status=1', this.env.httpOptions);
     }
+
+    fillDrpFormsByProcessId(): Observable<FormEntity[]> {
+        console.log(this.str + '/Form/getList');
+        return this.httpClient.get<FormEntity[]>(this.str + '/Form/getList?status=1', this.env.httpOptions);
+    }
+
+
     getForm(formCode: string): Observable<FormEntity> {
         return this.httpClient.get<FormEntity>(this.str + '/Form/' + formCode
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
+    
     Save(saveEntityObj: FormEntity): Observable<Insertstatus> {
         saveEntityObj.formId = null;
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

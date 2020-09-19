@@ -46,7 +46,7 @@ import { DashboardService } from './Components/Services/Dashboard.service';
 import { LogIn } from './Components/Module/login.model';
 import { LogInService } from './Components/Services/LogIn.service';
 import { LogInComponent } from './Components/login/login.component';
-import { User } from './Components/Module/User.model';
+import { User} from './Components/Module/User.model';
 import { UserService } from './Components/Services/User.Service';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { RouterModule } from '@angular/router';
@@ -196,6 +196,7 @@ import { AssetCategoryService } from './Components/Services/Masters/AssetCategor
 import { AssetCategoryListResolverService } from './Components/Resolver/Masters/Asset-Category-List-Resolver.Service';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TreeGridModule, EditService, ToolbarService } from '@syncfusion/ej2-angular-treegrid';
+
 import { AddDialogComponent } from './views/ProcessSetup/FormQueAnsMapping/dialogs/add/add.dialog.component';
 import { EditDialogComponent } from './views/ProcessSetup/FormQueAnsMapping/dialogs/edit/edit.dialog.component';
 import { DeleteDialogComponent } from './views/ProcessSetup/FormQueAnsMapping/dialogs/delete/delete.dialog.component';
@@ -221,6 +222,20 @@ import { ProjectTransfarmer } from './Components/Transformer/Masters/Project-Tra
 import { ProjectService } from './Components/Services/Masters/ProjectService';
 import { ProjectListResolverService } from './Components/Resolver/Masters/Project-List-Resolver.Service';
 
+import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
+import { ProcessFormMappingService } from './Components/Services/ProcessSetup/ProcessFormMappingService';
+import { ProcessFormMappingTransfarmer } from './Components/Transformer/ProcessSetup/ProcessFormMapping-Transfarmer';
+import { ProcessDataService } from './views/ProcessSetup/ProcessFormMapping/processdata.service';
+import { ProcessAddDialogComponent } from './views/ProcessSetup/ProcessFormMapping/dialogs/add/processadd.dialog.component';
+import { ProcessDeleteDialogComponent } from './views/ProcessSetup/ProcessFormMapping/dialogs/delete/processdelete.dialog.component';
+import { ProcessEditDialogComponent } from './views/ProcessSetup/ProcessFormMapping/dialogs/edit/processedit.dialog.component';
+
+import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
+import { UserDeviceMappingService } from './Components/Services/ProcessSetup/UserDeviceMappingService';
+import { UserDeviceMappingTransfarmer } from './Components/Transformer/ProcessSetup/UserDeviceMapping-Transfarmer';
+import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/userdevicedata.service';
+import { UserDeviceAddDialogComponent } from './views/ProcessSetup/UserDeviceMapping/dialogs/add/userdeviceadd.dialog.component';
+import { UserDeviceEditDialogComponent } from './views/ProcessSetup/UserDeviceMapping/dialogs/edit/userdeviceedit.dialog.component';
 
 @NgModule({
   imports: [
@@ -257,19 +272,30 @@ import { ProjectListResolverService } from './Components/Resolver/Masters/Projec
     MatTableModule,
     MatToolbarModule,
     MatPaginatorModule,
-
     NgxPaginationModule
   ],
   entryComponents: [
     AddDialogComponent,
     EditDialogComponent,
     DeleteDialogComponent,
-    DialogTemplateComponent
+    ProcessAddDialogComponent,
+    ProcessDeleteDialogComponent,
+    ProcessEditDialogComponent,
+    UserDeviceAddDialogComponent,
+    UserDeviceEditDialogComponent,
+    DialogTemplateComponent, 
+    
   ],
   declarations: [
     AddDialogComponent,
     EditDialogComponent,
     DeleteDialogComponent,
+    ProcessAddDialogComponent,
+    ProcessDeleteDialogComponent,
+    ProcessEditDialogComponent,
+    UserDeviceAddDialogComponent,
+    UserDeviceEditDialogComponent,
+    
     AppComponent, ...APP_CONTAINERS, P404Component, P500Component, LogInComponent,
     DialogTemplateComponent,
     ListUserComponent, UserMasterComponent, DashboardComponent, ListUOMComponent,
@@ -294,24 +320,29 @@ import { ProjectListResolverService } from './Components/Resolver/Masters/Projec
     FormQueAnsMappingComponent,
     RoleComponent,RoleListComponent,
     ProjectComponent, ProjectListComponent, 
+    ProcessFormMappingComponent, UserDeviceMappingComponent,
+    
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService,
-    CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
+    CityGroupService, ItemSubGroupService, RegionService, 
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
     AssetTransfarmer, AssetGroupTransfarmer, TehsilTransfarmer, QuestionTransfarmer,
     AnswerTransfarmer, ProcessTransfarmer1, ZoneTransfarmer, CircleTransfarmer,
-    FormQueAnsMappingTransfarmer, DatePipe, GlobalService,
+    FormQueAnsMappingService, FormQueAnsMappingTransfarmer, 
+    ProcessFormMappingService, ProcessFormMappingTransfarmer, UserDeviceMappingService,
+    UserDeviceMappingTransfarmer,
+    DatePipe, GlobalService,
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
-    AssetCategoryService, DataService,
+    AssetCategoryService, DataService,ProcessDataService, UserDeviceDataService,
     FormListResolverService, RegionListResolverService, ColourListResolverService,
     AssetListResolverService, ProcessListResolverService, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,

@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-md-4"></div>
+    <mat-form-field class="col-md-4">
+        <mat-label>Device</mat-label>
+        <mat-select required  [(ngModel)]="DeviceId"
+         (selectionChange)="DeviceChange($event)">
+            <mat-option *ngFor="let device of deviceObj" [value]="device.deviceId">
+              {{device.deviceId}} - {{device.deviceName}}
+            </mat-option>
+        </mat-select>
+        <mat-error>
+            {{formErrors['ControlDeviceCode']}}
+        </mat-error>
+    </mat-form-field>
+  </div>
+  
+  
+  <div class="container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource"
+    [matSortDisableClear]="false"
+    matSort class="mat-cell">
+      ng update @angular/cli @angular/core
+      
+  
+      <ng-container matColumnDef="ProcFormMapping">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>MapId</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.udmId}}</mat-cell>
+      </ng-container>   
+  
+      <ng-container matColumnDef="FormText">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Form</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.loginId}}-{{row.loginIdText}}</mat-cell>
+      </ng-container>
+     
+      <ng-container matColumnDef="SortBy">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Sort By</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.sortBy}}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="ActiveText">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.isActiveText}}</mat-cell>
+      </ng-container> 
+       <!-- actions -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <button mat-icon-button color="primary" (click)="addNew()">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          </button>
+        </mat-header-cell>
+  
+        <mat-cell *matCellDef="let row; let i=index;">
+          <button mat-icon-button color="accent" (click)="startEdit(i,
+          row.udmId,
+          row.loginId,      
+          row.sortBy,
+          row.isActive)">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+  
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  
+  
+    <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+      No results
+    </div>
+    <mat-paginator #paginator
+                  [length]="dataSource.filteredData.length"
+                  [pageIndex]="0"
+                  [pageSize]="10"
+                  [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>
+  
+  <div class="row" style="padding-top: 20px;">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <button mat-raised-button
+        (click)="save()"
+            color="primary">Submit</button>
+        <button mat-raised-button color="warn" routerLink="/dashboard">
+            Cancel</button>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  
