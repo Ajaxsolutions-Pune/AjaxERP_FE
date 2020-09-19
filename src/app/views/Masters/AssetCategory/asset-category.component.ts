@@ -13,6 +13,7 @@ import { AssetGroupTransfarmer } from '../../../Components/Transformer/Masters/A
 import { AssetCategoryService } from '../../../Components/Services/Masters/AssetCategory';
 import { AssetCategoryTransfarmer } from '../../../Components/Transformer/Masters/Asset-Category-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
+import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-asset-category',
@@ -34,6 +35,7 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
     private assetCategoryService: AssetCategoryService,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private router: Router,
+    private globalService: GlobalService,
     private assetCategoryTransfarmer: AssetCategoryTransfarmer,
     private colourService: ColourService,
     private colourTransfarmer: ColourTransfarmer,
@@ -91,7 +93,11 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
       assetCategoryNameUNI: null,
       assetGroupCode: null,
       colourCode: null,
-      isActive: 'true'
+      isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
@@ -105,6 +111,10 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
   }
 
   save(ObjForm: NgForm): void {
+    this.bindObj.createdBy = localStorage.getItem('username');
+    this.bindObj.createdDate = this.globalService.GerCurrntDateStamp();
+    this.bindObj.modifiedBy = localStorage.getItem('username');
+    this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
     if (status !== 'Update') {
       this.bindObj.assetCategoryCode = null;
       this.assetCategoryService.Save(this.assetCategoryTransfarmer.AssetCategoryTransfarmer(this.bindObj)).subscribe(
@@ -144,7 +154,11 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
       assetCategoryNameUNI: null,
       assetGroupCode: null,
       colourCode: null,
-      isActive: 'true'
+      isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     if (assetCategory_Code === null || assetCategory_Code === '') {
       this.bindObj = {
@@ -153,7 +167,11 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
         assetCategoryNameUNI: null,
         assetGroupCode: null,
         colourCode: null,
-        isActive: 'true'
+        isActive: 'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
       status = '';
 

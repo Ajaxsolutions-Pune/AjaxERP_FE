@@ -894,12 +894,12 @@ export const routes: Routes = [
           RoleList: RoleListResolverService
         },
       },
-      
+
       {
         path: 'Role',
-        component : RoleComponent,
-        data:{
-          title: 'Add Role'          
+        component: RoleComponent,
+        data: {
+          title: 'Add Role'
         }
       },
 
@@ -922,12 +922,12 @@ export const routes: Routes = [
           ProjectList: ProjectListResolverService
         },
       },
-      
+
       {
         path: 'Project',
-        component : ProjectComponent,
-        data:{
-          title: 'Add Project'          
+        component: ProjectComponent,
+        data: {
+          title: 'Add Project'
         }
       },
 

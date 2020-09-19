@@ -49,7 +49,11 @@ export class ClusterListComponent implements OnInit {
       clusterNameENG: null,
       clusterNameUNI: null,
       circleCode: null,
-      isActive: '3'
+      isActive: '3',
+      createdBy: localStorage.getItem('username'),
+      createdDate: null,
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: null,
     };
   }
 

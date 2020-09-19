@@ -7,6 +7,7 @@ import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
 import { RegionTransfarmer } from '../../../Components/Transformer/Masters/Region-Transfarmer';
 import { RegionService } from '../../../Components/Services/Masters/RegionService';
+import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-region',
@@ -23,6 +24,7 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
   constructor(private route: ActivatedRoute,
     private regionTransfarmer: RegionTransfarmer,
     private regionService: RegionService,
+    private globalService: GlobalService,
     private defaultLayoutComponent: DefaultLayoutComponent, private router: Router,
     private formBuilder: FormBuilder) {
     super();
@@ -53,11 +55,12 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
       this.bindObj.regionCode = null;
       this.regionService.Save(this.regionTransfarmer.RegionTransfarmer(this.bindObj)).subscribe(
         (par) => {
+          console.log(par);
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             ObjForm.reset();
-            this.router.navigate(['AssetCategoryList']);
+            this.router.navigate(['RegionList']);
           } else {
             this.defaultLayoutComponent.Massage('',
               'Somethig Wrong', 'modal-info');
@@ -72,7 +75,7 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             ObjForm.reset();
-            this.router.navigate(['AssetCategoryList']);
+            this.router.navigate(['RegionList']);
           } else {
             this.defaultLayoutComponent.Massage('',
               'Somethig Wrong', 'modal-info');
@@ -95,7 +98,12 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
       regionCode: null,
       regionNameENG: null,
       regionNameUNI: null,
-      isActive: 'true'
+      sortBy: null,
+      isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
@@ -112,16 +120,26 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
   private getregion(region_Code: string) {
     this.bindObj = {
       regionCode: null,
+      sortBy: null,
       regionNameENG: null,
       regionNameUNI: null,
-      isActive: 'true'
+      isActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: localStorage.getItem('username'),
+      modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
     if (region_Code === null || region_Code === '') {
       this.bindObj = {
+        sortBy: null,
         regionCode: null,
         regionNameENG: null,
         regionNameUNI: null,
-        isActive: 'true'
+        isActive: 'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: localStorage.getItem('username'),
+        modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
       status = '';
 

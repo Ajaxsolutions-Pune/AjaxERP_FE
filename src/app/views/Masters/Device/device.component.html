@@ -40,8 +40,36 @@
                   formControlName="ControldeviceName" name="txtdeviceName">
               </mat-form-field>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Model" [(ngModel)]="bindObj.model" #txtmodel formControlName="Controlmodel"
-                  name="txtmodel">
+                <mat-label>Lock Type</mat-label>
+                <mat-select required formControlName="ControllockTypeCode" [(ngModel)]="bindObj.lockTypeCode">
+                  <mat-option>Lock Type</mat-option>
+                  <mat-option value="1">Yes</mat-option>
+                  <mat-option value="0">No</mat-option>
+                </mat-select>
+                <mat-error>
+                  {{ formErrors['ControllockTypeCode'] }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <div class="col-md-2"></div>
+              <mat-form-field class="col-md-4">
+                <input matInput placeholder="Interval (min)" 
+                [(ngModel)]="bindObj.trackingIntervalMin" #txttrackingIntervalMin
+                  formControlName="ControltrackingIntervalMin" name="txttrackingIntervalMin">
+              </mat-form-field>
+
+              <mat-form-field class="col-md-4">
+                <mat-label>Tracking</mat-label>
+                <mat-select required formControlName="ControlisTracking"
+                 [(ngModel)]="bindObj.isTracking">
+                  <mat-option>Tracking</mat-option>
+                  <mat-option value="1">Yes</mat-option>
+                  <mat-option value="0">No</mat-option>
+                </mat-select>
+                <mat-error>
+                  {{ formErrors['ControllockTypeCode'] }}
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="row">
@@ -69,31 +97,12 @@
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="RAM" [(ngModel)]="bindObj.ram" #txtram formControlName="Controlram"
-                  name="txtram">
+                <input matInput placeholder="Sim 1 Moble No" [(ngModel)]="bindObj.sim1MobleNo" #txtsim1MobleNo
+                  formControlName="Controlsim1MobleNo" name="txtsim1MobleNo">
               </mat-form-field>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Storage" [(ngModel)]="bindObj.storage" #txtstorage
-                  formControlName="Controlstorage" name="txtstorage">
-              </mat-form-field>
-            </div>
-            <div class="row">
-              <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
-                <input matInput placeholder="Status Ip" [(ngModel)]="bindObj.statusIp" #txtstatusIp
-                  formControlName="ControlstatusIp" name="txtstatusIp">
-              </mat-form-field>
-
-              <mat-form-field class="col-md-4">
-                <mat-label>Lock Type</mat-label>
-                <mat-select required formControlName="ControllockTypeCode" [(ngModel)]="bindObj.lockTypeCode">
-                  <mat-option>Lock Type</mat-option>
-                  <mat-option value="1">Lock Type 1</mat-option>
-                  <mat-option value="0">Lock Type 2</mat-option>
-                </mat-select>
-                <mat-error>
-                  {{ formErrors['ControllockTypeCode'] }}
-                </mat-error>
+                <input matInput placeholder="Sim 2 Moble No" [(ngModel)]="bindObj.sim2MobleNo" #txtsim2MobleNo
+                  formControlName="Controlsim2MobleNo" name="txtsim2MobleNo">
               </mat-form-field>
             </div>
             <div class="row">
@@ -110,33 +119,23 @@
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Sim 1 Moble No" [(ngModel)]="bindObj.sim1MobleNo" #txtsim1MobleNo
-                  formControlName="Controlsim1MobleNo" name="txtsim1MobleNo">
+                <input matInput placeholder="RAM" [(ngModel)]="bindObj.ram" #txtram formControlName="Controlram"
+                  name="txtram">
               </mat-form-field>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Sim 2 Moble No" [(ngModel)]="bindObj.sim2MobleNo" #txtsim2MobleNo
-                  formControlName="Controlsim2MobleNo" name="txtsim2MobleNo">
+                <input matInput placeholder="Storage" [(ngModel)]="bindObj.storage" #txtstorage
+                  formControlName="Controlstorage" name="txtstorage">
               </mat-form-field>
             </div>
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Interval (min)" 
-                [(ngModel)]="bindObj.trackingIntervalMin" #txttrackingIntervalMin
-                  formControlName="ControltrackingIntervalMin" name="txttrackingIntervalMin">
+                <input matInput placeholder="Status Ip" [(ngModel)]="bindObj.statusIp" #txtstatusIp
+                  formControlName="ControlstatusIp" name="txtstatusIp">
               </mat-form-field>
-
               <mat-form-field class="col-md-4">
-                <mat-label>Tracking</mat-label>
-                <mat-select required formControlName="ControlisTracking"
-                 [(ngModel)]="bindObj.isTracking">
-                  <mat-option>Tracking</mat-option>
-                  <mat-option value="1">Yes</mat-option>
-                  <mat-option value="0">No</mat-option>
-                </mat-select>
-                <mat-error>
-                  {{ formErrors['ControllockTypeCode'] }}
-                </mat-error>
+                <input matInput placeholder="Model" [(ngModel)]="bindObj.model" #txtmodel formControlName="Controlmodel"
+                  name="txtmodel">
               </mat-form-field>
             </div>
           </div>
@@ -161,4 +160,4 @@
   </div>
 </form>
 <!--/style="display: none;"-->
-<div> {{bindObj | json}}</div>
+<div style="display: none;"> {{bindObj | json}}</div>

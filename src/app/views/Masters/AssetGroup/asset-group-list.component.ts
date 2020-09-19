@@ -47,6 +47,10 @@ export class AssetGroupListComponent implements OnInit {
       assetGroupCode: null,
       assetGroupNameENG: null,
       assetGroupNameUNI: null,
+      createdBy: null,
+      createdDate: null,
+      modifiedBy: null,
+      modifiedDate: null,
       isActive: '3'
     };
   }

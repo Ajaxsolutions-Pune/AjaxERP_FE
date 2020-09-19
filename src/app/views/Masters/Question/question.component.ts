@@ -90,27 +90,27 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
   }
 
   save(QuestionForm: NgForm): void {
-      this.question.createdBy = localStorage.getItem('username');
-      this.question.createdDate = this.globalService.GerCurrntDateStamp();
-      this.question.modifiedBy = localStorage.getItem('username');
-      this.question.modifiedDate = this.globalService.GerCurrntDateStamp();
-      
+    this.question.createdBy = localStorage.getItem('username');
+    this.question.createdDate = this.globalService.GerCurrntDateStamp();
+    this.question.modifiedBy = localStorage.getItem('username');
+    this.question.modifiedDate = this.globalService.GerCurrntDateStamp();
+
     if (status !== 'Update') {
       this.question.questionId = null;
-        
-        this.questionService.Save(this.questionTransfarmer.QuestionTransfarmer(this.question)).subscribe(
-          (par) => {
-            if (par !== null) {
-              this.defaultLayoutComponent.Massage('',
-                'Data saved successfully !', 'modal-info');
-              QuestionForm.reset();
-              this.router.navigate(['QuestionList']);
-            } else {
-              this.defaultLayoutComponent.Massage('',
-                'Somethig Wrong', 'modal-info');
-            }
+
+      this.questionService.Save(this.questionTransfarmer.QuestionTransfarmer(this.question)).subscribe(
+        (par) => {
+          if (par !== null) {
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            QuestionForm.reset();
+            this.router.navigate(['QuestionList']);
+          } else {
+            this.defaultLayoutComponent.Massage('',
+              'Somethig Wrong', 'modal-info');
           }
-        );
+        }
+      );
 
     } else {
       this.questionService.Update(this.questionTransfarmer.QuestionTransfarmer(this.question)).subscribe(

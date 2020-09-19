@@ -20,7 +20,15 @@ export class ZoneTransfarmer {
             this.Oject.zoneCode = element.zoneCode;
             this.Oject.zoneNameENG = element.zoneNameENG;
             this.Oject.zoneNameUNI = element.zoneNameUNI;
-            this.Oject.isActive = element.isActive;
+
+            this.Oject.createdBy = element.createdBy;
+            this.Oject.createdDate = element.createdDate;
+            this.Oject.modifiedBy = element.modifiedBy;
+            this.Oject.modifiedDate = element.modifiedDate;
+
+            if (element.isActive === '1') {
+                this.Oject.isActive = 'Active'.toString().trim();
+            } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
             this.arrOject.push(this.Oject);
         });
         return this.arrOject;
@@ -31,6 +39,12 @@ export class ZoneTransfarmer {
         this.Oject.zoneCode = Entity.zoneCode;
         this.Oject.zoneNameENG = Entity.zoneNameENG;
         this.Oject.zoneNameUNI = Entity.zoneNameUNI;
+
+        this.Oject.createdBy = Entity.createdBy;
+        this.Oject.createdDate = Entity.createdDate;
+        this.Oject.modifiedBy = Entity.modifiedBy;
+        this.Oject.modifiedDate = Entity.modifiedDate;
+
         if (Entity.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
         } else { this.Oject.isActive = ''.toString().trim(); }
@@ -38,14 +52,21 @@ export class ZoneTransfarmer {
         return this.Oject;
     }
 
-    ZoneTransfarmer(qaType1: Zone): ZoneEntity {
+    ZoneTransfarmer(zone: Zone): ZoneEntity {
         this.OjectEntity = new ZoneEntity();
-        this.OjectEntity.zoneCode = qaType1.zoneCode;
-        this.OjectEntity.zoneNameENG = qaType1.zoneNameENG;
-        this.OjectEntity.zoneNameUNI = qaType1.zoneNameUNI;
-         if (qaType1.isActive === 'true') {  this.OjectEntity.isActive = '1';
-             } else { this.OjectEntity.isActive = '0'; }
-        if (qaType1.isActive.toString().trim() === 'true') {
+        this.OjectEntity.zoneCode = zone.zoneCode;
+        this.OjectEntity.zoneNameENG = zone.zoneNameENG;
+        this.OjectEntity.zoneNameUNI = zone.zoneNameUNI;
+
+        this.OjectEntity.createdBy = zone.createdBy;
+        this.OjectEntity.createdDate = zone.createdDate;
+        this.OjectEntity.modifiedBy = zone.modifiedBy;
+        this.OjectEntity.modifiedDate = zone.modifiedDate;
+
+        if (zone.isActive === 'true') {
+            this.OjectEntity.isActive = '1';
+        } else { this.OjectEntity.isActive = '0'; }
+        if (zone.isActive.toString().trim() === 'true') {
             this.OjectEntity.isActive = '1';
         } else {
             this.OjectEntity.isActive = '0';

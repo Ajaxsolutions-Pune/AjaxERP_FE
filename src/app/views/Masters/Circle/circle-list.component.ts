@@ -45,7 +45,11 @@ export class CircleListComponent implements OnInit {
       circleNameENG: null,
       circleNameUNI: null,
       zoneCode: null,
-      isActive: '3'
+      isActive: '3',
+      createdBy: null,
+      createdDate: null,
+      modifiedBy: null,
+      modifiedDate: null,
     };
   }
 

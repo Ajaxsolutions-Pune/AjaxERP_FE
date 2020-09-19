@@ -60,7 +60,7 @@ export class AnswerListComponent implements OnInit {
     this.SerachCri = 0;
     this.Resultanswer = this.WithoutFilterAnswer;
     if (this.objAnswer.answer !== null && this.objAnswer.answer !== '') {
-      console.log(this.objAnswer.answer.toString().toLowerCase());
+      // console.log(this.objAnswer.answer.toString().toLowerCase());
       this.Resultanswer = this.Resultanswer.filter(SubResult =>
         SubResult.answer.toLowerCase().indexOf(this.objAnswer.answer.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;

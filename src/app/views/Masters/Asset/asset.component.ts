@@ -232,14 +232,16 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         Validators.required]],
       Controllatitude: ['', [
         Validators.required,
-        Validators.minLength(9),
-        Validators.maxLength(9),
-        Validators.pattern('^[0-9]+(.[0-9]{0,6})?$')]],
+        Validators.minLength(10),
+        Validators.maxLength(10),
+        Validators.pattern('^[0-9]+(.[0-9]{0,7})?$')
+      ]],
       Controllongitude: ['', [
         Validators.required,
-        Validators.minLength(9),
-        Validators.maxLength(9),
-        Validators.pattern('^[0-9]+(.[0-9]{0,6})?$')]],
+        Validators.minLength(10),
+        Validators.maxLength(10),
+        Validators.pattern('^[0-9]+(.[0-9]{0,7})?$')
+      ]],
       ControlRedius: ['', [
         Validators.required]],
       ControlpinCode: ['', []],
@@ -300,6 +302,12 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       createdDate: this.globalService.GerCurrntDateStamp(),
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
+      emailId: '',
+      hubCode: '',
+      isRetag: '',
+      locationName: '',
+      mobileNo: '',
+      tlCode: '',
     };
 
     this.deviceService.getDevices().subscribe(
@@ -377,6 +385,12 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       createdDate: this.globalService.GerCurrntDateStamp(),
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
+      emailId: '',
+      hubCode: '',
+      isRetag: '',
+      locationName: '',
+      mobileNo: '',
+      tlCode: '',
     };
     if (asset_Code === null || asset_Code === '') {
       this.bindObj = {
@@ -416,6 +430,12 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         createdDate: this.globalService.GerCurrntDateStamp(),
         modifiedBy: localStorage.getItem('username'),
         modifiedDate: this.globalService.GerCurrntDateStamp(),
+        emailId: '',
+        hubCode: '',
+        isRetag: '',
+        locationName: '',
+        mobileNo: '',
+        tlCode: '',
       };
       status = '';
 
@@ -457,6 +477,12 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         deviceId: null,
         sortBy: null,
         source: null,
+        emailId: '',
+        hubCode: '',
+        isRetag: '',
+        locationName: '',
+        mobileNo: '',
+        tlCode: '',
       };
       this.assetService.getAsset(asset_Code).subscribe(
         (par) => {
@@ -503,6 +529,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
     } else {
       this.assetService.Update(this.assetTransfarmer.AssetTransfarmer(this.bindObj)).subscribe(
         (par) => {
+          console.log(par);
           if (par.status === 'Inserted') {
             console.log(par.status);
             this.defaultLayoutComponent.Massage('',

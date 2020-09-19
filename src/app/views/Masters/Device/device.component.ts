@@ -43,7 +43,6 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
     };
   }
   ngOnInit() {
-    console.log(LoginUser.username);
     this.form = this.formBuilder.group({
       Controlimei1: ['', [
         Validators.required]],

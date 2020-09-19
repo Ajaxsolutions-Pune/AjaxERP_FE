@@ -4,6 +4,10 @@ export class Cluster {
     clusterNameUNI: string;
     circleCode: string;
     isActive: string;
+    createdBy: string;
+    createdDate: string;
+    modifiedBy: string;
+    modifiedDate: string;
 }
 export class ClusterEntity {
     clusterCode: string;
@@ -11,4 +15,8 @@ export class ClusterEntity {
     clusterNameUNI: string;
     circleCode: string;
     isActive: string;
+    createdBy: string;
+    createdDate: string;
+    modifiedBy: string;
+    modifiedDate: string;
 }

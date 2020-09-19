@@ -72,10 +72,10 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     this.process.createdDate = this.globalService.GerCurrntDateStamp();
     this.process.modifiedBy = localStorage.getItem('username');
     this.process.modifiedDate = this.globalService.GerCurrntDateStamp();
-    
+
     if (status !== 'Update') {
-      this.process.processId = null;    
-        console.log(this.process);
+      this.process.processId = null;
+      console.log(this.process);
       this.processService.Save(this.processTransfarmer.processTransfarmer(this.process)).subscribe(
         (par) => {
           console.log(par);

@@ -20,6 +20,10 @@ export class AssetCategoryTransfarmer {
             this.Oject.assetCategoryNameENG = element.assetCategoryNameENG;
             this.Oject.assetCategoryNameUNI = element.assetCategoryNameUNI;
             this.Oject.assetGroupCode = element.assetGroupCode;
+            this.Oject.createdBy = element.createdBy;
+            this.Oject.createdDate = element.createdDate;
+            this.Oject.modifiedBy = element.modifiedBy;
+            this.Oject.modifiedDate = element.modifiedDate;
             this.Oject.colourCode = element.colourCode;
             if (element.isActive === '1') {
                 this.Oject.isActive = 'Active'.toString().trim();
@@ -37,6 +41,10 @@ export class AssetCategoryTransfarmer {
         this.Oject.assetCategoryNameENG = element.assetCategoryNameENG;
         this.Oject.assetCategoryNameUNI = element.assetCategoryNameUNI;
         this.Oject.assetGroupCode = element.assetGroupCode;
+        this.Oject.createdBy = element.createdBy;
+        this.Oject.createdDate = element.createdDate;
+        this.Oject.modifiedBy = element.modifiedBy;
+        this.Oject.modifiedDate = element.modifiedDate;
         this.Oject.colourCode = element.colourCode;
         if (element.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
@@ -50,6 +58,10 @@ export class AssetCategoryTransfarmer {
         this.OjectEntity.assetCategoryNameENG = element.assetCategoryNameENG;
         this.OjectEntity.assetCategoryNameUNI = element.assetCategoryNameUNI;
         this.OjectEntity.assetGroupCode = element.assetGroupCode;
+        this.OjectEntity.createdBy = element.createdBy;
+        this.OjectEntity.createdDate = element.createdDate;
+        this.OjectEntity.modifiedBy = element.modifiedBy;
+        this.OjectEntity.modifiedDate = element.modifiedDate;
         this.OjectEntity.colourCode = element.colourCode;
         if (element.isActive === 'true') {
             this.OjectEntity.isActive = '1';

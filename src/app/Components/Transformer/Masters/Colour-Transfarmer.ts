@@ -19,7 +19,13 @@ export class ColourTransfarmer {
             this.Oject.colourCode = element.colourCode;
             this.Oject.colourNameENG = element.colourNameENG;
             this.Oject.colourNameENG = element.colourNameENG;
-            this.Oject.isActive = element.isActive;
+            this.Oject.createdBy = element.createdBy;
+            this.Oject.createdDate = element.createdDate;
+            this.Oject.modifiedBy = element.modifiedBy;
+            this.Oject.modifiedDate = element.modifiedDate;
+            if (element.isActive === '1') {
+                this.Oject.isActive = 'Active'.toString().trim();
+            } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
             this.arrOject.push(this.Oject);
         });
         return this.arrOject;
@@ -30,6 +36,10 @@ export class ColourTransfarmer {
         this.Oject.colourCode = Entity.colourCode;
         this.Oject.colourNameENG = Entity.colourNameENG;
         this.Oject.colourNameENG = Entity.colourNameENG;
+        this.Oject.createdBy = Entity.createdBy;
+        this.Oject.createdDate = Entity.createdDate;
+        this.Oject.modifiedBy = Entity.modifiedBy;
+        this.Oject.modifiedDate = Entity.modifiedDate;
         if (Entity.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
         } else { this.Oject.isActive = ''.toString().trim(); }
@@ -37,14 +47,18 @@ export class ColourTransfarmer {
         return this.Oject;
     }
 
-    ColourTransfarmer(qaType1: Colour): ColourEntity {
+    ColourTransfarmer(Entity: Colour): ColourEntity {
         this.OjectEntity = new ColourEntity();
-        this.OjectEntity.colourCode = qaType1.colourCode;
-        this.OjectEntity.colourNameENG = qaType1.colourNameENG;
-        this.OjectEntity.colourNameENG = qaType1.colourNameENG;
-         if (qaType1.isActive === 'true') {  this.OjectEntity.isActive = '1';
+        this.OjectEntity.colourCode = Entity.colourCode;
+        this.OjectEntity.colourNameENG = Entity.colourNameENG;
+        this.OjectEntity.colourNameENG = Entity.colourNameENG;
+        this.OjectEntity.createdBy = Entity.createdBy;
+        this.OjectEntity.createdDate = Entity.createdDate;
+        this.OjectEntity.modifiedBy = Entity.modifiedBy;
+        this.OjectEntity.modifiedDate = Entity.modifiedDate;
+         if (Entity.isActive === 'true') {  this.OjectEntity.isActive = '1';
              } else { this.OjectEntity.isActive = '0'; }
-        if (qaType1.isActive.toString().trim() === 'true') {
+        if (Entity.isActive.toString().trim() === 'true') {
             this.OjectEntity.isActive = '1';
         } else {
             this.OjectEntity.isActive = '0';

@@ -27,7 +27,7 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Colour Name ENG"
+                                placeholder="Colour Name"
                                 [(ngModel)]="bindObj.colourNameENG" required
                                 formControlName="ControlcolourNameENG"
                                 #txtcolourNameENG
@@ -38,7 +38,7 @@
                             </mat-form-field>
                             <div class="col-md-4"></div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="display: none;">
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
@@ -69,8 +69,10 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <button mat-raised-button [disabled]="!form.valid" 
+                                <button mat-raised-button [disabled]="!form.valid"
+                                (click)="save()"                 
                                     color="primary">Submit</button>
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                 <button mat-raised-button color="warn"
                                  routerLink="/ColourList">
                                  <i class="fa fa-ban"></i>
@@ -85,4 +87,4 @@
 
     </div>
 </form>
-<div> {{bindObj | json}}</div>
+<div style="display: none;"> {{bindObj | json}}</div>

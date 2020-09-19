@@ -27,7 +27,7 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Category Name"
+                                placeholder="Asset Category Name"
                                 [(ngModel)]="bindObj.assetCategoryNameENG" required
                                 formControlName="ControlCategoryNameENG"
                                 #txtassetCategoryNameENG
@@ -119,4 +119,4 @@
         <!--/.row-->
     </div>
 </form>
-<div> {{bindObj | json}}</div>
+<div style="display: none;"> {{bindObj | json}}</div>

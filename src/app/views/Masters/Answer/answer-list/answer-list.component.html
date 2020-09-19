@@ -1,7 +1,7 @@
 <div class="form-group">
   <div class="row">
 
-    <div class="col-md-3">Answer ID</div>
+    <div class="col-md-3">Answer Code</div>
     <div class="col-md-3">Answer</div>
     <div class="col-md-2">Status</div>
   </div>
@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-md-3">
       <input id="txtAnswerID" required name="txtAnswerID" 
-      type="text" class="form-control" placeholder="Answer ID"
+      type="text" class="form-control" placeholder="Answer Code"
         (input)="resultChanged()" [(ngModel)]="objAnswer.answerId">
     </div>
     <div class="col-md-3">
@@ -38,7 +38,7 @@
 <table class="table table-responsive-sm table-hover table-outline mb-0">
   <thead class="thead-light">
     <tr>
-      <th>Answer Id</th>
+      <th>Answer Code</th>
       <th>Answer</th>
       <th>Status</th>
       <th>Action</th>

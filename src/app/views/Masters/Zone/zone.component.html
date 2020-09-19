@@ -27,7 +27,7 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Zone Name ENG"
+                                placeholder="Zone Name"
                                 [(ngModel)]="bindObj.zoneNameENG" required
                                 formControlName="ControlzoneNameENG"
                                 #txtzoneNameENG
@@ -42,7 +42,7 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Zone Name ENG"
+                                placeholder="Zone Name"
                                 [(ngModel)]="bindObj.zoneNameUNI"
                                 formControlName="ControlzoneNameUNI"
                                 #txtzoneNameUNI
@@ -73,7 +73,7 @@
                                 (click)="save(ObjForm)"
                                     color="primary">Submit</button> &nbsp;
                                     &nbsp; &nbsp; &nbsp; &nbsp;
-                                <button mat-raised-button color="warn" routerLink="/AnswerList">
+                                <button mat-raised-button color="warn" routerLink="/ZoneList">
                                     Cancel</button>
                             </div>
                             <div class="col-md-4"></div>
@@ -85,4 +85,4 @@
         <!--/.row-->
     </div>
 </form>
-<div> {{bindObj | json}}</div>
+<div style="display: none;"> {{bindObj | json}}</div>

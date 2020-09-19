@@ -24,8 +24,6 @@ export class FormQueAnsMappingService {
     }
 
     getFormQueAnsMapping(formId: string): Observable<FormQueAnsMappingEntity[]> {
-        console.log(this.str + '/GetFQAMapping/getList/Sudarshan/' + this.env.OuCode +
-        '?formId=' + formId);
         return this.httpClient.get<FormQueAnsMappingEntity[]>(
             this.str + '/GetFQAMapping/getList/Sudarshan/' + this.env.OuCode +
             '?formId=' + formId
@@ -33,18 +31,18 @@ export class FormQueAnsMappingService {
     }
     Save(saveEntityObj: FormQueAnsMappingEntity[]): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        console.log("####### Before send to service ####");
-        saveEntityObj.forEach(element => {
-            console.log('Id ->'+element.fqamId +' Is_active -->'+element.isActive);  
-            console.log('ansId ->'+element.answerId +' AnsText -->'+element.answerIdText);
-            console.log('CreatedBy ->'+element.createdBy +' CreatedDate -->'+element.createdDate);
-            console.log('FormId ->'+element.formId +' FormQueSeqNo -->'+element.formQueSeqNo);
-            console.log('isQueMandatory ->'+element.isQuestionMandatory +' NextFormId -->'+element.nextFormId);
-            console.log('ModifyBy ->'+element.modifiedBy +' ModifyDate -->'+element.modifiedDate);
-            console.log('NextQueGrp ->'+element.nextQueGroup +' Que Grp -->'+element.queGroup);
-            console.log('Que Id ->'+element.questionId +' Question ID -->'+element.questionIdText);
-            console.log('Update flag ->'+element.updateFlag );     
-          });
+        console.log('####### Before send to service ####');
+        // saveEntityObj.forEach(element => {
+        //    console.log('Id ->' + element.fqamId + ' Is_active -->' + element.isActive);
+        //    console.log('ansId ->' + element.answerId + ' AnsText -->' + element.answerIdText);
+        //    console.log('CreatedBy ->' + element.createdBy + ' CreatedDate -->' + element.createdDate);
+        //    console.log('FormId ->' + element.formId + ' FormQueSeqNo -->' + element.formQueSeqNo);
+        //    console.log('isQueMandatory ->' + element.isQuestionMandatory + ' NextFormId -->' + element.nextFormId);
+        //    console.log('ModifyBy ->' + element.modifiedBy + ' ModifyDate -->' + element.modifiedDate);
+        //    // console.log('NextQueGrp ->' + element.nextQueGroup + ' Que Grp -->' + element.queGroup);
+        //  console.log('Que Id ->' + element.questionId + ' Question ID -->' + element.questionIdText);
+        //    console.log('Update flag ->' + element.updateFlag);
+        //  });
 
         return this.httpClient.post<Insertstatus>(this.str + '/FormQueAnsMapping/createList', saveEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));

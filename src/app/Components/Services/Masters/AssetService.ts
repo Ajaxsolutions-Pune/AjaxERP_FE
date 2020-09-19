@@ -33,7 +33,7 @@ export class AssetService {
     }
 
     Update(updateEntityObj: AssetEntity): Observable<Insertstatus> {
-        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        console.log(updateEntityObj);
         // tslint:disable-next-line:max-line-length
         return this.httpClient.post<Insertstatus>(this.str + '/Asset', updateEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));

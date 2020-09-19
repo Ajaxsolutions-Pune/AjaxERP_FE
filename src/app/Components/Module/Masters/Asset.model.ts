@@ -35,6 +35,12 @@ export class Asset {
     sortBy: string;
     source: string;
     deviceId: string;
+    isRetag: string;
+    locationName: string;
+    tlCode: string;
+    hubCode: string;
+    mobileNo: string;
+    emailId: string;
 }
 export class AssetEntity {
     ouCode: string;
@@ -74,5 +80,10 @@ export class AssetEntity {
     sortBy: string;
     source: string;
     deviceId: string;
+    locationName: string;
+    tlCode: string;
+    hubCode: string;
+    mobileNo: string;
+    emailId: string;
 
 }
