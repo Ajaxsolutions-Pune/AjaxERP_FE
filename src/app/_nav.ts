@@ -128,11 +128,21 @@ export const navItems: NavData[] = [
         url: '/DeviceList',
         icon: 'icon-puzzle'
       },
-       {
-         name: 'Colour',
-         url: '/ColourList',
-         icon: 'icon-puzzle'
-       },
+      {
+        name: 'Colour',
+        url: '/ColourList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Transmission Line',
+        url: '/TransmissionLineList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Hub',
+        url: '/HubList',
+        icon: 'icon-puzzle'
+      },
       // {
       //   name: 'Country',
       //   url: '/CountryList',

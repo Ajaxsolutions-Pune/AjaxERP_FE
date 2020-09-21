@@ -220,6 +220,16 @@ import { ProjectComponent } from './views/Masters/Project/project.component';
 import { ProjectTransfarmer } from './Components/Transformer/Masters/Project-Transfarmer';
 import { ProjectService } from './Components/Services/Masters/ProjectService';
 import { ProjectListResolverService } from './Components/Resolver/Masters/Project-List-Resolver.Service';
+import { TransmissionLineListComponent } from './views/Masters/TransmissionLine/transmission-line-list.component';
+import { TransmissionLineListResolverService } from './Components/Resolver/Masters/TransmissionLine-List-Resolver.Service';
+import { TransmissionLineService } from './Components/Services/Masters/TransmissionLineService';
+import { TransmissionLineTransfarmer } from './Components/Transformer/Masters/TransmissionLine-Transfarmer';
+import { TransmissionLineComponent } from './views/Masters/TransmissionLine/transmission-line.component';
+import { HubListResolverService } from './Components/Resolver/Masters/Hub-List-Resolver.Service';
+import { HubService } from './Components/Services/Masters/HubService';
+import { HubTransfarmer } from './Components/Transformer/Masters/Hub-Transfarmer';
+import { HubListComponent } from './views/Masters/Hub/hub-list.component';
+import { HubComponent } from './views/Masters/Hub/hub.component';
 
 
 @NgModule({
@@ -294,12 +304,14 @@ import { ProjectListResolverService } from './Components/Resolver/Masters/Projec
     FormQueAnsMappingComponent,
     RoleComponent, RoleListComponent,
     ProjectComponent, ProjectListComponent,
+    TransmissionLineComponent, TransmissionLineListComponent, HubListComponent, HubComponent,
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
-    QaTypeService, BrandService, StateService, MFGService,
+    QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
+    HubService,
     CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
@@ -308,7 +320,8 @@ import { ProjectListResolverService } from './Components/Resolver/Masters/Projec
     FormQueAnsMappingTransfarmer, DatePipe, GlobalService,
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
-    StateTransfarmer, CountryTransfarmer, DistrictTransfarmer,
+    StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
+    HubTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService,
@@ -319,8 +332,9 @@ import { ProjectListResolverService } from './Components/Resolver/Masters/Projec
     QuestionListResolverService, TehsilListResolverService, TehsilMasterResolverService,
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
-    DeviceListResolverService,
-    ClusterListResolverService, DialogTemplateComponent,
+    DeviceListResolverService, ClusterListResolverService, TransmissionLineListResolverService,
+    HubListResolverService,
+    DialogTemplateComponent,
     DialogService,
     RoleService, RoleTransfarmer, RoleListResolverService,
     ProjectService, ProjectTransfarmer, ProjectListResolverService,
