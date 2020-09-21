@@ -87,27 +87,7 @@ export const navItems: NavData[] = [
       //   name: 'QuestionType',
       //   url: '/QuestionTypeList',
       //   icon: 'icon-puzzle'
-      // },
-      {
-        name: 'Zone',
-        url: '/ZoneList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Circle',
-        url: '/CircleList',
-        icon: 'icon-puzzle'
-      },
-       {
-         name: 'Cluster',
-         url: '/ClusterList',
-         icon: 'icon-puzzle'
-       },
-       {
-         name: 'Region',
-         url: '/RegionList',
-         icon: 'icon-puzzle'
-       },
+      // },X
        {
          name: 'Asset Category',
          url: '/AssetCategoryList',
@@ -126,11 +106,6 @@ export const navItems: NavData[] = [
       {
         name: 'Device',
         url: '/DeviceList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Colour',
-        url: '/ColourList',
         icon: 'icon-puzzle'
       },
       {
@@ -244,6 +219,39 @@ export const navItems: NavData[] = [
       //   icon: 'icon-puzzle'
       // },
     ]
+  },
+  {
+    name: 'Teritoring Master',
+    url: '/Reports',
+    //   icon: 'fa fa-newspaper-o',
+    children: [
+      {
+        name: 'Zone',
+        url: '/ZoneList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Cluster',
+        url: '/ClusterList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Region',
+        url: '/RegionList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Colour',
+        url: '/ColourList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Circle',
+        url: '/CircleList',
+        icon: 'icon-puzzle'
+      },
+    ]
+
   },
   {
     name: 'Monitoring Reports',
