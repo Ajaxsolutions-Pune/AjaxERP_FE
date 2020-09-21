@@ -20,6 +20,11 @@ export class ProcessService1 {
         , this.env.httpOptions);
     }
 
+    fillDrpProcess(): Observable<ProcessEntity[]> {
+        console.log(this.str + '/Process/getList');
+        return this.httpClient.get<ProcessEntity[]>(this.str + '/Process/getList?status=1', this.env.httpOptions);
+    }
+
     getprocess(processCode: string): Observable<ProcessEntity> {
         return this.httpClient.get<ProcessEntity>(this.str + '/Process/' + processCode
         , this.env.httpOptions).pipe(catchError(this.handleError));

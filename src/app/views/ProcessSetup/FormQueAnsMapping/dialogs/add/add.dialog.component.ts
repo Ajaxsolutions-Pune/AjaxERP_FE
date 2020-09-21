@@ -48,9 +48,11 @@ export class AddDialogComponent implements OnInit {
     this.questionsService.fillDrpQuestions().subscribe(
       (par) => this.questionsObj = this.questionsTransfarmer.QuestionTransfarmers(par),
       (err: any) => console.log(err));
+
     this.answersService.fillDrpAnswers().subscribe(
       (par) => this.answersObj = this.answersTransfarmer.AnswerTransfarmers(par),
       (err: any) => console.log(err));
+      
     this.formService.fillDrpForms().subscribe(
       (par) => this.formObj = this.formTransfarmer.fTransfarmers(par),
       (err: any) => console.log(err));

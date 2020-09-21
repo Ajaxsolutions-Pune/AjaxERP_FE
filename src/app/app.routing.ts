@@ -106,6 +106,10 @@ import { HubListResolverService } from './Components/Resolver/Masters/Hub-List-R
 import { HubListComponent } from './views/Masters/Hub/hub-list.component';
 import { HubComponent } from './views/Masters/Hub/hub.component';
 
+import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
+import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
+
+
 export const routes: Routes = [
   {
     path: '',
@@ -902,6 +906,7 @@ export const routes: Routes = [
           title: 'Edit Device'
         }
       },
+      
       {
         path: 'FormQueAnsMapping',
         component: FormQueAnsMappingComponent,
@@ -910,6 +915,22 @@ export const routes: Routes = [
         },
       },
 
+      {
+        path: 'ProcessFormMapping',
+        component: ProcessFormMappingComponent,
+        data: {
+          title: 'Process Form Mapping'
+        },
+      },
+
+      {
+        path: 'UserDeviceMapping',
+        component: UserDeviceMappingComponent,
+        data: {
+          title: 'User Device Mapping'
+        },
+      },
+      
       {
         path: 'RoleList',
         component: RoleListComponent,
