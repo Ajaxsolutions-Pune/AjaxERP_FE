@@ -1,4 +1,4 @@
-export class ContactEntity {
+export class Contact {
     contactCode: string;
     contactType: string;
     salutationCode: string;
@@ -47,7 +47,8 @@ export class ContactEntity {
     pan: string;
     tin: string;
 }
-export class Contact {
+
+export class ContactEntity {
     contactCode: string;
     contactType: string;
     salutationCode: string;

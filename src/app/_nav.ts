@@ -104,6 +104,16 @@ export const navItems: NavData[] = [
       //   icon: 'icon-puzzle'
       // },
       {
+        name: 'Process Form',
+        url: '/ProcessFormMapping',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'User Device Map',
+        url: '/UserDeviceMapping',
+        icon: 'icon-puzzle'
+      },
+      {
         name: 'Device',
         url: '/DeviceList',
         icon: 'icon-puzzle'
@@ -211,16 +221,6 @@ export const navItems: NavData[] = [
       {
         name: 'Form Que Ans',
         url: '/FormQueAnsMapping',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Process Form',
-        url: '/ProcessFormMapping',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'User Device Map',
-        url: '/UserDeviceMapping',
         icon: 'icon-puzzle'
       },
       // {
