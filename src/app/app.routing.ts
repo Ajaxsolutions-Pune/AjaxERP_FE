@@ -105,6 +105,8 @@ import { TransmissionLineComponent } from './views/Masters/TransmissionLine/tran
 import { HubListResolverService } from './Components/Resolver/Masters/Hub-List-Resolver.Service';
 import { HubListComponent } from './views/Masters/Hub/hub-list.component';
 import { HubComponent } from './views/Masters/Hub/hub.component';
+import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
+import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
 
 export const routes: Routes = [
   {
@@ -909,7 +911,21 @@ export const routes: Routes = [
           title: 'Form Question Answer Mapping'
         },
       },
+      {
+        path: 'ProcessFormMapping',
+        component: ProcessFormMappingComponent,
+        data: {
+          title: 'Process Form Mapping'
+        },
+      },
 
+      {
+        path: 'UserDeviceMapping',
+        component: UserDeviceMappingComponent,
+        data: {
+          title: 'User Device Mapping'
+        },
+      },
       {
         path: 'RoleList',
         component: RoleListComponent,

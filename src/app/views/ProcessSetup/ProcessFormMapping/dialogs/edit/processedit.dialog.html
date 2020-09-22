@@ -1,0 +1,58 @@
+<div class="container">
+    <h3 mat-dialog-title>Edit Process Form Mapping</h3>
+  
+    <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" autocomplete="off">
+  
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput #input class="form-control" placeholder="ProcessFormMapping"
+          disabled
+           [(ngModel)]="data.pfmId" name="pfmId" required >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>   
+
+      <div class="form">
+        <mat-form-field color="accent">        
+          <mat-label>Form</mat-label>
+          <mat-select  (selectionChange)="FormsChange($event)"
+          required name="Forms" #input
+          [(ngModel)]="data.formId">
+          <mat-option>Form</mat-option>
+          <mat-option *ngFor="let form of formObj"
+           [value]="form.formId">
+            {{form.formName}}
+          </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>     
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput #input class="form-control" maxlength="5"
+          type="number"
+          oninput="javascript: if (this.value.length > this.maxLength) 
+          this.value = this.value.slice(0, this.maxLength);"
+          #input
+          placeholder="Sort By"
+           [(ngModel)]="data.sortBy" name="sortBy" required >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>  
+
+      <div class="form">       
+        <mat-checkbox name="chkActive" [(ngModel)]="data.isActive">Active</mat-checkbox>
+      </div>
+
+      <div mat-dialog-actions>
+        <button mat-raised-button [type]="submit" 
+        [disabled]="!formControl.valid" [mat-dialog-close]="1"
+        (click)="stopEdit()"
+            color="primary">Save</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+              Cancel</button>
+      </div>
+    </form>
+  </div>
+  

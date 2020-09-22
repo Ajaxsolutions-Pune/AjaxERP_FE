@@ -1,0 +1,147 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <mat-form-field class="col-md-4">
+      <mat-label>Process</mat-label>
+      <mat-select required  [(ngModel)]="ProcessId"
+       (selectionChange)="FormChange($event)">
+          <mat-option *ngFor="let process of processObj" [value]="process.processId">
+            {{process.processId}} - {{process.processName}}
+          </mat-option>
+      </mat-select>
+      <mat-error>
+          {{formErrors['ControlFormCode']}}
+      </mat-error>
+  </mat-form-field>
+</div>
+
+
+<div class="container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource"
+  [matSortDisableClear]="false"
+  matSort class="mat-cell">
+    ng update @angular/cli @angular/core
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <ng-container matColumnDef="ProcFormMapping">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>MapId</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.pfmId}}</mat-cell>
+    </ng-container>   
+
+    <ng-container matColumnDef="FormText">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Form</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.formId}} - {{row.formName}}</mat-cell>
+    </ng-container>
+   
+    <ng-container matColumnDef="SortBy">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Sort By</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.sortBy}}</mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="ActiveText">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.isActiveText}}</mat-cell>
+    </ng-container>
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="addNew()">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent" (click)="startEdit(i,
+        row.pfmId,
+        row.formId,      
+        row.sortBy,
+        row.isActive)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+    No results
+  </div>
+  <mat-paginator #paginator
+                [length]="dataSource.filteredData.length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>
+
+<div class="row" style="padding-top: 20px;">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+      <button mat-raised-button
+      (click)="save()"
+          color="primary">Submit</button>
+      <button mat-raised-button color="warn" routerLink="/dashboard">
+          Cancel</button>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<!-- <div> {{dataSource.filteredData | json}}</div>-->
+
+     
+
+
+
+
+
+
+
+
+
+   <!-- <div class="clearfix"></div>
+
+     <div class="card col-md-12">      
+      <div class="card-body">
+        <div id="table" class="table-editable">
+          <span class="table-add float-right mb-3 mr-2">
+            <a class="text-success">
+              <button type="button" class="btn btn-success" rounded="true">Add</button>
+            </a>
+          </span>
+          <table class="table table-bordered table-responsive-md table-striped text-center">
+            <tr>
+              <th class="text-center">Form Name</th>
+              <th class="text-center">Sort By </th>
+              <th class="text-center">Is Active</th>          
+              <th class="text-center">Remove</th>  
+            </tr>
+            <tr>
+              <td>               
+                <div class="form-group">
+                  <select formControlName="form" class="form-control">
+                    <option value="">Select Form...</option>
+                    <option *ngFor="let form of forms" [value]="form.formId">{{form.formId}} - {{form.formName}}</option>
+                  </select>
+                </div>  
+              </td>
+              <td>
+                <span   contenteditable="true"></span>
+              </td>
+              <td>
+                <span   contenteditable="true"></span>
+              </td>                           
+              <td>
+                <span class="table-remove">
+                  <button type="button" class="btn btn-danger" rounded="true">Remove</button>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>-->

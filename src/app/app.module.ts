@@ -230,6 +230,22 @@ import { HubService } from './Components/Services/Masters/HubService';
 import { HubTransfarmer } from './Components/Transformer/Masters/Hub-Transfarmer';
 import { HubListComponent } from './views/Masters/Hub/hub-list.component';
 import { HubComponent } from './views/Masters/Hub/hub.component';
+import { ProcessFormMappingService } from './Components/Services/ProcessSetup/ProcessFormMappingService';
+import { UserDeviceMappingService } from './Components/Services/ProcessSetup/UserDeviceMappingService';
+import { UserTransfarmer } from './Components/Transformer/Masters/User-Transfarmer';
+import { ProcessFormMappingTransfarmer } from './Components/Transformer/ProcessSetup/ProcessFormMapping-Transfarmer';
+import { UserDeviceMappingTransfarmer } from './Components/Transformer/ProcessSetup/UserDeviceMapping-Transfarmer';
+import { ProcessAddDialogComponent } from './views/ProcessSetup/ProcessFormMapping/dialogs/add/processadd.dialog.component';
+import { ProcessDeleteDialogComponent } from './views/ProcessSetup/ProcessFormMapping/dialogs/delete/processdelete.dialog.component';
+import { ProcessEditDialogComponent } from './views/ProcessSetup/ProcessFormMapping/dialogs/edit/processedit.dialog.component';
+import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
+import { UserDeviceAddDialogComponent } from './views/ProcessSetup/UserDeviceMapping/dialogs/add/userdeviceadd.dialog.component';
+import { UserDeviceEditDialogComponent } from './views/ProcessSetup/UserDeviceMapping/dialogs/edit/userdeviceedit.dialog.component';
+import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
+import { ContactListResolverService } from './Components/Resolver/Masters/Contact-List-Resolver.Service';
+import { ContactService } from './Components/Services/Masters/ContactService';
+import { ProcessDataService } from './views/ProcessSetup/ProcessFormMapping/processdata.service';
+import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/userdevicedata.service';
 
 
 @NgModule({
@@ -305,13 +321,20 @@ import { HubComponent } from './views/Masters/Hub/hub.component';
     RoleComponent, RoleListComponent,
     ProjectComponent, ProjectListComponent,
     TransmissionLineComponent, TransmissionLineListComponent, HubListComponent, HubComponent,
+    ProcessFormMappingComponent, UserDeviceMappingComponent,
+    ProcessAddDialogComponent,
+    ProcessDeleteDialogComponent,
+    ProcessEditDialogComponent,
+
+    UserDeviceAddDialogComponent,
+    UserDeviceEditDialogComponent,
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
-    HubService,
+    HubService, ContactService,
     CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
@@ -321,7 +344,7 @@ import { HubComponent } from './views/Masters/Hub/hub.component';
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
-    HubTransfarmer,
+    HubTransfarmer, StateTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService,
@@ -333,11 +356,15 @@ import { HubComponent } from './views/Masters/Hub/hub.component';
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
     DeviceListResolverService, ClusterListResolverService, TransmissionLineListResolverService,
-    HubListResolverService,
+    HubListResolverService, ContactListResolverService,
     DialogTemplateComponent,
     DialogService,
     RoleService, RoleTransfarmer, RoleListResolverService,
     ProjectService, ProjectTransfarmer, ProjectListResolverService,
+
+    ProcessFormMappingService, ProcessFormMappingTransfarmer, ProcessDataService, UserDeviceDataService,
+    ProcessDataService,
+    UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
