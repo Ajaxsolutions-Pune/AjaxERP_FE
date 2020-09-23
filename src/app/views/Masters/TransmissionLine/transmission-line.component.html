@@ -1,0 +1,123 @@
+<form #ObjForm="ngForm" [formGroup]="form" autocomplete="off">
+    
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Transmission Line</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Transmission Line Code"
+                                [(ngModel)]="bindObj.tlCode"
+                                formControlName="ControltlCode"
+                                #txtControltlCode
+                                name="txtControltlCode">
+                                <mat-error>
+                                    {{ formErrors['ControltlCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Transmission Line Name"
+                                [(ngModel)]="bindObj.tlNameENG" required
+                                formControlName="ControltlNameENG"
+                                #txtTransmissionLineNameENG
+                                name="txtTransmissionLineNameENG">
+                                <mat-error>
+                                    {{ formErrors['ControltlNameENG'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Project</mat-label>
+                                <mat-select required 
+                                formControlName="ControlProject"
+                                 [(ngModel)]="bindObj.projectCode">
+                                 <mat-option>Project</mat-option>
+                                 <mat-option value="1">Project 1</mat-option>
+                                 <mat-option value="2">Project 2</mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlProject'] }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Transmission Line Type</mat-label>
+                                <mat-select required 
+                                formControlName="ControltlTypeCode"
+                                 [(ngModel)]="bindObj.tlTypeCode">
+                                    <mat-option>Transmission Line Type</mat-option>
+                                    <mat-option *ngFor="let obj of TransmissionLineTypeDrp"
+                                     [value]="obj.listCode">
+                                      {{obj.listDescENG}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControltlTypeCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Transmission Line Group</mat-label>
+                                <mat-select required 
+                                formControlName="ControltlGroupCode"
+                                 [(ngModel)]="bindObj.tlGroupCode">
+                                    <mat-option>Transmission Line Group</mat-option>
+                                    <mat-option *ngFor="let obj of TransmissionLineGroupDrp"
+                                     [value]="obj.listCode">
+                                      {{obj.listDescENG}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControltlGroupCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-sm-4" style="padding-top: 20px;">
+                                <mat-checkbox name="chkisActive" #chkisActive formControlName="ControlisActive"
+                                    [(ngModel)]="bindObj.isActive">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button mat-raised-button [disabled]="!form.valid" 
+                                (click)="save(ObjForm)"
+                                    color="primary">Submit</button> &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button mat-raised-button color="warn" routerLink="/TransmissionLineList">
+                                    Cancel</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div style="display: none;"> {{bindObj | json}}</div>

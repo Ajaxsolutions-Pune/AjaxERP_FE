@@ -46,13 +46,8 @@ import { DashboardService } from './Components/Services/Dashboard.service';
 import { LogIn } from './Components/Module/login.model';
 import { LogInService } from './Components/Services/LogIn.service';
 import { LogInComponent } from './Components/login/login.component';
-//import { User} from './Components/Module/User.model';
-//import { UserService } from './Components/Services/User.Service';
-
-import {User } from './Components/Module/Masters/User.model';
-import {UserService} from './Components/Services/Masters/UserService'
-import {UserTransfarmer} from './Components/Transformer/Masters/User-Transfarmer'
-
+import { User } from './Components/Module/User.model';
+import { UserService } from './Components/Services/User.Service';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { RouterModule } from '@angular/router';
 import { ListUserComponent } from './views/Masters/User/List-user.component';
@@ -201,7 +196,6 @@ import { AssetCategoryService } from './Components/Services/Masters/AssetCategor
 import { AssetCategoryListResolverService } from './Components/Resolver/Masters/Asset-Category-List-Resolver.Service';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TreeGridModule, EditService, ToolbarService } from '@syncfusion/ej2-angular-treegrid';
-
 import { AddDialogComponent } from './views/ProcessSetup/FormQueAnsMapping/dialogs/add/add.dialog.component';
 import { EditDialogComponent } from './views/ProcessSetup/FormQueAnsMapping/dialogs/edit/edit.dialog.component';
 import { DeleteDialogComponent } from './views/ProcessSetup/FormQueAnsMapping/dialogs/delete/delete.dialog.component';
@@ -215,40 +209,43 @@ import { MyErrorStateMatcher } from './views/Masters/AngularDemo/MyErrorStateMat
 import { NgxPaginationModule } from 'ngx-pagination';
 import { GlobalService } from './Components/Services/GlobalServices/Global.service';
 
-import { RoleListComponent} from './views/Masters/Role/role-list.component';
+import { RoleListComponent } from './views/Masters/Role/role-list.component';
 import { RoleComponent } from './views/Masters/Role/role.component';
 import { RoleTransfarmer } from './Components/Transformer/Masters/Role-Transfarmer';
 import { RoleService } from './Components/Services/Masters/RoleService';
 import { RoleListResolverService } from './Components/Resolver/Masters/Role-List-Resolver-Services';
 
-import { ProjectListComponent} from './views/Masters/Project/project-list.component';
+import { ProjectListComponent } from './views/Masters/Project/project-list.component';
 import { ProjectComponent } from './views/Masters/Project/project.component';
 import { ProjectTransfarmer } from './Components/Transformer/Masters/Project-Transfarmer';
 import { ProjectService } from './Components/Services/Masters/ProjectService';
 import { ProjectListResolverService } from './Components/Resolver/Masters/Project-List-Resolver.Service';
-
-import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
+import { TransmissionLineListComponent } from './views/Masters/TransmissionLine/transmission-line-list.component';
+import { TransmissionLineListResolverService } from './Components/Resolver/Masters/TransmissionLine-List-Resolver.Service';
+import { TransmissionLineService } from './Components/Services/Masters/TransmissionLineService';
+import { TransmissionLineTransfarmer } from './Components/Transformer/Masters/TransmissionLine-Transfarmer';
+import { TransmissionLineComponent } from './views/Masters/TransmissionLine/transmission-line.component';
+import { HubListResolverService } from './Components/Resolver/Masters/Hub-List-Resolver.Service';
+import { HubService } from './Components/Services/Masters/HubService';
+import { HubTransfarmer } from './Components/Transformer/Masters/Hub-Transfarmer';
+import { HubListComponent } from './views/Masters/Hub/hub-list.component';
+import { HubComponent } from './views/Masters/Hub/hub.component';
 import { ProcessFormMappingService } from './Components/Services/ProcessSetup/ProcessFormMappingService';
+import { UserDeviceMappingService } from './Components/Services/ProcessSetup/UserDeviceMappingService';
+import { UserTransfarmer } from './Components/Transformer/Masters/User-Transfarmer';
 import { ProcessFormMappingTransfarmer } from './Components/Transformer/ProcessSetup/ProcessFormMapping-Transfarmer';
-import { ProcessDataService } from './views/ProcessSetup/ProcessFormMapping/processdata.service';
+import { UserDeviceMappingTransfarmer } from './Components/Transformer/ProcessSetup/UserDeviceMapping-Transfarmer';
 import { ProcessAddDialogComponent } from './views/ProcessSetup/ProcessFormMapping/dialogs/add/processadd.dialog.component';
 import { ProcessDeleteDialogComponent } from './views/ProcessSetup/ProcessFormMapping/dialogs/delete/processdelete.dialog.component';
 import { ProcessEditDialogComponent } from './views/ProcessSetup/ProcessFormMapping/dialogs/edit/processedit.dialog.component';
-
-import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
-import { UserDeviceMappingService } from './Components/Services/ProcessSetup/UserDeviceMappingService';
-import { UserDeviceMappingTransfarmer } from './Components/Transformer/ProcessSetup/UserDeviceMapping-Transfarmer';
-import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/userdevicedata.service';
+import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
 import { UserDeviceAddDialogComponent } from './views/ProcessSetup/UserDeviceMapping/dialogs/add/userdeviceadd.dialog.component';
 import { UserDeviceEditDialogComponent } from './views/ProcessSetup/UserDeviceMapping/dialogs/edit/userdeviceedit.dialog.component';
-
-import { DeviceAssetAddDialogComponent } from './views/ProcessSetup/DeviceAssetMapping/dialogs/add/deviceassetadd.dialog.component';
-import { DeviceAssetEditDialogComponent } from './views/ProcessSetup/DeviceAssetMapping/dialogs/edit/deviceassetedit.dialog.component';
-import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMapping/device-asset-mapping.component';
-import { DeviceAssetMappingService } from './Components/Services/ProcessSetup/DeviceAssetMappingService';
-import { DeviceAssetMappingTransfarmer } from './Components/Transformer/ProcessSetup/DeviceAssetMapping-Transfarmer';
-import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/deviceassetdata.service';
-
+import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
+import { ContactListResolverService } from './Components/Resolver/Masters/Contact-List-Resolver.Service';
+import { ContactService } from './Components/Services/Masters/ContactService';
+import { ProcessDataService } from './views/ProcessSetup/ProcessFormMapping/processdata.service';
+import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/userdevicedata.service';
 
 
 @NgModule({
@@ -286,41 +283,19 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
     MatTableModule,
     MatToolbarModule,
     MatPaginatorModule,
+
     NgxPaginationModule
   ],
   entryComponents: [
     AddDialogComponent,
     EditDialogComponent,
     DeleteDialogComponent,
-
-    ProcessAddDialogComponent,
-    ProcessDeleteDialogComponent,
-    ProcessEditDialogComponent,
-
-    UserDeviceAddDialogComponent,
-    UserDeviceEditDialogComponent,
-
-    DeviceAssetAddDialogComponent,
-    DeviceAssetEditDialogComponent,
-
     DialogTemplateComponent
-    
   ],
   declarations: [
     AddDialogComponent,
     EditDialogComponent,
     DeleteDialogComponent,
-
-    ProcessAddDialogComponent,
-    ProcessDeleteDialogComponent,
-    ProcessEditDialogComponent,
-    
-    UserDeviceAddDialogComponent,
-    UserDeviceEditDialogComponent,
-
-    DeviceAssetAddDialogComponent,
-    DeviceAssetEditDialogComponent,
-    
     AppComponent, ...APP_CONTAINERS, P404Component, P500Component, LogInComponent,
     DialogTemplateComponent,
     ListUserComponent, UserMasterComponent, DashboardComponent, ListUOMComponent,
@@ -343,34 +318,36 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
     AssetComponent, AssetListComponent, DeviceListComponent,
     DeviceComponent, AngularDemoComponent, FormQueAnsMappingListComponent,
     FormQueAnsMappingComponent,
-    RoleComponent,RoleListComponent,
-    ProjectComponent, ProjectListComponent, 
+    RoleComponent, RoleListComponent,
+    ProjectComponent, ProjectListComponent,
+    TransmissionLineComponent, TransmissionLineListComponent, HubListComponent, HubComponent,
     ProcessFormMappingComponent, UserDeviceMappingComponent,
-    DeviceAssetMappingComponent,
+    ProcessAddDialogComponent,
+    ProcessDeleteDialogComponent,
+    ProcessEditDialogComponent,
+
+    UserDeviceAddDialogComponent,
+    UserDeviceEditDialogComponent,
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
-    QaTypeService, BrandService, StateService, MFGService,
-    CityGroupService, ItemSubGroupService, RegionService, 
+    QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
+    HubService, ContactService,
+    CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
     AssetTransfarmer, AssetGroupTransfarmer, TehsilTransfarmer, QuestionTransfarmer,
     AnswerTransfarmer, ProcessTransfarmer1, ZoneTransfarmer, CircleTransfarmer,
-    FormQueAnsMappingService, FormQueAnsMappingTransfarmer, 
-    ProcessFormMappingService, ProcessFormMappingTransfarmer, 
-    UserDeviceMappingService,
-    UserDeviceMappingTransfarmer,UserTransfarmer,DeviceAssetMappingService,
-    DeviceAssetDataService,
-    DeviceAssetMappingTransfarmer,
-    DatePipe, GlobalService,
+    FormQueAnsMappingTransfarmer, DatePipe, GlobalService,
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
-    StateTransfarmer, CountryTransfarmer, DistrictTransfarmer,
+    StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
+    HubTransfarmer, StateTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
-    AssetCategoryService, DataService,ProcessDataService, UserDeviceDataService,
+    AssetCategoryService, DataService,
     FormListResolverService, RegionListResolverService, ColourListResolverService,
     AssetListResolverService, ProcessListResolverService, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
@@ -378,12 +355,16 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
     QuestionListResolverService, TehsilListResolverService, TehsilMasterResolverService,
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
-    DeviceListResolverService,
-    ClusterListResolverService, DialogTemplateComponent,
+    DeviceListResolverService, ClusterListResolverService, TransmissionLineListResolverService,
+    HubListResolverService, ContactListResolverService,
+    DialogTemplateComponent,
     DialogService,
-    
-    RoleService,RoleTransfarmer,RoleListResolverService,
+    RoleService, RoleTransfarmer, RoleListResolverService,
     ProjectService, ProjectTransfarmer, ProjectListResolverService,
+
+    ProcessFormMappingService, ProcessFormMappingTransfarmer, ProcessDataService, UserDeviceDataService,
+    ProcessDataService,
+    UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy

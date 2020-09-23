@@ -1,0 +1,125 @@
+<form #ObjForm="ngForm" [formGroup]="form" autocomplete="off">
+    
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Hub</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Hub Code"
+                                [(ngModel)]="bindObj.hubCode"
+                                formControlName="ControlhubCode"
+                                #txtControlhubCode
+                                name="txtControlhubCode">
+                                <mat-error>
+                                    {{ formErrors['ControlhubCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Hub Name"
+                                [(ngModel)]="bindObj.hubNameENG" required
+                                formControlName="ControlhubNameENG"
+                                #txtHubNameENG
+                                name="txtHubNameENG">
+                                <mat-error>
+                                    {{ formErrors['ControlhubNameENG'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Transmission Line</mat-label>
+                                <mat-select required 
+                                formControlName="ControltlCode"
+                                 [(ngModel)]="bindObj.tlCode">
+                                 <mat-option>Transmission Line</mat-option>
+                                 <mat-option *ngFor="let obj of transmissionLinedrp"
+                                  [value]="obj.tlCode">
+                                   {{obj.tlNameENG}}
+                                 </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControltlCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Hub Type</mat-label>
+                                <mat-select required 
+                                formControlName="ControlhubTypeCode"
+                                 [(ngModel)]="bindObj.hubTypeCode">
+                                    <mat-option>Hub Type</mat-option>
+                                    <mat-option *ngFor="let obj of hubTypeDrp"
+                                     [value]="obj.listCode">
+                                      {{obj.listDescENG}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlhubTypeCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Hub Group</mat-label>
+                                <mat-select required 
+                                formControlName="ControlhubGroupCode"
+                                 [(ngModel)]="bindObj.hubGroupCode">
+                                    <mat-option>Hub Group</mat-option>
+                                    <mat-option *ngFor="let obj of hubGroupDrp"
+                                     [value]="obj.listCode">
+                                      {{obj.listDescENG}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlhubGroupCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-sm-4" style="padding-top: 20px;">
+                                <mat-checkbox name="chkisActive" #chkisActive formControlName="ControlisActive"
+                                    [(ngModel)]="bindObj.isActive">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button mat-raised-button [disabled]="!form.valid" 
+                                (click)="save(ObjForm)"
+                                    color="primary">Submit</button> &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button mat-raised-button color="warn" routerLink="/HubList">
+                                    Cancel</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+</form>
+<div style="display: none;"> {{bindObj | json}}</div>

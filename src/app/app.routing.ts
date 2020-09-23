@@ -99,11 +99,14 @@ import { RoleListResolverService } from './Components/Resolver/Masters/Role-List
 import { ProjectComponent } from './views/Masters/Project/project.component';
 import { ProjectListComponent } from './views/Masters/Project/project-list.component';
 import { ProjectListResolverService } from './Components/Resolver/Masters/Project-List-Resolver.Service';
-
+import { TransmissionLineListComponent } from './views/Masters/TransmissionLine/transmission-line-list.component';
+import { TransmissionLineListResolverService } from './Components/Resolver/Masters/TransmissionLine-List-Resolver.Service';
+import { TransmissionLineComponent } from './views/Masters/TransmissionLine/transmission-line.component';
+import { HubListResolverService } from './Components/Resolver/Masters/Hub-List-Resolver.Service';
+import { HubListComponent } from './views/Masters/Hub/hub-list.component';
+import { HubComponent } from './views/Masters/Hub/hub.component';
 import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
 import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
-import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMapping/device-asset-mapping.component';
-
 
 export const routes: Routes = [
   {
@@ -816,17 +819,58 @@ export const routes: Routes = [
         path: 'Asset',
         component: AssetComponent,
         data: {
-          title: 'Add Asset'
+          title: 'Add Aset'
         },
         resolve: {
           AssetList: AssetListResolverService
         }
       },
       {
-        path: 'Asset/:id',
-        component: AssetComponent,
+        path: 'TransmissionLineList',
+        component: TransmissionLineListComponent,
         data: {
-          title: 'Edit Asset'
+          title: 'Transmission Line List'
+        },
+        resolve: {
+          TransmissionLineList: TransmissionLineListResolverService
+        }
+      },
+      {
+        path: 'TransmissionLine',
+        component: TransmissionLineComponent,
+        data: {
+          title: 'Add Transmission Line'
+        }
+      },
+      {
+        path: 'TransmissionLine/:id',
+        component: TransmissionLineComponent,
+        data: {
+          title: 'Edit Transmission Line'
+        }
+      },
+      {
+        path: 'HubList',
+        component: HubListComponent,
+        data: {
+          title: 'Hub List'
+        },
+        resolve: {
+          HubList: HubListResolverService
+        }
+      },
+      {
+        path: 'Hub',
+        component: HubComponent,
+        data: {
+          title: 'Add Hub'
+        }
+      },
+      {
+        path: 'Hub/:id',
+        component: HubComponent,
+        data: {
+          title: 'Edit Hub'
         }
       },
       {
@@ -860,7 +904,6 @@ export const routes: Routes = [
           title: 'Edit Device'
         }
       },
-      
       {
         path: 'FormQueAnsMapping',
         component: FormQueAnsMappingComponent,
@@ -868,7 +911,6 @@ export const routes: Routes = [
           title: 'Form Question Answer Mapping'
         },
       },
-
       {
         path: 'ProcessFormMapping',
         component: ProcessFormMappingComponent,
@@ -884,15 +926,6 @@ export const routes: Routes = [
           title: 'User Device Mapping'
         },
       },
-
-      {
-        path: 'DeviceAssetMapping',
-        component: DeviceAssetMappingComponent,
-        data: {
-          title: 'Device Asset Mapping'
-        },
-      },
-      
       {
         path: 'RoleList',
         component: RoleListComponent,

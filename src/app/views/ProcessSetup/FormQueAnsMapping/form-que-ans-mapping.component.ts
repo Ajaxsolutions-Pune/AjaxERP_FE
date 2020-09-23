@@ -99,7 +99,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
-        this.insertData.dataChange.value.push(this.dataService.getDialogData());  
+        this.insertData.dataChange.value.push(this.dataService.getDialogData());
         this.refreshTable();
       }
     });
@@ -134,20 +134,20 @@ export class FormQueAnsMappingComponent extends FormComponentBase
       console.log(e.updateFlag);
     });
 
-    // Added by Rahul 
+    // Added by Rahul
     this.insertData.dataChange.value.forEach(element => {
-      console.log('Id ->'+element.fqamId +' Is_active -->'+element.isActive);  
-      console.log('ansId ->'+element.answerId +' AnsText -->'+element.answerIdText);
-      console.log('CreatedDate ->'+element.createdBy +' CreatedDate -->'+element.createdDate);
-      console.log('FormId ->'+element.formId +' FormQueSeqNo -->'+element.formQueSeqNo);
-      console.log('isQueMandatory ->'+element.isQuestionMandatory +' NextFormId -->'+element.nextFormId);
-      console.log('ModifyBy ->'+element.modifiedBy +' ModifyDate -->'+element.modifiedDate);
-      console.log('NextQueGrp ->'+element.nextQueGroup +' Que Grp -->'+element.queGroup);
-      console.log('Que Id ->'+element.questionId +' Question ID -->'+element.questionIdText);
-      console.log('Update flag ->'+element.updateFlag );     
+      console.log('Id ->' + element.fqamId + ' Is_active -->' + element.isActive);
+      console.log('ansId ->' + element.answerId + ' AnsText -->' + element.answerIdText);
+      console.log('CreatedDate ->' + element.createdBy + ' CreatedDate -->' + element.createdDate);
+      console.log('FormId ->' + element.formId + ' FormQueSeqNo -->' + element.formQueSeqNo);
+      console.log('isQueMandatory ->' + element.isQuestionMandatory + ' NextFormId -->' + element.nextFormId);
+      console.log('ModifyBy ->' + element.modifiedBy + ' ModifyDate -->' + element.modifiedDate);
+      console.log('NextQueGrp ->' + element.nextQueGroup + ' Que Grp -->' + element.queGroup);
+      console.log('Que Id ->' + element.questionId + ' Question ID -->' + element.questionIdText);
+      console.log('Update flag ->' + element.updateFlag);
     });
-    
-    console.log('DataChange -->'+this.insertData.dataChange.value);
+
+    console.log('DataChange -->' + this.insertData.dataChange.value);
     this.formQueAnsMappingService.Save(this.formQueAnsMappingTransfarmer
       .ObjectToEntityFormQueAnsMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
         (par) => {
@@ -170,8 +170,8 @@ export class FormQueAnsMappingComponent extends FormComponentBase
       text: target.innerText.trim()
     };
     this.objFormQueAnsMapping = [];
-     
-    // Added by Rahul 
+
+    // Added by Rahul
     this.insertData.dataChange.value.splice(0);
 
     this.exampleDatabase.dataChange.value.splice(0, 100);
@@ -223,15 +223,15 @@ export class FormQueAnsMappingComponent extends FormComponentBase
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.fqamId === this.id);
         // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
-        
+
         // Added by Rahul
         const findInsertIndex = this.insertData.dataChange.value.findIndex(x => x.fqamId === this.id);
-        if(findInsertIndex > -1){
-          this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData(); 
-        }else{
+        if (findInsertIndex > -1) {
+          this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData();
+        } else {
           this.insertData.dataChange.value.push(this.exampleDatabase.dataChange.value[foundIndex]);
         }
-        
+
         // And lastly refresh table
         this.refreshTable();
       }

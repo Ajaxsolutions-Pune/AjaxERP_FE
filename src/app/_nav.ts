@@ -42,7 +42,7 @@ export const navItems: NavData[] = [
   {
     name: 'Monitoring Masters',
     url: '/Masters',
-  //  icon: 'nav-icon icon-layers',
+    //  icon: 'nav-icon icon-layers',
     children: [
       {
         name: 'Form',
@@ -87,52 +87,47 @@ export const navItems: NavData[] = [
       //   name: 'QuestionType',
       //   url: '/QuestionTypeList',
       //   icon: 'icon-puzzle'
-      // },
+      // },X
+      {
+        name: 'Asset Category',
+        url: '/AssetCategoryList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Asset Group',
+        url: '/AssetGroupList',
+        icon: 'icon-puzzle'
+      },
       // {
-      //   name: 'Zone',
-      //   url: '/ZoneList',
+      //   name: 'Asset',
+      //   url: '/AssetList',
       //   icon: 'icon-puzzle'
       // },
-      // {
-      //   name: 'Circle',
-      //   url: '/CircleList',
-      //   icon: 'icon-puzzle'
-      // },
-      // {
-      //   name: 'Cluster',
-      //   url: '/ClusterList',
-      //   icon: 'icon-puzzle'
-      // },
-      // {
-      //   name: 'Region',
-      //   url: '/RegionList',
-      //   icon: 'icon-puzzle'
-      // },
-      // {
-      //   name: 'Asset Category',
-      //   url: '/AssetCategoryList',
-      //   icon: 'icon-puzzle'
-      // },
-      // {
-      //   name: 'Asset Group',
-      //   url: '/AssetGroupList',
-      //   icon: 'icon-puzzle'
-      // },
-      /*{
-        name: 'Asset',
-        url: '/AssetList',
+      {
+        name: 'Process Form',
+        url: '/ProcessFormMapping',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'User Device Map',
+        url: '/UserDeviceMapping',
         icon: 'icon-puzzle'
       },
       {
         name: 'Device',
         url: '/DeviceList',
         icon: 'icon-puzzle'
-      },*/
-      // {
-      //   name: 'Colour',
-      //   url: '/ColourList',
-      //   icon: 'icon-puzzle'
-      // },
+      },
+      {
+        name: 'Transmission Line',
+        url: '/TransmissionLineList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Hub',
+        url: '/HubList',
+        icon: 'icon-puzzle'
+      },
       // {
       //   name: 'Country',
       //   url: '/CountryList',
@@ -229,7 +224,7 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
-        name: 'Process Form Map',
+        name: 'Process Form',
         url: '/ProcessFormMapping',
         icon: 'icon-puzzle'
       },
@@ -238,17 +233,50 @@ export const navItems: NavData[] = [
         url: '/UserDeviceMapping',
         icon: 'icon-puzzle'
       },
+      // {
+      // name: 'Process Form',
+      // url: '/FormQueAnsMapping',
+      //   icon: 'icon-puzzle'
+      // },
+    ]
+  },
+  {
+    name: 'Teritoring Master',
+    url: '/Reports',
+    //   icon: 'fa fa-newspaper-o',
+    children: [
       {
-        name: 'Device Asset Map',
-        url: '/DeviceAssetMapping',
+        name: 'Zone',
+        url: '/ZoneList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Cluster',
+        url: '/ClusterList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Region',
+        url: '/RegionList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Colour',
+        url: '/ColourList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Circle',
+        url: '/CircleList',
         icon: 'icon-puzzle'
       },
     ]
+
   },
   {
     name: 'Monitoring Reports',
     url: '/Reports',
-    //icon: 'fa fa-newspaper-o',
+    //   icon: 'fa fa-newspaper-o',
     children: [
     ]
 

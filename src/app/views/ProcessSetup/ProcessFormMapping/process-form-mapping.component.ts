@@ -14,7 +14,6 @@ import { FormComponentBase } from '../../Masters/AngularDemo/infrastructure/form
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../../Masters/AngularDemo/infrastructure/cross-field-error-matcher';
 import { Process } from '../../../Components/Module/Masters/Process.model';
-//import { ProcessService1 } from '../../../Components/Services/Masters/FormService';
 import { ProcessTransfarmer1 } from '../../../Components/Transformer/Masters/Process-Transfarmer1';
 import { ProcessFormMapping } from '../../../Components/Module/ProcessSetup/ProcessFormMapping.model';
 import { ProcessFormMappingTransfarmer } from '../../../Components/Transformer/ProcessSetup/ProcessFormMapping-Transfarmer';
@@ -27,14 +26,14 @@ import { ProcessService1 } from '../../../Components/Services/Masters/ProcessSer
 @Component({
   selector: 'app-process-form-mapping',
   templateUrl: './process-form-mapping.component.html',
-  styleUrls:  ['./process-form-mapping.component.scss']
+  styleUrls: ['./process-form-mapping.component.scss']
 })
 
 export class ProcessFormMappingComponent extends FormComponentBase
   implements OnInit {
 
   processObj: Process[];
-  displayedColumns = ['ProcFormMapping', 'FormText','SortBy',  'ActiveText', 'actions'];
+  displayedColumns = ['ProcFormMapping', 'FormText', 'SortBy', 'ActiveText', 'actions'];
   exampleDatabase: ProcessDataService | null;
   insertData: ProcessDataService | null;
   dataSource: ExampleDataSource | null;
@@ -75,7 +74,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
 
 
   ngOnInit() {
-    this.processService.fillDrpProcess().subscribe(
+    this.processService.filldrpProcessFormMappings().subscribe(
       (par) => {
         this.processObj = this.processTransfarmer.processTransfarmers(par);
       },
@@ -89,11 +88,11 @@ export class ProcessFormMappingComponent extends FormComponentBase
 
   addNew() {
     const dialogRef = this.dialog.open(ProcessAddDialogComponent, {
-    
+
       data: {
-       // isQuestionMandatory: ''.toString(),
-      
-        processId: this.ProcessId,        
+        // isQuestionMandatory: ''.toString(),
+
+        processId: this.ProcessId,
         isActive: ''.toString(),
         updateFlag: '1'
       }
@@ -101,7 +100,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
-        this.insertData.dataChange.value.push(this.dataService.getDialogData());  
+        this.insertData.dataChange.value.push(this.dataService.getDialogData());
         this.refreshTable();
       }
     });
@@ -134,18 +133,18 @@ export class ProcessFormMappingComponent extends FormComponentBase
       console.log(e.updateFlag);
     });
 
-    // Added by Rahul 
+    // Added by Rahul
     this.insertData.dataChange.value.forEach(element => {
-      console.log('Id ->'+element.pfmId +' Is_active -->'+element.isActive);  
-      console.log('CreatedDate ->'+element.createdBy +' CreatedDate -->'+element.createdDate);
-      console.log('FormId ->'+element.formId +' FormQueSeqNo -->'+element.formId);
-      console.log('SortBy ->'+element.formId +' SortBy -->'+element.sortBy);
-      console.log('ModifyBy ->'+element.modifiedBy +' ModifyDate -->'+element.modifiedDate);
-      console.log('Update flag ->'+element.updateFlag );     
+      console.log('Id ->' + element.pfmId + ' Is_active -->' + element.isActive);
+      console.log('CreatedDate ->' + element.createdBy + ' CreatedDate -->' + element.createdDate);
+      console.log('FormId ->' + element.formId + ' FormQueSeqNo -->' + element.formId);
+      console.log('SortBy ->' + element.formId + ' SortBy -->' + element.sortBy);
+      console.log('ModifyBy ->' + element.modifiedBy + ' ModifyDate -->' + element.modifiedDate);
+      console.log('Update flag ->' + element.updateFlag);
     });
-    
-    console.log('DataChange -->'+this.insertData.dataChange.value);
-    
+
+    console.log('DataChange -->' + this.insertData.dataChange.value);
+
     this.processformMappingService.Save(this.processFormMappingTransfarmer.
       ObjectToEntityProcessFormMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
         (par) => {
@@ -168,8 +167,8 @@ export class ProcessFormMappingComponent extends FormComponentBase
       text: target.innerText.trim()
     };
     this.objProcessFormMapping = [];
-     
-    // Added by Rahul 
+
+    // Added by Rahul
     this.insertData.dataChange.value.splice(0);
 
     this.exampleDatabase.dataChange.value.splice(0, 100);
@@ -177,7 +176,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
     this.processformMappingService.getProcessFormMapping(selectedData.value).subscribe(
       (par) => {
         this.objProcessFormMapping = this.processFormMappingTransfarmer.
-        ProcessFormMappingTransfarmers(par);
+          ProcessFormMappingTransfarmers(par);
         this.objProcessFormMapping.forEach(a => {
           a.processId = selectedData.value;
         });
@@ -194,7 +193,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
 
   startEdit(i: number,
     pfmId: number,
-    formId: string,   
+    formId: string,
     sortBy: string,
     isActive: string) {
     this.id = pfmId;
@@ -203,7 +202,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
     const dialogRef = this.dialog.open(ProcessEditDialogComponent, {
       data: {
         pfmId: pfmId,
-        formId: formId, 
+        formId: formId,
         sortBy: sortBy,
         isActive: isActive,
         updateFlag: '1'
@@ -216,13 +215,13 @@ export class ProcessFormMappingComponent extends FormComponentBase
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.pfmId === this.id);
         // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
-         // Added by Rahul
+        // Added by Rahul
         const findInsertIndex = this.insertData.dataChange.value.findIndex(x => x.pfmId === this.id);
-        if(findInsertIndex > -1){
-          this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData(); 
-        }else{
+        if (findInsertIndex > -1) {
+          this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData();
+        } else {
           this.insertData.dataChange.value.push(this.exampleDatabase.dataChange.value[foundIndex]);
-        }        
+        }
         // And lastly refresh table
         this.refreshTable();
       }
@@ -334,7 +333,7 @@ export class ExampleDataSource extends DataSource<ProcessFormMapping> {
       switch (this._sort.active) {
         case 'FormQuestionsAnswerMapping': [propertyA, propertyB] = [a.pfmId, b.pfmId]; break;
         case 'FormText': [propertyA, propertyB] = [a.formName, b.formName]; break;
-        case 'SortBy': [propertyA, propertyB] = [a.sortBy, b.sortBy]; break;      
+        case 'SortBy': [propertyA, propertyB] = [a.sortBy, b.sortBy]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
@@ -344,35 +343,3 @@ export class ExampleDataSource extends DataSource<ProcessFormMapping> {
     });
   }
 }
-
-/*import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { ProcessService1 } from '../../../Components/Services/Masters/ProcessService1';
-import { FormService} from '../../../Components/Services/Masters/FormService';
-
-@Component({
-  selector: 'app-process-form-mapping',
-  templateUrl: './process-form-mapping.component.html',
- // styleUrls: ['./create-account.component.css']
-})
-export class ProcessFormMappingComponent implements OnInit {
-  processFormMappingForm: FormGroup;
-  processes : {};
-  forms: {}; 
-
-  constructor(private processService1: ProcessService1, private formService: FormService) { } 
-  ngOnInit() {
-    this.processService1.fillDrpProcess().subscribe(
-      data => this.processes = data
-    );
-
-    this.formService.fillDrpForms().subscribe(
-      data => this.forms = data
-    );
-
-    this.processFormMappingForm = new FormGroup({
-      country: new FormControl(''),
-      form: new FormControl(''),     
-    });
-  }
-}*/
