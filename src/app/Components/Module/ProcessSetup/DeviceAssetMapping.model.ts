@@ -1,9 +1,9 @@
-export class UserDeviceMapping {
-    adId: number;
+export class DeviceAssetMapping {
+    daId: number;
     ouCode:number;
     deviceId: string;   
-    loginId: string;
-    loginIdText: string;  
+    assetCode: string;
+    assetCodeText: string;  
     sortBy  : string;   
     isActive: string;
     isActiveText: string;
@@ -13,12 +13,12 @@ export class UserDeviceMapping {
     modifiedDate: string;
     updateFlag: string;
 }
-export class UserDeviceMappingEntity {
-    ouCode:number; 
-    adId: number;
-    deviceId: string;   
-    loginId: string;
-    loginIdText: string;  
+export class DeviceAssetMappingEntity {
+    daId: number;
+    ouCode : number;
+    deviceId : string;   
+    assetCode: string;
+    assetCodeText: string;  
     sortBy  : string;   
     isActive: string;
     isActiveText: string;

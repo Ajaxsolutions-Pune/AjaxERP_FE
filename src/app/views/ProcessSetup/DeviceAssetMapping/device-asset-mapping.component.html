@@ -22,14 +22,14 @@
       ng update @angular/cli @angular/core
       
   
-      <ng-container matColumnDef="UserDeviceMapping">
+      <ng-container matColumnDef="DeviceAssetMapping">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Map Id</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.adId}}</mat-cell>
+        <mat-cell *matCellDef="let row"> {{row.daId}}</mat-cell>
       </ng-container>   
   
-      <ng-container matColumnDef="UserText">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>User</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.loginId}} - {{row.loginIdText}}</mat-cell>
+      <ng-container matColumnDef="AssetText">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Asset</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.assetCode}} - {{row.assetCodeText}}</mat-cell>
       </ng-container>
      
       <ng-container matColumnDef="SortBy">
@@ -51,8 +51,8 @@
   
         <mat-cell *matCellDef="let row; let i=index;">
           <button mat-icon-button color="accent" (click)="startEdit(i,
-          row.adId,
-          row.loginId,      
+          row.daId,
+          row.assetCode,      
           row.sortBy,
           row.isActive)">
             <mat-icon aria-label="Edit">edit</mat-icon>

@@ -74,7 +74,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
 
 
   ngOnInit() {
-    this.processService.filldrpProcessFormMappings().subscribe(
+    this.processService.fillDrpProcess().subscribe(
       (par) => {
         this.processObj = this.processTransfarmer.processTransfarmers(par);
       },

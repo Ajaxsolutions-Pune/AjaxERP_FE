@@ -5,13 +5,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { DataSource } from '@angular/cdk/collections';
 
-import { UserDeviceAddDialogComponent } from './dialogs/add/userdeviceadd.dialog.component';
-import { UserDeviceEditDialogComponent } from './dialogs/edit/userdeviceedit.dialog.component';
+import { DeviceAssetAddDialogComponent } from './dialogs/add/deviceassetadd.dialog.component';
+import { DeviceAssetEditDialogComponent } from './dialogs/edit/deviceassetedit.dialog.component';
 //import { ProcessDeleteDialogComponent } from './dialogs/delete/processdelete.dialog.component';
 
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserDeviceDataService } from './userdevicedata.service';
+//import { UserDeviceDataService } from './userdevicedata.service';
 import { FormComponentBase } from '../../Masters/AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../../Masters/AngularDemo/infrastructure/cross-field-error-matcher';
@@ -19,36 +19,38 @@ import { CrossFieldErrorMatcher } from '../../Masters/AngularDemo/infrastructure
 import { Device } from '../../../Components/Module/Masters/Device.model';
 import { DeviceTransfarmer } from '../../../Components/Transformer/Masters/Device-Transfarmer';
 import { DeviceService } from '../../../Components/Services/Masters/DeviceService';
-import { UserDeviceMapping } from '../../../Components/Module/ProcessSetup/UserDeviceMapping.model';
 
-import { UserDeviceMappingTransfarmer } from '../../../Components/Transformer/ProcessSetup/UserDeviceMapping-Transfarmer';
-import { UserDeviceMappingService } from '../../../Components/Services/ProcessSetup/UserDeviceMappingService';
+import { DeviceAssetMapping } from '../../../Components/Module/ProcessSetup/DeviceAssetMapping.model';
+
+import { DeviceAssetMappingTransfarmer } from '../../../Components/Transformer/ProcessSetup/DeviceAssetMapping-Transfarmer';
+import { DeviceAssetMappingService } from '../../../Components/Services/ProcessSetup/DeviceAssetMappingService';
 
 import { DefaultLayoutComponent } from '../../../containers';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import { DeviceAssetDataService } from './deviceassetdata.service';
 
 
 @Component({
-  selector: 'app-user-device-mapping',
-  templateUrl: './user-device-mapping.component.html',
-  styleUrls:  ['./user-device-mapping.component.scss']
+  selector: 'app-device-Asset-mapping',
+  templateUrl: 'device-asset-mapping.component.html',
+  styleUrls:  ['device-asset-mapping.component.scss']
 })
 
-export class UserDeviceMappingComponent extends FormComponentBase
+export class DeviceAssetMappingComponent extends FormComponentBase
   implements OnInit {
 
   deviceObj: Device[];
-  displayedColumns = ['UserDeviceMapping', 'UserText','SortBy',  'ActiveText', 'actions'];
-  exampleDatabase: UserDeviceDataService | null;
-  insertData: UserDeviceDataService | null;
+  displayedColumns = ['DeviceAssetMapping', 'AssetText','SortBy',  'ActiveText', 'actions'];
+  exampleDatabase: DeviceAssetDataService | null;
+  insertData: DeviceAssetDataService | null;
   dataSource: ExampleDataSource | null;
-  objUserDeviceMapping: UserDeviceMapping[];
+  objDeviceAssetMapping: DeviceAssetMapping[];
   index: number;
   id: number;
   DeviceId: string;
   mappingId: number;
-  addObjUserDeviceMapping: UserDeviceMapping;
+  addObjDeviceAssetMapping: DeviceAssetMapping;
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
 
@@ -57,10 +59,10 @@ export class UserDeviceMappingComponent extends FormComponentBase
     private defaultLayoutComponent: DefaultLayoutComponent,
     private deviceService: DeviceService,
     private deviceTransfarmer: DeviceTransfarmer,
-    private userDeviceMappingTransfarmer: UserDeviceMappingTransfarmer,
-    private userDeviceMappingService: UserDeviceMappingService,
+    private deviceAssetMappingTransfarmer: DeviceAssetMappingTransfarmer,
+    private deviceAssetMappingService: DeviceAssetMappingService,
     public dialog: MatDialog,
-    public dataService: UserDeviceDataService,
+    public dataService: DeviceAssetDataService,
     private globalService: GlobalService,
     private formBuilder: FormBuilder) {
     super();
@@ -93,7 +95,7 @@ export class UserDeviceMappingComponent extends FormComponentBase
   }
 
   addNew() {
-    const dialogRef = this.dialog.open(UserDeviceAddDialogComponent, {
+    const dialogRef = this.dialog.open(DeviceAssetAddDialogComponent, {
     
       data: {
        // isQuestionMandatory: ''.toString(),
@@ -132,22 +134,22 @@ export class UserDeviceMappingComponent extends FormComponentBase
       element.modifiedBy = localStorage.getItem('username');
       element.modifiedDate = this.globalService.GerCurrntDateStamp();
     });
-    console.log(this.userDeviceMappingTransfarmer.
-      ObjectToEntityUserDeviceMappingTransfarmers(this.dataSource.filteredData));
-    this.objUserDeviceMapping = [];
-    this.objUserDeviceMapping = this.dataSource.filteredData.filter(e => {
+    console.log(this.deviceAssetMappingTransfarmer.
+      ObjectToEntityDeviceAssetMappingTransfarmers(this.dataSource.filteredData));
+    this.objDeviceAssetMapping = [];
+    this.objDeviceAssetMapping = this.dataSource.filteredData.filter(e => {
       console.log(e.updateFlag);
     });   
     
-    this.userDeviceMappingService.Save(this.userDeviceMappingTransfarmer.
-      ObjectToEntityUserDeviceMappingTransfarmers (this.insertData.dataChange.value)).subscribe(
+    this.deviceAssetMappingService.Save(this.deviceAssetMappingTransfarmer.
+      ObjectToEntityDeviceAssetMappingTransfarmers (this.insertData.dataChange.value)).subscribe(
         (par) => {
           console.log(par);
           if (par.status === 'Success') {
             console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
-            this.router.navigate(['UserDeviceMapping']);
+            this.router.navigate(['DeviceAssetMapping']);
             this.DeviceId = this.DeviceId;
           }
         }
@@ -160,21 +162,21 @@ export class UserDeviceMappingComponent extends FormComponentBase
       value: event.value,
       text: target.innerText.trim()
     };
-    this.objUserDeviceMapping = [];
+    this.objDeviceAssetMapping = [];
      
   
     this.insertData.dataChange.value.splice(0);
 
     this.exampleDatabase.dataChange.value.splice(0, 100);
     this.refreshTable();
-    this.userDeviceMappingService.getUserDeviceMapping(selectedData.value).subscribe(
+    this.deviceAssetMappingService.getDeviceAssetMapping(selectedData.value).subscribe(
       (par) => {
-        this.objUserDeviceMapping = this.userDeviceMappingTransfarmer.
-        UserDeviceMappingTransfarmers(par);
-        this.objUserDeviceMapping.forEach(a => {
+        this.objDeviceAssetMapping = this.deviceAssetMappingTransfarmer.
+        DeviceAssetMappingTransfarmers(par);
+        this.objDeviceAssetMapping.forEach(a => {
           a.deviceId = selectedData.value;
         });
-        this.objUserDeviceMapping.forEach(element => {
+        this.objDeviceAssetMapping.forEach(element => {
           this.exampleDatabase.dataChange.value.push(element);
           this.refreshTable();
         });
@@ -184,17 +186,17 @@ export class UserDeviceMappingComponent extends FormComponentBase
   }
 
   startEdit(i: number,
-    adId: number,
-    loginId: string,   
+    daId: number,
+    assetCode: string,   
     sortBy: string,
     isActive: string) {
-    this.id = adId;
+    this.id = daId;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
-    const dialogRef = this.dialog.open(UserDeviceEditDialogComponent,{
+    const dialogRef = this.dialog.open(DeviceAssetEditDialogComponent,{
       data: {
-        adId: adId,
-        loginId: loginId, 
+        daId: daId,
+        assetCode: assetCode, 
         sortBy: sortBy,
         isActive: isActive,
         updateFlag: '1'
@@ -204,11 +206,11 @@ export class UserDeviceMappingComponent extends FormComponentBase
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.adId === this.id);
+        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.daId === this.id);
         // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
          // Added by ...
-        const findInsertIndex = this.insertData.dataChange.value.findIndex(x => x.adId === this.id);
+        const findInsertIndex = this.insertData.dataChange.value.findIndex(x => x.daId === this.id);
         if(findInsertIndex > -1){
           this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData(); 
         }else{
@@ -249,14 +251,14 @@ export class UserDeviceMappingComponent extends FormComponentBase
     this.paginator._changePageSize(this.paginator.pageSize);
   }
   public loadData() {
-    this.exampleDatabase = new UserDeviceDataService(this.httpClient);
-    this.insertData = new UserDeviceDataService(this.httpClient);
+    this.exampleDatabase = new DeviceAssetDataService(this.httpClient);
+    this.insertData = new DeviceAssetDataService(this.httpClient);
     this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator, this.sort);
 
   }
 }
 
-export class ExampleDataSource extends DataSource<UserDeviceMapping> {
+export class ExampleDataSource extends DataSource<DeviceAssetMapping> {
   _filterChange = new BehaviorSubject('');
 
   get filter(): string {
@@ -267,10 +269,10 @@ export class ExampleDataSource extends DataSource<UserDeviceMapping> {
     this._filterChange.next(filter);
   }
 
-  filteredData: UserDeviceMapping[] = [];
-  renderedData: UserDeviceMapping[] = [];
+  filteredData: DeviceAssetMapping[] = [];
+  renderedData: DeviceAssetMapping[] = [];
 
-  constructor(public _exampleDatabase: UserDeviceDataService,
+  constructor(public _exampleDatabase: DeviceAssetDataService,
     public _paginator: MatPaginator,
     public _sort: MatSort) {
     super();
@@ -279,7 +281,7 @@ export class ExampleDataSource extends DataSource<UserDeviceMapping> {
   }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<UserDeviceMapping[]> {
+  connect(): Observable<DeviceAssetMapping[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
@@ -287,15 +289,14 @@ export class ExampleDataSource extends DataSource<UserDeviceMapping> {
       this._filterChange,
       this._paginator.page
     ];
-
-    this._exampleDatabase.getAllUserDeviceMappings();
+    this._exampleDatabase.getAllDeviceAssetMappings();
 
 
     return merge(...displayDataChanges).pipe(map(() => {
       // Filter data
-      this.filteredData = this._exampleDatabase.data.slice().filter((userDeviceMapping: UserDeviceMapping) => {
-        const searchStr = (userDeviceMapping.adId + userDeviceMapping.loginIdText
-          + userDeviceMapping.sortBy + userDeviceMapping.isActiveText).toLowerCase();
+      this.filteredData = this._exampleDatabase.data.slice().filter((deviceAssetMapping: DeviceAssetMapping) => {
+        const searchStr = (deviceAssetMapping.daId + deviceAssetMapping.assetCode
+          + deviceAssetMapping.sortBy + deviceAssetMapping.isActiveText).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
 
@@ -313,7 +314,7 @@ export class ExampleDataSource extends DataSource<UserDeviceMapping> {
   disconnect() { }
 
   /** Returns a sorted copy of the database data. */
-  sortData(data: UserDeviceMapping[]): UserDeviceMapping[] {
+  sortData(data: DeviceAssetMapping[]): DeviceAssetMapping[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
@@ -323,8 +324,8 @@ export class ExampleDataSource extends DataSource<UserDeviceMapping> {
       let propertyB: number | string = '';
 
       switch (this._sort.active) {
-        case 'UserDeviceMapping': [propertyA, propertyB] = [a.adId, b.adId]; break;
-        case 'LoginText': [propertyA, propertyB] = [a.loginIdText, b.loginIdText]; break;
+        case 'DeviceAssetMapping': [propertyA, propertyB] = [a.daId, b.daId]; break;
+        case 'AssetText': [propertyA, propertyB] = [a.assetCodeText, b.assetCodeText]; break;
         case 'SortBy': [propertyA, propertyB] = [a.sortBy, b.sortBy]; break;      
       }
 

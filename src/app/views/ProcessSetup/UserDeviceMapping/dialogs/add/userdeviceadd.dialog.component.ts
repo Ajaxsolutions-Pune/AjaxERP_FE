@@ -51,7 +51,7 @@ export class UserDeviceAddDialogComponent implements OnInit{
     this.dialogRef.close();
   }
 
-  FormsChange(event) {
+  UsersChange(event) {
     const target = event.source.selected._element.nativeElement;
     const selectedData = {
       value: event.value,

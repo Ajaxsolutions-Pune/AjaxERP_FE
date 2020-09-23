@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../Module/environment';
-import { UserDeviceMappingEntity, UserDeviceMapping } from '../../Module/ProcessSetup/UserDeviceMapping.model';
+import { DeviceAssetMappingEntity, DeviceAssetMapping } from '../../Module/ProcessSetup/DeviceAssetMapping.model';
 @Injectable()
-export class UserDeviceMappingTransfarmer {
+export class DeviceAssetMappingTransfarmer {
     str: string;
-    OjectEntity: UserDeviceMappingEntity;
-    Oject: UserDeviceMapping;
-    arrOject: UserDeviceMapping[] = [];
-    arrOjectEntity: UserDeviceMappingEntity[] = [];
+    OjectEntity: DeviceAssetMappingEntity;
+    Oject: DeviceAssetMapping;
+    arrOject: DeviceAssetMapping[] = [];
+    arrOjectEntity: DeviceAssetMappingEntity[] = [];
     env = environment;
     constructor() {
         this.str = this.env.apiServiceIPPort;
     }
     
-    UserDeviceMappingTransfarmers(Entity: UserDeviceMappingEntity[]): UserDeviceMapping[] {
+    DeviceAssetMappingTransfarmers(Entity: DeviceAssetMappingEntity[]): DeviceAssetMapping[] {
         this.arrOject = [];
         Entity.forEach(element => {
-            this.Oject = new UserDeviceMapping();
+            this.Oject = new DeviceAssetMapping();
            // console.log(element.adId);
-            this.Oject.adId = element.adId;
+            this.Oject.daId = element.daId;
             this.Oject.deviceId = element.deviceId;           
-            this.Oject.loginId = element.loginId;
-            this.Oject.loginIdText = element.loginIdText;
+            this.Oject.assetCode = element.assetCode;
+            this.Oject.assetCodeText = element.assetCodeText;
             this.Oject.sortBy = '0'; //element.sortBy;           
                    
             if (element.isActive === '1') 
@@ -38,15 +38,15 @@ export class UserDeviceMappingTransfarmer {
         return this.arrOject;
     }
 
-    ObjectToEntityUserDeviceMappingTransfarmers(Entity: UserDeviceMapping[]): UserDeviceMappingEntity[] {
+    ObjectToEntityDeviceAssetMappingTransfarmers(Entity: DeviceAssetMapping[]): DeviceAssetMappingEntity[] {
         this.arrOjectEntity = [];
         Entity.forEach(element => {
-            this.Oject = new UserDeviceMappingEntity();
-            this.Oject.adId = element.adId;    
+            this.Oject = new DeviceAssetMappingEntity();
+            this.Oject.daId = element.daId;    
             this.Oject.ouCode = 12;      
             this.Oject.deviceId = element.deviceId;           
-            this.Oject.loginId = element.loginId;
-            this.Oject.loginIdText = element.loginIdText;            
+            this.Oject.assetCode = element.assetCode;
+            this.Oject.assetCodeText = element.assetCodeText;            
             this.Oject.sortBy = '0';       
             this.Oject.createdBy = element.createdBy;
             this.Oject.createdDate = element.createdDate;
@@ -67,13 +67,13 @@ export class UserDeviceMappingTransfarmer {
         return this.arrOjectEntity;
     }
 
-    UserDeviceMappingTransfarmerEntity(Entity: UserDeviceMappingEntity): UserDeviceMapping {
+    DeviceAssetMappingTransfarmerEntity(Entity: DeviceAssetMappingEntity): DeviceAssetMapping {
         console.log(Entity);
-        this.Oject = new UserDeviceMapping();        
-        this.Oject.adId = Entity.adId;
+        this.Oject = new DeviceAssetMapping();        
+        this.Oject.daId = Entity.daId;
         this.Oject.deviceId = Entity.deviceId;           
-        this.Oject.loginId = Entity.loginId;
-        this.Oject.loginIdText = Entity.loginIdText;               
+        this.Oject.assetCode = Entity.assetCode;
+        this.Oject.assetCodeText = Entity.assetCodeText;               
         this.Oject.sortBy = Entity.sortBy;         
         this.Oject.isActive = Entity.isActive;
         this.Oject.createdBy = Entity.createdBy;
@@ -92,12 +92,12 @@ export class UserDeviceMappingTransfarmer {
         return this.Oject;
     }
 
-    UserDeviceMappingTransfarmer(element: UserDeviceMapping): UserDeviceMappingEntity {
-        this.OjectEntity = new UserDeviceMappingEntity();
-        this.Oject.adId = element.adId;
+    UserDeviceAssetMappingTransfarmer(element: DeviceAssetMapping): DeviceAssetMappingEntity {
+        this.OjectEntity = new DeviceAssetMappingEntity();
+        this.Oject.daId = element.daId;
         this.Oject.deviceId = element.deviceId;           
-        this.Oject.loginId = element.loginId;
-        this.Oject.loginIdText = element.loginIdText;       
+        this.Oject.assetCode = element.assetCode;
+        this.Oject.assetCodeText = element.assetCodeText;       
         this.Oject.sortBy = element.sortBy;               
         this.OjectEntity.createdBy = element.createdBy;
         this.OjectEntity.createdDate = element.createdDate;

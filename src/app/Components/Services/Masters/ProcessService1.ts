@@ -23,12 +23,21 @@ export class ProcessService1 {
     filldrpProcessFormMappings(): Observable<ProcessEntity[]> {
         return this.httpClient.get<ProcessEntity[]>(this.str +
             '/ProcessFormMapping/getList?status=1',
-            this.env.httpOptions);
+            this.env.httpOptions);            
     }
+
+    fillDrpProcess(): Observable<ProcessEntity[]> {
+        console.log(this.str + '/Process/getList');
+        return this.httpClient.get<ProcessEntity[]>(this.str + '/Process/getList?status=1', this.env.httpOptions);
+    }
+
     getprocess(processCode: string): Observable<ProcessEntity> {
         return this.httpClient.get<ProcessEntity>(this.str + '/Process/' + processCode
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
+
+
+
     Save(saveEntityObj: ProcessEntity): Observable<ProcessEntity> {
         saveEntityObj.processId = null;
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

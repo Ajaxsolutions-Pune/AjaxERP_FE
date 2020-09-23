@@ -1,36 +1,35 @@
 <div class="container">
-    <h3 mat-dialog-title>Edit Process Form Mapping</h3>
+    <h3 mat-dialog-title>Add New User Device Mapping</h3>
   
     <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" autocomplete="off">
-  
       <div class="form">
         <mat-form-field color="accent">
-          <input matInput #input class="form-control" placeholder="UserDeviceMapping"
+          <input matInput #daId class="form-control" placeholder="Id" 
           disabled
-           [(ngModel)]="data.adId" name="adId" required >
+           [(ngModel)]="daId.adId" name="daId" required >
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>   
 
       <div class="form">
         <mat-form-field color="accent">        
-          <mat-label>User</mat-label>
-          <mat-select  (selectionChange)="UsersChange($event)"
-          required name="Users" #input
-          [(ngModel)]="data.loginId">
-          <mat-option>Form</mat-option>
-          <mat-option *ngFor="let user of user"
-           [value]="user.loginID">
-            {{user.userNameENG}}
+          <mat-label>Asset</mat-label>
+          <mat-select  (selectionChange)="AssetsChange($event)"
+          required name="Assets" #input
+          [(ngModel)]="data.assetCode">
+          <mat-option>Asset</mat-option>
+          <mat-option *ngFor="let asset of asset"
+           [value]="asset.assetCode">
+            {{asset.assetNameENG}}
           </mat-option>
           </mat-select>
-          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+         <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>-->
         </mat-form-field>
-      </div>     
-
+      </div>
+    
       <div class="form">
         <mat-form-field color="accent">
-          <input matInput #input class="form-control" maxlength="5"
+          <input matInput #formQueSeqNo class="form-control" maxlength="5"
           type="number"
           oninput="javascript: if (this.value.length > this.maxLength) 
           this.value = this.value.slice(0, this.maxLength);"
@@ -38,21 +37,21 @@
           placeholder="Sort By"
            [(ngModel)]="data.sortBy" name="sortBy" required >
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          
         </mat-form-field>
-      </div>  
+      </div>      
 
-      <div class="form">       
+      <div class="form">                
         <mat-checkbox name="chkActive" [(ngModel)]="data.isActive">Active</mat-checkbox>
       </div>
-
+     
       <div mat-dialog-actions>
         <button mat-raised-button [type]="submit" 
         [disabled]="!formControl.valid" [mat-dialog-close]="1"
-        (click)="stopEdit()"
+        (click)="confirmAdd()"
             color="primary">Save</button>
-
-        <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
-         Cancel</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+              Cancel</button>
       </div>
     </form>
   </div>

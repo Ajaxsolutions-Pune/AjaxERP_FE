@@ -46,8 +46,10 @@ import { DashboardService } from './Components/Services/Dashboard.service';
 import { LogIn } from './Components/Module/login.model';
 import { LogInService } from './Components/Services/LogIn.service';
 import { LogInComponent } from './Components/login/login.component';
-import { User } from './Components/Module/User.model';
-import { UserService } from './Components/Services/User.Service';
+//import { User } from './Components/Module/User.model';
+//import { UserService } from './Components/Services/User.Service';
+import {User } from './Components/Module/Masters/User.model';
+import {UserService} from './Components/Services/Masters/UserService';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { RouterModule } from '@angular/router';
 import { ListUserComponent } from './views/Masters/User/List-user.component';
@@ -246,10 +248,13 @@ import { ContactListResolverService } from './Components/Resolver/Masters/Contac
 import { ContactService } from './Components/Services/Masters/ContactService';
 import { ProcessDataService } from './views/ProcessSetup/ProcessFormMapping/processdata.service';
 import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/userdevicedata.service';
-import { ContactComponent } from './views/Masters/Contact/contact.component';
-import { ContactListComponent } from './views/Masters/Contact/contact-list.component';
-import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Transfarmer';
 
+import { DeviceAssetAddDialogComponent } from './views/ProcessSetup/DeviceAssetMapping/dialogs/add/deviceassetadd.dialog.component';
+import { DeviceAssetEditDialogComponent } from './views/ProcessSetup/DeviceAssetMapping/dialogs/edit/deviceassetedit.dialog.component';
+import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMapping/device-asset-mapping.component';
+import { DeviceAssetMappingService } from './Components/Services/ProcessSetup/DeviceAssetMappingService';
+import { DeviceAssetMappingTransfarmer } from './Components/Transformer/ProcessSetup/DeviceAssetMapping-Transfarmer';
+import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/deviceassetdata.service';
 
 @NgModule({
   imports: [
@@ -293,12 +298,26 @@ import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Tra
     AddDialogComponent,
     EditDialogComponent,
     DeleteDialogComponent,
+    ProcessAddDialogComponent,
+    ProcessDeleteDialogComponent,
+    ProcessEditDialogComponent,
+    UserDeviceAddDialogComponent,
+    UserDeviceEditDialogComponent,
+    DeviceAssetAddDialogComponent,
+    DeviceAssetEditDialogComponent,
     DialogTemplateComponent
   ],
   declarations: [
     AddDialogComponent,
     EditDialogComponent,
     DeleteDialogComponent,
+    ProcessAddDialogComponent,
+    ProcessDeleteDialogComponent,
+    ProcessEditDialogComponent,    
+    UserDeviceAddDialogComponent,
+    UserDeviceEditDialogComponent,
+    DeviceAssetAddDialogComponent,
+    DeviceAssetEditDialogComponent,
     AppComponent, ...APP_CONTAINERS, P404Component, P500Component, LogInComponent,
     DialogTemplateComponent,
     ListUserComponent, UserMasterComponent, DashboardComponent, ListUOMComponent,
@@ -324,6 +343,7 @@ import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Tra
     RoleComponent, RoleListComponent,
     ProjectComponent, ProjectListComponent,
     TransmissionLineComponent, TransmissionLineListComponent, HubListComponent, HubComponent,
+<<<<<<< HEAD
     ProcessFormMappingComponent, UserDeviceMappingComponent,
     ProcessAddDialogComponent,
     ProcessDeleteDialogComponent,
@@ -333,6 +353,10 @@ import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Tra
     UserDeviceEditDialogComponent,
     ContactComponent,
     ContactListComponent,
+=======
+    ProcessFormMappingComponent, UserDeviceMappingComponent,    
+    DeviceAssetMappingComponent,
+>>>>>>> 3036f6bf693e43043603a686b9a5a5e8235329f9
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
@@ -369,7 +393,9 @@ import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Tra
 
     ProcessFormMappingService, ProcessFormMappingTransfarmer, ProcessDataService, UserDeviceDataService,
     ProcessDataService,
-    UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer,
+    UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer,DeviceAssetMappingService,
+    DeviceAssetDataService,
+    DeviceAssetMappingTransfarmer,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy

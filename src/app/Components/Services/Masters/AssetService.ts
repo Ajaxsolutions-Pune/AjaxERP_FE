@@ -24,6 +24,13 @@ export class AssetService {
         return this.httpClient.get<AssetEntity>(this.str + '/Asset/' + qaTypeCode
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
+
+    fillDrpAssets(): Observable<AssetEntity[]> {
+        return this.httpClient.get<AssetEntity[]>(this.str + '/Asset/getList', this.env.httpOptions);
+    }
+
+
+
     Save(saveEntityObj: AssetEntity): Observable<Insertstatus> {
         console.log('service');
         console.log(AssetEntity);

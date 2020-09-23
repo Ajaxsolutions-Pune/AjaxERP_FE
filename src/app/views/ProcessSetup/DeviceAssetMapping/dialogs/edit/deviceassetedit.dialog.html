@@ -1,32 +1,34 @@
 <div class="container">
-    <h3 mat-dialog-title>Edit Process Form Mapping</h3>
+    <h3 mat-dialog-title>Edit Device Asset Mapping</h3>
   
     <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" autocomplete="off">
   
       <div class="form">
         <mat-form-field color="accent">
-          <input matInput #input class="form-control" placeholder="UserDeviceMapping"
+          <input matInput #input class="form-control" placeholder="DeviceAssetMapping"
           disabled
-           [(ngModel)]="data.adId" name="adId" required >
+           [(ngModel)]="data.daId" name="daId" required >
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>   
 
       <div class="form">
         <mat-form-field color="accent">        
-          <mat-label>User</mat-label>
-          <mat-select  (selectionChange)="UsersChange($event)"
-          required name="Users" #input
-          [(ngModel)]="data.loginId">
-          <mat-option>Form</mat-option>
-          <mat-option *ngFor="let user of user"
-           [value]="user.loginID">
-            {{user.userNameENG}}
+          <mat-label>Asset</mat-label>
+          <mat-select  (selectionChange)="AssetsChange($event)"
+          required name="Assets" #input
+          [(ngModel)]="data.assetCode">
+          <mat-option>Asset</mat-option>
+          <mat-option *ngFor="let asset of asset"
+           [value]="asset.assetCode">
+            {{asset.assetNameENG}}
           </mat-option>
           </mat-select>
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>     
+
+      
 
       <div class="form">
         <mat-form-field color="accent">

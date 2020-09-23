@@ -4,17 +4,17 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
-import { UserDeviceMappingEntity } from '../../Module/ProcessSetup/UserDeviceMapping.model';
+import { DeviceAssetMappingEntity } from '../../Module/ProcessSetup/DeviceAssetMapping.model';
 @Injectable()
-export class UserDeviceMappingService {
+export class DeviceAssetMappingService {
     str: string;
     env = environment;
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
     }
-    getUserDeviceMappings(): Observable<UserDeviceMappingEntity[]> {
-        return this.httpClient.get<UserDeviceMappingEntity[]>(this.str +
-            '/UserDeviceMapping/getList',            
+    getDeviceAssetMappings(): Observable<DeviceAssetMappingEntity[]> {
+        return this.httpClient.get<DeviceAssetMappingEntity[]>(this.str +
+            '/DeviceAssetMapping/getList',            
             this.env.httpOptions);
             //'/ProcessFormMapping/getList',
     }
@@ -25,14 +25,14 @@ export class UserDeviceMappingService {
             this.env.httpOptions);
     }*/
 
-    getUserDeviceMapping(deviceId: string): Observable<UserDeviceMappingEntity[]> {
-        console.log(this.str + '/UserDeviceMapping/getList');
-        return this.httpClient.get<UserDeviceMappingEntity[]>(
-            this.str + '/UserDeviceMapping/getList?deviceId=' + deviceId
+    getDeviceAssetMapping(deviceId: string): Observable<DeviceAssetMappingEntity[]> {
+        console.log(this.str + '/DeviceAssetMapping/getList');
+        return this.httpClient.get<DeviceAssetMappingEntity[]>(
+            this.str + '/DeviceAssetMapping/getList?deviceId=' + deviceId
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    Save(saveEntityObj: UserDeviceMappingEntity[]): Observable<Insertstatus> {
+    Save(saveEntityObj: DeviceAssetMappingEntity[]): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         console.log("####### Before send to service ####");
         saveEntityObj.forEach(element => {
@@ -46,10 +46,10 @@ export class UserDeviceMappingService {
             console.log('Que Id ->'+element.questionId +' Question ID -->'+element.questionIdText);
             console.log('Update flag ->'+element.updateFlag ); */    
             
-            console.log('Id ->'+element.adId +' Is_active -->'+element.isActive);  
+            console.log('Id ->'+element.daId +' Is_active -->'+element.isActive);  
             //console.log('ansId ->'+element.answerId +' AnsText -->'+element.answerIdText);
             console.log('CreatedDate ->'+element.createdBy +' CreatedDate -->'+element.createdDate);
-            console.log('LoginId ->'+element.loginId +' LoginName -->'+element.loginIdText);
+            console.log('LoginId ->'+element.assetCode +' LoginName -->'+element.assetCodeText);
             //console.log('isQueMandatory ->'+element.isQuestionMandatory +' NextFormId -->'+element.nextFormId);
             console.log('ModifyBy ->'+element.modifiedBy +' ModifyDate -->'+element.modifiedDate);
             //console.log('NextQueGrp ->'+element.nextQueGroup +' Que Grp -->'+element.queGroup);
@@ -57,14 +57,14 @@ export class UserDeviceMappingService {
             console.log('Update flag ->'+element.updateFlag );            
         });
         ///FormQueAnsMapping/createList
-        return this.httpClient.post<Insertstatus>(this.str + '/UserDeviceMapping/createList', saveEntityObj
+        return this.httpClient.post<Insertstatus>(this.str + '/DeviceAssetMapping/createList', saveEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    Update(updateEntityObj: UserDeviceMappingEntity): Observable<Insertstatus> {
+    Update(updateEntityObj: DeviceAssetMappingEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<Insertstatus>(this.str + '/UserDeviceMapping', updateEntityObj
+        return this.httpClient.post<Insertstatus>(this.str + '/DeviceAssetMapping', updateEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
