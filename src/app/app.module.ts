@@ -46,8 +46,13 @@ import { DashboardService } from './Components/Services/Dashboard.service';
 import { LogIn } from './Components/Module/login.model';
 import { LogInService } from './Components/Services/LogIn.service';
 import { LogInComponent } from './Components/login/login.component';
-import { User} from './Components/Module/User.model';
-import { UserService } from './Components/Services/User.Service';
+//import { User} from './Components/Module/User.model';
+//import { UserService } from './Components/Services/User.Service';
+
+import {User } from './Components/Module/Masters/User.model';
+import {UserService} from './Components/Services/Masters/UserService'
+import {UserTransfarmer} from './Components/Transformer/Masters/User-Transfarmer'
+
 import { BnNgIdleService } from 'bn-ng-idle';
 import { RouterModule } from '@angular/router';
 import { ListUserComponent } from './views/Masters/User/List-user.component';
@@ -237,6 +242,15 @@ import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/us
 import { UserDeviceAddDialogComponent } from './views/ProcessSetup/UserDeviceMapping/dialogs/add/userdeviceadd.dialog.component';
 import { UserDeviceEditDialogComponent } from './views/ProcessSetup/UserDeviceMapping/dialogs/edit/userdeviceedit.dialog.component';
 
+import { DeviceAssetAddDialogComponent } from './views/ProcessSetup/DeviceAssetMapping/dialogs/add/deviceassetadd.dialog.component';
+import { DeviceAssetEditDialogComponent } from './views/ProcessSetup/DeviceAssetMapping/dialogs/edit/deviceassetedit.dialog.component';
+import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMapping/device-asset-mapping.component';
+import { DeviceAssetMappingService } from './Components/Services/ProcessSetup/DeviceAssetMappingService';
+import { DeviceAssetMappingTransfarmer } from './Components/Transformer/ProcessSetup/DeviceAssetMapping-Transfarmer';
+import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/deviceassetdata.service';
+
+
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -278,23 +292,34 @@ import { UserDeviceEditDialogComponent } from './views/ProcessSetup/UserDeviceMa
     AddDialogComponent,
     EditDialogComponent,
     DeleteDialogComponent,
+
     ProcessAddDialogComponent,
     ProcessDeleteDialogComponent,
     ProcessEditDialogComponent,
+
     UserDeviceAddDialogComponent,
     UserDeviceEditDialogComponent,
-    DialogTemplateComponent, 
+
+    DeviceAssetAddDialogComponent,
+    DeviceAssetEditDialogComponent,
+
+    DialogTemplateComponent
     
   ],
   declarations: [
     AddDialogComponent,
     EditDialogComponent,
     DeleteDialogComponent,
+
     ProcessAddDialogComponent,
     ProcessDeleteDialogComponent,
     ProcessEditDialogComponent,
+    
     UserDeviceAddDialogComponent,
     UserDeviceEditDialogComponent,
+
+    DeviceAssetAddDialogComponent,
+    DeviceAssetEditDialogComponent,
     
     AppComponent, ...APP_CONTAINERS, P404Component, P500Component, LogInComponent,
     DialogTemplateComponent,
@@ -321,7 +346,7 @@ import { UserDeviceEditDialogComponent } from './views/ProcessSetup/UserDeviceMa
     RoleComponent,RoleListComponent,
     ProjectComponent, ProjectListComponent, 
     ProcessFormMappingComponent, UserDeviceMappingComponent,
-    
+    DeviceAssetMappingComponent,
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
@@ -334,8 +359,11 @@ import { UserDeviceEditDialogComponent } from './views/ProcessSetup/UserDeviceMa
     AssetTransfarmer, AssetGroupTransfarmer, TehsilTransfarmer, QuestionTransfarmer,
     AnswerTransfarmer, ProcessTransfarmer1, ZoneTransfarmer, CircleTransfarmer,
     FormQueAnsMappingService, FormQueAnsMappingTransfarmer, 
-    ProcessFormMappingService, ProcessFormMappingTransfarmer, UserDeviceMappingService,
-    UserDeviceMappingTransfarmer,
+    ProcessFormMappingService, ProcessFormMappingTransfarmer, 
+    UserDeviceMappingService,
+    UserDeviceMappingTransfarmer,UserTransfarmer,DeviceAssetMappingService,
+    DeviceAssetDataService,
+    DeviceAssetMappingTransfarmer,
     DatePipe, GlobalService,
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
@@ -353,6 +381,7 @@ import { UserDeviceEditDialogComponent } from './views/ProcessSetup/UserDeviceMa
     DeviceListResolverService,
     ClusterListResolverService, DialogTemplateComponent,
     DialogService,
+    
     RoleService,RoleTransfarmer,RoleListResolverService,
     ProjectService, ProjectTransfarmer, ProjectListResolverService,
     {

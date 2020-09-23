@@ -102,6 +102,7 @@ import { ProjectListResolverService } from './Components/Resolver/Masters/Projec
 
 import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
 import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
+import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMapping/device-asset-mapping.component';
 
 
 export const routes: Routes = [
@@ -881,6 +882,14 @@ export const routes: Routes = [
         component: UserDeviceMappingComponent,
         data: {
           title: 'User Device Mapping'
+        },
+      },
+
+      {
+        path: 'DeviceAssetMapping',
+        component: DeviceAssetMappingComponent,
+        data: {
+          title: 'Device Asset Mapping'
         },
       },
       

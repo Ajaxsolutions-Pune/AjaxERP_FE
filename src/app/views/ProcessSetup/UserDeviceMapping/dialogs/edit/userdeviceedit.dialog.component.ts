@@ -50,7 +50,7 @@ export class UserDeviceEditDialogComponent implements OnInit {
     // emppty stuff
   }
 
-  NextFormChange(event) {
+  UsersChange(event) {
     const target = event.source.selected._element.nativeElement;
     const selectedData = {
       value: event.value,
