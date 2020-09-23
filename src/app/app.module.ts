@@ -343,20 +343,8 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
     RoleComponent, RoleListComponent,
     ProjectComponent, ProjectListComponent,
     TransmissionLineComponent, TransmissionLineListComponent, HubListComponent, HubComponent,
-<<<<<<< HEAD
-    ProcessFormMappingComponent, UserDeviceMappingComponent,
-    ProcessAddDialogComponent,
-    ProcessDeleteDialogComponent,
-    ProcessEditDialogComponent,
-
-    UserDeviceAddDialogComponent,
-    UserDeviceEditDialogComponent,
-    ContactComponent,
-    ContactListComponent,
-=======
     ProcessFormMappingComponent, UserDeviceMappingComponent,    
     DeviceAssetMappingComponent,
->>>>>>> 3036f6bf693e43043603a686b9a5a5e8235329f9
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
@@ -373,7 +361,7 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
-    HubTransfarmer, StateTransfarmer, ContactTransfarmer,
+    HubTransfarmer, StateTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService,
