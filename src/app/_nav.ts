@@ -274,6 +274,19 @@ export const navItems: NavData[] = [
 
   },
   {
+    name: 'CRM',
+    url: '/CRM',
+    //   icon: 'fa fa-newspaper-o',
+    children: [
+      {
+        name: 'Contact',
+        url: '/ContactList',
+        icon: 'icon-puzzle'
+      }
+    ]
+
+  },
+  {
     name: 'Monitoring Reports',
     url: '/Reports',
     //   icon: 'fa fa-newspaper-o',

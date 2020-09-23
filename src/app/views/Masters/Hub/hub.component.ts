@@ -1,18 +1,13 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Hub, HubEntity } from '../../../Components/Module/Masters/Hub.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
-import { AssetGroupEntity, AssetGroup } from '../../../Components/Module/Masters/AssetGroup.model';
-import { Colour } from '../../../Components/Module/Masters/Colour.model';
-import { ColourTransfarmer } from '../../../Components/Transformer/Masters/Colour-Transfarmer';
-import { ColourService } from '../../../Components/Services/Masters/ColourService';
 import { DefaultLayoutComponent } from '../../../containers';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { HubService } from '../../../Components/Services/Masters/HubService';
 import { HubTransfarmer } from '../../../Components/Transformer/Masters/Hub-Transfarmer';
-import { env } from 'process';
 import { environment } from '../../../Components/Module/environment';
 import { TransmissionLineService } from '../../../Components/Services/Masters/TransmissionLineService';
 import { TransmissionLineTransfarmer } from '../../../Components/Transformer/Masters/TransmissionLine-Transfarmer';
@@ -35,7 +30,7 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
   hubGroupDrp: MasterDrp[];
   env = environment;
   bindObjEntity: HubEntity;
-  constructor(private _router: Router, private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private hubService: HubService,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private router: Router,

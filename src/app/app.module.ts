@@ -246,6 +246,9 @@ import { ContactListResolverService } from './Components/Resolver/Masters/Contac
 import { ContactService } from './Components/Services/Masters/ContactService';
 import { ProcessDataService } from './views/ProcessSetup/ProcessFormMapping/processdata.service';
 import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/userdevicedata.service';
+import { ContactComponent } from './views/Masters/Contact/contact.component';
+import { ContactListComponent } from './views/Masters/Contact/contact-list.component';
+import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Transfarmer';
 
 
 @NgModule({
@@ -328,6 +331,8 @@ import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/us
 
     UserDeviceAddDialogComponent,
     UserDeviceEditDialogComponent,
+    ContactComponent,
+    ContactListComponent,
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
@@ -344,7 +349,7 @@ import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/us
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
-    HubTransfarmer, StateTransfarmer,
+    HubTransfarmer, StateTransfarmer, ContactTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService,
