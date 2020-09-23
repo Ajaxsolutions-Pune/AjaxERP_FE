@@ -65,23 +65,23 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
 
-      /*{
+      {
         name: 'Role',
         url: '/RoleList',
         icon: 'icon-puzzle'
       },
 
-      {
+     /* {
         name: 'Role Level',
         url: '/Role-level',
         icon: 'icon-puzzle'
-      },
+      },*/
 
       {
         name: 'Project',
         url: '/ProjectList',
         icon: 'icon-puzzle'
-      },*/
+      },
 
       // {
       //   name: 'QuestionType',
@@ -103,16 +103,7 @@ export const navItems: NavData[] = [
       //   url: '/AssetList',
       //   icon: 'icon-puzzle'
       // },
-      {
-        name: 'Process Form',
-        url: '/ProcessFormMapping',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'User Device Map',
-        url: '/UserDeviceMapping',
-        icon: 'icon-puzzle'
-      },
+      
       {
         name: 'Device',
         url: '/DeviceList',
@@ -233,11 +224,11 @@ export const navItems: NavData[] = [
         url: '/UserDeviceMapping',
         icon: 'icon-puzzle'
       },
-      // {
-      // name: 'Process Form',
-      // url: '/FormQueAnsMapping',
-      //   icon: 'icon-puzzle'
-      // },
+      {
+        name: 'Device Asset Map',
+        url: '/DeviceAssetMapping',
+        icon: 'icon-puzzle'
+      },
     ]
   },
   {

@@ -28,7 +28,7 @@ export class DeviceAssetMappingService {
     getDeviceAssetMapping(deviceId: string): Observable<DeviceAssetMappingEntity[]> {
         console.log(this.str + '/DeviceAssetMapping/getList');
         return this.httpClient.get<DeviceAssetMappingEntity[]>(
-            this.str + '/DeviceAssetMapping/getList'
+            this.str + '/DeviceAssetMapping/getList?deviceId=' + deviceId
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 

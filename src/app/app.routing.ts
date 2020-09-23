@@ -107,6 +107,7 @@ import { HubListComponent } from './views/Masters/Hub/hub-list.component';
 import { HubComponent } from './views/Masters/Hub/hub.component';
 import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
 import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
+import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMapping/device-asset-mapping.component';
 
 export const routes: Routes = [
   {
@@ -926,6 +927,15 @@ export const routes: Routes = [
           title: 'User Device Mapping'
         },
       },
+
+      {
+        path: 'DeviceAssetMapping',
+        component: DeviceAssetMappingComponent,
+        data: {
+          title: 'Device Asset Mapping'
+        },
+      },
+      
       {
         path: 'RoleList',
         component: RoleListComponent,
