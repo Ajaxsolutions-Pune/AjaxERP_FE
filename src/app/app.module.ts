@@ -48,8 +48,8 @@ import { LogInService } from './Components/Services/LogIn.service';
 import { LogInComponent } from './Components/login/login.component';
 //import { User } from './Components/Module/User.model';
 //import { UserService } from './Components/Services/User.Service';
-import {User } from './Components/Module/Masters/User.model';
-import {UserService} from './Components/Services/Masters/UserService';
+import { User } from './Components/Module/Masters/User.model';
+import { UserService } from './Components/Services/Masters/UserService';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { RouterModule } from '@angular/router';
 import { ListUserComponent } from './views/Masters/User/List-user.component';
@@ -255,6 +255,9 @@ import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMap
 import { DeviceAssetMappingService } from './Components/Services/ProcessSetup/DeviceAssetMappingService';
 import { DeviceAssetMappingTransfarmer } from './Components/Transformer/ProcessSetup/DeviceAssetMapping-Transfarmer';
 import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/deviceassetdata.service';
+import { ContactListComponent } from './views/Masters/Contact/contact-list.component';
+import { ContactComponent } from './views/Masters/Contact/contact.component';
+import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Transfarmer';
 
 @NgModule({
   imports: [
@@ -313,7 +316,7 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
     DeleteDialogComponent,
     ProcessAddDialogComponent,
     ProcessDeleteDialogComponent,
-    ProcessEditDialogComponent,    
+    ProcessEditDialogComponent,
     UserDeviceAddDialogComponent,
     UserDeviceEditDialogComponent,
     DeviceAssetAddDialogComponent,
@@ -343,8 +346,8 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
     RoleComponent, RoleListComponent,
     ProjectComponent, ProjectListComponent,
     TransmissionLineComponent, TransmissionLineListComponent, HubListComponent, HubComponent,
-    ProcessFormMappingComponent, UserDeviceMappingComponent,    
-    DeviceAssetMappingComponent,
+    ProcessFormMappingComponent, UserDeviceMappingComponent,
+    DeviceAssetMappingComponent, ContactListComponent,ContactComponent
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
@@ -361,7 +364,7 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
-    HubTransfarmer, StateTransfarmer,
+    HubTransfarmer, StateTransfarmer,ContactTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService,
@@ -381,7 +384,7 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
 
     ProcessFormMappingService, ProcessFormMappingTransfarmer, ProcessDataService, UserDeviceDataService,
     ProcessDataService,
-    UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer,DeviceAssetMappingService,
+    UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer, DeviceAssetMappingService,
     DeviceAssetDataService,
     DeviceAssetMappingTransfarmer,
     {

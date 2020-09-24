@@ -41,6 +41,12 @@ export class ContactComponent extends FormComponentBase implements OnInit, After
       ControlContactCode: {
         required: 'Contact Code is required.',
         pattern: 'Value cross max limit of Contact Code.',
+      },
+      ControlcontactType: {
+        required: 'Contact Type is required.'
+      },
+      ControlContactNameENG: {
+        required: 'Contact Name is required.'
       }
     };
     this.formErrors = {
@@ -52,6 +58,12 @@ export class ContactComponent extends FormComponentBase implements OnInit, After
     this.form = this.formBuilder.group({
       ControlContactCode: ['',
         [Validators.required]],
+        ControlcontactType: ['',
+          [Validators.required]],
+          ControlContactNameENG: ['',
+            [Validators.required]],
+            ControlisActive: ['',
+              []]
     });
     this.form.controls['ControlContactCode'].disable();
     status = '';

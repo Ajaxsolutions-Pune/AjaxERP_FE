@@ -108,6 +108,9 @@ import { HubComponent } from './views/Masters/Hub/hub.component';
 import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
 import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
 import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMapping/device-asset-mapping.component';
+import { ContactListResolverService } from './Components/Resolver/Masters/Contact-List-Resolver.Service';
+import { ContactListComponent } from './views/Masters/Contact/contact-list.component';
+import { ContactComponent } from './views/Masters/Contact/contact.component';
 
 export const routes: Routes = [
   {
@@ -851,8 +854,25 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'ContactList',
+        component: ContactListComponent,
+        data: {
+          title: 'Contact List'
+        },
+        resolve: {
+          ContactList: ContactListResolverService
+        }
+      },
+      {
+        path: 'Contact',
+        component: ContactComponent,
+        data: {
+          title: 'Add Contact'
+        }
+      },
+      {
         path: 'Contact/:id',
-        component: TransmissionLineComponent,
+        component: ContactComponent,
         data: {
           title: 'Edit Contact'
         }
