@@ -111,6 +111,9 @@ import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMap
 import { ContactListResolverService } from './Components/Resolver/Masters/Contact-List-Resolver.Service';
 import { ContactListComponent } from './views/Masters/Contact/contact-list.component';
 import { ContactComponent } from './views/Masters/Contact/contact.component';
+import { AccessListComponent } from './views/Masters/Access/access-list.component';
+import { AccessListResolverService } from './Components/Resolver/Masters/Access-List-Resolver.Service';
+import { AccessComponent } from './views/Masters/Access/access.component';
 
 export const routes: Routes = [
   {
@@ -820,10 +823,44 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'Asset/:id',
+        component: AssetComponent,
+        data: {
+          title: 'Edit Asset Category'
+        }
+      },
+      {
         path: 'Asset',
         component: AssetComponent,
         data: {
           title: 'Add Aset'
+        },
+        resolve: {
+          AssetList: AssetListResolverService
+        }
+      },
+      {
+        path: 'AccessList',
+        component: AccessListComponent,
+        data: {
+          title: 'Access List'
+        },
+        resolve: {
+          AccessList: AccessListResolverService
+        }
+      },
+      {
+        path: 'Access/:id',
+        component: AccessComponent,
+        data: {
+          title: 'Edit Access'
+        }
+      },
+      {
+        path: 'Access',
+        component: AccessComponent,
+        data: {
+          title: 'Add Access'
         },
         resolve: {
           AssetList: AssetListResolverService

@@ -71,11 +71,11 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
 
-     /* {
-        name: 'Role Level',
-        url: '/Role-level',
-        icon: 'icon-puzzle'
-      },*/
+      /* {
+         name: 'Role Level',
+         url: '/Role-level',
+         icon: 'icon-puzzle'
+       },*/
 
       {
         name: 'Project',
@@ -103,7 +103,7 @@ export const navItems: NavData[] = [
       //   url: '/AssetList',
       //   icon: 'icon-puzzle'
       // },
-      
+
       {
         name: 'Device',
         url: '/DeviceList',
@@ -272,6 +272,19 @@ export const navItems: NavData[] = [
       {
         name: 'Contact',
         url: '/ContactList',
+        icon: 'icon-puzzle'
+      }
+    ]
+
+  },
+  {
+    name: 'User Setup',
+    url: '/User Setup',
+    //   icon: 'fa fa-newspaper-o',
+    children: [
+      {
+        name: 'Access',
+        url: '/AccessList',
         icon: 'icon-puzzle'
       }
     ]

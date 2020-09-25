@@ -258,6 +258,11 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
 import { ContactListComponent } from './views/Masters/Contact/contact-list.component';
 import { ContactComponent } from './views/Masters/Contact/contact.component';
 import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Transfarmer';
+import { AccessListResolverService } from './Components/Resolver/Masters/Access-List-Resolver.Service';
+import { AccessService } from './Components/Services/Masters/AccessService';
+import { AccessTransfarmer } from './Components/Transformer/Masters/Access-Transfarmer';
+import { AccessListComponent } from './views/Masters/Access/access-list.component';
+import { AccessComponent } from './views/Masters/Access/access.component';
 
 @NgModule({
   imports: [
@@ -347,14 +352,14 @@ import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Tra
     ProjectComponent, ProjectListComponent,
     TransmissionLineComponent, TransmissionLineListComponent, HubListComponent, HubComponent,
     ProcessFormMappingComponent, UserDeviceMappingComponent,
-    DeviceAssetMappingComponent, ContactListComponent,ContactComponent
+    DeviceAssetMappingComponent, ContactListComponent,ContactComponent, AccessListComponent, AccessComponent
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
-    HubService, ContactService,
+    HubService, ContactService,AccessService,
     CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
@@ -364,7 +369,7 @@ import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Tra
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
-    HubTransfarmer, StateTransfarmer,ContactTransfarmer,
+    HubTransfarmer, StateTransfarmer,ContactTransfarmer,AccessTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService,
@@ -376,7 +381,7 @@ import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Tra
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
     DeviceListResolverService, ClusterListResolverService, TransmissionLineListResolverService,
-    HubListResolverService, ContactListResolverService,
+    HubListResolverService, ContactListResolverService,AccessListResolverService,
     DialogTemplateComponent,
     DialogService,
     RoleService, RoleTransfarmer, RoleListResolverService,

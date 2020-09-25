@@ -156,12 +156,40 @@ export class FormQueAnsMappingComponent extends FormComponentBase
             console.log(par.status);
             this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
               'Data saved successfully !', 'modal-info');
-            this.router.navigate(['FormQueAnsMapping']);
+            // this.router.navigate(['FormQueAnsMapping']);
             this.FormId = this.FormId;
+            this.GetRouteData(this.FormId);
           }
         }
       );
 
+  }
+  GetRouteData(formId: string): void {
+    const selectedData = {
+      value: formId,
+      text: formId
+    };
+    this.objFormQueAnsMapping = [];
+
+    // Added by Rahul
+    this.insertData.dataChange.value.splice(0);
+
+    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.refreshTable();
+    this.formQueAnsMappingService.getFormQueAnsMapping(selectedData.value).subscribe(
+      (par) => {
+        this.objFormQueAnsMapping = this.formQueAnsMappingTransfarmer.
+          FormQueAnsMappingTransfarmers(par);
+        this.objFormQueAnsMapping.forEach(a => {
+          a.formId = selectedData.value;
+        });
+        this.objFormQueAnsMapping.forEach(element => {
+          this.exampleDatabase.dataChange.value.push(element);
+          this.refreshTable();
+        });
+
+      },
+      (err: any) => console.log(err));
   }
   FormChange(event) {
     const target = event.source.selected._element.nativeElement;
