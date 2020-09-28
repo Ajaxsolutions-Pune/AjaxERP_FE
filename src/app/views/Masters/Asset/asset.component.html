@@ -42,18 +42,19 @@
                   </mat-error>
               </mat-form-field>
               <mat-form-field class="col-md-4">
-                <mat-label>Asset Category</mat-label>
+                <mat-label> Asset Group</mat-label>
                 <mat-select required
-                formControlName="ControlAssetCategory"
-                [(ngModel)]="bindObj.assetCategoryCode">
-                <mat-option>Asset Category</mat-option>
-                <mat-option *ngFor="let assetCategory of assetCategoryObj"
-                 [value]="assetCategory.assetCategoryCode">
-                  {{assetCategory.assetCategoryNameENG}}
+                formControlName="ControlassetGroupCode"
+                (selectionChange)="AssetGroupChange($event)"
+                [(ngModel)]="bindObj.assetGroupCode">
+                <mat-option>Asset Group</mat-option>
+                <mat-option *ngFor="let assetGroup of assetGroupObj"
+                 [value]="assetGroup.assetGroupCode">
+                  {{assetGroup.assetGroupNameENG}}
                 </mat-option>
                 </mat-select>
                 <mat-error>
-                {{ formErrors['ControlAssetCategory'] }}
+                {{ formErrors['ControlassetGroupCode'] }}
                 </mat-error>
               </mat-form-field>
               <div class="col-md-2"></div>
@@ -70,18 +71,18 @@
                   </mat-error>
               </mat-form-field>
               <mat-form-field class="col-md-4">
-                <mat-label> Asset Group</mat-label>
+                <mat-label>Asset Category</mat-label>
                 <mat-select required
-                formControlName="ControlassetGroupCode"
-                [(ngModel)]="bindObj.assetGroupCode">
-                <mat-option>Asset Group</mat-option>
-                <mat-option *ngFor="let assetGroup of assetGroupObj"
-                 [value]="assetGroup.assetGroupCode">
-                  {{assetGroup.assetGroupNameENG}}
+                formControlName="ControlAssetCategory"
+                [(ngModel)]="bindObj.assetCategoryCode">
+                <mat-option>Asset Category</mat-option>
+                <mat-option *ngFor="let assetCategory of assetCategoryObj"
+                 [value]="assetCategory.assetCategoryCode">
+                  {{assetCategory.assetCategoryNameENG}}
                 </mat-option>
                 </mat-select>
                 <mat-error>
-                {{ formErrors['ControlassetGroupCode'] }}
+                {{ formErrors['ControlAssetCategory'] }}
                 </mat-error>
               </mat-form-field>
             </div>

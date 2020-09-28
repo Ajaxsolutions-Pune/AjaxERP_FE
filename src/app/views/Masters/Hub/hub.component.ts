@@ -124,29 +124,41 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
   }
 
   save(ObjForm: NgForm): void {
-    // this.bindObj.createdBy = localStorage.getItem('username');
-    // this.bindObj.createdDate = this.globalService.GerCurrntDateStamp();
-    // this.bindObj.modifiedBy = localStorage.getItem('username');
-    // this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
+     this.bindObj.createdBy = localStorage.getItem('username');
+     this.bindObj.createdDate = this.globalService.GerCurrntDateStamp();
+     this.bindObj.modifiedBy = localStorage.getItem('username');
+     this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
     if (status !== 'Update') {
       // this.bindObj.tlCode = null;
-      this.hubService.Save(this.hubTransfarmer.
-        HubTransfarmer(this.bindObj)).subscribe(
-          (par) => {
-            console.log(this.hubTransfarmer.
-              HubTransfarmer(this.bindObj));
-            console.log(par);
-            if (par !== null) {
-              this.defaultLayoutComponent.Massage('',
-                'Data saved successfully !', 'modal-info');
-              ObjForm.reset();
-              this.router.navigate(['HubList']);
-            } else {
-              this.defaultLayoutComponent.Massage('',
-                'Somethig Wrong', 'modal-info');
-            }
+      
+      this.hubService.getHub(this.bindObj.hubCode).subscribe(
+        (par) => {
+          console.log('get');
+          console.log(par);
+          if (par !== null) {
+            this.defaultLayoutComponent.Massage('',
+            'This hub code already exist !', 'modal-danger');
+            return;
           }
-        );
+          this.hubService.Save(this.hubTransfarmer.
+            HubTransfarmer(this.bindObj)).subscribe(
+              (par) => {
+                console.log(this.hubTransfarmer.
+                  HubTransfarmer(this.bindObj));
+                console.log(par);
+                if (par !== null) {
+                  this.defaultLayoutComponent.Massage('',
+                    'Data saved successfully !', 'modal-info');
+                  ObjForm.reset();
+                  this.router.navigate(['HubList']);
+                } else {
+                  this.defaultLayoutComponent.Massage('',
+                    'Somethig Wrong', 'modal-danger');
+                }
+              }
+            );
+        },
+        (err: any) => console.log(err));
 
     } else {
       this.hubService.Update(this.hubTransfarmer.

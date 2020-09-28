@@ -91,7 +91,7 @@ export class ProcessListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT processId,processName,geofence,isActive' +
-      ' INTO XLSX("processList.xlsx",{headers:true}) FROM ?', [this.processs]);
+    alasql('SELECT processId Process_Code,processName Process_Name,geofence Geofence,isActive Status' +
+      ' INTO XLSX("ProcessList.xlsx",{headers:true}) FROM ?', [this.processs]);
   }
 }

@@ -114,6 +114,9 @@ import { ContactComponent } from './views/Masters/Contact/contact.component';
 import { AccessListComponent } from './views/Masters/Access/access-list.component';
 import { AccessListResolverService } from './Components/Resolver/Masters/Access-List-Resolver.Service';
 import { AccessComponent } from './views/Masters/Access/access.component';
+import { RolelevelListResolverService } from './Components/Resolver/Masters/RoleLevel-List-Resolver.Service';
+import { RolelevelListComponent } from './views/Masters/Rolelevel/rolelevel-list.component';
+import { RolelevelComponent } from './views/Masters/Rolelevel/rolelevel.component';
 
 export const routes: Routes = [
   {
@@ -867,6 +870,33 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'RolelevelList',
+        component: RolelevelListComponent,
+        data: {
+          title: 'Rolelevel List'
+        },
+        resolve: {
+          RolelevelList: RolelevelListResolverService
+        }
+      },
+      {
+        path: 'Rolelevel/:id',
+        component: RolelevelComponent,
+        data: {
+          title: 'Edit Rolelevel'
+        }
+      },
+      {
+        path: 'Rolelevel',
+        component: RolelevelComponent,
+        data: {
+          title: 'Add Rolelevel'
+        },
+        resolve: {
+          AssetList: AssetListResolverService
+        }
+      },
+      {
         path: 'TransmissionLineList',
         component: TransmissionLineListComponent,
         data: {
@@ -918,7 +948,7 @@ export const routes: Routes = [
         path: 'HubList',
         component: HubListComponent,
         data: {
-          title: 'Hub List'
+          title: 'HUB List'
         },
         resolve: {
           HubList: HubListResolverService
@@ -928,14 +958,14 @@ export const routes: Routes = [
         path: 'Hub',
         component: HubComponent,
         data: {
-          title: 'Add Hub'
+          title: 'Add HUB'
         }
       },
       {
         path: 'Hub/:id',
         component: HubComponent,
         data: {
-          title: 'Edit Hub'
+          title: 'Edit HUB'
         }
       },
       {

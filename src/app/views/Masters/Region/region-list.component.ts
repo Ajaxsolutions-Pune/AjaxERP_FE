@@ -92,7 +92,7 @@ export class RegionListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT regionCode Region_Code,regionNameENG Region_Name,isActive Active' +
+    alasql('SELECT regionCode Region_Code,regionNameENG Region_Name,isActive Status' +
       ' INTO XLSX("RegionList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

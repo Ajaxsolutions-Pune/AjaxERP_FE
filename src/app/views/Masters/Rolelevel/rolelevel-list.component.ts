@@ -1,35 +1,35 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CircleEntity, Circle } from '../../../Components/Module/Masters/Circle.model';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CircleTransfarmer } from '../../../Components/Transformer/Masters/Circle-Transfarmer';
-import { environment } from '../../../Components/Module/environment';
 import * as alasql from 'alasql';
+import { environment } from '../../../Components/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
+import { Rolelevel, RolelevelEntity } from '../../../Components/Module/Masters/Rolelevel.model';
+import { RolelevelTransfarmer } from '../../../Components/Transformer/Masters/Role-level.Transfarmer';
 
 @Component({
-  selector: 'app-circle-list',
-  templateUrl: './circle-list.component.html',
-  styleUrls: ['./circle-list.component.scss']
+  selector: 'app-rolelevel-list',
+  templateUrl: './rolelevel-list.component.html',
+  styleUrls: ['./rolelevel-list.component.scss']
 })
-export class CircleListComponent implements OnInit {
-  @Input() questionInput: Circle;
-  arrOject: Circle[];
-  arrOjectEntity: CircleEntity[];
+export class RolelevelListComponent implements OnInit {
+  @Input() questionInput: Rolelevel;
+  arrOject: Rolelevel[];
+  arrOjectEntity: RolelevelEntity[];
 
-  WithoutFilterObj: Circle[];
+  WithoutFilterObj: Rolelevel[];
+  ResultOject: Rolelevel[];
+  SerachCri: number;
+  bindObj: Rolelevel;
   config: any;
   env = environment;
-  ResultOject: Circle[];
-  SerachCri: number;
-  bindObj: Circle;
   constructor(private _router: Router,
-    objTrans: CircleTransfarmer,
+    objTrans: RolelevelTransfarmer,
     private route: ActivatedRoute) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       this._router.navigate(['login']);
     }
-    this.arrOjectEntity = this.route.snapshot.data['CircleList'];
-    this.arrOject = objTrans.CircleTransfarmers(this.arrOjectEntity);
+    this.arrOjectEntity = this.route.snapshot.data['RolelevelList'];
+    this.arrOject = objTrans.RolelevelTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
     this.config = {
       itemsPerPage: this.env.paginationPageSize,
@@ -41,10 +41,10 @@ export class CircleListComponent implements OnInit {
     this.WithoutFilterObj = this.arrOject;
     console.log(this.arrOject);
     this.bindObj = {
-      circleCode: null,
-      circleNameENG: null,
-      circleNameUNI: null,
-      zoneCode: null,
+      roleLevelDesc: null,
+      roleLevelId: null,
+      rolePriority: null,
+      userType: null,
       isActive: '3',
       createdBy: null,
       createdDate: null,
@@ -59,21 +59,22 @@ export class CircleListComponent implements OnInit {
   resultChanged(): void {
     this.SerachCri = 0;
     this.ResultOject = this.WithoutFilterObj;
-    if (this.bindObj.circleNameENG !== null && this.bindObj.circleNameENG !== '') {
+    if (this.bindObj.roleLevelDesc !== null && this.bindObj.roleLevelDesc !== '') {
       this.ResultOject = this.ResultOject.filter(SubResult =>
-        SubResult.circleNameENG.toLowerCase().indexOf(this.bindObj.circleNameENG.toString().toLowerCase()) !== -1);
+        SubResult.roleLevelDesc.toLowerCase().indexOf(this.bindObj.roleLevelDesc.toString().toLowerCase())
+        !== -1);
       this.SerachCri = 1;
     }
-    if (this.bindObj.circleCode !== null && this.bindObj.circleCode.toString() !== '') {
+    if (this.bindObj.roleLevelId !== null && this.bindObj.roleLevelId.toString() !== '') {
       this.ResultOject = this.ResultOject.filter(SubResult =>
-        SubResult.circleCode.toString().toLowerCase().indexOf(this.bindObj.circleCode.toString().toLowerCase()) !== -1);
+        SubResult.roleLevelId.toString().toLowerCase().indexOf(
+          this.bindObj.roleLevelId.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
     if (this.bindObj.isActive !== null && this.bindObj.isActive.toString() !== '-1') {
       if (this.bindObj.isActive.toString() === '3') {
         this.ResultOject = this.ResultOject.filter(SubResultProd =>
-          SubResultProd.isActive.toString() === 'Active'
-          || SubResultProd.isActive.toString() === 'Inactive');
+          SubResultProd.isActive.toString() === 'Active' || SubResultProd.isActive.toString() === 'Inactive');
       } else {
         this.ResultOject = this.ResultOject.filter(SubResultProd =>
           SubResultProd.isActive.toString() === this.bindObj.isActive.toString());
@@ -92,7 +93,8 @@ export class CircleListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT circleCode Circle_Code,CircleNameENG circle_Name,' +
-      'isActive Status INTO XLSX("CircleList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT roleLevelId Rolelevel_Code,roleLevelDesc Rolelevel_Name,rolePriority Role_Priority,' +
+      'isActive Status INTO XLSX("RoleLevelList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }
+

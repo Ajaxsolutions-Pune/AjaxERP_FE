@@ -1,21 +1,21 @@
 <div class="form-group">
     <div class="row">  
-      <div class="col-md-3">HUB Code</div>
-      <div class="col-md-3">HUB Name</div>
+      <div class="col-md-3">Role Level Code</div>
+      <div class="col-md-3">Role Level Name</div>
       <div class="col-md-2">Status</div>
     </div>
     <div class="row">
       <div class="col-md-3">
-          <input id="txtHubCode" required name="txtHubCode" 
-          type="text" class="form-control" placeholder="HUB Code" 
-          (input)="resultChanged()" [(ngModel)]="bindObj.hubCode">
+          <input id="txtRolelevelCode" required name="txtRolelevelCode" 
+          type="text" class="form-control" placeholder="Role Level Code" 
+          (input)="resultChanged()" [(ngModel)]="bindObj.roleLevelId">
       </div>
       <div class="col-md-3">
-          <input id="txtHubNameENG" required 
-          name="txtHubNameENG" type="text" class="form-control" 
-          placeholder="HUB Name"
+          <input id="txtroleLevelDesc" required 
+          name="txtroleLevelDesc" type="text" class="form-control" 
+          placeholder="Role Level Name"
           (input)="resultChanged()" 
-          [(ngModel)]="bindObj.hubNameENG">
+          [(ngModel)]="bindObj.roleLevelDesc">
       </div>
       <div class="col-md-2">
         <select id="ShiftId" name="ShiftId" (change)="resultChanged()" [(ngModel)]="bindObj.isActive"
@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-1">
           <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" 
-          title="Create HUB" routerLink="/Hub"></button>
+          title="Create Role Level" routerLink="/Rolelevel"></button>
       </div>
       <div class="col-md-1">
         <i class="fa fa-file-excel-o" style="font-size:35px;color: #20a8d8" aria-hidden="true"
@@ -39,8 +39,8 @@
   <table class="table table-responsive-sm table-hover table-outline mb-0">
       <thead class="thead-light">
         <tr>
-          <th>HUB Code</th>
-          <th>HUB Name</th>
+          <th>Role Level Code</th>
+          <th>Role Level Name</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -48,16 +48,16 @@
       <tbody>
         <tr *ngFor="let Oject of arrOject | paginate: config">
           <td>
-            <div>{{Oject.hubCode}}</div>
+            <div>{{Oject.roleLevelId}}</div>
           </td>
           <td>
-            {{Oject.hubNameENG}}
-          </td>
+            {{Oject.roleLevelDesc}}
+          </td> 
           <td>
             {{Oject.isActive}}
           </td>
           <td>
-          <button mat-icon-button [routerLink]="['/Hub/',Oject.hubCode]"
+          <button mat-icon-button [routerLink]="['/Rolelevel/',Oject.roleLevelId]"
            color="accent">
             <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>
           </button>

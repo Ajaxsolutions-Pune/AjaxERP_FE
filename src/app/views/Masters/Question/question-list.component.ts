@@ -93,6 +93,6 @@ export class QuestionListComponent implements OnInit {
 
   ExportToExcel(): void {
     alasql('SELECT question Question,questionId Question_Id,' +
-      'qaTypeCode Question_Type_Code,isActive Is_Active INTO XLSX("questionList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+      'qaTypeCode Question_Type_Code,isActive Status Is_Active INTO XLSX("QuestionList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

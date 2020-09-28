@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from '../../../Components/Module/environment';
 import { Hub, HubEntity } from '../../../Components/Module/Masters/Hub.model';
 import { HubTransfarmer } from '../../../Components/Transformer/Masters/Hub-Transfarmer';
+import * as alasql from 'alasql';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
   selector: 'app-hub-list',
@@ -94,7 +96,7 @@ export class HubListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT HubCode Asset_Category_Code,assetGroupNameENG Asset_GroupName,' +
-      'isActive INTO XLSX("AssetGroupList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT hubCode HUB_Code,hubNameENG HUB_Name,' +
+      'isActive Status INTO XLSX("AssetGroupList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

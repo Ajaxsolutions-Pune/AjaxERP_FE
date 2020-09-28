@@ -263,6 +263,11 @@ import { AccessService } from './Components/Services/Masters/AccessService';
 import { AccessTransfarmer } from './Components/Transformer/Masters/Access-Transfarmer';
 import { AccessListComponent } from './views/Masters/Access/access-list.component';
 import { AccessComponent } from './views/Masters/Access/access.component';
+import { RolelevelComponent } from './views/Masters/Rolelevel/rolelevel.component';
+import { RolelevelListComponent } from './views/Masters/Rolelevel/rolelevel-list.component';
+import { RolelevelService } from './Components/Services/Masters/RolelevelService';
+import { RolelevelTransfarmer } from './Components/Transformer/Masters/Role-level.Transfarmer';
+import { RolelevelListResolverService } from './Components/Resolver/Masters/RoleLevel-List-Resolver.Service';
 
 @NgModule({
   imports: [
@@ -352,14 +357,14 @@ import { AccessComponent } from './views/Masters/Access/access.component';
     ProjectComponent, ProjectListComponent,
     TransmissionLineComponent, TransmissionLineListComponent, HubListComponent, HubComponent,
     ProcessFormMappingComponent, UserDeviceMappingComponent,
-    DeviceAssetMappingComponent, ContactListComponent,ContactComponent, AccessListComponent, AccessComponent
+    DeviceAssetMappingComponent, ContactListComponent, ContactComponent, AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
-    HubService, ContactService,AccessService,
+    HubService, ContactService, AccessService,
     CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
@@ -369,7 +374,7 @@ import { AccessComponent } from './views/Masters/Access/access.component';
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
-    HubTransfarmer, StateTransfarmer,ContactTransfarmer,AccessTransfarmer,
+    HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService,
@@ -381,10 +386,11 @@ import { AccessComponent } from './views/Masters/Access/access.component';
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
     DeviceListResolverService, ClusterListResolverService, TransmissionLineListResolverService,
-    HubListResolverService, ContactListResolverService,AccessListResolverService,
+    HubListResolverService, ContactListResolverService, AccessListResolverService,
+    ProcessListResolverService, RoleListResolverService,
     DialogTemplateComponent,
-    DialogService,
-    RoleService, RoleTransfarmer, RoleListResolverService,
+    DialogService, RolelevelListResolverService,
+    RoleService, RolelevelService, RoleTransfarmer, RolelevelTransfarmer,
     ProjectService, ProjectTransfarmer, ProjectListResolverService,
 
     ProcessFormMappingService, ProcessFormMappingTransfarmer, ProcessDataService, UserDeviceDataService,

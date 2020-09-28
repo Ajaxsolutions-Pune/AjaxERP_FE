@@ -64,19 +64,6 @@ export const navItems: NavData[] = [
         url: '/ProcessList',
         icon: 'icon-puzzle'
       },
-
-      {
-        name: 'Role',
-        url: '/RoleList',
-        icon: 'icon-puzzle'
-      },
-
-      /* {
-         name: 'Role Level',
-         url: '/Role-level',
-         icon: 'icon-puzzle'
-       },*/
-
       {
         name: 'Project',
         url: '/ProjectList',
@@ -98,11 +85,11 @@ export const navItems: NavData[] = [
         url: '/AssetGroupList',
         icon: 'icon-puzzle'
       },
-      // {
-      //   name: 'Asset',
-      //   url: '/AssetList',
-      //   icon: 'icon-puzzle'
-      // },
+      {
+        name: 'Asset',
+        url: '/AssetList',
+        icon: 'icon-puzzle'
+      },
 
       {
         name: 'Device',
@@ -232,18 +219,13 @@ export const navItems: NavData[] = [
     ]
   },
   {
-    name: 'Teritoring Master',
+    name: 'Territory Master',
     url: '/Reports',
     //   icon: 'fa fa-newspaper-o',
     children: [
       {
         name: 'Zone',
         url: '/ZoneList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Cluster',
-        url: '/ClusterList',
         icon: 'icon-puzzle'
       },
       {
@@ -254,6 +236,11 @@ export const navItems: NavData[] = [
       {
         name: 'Colour',
         url: '/ColourList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Cluster',
+        url: '/ClusterList',
         icon: 'icon-puzzle'
       },
       {
@@ -286,7 +273,17 @@ export const navItems: NavData[] = [
         name: 'Access',
         url: '/AccessList',
         icon: 'icon-puzzle'
-      }
+      },
+      {
+        name: 'Role',
+        url: '/RoleList',
+        icon: 'icon-puzzle'
+      },
+       {
+         name: 'Role Level',
+         url: '/RolelevelList',
+         icon: 'icon-puzzle'
+       },
     ]
 
   },

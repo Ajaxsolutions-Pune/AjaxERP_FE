@@ -64,6 +64,6 @@ export class BrandListComponent implements OnInit {
 
   ExportToExcel(): void {
     alasql('SELECT Brand_Code,Brand_Id,Brand_Name_ENg,Brand_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("brandList.xlsx",{headers:true}) FROM ?', [this.brands]);
+      'CreDate,ModDate,IsActive Status INTO XLSX("brandList.xlsx",{headers:true}) FROM ?', [this.brands]);
   }
 }

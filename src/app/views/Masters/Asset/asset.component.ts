@@ -545,4 +545,15 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
     }
   }
 
+  AssetGroupChange(event) {
+    const target = event.source.selected._element.nativeElement;
+    const selectedData = {
+      value: event.value,
+      text: target.innerText.trim()
+    };
+    
+    this.assetCategoryService.getAssetCategorysByGroupId(selectedData.value).subscribe(
+      (par) => this.assetCategoryObj = this.assetCategoryTransfarmer.AssetCategoryTransfarmers(par),
+      (err: any) => console.log(err));
+  }
 }

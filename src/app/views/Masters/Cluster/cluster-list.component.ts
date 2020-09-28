@@ -93,7 +93,7 @@ export class ClusterListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT clusterCode Cluster_Code,clusterNameENG Cluster_Name,isActive Is_Active' +
-      ' INTO XLSX("clusterList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT clusterCode Cluster_Code,clusterNameENG Cluster_Name,isActive Status' +
+      ' INTO XLSX("ClusterList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

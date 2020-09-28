@@ -128,21 +128,32 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
     this.bindObj.modifiedBy = localStorage.getItem('username');
     this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
     if (status !== 'Update') {
-     // this.bindObj.tlCode = null;
-      this.transmissionLineService.Save(this.transmissionLineTransfarmer.
-        TransmissionLineTransfarmer(this.bindObj)).subscribe(
-          (par) => {
-            if (par !== null) {
-              this.defaultLayoutComponent.Massage('',
-                'Data saved successfully !', 'modal-info');
-              ObjForm.reset();
-              this.router.navigate(['TransmissionLineList']);
-            } else {
-              this.defaultLayoutComponent.Massage('',
-                'Somethig Wrong', 'modal-info');
-            }
+      
+      this.transmissionLineService.getTransmissionLine(this.bindObj.tlCode).subscribe(
+        (par) => {
+          console.log('get');
+          console.log(par);
+          if (par !== null) {
+            this.defaultLayoutComponent.Massage('',
+            'This Transmission Line code already exist !', 'modal-danger');
+            return;
           }
-        );
+          this.transmissionLineService.Save(this.transmissionLineTransfarmer.
+            TransmissionLineTransfarmer(this.bindObj)).subscribe(
+              (par) => {
+                if (par !== null) {
+                  this.defaultLayoutComponent.Massage('',
+                    'Data saved successfully !', 'modal-info');
+                  ObjForm.reset();
+                  this.router.navigate(['TransmissionLineList']);
+                } else {
+                  this.defaultLayoutComponent.Massage('',
+                    'Somethig Wrong', 'modal-info');
+                }
+              }
+            );
+        },
+        (err: any) => console.log(err));
 
     } else {
       this.transmissionLineService.Update(this.transmissionLineTransfarmer.

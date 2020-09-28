@@ -1,0 +1,107 @@
+<main class="form-main">
+    <form #formRoleLevel="ngForm" [formGroup]="form" autocomplete="off">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Role Level</strong>
+                        </div>
+                        <div class="card-body">
+                           <!--<h6 class="text-right">* - Mandatory fields</h6>--> 
+                            <div class="row">
+                                <div class="col-md-4"></div>                            
+                                <mat-form-field class="col-md-2">
+                                    <input matInput
+                                    #RoleLevelID
+                                    spellcheck="false" [(ngModel)]="roleLevelobj.roleLevelId"
+                                    placeholder="Role Level Code"
+                                    formControlName="ControlRoleLevelId" >
+                                    <mat-error>
+                                    {{ formErrors['ControlRoleLevelId'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>   
+                               <!--<span class="Mandatory_Icon">*</span>-->  
+                                <mat-form-field class="col-md-4">
+                                  <input matInput
+                                    #RoleLevelName
+                                    spellcheck="false" [(ngModel)]="roleLevelobj.roleLevelDesc"
+                                    placeholder="Role Level Name *"
+                                    formControlName="ControlRoleLevelName" maxlength="50">                                    
+                                  <mat-error>
+                                    {{ formErrors['ControlRoleLevelName']}}
+                                  </mat-error>
+                                </mat-form-field>
+                               
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <mat-label>User Type</mat-label>
+                                    <mat-select required 
+                                    formControlName="ControluserType"
+                                     [(ngModel)]="roleLevelobj.userType">
+                                        <mat-option>User Type</mat-option>
+                                        <mat-option *ngFor="let obj of UserTypeDrp"
+                                         [value]="obj.listCode">
+                                          {{obj.listDescENG}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        {{ formErrors['ControluserType'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>                                    
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                      #RoleLevelName
+                                      spellcheck="false" [(ngModel)]="roleLevelobj.rolePriority"
+                                      placeholder="Role Priority " type="number"
+                                      formControlName="ControlrolePriority">                                    
+                                    <mat-error>
+                                      {{ formErrors['ControlrolePriority']}}
+                                    </mat-error>
+                                  </mat-form-field>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-sm-4">                                    
+                                    <mat-checkbox name="chkisActive"
+                                    #chkisActive 
+                                    formControlName="ControlisActive"
+                                     [(ngModel)]="roleLevelobj.isActive">Active
+                                    </mat-checkbox>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">                                    
+                                    <button mat-raised-button
+                                    [disabled]="!form.valid"
+                                    (click)="save(formRoleLevel)"
+                                    color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button mat-raised-button color="warn"
+                                         routerLink="/RolelevelList" >
+                                            Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </form>
+    </main>
+    <div style="display: none;"> {{RoleLevelobj | json}}</div>

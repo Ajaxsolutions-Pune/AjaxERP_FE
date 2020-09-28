@@ -4,6 +4,9 @@ import { environment } from '../../../Components/Module/environment';
 import { Access, AccessEntity } from '../../../Components/Module/Masters/Access.model';
 import { AccessTransfarmer } from '../../../Components/Transformer/Masters/Access-Transfarmer';
 
+import * as alasql from 'alasql';
+alasql['private'].externalXlsxLib = require('xlsx');
+
 @Component({
   selector: 'app-access-list',
   templateUrl: './access-list.component.html',
@@ -90,6 +93,6 @@ export class AccessListComponent implements OnInit {
 
 ExportToExcel(): void {
   alasql('SELECT accessId access_Code,accessName Access_Name,' +
-  'isActive INTO XLSX("AssetGroupList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+  'isActive Status INTO XLSX("AssetList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

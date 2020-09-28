@@ -94,7 +94,7 @@ export class TransmissionLineListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT TransmissionLineCode Asset_Category_Code,assetGroupNameENG Asset_GroupName,' +
-      'isActive INTO XLSX("AssetGroupList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT tlCode Transmission_Line_Code,tlNameENG Transmission_Line_Name,' +
+      'isActive Status INTO XLSX("TransmissionLineList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }
