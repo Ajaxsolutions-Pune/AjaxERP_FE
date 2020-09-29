@@ -57,7 +57,7 @@
                                 <div class="col-md-4">                                    
                                     <button mat-raised-button
                                     [disabled]="!form.valid"
-                                    (click)="save(formAccess)"
+                                    (click)="save()"
                                     color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp;
                                         <button mat-raised-button color="warn"
                                          routerLink="/AccessList" >
@@ -73,4 +73,4 @@
         </div>
     </form>
     </main>
-    <div style="display: none;"> {{Accessobj | json}}</div>
+    <div style="display: none;"> {{accessobj | json}}</div>

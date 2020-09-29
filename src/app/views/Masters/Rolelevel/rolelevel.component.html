@@ -88,7 +88,7 @@
                                 <div class="col-md-4">                                    
                                     <button mat-raised-button
                                     [disabled]="!form.valid"
-                                    (click)="save(formRoleLevel)"
+                                    (click)="save()"
                                     color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp;
                                         <button mat-raised-button color="warn"
                                          routerLink="/RolelevelList" >
@@ -104,4 +104,4 @@
         </div>
     </form>
     </main>
-    <div style="display: none;"> {{RoleLevelobj | json}}</div>
+    <div style="display: none;"> {{roleLevelobj | json}}</div>
