@@ -18,7 +18,6 @@ export class BrandService {
     ListUnits: Brand[];
 
     getBrands(): Observable<Brand[]> {
-        console.log(this.str + 'Brand/getList');
         return this.httpClient.get<Brand[]>(this.str + 'Brand/getList', this.env.httpOptions);
     }
 
@@ -38,9 +37,7 @@ export class BrandService {
 
     Update(Brand1: Brand): string {
         const Index = this.brands.findIndex(a => a.brandCode === Brand1.brandCode);
-        console.log(Index);
         this.brands[Index] = Brand1;
-        console.log(this.brands[Index]);
         return '';
     }
 

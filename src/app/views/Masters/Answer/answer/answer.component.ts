@@ -32,7 +32,6 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
     private defaultLayoutComponent: DefaultLayoutComponent,
     private router: Router, private formBuilder: FormBuilder) {
     super();
-    console.log(localStorage.getItem('username'));
     this.validationMessages = {
       ControlAnswerID: {
         required: 'Answer id is required.',
@@ -90,13 +89,9 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
 
     if (status !== 'Update') {
       this.answer.answerId = null;
-      console.log(this.answerTransfarmer.AnswerTransfarmer(this.answer));
-      // if (this.question.isActive === 'true') { this.question.isActive = '1'; } else { this.question.isActive = '0'; }
-
       this.answerService.Save(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
         (par) => {
           if (par.status === 'Inserted') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['AnswerList']);
@@ -108,12 +103,9 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
       );
 
     } else {
-      console.log(this.answerTransfarmer.AnswerTransfarmer(this.answer));
       this.answerService.Update(this.answerTransfarmer.AnswerTransfarmer(this.answer)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Updated') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['AnswerList']);

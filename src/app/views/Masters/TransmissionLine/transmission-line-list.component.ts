@@ -39,7 +39,6 @@ export class TransmissionLineListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       ouCode: null,
       projectCode: null,

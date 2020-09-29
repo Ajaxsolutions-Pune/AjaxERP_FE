@@ -29,7 +29,6 @@ export class ProcessListComponent implements OnInit {
         this._router.navigate(['login']);
       }
     this.processEntity = this.route.snapshot.data['ProcessList1'];
-    console.log(this.processEntity);
      this.processs = objTrans.processTransfarmers(this.processEntity);
     this.WithoutFilterprocess = this.processs;
     this.config = {

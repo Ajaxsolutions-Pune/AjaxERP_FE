@@ -67,7 +67,6 @@ export class AssetTransfarmer {
         return this.arrOject;
     }
     AssetTransfarmerEntity(element: AssetEntity): Asset {
-        console.log(element);
         this.Oject = new Asset();
         this.Oject = new Asset();
         this.Oject.ouCode = element.ouCode;

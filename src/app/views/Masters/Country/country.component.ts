@@ -28,7 +28,6 @@ export class CountryComponent implements OnInit {
 
   }
   save(countryForm: NgForm): void {
-    console.log(this.country.countryCode);
     this.countryService.Save(this.country).subscribe(
       () => {
         countryForm.reset();
@@ -74,7 +73,6 @@ export class CountryComponent implements OnInit {
 
     } else {
       this.countryService.getCountry(Id).pipe().subscribe(product => this.countryEntity = product);
-      console.log('Hiiii---  ' + this.countryEntity.countryCode);
        this.country = this.countryTransfarmer.CountryTransfarmerOne(this.countryEntity);
       JSON.stringify(this.countryEntity);
       status = 'Update';

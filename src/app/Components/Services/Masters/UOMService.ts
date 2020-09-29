@@ -31,7 +31,6 @@ export class UOMService {
     }
 
     getUnits(): Observable<UOM[]> {
-        console.log('hii');
         return this.httpClient.get<UOM[]>(this.str + '/Uom/getList', this.env.httpOptions);
     }
     getRole(): void {
@@ -45,9 +44,7 @@ export class UOMService {
 
     Update(Unit: UOM): string {
         const Index = this.Units.findIndex(a => a.uomCode === Unit.uomCode);
-        console.log(Index);
         this.Units[Index] = Unit;
-        console.log(this.Units[Index]);
         return '';
     }
 

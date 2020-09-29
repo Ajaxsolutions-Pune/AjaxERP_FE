@@ -80,9 +80,7 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
       this.bindObj.zoneCode = null;
       this.zoneService.Save(this.zoneTransfarmer.ZoneTransfarmer(this.bindObj)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Inserted') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['ZoneList']);
@@ -96,7 +94,6 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
     } else {
       this.zoneService.Update(this.zoneTransfarmer.ZoneTransfarmer(this.bindObj)).subscribe(
         (par) => {
-          console.log(par.status);
           if (par.status === 'Updated') {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');

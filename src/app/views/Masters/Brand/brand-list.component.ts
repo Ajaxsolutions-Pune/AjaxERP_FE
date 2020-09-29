@@ -32,7 +32,6 @@ export class BrandListComponent implements OnInit {
       (par) => this.brands = par,
       (err: any) => console.log(err));
     this.WithoutFilterBrands = this.brands;
-    console.log(this.brands);
     this.brand = {
       manufactureCode: null,
       brandCode: null,
@@ -40,7 +39,6 @@ export class BrandListComponent implements OnInit {
       brandDescUni: null,
       isActive: 1
     };
-    console.log(this.brands);
   }
 
   resultChanged(): void {

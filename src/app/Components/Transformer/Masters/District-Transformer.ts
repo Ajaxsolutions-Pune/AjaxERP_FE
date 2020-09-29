@@ -32,10 +32,8 @@ export class DistrictTransfarmer {
         return this.districts;
     }
     DistrictTransfarmerEntity(Entity: DistrictEntity): District {
-        console.log('byyy' + Entity.districtName);
         this.district = new District();
             this.district.districtCode = Entity.districtCode;
-            console.log(Entity.districtName);
             this.district.districtNameEng = Entity.districtName;
             this.district.districtNameUni = Entity.districtNameUni;
             this.district.stateCode = Entity.stateCode;

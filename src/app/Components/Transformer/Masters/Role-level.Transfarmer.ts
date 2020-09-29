@@ -46,7 +46,6 @@ export class RolelevelTransfarmer {
         if (Entity.isActive === '1') {
             this.rolelevel.isActive = 'true'.toString().trim();
         } else { this.rolelevel.isActive = ''.toString().trim(); }
-        console.log(this.rolelevel.isActive);
         return this.rolelevel;
     }
 

@@ -25,7 +25,6 @@ export class BrandComponent implements OnInit {
 
   }
   save(countryForm: NgForm): void {
-    console.log(status);
     if (status !== 'Update') {
       this.brand.brandCode = null;
       this.brandService.Save(this.brand).subscribe(
@@ -51,7 +50,6 @@ export class BrandComponent implements OnInit {
       brandDescUni: null,
       isActive: 1
     };
-    console.log(Id);
     if (Id === null || Id === '' || Id === '0') {
       this.brand = {
         manufactureCode: null,

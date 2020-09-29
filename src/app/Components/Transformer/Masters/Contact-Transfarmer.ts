@@ -73,7 +73,6 @@ export class ContactTransfarmer {
         return this.contacts;
     }
     ContactTransfarmerEntity(Entity: ContactEntity): Contact {
-        console.log(Entity);
         this.contact = new Contact();
         this.contact.contactCode = Entity.contactCode;
         this.contact.contactType = Entity.contactType;
@@ -125,7 +124,6 @@ export class ContactTransfarmer {
         if (Entity.isActive === '1') {
             this.contact.isActive = 'true'.toString().trim();
         } else { this.contact.isActive = ''.toString().trim(); }
-        console.log(this.contact.isActive);
         return this.contact;
     }
 

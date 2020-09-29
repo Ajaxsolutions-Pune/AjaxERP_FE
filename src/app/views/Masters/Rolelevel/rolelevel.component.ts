@@ -107,9 +107,7 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
       this.roleLevelobj.roleLevelId = null;
       this.RoleLevelService.Save(this.RoleLevelTransfarmer.RolelevelTransfarmer(this.roleLevelobj)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Inserted') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['RolelevelList']);
@@ -123,9 +121,7 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
     } else {
       this.RoleLevelService.Update(this.RoleLevelTransfarmer.RolelevelTransfarmer(this.roleLevelobj)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Updated') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['RolelevelList']);
@@ -168,7 +164,6 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
       this.RoleLevelService.getRolelevel(RoleLevel_Code).subscribe(
         (par) => {
           this.roleLevelEntity = par;
-          console.log(this.roleLevelEntity);
           this.roleLevelobj = this.RoleLevelTransfarmer.RolelevelTransfarmerEntity(this.roleLevelEntity);
         },
         (err: any) => console.log(err));

@@ -36,7 +36,6 @@ export class CastListComponent implements OnInit {
   ngOnInit() {
     this.Casts = this.castsService.getCasts();
     this.WithoutFilterCasts = this.Casts;
-    console.log(this.Casts);
     this.cast = {
       CastCategory: null,
       Id: null,

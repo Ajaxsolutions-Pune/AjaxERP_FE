@@ -18,11 +18,9 @@ export class AuthService {
     this.str = this.env.apiServiceIPPort;
   }
   Login(loginEntityObj: LogIn): Observable<Insertstatus> {
-    console.log(loginEntityObj);
     const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
     return this.httpClient.post<Insertstatus>
-      ('http://ajaxdevdbcl.eastus.cloudapp.azure.com:8085/AjaxErpBackEnd/authenticate',
-    // ('http://ajaxservercl.eastus.cloudapp.azure.com:8090/AjaxErpBackEnd/authenticate',    
+      ('http://ajaxdevdbcl.eastus.cloudapp.azure.com:8085/AjaxErpBackEnd/authenticate', 
         loginEntityObj,
         httpOptions).pipe(catchError(this.handleError));
   }

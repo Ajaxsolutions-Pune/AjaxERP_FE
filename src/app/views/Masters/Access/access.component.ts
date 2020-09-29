@@ -87,9 +87,7 @@ export class AccessComponent extends FormComponentBase implements OnInit, AfterV
       this.accessobj.accessId = null;
       this.accessService.Save(this.accessTransfarmer.AccessTransfarmer(this.accessobj)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Inserted') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['AccessList']);
@@ -103,9 +101,7 @@ export class AccessComponent extends FormComponentBase implements OnInit, AfterV
     } else {
       this.accessService.Update(this.accessTransfarmer.AccessTransfarmer(this.accessobj)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Updated') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['AccessList']);
@@ -144,7 +140,6 @@ export class AccessComponent extends FormComponentBase implements OnInit, AfterV
       this.accessService.getAccess(Access_Code).subscribe(
         (par) => {
           this.accessEntity = par;
-          console.log(this.accessEntity);
           this.accessobj = this.accessTransfarmer.AccessTransfarmerEntity(this.accessEntity);
         },
         (err: any) => console.log(err));

@@ -131,8 +131,6 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
       
       this.transmissionLineService.getTransmissionLine(this.bindObj.tlCode).subscribe(
         (par) => {
-          console.log('get');
-          console.log(par);
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
             'This Transmission Line code already exist !', 'modal-danger');

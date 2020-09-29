@@ -21,7 +21,6 @@ export class DistrictService {
     }
 
     getDistrict(DistrictCode: number): Observable<DistrictEntity> {
-        console.log(this.str + 'District/' + DistrictCode);
         return this.httpClient.get<DistrictEntity>(this.str + 'District/' + DistrictCode
         , this.env.httpOptions);
 

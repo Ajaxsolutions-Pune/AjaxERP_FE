@@ -35,7 +35,6 @@ export class TehsilComponent implements OnInit {
 
     this.districtDrpList = null;
     this.districtDrpList = this.districtTransfarmer.DistrictTransfarmers(this.districtEntity);
-    console.log(this.districtDrpList);
     if (this.tehsilEntity !== null && this.tehsilEntity !== undefined) {
       this.tehsil = this.tehsilTransfarmer.TehsilTransfarmerEntity(this.tehsilEntity);
 
@@ -44,10 +43,8 @@ export class TehsilComponent implements OnInit {
   }
   ngOnInit() {
     status = '';
-
   }
   save(tehsilForm: NgForm): void {
-    console.log(status);
     if (status !== 'Update') {
       this.tehsilService.Save(this.tehsil);
     } else {

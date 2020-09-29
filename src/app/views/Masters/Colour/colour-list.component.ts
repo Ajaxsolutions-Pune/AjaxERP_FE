@@ -43,7 +43,6 @@ export class ColourListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       colourCode: null,
       colourNameENG: null,

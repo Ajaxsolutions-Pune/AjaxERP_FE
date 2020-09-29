@@ -18,13 +18,11 @@ export class RoleService {
     }
     Listrole: Role[];
     getRoles(): Observable<RoleEntity[]> {
-        console.log(this.httpClient.get<RoleEntity[]>(this.str + '/Role/getList'));
         return this.httpClient.get<RoleEntity[]>(this.str + '/Role/getList', 
         this.env.httpOptions);
     }
 
     fillDrpAnswers(): Observable<RoleEntity[]> {
-        console.log(this.httpClient.get<RoleEntity[]>(this.str + '/Answer/getList'));
         return this.httpClient.get<RoleEntity[]>(this.str + '/Answer/getList?status=1', 
         this.env.httpOptions);
     }
@@ -36,7 +34,6 @@ export class RoleService {
     
     Save(saveEntityObj: Role): Observable<Insertstatus> {
         saveEntityObj.roleId = null;
-        console.log(this.str + '/Role');
         return this.httpClient.post<Insertstatus>(this.str + '/Role',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
@@ -53,14 +50,5 @@ export class RoleService {
             console.error('client side error', errorResponse.error.message);
         }
         return throwError('d');
-        const data = null; // call api
-        console.log(this.dialogService);
-        this.dialogService.openModal('Title1', 'Message Test', () => {
-            // confirmed
-            console.log('Yes');
-        }, () => {
-            // not confirmed
-            console.log('No');
-        });
     }
 }

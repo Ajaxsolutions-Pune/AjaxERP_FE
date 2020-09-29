@@ -39,7 +39,6 @@ export class AssetCategoryListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       assetCategoryCode: null,
       assetCategoryNameENG: null,

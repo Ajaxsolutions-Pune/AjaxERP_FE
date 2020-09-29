@@ -17,12 +17,11 @@ export class UserDeviceMappingTransfarmer {
         this.arrOject = [];
         Entity.forEach(element => {
             this.Oject = new UserDeviceMapping();
-           // console.log(element.adId);
             this.Oject.adId = element.adId;
             this.Oject.deviceId = element.deviceId;           
             this.Oject.loginId = element.loginId;
             this.Oject.loginIdText = element.loginIdText;
-            this.Oject.sortBy = '0'; //element.sortBy;           
+            this.Oject.sortBy = '0';   
                    
             if (element.isActive === '1') 
             {
@@ -62,13 +61,11 @@ export class UserDeviceMappingTransfarmer {
                 this.Oject.isActive = '0';
             }
             this.arrOjectEntity.push(this.Oject);
-            console.log('##### Transform -->>'+this.arrOjectEntity.values.toString); 
         });
         return this.arrOjectEntity;
     }
 
     UserDeviceMappingTransfarmerEntity(Entity: UserDeviceMappingEntity): UserDeviceMapping {
-        console.log(Entity);
         this.Oject = new UserDeviceMapping();        
         this.Oject.adId = Entity.adId;
         this.Oject.deviceId = Entity.deviceId;           

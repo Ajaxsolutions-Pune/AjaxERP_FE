@@ -23,7 +23,6 @@ export class CountryService {
     }
 
     getCountry(countrysId: string): Observable<CountryEntity> {
-        console.log(this.str + 'Country/' + countrysId);
         return this.httpClient.get<CountryEntity>(this.str + 'Country/'
             + countrysId, this.env.httpOptions).pipe(catchError(this.handleError));
     }

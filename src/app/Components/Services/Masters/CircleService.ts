@@ -33,8 +33,6 @@ export class CircleService {
     }
 
     Update(updateEntityObj: CircleEntity): Observable<CircleEntity> {
-        console.log(updateEntityObj.circleCode);
-        // tslint:disable-next-line:max-line-length
         return this.httpClient.post<CircleEntity>(this.str + '/Circle', updateEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }

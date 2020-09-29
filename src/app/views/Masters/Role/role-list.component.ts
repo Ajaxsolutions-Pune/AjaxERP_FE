@@ -68,7 +68,6 @@ alasql['private'].externalXlsxLib = require('xlsx');
         this.Resultrole = this.WithoutFilterRole;
 
         if (this.objRole.roleName !== null && this.objRole.roleName !== '') {
-          console.log(this.objRole.roleName.toString().toLowerCase());
           this.Resultrole = this.Resultrole.filter(SubResult =>
             SubResult.roleName.toLowerCase().indexOf(this.objRole.roleName.toString().toLowerCase()) !== -1);
           this.SerachCri = 1;

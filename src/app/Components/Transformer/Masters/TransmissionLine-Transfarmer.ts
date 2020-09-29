@@ -37,7 +37,6 @@ export class TransmissionLineTransfarmer {
         return this.transmissionLines;
     }
     TransmissionLineTransfarmerEntity(Entity: TransmissionLineEntity): TransmissionLine {
-        console.log(Entity);
         this.transmissionLine = new TransmissionLine();
         this.transmissionLine.ouCode = Entity.ouCode;
         this.transmissionLine.projectCode = Entity.projectCode;
@@ -50,13 +49,9 @@ export class TransmissionLineTransfarmer {
         this.transmissionLine.createdDate = Entity.createdDate;
         this.transmissionLine.modifiedBy = Entity.modifiedBy;
         this.transmissionLine.modifiedDate = Entity.modifiedDate;
-        console.log(Entity.isActive.toString().trim() === '1');
-        console.log(Entity.isActive);
-        // tslint:disable-next-line:max-line-length
         if (Entity.isActive === '1') {
             this.transmissionLine.isActive = 'true'.toString().trim();
         } else { this.transmissionLine.isActive = ''.toString().trim(); }
-        console.log(this.transmissionLine.isActive);
         return this.transmissionLine;
     }
 

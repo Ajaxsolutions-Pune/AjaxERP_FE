@@ -15,7 +15,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 import { AppComponent } from './app.component';
-// Import containers
 import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -31,23 +30,17 @@ import {
   AppFooterModule,
   AppSidebarModule,
 } from '@coreui/angular';
-
-// Import routing module
 import { AppRoutingModule, routes } from './app.routing';
-
-// Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component'; // import bn-ng-idle service
+import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component'; 
 import { DashboardService } from './Components/Services/Dashboard.service';
 
 
 import { LogIn } from './Components/Module/login.model';
 import { LogInService } from './Components/Services/LogIn.service';
 import { LogInComponent } from './Components/login/login.component';
-//import { User } from './Components/Module/User.model';
-//import { UserService } from './Components/Services/User.Service';
 import { User } from './Components/Module/Masters/User.model';
 import { UserService } from './Components/Services/Masters/UserService';
 import { BnNgIdleService } from 'bn-ng-idle';

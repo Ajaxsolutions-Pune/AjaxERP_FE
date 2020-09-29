@@ -17,8 +17,6 @@ export class DialogTemplateComponent {
         this.modalTitle = data.title;
         this.modalMessage = data.message;
         this.modalType = data.type;
-
-        console.log(data);
     }
 
 }

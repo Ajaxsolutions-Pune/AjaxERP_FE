@@ -34,7 +34,6 @@ export class ListUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.datePipe.transform(this.myDate, 'yyyy-MM-dd'));
     this.user = this.userService.getUsers();
     this.WithoutFilteruser = this.user;
     this.user1 = {
@@ -58,7 +57,6 @@ export class ListUserComponent implements OnInit {
   resultChanged(): void {
     this.SerachCri = 0;
     this.ResultUser = this.WithoutFilteruser;
-    console.log(this.user1.UserNo);
     if (this.user1.UserName !== null && this.user1.UserName !== '') {
       this.ResultUser = this.ResultUser.filter(SubResultUser =>
         SubResultUser.UserName.toLowerCase().indexOf(this.user1.UserName.toLowerCase()) !== -1);
@@ -70,11 +68,9 @@ export class ListUserComponent implements OnInit {
       this.SerachCri = 1;
     }
     if (this.SerachCri === 0) {
-      console.log('resul');
       this.ResultUser = this.WithoutFilteruser;
     }
     this.user = this.ResultUser;
-    console.log(this.user);
   }
   ExportToExcel(): void {
     // tslint:disable-next-line:max-line-length

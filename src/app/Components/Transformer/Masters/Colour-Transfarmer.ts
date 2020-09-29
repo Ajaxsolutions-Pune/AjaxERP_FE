@@ -31,7 +31,6 @@ export class ColourTransfarmer {
         return this.arrOject;
     }
     ColourTransfarmerEntity(Entity: ColourEntity): Colour {
-        console.log(Entity);
         this.Oject = new Colour();
         this.Oject.colourCode = Entity.colourCode;
         this.Oject.colourNameENG = Entity.colourNameENG;

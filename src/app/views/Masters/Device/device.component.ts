@@ -207,9 +207,7 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
       this.bindObj.deviceId = null;
       this.deviceService.Save(this.deviceTransfarmer.DeviceTransfarmer(this.bindObj)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Inserted') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this._router.navigate(['DeviceList']);

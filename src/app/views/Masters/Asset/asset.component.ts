@@ -510,12 +510,9 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
 
     if (status !== 'Update') {
       this.bindObj.assetCode = null;
-      console.log('this.bindObj');
-      console.log(this.bindObj);
       this.assetService.Save(this.assetTransfarmer.AssetTransfarmer(this.bindObj)).subscribe(
         (par) => {
           if (par.status === 'Inserted') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this._router.navigate(['AssetList']);
@@ -529,10 +526,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
     } else {
       this.assetService.Update(this.assetTransfarmer.AssetTransfarmer(this.bindObj)).subscribe(
         (par) => {
-          console.log(this.assetTransfarmer.AssetTransfarmer(this.bindObj));
-          console.log(par);
           if (par !== null) {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this._router.navigate(['AssetList']);

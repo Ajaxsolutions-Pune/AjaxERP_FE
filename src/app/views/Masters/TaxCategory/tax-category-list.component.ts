@@ -33,7 +33,6 @@ export class TaxCategoryListComponent implements OnInit {
   ngOnInit() {
     this.taxcategorys = this.taxcategorysService.getTaxCategorys();
     this.WithoutFilterTaxCategorys = this.taxcategorys;
-    console.log(this.taxcategorys);
     this.TaxCategory = {
       Id: null,
       TaxCategory_Code: null,

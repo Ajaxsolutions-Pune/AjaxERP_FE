@@ -24,7 +24,6 @@ export class StateService {
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     getState(StateCode: string): Observable<StateEntity[]> {
-        console.log(this.str + '/State/' + StateCode);
         return this.httpClient.get<StateEntity[]>(this.str + 'State/' + StateCode
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }

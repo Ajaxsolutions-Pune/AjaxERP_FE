@@ -32,11 +32,8 @@ export class QuestionTypeComponent implements OnInit {
   save(qaTypeForm: NgForm): void {
     if (status !== 'Update') {
       this.bindObj.qaTypeCode = null;
-      console.log('hii');
-      console.log(this.bindObj);
       this.qaTypeService.Save(this.qaTypeTransfarmer.QaTypeTransfarmer(this.bindObj)).subscribe(
         (par) => {
-          console.log(par);
         }
       );
     } else {

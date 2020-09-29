@@ -90,7 +90,6 @@ export class StateComponent implements OnInit {
       status = '';
 
     } else {
-      console.log(this.stateService.getState(StateCode)[0]);
       this.state = this.stateTransfarmer.StateTransfarmerEntity(this.stateService.getState(StateCode)[0]);
       status = 'Update';
     }

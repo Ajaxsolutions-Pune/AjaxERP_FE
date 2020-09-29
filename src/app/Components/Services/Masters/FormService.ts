@@ -17,17 +17,14 @@ export class FormService {
     }
     ListForm: FormObj[];
     getForms(): Observable<FormEntity[]> {
-        console.log(this.str + '/Form/getList');
         return this.httpClient.get<FormEntity[]>(this.str + '/Form/getList', this.env.httpOptions);
     }
 
     fillDrpForms(): Observable<FormEntity[]> {
-        console.log(this.str + '/Form/getList');
         return this.httpClient.get<FormEntity[]>(this.str + '/Form/getList?status=1', this.env.httpOptions);
     }
 
     fillDrpFormsByProcessId(): Observable<FormEntity[]> {
-        console.log(this.str + '/Form/getList');
         return this.httpClient.get<FormEntity[]>(this.str + '/Form/getList?status=1', this.env.httpOptions);
     }
 
@@ -45,7 +42,6 @@ export class FormService {
     }
 
     Update(updateEntityObj: FormEntity): Observable<Insertstatus> {
-        console.log(this.str + '/Form');
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<Insertstatus>(this.str + '/Form', updateEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));

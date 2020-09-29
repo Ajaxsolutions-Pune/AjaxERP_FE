@@ -43,7 +43,6 @@ export class StateTransfarmer {
 
     StateTransfarmerEntity(Entity: StateEntity): State {
         this.state = new State();
-        console.log(Entity);
         this.state.state_Code = Entity.stateCode;
         this.state.Country_Code = Entity.countryCode;
         this.state.State_Name_Uni = Entity.stateNameUni;

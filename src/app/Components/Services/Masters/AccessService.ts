@@ -44,13 +44,8 @@ export class AccessService {
             console.error('client side error', errorResponse.error.message);
         }
         return throwError('d');
-        console.log(this.dialogService);
         this.dialogService.openModal('Title1', 'Message Test', () => {
-            // confirmed
-            console.log('Yes');
         }, () => {
-            // not confirmed
-            console.log('No');
         });
     }
 }

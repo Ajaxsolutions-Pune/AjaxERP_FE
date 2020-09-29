@@ -17,7 +17,6 @@ export class TehsilService {
     }
     ListDistrict: Tehsil[];
     getTehsils(): Observable<Tehsil[]> {
-        console.log('ji');
         return this.httpClient.get<Tehsil[]>(this.str + '/Tehsil/getList'
         , this.env.httpOptions);
     }
@@ -28,7 +27,6 @@ export class TehsilService {
     }
 
     getTehsil(TehsilCode: number): Observable<TehsilEntity> {
-        console.log(this.str + 'Tehsil/' + TehsilCode);
         return this.httpClient.get<TehsilEntity>(this.str + 'Tehsil/' + TehsilCode
         , this.env.httpOptions);
 
@@ -42,7 +40,6 @@ export class TehsilService {
 
     }
     Update(tehsil: Tehsil): Observable<TehsilEntity> {
-        console.log(this.str + 'Tehsil/');
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<TehsilEntity>(this.str + 'State', tehsil
         , this.env.httpOptions).pipe(catchError(this.handleError));

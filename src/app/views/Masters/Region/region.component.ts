@@ -55,7 +55,6 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
       this.bindObj.regionCode = null;
       this.regionService.Save(this.regionTransfarmer.RegionTransfarmer(this.bindObj)).subscribe(
         (par) => {
-          console.log(par);
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
@@ -112,7 +111,6 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
   }
 
   omit_special_char(event) {
-    console.log('omit_special_char');
     let k;
     k = event.charCode;  //         k = event.keyCode;  (Both can be used)
     return ((k > 64 && k < 91) || (k > 96 && k < 123) || k === 8 || k === 32 || (k >= 48 && k <= 57));

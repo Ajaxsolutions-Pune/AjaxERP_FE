@@ -75,12 +75,10 @@ export class FormQueAnsMappingTransfarmer {
                 this.Oject.isActive = '0';
             }
             this.arrOjectEntity.push(this.Oject);
-            console.log('##### Transform -->>'+this.arrOjectEntity.values.toString); 
         });
         return this.arrOjectEntity;
     }
     FormQueAnsMappingTransfarmerEntity(Entity: FormQueAnsMappingEntity): FormQueAnsMapping {
-        console.log(Entity);
         this.Oject = new FormQueAnsMapping();
         this.Oject.fqamId = Entity.fqamId;
         this.Oject.formId = Entity.formId;

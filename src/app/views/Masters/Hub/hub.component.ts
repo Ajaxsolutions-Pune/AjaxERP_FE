@@ -133,8 +133,6 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
       
       this.hubService.getHub(this.bindObj.hubCode).subscribe(
         (par) => {
-          console.log('get');
-          console.log(par);
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
             'This hub code already exist !', 'modal-danger');
@@ -143,9 +141,6 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
           this.hubService.Save(this.hubTransfarmer.
             HubTransfarmer(this.bindObj)).subscribe(
               (par) => {
-                console.log(this.hubTransfarmer.
-                  HubTransfarmer(this.bindObj));
-                console.log(par);
                 if (par !== null) {
                   this.defaultLayoutComponent.Massage('',
                     'Data saved successfully !', 'modal-info');
@@ -164,8 +159,6 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
       this.hubService.Update(this.hubTransfarmer.
         HubTransfarmer(this.bindObj)).subscribe(
           (par) => {
-            console.log(this.hubTransfarmer.
-              HubTransfarmer(this.bindObj));
             if (par !== null) {
               this.defaultLayoutComponent.Massage('',
                 'Data saved successfully !', 'modal-info');

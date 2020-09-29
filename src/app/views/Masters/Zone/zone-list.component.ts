@@ -42,7 +42,6 @@ export class ZoneListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       zoneCode: null,
       zoneNameENG: null,

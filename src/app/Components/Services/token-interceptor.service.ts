@@ -6,10 +6,6 @@ export class TokenInterceptorService implements HttpInterceptor {
 
     constructor() { }
     intercept(req, next) {
-
-        console.log('localStorage');
-        console.log(localStorage.getItem('user'));
-        // tslint:disable-next-line:max-line-length
         let token = '';
         if (localStorage.getItem('token') !== null && localStorage.getItem('token') !== '') {
             token = localStorage.getItem('token');

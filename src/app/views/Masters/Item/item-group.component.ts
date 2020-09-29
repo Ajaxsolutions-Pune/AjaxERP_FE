@@ -24,7 +24,6 @@ export class ItemGroupComponent implements OnInit {
       IsActive: null,
     };
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getItemGroup(str); });
-    console.log(this.itemGroup.Group_Code);
   }
   save(countryForm: NgForm): void {
     if (status !== 'Update') {

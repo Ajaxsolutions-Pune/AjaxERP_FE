@@ -42,7 +42,6 @@ export class AccessTransfarmer {
         if (Entity.isActive === '1') {
             this.access.isActive = 'true'.toString().trim();
         } else { this.access.isActive = ''.toString().trim(); }
-        console.log(this.access.isActive);
         return this.access;
     }
 

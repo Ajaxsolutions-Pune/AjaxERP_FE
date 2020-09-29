@@ -35,7 +35,6 @@ export class EditDialogComponent implements OnInit {
     private formService: FormService,
     private formTransfarmer: FormTransfarmer,
     @Inject(MAT_DIALOG_DATA) public data: FormQueAnsMapping, public dataService: DataService) {
-      console.log(data);
   }
   formControl = new FormControl('', [
     Validators.required

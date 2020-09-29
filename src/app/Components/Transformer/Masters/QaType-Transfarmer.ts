@@ -24,7 +24,6 @@ export class QaTypeTransfarmer {
         return this.arrOject;
     }
     QaTypeTransfarmerEntity(Entity: QaTypeEntity): QaType {
-        console.log(Entity);
         this.Oject = new QaType();
         this.Oject.qaTypeCode = Entity.qaTypeCode;
         this.Oject.qaTypeDesc = Entity.qaTypeDesc;

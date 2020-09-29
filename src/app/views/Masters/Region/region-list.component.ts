@@ -43,7 +43,6 @@ export class RegionListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       regionCode: null,
       sortBy: null,

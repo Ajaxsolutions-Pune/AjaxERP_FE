@@ -137,9 +137,6 @@ export class ContactComponent extends FormComponentBase implements OnInit, After
       this.contactService.Save(this.contactTransfarmer.
         ContactTransfarmer(this.bindObj)).subscribe(
           (par) => {
-            console.log(this.contactTransfarmer.
-              ContactTransfarmer(this.bindObj));
-            console.log(par);
             if (par !== null) {
               this.defaultLayoutComponent.Massage('',
                 'Data saved successfully !', 'modal-info');
@@ -156,8 +153,6 @@ export class ContactComponent extends FormComponentBase implements OnInit, After
       this.contactService.Update(this.contactTransfarmer.
         ContactTransfarmer(this.bindObj)).subscribe(
           (par) => {
-            console.log(this.contactTransfarmer.
-              ContactTransfarmer(this.bindObj));
             if (par !== null) {
               this.defaultLayoutComponent.Massage('',
                 'Data saved successfully !', 'modal-info');

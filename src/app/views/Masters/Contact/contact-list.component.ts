@@ -37,7 +37,6 @@ export class ContactListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       isActive: '3',
       contactCode: null,

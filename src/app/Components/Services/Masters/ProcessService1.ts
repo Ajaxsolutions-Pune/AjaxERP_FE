@@ -16,7 +16,6 @@ export class ProcessService1 {
         this.str = this.env.apiServiceIPPort;
     }
     getprocesss(): Observable<ProcessEntity[]> {
-        console.log(this.str + '/Process/getList');
         return this.httpClient.get<ProcessEntity[]>(this.str + '/Process/getList'
             , this.env.httpOptions);
     }
@@ -27,7 +26,6 @@ export class ProcessService1 {
     }
 
     fillDrpProcess(): Observable<ProcessEntity[]> {
-        console.log(this.str + '/Process/getList');
         return this.httpClient.get<ProcessEntity[]>(this.str + '/Process/getList?status=1', this.env.httpOptions);
     }
 

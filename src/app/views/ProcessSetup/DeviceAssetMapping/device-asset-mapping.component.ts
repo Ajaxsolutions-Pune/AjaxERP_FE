@@ -115,7 +115,6 @@ export class DeviceAssetMappingComponent extends FormComponentBase
   }
 
   save(): void {
-    console.log(this.DeviceId);
     if (this.DeviceId === undefined) {
       this.defaultLayoutComponent.Massage('Somethig Wrong',
         'Please select device name', 'modal-danger');
@@ -134,19 +133,14 @@ export class DeviceAssetMappingComponent extends FormComponentBase
       element.modifiedBy = localStorage.getItem('username');
       element.modifiedDate = this.globalService.GerCurrntDateStamp();
     });
-    console.log(this.deviceAssetMappingTransfarmer.
-      ObjectToEntityDeviceAssetMappingTransfarmers(this.dataSource.filteredData));
     this.objDeviceAssetMapping = [];
     this.objDeviceAssetMapping = this.dataSource.filteredData.filter(e => {
-      console.log(e.updateFlag);
     });   
     
     this.deviceAssetMappingService.Save(this.deviceAssetMappingTransfarmer.
       ObjectToEntityDeviceAssetMappingTransfarmers (this.insertData.dataChange.value)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Success') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['DeviceAssetMapping']);
