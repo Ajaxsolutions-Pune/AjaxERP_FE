@@ -9,7 +9,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4"></div>
+                                <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
                                     <input matInput
                                     placeholder="Project ID"
@@ -21,10 +21,6 @@
                                         {{ formErrors['ControlProjectID'] }}
                                     </mat-error>
                                 </mat-form-field>
-                                <div class="col-md-4"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"></div>
                                 <mat-form-field class="col-md-4">
                                     <input matInput
                                     placeholder="Project"
@@ -36,11 +32,45 @@
                                         {{ formErrors['ControlProject'] }}
                                     </mat-error>
                                 </mat-form-field>
-                                <div class="col-md-4"></div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>                               
+                                <mat-form-field color="accent" class="col-md-4">        
+                                    <mat-label>Project Type</mat-label>
+                                    <mat-select  
+                                    formControlName="ControlProjectType"                                                            
+                                    [(ngModel)]="project.projectTypeCode">
+                                    <mat-option>Select</mat-option>
+                                    <mat-option *ngFor="let prjType of prjTypeDrp"
+                                    [value]="prjType.listCode">
+                                    {{prjType.listDescENG}}
+                                    </mat-option>
+                                    </mat-select>
+                                   <mat-error>
+                                      {{ formErrors['ControlProjectType'] }}
+                                  </mat-error>
+                                  </mat-form-field> 
+                                  <mat-form-field color="accent" class="col-md-4">        
+                                    <mat-label>Project Group</mat-label>
+                                    <mat-select  
+                                    formControlName="ControlProjectGroup"                                                            
+                                    [(ngModel)]="project.projectGroupCode">
+                                    <mat-option>Select</mat-option>
+                                    <mat-option *ngFor="let prjGroup of prjGroupDrp"
+                                    [value]="prjGroup.listCode">
+                                    {{prjGroup.listDescENG}}
+                                    </mat-option>
+                                    </mat-select>
+                                   <mat-error>
+                                      {{ formErrors['ControlProjectGroup'] }}
+                                  </mat-error>
+                                  </mat-form-field>       
+                                <div class="col-md-2"></div>
                             </div>
                           <div class="row">
-                                <div class="col-md-4"></div>
-                                <mat-form-field class="col-md-4">
+                                <div class="col-md-2"></div>
+                                <mat-form-field class="col-md-8">
                                     <input matInput
                                     placeholder="Project Description"
                                     [(ngModel)]="project.projectDescription"    
@@ -48,10 +78,10 @@
                                     #txtProjectDesc        
                                     name="txtProjectDesc">                                  
                                 </mat-form-field>
-                                <div class="col-md-4"></div>
+                                <div class="col-md-8"></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"></div>
+                                <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
                                     <input matInput
                                     placeholder="Start Date"
@@ -60,11 +90,6 @@
                                     #txtProjectStartDate                               
                                     name="txtProjectStartDate">                                  
                                 </mat-form-field>
-                                <div class="col-md-4"></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"></div>
                                 <mat-form-field class="col-md-4">
                                     <input matInput
                                     placeholder="End Date"
@@ -73,24 +98,26 @@
                                     #txtProjectEndDate                         
                                     name="txtProjectEndDate">                                    
                                 </mat-form-field>
-                                <div class="col-md-4"></div>
-                            </div>
+                                <div class="col-md-2"></div>
+                            </div>                           
 
                             <div class="row">
-                                <div class="col-md-4"></div>
-                                <mat-form-field class="col-md-4">
-                                    <input matInput
-                                    placeholder="Access Type"
-                                    [(ngModel)]="project.accessType"  
-                                    formControlName="ControlAccessType"    
-                                    #txtAccessType                          
-                                    name="txtAccessType">                                    
-                                </mat-form-field>
-                                <div class="col-md-4"></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"></div>
+                                <div class="col-md-2"></div>
+                                <mat-form-field color="accent" class="col-md-4">        
+                                    <mat-label>Project Manager</mat-label>
+                                    <mat-select  
+                                    formControlName="ControlProjectManager"                                                            
+                                    [(ngModel)]="project.projectManagerCode">
+                                    <mat-option>Select</mat-option>
+                                    <mat-option *ngFor="let emp of employeeDrp"
+                                    [value]="emp.employeeCode">
+                                    {{emp.firstNameENG}} {{emp.middleNameENG}} {{emp.surnameNameENG}}
+                                    </mat-option>
+                                    </mat-select>
+                                   <mat-error>
+                                      {{ formErrors['ControlProjectManager'] }}
+                                  </mat-error>
+                                  </mat-form-field>    
                                 <mat-form-field class="col-md-4">
                                     <input matInput
                                     placeholder="Priority"
@@ -99,22 +126,11 @@
                                     #txtPriority                         
                                    name="txtPriority">                                   
                                 </mat-form-field>
-                                <div class="col-md-4"></div>
-                            </div>
+                                <div class="col-md-2"></div>
+                            </div>                            
 
                             <div class="row">
-                                <div class="col-md-4"></div>
-                                <div class="col-sm-4" style="padding-top: 20px;">
-                                    <mat-checkbox name="chkisTimesheetRequire"   
-                                    formControlName="ControlisTimesheetRequire"                                
-                                    [(ngModel)]="project.timesheetRequired">Time Sheet Required
-                                    </mat-checkbox>
-                                </div>
-                                <div class="col-md-4"></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"></div>
+                                <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
                                     <input matInput
                                     placeholder="Main Account Code"
@@ -123,11 +139,6 @@
                                     #txtMainAccountCode                          
                                     name="txtMainAccountCode">                                   
                                 </mat-form-field>
-                                <div class="col-md-4"></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4"></div>
                                 <mat-form-field class="col-md-4">
                                     <input matInput
                                     placeholder="Budget"
@@ -136,19 +147,25 @@
                                     #txtBudget                          
                                     name="txtBudget">                                   
                                 </mat-form-field>
-                                <div class="col-md-4"></div>
-                            </div>
+                                <div class="col-md-2"></div>
+                            </div>                           
 
                             <div class="row">
-                                <div class="col-md-4"></div>
+                                <div class="col-md-2"></div>
+                                <div class="col-sm-4" style="padding-top: 20px;">
+                                    <mat-checkbox name="chkisTimesheetRequire"   
+                                    formControlName="ControlisTimesheetRequire"                                
+                                    [(ngModel)]="project.timesheetRequired">Time Sheet Required
+                                    </mat-checkbox>
+                                </div>
                                 <div class="col-sm-4" style="padding-top: 20px;">
                                     <mat-checkbox name="chkisActive"
                                     #chkisActive
                                     formControlName="ControlisActive"
                                      [(ngModel)]="project.isActive">Active
                                     </mat-checkbox>
-                                </div>
-                                <div class="col-md-4"></div>
+                                </div>                               
+                                <div class="col-md-2"></div>
                             </div> 
 
                         </div>
@@ -173,4 +190,4 @@
         </div>
     </form>
 </main>
-<div> {{project | json}}</div>
+  <!--<div> {{project | json}}</div>-->

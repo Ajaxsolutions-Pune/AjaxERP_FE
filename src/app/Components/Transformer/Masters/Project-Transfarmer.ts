@@ -25,7 +25,10 @@ export class ProjectTransfarmer {
             this.project.projectDescription= element.projectDescription;
             this.project.startDate= element.startDate;
             this.project.endDate = element.endDate;
-            this.project.accessType = element.accessType;
+            this.project.projectTypeCode = element.projectTypeCode;
+            this.project.projectGroupCode = element.projectGroupCode;
+            this.project.customerCode = element.customerCode;
+            this.project.projectManagerCode = element.projectManagerCode;          
             this.project.priority = element.priority;          
             if (element.timesheetRequired === '1') {
                 this.project.timesheetRequired = 'Yes'.toString().trim();
@@ -52,10 +55,12 @@ export class ProjectTransfarmer {
         this.project.projectName = Entity.projectName;
         this.project.projectDescription= Entity.projectDescription;
         this.project.startDate= Entity.startDate;
-        this.project.endDate = Entity.endDate;
-        this.project.accessType = Entity.accessType;
+        this.project.endDate = Entity.endDate;      
+        this.project.projectTypeCode = Entity.projectTypeCode;
+        this.project.projectGroupCode = Entity.projectGroupCode;
+        this.project.customerCode = Entity.customerCode;
+        this.project.projectManagerCode = Entity.projectManagerCode;  
         this.project.priority = Entity.priority;
-
         //this.project.timesheet_required = Entity.timesheet_required;
 
         if (Entity.timesheetRequired === '1') 
@@ -86,7 +91,10 @@ export class ProjectTransfarmer {
         this.projectEntity.projectDescription= Project1.projectDescription;
         this.projectEntity.startDate= Project1.startDate;
         this.projectEntity.endDate = Project1.endDate;
-        this.projectEntity.accessType = Project1.accessType;
+        this.projectEntity.projectTypeCode = Project1.projectTypeCode;
+        this.projectEntity.projectGroupCode = Project1.projectGroupCode;
+        this.projectEntity.customerCode = Project1.customerCode;
+        this.projectEntity.projectManagerCode = Project1.projectManagerCode;  
         this.projectEntity.priority = Project1.priority;
         
         //this.projectEntity.timesheet_required = Project1.timesheet_required;

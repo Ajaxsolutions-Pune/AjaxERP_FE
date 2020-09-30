@@ -9,7 +9,9 @@ import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
 import { environment } from '../../../Components/Module/environment';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
-
+import { RoleLevel } from '../../../Components/Module/Masters/RoleLevel.model';
+import { RoleLevelService} from '../../../Components/Services/Masters/RoleLevelService';
+import { RoleLevelTransfarmer} from '../../../Components/Transformer/Masters/RoleLevel-Transfarmer';
 @Component({
     selector: 'app-role',
     templateUrl:'./Role.component.html'     
@@ -17,6 +19,7 @@ import { GlobalService } from '../../../Components/Services/GlobalServices/Globa
 
   export class RoleComponent extends FormComponentBase implements OnInit, AfterViewInit 
   {
+    roleLevel: RoleLevel[];  
     // @ts-ignore
     @ViewChild('txtRoleID') firstItem: ElementRef;
     form!: FormGroup;
@@ -25,12 +28,16 @@ import { GlobalService } from '../../../Components/Services/GlobalServices/Globa
     roleEntity: RoleEntity;
     str: string;
     env = environment;
+    
 
     constructor(private route: ActivatedRoute,
       private roleTransfarmer: RoleTransfarmer,
       private defaultLayoutComponent: DefaultLayoutComponent,
       private roleService: RoleService,
       private globalService: GlobalService,
+      private roleLevelService: RoleLevelService,
+      private roleLevelTransfarmer: RoleLevelTransfarmer,
+     
       private router: Router, private formBuilder: FormBuilder) 
     {
       super();
@@ -50,6 +57,12 @@ import { GlobalService } from '../../../Components/Services/GlobalServices/Globa
     }
 
     ngOnInit() {
+ 
+      this.roleLevelService.fillDrpRoleLevels().subscribe(
+        (par) => this.roleLevel = this.roleLevelTransfarmer.RoleLevelTransfarmers(par),
+        (err: any) => console.log(err));
+
+
         this.form = this.formBuilder.group({
           ControlroleId: ['', []],
           ControlroleName: ['', [Validators.required]],

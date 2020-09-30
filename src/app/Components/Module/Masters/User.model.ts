@@ -21,7 +21,7 @@ export class User {
     createdBy: string;
     createdDate: string;
     modifiedBy: string;
-    modifiedDate: string;
+    modifiedDate: string;      
 }
 
 export class UserEntity { 

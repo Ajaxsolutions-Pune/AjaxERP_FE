@@ -50,10 +50,12 @@ import { LogInComponent } from './Components/login/login.component';
 //import { UserService } from './Components/Services/User.Service';
 import {User } from './Components/Module/Masters/User.model';
 import {UserService} from './Components/Services/Masters/UserService';
+
+
 import { BnNgIdleService } from 'bn-ng-idle';
 import { RouterModule } from '@angular/router';
-import { ListUserComponent } from './views/Masters/User/List-user.component';
-import { UserMasterComponent } from './views/Masters/User/user-master.component';
+import { UserListComponent } from './views/Masters/User/List-user.component';
+import { UserComponent } from './views/Masters/User/user-master.component';
 import { ListUOMComponent } from './views/Masters/UOM/list-uom.component';
 import { UnitComponent } from './views/Masters/UOM/unit.component';
 import { UOMService } from './Components/Services/Masters/UOMService';
@@ -248,13 +250,16 @@ import { ContactListResolverService } from './Components/Resolver/Masters/Contac
 import { ContactService } from './Components/Services/Masters/ContactService';
 import { ProcessDataService } from './views/ProcessSetup/ProcessFormMapping/processdata.service';
 import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/userdevicedata.service';
-
 import { DeviceAssetAddDialogComponent } from './views/ProcessSetup/DeviceAssetMapping/dialogs/add/deviceassetadd.dialog.component';
 import { DeviceAssetEditDialogComponent } from './views/ProcessSetup/DeviceAssetMapping/dialogs/edit/deviceassetedit.dialog.component';
 import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMapping/device-asset-mapping.component';
 import { DeviceAssetMappingService } from './Components/Services/ProcessSetup/DeviceAssetMappingService';
 import { DeviceAssetMappingTransfarmer } from './Components/Transformer/ProcessSetup/DeviceAssetMapping-Transfarmer';
 import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/deviceassetdata.service';
+import { RoleLevelService } from './Components/Services/Masters/RoleLevelService';
+import { RoleLevel } from './Components/Module/Masters/RoleLevel.model';
+import { RoleLevelTransfarmer } from './Components/Transformer/Masters/RoleLevel-Transfarmer';
+import { UserListResolverService } from './Components/Resolver/Masters/User-List-Resolver.Service';
 
 @NgModule({
   imports: [
@@ -320,7 +325,7 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
     DeviceAssetEditDialogComponent,
     AppComponent, ...APP_CONTAINERS, P404Component, P500Component, LogInComponent,
     DialogTemplateComponent,
-    ListUserComponent, UserMasterComponent, DashboardComponent, ListUOMComponent,
+    UserListComponent, UserComponent, DashboardComponent, ListUOMComponent,
     CountryComponent, UnitComponent, CountryListComponent, BrandListComponent,
     TaxRateListComponent, MyErrorStateMatcher,
     BrandComponent, StateComponent, StateListComponent, CityListComponent, CityComponent,
@@ -348,6 +353,7 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
+    RoleLevelService, RoleLevel,UserComponent,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
@@ -377,11 +383,13 @@ import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/
     DialogTemplateComponent,
     DialogService,
     RoleService, RoleTransfarmer, RoleListResolverService,
+    UserListResolverService,
     ProjectService, ProjectTransfarmer, ProjectListResolverService,
 
     ProcessFormMappingService, ProcessFormMappingTransfarmer, ProcessDataService, UserDeviceDataService,
     ProcessDataService,
     UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer,DeviceAssetMappingService,
+    RoleLevelTransfarmer,
     DeviceAssetDataService,
     DeviceAssetMappingTransfarmer,
     {

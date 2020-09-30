@@ -1,7 +1,6 @@
 <div class="container">
-    <h3 mat-dialog-title>Add New User Device Mapping</h3>
-  
-    <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" autocomplete="off">
+    <h3 mat-dialog-title>Add New Device Asset Mapping</h3>
+   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" autocomplete="off">
       <div class="form">
         <mat-form-field color="accent">
           <input matInput #daId class="form-control" placeholder="Id" 
@@ -16,11 +15,11 @@
           <mat-label>Asset</mat-label>
           <mat-select  (selectionChange)="AssetsChange($event)"
           required name="Assets" #input
-          [(ngModel)]="data.assetCode">
+          [(ngModel)]="data.roleLevelId">
           <mat-option>Asset</mat-option>
-          <mat-option *ngFor="let asset of asset"
-           [value]="asset.assetCode">
-            {{asset.assetNameENG}}
+          <mat-option *ngFor="let roleLevel of roleLevel"
+           [value]="roleLevel.roleLevelId">
+            {{roleLevel.assetNameENG}}
           </mat-option>
           </mat-select>
          <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>-->

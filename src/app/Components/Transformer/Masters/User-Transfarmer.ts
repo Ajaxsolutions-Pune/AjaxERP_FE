@@ -14,10 +14,11 @@ export class UserTransfarmer {
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
     }
-    UserTransfarmers(Entity: UserEntity[]): User[] {
+    UserTransfarmers(Entity: User[]): UserEntity[] {
         this.users = [];
         Entity.forEach(element => {
-            this.user = new User();            
+            this.user = new User();       
+            this.user.ouCode = '12';     
             this.user.id = element.id;
             this.user.loginID = element.loginID;
             this.user.pwd = element.pwd;
@@ -28,14 +29,28 @@ export class UserTransfarmer {
             this.user.mobileNo = element.mobileNo;
             this.user.pwdChangedDate = element.pwdChangedDate;
             this.user.pwdExpiryDate = element.pwdExpiryDate ;
-            this.user.isBlocked = element.isBlocked ;
+            //this.user.isBlocked = element.isBlocked ;
+            if (element.isBlocked === '1') 
+            { 
+                this.user.isBlocked = 'Block'.toString().trim(); 
+            } else 
+            { 
+                this.user.isBlocked = 'Unblock'.toString().trim(); 
+            }
             this.user.userGroupCode = element.userGroupCode ;            
             this.user.entityCode = element.entityCode ;
             this.user.entityBranchCode = element.entityBranchCode ;
             this.user.desigination = element.desigination ;
-            this.user.isPswdChanged = element.isPswdChanged;
+            //this.user.isPswdChanged = element.isPswdChanged;
             this.user.desigination = element.desigination ;
-            this.user.isPswdChanged = element.isPswdChanged;         
+            //this.user.isPswdChanged = element.isPswdChanged;      
+            if (element.isPswdChanged === '1') 
+            { 
+                this.user.isPswdChanged = 'Changed'.toString().trim(); 
+            } else 
+            { 
+                this.user.isPswdChanged = 'Not Changed'.toString().trim(); 
+            }   
             this.user.createdBy = element.createdBy;
             this.user.createdDate = element.createdDate;
             this.user.modifiedBy = element.modifiedBy;
@@ -51,6 +66,7 @@ export class UserTransfarmer {
     UserTransfarmerEntity(Entity: UserEntity): User {
         console.log(Entity);
         this.user = new User();
+        this.user.ouCode = '12';
         this.user.id = Entity.id;
         this.user.loginID = Entity.loginID;
         this.user.pwd = Entity.pwd;
@@ -61,29 +77,49 @@ export class UserTransfarmer {
         this.user.mobileNo = Entity.mobileNo;
         this.user.pwdChangedDate = Entity.pwdChangedDate;
         this.user.pwdExpiryDate = Entity.pwdExpiryDate ;
-        this.user.isBlocked = Entity.isBlocked ;
+        //this.user.isBlocked = Entity.isBlocked;
+        if (Entity.isBlocked === '1') 
+        { 
+             this.user.isBlocked = 'true'.toString().trim(); 
+        } else 
+        { 
+            this.user.isBlocked = ''.toString().trim(); 
+        }
         this.user.userGroupCode = Entity.userGroupCode ;            
         this.user.entityCode = Entity.entityCode ;
         this.user.entityBranchCode = Entity.entityBranchCode ;
         this.user.desigination = Entity.desigination ;
-        this.user.isPswdChanged = Entity.isPswdChanged;
+        //this.user.isPswdChanged = Entity.isPswdChanged;
         this.user.desigination = Entity.desigination ;
-        this.user.isPswdChanged = Entity.isPswdChanged;         
+        //this.user.isPswdChanged = Entity.isPswdChanged;  
+        if (Entity.isPswdChanged === '1') 
+        { 
+             this.user.isPswdChanged = 'true'.toString().trim(); 
+        } else 
+        { 
+            this.user.isPswdChanged = ''.toString().trim(); 
+        }       
         this.user.createdBy = Entity.createdBy;
         this.user.createdDate = Entity.createdDate;
         this.user.modifiedBy = Entity.modifiedBy;
         this.user.modifiedDate = Entity.modifiedDate;
         console.log(Entity.isActive.toString().trim() === '1');
         console.log(Entity.isActive);        
-         if (Entity.isActive === '1') { this.user.isActive = 'true'.toString().trim(); } else { this.user.isActive = ''.toString().trim(); }
+        if (Entity.isActive === '1') 
+        { 
+             this.user.isActive = 'true'.toString().trim(); 
+        } else 
+        { 
+            this.user.isActive = ''.toString().trim(); 
+        }
         console.log(this.user.isActive);
         return this.user;
     }
 
-    AnswerTransfarmer(User1: User): UserEntity {
+    UserTransfarmer(User1: User): UserEntity {
         this.userEntity = new UserEntity();
-
         this.userEntity.id = User1.id;
+        this.userEntity.ouCode = '12';
         this.userEntity.loginID = User1.loginID;
         this.userEntity.pwd = User1.pwd;
         this.userEntity.userNameENG = User1.userNameENG;
@@ -93,14 +129,21 @@ export class UserTransfarmer {
         this.userEntity.mobileNo = User1.mobileNo;
         this.userEntity.pwdChangedDate = User1.pwdChangedDate;
         this.userEntity.pwdExpiryDate = User1.pwdExpiryDate ;
-        this.userEntity.isBlocked = User1.isBlocked ;
+        //this.userEntity.isBlocked = User1.isBlocked ;
+        if (User1.isBlocked.toString().trim() === 'true') 
+         { this.userEntity.isBlocked = '1'; } 
+         else 
+         { this.userEntity.isBlocked = '0'; }
         this.userEntity.userGroupCode = User1.userGroupCode ;            
         this.userEntity.entityCode = User1.entityCode ;
         this.userEntity.entityBranchCode = User1.entityBranchCode ;
         this.userEntity.desigination = User1.desigination ;
-        this.userEntity.isPswdChanged = User1.isPswdChanged;
-        this.userEntity.desigination = User1.desigination ;
-        this.userEntity.isPswdChanged = User1.isPswdChanged;         
+        //this.userEntity.isPswdChanged = User1.isPswdChanged;
+        if (User1.isPswdChanged.toString().trim() === 'true') 
+        { this.userEntity.isPswdChanged = '1'; } 
+        else 
+        { this.userEntity.isPswdChanged = '0'; }      
+        this.userEntity.desigination = User1.desigination ;            
         this.userEntity.createdBy = User1.createdBy;
         this.userEntity.createdDate = User1.createdDate;
         this.userEntity.modifiedBy = User1.modifiedBy;

@@ -1,83 +1,124 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, Route, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { User, UserEntity } from '../../../Components/Module/Masters/User.model';
+import { UserTransfarmer } from '../../../Components/Transformer/Masters/User-Transfarmer';
+import { UserService } from '../../../Components/Services/Masters/UserService';
 import * as alasql from 'alasql';
-import { User } from '../../../Components/Module/User.model';
-import { UserService } from '../../../Components/Services/User.Service';
-import { LoginUser } from '../../../Components/Module/LoginUser';
+import { environment } from '../../../Components/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
-import { DatePipe } from '@angular/common';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'app-List-User',
-  templateUrl: './List-User.component.html',
-  styleUrls: ['./List-User.component.scss']
-})
-export class ListUserComponent implements OnInit {
-  @Input() u: User;
-  user: User[];
+    selector: 'app-user-list',
+    templateUrl: './List-user.component.html'
+    //styleUrls: ['./Answer-list.component.scss']
+  })
 
-  WithoutFilteruser: User[];
-  ResultUser: User[];
-  SerachCri: number;
-  user1: User;
-  myDate = new Date();
-  constructor(private _router: Router,
-    private userService: UserService,
-    private datePipe: DatePipe,
-    private route: ActivatedRoute) {
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
+
+  export class UserListComponent implements OnInit 
+  {
+    @Input() UserInput: User;
+    users: User[];
+    usersEntity: UserEntity[];
+    config: any;
+    env = environment;
+
+    WithoutFilterRole: User[];
+    Resultuser: User[];
+    SerachCri: number;
+    objUser: User;
+    constructor(private _router: Router,
+      objTrans: UserTransfarmer,
+      private roleService: UserService,
+      private route: ActivatedRoute) {
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        this._router.navigate(['login']);
+      }
+      this.usersEntity = this.route.snapshot.data['UserList'];
+      this.users = objTrans.UserTransfarmers(this.usersEntity);
+      this.WithoutFilterRole = this.users;
+      this.config = {
+        itemsPerPage:  this.env.paginationPageSize,
+        currentPage: 1,
+        totalItems: this.users.length
+      };
     }
-    this.user = this.userService.getUsers();
-    this.WithoutFilteruser = this.user;
+    
+    ngOnInit() {
+        this.WithoutFilterRole = this.users;
+        this.objUser = {
+          id: null,
+          ouCode: null,
+          loginID: null,
+          pwd:null,
+          userNameENG: null,
+          userNameUNI: null,
+          userTypeCode:null,
+          emailID: null,
+          mobileNo: null,
+          pwdChangedDate: null,
+          pwdExpiryDate: null,
+          isBlocked: null,
+          userGroupCode:null,      
+          entityCode: null, 
+          entityBranchCode:null, 
+          desigination: null, 
+          isPswdChanged: null, 
+          isActive  : '3' ,
+          createdBy: null,
+          createdDate : null,
+          modifiedBy: null,
+          modifiedDate: null  
+         };
+      }
+
+      pageChanged(event) {
+        this.config.currentPage = event;
+      }
+
+      resultChanged(): void {
+        this.SerachCri = 0;
+        this.Resultuser = this.WithoutFilterRole;
+
+        if (this.objUser.userNameENG !== null && this.objUser.userNameENG !== '') {
+          console.log(this.objUser.userNameENG.toString().toLowerCase());
+          this.Resultuser = this.Resultuser.filter(SubResult =>
+            SubResult.userNameENG.toLowerCase().indexOf(this.objUser.userNameENG.toString().toLowerCase()) !== -1);
+          this.SerachCri = 1;
+        }
+
+        if (this.objUser.loginID !== null && this.objUser.loginID.toString() !== '') {
+          this.Resultuser = this.Resultuser.filter(SubResult =>
+            SubResult.loginID.toString().toLowerCase().indexOf(this.objUser.loginID.toString().toLowerCase()) !== -1);
+          this.SerachCri = 1;
+        }
+    
+        if (this.objUser.isActive !== null && this.objUser.isActive.toString() !== '-1') {
+          if (this.objUser.isActive.toString() === '3') {
+            this.Resultuser = this.Resultuser.filter(SubResultProd =>
+              SubResultProd.isActive.toString() === 'Active'
+              || SubResultProd.isActive.toString() === 'Inactive');
+          } else {
+            this.Resultuser = this.Resultuser.filter(SubResultProd =>
+              SubResultProd.isActive.toString() === this.objUser.isActive.toString());
+          }
+          this.SerachCri = 1;
+        }
+
+        if (this.SerachCri === 0) {
+          this.Resultuser = this.WithoutFilterRole;
+        }
+        this.users = this.Resultuser;
+        this.config = {
+          itemsPerPage: this.env.paginationPageSize,
+          currentPage: 1,
+          totalItems: this.users.length
+        };
+      }
+
+      ExportToExcel(): void {
+        alasql('SELECT roleId Role_Id,roleName Role_Name, roleDescription Role_Description , rolecreatefor Role_Create_For , isActive Is_Active' +
+         ' INTO XLSX("RoleList.xlsx",{headers:true}) FROM ?', [this.users]);
+      }
+
   }
 
-  ngOnInit() {
-    console.log(this.datePipe.transform(this.myDate, 'yyyy-MM-dd'));
-    this.user = this.userService.getUsers();
-    this.WithoutFilteruser = this.user;
-    this.user1 = {
-      UserNo: null,
-      UserName: null,
-      UserID: null,
-      BranchNo: 1,
-      Password: null,
-      RoleId: -1,
-      IsActive: null,
-      CreDate: null,
-      ModDate: null,
-      EmpId: -1,
-      status: null,
-      CreUser: '',
-      ModUser: ''
-      // ModUser: LoginUser.UserName,
-    };
-  }
-
-  resultChanged(): void {
-    this.SerachCri = 0;
-    this.ResultUser = this.WithoutFilteruser;
-    console.log(this.user1.UserNo);
-    if (this.user1.UserName !== null && this.user1.UserName !== '') {
-      this.ResultUser = this.ResultUser.filter(SubResultUser =>
-        SubResultUser.UserName.toLowerCase().indexOf(this.user1.UserName.toLowerCase()) !== -1);
-      this.SerachCri = 1;
-    }
-    if (this.user1.UserNo !== null && this.user1.UserNo.toString() !== '') {
-      this.ResultUser = this.ResultUser.filter(SubResultUser =>
-        SubResultUser.UserNo.toString() === this.user1.UserNo.toString());
-      this.SerachCri = 1;
-    }
-    if (this.SerachCri === 0) {
-      console.log('resul');
-      this.ResultUser = this.WithoutFilteruser;
-    }
-    this.user = this.ResultUser;
-    console.log(this.user);
-  }
-  ExportToExcel(): void {
-    // tslint:disable-next-line:max-line-length
-    alasql('SELECT UserNo,UserID,UserName,CreUser,CreDate,IsActive,status,EmpId INTO XLSX("UserList.xlsx",{headers:true}) FROM ?', [this.user]);
-  }
-}

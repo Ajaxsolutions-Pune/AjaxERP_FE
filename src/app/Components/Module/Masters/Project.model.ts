@@ -5,7 +5,10 @@ export class ProjectEntity {
     projectDescription: string;
     startDate : string;
     endDate : string;
-    accessType : string;
+    projectTypeCode : string;
+    projectGroupCode : string;
+    customerCode : string;
+    projectManagerCode : string;
     priority : string;
     timesheetRequired : string;
     mainAccountHeadCode :string;
@@ -14,8 +17,9 @@ export class ProjectEntity {
     createdBy: string;
     createdDate: string;
     modifiedBy: string;
-    modifiedDate: string;
+    modifiedDate: string;       
 }
+
 export class Project {
     ouCode :string;
     projectCode: string;
@@ -23,7 +27,10 @@ export class Project {
     projectDescription: string;
     startDate : string;
     endDate : string;
-    accessType : string;
+    projectTypeCode : string;
+    projectGroupCode : string;
+    customerCode : string;
+    projectManagerCode : string;
     priority : string;
     timesheetRequired : string;
     mainAccountHeadCode :string;
@@ -32,5 +39,5 @@ export class Project {
     createdBy: string;
     createdDate: string;
     modifiedBy: string;
-    modifiedDate: string;
+    modifiedDate: string;   
 }

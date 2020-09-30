@@ -8,8 +8,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LogInComponent } from './Components/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component';
-import { UserMasterComponent } from './views/Masters/User/user-master.component';
-import { ListUserComponent } from './views/Masters/User/List-user.component';
+import { UserListComponent } from './views/Masters/User/List-user.component';
 import { UnitComponent } from './views/Masters/UOM/unit.component';
 import { ListUOMComponent } from './views/Masters/UOM/list-uom.component';
 import { CountryComponent } from './views/Masters/Country/country.component';
@@ -108,6 +107,8 @@ import { HubComponent } from './views/Masters/Hub/hub.component';
 import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
 import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
 import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMapping/device-asset-mapping.component';
+import { UserListResolverService } from './Components/Resolver/Masters/User-List-Resolver.Service';
+import { UserComponent } from './views/Masters/User/user-master.component';
 
 export const routes: Routes = [
   {
@@ -157,27 +158,7 @@ export const routes: Routes = [
           title: 'Dashboard'
         }
       },
-      {
-        path: 'UserList',
-        component: ListUserComponent,
-        data: {
-          title: 'User List'
-        }
-      },
-      {
-        path: 'AddUser/:id',
-        component: UserMasterComponent,
-        data: {
-          title: 'User Master'
-        }
-      },
-      {
-        path: 'EditUser/:id',
-        component: UserMasterComponent,
-        data: {
-          title: 'Edit User'
-        }
-      },
+      
       {
         path: 'UnitList',
         component: ListUOMComponent,
@@ -960,6 +941,33 @@ export const routes: Routes = [
         component: RoleComponent,
         data: {
           title: 'Edit Role'
+        }
+      },
+
+      {
+        path: 'UserList',
+        component: UserListComponent,
+        data: {
+          title: 'User List'
+        },
+        resolve: {
+          UserList: UserListResolverService
+        },
+      },
+
+      {
+        path: 'User',
+        component: UserComponent,
+        data: {
+          title: 'Add User'
+        }
+      },
+
+      {
+        path: 'User/:id',
+        component: UserComponent,
+        data: {
+          title: 'Edit User'
         }
       },
 

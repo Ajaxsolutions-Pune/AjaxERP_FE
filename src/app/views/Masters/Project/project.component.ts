@@ -10,6 +10,11 @@ import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-fiel
 import { environment } from '../../../Components/Module/environment';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { LoginUser } from '../../../Components/Module/LoginUser';
+import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
+
+import { Employee} from '../../../Components/Module/Masters/Employee.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-project',
@@ -24,11 +29,15 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
   projectEntity: ProjectEntity;
   str: string;
   env = environment;
+  prjGroupDrp: MasterDrp[];
+  prjTypeDrp: MasterDrp[];
+  employeeDrp : Employee[];
   
   constructor(private route: ActivatedRoute,
     private projectTransfarmer: ProjectTransfarmer,
     private projectService: ProjectService,
     private globalService: GlobalService,
+    private httpClient: HttpClient,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private router: Router, private formBuilder: FormBuilder) {
     super();
@@ -41,25 +50,54 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
         required: 'Project is required.',
       }
     };
-
     this.formErrors = {
         ControlProjectID: '',
         ControlProject: '',      
     };
+     this.str = this.env.apiServiceIPPort;
   }
 
+  fillEmployeeDrp(): Observable<Employee[]> {
+      return this.httpClient.get<Employee[]>(this.str + '/Employee/getList', this.env.httpOptions);
+      }
+
   ngOnInit() {
+
+    //project group combo
+    this.globalService.fillMasterDrp('PRJGR').subscribe(
+      (par) => {
+        this.prjGroupDrp = par;
+      },
+      (err: any) => console.log(err));
+
+    //project type combo
+    this.globalService.fillMasterDrp('PRJTY').subscribe(
+      (par) => {
+        this.prjTypeDrp = par;
+      },
+      (err: any) => console.log(err));
+
+    //Employee combo
+    this.fillEmployeeDrp().subscribe(
+      (par) => {
+        this.employeeDrp = par;
+      },
+      (err: any) => console.log(err)); 
+    
     this.form = this.formBuilder.group({
       ControlProjectID: ['', []],
       ControlisActive: ['', []],
       ControlProjectDesc: ['', []],
       ControlStartDate: ['', []],
-      ControlEndDate : ['', []],
-      ControlAccessType : ['', []],
+      ControlEndDate : ['', []],     
+      ControlAccessType : ['',[]],
       ControlPriority: ['', []],
       ControlisTimesheetRequire: ['', []],
       ControlAccountCode: ['', []],
       ControlBudget: ['', []],
+      ControlProjectType: ['', []],
+      ControlProjectGroup: ['', []],
+      ControlProjectManager: ['', []],
       ControlProject: ['', [Validators.required]]
     });
     this.form.controls['ControlProjectID'].disable();
@@ -71,7 +109,10 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
         projectDescription : null,
         startDate : null,
         endDate : null,
-        accessType : null,
+        projectTypeCode : null,
+        projectGroupCode : null,
+        customerCode : null,
+        projectManagerCode : null,
         priority : null,
         timesheetRequired : 'true',
         mainAccountHeadCode : null,
@@ -152,7 +193,10 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
         projectDescription : null,
         startDate : null,
         endDate : null,
-        accessType : null,
+        projectTypeCode : null,
+        projectGroupCode : null,
+        customerCode : null,
+        projectManagerCode : null,
         priority : null,
         timesheetRequired : 'true',
         mainAccountHeadCode : null,
@@ -175,7 +219,10 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
         projectDescription : null,
         startDate : null,
         endDate : null,
-        accessType : null,
+        projectTypeCode : null,
+        projectGroupCode : null,
+        customerCode : null,
+        projectManagerCode : null,
         priority : null,
         timesheetRequired : 'true',
         mainAccountHeadCode : null,
@@ -196,7 +243,10 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
         projectDescription : null,
         startDate : null,
         endDate : null,
-        accessType : null,
+        projectTypeCode : null,
+        projectGroupCode : null,
+        customerCode : null,
+        projectManagerCode : null,
         priority : null,
         timesheetRequired : 'true',
         mainAccountHeadCode : null,
