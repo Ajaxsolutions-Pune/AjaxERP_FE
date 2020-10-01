@@ -43,6 +43,25 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                              <mat-label> Asset Group</mat-label>
+                              <mat-select required
+                              formControlName="ControlassetGroupCode"
+                              [(ngModel)]="process.assetGroupCode">
+                              <mat-option>Asset Group</mat-option>
+                              <mat-option *ngFor="let assetGroup of assetGroupObj"
+                               [value]="assetGroup.assetGroupCode">
+                                {{assetGroup.assetGroupNameENG}}
+                              </mat-option>
+                              </mat-select>
+                              <mat-error>
+                              {{ formErrors['ControlassetGroupCode'] }}
+                              </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
                             <div class="col-sm-4" style="padding-top: 20px;">
                                 <mat-checkbox name="chkisActive" #chkisActive formControlName="ControlisActive"
                                     [(ngModel)]="process.isActive">Active

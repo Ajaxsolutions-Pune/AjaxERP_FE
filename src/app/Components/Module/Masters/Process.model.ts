@@ -2,6 +2,7 @@ export class Process {
     processId: string;
     processName: string;
     geofence: string;
+    assetGroupCode: string;
     isActive: string;
     createdBy: string;
     createdDate: string;
@@ -12,6 +13,7 @@ export class ProcessEntity {
     processId: string;
     processName: string;
     geofence: string;
+    assetGroupCode: string;
     isActive: string;
     createdBy: string;
     createdDate: string;

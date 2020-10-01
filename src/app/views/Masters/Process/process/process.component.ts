@@ -8,6 +8,9 @@ import { NgForm, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
 import { GlobalService } from '../../../../Components/Services/GlobalServices/Global.service';
+import { AssetGroup } from '../../../../Components/Module/Masters/AssetGroup.model';
+import { AssetGroupService } from '../../../../Components/Services/Masters/AssetGroupService';
+import { AssetGroupTransfarmer } from '../../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
 
 @Component({
   selector: 'app-process',
@@ -21,10 +24,13 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
   errorMatcher = new CrossFieldErrorMatcher();
   process: Process;
   processEntity: ProcessEntity;
+  assetGroupObj: AssetGroup[];
   str: string;
   constructor(private route: ActivatedRoute,
     private processTransfarmer: ProcessTransfarmer1,
     private globalService: GlobalService,
+    private assetGroupService: AssetGroupService,
+    private assetGroupTransfarmer: AssetGroupTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private processService: ProcessService1, private router: Router,
     private formBuilder: FormBuilder) {
@@ -53,11 +59,15 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       isActive: 'true',
       processId: null,
       processName: null,
+      assetGroupCode: null,
       createdBy: localStorage.getItem('username'),
       createdDate: this.globalService.GerCurrntDateStamp(),
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
+    this.assetGroupService.getAssetGroups().subscribe(
+      (par) => this.assetGroupObj = this.assetGroupTransfarmer.AssetGroupTransfarmers(par),
+      (err: any) => console.log(err));
     this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getprocess(str); });
   }
 
@@ -102,6 +112,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       isActive: 'true',
       processId: null,
       processName: null,
+      assetGroupCode: null,
       createdBy: localStorage.getItem('username'),
       createdDate: this.globalService.GerCurrntDateStamp(),
       modifiedBy: localStorage.getItem('username'),
@@ -113,6 +124,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
         processName: null,
         geofence: '',
         isActive: 'true',
+        assetGroupCode: null,
         createdBy: localStorage.getItem('username'),
         createdDate: this.globalService.GerCurrntDateStamp(),
         modifiedBy: localStorage.getItem('username'),

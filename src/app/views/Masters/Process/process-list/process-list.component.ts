@@ -44,6 +44,7 @@ export class ProcessListComponent implements OnInit {
       processId: null,
       processName: null,
       geofence: null,
+      assetGroupCode: null,
       isActive: '3',
       createdBy: null,
       createdDate: null,
