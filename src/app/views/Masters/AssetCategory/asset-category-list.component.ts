@@ -25,9 +25,9 @@ export class AssetCategoryListComponent implements OnInit {
   constructor(private _router: Router,
     objTrans: AssetCategoryTransfarmer,
     private route: ActivatedRoute) {
-      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
-      }
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      this._router.navigate(['login']);
+    }
     this.arrOjectEntity = this.route.snapshot.data['AssetCategoryList1'];
     this.arrOject = objTrans.AssetCategoryTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
@@ -39,12 +39,13 @@ export class AssetCategoryListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       assetCategoryCode: null,
       assetCategoryNameENG: null,
       assetCategoryNameUNI: null,
       assetGroupCode: null,
+      assetGroupText: null,
+      colourText: null,
       colourCode: null,
       isActive: '3',
       createdBy: null,
@@ -92,7 +93,7 @@ export class AssetCategoryListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT assetCategoryCode Asset_Category_Code,assetGroupNameENG Asset_GroupName,' +
-      'isActive INTO XLSX("AssetGroupList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT assetCategoryCode Asset_Category_Code,assetCategoryNameENG Asset_Category_Name,' +
+      'isActive Status INTO XLSX("AssetGroupList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

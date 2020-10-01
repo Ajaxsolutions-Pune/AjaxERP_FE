@@ -25,7 +25,6 @@ export class UserDeviceEditDialogComponent implements OnInit {
     private userService: UserService,
     private userTransfarmer: UserTransfarmer,
     @Inject(MAT_DIALOG_DATA) public data: UserDeviceMapping, public dataService: UserDeviceDataService) {
-      console.log(data);
   }
   formControl = new FormControl('', [
     Validators.required
@@ -64,17 +63,9 @@ export class UserDeviceEditDialogComponent implements OnInit {
   }
 
   stopEdit(): void {
-    //this.objanswerIdText = this.answersObj.
-    //  find(element => element.answerId === this.data.answerId).answer;
-    //this.objquestionIdText = this.questionsObj.
-    //  find(element => element.questionId === this.data.questionId).question;
         this.objnextUserIdText = this.user.
       find(element => element.loginID === this.data.loginId).userNameENG;
-
       this.data.loginIdText = this.objnextUserIdText;
-      //this.data.questionIdText = this.objquestionIdText;
-      //this.data.answerIdText = this.objanswerIdText;
-     
       if (this.data.isActive.toString() === 'true') {
         this.data.isActiveText = 'Active';
       } else {

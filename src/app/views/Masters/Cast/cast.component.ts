@@ -42,9 +42,6 @@ export class CastComponent implements OnInit {
   }
 
   private getcasts(Id: number) {
-
-    console.log(Id);
-    console.log(status);
     this.cast = {
       Id: null,
       Cast_Code: null,

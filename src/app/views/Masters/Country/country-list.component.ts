@@ -27,7 +27,6 @@ export class CountryListComponent implements OnInit {
         this._router.navigate(['login']);
       }
     this.countrysEntitys = this.route.snapshot.data['CountryList'];
-    console.log(this.countrysEntitys);
     this.countrys = this.countryTransfarmer.CountryTransfarmers(this.countrysEntitys);
   }
 
@@ -54,7 +53,6 @@ export class CountryListComponent implements OnInit {
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultcountrys = this.WithoutFiltercountrys;
-    console.log(this.country.id);
     if (this.country.Country_Name_ENg !== null && this.country.Country_Name_ENg !== '') {
       this.Resultcountrys = this.Resultcountrys.filter(SubResultcountry =>
         SubResultcountry.Country_Name_ENg.toLowerCase().indexOf(this.country.Country_Name_ENg.toString().toLowerCase()) !== -1);
@@ -66,11 +64,9 @@ export class CountryListComponent implements OnInit {
       this.SerachCri = 1;
     }
     if (this.SerachCri === 0) {
-      console.log('resul');
       this.Resultcountrys = this.WithoutFiltercountrys;
     }
     this.countrys = this.Resultcountrys;
-    console.log(this.countrys);
   }
 
   ExportToExcel(): void {

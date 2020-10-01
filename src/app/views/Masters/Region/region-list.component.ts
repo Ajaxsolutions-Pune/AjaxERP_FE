@@ -43,7 +43,6 @@ export class RegionListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       regionCode: null,
       sortBy: null,
@@ -92,7 +91,7 @@ export class RegionListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT regionCode Region_Code,regionNameENG Region_Name,isActive Active' +
+    alasql('SELECT regionCode Region_Code,regionNameENG Region_Name,isActive Status' +
       ' INTO XLSX("RegionList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

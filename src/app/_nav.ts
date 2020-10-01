@@ -64,30 +64,17 @@ export const navItems: NavData[] = [
         url: '/ProcessList',
         icon: 'icon-puzzle'
       },
-
-      {
-        name: 'Role',
-        url: '/RoleList',
-        icon: 'icon-puzzle'
-      },
       {
         name: 'Project',
         url: '/ProjectList',
         icon: 'icon-puzzle'
       },
 
-     /* {
-        name: 'Role Level',
-        url: '/Role-level',
-        icon: 'icon-puzzle'
-      },
-
-     
-       {
-         name: 'QuestionType',
-         url: '/QuestionTypeList',
-         icon: 'icon-puzzle'
-       },*/
+      // {
+      //   name: 'QuestionType',
+      //   url: '/QuestionTypeList',
+      //   icon: 'icon-puzzle'
+      // },X
       {
         name: 'Asset Category',
         url: '/AssetCategoryList',
@@ -98,12 +85,12 @@ export const navItems: NavData[] = [
         url: '/AssetGroupList',
         icon: 'icon-puzzle'
       },
-      // {
-      //   name: 'Asset',
-      //   url: '/AssetList',
-      //   icon: 'icon-puzzle'
-      // },
-      
+      {
+        name: 'Asset',
+        url: '/AssetList',
+        icon: 'icon-puzzle'
+      },
+
       {
         name: 'Device',
         url: '/DeviceList',
@@ -149,11 +136,11 @@ export const navItems: NavData[] = [
       //   url: '/CityGroupList',
       //   icon: 'icon-puzzle'
       // },
-       {
-         name: 'User',
-         url: '/UserList',
-         icon: 'icon-puzzle'
-       },
+      // {
+      //   name: 'User',
+      //   url: '/UserList',
+      //   icon: 'icon-puzzle'
+      // },
       // {
       //   name: 'Unit',
       //   url: '/UnitList',
@@ -232,18 +219,13 @@ export const navItems: NavData[] = [
     ]
   },
   {
-    name: 'Teritoring Master',
+    name: 'Territory Master',
     url: '/Reports',
     //   icon: 'fa fa-newspaper-o',
     children: [
       {
         name: 'Zone',
         url: '/ZoneList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Cluster',
-        url: '/ClusterList',
         icon: 'icon-puzzle'
       },
       {
@@ -257,10 +239,51 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
+        name: 'Cluster',
+        url: '/ClusterList',
+        icon: 'icon-puzzle'
+      },
+      {
         name: 'Circle',
         url: '/CircleList',
         icon: 'icon-puzzle'
       },
+    ]
+
+  },
+  {
+    name: 'CRM',
+    url: '/CRM',
+    //   icon: 'fa fa-newspaper-o',
+    children: [
+      {
+        name: 'Contact',
+        url: '/ContactList',
+        icon: 'icon-puzzle'
+      }
+    ]
+
+  },
+  {
+    name: 'User Setup',
+    url: '/User Setup',
+    //   icon: 'fa fa-newspaper-o',
+    children: [
+      {
+        name: 'Access',
+        url: '/AccessList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Role',
+        url: '/RoleList',
+        icon: 'icon-puzzle'
+      },
+       {
+         name: 'Role Level',
+         url: '/RolelevelList',
+         icon: 'icon-puzzle'
+       },
     ]
 
   },

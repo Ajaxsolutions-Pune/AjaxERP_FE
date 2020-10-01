@@ -107,7 +107,6 @@ export class ProcessFormMappingComponent extends FormComponentBase
   }
 
   save(): void {
-    console.log(this.ProcessId);
     if (this.ProcessId === undefined) {
       this.defaultLayoutComponent.Massage('Somethig Wrong',
         'Please select process name', 'modal-danger');
@@ -126,31 +125,13 @@ export class ProcessFormMappingComponent extends FormComponentBase
       element.modifiedBy = localStorage.getItem('username');
       element.modifiedDate = this.globalService.GerCurrntDateStamp();
     });
-    console.log(this.processFormMappingTransfarmer.
-      ObjectToEntityProcessFormMappingTransfarmers(this.dataSource.filteredData));
     this.objProcessFormMapping = [];
     this.objProcessFormMapping = this.dataSource.filteredData.filter(e => {
-      console.log(e.updateFlag);
     });
-
-    // Added by Rahul
-    this.insertData.dataChange.value.forEach(element => {
-      console.log('Id ->' + element.pfmId + ' Is_active -->' + element.isActive);
-      console.log('CreatedDate ->' + element.createdBy + ' CreatedDate -->' + element.createdDate);
-      console.log('FormId ->' + element.formId + ' FormQueSeqNo -->' + element.formId);
-      console.log('SortBy ->' + element.formId + ' SortBy -->' + element.sortBy);
-      console.log('ModifyBy ->' + element.modifiedBy + ' ModifyDate -->' + element.modifiedDate);
-      console.log('Update flag ->' + element.updateFlag);
-    });
-
-    console.log('DataChange -->' + this.insertData.dataChange.value);
-
     this.processformMappingService.Save(this.processFormMappingTransfarmer.
       ObjectToEntityProcessFormMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Success') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['ProcessFormMapping']);

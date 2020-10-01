@@ -108,7 +108,6 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   }
 
   save(): void {
-    console.log(this.FormId);
     if (this.FormId === undefined) {
       this.defaultLayoutComponent.Massage('Somethig Wrong',
         'Please select form name', 'modal-danger');
@@ -127,41 +126,49 @@ export class FormQueAnsMappingComponent extends FormComponentBase
       element.modifiedBy = localStorage.getItem('username');
       element.modifiedDate = this.globalService.GerCurrntDateStamp();
     });
-    console.log(this.formQueAnsMappingTransfarmer
-      .ObjectToEntityFormQueAnsMappingTransfarmers(this.dataSource.filteredData));
     this.objFormQueAnsMapping = [];
     this.objFormQueAnsMapping = this.dataSource.filteredData.filter(e => {
-      console.log(e.updateFlag);
     });
 
-    // Added by Rahul
-    this.insertData.dataChange.value.forEach(element => {
-      console.log('Id ->' + element.fqamId + ' Is_active -->' + element.isActive);
-      console.log('ansId ->' + element.answerId + ' AnsText -->' + element.answerIdText);
-      console.log('CreatedDate ->' + element.createdBy + ' CreatedDate -->' + element.createdDate);
-      console.log('FormId ->' + element.formId + ' FormQueSeqNo -->' + element.formQueSeqNo);
-      console.log('isQueMandatory ->' + element.isQuestionMandatory + ' NextFormId -->' + element.nextFormId);
-      console.log('ModifyBy ->' + element.modifiedBy + ' ModifyDate -->' + element.modifiedDate);
-      console.log('NextQueGrp ->' + element.nextQueGroup + ' Que Grp -->' + element.queGroup);
-      console.log('Que Id ->' + element.questionId + ' Question ID -->' + element.questionIdText);
-      console.log('Update flag ->' + element.updateFlag);
-    });
-
-    console.log('DataChange -->' + this.insertData.dataChange.value);
     this.formQueAnsMappingService.Save(this.formQueAnsMappingTransfarmer
       .ObjectToEntityFormQueAnsMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Success') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
               'Data saved successfully !', 'modal-info');
-            this.router.navigate(['FormQueAnsMapping']);
             this.FormId = this.FormId;
+            this.GetRouteData(this.FormId);
           }
         }
       );
 
+  }
+  GetRouteData(formId: string): void {
+    const selectedData = {
+      value: formId,
+      text: formId
+    };
+    this.objFormQueAnsMapping = [];
+
+    // Added by Rahul
+    this.insertData.dataChange.value.splice(0);
+
+    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.refreshTable();
+    this.formQueAnsMappingService.getFormQueAnsMapping(selectedData.value).subscribe(
+      (par) => {
+        this.objFormQueAnsMapping = this.formQueAnsMappingTransfarmer.
+          FormQueAnsMappingTransfarmers(par);
+        this.objFormQueAnsMapping.forEach(a => {
+          a.formId = selectedData.value;
+        });
+        this.objFormQueAnsMapping.forEach(element => {
+          this.exampleDatabase.dataChange.value.push(element);
+          this.refreshTable();
+        });
+
+      },
+      (err: any) => console.log(err));
   }
   FormChange(event) {
     const target = event.source.selected._element.nativeElement;
@@ -202,7 +209,6 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     nextFormId: string,
     isActive: string) {
     this.id = fqamId;
-    // index row is used just for debugging proposes and can be removed
     this.index = i;
     const dialogRef = this.dialog.open(EditDialogComponent, {
       data: {
@@ -219,20 +225,14 @@ export class FormQueAnsMappingComponent extends FormComponentBase
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-        // When using an edit things are little different, firstly we find record inside DataService by id
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.fqamId === this.id);
-        // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
-
-        // Added by Rahul
         const findInsertIndex = this.insertData.dataChange.value.findIndex(x => x.fqamId === this.id);
         if (findInsertIndex > -1) {
           this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData();
         } else {
           this.insertData.dataChange.value.push(this.exampleDatabase.dataChange.value[foundIndex]);
         }
-
-        // And lastly refresh table
         this.refreshTable();
       }
     });

@@ -25,37 +25,12 @@ export class ProcessFormMappingService {
     }
 
     getProcessFormMapping(processId: string): Observable<ProcessFormMappingEntity[]> {
-        console.log(this.str + '/GetPFMapping/getList/Sudarshan/12?processId=' + processId +'&activeStatus=1');        
-        return this.httpClient.get<ProcessFormMappingEntity[]>(
+          return this.httpClient.get<ProcessFormMappingEntity[]>(
             this.str + '/GetPFMapping/getList/Sudarshan/12?processId=' + processId +'&activeStatus=1'
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Save(saveEntityObj: ProcessFormMappingEntity[]): Observable<Insertstatus> {
-        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        console.log("####### Before send to service ####");
-        saveEntityObj.forEach(element => {
-            /*console.log('Id ->'+element.fqamId +' Is_active -->'+element.isActive);  
-            console.log('ansId ->'+element.answerId +' AnsText -->'+element.answerIdText);
-            console.log('CreatedBy ->'+element.createdBy +' CreatedDate -->'+element.createdDate);
-            console.log('FormId ->'+element.formId +' FormQueSeqNo -->'+element.formQueSeqNo);
-            console.log('isQueMandatory ->'+element.isQuestionMandatory +' NextFormId -->'+element.nextFormId);
-            console.log('ModifyBy ->'+element.modifiedBy +' ModifyDate -->'+element.modifiedDate);
-            console.log('NextQueGrp ->'+element.nextQueGroup +' Que Grp -->'+element.queGroup);
-            console.log('Que Id ->'+element.questionId +' Question ID -->'+element.questionIdText);
-            console.log('Update flag ->'+element.updateFlag ); */    
-            
-            console.log('Id ->'+element.pfmId +' Is_active -->'+element.isActive);  
-            //console.log('ansId ->'+element.answerId +' AnsText -->'+element.answerIdText);
-            console.log('CreatedDate ->'+element.createdBy +' CreatedDate -->'+element.createdDate);
-            console.log('FormId ->'+element.formId +' FormQueSeqNo -->'+element.formId);
-            //console.log('isQueMandatory ->'+element.isQuestionMandatory +' NextFormId -->'+element.nextFormId);
-            console.log('ModifyBy ->'+element.modifiedBy +' ModifyDate -->'+element.modifiedDate);
-            //console.log('NextQueGrp ->'+element.nextQueGroup +' Que Grp -->'+element.queGroup);
-            //console.log('Que Id ->'+element.questionId +' Question ID -->'+element.questionIdText);
-            console.log('Update flag ->'+element.updateFlag );            
-        });
-        ///FormQueAnsMapping/createList
         return this.httpClient.post<Insertstatus>(this.str + '/ProcessFormMapping/createList', saveEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }

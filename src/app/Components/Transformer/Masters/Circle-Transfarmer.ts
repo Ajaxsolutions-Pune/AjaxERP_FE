@@ -15,7 +15,6 @@ export class CircleTransfarmer {
     CircleTransfarmers(Entity: CircleEntity[]): Circle[] {
         this.arrOject = [];
         Entity.forEach(element => {
-            console.log(element);
             this.Oject = new Circle();
             this.Oject.circleCode = element.circleCode;
             this.Oject.circleNameENG = element.circleNameENG;
@@ -33,7 +32,6 @@ export class CircleTransfarmer {
         return this.arrOject;
     }
     CircleTransfarmerEntity(Entity: CircleEntity): Circle {
-        console.log(Entity);
         this.Oject = new Circle();
         this.Oject.circleCode = Entity.circleCode;
         this.Oject.circleNameENG = Entity.circleNameENG;

@@ -33,7 +33,6 @@ export class ClusterTransfarmer {
         return this.arrOject;
     }
     ClusterTransfarmerEntity(Entity: ClusterEntity): Cluster {
-        console.log(Entity);
         this.Oject = new Cluster();
         this.Oject.clusterCode = Entity.clusterCode;
         this.Oject.clusterNameENG = Entity.clusterNameENG;
@@ -63,8 +62,6 @@ export class ClusterTransfarmer {
         this.OjectEntity.createdDate = element.createdDate;
         this.OjectEntity.modifiedBy = element.modifiedBy;
         this.OjectEntity.modifiedDate = element.modifiedDate;
-
-        console.log(element.circleCode);
         if (element.isActive === 'true') {
             this.OjectEntity.isActive = '1';
         } else { this.OjectEntity.isActive = '0'; }

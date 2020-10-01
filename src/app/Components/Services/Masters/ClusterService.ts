@@ -23,7 +23,6 @@ export class ClusterService {
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: ClusterEntity): Observable<Insertstatus> {
-        console.log(saveEntityObj);
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<Insertstatus>(this.str + '/Cluster', saveEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));

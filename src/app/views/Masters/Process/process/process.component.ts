@@ -75,10 +75,8 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
 
     if (status !== 'Update') {
       this.process.processId = null;
-      console.log(this.process);
       this.processService.Save(this.processTransfarmer.processTransfarmer(this.process)).subscribe(
         (par) => {
-          console.log(par);
           processForm.reset();
           this.defaultLayoutComponent.Massage('',
             'Data saved successfully !', 'modal-info');
@@ -126,7 +124,6 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       this.processService.getprocess(process_Code).subscribe(
         (par) => {
           this.processEntity = par;
-          console.log(this.processEntity);
           this.process = this.processTransfarmer.processTransfarmerEntity(this.processEntity);
         },
         (err: any) => console.log(err));
@@ -135,7 +132,6 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
   }
 
   omit_special_char(event) {
-    console.log('omit_special_char');
     let k;
     k = event.charCode;  //         k = event.keyCode;  (Both can be used)
     return ((k > 64 && k < 91) || (k > 96 && k < 123) || k === 8 || k === 32 || (k >= 48 && k <= 57));

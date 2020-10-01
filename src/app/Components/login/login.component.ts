@@ -43,18 +43,14 @@ export class LogInComponent implements OnInit {
   }
 
   async ngOnInit() {
-    console.log(this.globalService.GerCurrntDateStamp());
     this.loginInvalid = false;
     this.form = this.fb.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]
     });
-    // tslint:disable-next-line:no-unused-expression
     const today = (new Date(), 'yyyy-MM-dd HH:mm:ss Z');
-    // console.log(today);
 
     const date = new Date();
-    console.log(Date.now);
 
   }
   async onSubmit() {
@@ -81,7 +77,6 @@ export class LogInComponent implements OnInit {
                 headers:
                   new HttpHeaders({
                     'Content-Type': 'application/json',
-                    // tslint:disable-next-line:max-line-length
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                   })
               };

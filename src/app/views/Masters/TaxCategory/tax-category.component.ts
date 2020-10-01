@@ -39,9 +39,6 @@ export class TaxCategoryComponent implements OnInit {
   }
 
   private gettaxcategorys(Id: number) {
-
-    console.log(Id);
-    console.log(status);
     this.taxcategory = {
       Id: null,
       TaxCategory_Code: null,

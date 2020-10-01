@@ -33,7 +33,6 @@ export class ProcessDataService {
   }
 
   deleteProcessFormMapping(id: number): void {
-    console.log(id);
   }
 }
 

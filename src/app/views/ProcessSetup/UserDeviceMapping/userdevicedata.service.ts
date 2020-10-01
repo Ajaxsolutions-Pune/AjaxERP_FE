@@ -31,10 +31,6 @@ export class UserDeviceDataService {
   updateUserDeviceMapping(userDeviceMapping: UserDeviceMapping): void {
     this.dialogData = userDeviceMapping;
   }
-
-  /*deleteUserDeviceMapping(id: number): void {
-    console.log(id);
-  }*/
 }
 
 

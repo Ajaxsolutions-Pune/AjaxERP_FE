@@ -20,7 +20,6 @@ export class TransmissionLineService {
     }
 
     fillDrpTransmissionLines(): Observable<TransmissionLineEntity[]> {
-        console.log(this.httpClient.get<TransmissionLineEntity[]>(this.str + '/TransmissionLine/getList'));
         return this.httpClient.get<TransmissionLineEntity[]>(this.str + '/TransmissionLine/getList?status=1', this.env.httpOptions);
     }
 
@@ -45,13 +44,5 @@ export class TransmissionLineService {
             console.error('client side error', errorResponse.error.message);
         }
         return throwError('d');
-        console.log(this.dialogService);
-        this.dialogService.openModal('Title1', 'Message Test', () => {
-            // confirmed
-            console.log('Yes');
-        }, () => {
-            // not confirmed
-            console.log('No');
-        });
     }
 }

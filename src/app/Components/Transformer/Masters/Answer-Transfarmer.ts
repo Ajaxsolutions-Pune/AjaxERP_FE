@@ -32,7 +32,6 @@ export class AnswerTransfarmer {
         return this.answers;
     }
     AnswerTransfarmerEntity(Entity: AnswerEntity): Answer {
-        console.log(Entity);
         this.answer = new Answer();
         this.answer.answerId = Entity.answerId;
         this.answer.answer = Entity.answer;
@@ -40,11 +39,8 @@ export class AnswerTransfarmer {
         this.answer.createdDate = Entity.createdDate;
         this.answer.modifiedBy = Entity.modifiedBy;
         this.answer.modifiedDate = Entity.modifiedDate;
-        console.log(Entity.isActive.toString().trim() === '1');
-        console.log(Entity.isActive);
-         // tslint:disable-next-line:max-line-length
-         if (Entity.isActive === '1') { this.answer.isActive = 'true'.toString().trim(); } else { this.answer.isActive = ''.toString().trim(); }
-        console.log(this.answer.isActive);
+        // tslint:disable-next-line:max-line-length
+        if (Entity.isActive === '1') { this.answer.isActive = 'true'.toString().trim(); } else { this.answer.isActive = ''.toString().trim(); }
         return this.answer;
     }
 
@@ -56,7 +52,7 @@ export class AnswerTransfarmer {
         this.answerEntity.createdDate = Answer1.createdDate;
         this.answerEntity.modifiedBy = Answer1.modifiedBy;
         this.answerEntity.modifiedDate = Answer1.modifiedDate;
-         if (Answer1.isActive.toString().trim() === 'true') { this.answerEntity.isActive = '1'; } else { this.answerEntity.isActive = '0'; }
+        if (Answer1.isActive.toString().trim() === 'true') { this.answerEntity.isActive = '1'; } else { this.answerEntity.isActive = '0'; }
         return this.answerEntity;
     }
 }

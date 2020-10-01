@@ -47,7 +47,6 @@ export class DeviceTransfarmer {
         return this.arrOject;
     }
     DeviceTransfarmerEntity(element: DeviceEntity): Device {
-        console.log(element);
         this.Oject = new Device();
         this.Oject.deviceId = element.deviceId;
         this.Oject.imei1 = element.imei1;
@@ -110,8 +109,6 @@ export class DeviceTransfarmer {
         } else {
             this.OjectEntity.isActive = '0';
         }
-        console.log('OjectEntity');
-        console.log(this.OjectEntity);
         return this.OjectEntity;
     }
 }

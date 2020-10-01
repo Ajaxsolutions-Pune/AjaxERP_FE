@@ -15,7 +15,6 @@ export class AssetService {
         this.str = this.env.apiServiceIPPort;
     }
     getAssets(): Observable<AssetEntity[]> {
-        console.log(this.str + '/Asset/getList');
         return this.httpClient.get<AssetEntity[]>(this.str + '/Asset/getList'
         , this.env.httpOptions);
     }
@@ -32,16 +31,12 @@ export class AssetService {
 
 
     Save(saveEntityObj: AssetEntity): Observable<Insertstatus> {
-        console.log('service');
-        console.log(AssetEntity);
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<Insertstatus>(this.str + '/Asset', saveEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: AssetEntity): Observable<Insertstatus> {
-        console.log(updateEntityObj);
-        // tslint:disable-next-line:max-line-length
         return this.httpClient.post<Insertstatus>(this.str + '/Asset', updateEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }

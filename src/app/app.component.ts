@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
       headers:
         new HttpHeaders({
           'Content-Type': 'application/json',
-          // tslint:disable-next-line:max-line-length
           'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
     };

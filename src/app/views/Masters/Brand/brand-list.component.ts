@@ -32,7 +32,6 @@ export class BrandListComponent implements OnInit {
       (par) => this.brands = par,
       (err: any) => console.log(err));
     this.WithoutFilterBrands = this.brands;
-    console.log(this.brands);
     this.brand = {
       manufactureCode: null,
       brandCode: null,
@@ -40,7 +39,6 @@ export class BrandListComponent implements OnInit {
       brandDescUni: null,
       isActive: 1
     };
-    console.log(this.brands);
   }
 
   resultChanged(): void {
@@ -64,6 +62,6 @@ export class BrandListComponent implements OnInit {
 
   ExportToExcel(): void {
     alasql('SELECT Brand_Code,Brand_Id,Brand_Name_ENg,Brand_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("brandList.xlsx",{headers:true}) FROM ?', [this.brands]);
+      'CreDate,ModDate,IsActive Status INTO XLSX("brandList.xlsx",{headers:true}) FROM ?', [this.brands]);
   }
 }

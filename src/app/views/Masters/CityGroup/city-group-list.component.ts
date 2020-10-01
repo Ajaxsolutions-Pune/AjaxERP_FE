@@ -42,9 +42,6 @@ export class CityGroupListComponent implements OnInit {
       IsActive: true,
 
     };
-    console.log('CityGroup_Code ' + this.citygroup.CityGroup_Code);
-
-    console.log('CityGroup_Name' + this.citygroup.CityGroup_Name_ENG);
   }
 
   resultChanged(): void {

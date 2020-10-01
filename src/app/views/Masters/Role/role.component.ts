@@ -9,8 +9,8 @@ import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
 import { environment } from '../../../Components/Module/environment';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
-import { RoleLevel } from '../../../Components/Module/Masters/RoleLevel.model';
-import { RoleLevelService} from '../../../Components/Services/Masters/RoleLevelService';
+import { Rolelevel } from '../../../Components/Module/Masters/RoleLevel.model';
+import { RolelevelService} from '../../../Components/Services/Masters/RoleLevelService';
 import { RoleLevelTransfarmer} from '../../../Components/Transformer/Masters/RoleLevel-Transfarmer';
 @Component({
     selector: 'app-role',
@@ -19,7 +19,7 @@ import { RoleLevelTransfarmer} from '../../../Components/Transformer/Masters/Rol
 
   export class RoleComponent extends FormComponentBase implements OnInit, AfterViewInit 
   {
-    roleLevel: RoleLevel[];  
+    roleLevel: Rolelevel[];  
     // @ts-ignore
     @ViewChild('txtRoleID') firstItem: ElementRef;
     form!: FormGroup;
@@ -35,7 +35,7 @@ import { RoleLevelTransfarmer} from '../../../Components/Transformer/Masters/Rol
       private defaultLayoutComponent: DefaultLayoutComponent,
       private roleService: RoleService,
       private globalService: GlobalService,
-      private roleLevelService: RoleLevelService,
+      private roleLevelService: RolelevelService,
       private roleLevelTransfarmer: RoleLevelTransfarmer,
      
       private router: Router, private formBuilder: FormBuilder) 
@@ -58,7 +58,7 @@ import { RoleLevelTransfarmer} from '../../../Components/Transformer/Masters/Rol
 
     ngOnInit() {
  
-      this.roleLevelService.fillDrpRoleLevels().subscribe(
+      this.roleLevelService.fillDrpRolelevels().subscribe(
         (par) => this.roleLevel = this.roleLevelTransfarmer.RoleLevelTransfarmers(par),
         (err: any) => console.log(err));
 

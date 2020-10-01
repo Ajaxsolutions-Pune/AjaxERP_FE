@@ -36,9 +36,6 @@ export class CityComponent implements OnInit {
   }
 
   private getcountrys(Id: number) {
-
-    console.log(Id);
-    console.log(status);
     this.city = {
       ID: null,
       City_Code: null,

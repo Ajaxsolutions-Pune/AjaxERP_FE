@@ -10,8 +10,8 @@ import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-fiel
 import { environment } from '../../../Components/Module/environment';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 
-import { RoleLevel } from '../../../Components/Module/Masters/RoleLevel.model';
-import { RoleLevelService } from '../../../Components/Services/Masters/RoleLevelService';
+import { Rolelevel } from '../../../Components/Module/Masters/RoleLevel.model';
+import { RolelevelService } from '../../../Components/Services/Masters/RoleLevelService';
 import { RoleLevelTransfarmer } from '../../../Components/Transformer/Masters/RoleLevel-Transfarmer';
 
 import { UserEntity_} from '../../../Components/Module/Masters/UserEntity.model';
@@ -26,7 +26,7 @@ import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
 
   export class UserComponent extends FormComponentBase implements OnInit, AfterViewInit 
   {
-    roleLevel: RoleLevel[];     
+    roleLevel: Rolelevel[];     
     // @ts-ignore
     @ViewChild('txtLoginID') firstItem: ElementRef;
     form!: FormGroup;
@@ -45,7 +45,7 @@ import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
       private userService: UserService,
       private globalService: GlobalService,
       private httpClient: HttpClient,
-      private roleLevelService: RoleLevelService,
+      private roleLevelService: RolelevelService,
       private roleLevelTransfarmer: RoleLevelTransfarmer,      
       private router: Router, private formBuilder: FormBuilder) 
     {     
@@ -84,7 +84,7 @@ import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
       }
 
     ngOnInit() { 
-      this.roleLevelService.fillDrpRoleLevels().subscribe(
+      this.roleLevelService.fillDrpRolelevels().subscribe(
         (par) => this.roleLevel = this.roleLevelTransfarmer.RoleLevelTransfarmers(par),
         (err: any) => console.log(err));
         //user hroup combo

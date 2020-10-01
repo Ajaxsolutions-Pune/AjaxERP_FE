@@ -38,7 +38,6 @@ export class HubTransfarmer {
         return this.hubs;
     }
     HubTransfarmerEntity(Entity: HubEntity): Hub {
-        console.log(Entity);
         this.hub = new Hub();
         this.hub.ouCode = Entity.ouCode;
         this.hub.hubCode = Entity.hubCode;
@@ -54,7 +53,6 @@ export class HubTransfarmer {
         if (Entity.isActive === '1') {
             this.hub.isActive = 'true'.toString().trim();
         } else { this.hub.isActive = ''.toString().trim(); }
-        console.log(this.hub.isActive);
         return this.hub;
     }
 

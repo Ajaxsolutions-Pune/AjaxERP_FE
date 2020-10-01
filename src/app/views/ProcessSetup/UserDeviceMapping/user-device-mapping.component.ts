@@ -32,14 +32,14 @@ import { GlobalService } from '../../../Components/Services/GlobalServices/Globa
 @Component({
   selector: 'app-user-device-mapping',
   templateUrl: './user-device-mapping.component.html',
-  styleUrls:  ['./user-device-mapping.component.scss']
+  styleUrls: ['./user-device-mapping.component.scss']
 })
 
 export class UserDeviceMappingComponent extends FormComponentBase
   implements OnInit {
 
   deviceObj: Device[];
-  displayedColumns = ['UserDeviceMapping', 'UserText','SortBy',  'ActiveText', 'actions'];
+  displayedColumns = ['UserDeviceMapping', 'UserText', 'SortBy', 'ActiveText', 'actions'];
   exampleDatabase: UserDeviceDataService | null;
   insertData: UserDeviceDataService | null;
   dataSource: ExampleDataSource | null;
@@ -65,7 +65,7 @@ export class UserDeviceMappingComponent extends FormComponentBase
     private formBuilder: FormBuilder) {
     super();
     this.validationMessages = {
-        ControlDeviceCode: {
+      ControlDeviceCode: {
         required: 'Device is required.',
       }
     };
@@ -94,11 +94,11 @@ export class UserDeviceMappingComponent extends FormComponentBase
 
   addNew() {
     const dialogRef = this.dialog.open(UserDeviceAddDialogComponent, {
-    
+
       data: {
-       // isQuestionMandatory: ''.toString(),
-      
-        deviceId: this.DeviceId,        
+        // isQuestionMandatory: ''.toString(),
+
+        deviceId: this.DeviceId,
         isActive: ''.toString(),
         updateFlag: '1'
       }
@@ -106,14 +106,13 @@ export class UserDeviceMappingComponent extends FormComponentBase
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
-        this.insertData.dataChange.value.push(this.dataService.getDialogData());  
+        this.insertData.dataChange.value.push(this.dataService.getDialogData());
         this.refreshTable();
       }
     });
   }
 
   save(): void {
-    console.log(this.DeviceId);
     if (this.DeviceId === undefined) {
       this.defaultLayoutComponent.Massage('Somethig Wrong',
         'Please select device name', 'modal-danger');
@@ -132,19 +131,14 @@ export class UserDeviceMappingComponent extends FormComponentBase
       element.modifiedBy = localStorage.getItem('username');
       element.modifiedDate = this.globalService.GerCurrntDateStamp();
     });
-    console.log(this.userDeviceMappingTransfarmer.
-      ObjectToEntityUserDeviceMappingTransfarmers(this.dataSource.filteredData));
     this.objUserDeviceMapping = [];
     this.objUserDeviceMapping = this.dataSource.filteredData.filter(e => {
-      console.log(e.updateFlag);
-    });   
-    
+    });
+
     this.userDeviceMappingService.Save(this.userDeviceMappingTransfarmer.
-      ObjectToEntityUserDeviceMappingTransfarmers (this.insertData.dataChange.value)).subscribe(
+      ObjectToEntityUserDeviceMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Success') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['UserDeviceMapping']);
@@ -152,17 +146,17 @@ export class UserDeviceMappingComponent extends FormComponentBase
           }
         }
       );
-    }
+  }
 
-    DeviceChange(event) {
+  DeviceChange(event) {
     const target = event.source.selected._element.nativeElement;
     const selectedData = {
       value: event.value,
       text: target.innerText.trim()
     };
     this.objUserDeviceMapping = [];
-     
-  
+
+
     this.insertData.dataChange.value.splice(0);
 
     this.exampleDatabase.dataChange.value.splice(0, 100);
@@ -170,7 +164,7 @@ export class UserDeviceMappingComponent extends FormComponentBase
     this.userDeviceMappingService.getUserDeviceMapping(selectedData.value).subscribe(
       (par) => {
         this.objUserDeviceMapping = this.userDeviceMappingTransfarmer.
-        UserDeviceMappingTransfarmers(par);
+          UserDeviceMappingTransfarmers(par);
         this.objUserDeviceMapping.forEach(a => {
           a.deviceId = selectedData.value;
         });
@@ -185,16 +179,16 @@ export class UserDeviceMappingComponent extends FormComponentBase
 
   startEdit(i: number,
     adId: number,
-    loginId: string,   
+    loginId: string,
     sortBy: string,
     isActive: string) {
     this.id = adId;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
-    const dialogRef = this.dialog.open(UserDeviceEditDialogComponent,{
+    const dialogRef = this.dialog.open(UserDeviceEditDialogComponent, {
       data: {
         adId: adId,
-        loginId: loginId, 
+        loginId: loginId,
         sortBy: sortBy,
         isActive: isActive,
         updateFlag: '1'
@@ -203,48 +197,17 @@ export class UserDeviceMappingComponent extends FormComponentBase
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-        // When using an edit things are little different, firstly we find record inside DataService by id
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.adId === this.id);
-        // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
-         // Added by ...
         const findInsertIndex = this.insertData.dataChange.value.findIndex(x => x.adId === this.id);
-        if(findInsertIndex > -1){
-          this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData(); 
-        }else{
+        if (findInsertIndex > -1) {
+          this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData();
+        } else {
           this.insertData.dataChange.value.push(this.exampleDatabase.dataChange.value[foundIndex]);
-        }        
-        // And lastly refresh table
-        this.refreshTable();
+        } this.refreshTable();
       }
     });
   }
-
-  /*deleteItem(i: number, FormQuestionsAnswerMapping: number, Questions: string, QuestionsMandatory: string,
-    FormQuestionssequence: string, answer: string, QuestionsGroup: string, NextForm: string) {
-    this.index = i;
-    this.id = FormQuestionsAnswerMapping;
-    const dialogRef = this.dialog.open(ProcessDeleteDialogComponent, {
-      data: {
-        FormQuestionsAnswerMapping: FormQuestionsAnswerMapping,
-        Questions: Questions, QuestionsMandatory: QuestionsMandatory,
-        FormQuestionssequence: FormQuestionssequence, answer: answer,
-        QuestionsGroup: QuestionsGroup, NextForm: NextForm
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x =>
-          x.udmId === this.id);
-        // for delete we use splice in order to remove single object from DataService
-        this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-        this.refreshTable();
-      }
-    });
-  }*/
-
-
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
   }
@@ -325,7 +288,7 @@ export class ExampleDataSource extends DataSource<UserDeviceMapping> {
       switch (this._sort.active) {
         case 'UserDeviceMapping': [propertyA, propertyB] = [a.adId, b.adId]; break;
         case 'LoginText': [propertyA, propertyB] = [a.loginIdText, b.loginIdText]; break;
-        case 'SortBy': [propertyA, propertyB] = [a.sortBy, b.sortBy]; break;      
+        case 'SortBy': [propertyA, propertyB] = [a.sortBy, b.sortBy]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
@@ -349,9 +312,9 @@ import { FormService} from '../../../Components/Services/Masters/FormService';
 export class ProcessFormMappingComponent implements OnInit {
   processFormMappingForm: FormGroup;
   processes : {};
-  forms: {}; 
+  forms: {};
 
-  constructor(private processService1: ProcessService1, private formService: FormService) { } 
+  constructor(private processService1: ProcessService1, private formService: FormService) { }
   ngOnInit() {
     this.processService1.fillDrpProcess().subscribe(
       data => this.processes = data
@@ -363,7 +326,7 @@ export class ProcessFormMappingComponent implements OnInit {
 
     this.processFormMappingForm = new FormGroup({
       country: new FormControl(''),
-      form: new FormControl(''),     
+      form: new FormControl(''),
     });
   }
 }*/

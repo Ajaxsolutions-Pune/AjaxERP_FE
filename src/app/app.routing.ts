@@ -8,7 +8,8 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LogInComponent } from './Components/login/login.component';
 import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component';
-import { UserListComponent } from './views/Masters/User/List-user.component';
+//import { UserMasterComponent } from './views/Masters/User/user-master.component';
+//import { ListUserComponent } from './views/Masters/User/List-user.component';
 import { UnitComponent } from './views/Masters/UOM/unit.component';
 import { ListUOMComponent } from './views/Masters/UOM/list-uom.component';
 import { CountryComponent } from './views/Masters/Country/country.component';
@@ -107,7 +108,16 @@ import { HubComponent } from './views/Masters/Hub/hub.component';
 import { ProcessFormMappingComponent } from './views/ProcessSetup/ProcessFormMapping/process-form-mapping.component';
 import { UserDeviceMappingComponent } from './views/ProcessSetup/UserDeviceMapping/user-device-mapping.component';
 import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMapping/device-asset-mapping.component';
-import { UserListResolverService } from './Components/Resolver/Masters/User-List-Resolver.Service';
+import { ContactListResolverService } from './Components/Resolver/Masters/Contact-List-Resolver.Service';
+import { ContactListComponent } from './views/Masters/Contact/contact-list.component';
+import { ContactComponent } from './views/Masters/Contact/contact.component';
+import { AccessListComponent } from './views/Masters/Access/access-list.component';
+import { AccessListResolverService } from './Components/Resolver/Masters/Access-List-Resolver.Service';
+import { AccessComponent } from './views/Masters/Access/access.component';
+import { RolelevelListResolverService } from './Components/Resolver/Masters/RoleLevel-List-Resolver.Service';
+import { RolelevelListComponent } from './views/Masters/Rolelevel/rolelevel-list.component';
+import { RolelevelComponent } from './views/Masters/Rolelevel/rolelevel.component';
+import { UserListComponent } from './views/Masters/User/List-user.component';
 import { UserComponent } from './views/Masters/User/user-master.component';
 
 export const routes: Routes = [
@@ -158,7 +168,27 @@ export const routes: Routes = [
           title: 'Dashboard'
         }
       },
-      
+      {
+        path: 'UserList',
+        component: UserListComponent,
+        data: {
+          title: 'User List'
+        }
+      },
+      {
+        path: 'AddUser/:id',
+        component: UserComponent,
+        data: {
+          title: 'User Master'
+        }
+      },
+      {
+        path: 'EditUser/:id',
+        component: UserComponent,
+        data: {
+          title: 'Edit User'
+        }
+      },
       {
         path: 'UnitList',
         component: ListUOMComponent,
@@ -798,10 +828,71 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'Asset/:id',
+        component: AssetComponent,
+        data: {
+          title: 'Edit Asset Category'
+        }
+      },
+      {
         path: 'Asset',
         component: AssetComponent,
         data: {
           title: 'Add Aset'
+        },
+        resolve: {
+          AssetList: AssetListResolverService
+        }
+      },
+      {
+        path: 'AccessList',
+        component: AccessListComponent,
+        data: {
+          title: 'Access List'
+        },
+        resolve: {
+          AccessList: AccessListResolverService
+        }
+      },
+      {
+        path: 'Access/:id',
+        component: AccessComponent,
+        data: {
+          title: 'Edit Access'
+        }
+      },
+      {
+        path: 'Access',
+        component: AccessComponent,
+        data: {
+          title: 'Add Access'
+        },
+        resolve: {
+          AssetList: AssetListResolverService
+        }
+      },
+      {
+        path: 'RolelevelList',
+        component: RolelevelListComponent,
+        data: {
+          title: 'Rolelevel List'
+        },
+        resolve: {
+          RolelevelList: RolelevelListResolverService
+        }
+      },
+      {
+        path: 'Rolelevel/:id',
+        component: RolelevelComponent,
+        data: {
+          title: 'Edit Rolelevel'
+        }
+      },
+      {
+        path: 'Rolelevel',
+        component: RolelevelComponent,
+        data: {
+          title: 'Add Rolelevel'
         },
         resolve: {
           AssetList: AssetListResolverService
@@ -832,10 +923,34 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'ContactList',
+        component: ContactListComponent,
+        data: {
+          title: 'Contact List'
+        },
+        resolve: {
+          ContactList: ContactListResolverService
+        }
+      },
+      {
+        path: 'Contact',
+        component: ContactComponent,
+        data: {
+          title: 'Add Contact'
+        }
+      },
+      {
+        path: 'Contact/:id',
+        component: ContactComponent,
+        data: {
+          title: 'Edit Contact'
+        }
+      },
+      {
         path: 'HubList',
         component: HubListComponent,
         data: {
-          title: 'Hub List'
+          title: 'HUB List'
         },
         resolve: {
           HubList: HubListResolverService
@@ -845,14 +960,14 @@ export const routes: Routes = [
         path: 'Hub',
         component: HubComponent,
         data: {
-          title: 'Add Hub'
+          title: 'Add HUB'
         }
       },
       {
         path: 'Hub/:id',
         component: HubComponent,
         data: {
-          title: 'Edit Hub'
+          title: 'Edit HUB'
         }
       },
       {
@@ -941,33 +1056,6 @@ export const routes: Routes = [
         component: RoleComponent,
         data: {
           title: 'Edit Role'
-        }
-      },
-
-      {
-        path: 'UserList',
-        component: UserListComponent,
-        data: {
-          title: 'User List'
-        },
-        resolve: {
-          UserList: UserListResolverService
-        },
-      },
-
-      {
-        path: 'User',
-        component: UserComponent,
-        data: {
-          title: 'Add User'
-        }
-      },
-
-      {
-        path: 'User/:id',
-        component: UserComponent,
-        data: {
-          title: 'Edit User'
         }
       },
 

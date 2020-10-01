@@ -51,13 +51,11 @@ export class ProcessFormMappingTransfarmer {
                 this.Oject.isActive = '0';
             }
             this.arrOjectEntity.push(this.Oject);
-            console.log('##### Transform -->>'+this.arrOjectEntity.values.toString); 
         });
         return this.arrOjectEntity;
     }
 
     ProcessFormMappingTransfarmerEntity(Entity: ProcessFormMappingEntity): ProcessFormMapping {
-        console.log(Entity);
         this.Oject = new ProcessFormMapping();   
         this.Oject.pfmId = Entity.pfmId;
         this.Oject.processId = Entity.processId;           

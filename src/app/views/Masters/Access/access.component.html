@@ -1,0 +1,76 @@
+<main class="form-main">
+    <form #formAccess="ngForm" [formGroup]="form" autocomplete="off">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Access</strong>
+                        </div>
+                        <div class="card-body">
+                           <!--<h6 class="text-right">* - Mandatory fields</h6>--> 
+                            <div class="row">
+                                <div class="col-md-4"></div>                            
+                                <mat-form-field class="col-md-2">
+                                    <input matInput
+                                    #AccessID
+                                    spellcheck="false" [(ngModel)]="accessobj.accessId"
+                                    placeholder="Access Code"
+                                    formControlName="ControlAccessId" >
+                                    <mat-error>
+                                    {{ formErrors['ControlAccessId'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>   
+                               <!--<span class="Mandatory_Icon">*</span>-->  
+                                <mat-form-field class="col-md-4">
+                                  <input matInput
+                                    #AccessName
+                                    spellcheck="false" [(ngModel)]="accessobj.accessName"
+                                    placeholder="Access Name *"
+                                    formControlName="ControlAccessName" maxlength="50">                                    
+                                  <mat-error>
+                                    {{ formErrors['ControlAccessName']}}
+                                  </mat-error>
+                                </mat-form-field>
+                               
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-sm-4">                                    
+                                    <mat-checkbox name="chkisActive"
+                                    #chkisActive 
+                                    formControlName="ControlisActive"
+                                     [(ngModel)]="accessobj.isActive">Active
+                                    </mat-checkbox>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">                                    
+                                    <button mat-raised-button
+                                    [disabled]="!form.valid"
+                                    (click)="save()"
+                                    color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button mat-raised-button color="warn"
+                                         routerLink="/AccessList" >
+                                            Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </form>
+    </main>
+    <div style="display: none;"> {{accessobj | json}}</div>

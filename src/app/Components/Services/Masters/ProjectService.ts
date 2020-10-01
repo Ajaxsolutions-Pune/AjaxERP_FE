@@ -19,7 +19,6 @@ export class ProjectService {
     }
     Listproject: Project[];
     getProjects(): Observable<ProjectEntity[]> {
-        console.log(this.httpClient.get<ProjectEntity[]>(this.str + '/Project/getList'));
         return this.httpClient.get<ProjectEntity[]>(this.str + '/Project/getList',
          this.env.httpOptions);
     }   
@@ -31,7 +30,6 @@ export class ProjectService {
 
     Save(saveEntityObj: ProjectEntity): Observable<Insertstatus> {
         saveEntityObj.projectCode = null;
-        console.log(this.str + '/Project');
         return this.httpClient.post<Insertstatus>(this.str + '/Project',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
             
@@ -49,14 +47,5 @@ export class ProjectService {
             console.error('client side error', errorResponse.error.message);
         }
         return throwError('d');
-        const data = null; // call api
-        console.log(this.dialogService);
-        this.dialogService.openModal('Title1', 'Message Test', () => {
-            // confirmed
-            console.log('Yes');
-        }, () => {
-            // not confirmed
-            console.log('No');
-        });
     }
 }

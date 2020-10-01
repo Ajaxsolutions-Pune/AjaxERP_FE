@@ -75,7 +75,6 @@ export class ProjectListComponent implements OnInit {
     this.Resultproject = this.WithoutFilterProject;
     
     if (this.objProject.projectName !== null && this.objProject.projectName !== '') {
-      console.log(this.objProject.projectName.toString().toLowerCase());
       this.Resultproject = this.Resultproject.filter(SubResult =>
         SubResult.projectName.toLowerCase().indexOf(this.objProject.projectName.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;

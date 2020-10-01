@@ -33,7 +33,6 @@ export class QuestionTransfarmer {
         return this.questions;
     }
     QuestionTransfarmerEntity(Entity: QuestionEntity): Question {
-        console.log(Entity);
         this.question = new Question();
         this.question.questionId = Entity.questionId;
         this.question.question = Entity.question;

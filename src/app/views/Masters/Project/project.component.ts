@@ -41,7 +41,6 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
     private defaultLayoutComponent: DefaultLayoutComponent,
     private router: Router, private formBuilder: FormBuilder) {
     super();
-    console.log(localStorage.getItem('username'));
     this.validationMessages = {
       ControlProjectID: {
         required: 'Project id is required.',
@@ -148,13 +147,10 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
       this.project.modifiedDate = this.globalService.GerCurrntDateStamp();
 
     if (status !== 'Update') {
-      this.project.projectCode = null;
-      console.log(this.projectTransfarmer.ProjectTransfarmer(this.project));
-      
+      this.project.projectCode = null;      
      this.projectService.Save(this.projectTransfarmer.ProjectTransfarmer(this.project)).subscribe(
         (par) => {         
           if (par.status === 'Inserted') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['ProjectList']);
@@ -166,12 +162,9 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
       );    
 
     } else {
-      console.log(this.projectTransfarmer.ProjectTransfarmer(this.project));
       this.projectService.Update(this.projectTransfarmer.ProjectTransfarmer(this.project)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Updated') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['ProjectList']);

@@ -4,10 +4,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { DeviceAssetMapping } from '../../../Components/Module/ProcessSetup/DeviceAssetMapping.model';
 @Injectable()
 export class DeviceAssetDataService {
-  // private readonly API_URL = 'https://api.github.com/repos/angular/angular/issues';
 
   dataChange: BehaviorSubject<DeviceAssetMapping[]> = new BehaviorSubject<DeviceAssetMapping[]>([]);
-  // Temporarily stores data from dialogs
   dialogData: any;
 
   constructor(private httpClient: HttpClient) { }
@@ -31,10 +29,6 @@ export class DeviceAssetDataService {
   updateDeviceAssetMapping(deviceAsstMapping: DeviceAssetMapping): void {
     this.dialogData = deviceAsstMapping;
   }
-
-  /*deleteUserDeviceMapping(id: number): void {
-    console.log(id);
-  }*/
 }
 
 

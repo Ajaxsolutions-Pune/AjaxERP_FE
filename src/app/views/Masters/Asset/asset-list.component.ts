@@ -29,7 +29,6 @@ export class AssetListComponent implements OnInit {
       this._router.navigate(['login']);
     }
     this.arrOjectEntity = this.route.snapshot.data['AssetList'];
-    console.log(this.arrOjectEntity);
     this.arrOject = objTrans.AssetTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
     this.config = {
@@ -44,7 +43,6 @@ export class AssetListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       ouCode: null,
       assetCode: null,

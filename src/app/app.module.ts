@@ -15,7 +15,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 import { AppComponent } from './app.component';
-// Import containers
 import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -31,31 +30,23 @@ import {
   AppFooterModule,
   AppSidebarModule,
 } from '@coreui/angular';
-
-// Import routing module
 import { AppRoutingModule, routes } from './app.routing';
-
-// Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component'; // import bn-ng-idle service
+import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component'; 
 import { DashboardService } from './Components/Services/Dashboard.service';
 
 
 import { LogIn } from './Components/Module/login.model';
 import { LogInService } from './Components/Services/LogIn.service';
 import { LogInComponent } from './Components/login/login.component';
-//import { User } from './Components/Module/User.model';
-//import { UserService } from './Components/Services/User.Service';
-import {User } from './Components/Module/Masters/User.model';
-import {UserService} from './Components/Services/Masters/UserService';
-
-
+import { User } from './Components/Module/Masters/User.model';
+import { UserService } from './Components/Services/Masters/UserService';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { RouterModule } from '@angular/router';
-import { UserListComponent } from './views/Masters/User/List-user.component';
-import { UserComponent } from './views/Masters/User/user-master.component';
+//import { ListUserComponent } from './views/Masters/User/List-user.component';
+//import { UserMasterComponent } from './views/Masters/User/user-master.component';
 import { ListUOMComponent } from './views/Masters/UOM/list-uom.component';
 import { UnitComponent } from './views/Masters/UOM/unit.component';
 import { UOMService } from './Components/Services/Masters/UOMService';
@@ -250,16 +241,28 @@ import { ContactListResolverService } from './Components/Resolver/Masters/Contac
 import { ContactService } from './Components/Services/Masters/ContactService';
 import { ProcessDataService } from './views/ProcessSetup/ProcessFormMapping/processdata.service';
 import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/userdevicedata.service';
+
 import { DeviceAssetAddDialogComponent } from './views/ProcessSetup/DeviceAssetMapping/dialogs/add/deviceassetadd.dialog.component';
 import { DeviceAssetEditDialogComponent } from './views/ProcessSetup/DeviceAssetMapping/dialogs/edit/deviceassetedit.dialog.component';
 import { DeviceAssetMappingComponent } from './views/ProcessSetup/DeviceAssetMapping/device-asset-mapping.component';
 import { DeviceAssetMappingService } from './Components/Services/ProcessSetup/DeviceAssetMappingService';
 import { DeviceAssetMappingTransfarmer } from './Components/Transformer/ProcessSetup/DeviceAssetMapping-Transfarmer';
 import { DeviceAssetDataService } from './views/ProcessSetup/DeviceAssetMapping/deviceassetdata.service';
-import { RoleLevelService } from './Components/Services/Masters/RoleLevelService';
-import { RoleLevel } from './Components/Module/Masters/RoleLevel.model';
-import { RoleLevelTransfarmer } from './Components/Transformer/Masters/RoleLevel-Transfarmer';
-import { UserListResolverService } from './Components/Resolver/Masters/User-List-Resolver.Service';
+import { ContactListComponent } from './views/Masters/Contact/contact-list.component';
+import { ContactComponent } from './views/Masters/Contact/contact.component';
+import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Transfarmer';
+import { AccessListResolverService } from './Components/Resolver/Masters/Access-List-Resolver.Service';
+import { AccessService } from './Components/Services/Masters/AccessService';
+import { AccessTransfarmer } from './Components/Transformer/Masters/Access-Transfarmer';
+import { AccessListComponent } from './views/Masters/Access/access-list.component';
+import { AccessComponent } from './views/Masters/Access/access.component';
+import { RolelevelComponent } from './views/Masters/Rolelevel/rolelevel.component';
+import { RolelevelListComponent } from './views/Masters/Rolelevel/rolelevel-list.component';
+import { RolelevelService } from './Components/Services/Masters/RolelevelService';
+import { RolelevelTransfarmer } from './Components/Transformer/Masters/Role-level.Transfarmer';
+import { RolelevelListResolverService } from './Components/Resolver/Masters/RoleLevel-List-Resolver.Service';
+import { UserListComponent } from './views/Masters/User/List-user.component';
+import { UserComponent } from './views/Masters/User/user-master.component';
 
 @NgModule({
   imports: [
@@ -318,14 +321,15 @@ import { UserListResolverService } from './Components/Resolver/Masters/User-List
     DeleteDialogComponent,
     ProcessAddDialogComponent,
     ProcessDeleteDialogComponent,
-    ProcessEditDialogComponent,    
+    ProcessEditDialogComponent,
     UserDeviceAddDialogComponent,
     UserDeviceEditDialogComponent,
     DeviceAssetAddDialogComponent,
     DeviceAssetEditDialogComponent,
     AppComponent, ...APP_CONTAINERS, P404Component, P500Component, LogInComponent,
     DialogTemplateComponent,
-    UserListComponent, UserComponent, DashboardComponent, ListUOMComponent,
+    UserListComponent, UserComponent,
+    DashboardComponent, ListUOMComponent,
     CountryComponent, UnitComponent, CountryListComponent, BrandListComponent,
     TaxRateListComponent, MyErrorStateMatcher,
     BrandComponent, StateComponent, StateListComponent, CityListComponent, CityComponent,
@@ -348,16 +352,15 @@ import { UserListResolverService } from './Components/Resolver/Masters/User-List
     RoleComponent, RoleListComponent,
     ProjectComponent, ProjectListComponent,
     TransmissionLineComponent, TransmissionLineListComponent, HubListComponent, HubComponent,
-    ProcessFormMappingComponent, UserDeviceMappingComponent,    
-    DeviceAssetMappingComponent,
+    ProcessFormMappingComponent, UserDeviceMappingComponent,
+    DeviceAssetMappingComponent, ContactListComponent, ContactComponent, AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
-    RoleLevelService, RoleLevel,UserComponent,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
-    HubService, ContactService,
+    HubService, ContactService, AccessService,
     CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
@@ -367,7 +370,7 @@ import { UserListResolverService } from './Components/Resolver/Masters/User-List
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
-    HubTransfarmer, StateTransfarmer,
+    HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService,
@@ -379,17 +382,16 @@ import { UserListResolverService } from './Components/Resolver/Masters/User-List
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
     DeviceListResolverService, ClusterListResolverService, TransmissionLineListResolverService,
-    HubListResolverService, ContactListResolverService,
+    HubListResolverService, ContactListResolverService, AccessListResolverService,
+    ProcessListResolverService, RoleListResolverService,
     DialogTemplateComponent,
-    DialogService,
-    RoleService, RoleTransfarmer, RoleListResolverService,
-    UserListResolverService,
+    DialogService, RolelevelListResolverService,
+    RoleService, RolelevelService, RoleTransfarmer, RolelevelTransfarmer,
     ProjectService, ProjectTransfarmer, ProjectListResolverService,
 
     ProcessFormMappingService, ProcessFormMappingTransfarmer, ProcessDataService, UserDeviceDataService,
     ProcessDataService,
-    UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer,DeviceAssetMappingService,
-    RoleLevelTransfarmer,
+    UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer, DeviceAssetMappingService,
     DeviceAssetDataService,
     DeviceAssetMappingTransfarmer,
     {

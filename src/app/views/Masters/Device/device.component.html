@@ -10,7 +10,7 @@
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Device Id" [(ngModel)]="bindObj.deviceId" #txtdeviceId
+                <input matInput placeholder="Device Code" [(ngModel)]="bindObj.deviceId" #txtdeviceId
                   formControlName="ControldeviceId" name="txtdeviceId">
               </mat-form-field>
               <div class="col-sm-4" style="padding-left: 12%;">
@@ -22,14 +22,14 @@
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="IMEI 1" required [(ngModel)]="bindObj.imei1" #txtimei1
+                <input matInput placeholder="Device Reg. 1" required [(ngModel)]="bindObj.imei1" #txtimei1
                   formControlName="Controlimei1" name="txtimei1">
                 <mat-error>
                   {{ formErrors['Controlimei1'] }}
                 </mat-error>
               </mat-form-field>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="IMEI 2" [(ngModel)]="bindObj.imei2" #txtimei2
+                <input matInput placeholder="Device Reg. 2" [(ngModel)]="bindObj.imei2" #txtimei2
                   formControlName="Controlimei2" name="txtimei2">
               </mat-form-field>
             </div>

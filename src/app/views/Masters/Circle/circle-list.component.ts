@@ -39,7 +39,6 @@ export class CircleListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       circleCode: null,
       circleNameENG: null,
@@ -92,7 +91,7 @@ export class CircleListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT circleCode circle_Code,circleNameENG circle_Name,' +
-      'isActive INTO XLSX("CircleList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT circleCode Circle_Code,CircleNameENG circle_Name,' +
+      'isActive Status INTO XLSX("CircleList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

@@ -15,8 +15,6 @@ export class DashboardService {
     }
     getDashBoard(BranchNo: string, Date1: string, machineId: string, DrawCode: string): Observable<DashboardProd[]> {
         // tslint:disable-next-line:max-line-length
-        console.log(this.str + '/Production/GetDashBoardProdStatus?BranchNo=' + BranchNo + '&Date=' + Date1 + '&machineno=' + machineId + '&DrawC=' + DrawCode);
-        // tslint:disable-next-line:max-line-length
         return this.httpClient.get<DashboardProd[]>(this.str + '/Production/GetDashBoardProdStatus?BranchNo=' + BranchNo + '&Date=' + Date1 + '&machineno=' + machineId + '&DrawC=' + DrawCode).pipe(catchError(this.handleError));
     }
 

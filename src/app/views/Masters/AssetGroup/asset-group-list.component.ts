@@ -3,6 +3,9 @@ import { AssetGroup, AssetGroupEntity } from '../../../Components/Module/Masters
 import { Router, ActivatedRoute } from '@angular/router';
 import { AssetGroupTransfarmer } from '../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
 import { environment } from '../../../Components/Module/environment';
+import * as alasql from 'alasql';
+alasql['private'].externalXlsxLib = require('xlsx');
+
 
 @Component({
   selector: 'app-asset-group-list',
@@ -42,7 +45,6 @@ export class AssetGroupListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       assetGroupCode: null,
       assetGroupNameENG: null,
@@ -90,7 +92,7 @@ export class AssetGroupListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT assetGroupCode,assetGroupNameENG,assetGroupNameUNI,' +
-      'isActive INTO XLSX("AssetGroupList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT assetGroupCode Asset_Group_Code ,assetGroupNameENG Asset_Group_Name,' +
+      'isActive Status INTO XLSX("AssetGroupList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

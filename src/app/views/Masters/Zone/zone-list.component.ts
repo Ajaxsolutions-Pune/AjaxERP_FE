@@ -42,7 +42,6 @@ export class ZoneListComponent implements OnInit {
   }
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       zoneCode: null,
       zoneNameENG: null,
@@ -93,6 +92,6 @@ export class ZoneListComponent implements OnInit {
 
   ExportToExcel(): void {
     alasql('SELECT zoneCode Code,zoneNameENG Zone,' +
-      'isActive Is_Active INTO XLSX("zoneList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+      'isActive Is_Active INTO XLSX("ZoneList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

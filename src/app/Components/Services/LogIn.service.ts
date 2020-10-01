@@ -20,7 +20,6 @@ export class LogInService {
     login: LogIn;
 
     Login(loginEntityObj: LogIn): Observable<Insertstatus> {
-        console.log(loginEntityObj);
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<Insertstatus>
             (this.str + '/authenticate',

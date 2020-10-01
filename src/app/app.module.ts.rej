@@ -1,0 +1,11 @@
+diff a/src/app/app.module.ts b/src/app/app.module.ts	(rejected hunks)
+@@ -246,6 +246,9 @@
+ import { ContactService } from './Components/Services/Masters/ContactService';
+ import { ProcessDataService } from './views/ProcessSetup/ProcessFormMapping/processdata.service';
+ import { UserDeviceDataService } from './views/ProcessSetup/UserDeviceMapping/userdevicedata.service';
++import { ContactComponent } from './views/Masters/Contact/contact.component';
++import { ContactListComponent } from './views/Masters/Contact/contact-list.component';
++import { ContactTransfarmer } from './Components/Transformer/Masters/Contact-Transfarmer';
+ 
+ 
+ @NgModule({

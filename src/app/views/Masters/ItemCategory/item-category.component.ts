@@ -36,9 +36,6 @@ export class ItemCategoryComponent implements OnInit {
   }
 
   private getitemcategorys(Id: number) {
-
-    console.log(Id);
-    console.log(status);
     this.itemcategory = {
       Id: null,
       oUCode: null,

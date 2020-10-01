@@ -31,7 +31,6 @@ export class QuestionTypeListComponent implements OnInit {
 
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       qaTypeCode: null,
       qaTypeDesc: null,

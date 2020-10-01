@@ -30,7 +30,6 @@ export class FormListComponent implements OnInit {
     }
     this.formEntity = this.route.snapshot.data['FormList'];
     this.forms = objTrans.fTransfarmers(this.formEntity);
-    console.log(this.forms[1].isActive);
     this.WithoutFilterForm = this.forms;
     this.config = {
       itemsPerPage: this.env.paginationPageSize,
@@ -80,7 +79,6 @@ export class FormListComponent implements OnInit {
       } else {
         this.ResultForm = this.ResultForm.filter(SubResultProd =>
           SubResultProd.isActive.toString() === this.Form.isActive.toString());
-        console.log(this.ResultForm);
       }
       this.SerachCri = 1;
     }

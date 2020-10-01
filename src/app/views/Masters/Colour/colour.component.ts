@@ -66,7 +66,6 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
     });
     this.form.controls['ControlcolourCode'].disable();
     this.WithoutFilterObj = this.arrOject;
-    console.log(this.arrOject);
     this.bindObj = {
       colourCode: null,
       colourNameENG: null,

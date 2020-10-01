@@ -41,7 +41,6 @@ export class ProcessEditDialogComponent implements OnInit {
     private formService: FormService,
     private formTransfarmer: FormTransfarmer,
     @Inject(MAT_DIALOG_DATA) public data: ProcessFormMapping, public dataService: ProcessDataService) {
-      console.log(data);
   }
   formControl = new FormControl('', [
     Validators.required
@@ -49,7 +48,7 @@ export class ProcessEditDialogComponent implements OnInit {
   ]);
 
 
-  ngOnInit() {   
+  ngOnInit() {
     this.formService.fillDrpForms().subscribe(
       (par) => {
         this.formObj = this.formTransfarmer.fTransfarmers(par);
@@ -92,7 +91,7 @@ export class ProcessEditDialogComponent implements OnInit {
     this.objanswerIdText = selectedData.text;
   }*/
 
-  
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -102,18 +101,18 @@ export class ProcessEditDialogComponent implements OnInit {
     //  find(element => element.answerId === this.data.answerId).answer;
     //this.objquestionIdText = this.questionsObj.
     //  find(element => element.questionId === this.data.questionId).question;
-        this.objnextFormIdText = this.formObj.
+    this.objnextFormIdText = this.formObj.
       find(element => element.formId === this.data.formId).formName;
 
-      this.data.formName = this.objnextFormIdText;
-      //this.data.questionIdText = this.objquestionIdText;
-      //this.data.answerIdText = this.objanswerIdText;
-     
-      if (this.data.isActive.toString() === 'true') {
-        this.data.isActiveText = 'Active';
-      } else {
-        this.data.isActiveText = 'Inactive';
-      }
+    this.data.formName = this.objnextFormIdText;
+    //this.data.questionIdText = this.objquestionIdText;
+    //this.data.answerIdText = this.objanswerIdText;
+
+    if (this.data.isActive.toString() === 'true') {
+      this.data.isActiveText = 'Active';
+    } else {
+      this.data.isActiveText = 'Inactive';
+    }
     this.dataService.updateProcessFormMapping(this.data);
   }
 }

@@ -25,17 +25,16 @@ export class AssetCategoryTransfarmer {
             this.Oject.modifiedBy = element.modifiedBy;
             this.Oject.modifiedDate = element.modifiedDate;
             this.Oject.colourCode = element.colourCode;
+            this.Oject.assetGroupText = 'GroupText ' + element.assetGroupCode;
+            this.Oject.colourText = 'colourText  ' + element.assetGroupCode;
             if (element.isActive === '1') {
                 this.Oject.isActive = 'Active'.toString().trim();
             } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
             this.arrOject.push(this.Oject);
         });
-        console.log('this.arrOject');
-        console.log(this.arrOject);
         return this.arrOject;
     }
     AssetCategoryTransfarmerEntity(element: AssetCategoryEntity): AssetCategory {
-        console.log(element);
         this.Oject = new AssetCategory();
         this.Oject.assetCategoryCode = element.assetCategoryCode;
         this.Oject.assetCategoryNameENG = element.assetCategoryNameENG;
@@ -46,6 +45,8 @@ export class AssetCategoryTransfarmer {
         this.Oject.modifiedBy = element.modifiedBy;
         this.Oject.modifiedDate = element.modifiedDate;
         this.Oject.colourCode = element.colourCode;
+        this.Oject.assetGroupText = 'GroupText ' + element.assetGroupCode;
+        this.Oject.colourText = 'colourText  ' + element.assetGroupCode;
         if (element.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
         } else { this.Oject.isActive = ''.toString().trim(); }
@@ -63,6 +64,9 @@ export class AssetCategoryTransfarmer {
         this.OjectEntity.modifiedBy = element.modifiedBy;
         this.OjectEntity.modifiedDate = element.modifiedDate;
         this.OjectEntity.colourCode = element.colourCode;
+        this.OjectEntity.assetGroupText = 'GroupText ' + element.assetGroupCode;
+        this.OjectEntity.colourText = 'colourText  ' + element.assetGroupCode;
+
         if (element.isActive === 'true') {
             this.OjectEntity.isActive = '1';
         } else { this.OjectEntity.isActive = '0'; }
@@ -71,8 +75,6 @@ export class AssetCategoryTransfarmer {
         } else {
             this.OjectEntity.isActive = '0';
         }
-        console.log('OjectEntity');
-        console.log(this.OjectEntity);
         return this.OjectEntity;
     }
 }

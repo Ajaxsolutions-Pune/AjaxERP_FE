@@ -29,7 +29,6 @@ export class ProcessListComponent implements OnInit {
         this._router.navigate(['login']);
       }
     this.processEntity = this.route.snapshot.data['ProcessList1'];
-    console.log(this.processEntity);
      this.processs = objTrans.processTransfarmers(this.processEntity);
     this.WithoutFilterprocess = this.processs;
     this.config = {
@@ -91,7 +90,7 @@ export class ProcessListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT processId,processName,geofence,isActive' +
-      ' INTO XLSX("processList.xlsx",{headers:true}) FROM ?', [this.processs]);
+    alasql('SELECT processId Process_Code,processName Process_Name,geofence Geofence,isActive Status' +
+      ' INTO XLSX("ProcessList.xlsx",{headers:true}) FROM ?', [this.processs]);
   }
 }

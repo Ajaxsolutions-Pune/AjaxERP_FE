@@ -41,9 +41,6 @@ export class CastCategoryComponent implements OnInit {
   }
 
   private getcastcategorys(Id: number) {
-
-    console.log(Id);
-    console.log(status);
     this.castcategory = {
       Id: null,
       CastCategory_Code: null,

@@ -31,7 +31,6 @@ export class AssetGroupTransfarmer {
         return this.arrOject;
     }
     AssetGroupTransfarmerEntity(Entity: AssetGroupEntity): AssetGroup {
-        console.log(Entity);
         this.Oject = new AssetGroup();
         this.Oject.assetGroupCode = Entity.assetGroupCode;
         this.Oject.assetGroupNameENG = Entity.assetGroupNameENG;

@@ -33,7 +33,6 @@ export class DataService {
   }
 
   deleteFormQueAnsMapping(id: number): void {
-    console.log(id);
   }
 }
 

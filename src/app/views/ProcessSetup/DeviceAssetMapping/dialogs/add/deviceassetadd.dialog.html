@@ -15,11 +15,11 @@
           <mat-label>Asset</mat-label>
           <mat-select  (selectionChange)="AssetsChange($event)"
           required name="Assets" #input
-          [(ngModel)]="data.roleLevelId">
+          [(ngModel)]="data.assetCode">
           <mat-option>Asset</mat-option>
-          <mat-option *ngFor="let roleLevel of roleLevel"
-           [value]="roleLevel.roleLevelId">
-            {{roleLevel.assetNameENG}}
+          <mat-option *ngFor="let asset of asset"
+           [value]="asset.assetCode">
+            {{asset.assetNameENG}}
           </mat-option>
           </mat-select>
          <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>-->

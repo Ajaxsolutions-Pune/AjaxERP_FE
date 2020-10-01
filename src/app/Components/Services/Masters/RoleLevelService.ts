@@ -1,65 +1,48 @@
-import { Injectable, Component } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { map, switchMap, debounceTime, catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
-import { RoleLevel, RoleLevelEntity } from '../../Module/Masters/RoleLevel.model';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { DialogService } from '../MatServices/Dialog.service';
-import { DatePipe } from '@angular/common';
+import { Rolelevel, RolelevelEntity } from '../../Module/Masters/Rolelevel.model';
 
 @Injectable()
-export class RoleLevelService {
+export class RolelevelService {
     str: string;
-    roleLevels: RoleLevel[];
+    Rolelevels: Rolelevel[];
     env = environment;
-    ListRoleLevel: RoleLevel[];
     constructor(private httpClient: HttpClient, public dialogService: DialogService) {
         this.str = this.env.apiServiceIPPort;
     }
-    Listanswer: RoleLevel[];
-    getUsers(): Observable<RoleLevelEntity[]> {
-        console.log(this.httpClient.get<RoleLevelEntity[]>(this.str + '/RoleLevel/getList'));
-        return this.httpClient.get<RoleLevelEntity[]>(this.str + '/RoleLevel/getList', this.env.httpOptions);
+    getRolelevels(): Observable<RolelevelEntity[]> {
+        return this.httpClient.get<RolelevelEntity[]>(this.str + '/RoleLevel/getList', this.env.httpOptions);
     }
 
-    fillDrpRoleLevels(): Observable<RoleLevelEntity[]> {
-        console.log(this.httpClient.get<RoleLevelEntity[]>(this.str + '/RoleLevel/getList'));
-        return this.httpClient.get<RoleLevelEntity[]>(this.str + '/RoleLevel/getList?status=1', this.env.httpOptions);
+    fillDrpRolelevels(): Observable<RolelevelEntity[]> {
+        return this.httpClient.get<RolelevelEntity[]>(this.str + '/RoleLevel/getList?status=1', this.env.httpOptions);
     }
 
-    getUser(AnswerCode: string): Observable<RoleLevelEntity> {
-        return this.httpClient.get<RoleLevelEntity>(this.str + '/User/' + AnswerCode,
+    getRolelevel(RolelevelCode: string): Observable<RolelevelEntity> {
+        return this.httpClient.get<RolelevelEntity>(this.str + '/RoleLevel/' + RolelevelCode,
             this.env.httpOptions).pipe(catchError(this.handleError));
     }
-
-    /*Save(saveEntityObj: RoleLevelEntity): Observable<Insertstatus> {
-        saveEntityObj.id = null;
-        console.log(this.str + '/RoleLevel');
-        return this.httpClient.post<Insertstatus>(this.str + '/User',
+    Save(saveEntityObj: RolelevelEntity): Observable<Insertstatus> {
+     //   saveEntityObj.tlCode = null;
+        return this.httpClient.post<Insertstatus>(this.str + '/RoleLevel',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
-    }*/
+    }
 
-   /* Update(updateEntityObj: RoleLevelEntity): Observable<Insertstatus> {
-        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    Update(updateEntityObj: RolelevelEntity): Observable<Insertstatus> {
         // tslint:disable-next-line:max-line-length
         return this.httpClient.post<Insertstatus>(this.str + '/RoleLevel', updateEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));
-    }*/
+    }
 
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {
             console.error('client side error', errorResponse.error.message);
         }
         return throwError('d');
-        const data = null; // call api
-        console.log(this.dialogService);
-        this.dialogService.openModal('Title1', 'Message Test', () => {
-            // confirmed
-            console.log('Yes');
-        }, () => {
-            // not confirmed
-            console.log('No');
-        });
     }
 }

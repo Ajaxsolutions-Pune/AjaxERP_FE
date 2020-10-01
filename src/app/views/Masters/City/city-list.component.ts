@@ -47,9 +47,6 @@ export class CityListComponent implements OnInit {
       Modified_By: null,
       Modified_Date: null,
     };
-    console.log('City_Code ' + this.city.City_Code);
-
-    console.log('City_Name' + this.city.City_Name_ENG);
   }
 
   resultChanged(): void {

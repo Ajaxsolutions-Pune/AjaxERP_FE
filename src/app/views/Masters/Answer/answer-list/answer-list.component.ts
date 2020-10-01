@@ -60,7 +60,6 @@ export class AnswerListComponent implements OnInit {
     this.SerachCri = 0;
     this.Resultanswer = this.WithoutFilterAnswer;
     if (this.objAnswer.answer !== null && this.objAnswer.answer !== '') {
-      // console.log(this.objAnswer.answer.toString().toLowerCase());
       this.Resultanswer = this.Resultanswer.filter(SubResult =>
         SubResult.answer.toLowerCase().indexOf(this.objAnswer.answer.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
@@ -94,7 +93,7 @@ export class AnswerListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT answerId Answer_Id,answer Answer,isActive Is_Active' +
+    alasql('SELECT answerId Answer_Id,answer Answer,isActive Status' +
       ' INTO XLSX("AnswerList.xlsx",{headers:true}) FROM ?', [this.answers]);
 
 

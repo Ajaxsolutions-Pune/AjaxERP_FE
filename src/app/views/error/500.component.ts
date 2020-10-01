@@ -11,7 +11,6 @@ export class P500Component {
 
   Logout() {
     this.router.navigate(['/login']);
-   console.log('hh');
-   // localStorage.removeItem('token');
+    localStorage.removeItem('token');
  }
 }

@@ -21,7 +21,6 @@ export class UnitComponent implements OnInit {
   }
   ngOnInit() {
     this.route.paramMap.subscribe(parameterMap => { const id = +parameterMap.get('id'); this.getUom(id.toString()); });
-    console.log(status);
   }
 
   save(userForm: NgForm): void {
@@ -52,7 +51,6 @@ export class UnitComponent implements OnInit {
     } else {
       this.UomService.getUnit(Id).pipe().subscribe(product => this.uom = product);
       status = 'Update';
-      console.log('hii' + this.uom.uomCode);
     }
   }
 }

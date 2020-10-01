@@ -23,7 +23,6 @@ export class AnswerService {
     }
 
     fillDrpAnswers(): Observable<AnswerEntity[]> {
-        console.log(this.httpClient.get<AnswerEntity[]>(this.str + '/Answer/getList'));
         return this.httpClient.get<AnswerEntity[]>(this.str + '/Answer/getList?status=1', this.env.httpOptions);
     }
 
@@ -33,7 +32,6 @@ export class AnswerService {
     }
     Save(saveEntityObj: AnswerEntity): Observable<Insertstatus> {
         saveEntityObj.answerId = null;
-        console.log(this.str + '/Answer');
         return this.httpClient.post<Insertstatus>(this.str + '/Answer',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
@@ -51,13 +49,8 @@ export class AnswerService {
         }
         return throwError('d');
         const data = null; // call api
-        console.log(this.dialogService);
         this.dialogService.openModal('Title1', 'Message Test', () => {
-            // confirmed
-            console.log('Yes');
         }, () => {
-            // not confirmed
-            console.log('No');
         });
     }
 }

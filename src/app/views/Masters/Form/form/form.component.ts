@@ -87,9 +87,7 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
       this.formobj.formId = null;
       this.formService.Save(this.formTransfarmer.formTransfarmer(this.formobj)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Inserted') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['FormList']);
@@ -103,9 +101,7 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
     } else {
       this.formService.Update(this.formTransfarmer.formTransfarmer(this.formobj)).subscribe(
         (par) => {
-          console.log(par);
           if (par.status === 'Updated') {
-            console.log(par.status);
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['FormList']);
@@ -144,7 +140,6 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
       this.formService.getForm(form_Code).subscribe(
         (par) => {
           this.formEntity = par;
-          console.log(this.formEntity);
           this.formobj = this.formTransfarmer.formTransfarmerEntity(this.formEntity);
         },
         (err: any) => console.log(err));
