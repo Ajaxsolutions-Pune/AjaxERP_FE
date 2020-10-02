@@ -16,6 +16,7 @@ export class UserTransfarmer {
     }
     UserTransfarmers(Entity: User[]): UserEntity[] {
         this.users = [];
+        console.log(Entity);
         Entity.forEach(element => {
             this.user = new User();       
             this.user.ouCode = '12';     

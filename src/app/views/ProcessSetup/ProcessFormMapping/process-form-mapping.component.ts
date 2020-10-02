@@ -88,10 +88,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
 
   addNew() {
     const dialogRef = this.dialog.open(ProcessAddDialogComponent, {
-
       data: {
-        // isQuestionMandatory: ''.toString(),
-
         processId: this.ProcessId,
         isActive: ''.toString(),
         updateFlag: '1'
@@ -101,6 +98,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
       if (result === 1) {
         this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
         this.insertData.dataChange.value.push(this.dataService.getDialogData());
+        console.log(this.insertData.dataChange.value);
         this.refreshTable();
       }
     });
@@ -128,6 +126,11 @@ export class ProcessFormMappingComponent extends FormComponentBase
     this.objProcessFormMapping = [];
     this.objProcessFormMapping = this.dataSource.filteredData.filter(e => {
     });
+    console.log('Out')
+    console.log(this.insertData.dataChange.value);
+    console.log('in')
+    console.log(this.processFormMappingTransfarmer.
+      ObjectToEntityProcessFormMappingTransfarmers(this.insertData.dataChange.value));
     this.processformMappingService.Save(this.processFormMappingTransfarmer.
       ObjectToEntityProcessFormMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
         (par) => {
@@ -136,9 +139,36 @@ export class ProcessFormMappingComponent extends FormComponentBase
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['ProcessFormMapping']);
             this.ProcessId = this.ProcessId;
+            this.GetRouteData(this.ProcessId);
           }
         }
       );
+  }
+
+  GetRouteData(formId: string): void {
+    const selectedData = {
+      value: formId,
+      text: formId
+    };
+    this.objProcessFormMapping = [];
+    this.insertData.dataChange.value.splice(0);
+
+    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.refreshTable();
+    this.processformMappingService.getProcessFormMapping(selectedData.value).subscribe(
+      (par) => {
+        this.objProcessFormMapping = this.processFormMappingTransfarmer.
+          ProcessFormMappingTransfarmers(par);
+        this.objProcessFormMapping.forEach(a => {
+          a.processId = selectedData.value;
+        });
+        this.objProcessFormMapping.forEach(element => {
+          this.exampleDatabase.dataChange.value.push(element);
+          this.refreshTable();
+        });
+
+      },
+      (err: any) => console.log(err));
   }
 
   FormChange(event) {
@@ -148,10 +178,8 @@ export class ProcessFormMappingComponent extends FormComponentBase
       text: target.innerText.trim()
     };
     this.objProcessFormMapping = [];
-
     // Added by Rahul
     this.insertData.dataChange.value.splice(0);
-
     this.exampleDatabase.dataChange.value.splice(0, 100);
     this.refreshTable();
     this.processformMappingService.getProcessFormMapping(selectedData.value).subscribe(

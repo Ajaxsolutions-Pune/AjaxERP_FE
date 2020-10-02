@@ -34,7 +34,7 @@ import { AppRoutingModule, routes } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component'; 
+import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component';
 import { DashboardService } from './Components/Services/Dashboard.service';
 
 
@@ -45,8 +45,6 @@ import { User } from './Components/Module/Masters/User.model';
 import { UserService } from './Components/Services/Masters/UserService';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { RouterModule } from '@angular/router';
-//import { ListUserComponent } from './views/Masters/User/List-user.component';
-//import { UserMasterComponent } from './views/Masters/User/user-master.component';
 import { ListUOMComponent } from './views/Masters/UOM/list-uom.component';
 import { UnitComponent } from './views/Masters/UOM/unit.component';
 import { UOMService } from './Components/Services/Masters/UOMService';
@@ -263,6 +261,7 @@ import { RolelevelTransfarmer } from './Components/Transformer/Masters/Role-leve
 import { RolelevelListResolverService } from './Components/Resolver/Masters/RoleLevel-List-Resolver.Service';
 import { UserListComponent } from './views/Masters/User/List-user.component';
 import { UserComponent } from './views/Masters/User/user-master.component';
+import { UserListResolverService } from './Components/Resolver/Masters/User-List-Resolver.Service';
 
 @NgModule({
   imports: [
@@ -353,7 +352,8 @@ import { UserComponent } from './views/Masters/User/user-master.component';
     ProjectComponent, ProjectListComponent,
     TransmissionLineComponent, TransmissionLineListComponent, HubListComponent, HubComponent,
     ProcessFormMappingComponent, UserDeviceMappingComponent,
-    DeviceAssetMappingComponent, ContactListComponent, ContactComponent, AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent
+    DeviceAssetMappingComponent, ContactListComponent, ContactComponent,
+    AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
@@ -373,11 +373,11 @@ import { UserComponent } from './views/Masters/User/user-master.component';
     HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
-    AssetCategoryService, DataService,
+    AssetCategoryService, DataService, UserService,
     FormListResolverService, RegionListResolverService, ColourListResolverService,
     AssetListResolverService, ProcessListResolverService, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
-    AssetCategoryListResolverService,
+    AssetCategoryListResolverService, UserListResolverService,
     QuestionListResolverService, TehsilListResolverService, TehsilMasterResolverService,
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
@@ -386,7 +386,7 @@ import { UserComponent } from './views/Masters/User/user-master.component';
     ProcessListResolverService, RoleListResolverService,
     DialogTemplateComponent,
     DialogService, RolelevelListResolverService,
-    RoleService, RolelevelService, RoleTransfarmer, RolelevelTransfarmer,
+    RoleService, RolelevelService, RoleTransfarmer, RolelevelTransfarmer, UserTransfarmer,
     ProjectService, ProjectTransfarmer, ProjectListResolverService,
 
     ProcessFormMappingService, ProcessFormMappingTransfarmer, ProcessDataService, UserDeviceDataService,
