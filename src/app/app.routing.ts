@@ -118,6 +118,7 @@ import { RolelevelListResolverService } from './Components/Resolver/Masters/Role
 import { RolelevelListComponent } from './views/Masters/Rolelevel/rolelevel-list.component';
 import { RolelevelComponent } from './views/Masters/Rolelevel/rolelevel.component';
 import { UserListComponent } from './views/Masters/User/List-user.component';
+import { UserListResolverService } from './Components/Resolver/Masters/User-List-Resolver.Service';
 import { UserComponent } from './views/Masters/User/user-master.component';
 
 export const routes: Routes = [
@@ -166,27 +167,6 @@ export const routes: Routes = [
         component: DashboardComponent,
         data: {
           title: 'Dashboard'
-        }
-      },
-      {
-        path: 'UserList',
-        component: UserListComponent,
-        data: {
-          title: 'User List'
-        }
-      },
-      {
-        path: 'AddUser/:id',
-        component: UserComponent,
-        data: {
-          title: 'User Master'
-        }
-      },
-      {
-        path: 'EditUser/:id',
-        component: UserComponent,
-        data: {
-          title: 'Edit User'
         }
       },
       {
@@ -1084,6 +1064,30 @@ export const routes: Routes = [
         component: ProjectComponent,
         data: {
           title: 'Edit Project'
+        }
+      },
+      {
+        path: 'UserList',
+        component: UserListComponent,
+        data: {
+          title: 'User List'
+        },
+        resolve: {
+          UserList: UserListResolverService,
+        },
+      },
+      {
+        path: 'User',
+        component: UserComponent,
+        data: {
+          title: 'Add User'
+        }
+      },
+      {
+        path: 'User/:id',
+        component: UserComponent,
+        data: {
+          title: 'Edit User'
         }
       },
 

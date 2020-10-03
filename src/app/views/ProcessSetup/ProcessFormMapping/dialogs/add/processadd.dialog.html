@@ -33,11 +33,11 @@
       <div class="form">
         <mat-form-field color="accent">
           <input matInput #formQueSeqNo class="form-control" maxlength="5"
-          type="number"
+          type="number"  onkeydown="javascript: return event.keyCode == 69 ? false : true"
           oninput="javascript: if (this.value.length > this.maxLength) 
           this.value = this.value.slice(0, this.maxLength);"
           #input
-          placeholder="Sort By"
+          placeholder="Sort"
            [(ngModel)]="data.sortBy" name="sortBy" required >
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           

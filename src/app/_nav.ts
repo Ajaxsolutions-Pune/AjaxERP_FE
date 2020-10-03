@@ -136,11 +136,6 @@ export const navItems: NavData[] = [
       //   url: '/CityGroupList',
       //   icon: 'icon-puzzle'
       // },
-       {
-         name: 'User',
-         url: '/UserList',
-        icon: 'icon-puzzle'
-       },
       // {
       //   name: 'Unit',
       //   url: '/UnitList',
@@ -282,6 +277,11 @@ export const navItems: NavData[] = [
        {
          name: 'Role Level',
          url: '/RolelevelList',
+         icon: 'icon-puzzle'
+       },
+       {
+         name: 'User',
+         url: '/UserList',
          icon: 'icon-puzzle'
        },
     ]

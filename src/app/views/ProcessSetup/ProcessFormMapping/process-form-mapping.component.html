@@ -4,6 +4,7 @@
       <mat-label>Process</mat-label>
       <mat-select required  [(ngModel)]="ProcessId"
        (selectionChange)="FormChange($event)">
+      
           <mat-option *ngFor="let process of processObj" [value]="process.processId">
             {{process.processId}} - {{process.processName}}
           </mat-option>
@@ -19,10 +20,6 @@
   <mat-table #table [dataSource]="dataSource"
   [matSortDisableClear]="false"
   matSort class="mat-cell">
-    ng update @angular/cli @angular/core
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
     <ng-container matColumnDef="ProcFormMapping">
       <mat-header-cell *matHeaderCellDef mat-sort-header>MapId</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.pfmId}}</mat-cell>
@@ -34,7 +31,7 @@
     </ng-container>
    
     <ng-container matColumnDef="SortBy">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Sort By</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Sort</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.sortBy}}</mat-cell>
     </ng-container>
     
@@ -45,7 +42,8 @@
     <!-- actions -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button color="primary" (click)="addNew()">
+        <button mat-icon-button color="primary" (click)="addNew()" 
+        [disabled]="ProcessId===NULL">
           <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
         </button>
       </mat-header-cell>
@@ -89,7 +87,7 @@
   </div>
   <div class="col-md-4"></div>
 </div>
-<!-- <div> {{dataSource.filteredData | json}}</div>-->
+ <div style="display: none;"> {{dataSource.filteredData | json}}</div>
 
      
 

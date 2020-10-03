@@ -30,8 +30,6 @@ export class ProcessAddDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ProcessAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProcessFormMapping,
-    private processService: ProcessService1,
-    private processTransfarmer: ProcessTransfarmer1,  
     private formService: FormService,
     private formTransfarmer: FormTransfarmer,
     public dataService: ProcessDataService) {
