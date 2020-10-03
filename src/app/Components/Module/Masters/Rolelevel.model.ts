@@ -9,6 +9,7 @@ export class RolelevelEntity {
     modifiedBy: string;
     modifiedDate: string;
 }
+
 export class Rolelevel {
     roleLevelId: string;
     roleLevelDesc: string;
