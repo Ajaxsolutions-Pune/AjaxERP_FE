@@ -136,11 +136,11 @@ export const navItems: NavData[] = [
       //   url: '/CityGroupList',
       //   icon: 'icon-puzzle'
       // },
-      // {
-      //   name: 'User',
-      //   url: '/UserList',
-      //   icon: 'icon-puzzle'
-      // },
+       {
+         name: 'User',
+         url: '/UserList',
+        icon: 'icon-puzzle'
+       },
       // {
       //   name: 'Unit',
       //   url: '/UnitList',
