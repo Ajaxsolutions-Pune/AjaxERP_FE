@@ -10,7 +10,7 @@ import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-fiel
 import { environment } from '../../../Components/Module/environment';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 
-import { Rolelevel } from '../../../Components/Module/Masters/RoleLevel.model';
+import { Rolelevel } from '../../../Components/Module/Masters/Rolelevel.model';
 import { RolelevelService } from '../../../Components/Services/Masters/RoleLevelService';
 import { RoleLevelTransfarmer } from '../../../Components/Transformer/Masters/RoleLevel-Transfarmer';
 

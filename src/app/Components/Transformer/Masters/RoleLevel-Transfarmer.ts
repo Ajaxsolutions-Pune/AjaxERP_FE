@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
-import { RolelevelEntity, Rolelevel } from '../../Module/Masters/RoleLevel.model';
+import { RolelevelEntity, Rolelevel } from '../../Module/Masters/Rolelevel.model';
 
 @Injectable()
 export class RoleLevelTransfarmer {
