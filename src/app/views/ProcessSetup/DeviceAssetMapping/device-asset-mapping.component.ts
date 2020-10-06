@@ -145,10 +145,38 @@ export class DeviceAssetMappingComponent extends FormComponentBase
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['DeviceAssetMapping']);
             this.DeviceId = this.DeviceId;
+            this.GetRouteData(this.DeviceId);
           }
         }
       );
     }
+
+    GetRouteData(Device_Id: string): void {
+      const selectedData = {
+        value: Device_Id,
+        text: Device_Id
+      };
+      this.objDeviceAssetMapping = [];
+      this.insertData.dataChange.value.splice(0);
+  
+      this.exampleDatabase.dataChange.value.splice(0, 100);
+      this.refreshTable();
+      this.deviceAssetMappingService.getDeviceAssetMapping(selectedData.value).subscribe(
+        (par) => {
+          this.objDeviceAssetMapping = this.deviceAssetMappingTransfarmer.
+          DeviceAssetMappingTransfarmers(par);
+          this.objDeviceAssetMapping.forEach(a => {
+            a.deviceId = selectedData.value;
+          });
+          this.objDeviceAssetMapping.forEach(element => {
+            this.exampleDatabase.dataChange.value.push(element);
+            this.refreshTable();
+          });
+  
+        },
+        (err: any) => console.log(err));
+    }
+  
 
     DeviceChange(event) {
     const target = event.source.selected._element.nativeElement;

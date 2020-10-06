@@ -11,8 +11,8 @@ import { environment } from '../../../Components/Module/environment';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 
 import { Rolelevel } from '../../../Components/Module/Masters/Rolelevel.model';
-import { RolelevelService } from '../../../Components/Services/Masters/RoleLevelService';
-import { RoleLevelTransfarmer } from '../../../Components/Transformer/Masters/RoleLevel-Transfarmer';
+import { RolelevelService } from '../../../Components/Services/Masters/RolelevelService';
+import { RolelevelTransfarmer } from '../../../Components/Transformer/Masters/Role-level.Transfarmer';
 
 import { UserEntity_} from '../../../Components/Module/Masters/UserEntity.model';
 import { HttpClient } from '@angular/common/http';
@@ -45,8 +45,8 @@ import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
       private userService: UserService,
       private globalService: GlobalService,
       private httpClient: HttpClient,
-      private roleLevelService: RolelevelService,
-      private roleLevelTransfarmer: RoleLevelTransfarmer,      
+      private rolelevelService: RolelevelService,
+      private roleLevelTransfarmer: RolelevelTransfarmer,      
       private router: Router, private formBuilder: FormBuilder) 
     {     
       super();
@@ -84,8 +84,8 @@ import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
       }
 
     ngOnInit() { 
-      this.roleLevelService.fillDrpRolelevels().subscribe(
-        (par) => this.roleLevel = this.roleLevelTransfarmer.RoleLevelTransfarmers(par),
+      this.rolelevelService.fillDrpRolelevels().subscribe(
+        (par) => this.roleLevel = this.roleLevelTransfarmer.RolelevelTransfarmers(par),
         (err: any) => console.log(err));
         //user hroup combo
         this.globalService.fillMasterDrp('USERG').subscribe(

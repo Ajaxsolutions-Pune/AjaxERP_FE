@@ -9,9 +9,10 @@ import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
 import { environment } from '../../../Components/Module/environment';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
-import { Rolelevel } from '../../../Components/Module/Masters/RoleLevel.model';
-import { RolelevelService} from '../../../Components/Services/Masters/RoleLevelService';
-import { RoleLevelTransfarmer} from '../../../Components/Transformer/Masters/RoleLevel-Transfarmer';
+import { Rolelevel } from '../../../Components/Module/Masters/Rolelevel.model';
+import { RolelevelService } from '../../../Components/Services/Masters/RolelevelService';
+import { RolelevelTransfarmer} from '../../../Components/Transformer/Masters/Role-level.Transfarmer';
+
 @Component({
     selector: 'app-role',
     templateUrl:'./Role.component.html'     
@@ -35,8 +36,8 @@ import { RoleLevelTransfarmer} from '../../../Components/Transformer/Masters/Rol
       private defaultLayoutComponent: DefaultLayoutComponent,
       private roleService: RoleService,
       private globalService: GlobalService,
-      private roleLevelService: RolelevelService,
-      private roleLevelTransfarmer: RoleLevelTransfarmer,
+      private rolelevelService: RolelevelService,
+      private roleLevelTransfarmer: RolelevelTransfarmer,
      
       private router: Router, private formBuilder: FormBuilder) 
     {
@@ -58,8 +59,8 @@ import { RoleLevelTransfarmer} from '../../../Components/Transformer/Masters/Rol
 
     ngOnInit() {
  
-      this.roleLevelService.fillDrpRolelevels().subscribe(
-        (par) => this.roleLevel = this.roleLevelTransfarmer.RoleLevelTransfarmers(par),
+      this.rolelevelService.fillDrpRolelevels().subscribe(
+        (par) => this.roleLevel = this.roleLevelTransfarmer.RolelevelTransfarmers(par),
         (err: any) => console.log(err));
 
 
