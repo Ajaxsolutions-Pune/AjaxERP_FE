@@ -73,6 +73,9 @@ import { RolelevelTransfarmer} from '../../../Components/Transformer/Masters/Rol
           ControlisActive: ['', []],
         });
         this.form.controls['ControlroleId'].disable();
+        if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+          window.location.href='login';
+        }
         status = '';
         this.role = {
           roleId: null,

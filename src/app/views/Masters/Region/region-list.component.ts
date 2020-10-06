@@ -26,7 +26,7 @@ export class RegionListComponent implements OnInit {
     objTrans: RegionTransfarmer,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.arrOjectEntity = this.route.snapshot.data['RegionList'];
     this.arrOject = objTrans.RegionTransfarmers(this.arrOjectEntity);

@@ -76,6 +76,9 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
       ControlisActive: ['', []],
     });
     this.form.controls['ControlassetCategoryCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     status = '';
     this.colourService.fillColoursDrp().subscribe(
       (par) => {

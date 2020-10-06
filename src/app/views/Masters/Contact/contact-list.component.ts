@@ -22,10 +22,10 @@ export class ContactListComponent implements OnInit {
   env = environment;
   constructor(private _router: Router,
     objTrans: ContactTransfarmer,
-    private route: ActivatedRoute) {
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
-    }
+    private route: ActivatedRoute) {   
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        window.location.href='login';
+      }
     this.arrOjectEntity = this.route.snapshot.data['ContactList'];
     this.arrOject = objTrans.ContactTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;

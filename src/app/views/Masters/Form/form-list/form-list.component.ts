@@ -26,7 +26,7 @@ export class FormListComponent implements OnInit {
     objTrans: FormTransfarmer,
     private route: ActivatedRoute) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
+      window.location.href='login';
     }
     this.formEntity = this.route.snapshot.data['FormList'];
     this.forms = objTrans.fTransfarmers(this.formEntity);
@@ -43,7 +43,7 @@ export class FormListComponent implements OnInit {
   }
   ngOnInit() {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
+      window.location.href='login';
     }
     this.WithoutFilterForm = this.forms;
     this.Form = {

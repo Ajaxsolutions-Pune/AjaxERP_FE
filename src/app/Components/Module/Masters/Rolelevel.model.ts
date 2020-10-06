@@ -1,4 +1,4 @@
-export class RolelevelEntity {
+export class Rolelevel {
     roleLevelId: string;
     roleLevelDesc: string;
     userType: string;
@@ -9,8 +9,7 @@ export class RolelevelEntity {
     modifiedBy: string;
     modifiedDate: string;
 }
-
-export class Rolelevel {
+export class RolelevelEntity {
     roleLevelId: string;
     roleLevelDesc: string;
     userType: string;

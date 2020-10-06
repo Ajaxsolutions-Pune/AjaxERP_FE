@@ -26,7 +26,7 @@ export class CityGroupListComponent implements OnInit {
     private citygroupService: CityGroupService,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.citygroups = this.citygroupService.getCityGroups();
     this.WithoutFilterCityGroups = this.citygroups;

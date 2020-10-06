@@ -29,7 +29,7 @@ export class ProjectListComponent implements OnInit {
     private projectService: ProjectService,
     private route: ActivatedRoute) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
+      window.location.href='login';
     }
     this.projectsEntity = this.route.snapshot.data['ProjectList'];
     this.projects = objTrans.ProjectTransfarmers(this.projectsEntity);

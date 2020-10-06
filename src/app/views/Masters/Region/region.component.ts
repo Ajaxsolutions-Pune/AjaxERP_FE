@@ -92,6 +92,9 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
       ControlisActive: ['', []],
     });
     this.form.controls['ControlregionCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     status = '';
     this.bindObj = {
       regionCode: null,

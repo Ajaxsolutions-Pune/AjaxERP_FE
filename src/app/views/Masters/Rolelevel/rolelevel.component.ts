@@ -47,9 +47,6 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
     this.formErrors = {
       ControlRoleLevelName: '',
     };
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this.router.navigate(['login']);
-    }
   }
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -63,7 +60,9 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
       ControlisActive: ['', []]
     });
     this.form.controls['ControlRoleLevelId'].disable();
-
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.globalService.fillMasterDrp('USERT').subscribe(
       (par) => {
         this.UserTypeDrp = par;

@@ -25,7 +25,7 @@ export class ItemCategoryListComponent implements OnInit {
     private itemcategorysService: ItemCategoryService,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.ItemCategorys = this.itemcategorysService.getItemCategorys();
     this.WithoutFilterItemCategorys = this.ItemCategorys;

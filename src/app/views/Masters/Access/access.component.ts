@@ -38,9 +38,6 @@ export class AccessComponent extends FormComponentBase implements OnInit, AfterV
     this.formErrors = {
       ControlAccessName: '',
     };
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this.router.navigate(['login']);
-    }
   }
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -50,7 +47,10 @@ export class AccessComponent extends FormComponentBase implements OnInit, AfterV
       ControlisActive: ['', []]
     });
     this.form.controls['ControlAccessId'].disable();
-
+    console.log('hii')
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     status = '';
     this.accessobj = {
       accessName: null,

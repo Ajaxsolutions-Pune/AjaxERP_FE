@@ -31,7 +31,7 @@ alasql['private'].externalXlsxLib = require('xlsx');
       private roleService: RoleService,
       private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
       this.rolesEntity = this.route.snapshot.data['RoleList'];
       this.roles = objTrans.RoleTransfarmers(this.rolesEntity);

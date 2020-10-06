@@ -25,9 +25,9 @@ export class AccessListComponent implements OnInit {
   env = environment;
   constructor(private _router: Router,
     objTrans: AccessTransfarmer,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute) {      
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
+      window.location.href='login';
     }
     this.arrOjectEntity = this.route.snapshot.data['AccessList'];
     this.arrOject = objTrans.AccessTransfarmers(this.arrOjectEntity);

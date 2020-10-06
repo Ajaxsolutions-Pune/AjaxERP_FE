@@ -26,7 +26,7 @@ export class DistrictListComponent implements OnInit {
     private districtTransfarmer: DistrictTransfarmer,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.districtEntity = this.route.snapshot.data['DistrictList'];
     this.districts = this.districtTransfarmer.DistrictTransfarmers(this.districtEntity);
