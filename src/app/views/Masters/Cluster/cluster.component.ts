@@ -66,6 +66,9 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
       ControlisActive: ['', []],
     });
     this.form.controls['ControlclusterCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.circleService.fillCircleDrp().subscribe(
       (par) => {
         this.circledrp = this.circleTransfarmer.CircleTransfarmers(par);

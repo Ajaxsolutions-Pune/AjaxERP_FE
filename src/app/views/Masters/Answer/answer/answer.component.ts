@@ -54,6 +54,9 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
         Validators.required]]
     });
     this.form.controls['ControlAnswerID'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     status = '';
     this.answer = {
       answer: null,

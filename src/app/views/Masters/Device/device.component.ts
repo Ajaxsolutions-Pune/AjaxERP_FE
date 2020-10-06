@@ -70,6 +70,9 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
       Controlsim2MobleNo: ['', []],
     });
     this.form.controls['ControldeviceId'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.bindObj = {
       deviceId: null,
       imei1: null,

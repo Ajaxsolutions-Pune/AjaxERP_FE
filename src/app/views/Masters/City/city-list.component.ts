@@ -22,7 +22,7 @@ export class CityListComponent implements OnInit {
     private cityService: CityService,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.citys = this.cityService.getCitys();
     this.WithoutFilterCitys = this.citys;

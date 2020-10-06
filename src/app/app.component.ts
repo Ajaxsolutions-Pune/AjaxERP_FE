@@ -20,9 +20,6 @@ export class AppComponent implements OnInit {
     private cookieService: CookieService,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private bnIdle: BnNgIdleService) {
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this.router.navigate(['login']);
-    }
     const httpOptions = {
       headers:
         new HttpHeaders({

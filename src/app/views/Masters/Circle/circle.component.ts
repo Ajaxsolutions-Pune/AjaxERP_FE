@@ -68,6 +68,9 @@ export class CircleComponent extends FormComponentBase implements OnInit, AfterV
     });
     status = '';
     this.form.controls['ControlcircleCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.zoneService.fillZoneDrp().subscribe(
       (par) => {
         this.zonedrp = this.zoneTransfarmer.ZoneTransfarmers(par);

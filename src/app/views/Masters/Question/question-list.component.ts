@@ -27,7 +27,7 @@ export class QuestionListComponent implements OnInit {
     objTrans: QuestionTransfarmer,
     private route: ActivatedRoute) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
+      window.location.href='login';
     }
     this.arrOjectEntity = this.route.snapshot.data['QuestionList'];
     this.arrOject = objTrans.QuestionTransfarmers(this.arrOjectEntity);

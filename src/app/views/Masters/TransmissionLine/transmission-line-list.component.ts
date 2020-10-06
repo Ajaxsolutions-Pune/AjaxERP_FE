@@ -26,7 +26,7 @@ export class TransmissionLineListComponent implements OnInit {
     objTrans: TransmissionLineTransfarmer,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.arrOjectEntity = this.route.snapshot.data['TransmissionLineList'];
     this.arrOject = objTrans.TransmissionLineTransfarmers(this.arrOjectEntity);

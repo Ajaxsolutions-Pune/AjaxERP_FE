@@ -20,7 +20,7 @@ export class ItemGroupListComponent implements OnInit {
     private itemGroupService: ItemGroupService,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.itemGroups = this.itemGroupService.getItemGroups();
     this.WithoutFilteritemGroups = this.itemGroups;

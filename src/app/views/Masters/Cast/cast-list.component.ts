@@ -27,7 +27,7 @@ export class CastListComponent implements OnInit {
     private castsService: CastService,
     private route: ActivatedRoute) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
+      window.location.href='login';
     }
     this.Casts = this.castsService.getCasts();
     this.WithoutFilterCasts = this.Casts;

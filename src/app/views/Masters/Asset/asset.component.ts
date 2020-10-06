@@ -265,6 +265,9 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       Controladdress: ['', []],
     });
     this.form.controls['ControlassetCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.bindObj = {
       ouCode: '12',
       assetCode: null,

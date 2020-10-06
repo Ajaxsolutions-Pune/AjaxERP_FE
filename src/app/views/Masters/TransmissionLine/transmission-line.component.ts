@@ -206,6 +206,9 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
       this.transmissionLineService.getTransmissionLine(TransmissionLine_Code).subscribe(
         (par) => {
           this.form.controls['ControltlCode'].disable();
+          if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+            window.location.href='login';
+          }
           this.bindObjEntity = par;
           this.bindObj = this.transmissionLineTransfarmer.
             TransmissionLineTransfarmerEntity(this.bindObjEntity);

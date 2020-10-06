@@ -26,7 +26,7 @@ export class DeviceListComponent implements OnInit {
     objTrans: DeviceTransfarmer,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
      this.arrOjectEntity = this.route.snapshot.data['DeviceList'];
      this.arrOject = objTrans.DeviceTransfarmers(this.arrOjectEntity);

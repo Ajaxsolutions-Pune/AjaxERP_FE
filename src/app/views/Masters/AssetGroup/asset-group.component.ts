@@ -62,6 +62,9 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
       ControlisActive: ['', []],
     });
     this.form.controls['ControlassetGroupCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.bindObj = {
       assetGroupCode: null,
       assetGroupNameENG: null,

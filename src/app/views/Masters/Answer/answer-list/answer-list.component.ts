@@ -26,10 +26,10 @@ export class AnswerListComponent implements OnInit {
   constructor(private _router: Router,
     objTrans: AnswerTransfarmer,
     private answerService: AnswerService,
-    private route: ActivatedRoute) {
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
-    }
+    private route: ActivatedRoute) {   
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        window.location.href='login';
+      }
     this.answersEntity = this.route.snapshot.data['AnswerList'];
     this.answers = objTrans.AnswerTransfarmers(this.answersEntity);
     this.WithoutFilterAnswer = this.answers;

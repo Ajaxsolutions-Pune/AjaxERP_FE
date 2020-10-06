@@ -22,7 +22,7 @@ export class QuestionTypeListComponent implements OnInit {
     objTrans: QaTypeTransfarmer,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.arrOjectEntity = this.route.snapshot.data['QaTypeList'];
     this.arrOject = objTrans.QaTypeTransfarmers(this.arrOjectEntity);

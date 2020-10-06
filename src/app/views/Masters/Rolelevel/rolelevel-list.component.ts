@@ -26,7 +26,7 @@ export class RolelevelListComponent implements OnInit {
     objTrans: RolelevelTransfarmer,
     private route: ActivatedRoute) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
+      window.location.href='login';
     }
     this.arrOjectEntity = this.route.snapshot.data['RolelevelList'];
     this.arrOject = objTrans.RolelevelTransfarmers(this.arrOjectEntity);

@@ -66,6 +66,9 @@ export class ContactComponent extends FormComponentBase implements OnInit, After
               []]
     });
     this.form.controls['ControlContactCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     status = '';
     this.bindObj = {
       contactCode: null,
@@ -273,6 +276,9 @@ export class ContactComponent extends FormComponentBase implements OnInit, After
         (par) => {
           this.bindObjEntity = par;
           this.form.controls['ControlContactCode'].disable();
+          if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+            window.location.href='login';
+          }
           this.bindObj = this.contactTransfarmer.
             ContactTransfarmerEntity(this.bindObjEntity);
         },

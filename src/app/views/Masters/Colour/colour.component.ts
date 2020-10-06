@@ -65,6 +65,9 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
       ControlisActive: ['', []],
     });
     this.form.controls['ControlcolourCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.WithoutFilterObj = this.arrOject;
     this.bindObj = {
       colourCode: null,

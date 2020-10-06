@@ -24,7 +24,7 @@ export class StateListComponent implements OnInit {
     private stateTransfarmer: StateTransfarmer,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.statesEntity = this.route.snapshot.data['StateList'];
     this.states = this.stateTransfarmer.StateTransfarmers(this.statesEntity);

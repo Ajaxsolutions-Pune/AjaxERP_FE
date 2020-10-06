@@ -56,7 +56,9 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
         Validators.required]]
     });
     this.form.controls['ControlquestionId'].disable();
-
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.qaTypeService.fillQaTypes().subscribe(
       (par) => {
         this.qaTypes = this.qaTypeTransfarmer.QaTypeTransfarmers(par);

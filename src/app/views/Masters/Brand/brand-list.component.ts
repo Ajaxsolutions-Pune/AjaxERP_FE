@@ -20,9 +20,9 @@ export class BrandListComponent implements OnInit {
   constructor(private _router: Router,
     private brandService: BrandService,
     objTrans: BrandTransformer,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute) {   
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
       this.brands = this.route.snapshot.data['BrandList'];
   }
