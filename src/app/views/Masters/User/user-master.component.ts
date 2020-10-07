@@ -10,7 +10,7 @@ import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-fiel
 import { environment } from '../../../Components/Module/environment';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 
-import { Rolelevel } from '../../../Components/Module/Masters/Rolelevel.model';
+import { RoleLevel } from '../../../Components/Module/Masters/RoleLevel.model';
 import { RolelevelService } from '../../../Components/Services/Masters/RolelevelService';
 import { RolelevelTransfarmer } from '../../../Components/Transformer/Masters/Role-level.Transfarmer';
 
@@ -26,7 +26,7 @@ import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
 
   export class UserComponent extends FormComponentBase implements OnInit, AfterViewInit 
   {
-    roleLevel: Rolelevel[];     
+    roleLevel: RoleLevel[];     
     // @ts-ignore
     @ViewChild('txtLoginID') firstItem: ElementRef;
     form!: FormGroup;
