@@ -33,7 +33,7 @@ export class RolelevelTransfarmer {
         });
         return this.rolelevels;
     }
-    RolelevelTransfarmerEntity(Entity: RoleLevelEntity): Rolelevel {
+    RolelevelTransfarmerEntity(Entity: RoleLevelEntity): RoleLevel {
         this.rolelevel = new RoleLevel();
         this.rolelevel.roleLevelId = Entity.roleLevelId;
         this.rolelevel.roleLevelDesc = Entity.roleLevelDesc;
