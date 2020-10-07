@@ -1,4 +1,4 @@
-<form #QuestionForm="ngForm" [formGroup]="form">
+<form #QuestionForm="ngForm" [formGroup]="form" >
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
@@ -29,12 +29,15 @@
                                 <input matInput
                                 placeholder="Question * "
                                 [(ngModel)]="question.question"
-                                formControlName="Controlquestion"
+                                formControlName="question1" 
+                                id="question1" 
                                 #txtquestion
                                 name="txtquestion" maxlength="100">
-                                <mat-error>
-                                    {{ formErrors['Controlquestion'] }}
-                                </mat-error>
+                               <mat-error>
+                                    <span *ngIf="isQueExist()">
+                                        Question is already taken.
+                                    </span> 
+                                </mat-error> 
                             </mat-form-field>
                             <div class="col-md-4"></div>
                         </div>
@@ -73,7 +76,7 @@
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
                                 <button mat-raised-button [disabled]="!form.valid" (click)="save(QuestionForm)"
-                                    color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                    color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp; 
                                 <button mat-raised-button color="warn" routerLink="/QuestionList">
                                     Cancel</button>
                             </div>
@@ -83,7 +86,8 @@
                 </div>
             </div>
         </div>
-        <!--/.row-->
+        
     </div>
 </form>
 <div style="display: none;"> {{question | json}}</div>
+

@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { Question, QuestionEntity } from '../../Module/Masters/Question.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class QuestionService {
@@ -36,6 +37,11 @@ export class QuestionService {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
         return this.httpClient.post<QuestionEntity>(this.str + '/Question', updateEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+
+    checkQuestion(question : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Question/getQueByName?name=' + question
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Question, QuestionEntity } from '../../../Components/Module/Masters/Question.model';
 import { QuestionService } from '../../../Components/Services/Masters/QuestionService';
 import { QuestionTransfarmer } from '../../../Components/Transformer/Masters/Question-Transfarmer';
@@ -11,6 +11,7 @@ import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-fiel
 import { QaTypeTransfarmer } from '../../../Components/Transformer/Masters/QaType-Transfarmer';
 import { QaTypeService } from '../../../Components/Services/Masters/QaTypeService';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import {  questionAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-question',
@@ -35,23 +36,21 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
     private questionService: QuestionService, private router: Router,
     private formBuilder: FormBuilder) {
     super();
-    this.validationMessages = {
-      Controlquestion: {
-        required: 'Question is required.',
-      }
-    };
 
     this.formErrors = {
-      Controlquestion: '',
       ControlqaTypeCode: '',
     };
   }
-  ngOnInit() {
+
+  isQueExist(): boolean {
+    return this.form.get('question1').hasError('queExist');
+  }
+
+  ngOnInit() { 
     this.form = this.formBuilder.group({
       ControlquestionId: ['', []],
       ControlisActive: ['', []],
-      Controlquestion: ['', [
-        Validators.required]],
+      question1: ['', [Validators.required], [questionAsyncValidator(this.questionService)] ],
       ControlqaTypeCode: ['', [
         Validators.required]]
     });
