@@ -136,7 +136,7 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
             this.router.navigate(['ClusterList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -151,7 +151,7 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
             this.router.navigate(['ClusterList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

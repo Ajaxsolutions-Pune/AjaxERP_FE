@@ -109,12 +109,12 @@ export class FormQueAnsMappingComponent extends FormComponentBase
 
   save(): void {
     if (this.FormId === undefined) {
-      this.defaultLayoutComponent.Massage('Somethig Wrong',
+      this.defaultLayoutComponent.Massage('Technical Error Please connect to Ajax Support team',
         'Please select form name', 'modal-danger');
       return;
     }
     if (this.dataSource.filteredData.length < 1) {
-      this.defaultLayoutComponent.Massage('Somethig Wrong',
+      this.defaultLayoutComponent.Massage('Technical Error Please connect to Ajax Support team',
         'No Item Found', 'modal-danger');
       return;
     }

@@ -216,7 +216,7 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
             this._router.navigate(['DeviceList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -230,7 +230,7 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
             this._router.navigate(['DeviceList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

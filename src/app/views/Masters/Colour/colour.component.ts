@@ -126,7 +126,7 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
             this.router.navigate(['ColourList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -141,7 +141,7 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
             this.router.navigate(['ColourList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

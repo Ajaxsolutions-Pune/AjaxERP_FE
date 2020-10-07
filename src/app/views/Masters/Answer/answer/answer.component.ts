@@ -100,7 +100,7 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
             this.router.navigate(['AnswerList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -114,7 +114,7 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
             this.router.navigate(['AnswerList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-danger');
+              'Technical Error Please connect to Ajax Support team', 'modal-danger');
           }
         }
       );

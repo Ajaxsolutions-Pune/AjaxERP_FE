@@ -46,8 +46,10 @@
                                 formControlName="ControlProject"
                                  [(ngModel)]="bindObj.projectCode">
                                  <mat-option>Project</mat-option>
-                                 <mat-option value="1">Project 1</mat-option>
-                                 <mat-option value="2">Project 2</mat-option>
+                                 <mat-option *ngFor="let obj of projectDrp"
+                                  [value]="obj.projectCode">
+                                   {{obj.projectName}}
+                                 </mat-option>
                                 </mat-select>
                                 <mat-error>
                                     {{ formErrors['ControlProject'] }}

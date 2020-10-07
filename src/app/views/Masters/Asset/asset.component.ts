@@ -521,7 +521,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
             this._router.navigate(['AssetList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -535,7 +535,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
             this._router.navigate(['AssetList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

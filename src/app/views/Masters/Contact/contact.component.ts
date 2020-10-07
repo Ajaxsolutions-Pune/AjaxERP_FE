@@ -147,7 +147,7 @@ export class ContactComponent extends FormComponentBase implements OnInit, After
               this.router.navigate(['ContactList']);
             } else {
               this.defaultLayoutComponent.Massage('',
-                'Somethig Wrong', 'modal-info');
+                'Technical Error Please connect to Ajax Support team', 'modal-info');
             }
           }
         );
@@ -163,7 +163,7 @@ export class ContactComponent extends FormComponentBase implements OnInit, After
               this.router.navigate(['ContactList']);
             } else {
               this.defaultLayoutComponent.Massage('',
-                'Somethig Wrong', 'modal-info');
+                'Technical Error Please connect to Ajax Support team', 'modal-info');
             }
           }
         );

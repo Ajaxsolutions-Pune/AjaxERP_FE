@@ -109,7 +109,7 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
             this.router.navigate(['QuestionList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -124,7 +124,7 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
             this.router.navigate(['QuestionList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

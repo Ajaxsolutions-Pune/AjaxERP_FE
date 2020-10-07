@@ -93,7 +93,7 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
             this.router.navigate(['FormList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -107,7 +107,7 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
             this.router.navigate(['FormList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

@@ -130,7 +130,7 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
             this.router.navigate(['AssetGroupList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -145,7 +145,7 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
             this.router.navigate(['AssetGroupList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

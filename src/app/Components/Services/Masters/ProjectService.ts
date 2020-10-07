@@ -22,6 +22,10 @@ export class ProjectService {
         return this.httpClient.get<ProjectEntity[]>(this.str + '/Project/getList',
          this.env.httpOptions);
     }   
+    getProjectDrp(): Observable<ProjectEntity[]> {
+        return this.httpClient.get<ProjectEntity[]>(this.str + '/Project/getList',
+         this.env.httpOptions);
+    }   
      
     getProject(ProjectCode: string): Observable<ProjectEntity> {
         return this.httpClient.get<ProjectEntity>(this.str + '/Project/' + ProjectCode,

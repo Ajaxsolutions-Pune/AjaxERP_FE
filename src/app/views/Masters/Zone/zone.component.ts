@@ -86,7 +86,7 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
             this.router.navigate(['ZoneList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -100,7 +100,7 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
             this.router.navigate(['ZoneList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

@@ -112,7 +112,7 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
             this.router.navigate(['RolelevelList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -126,7 +126,7 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
             this.router.navigate(['RolelevelList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

@@ -114,12 +114,12 @@ export class UserDeviceMappingComponent extends FormComponentBase
 
   save(): void {
     if (this.DeviceId === undefined) {
-      this.defaultLayoutComponent.Massage('Somethig Wrong',
+      this.defaultLayoutComponent.Massage('Technical Error Please connect to Ajax Support team',
         'Please select device name', 'modal-danger');
       return;
     }
     if (this.dataSource.filteredData.length < 1) {
-      this.defaultLayoutComponent.Massage('Somethig Wrong',
+      this.defaultLayoutComponent.Massage('Technical Error Please connect to Ajax Support team',
         'No Item Found', 'modal-danger');
       return;
     }
