@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, NgForm, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
-import { Rolelevel, RolelevelEntity } from '../../../Components/Module/Masters/Rolelevel.model';
+import { RoleLevel, RoleLevelEntity } from '../../../Components/Module/Masters/RoleLevel.model';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { RolelevelService } from '../../../Components/Services/Masters/RolelevelService';
 import { RolelevelTransfarmer } from '../../../Components/Transformer/Masters/Role-level.Transfarmer';
@@ -20,8 +20,8 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
   // @ViewChild('RoleLevelName') firstItem: ElementRef;
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
-  roleLevelobj: Rolelevel;
-  roleLevelEntity: RolelevelEntity;
+  roleLevelobj: RoleLevel;
+  roleLevelEntity: RoleLevelEntity;
   UserTypeDrp: MasterDrp[];
   TransmissionLineGroupDrp: MasterDrp[];
   str: string;
@@ -47,9 +47,6 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
     this.formErrors = {
       ControlRoleLevelName: '',
     };
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this.router.navigate(['login']);
-    }
   }
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -63,7 +60,9 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
       ControlisActive: ['', []]
     });
     this.form.controls['ControlRoleLevelId'].disable();
-
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.globalService.fillMasterDrp('USERT').subscribe(
       (par) => {
         this.UserTypeDrp = par;
@@ -113,7 +112,7 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
             this.router.navigate(['RolelevelList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -127,7 +126,7 @@ export class RolelevelComponent extends FormComponentBase implements OnInit, Aft
             this.router.navigate(['RolelevelList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

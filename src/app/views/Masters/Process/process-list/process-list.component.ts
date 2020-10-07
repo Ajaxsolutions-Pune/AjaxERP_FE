@@ -26,7 +26,7 @@ export class ProcessListComponent implements OnInit {
      objTrans: ProcessTransfarmer1,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.processEntity = this.route.snapshot.data['ProcessList1'];
      this.processs = objTrans.processTransfarmers(this.processEntity);

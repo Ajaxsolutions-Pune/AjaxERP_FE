@@ -32,9 +32,6 @@ export class DefaultLayoutComponent implements OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     @Inject(DOCUMENT) _document?: any) {
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this.router.navigate(['/login']);
-    }
     this.router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {
         this.showLoddingIndicator = true;
@@ -61,7 +58,7 @@ export class DefaultLayoutComponent implements OnDestroy {
     this.myModal.show();
   }
   Logout() {
-    this.router.navigate(['login']);
+    // this.router.navigate(['login']);
     localStorage.removeItem('token');
   }
 

@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
-import { RolelevelEntity, Rolelevel } from '../../Module/Masters/Rolelevel.model';
+import { RoleLevelEntity, RoleLevel } from '../../Module/Masters/RoleLevel.model';
 
 @Injectable()
 export class RolelevelTransfarmer {
     str: string;
-    rolelevelEntity: RolelevelEntity;
-    rolelevel: Rolelevel;
-    rolelevels: Rolelevel[];
+    rolelevelEntity: RoleLevelEntity;
+    rolelevel: RoleLevel;
+    rolelevels: RoleLevel[];
     env = environment;
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
     }
-    RolelevelTransfarmers(Entity: RolelevelEntity[]): Rolelevel[] {
+    RolelevelTransfarmers(Entity: RoleLevelEntity[]): RoleLevel[] {
         this.rolelevels = [];
         Entity.forEach(element => {
-            this.rolelevel = new Rolelevel();
+            this.rolelevel = new RoleLevel();
             this.rolelevel.roleLevelId = element.roleLevelId;
             this.rolelevel.roleLevelDesc = element.roleLevelDesc;
             this.rolelevel.userType = element.userType;
@@ -33,8 +33,8 @@ export class RolelevelTransfarmer {
         });
         return this.rolelevels;
     }
-    RolelevelTransfarmerEntity(Entity: RolelevelEntity): Rolelevel {
-        this.rolelevel = new Rolelevel();
+    RolelevelTransfarmerEntity(Entity: RoleLevelEntity): RoleLevel {
+        this.rolelevel = new RoleLevel();
         this.rolelevel.roleLevelId = Entity.roleLevelId;
         this.rolelevel.roleLevelDesc = Entity.roleLevelDesc;
         this.rolelevel.userType = Entity.userType;
@@ -49,8 +49,8 @@ export class RolelevelTransfarmer {
         return this.rolelevel;
     }
 
-    RolelevelTransfarmer(Rolelevel: Rolelevel): RolelevelEntity {
-        this.rolelevelEntity = new RolelevelEntity();
+    RolelevelTransfarmer(Rolelevel: RoleLevel): RoleLevelEntity {
+        this.rolelevelEntity = new RoleLevelEntity();
         this.rolelevelEntity.roleLevelId = Rolelevel.roleLevelId;
         this.rolelevelEntity.roleLevelDesc = Rolelevel.roleLevelDesc;
         this.rolelevelEntity.userType = Rolelevel.userType;

@@ -66,6 +66,9 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
       ControlisActive: ['', []],
     });
     this.form.controls['ControlclusterCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.circleService.fillCircleDrp().subscribe(
       (par) => {
         this.circledrp = this.circleTransfarmer.CircleTransfarmers(par);
@@ -133,7 +136,7 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
             this.router.navigate(['ClusterList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -148,7 +151,7 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
             this.router.navigate(['ClusterList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

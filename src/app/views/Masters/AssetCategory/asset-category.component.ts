@@ -76,6 +76,9 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
       ControlisActive: ['', []],
     });
     this.form.controls['ControlassetCategoryCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     status = '';
     this.colourService.fillColoursDrp().subscribe(
       (par) => {
@@ -128,7 +131,7 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
             this.router.navigate(['AssetCategoryList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -143,7 +146,7 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
             this.router.navigate(['AssetCategoryList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

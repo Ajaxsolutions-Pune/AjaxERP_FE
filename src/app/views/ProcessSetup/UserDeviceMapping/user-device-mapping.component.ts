@@ -114,12 +114,12 @@ export class UserDeviceMappingComponent extends FormComponentBase
 
   save(): void {
     if (this.DeviceId === undefined) {
-      this.defaultLayoutComponent.Massage('Somethig Wrong',
+      this.defaultLayoutComponent.Massage('Technical Error Please connect to Ajax Support team',
         'Please select device name', 'modal-danger');
       return;
     }
     if (this.dataSource.filteredData.length < 1) {
-      this.defaultLayoutComponent.Massage('Somethig Wrong',
+      this.defaultLayoutComponent.Massage('Technical Error Please connect to Ajax Support team',
         'No Item Found', 'modal-danger');
       return;
     }
@@ -143,9 +143,36 @@ export class UserDeviceMappingComponent extends FormComponentBase
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['UserDeviceMapping']);
             this.DeviceId = this.DeviceId;
+            this.GetRouteData(this.DeviceId);
           }
         }
       );
+  }
+
+  GetRouteData(loginId: string): void {
+    const selectedData = {
+      value: loginId,
+      text: loginId
+    };
+    this.objUserDeviceMapping = [];
+    this.insertData.dataChange.value.splice(0);
+
+    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.refreshTable();
+    this.userDeviceMappingService.getUserDeviceMapping(selectedData.value).subscribe(
+      (par) => {
+        this.objUserDeviceMapping = this.userDeviceMappingTransfarmer.
+        UserDeviceMappingTransfarmers(par);
+        this.objUserDeviceMapping.forEach(a => {
+          a.deviceId = selectedData.value;
+        });
+        this.objUserDeviceMapping.forEach(element => {
+          this.exampleDatabase.dataChange.value.push(element);
+          this.refreshTable();
+        });
+
+      },
+      (err: any) => console.log(err));
   }
 
   DeviceChange(event) {

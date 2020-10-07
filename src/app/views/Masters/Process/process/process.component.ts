@@ -48,11 +48,16 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     this.form = this.formBuilder.group({
       ControlprocessName: ['', [
         Validators.required]],
+        ControlassetGroup: ['', [
+          Validators.required]],
       Controlgeofence: ['', []],
       ControlprocessId: ['', []],
       ControlisActive: ['', []]
     });
     this.form.controls['ControlprocessId'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     status = '';
     this.process = {
       geofence: '',

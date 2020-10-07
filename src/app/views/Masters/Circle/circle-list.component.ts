@@ -24,10 +24,10 @@ export class CircleListComponent implements OnInit {
   bindObj: Circle;
   constructor(private _router: Router,
     objTrans: CircleTransfarmer,
-    private route: ActivatedRoute) {
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
-    }
+    private route: ActivatedRoute) {   
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        window.location.href='login';
+      }
     this.arrOjectEntity = this.route.snapshot.data['CircleList'];
     this.arrOject = objTrans.CircleTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;

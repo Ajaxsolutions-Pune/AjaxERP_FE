@@ -24,10 +24,10 @@ export class AssetCategoryListComponent implements OnInit {
   env = environment;
   constructor(private _router: Router,
     objTrans: AssetCategoryTransfarmer,
-    private route: ActivatedRoute) {
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
-    }
+    private route: ActivatedRoute) {   
+      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        window.location.href='login';
+      }
     this.arrOjectEntity = this.route.snapshot.data['AssetCategoryList1'];
     this.arrOject = objTrans.AssetCategoryTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;

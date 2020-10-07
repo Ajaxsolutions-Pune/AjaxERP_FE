@@ -28,9 +28,6 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
     private zoneService: ZoneService,
     private formBuilder: FormBuilder) {
     super();
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this.router.navigate(['login']);
-    }
     this.validationMessages = {
       ControlzoneCode: {
         required: 'Zone Code is required.',
@@ -62,6 +59,9 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
       ControlisActive: ['', []],
     });
     this.form.controls['ControlzoneCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     status = '';
     this.bindObj = {
       zoneCode: null,
@@ -86,7 +86,7 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
             this.router.navigate(['ZoneList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -100,7 +100,7 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
             this.router.navigate(['ZoneList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

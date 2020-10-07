@@ -13,8 +13,11 @@ import { GlobalService } from '../../../Components/Services/GlobalServices/Globa
 import { TransmissionLineService } from '../../../Components/Services/Masters/TransmissionLineService';
 import { TransmissionLineTransfarmer } from '../../../Components/Transformer/Masters/TransmissionLine-Transfarmer';
 import { env } from 'process';
+import { ProjectTransfarmer } from '../../../Components/Transformer/Masters/Project-Transfarmer';
 import { environment } from '../../../Components/Module/environment';
 import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
+import { Project } from '../../../Components/Module/Masters/Project.model';
+import { ProjectService } from '../../../Components/Services/Masters/ProjectService';
 
 @Component({
   selector: 'app-transmission-line',
@@ -30,6 +33,7 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
   colourdrp: Colour[];
   TransmissionLineTypeDrp: MasterDrp[];
   TransmissionLineGroupDrp: MasterDrp[];
+  projectDrp: Project[];
   env = environment;
   bindObjEntity: TransmissionLineEntity;
   constructor(private _router: Router, private route: ActivatedRoute,
@@ -40,6 +44,8 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
     private transmissionLineTransfarmer: TransmissionLineTransfarmer,
     private colourService: ColourService,
     private colourTransfarmer: ColourTransfarmer,
+    private projectService: ProjectService,
+    private ProjectTransfarmer: ProjectTransfarmer,
     private formBuilder: FormBuilder) {
     super();
     this.validationMessages = {
@@ -87,6 +93,11 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
         this.colourdrp = this.colourTransfarmer.ColourTransfarmers(par);
       },
       (err: any) => console.log(err));
+      this.projectService.getProjectDrp().subscribe(
+        (par) => {
+          this.projectDrp = this.ProjectTransfarmer.ProjectTransfarmers(par);
+        },
+        (err: any) => console.log(err));
       this.globalService.fillMasterDrp('TRLTY').subscribe(
         (par) => {
           this.TransmissionLineTypeDrp = par;
@@ -146,7 +157,7 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
                   this.router.navigate(['TransmissionLineList']);
                 } else {
                   this.defaultLayoutComponent.Massage('',
-                    'Somethig Wrong', 'modal-info');
+                    'Technical Error Please connect to Ajax Support team', 'modal-info');
                 }
               }
             );
@@ -164,7 +175,7 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
               this.router.navigate(['TransmissionLineList']);
             } else {
               this.defaultLayoutComponent.Massage('',
-                'Somethig Wrong', 'modal-info');
+                'Technical Error Please connect to Ajax Support team', 'modal-info');
             }
           }
         );
@@ -206,6 +217,9 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
       this.transmissionLineService.getTransmissionLine(TransmissionLine_Code).subscribe(
         (par) => {
           this.form.controls['ControltlCode'].disable();
+          if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+            window.location.href='login';
+          }
           this.bindObjEntity = par;
           this.bindObj = this.transmissionLineTransfarmer.
             TransmissionLineTransfarmerEntity(this.bindObjEntity);

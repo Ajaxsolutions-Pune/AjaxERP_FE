@@ -148,7 +148,7 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
                   this.router.navigate(['HubList']);
                 } else {
                   this.defaultLayoutComponent.Massage('',
-                    'Somethig Wrong', 'modal-danger');
+                    'Technical Error Please connect to Ajax Support team', 'modal-danger');
                 }
               }
             );
@@ -166,7 +166,7 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
               this.router.navigate(['HubList']);
             } else {
               this.defaultLayoutComponent.Massage('',
-                'Somethig Wrong', 'modal-info');
+                'Technical Error Please connect to Ajax Support team', 'modal-info');
             }
           }
         );
@@ -209,6 +209,9 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
         (par) => {
           this.bindObjEntity = par;
           this.form.controls['ControlhubCode'].disable();
+          if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+            window.location.href='login';
+          }
           this.bindObj = this.hubTransfarmer.
             HubTransfarmerEntity(this.bindObjEntity);
         },

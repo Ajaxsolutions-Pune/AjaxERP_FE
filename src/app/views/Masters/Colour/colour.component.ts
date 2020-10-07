@@ -65,6 +65,9 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
       ControlisActive: ['', []],
     });
     this.form.controls['ControlcolourCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.WithoutFilterObj = this.arrOject;
     this.bindObj = {
       colourCode: null,
@@ -123,7 +126,7 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
             this.router.navigate(['ColourList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -138,7 +141,7 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
             this.router.navigate(['ColourList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );

@@ -25,7 +25,8 @@
                                 <input matInput #processName 
                                 spellcheck="false" [(ngModel)]="process.processName" 
                                 (keypress)="omit_special_char($event)" 
-                                placeholder="Process Name *" maxlength="50" formControlName="ControlprocessName">
+                                placeholder="Process Name *" 
+                                maxlength="50" formControlName="ControlprocessName">
                                 <mat-error>
                                     {{ formErrors['ControlprocessName'] }}
                                 </mat-error>
@@ -34,18 +35,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4"></div>
-                            <div class="col-sm-4" style="padding-top: 20px;">
-                                <mat-checkbox name="chkgeofence" #chkgeofence formControlName="Controlgeofence"
-                                    [(ngModel)]="process.geofence">Geofence
-                                </mat-checkbox>
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                               <mat-label> Asset Group</mat-label>
-                              <mat-select required                               
+                              <mat-select required       
+                              formControlName="ControlassetGroup"                        
                               [(ngModel)]="process.assetGroupCode">
                               <mat-option>Asset Group</mat-option>
                               <mat-option *ngFor="let assetGroup of assetGroupObj"
@@ -61,19 +54,24 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4"></div>
-                            <div class="col-sm-4" style="padding-top: 20px;">
+                            <div class="col-sm-2" style="padding-top: 20px;">
+                                <mat-checkbox name="chkgeofence" #chkgeofence formControlName="Controlgeofence"
+                                    [(ngModel)]="process.geofence">Geofence
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-sm-2" style="padding-top: 20px;">
                                 <mat-checkbox name="chkisActive" #chkisActive formControlName="ControlisActive"
                                     [(ngModel)]="process.isActive">Active
                                 </mat-checkbox>
                             </div>
-                            <div class="col-md-4"></div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <button mat-raised-button [disabled]="!form.valid" (click)="save(processForm)"
+                                <button mat-raised-button [disabled]="!form.valid" 
+                                (click)="save(processForm)"
                                     color="primary">Submit</button>
                                 &nbsp; &nbsp; &nbsp; &nbsp;
                                 <button mat-raised-button color="warn" routerLink="/ProcessList">

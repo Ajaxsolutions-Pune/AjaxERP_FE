@@ -25,7 +25,7 @@ export class TehsilListComponent implements OnInit {
     private tehsilsTransfarmer: TehsilTransfarmer,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.tehsilsEntity = this.route.snapshot.data['TehsilList'];
     this.tehsils = this.tehsilsTransfarmer.TehsilTransfarmers(this.tehsilsEntity);

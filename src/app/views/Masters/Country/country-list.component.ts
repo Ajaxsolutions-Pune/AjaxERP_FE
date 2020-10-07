@@ -24,7 +24,7 @@ export class CountryListComponent implements OnInit {
     private countryTransfarmer: CountryTransfarmer,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+         window.location.href='login';
       }
     this.countrysEntitys = this.route.snapshot.data['CountryList'];
     this.countrys = this.countryTransfarmer.CountryTransfarmers(this.countrysEntitys);

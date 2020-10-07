@@ -100,6 +100,9 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
       ControlProject: ['', [Validators.required]]
     });
     this.form.controls['ControlProjectID'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     status = '';
     this.project = {
         ouCode : '12',
@@ -156,7 +159,7 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
             this.router.navigate(['ProjectList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );    
@@ -170,7 +173,7 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
             this.router.navigate(['ProjectList']);
           }   else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-danger');
+              'Technical Error Please connect to Ajax Support team', 'modal-danger');
           }
         }
       );

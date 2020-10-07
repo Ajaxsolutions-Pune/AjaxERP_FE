@@ -21,7 +21,7 @@ export class ListUOMComponent implements OnInit {
     private unitService: UOMService,
     private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        this._router.navigate(['login']);
+        window.location.href='login';
       }
     this.unitService.getUnits().subscribe(
       (par) => this.Units = par,

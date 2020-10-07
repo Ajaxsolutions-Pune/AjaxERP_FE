@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import * as alasql from 'alasql';
 import { environment } from '../../../Components/Module/environment';
 alasql['private'].externalXlsxLib = require('xlsx');
-import { Rolelevel, RolelevelEntity } from '../../../Components/Module/Masters/Rolelevel.model';
+import { RoleLevel, RoleLevelEntity } from '../../../Components/Module/Masters/RoleLevel.model';
 import { RolelevelTransfarmer } from '../../../Components/Transformer/Masters/Role-level.Transfarmer';
 
 @Component({
@@ -12,21 +12,21 @@ import { RolelevelTransfarmer } from '../../../Components/Transformer/Masters/Ro
   styleUrls: ['./rolelevel-list.component.scss']
 })
 export class RolelevelListComponent implements OnInit {
-  @Input() questionInput: Rolelevel;
-  arrOject: Rolelevel[];
-  arrOjectEntity: RolelevelEntity[];
+  @Input() questionInput: RoleLevel;
+  arrOject: RoleLevel[];
+  arrOjectEntity: RoleLevelEntity[];
 
-  WithoutFilterObj: Rolelevel[];
-  ResultOject: Rolelevel[];
+  WithoutFilterObj: RoleLevel[];
+  ResultOject: RoleLevel[];
   SerachCri: number;
-  bindObj: Rolelevel;
+  bindObj: RoleLevel;
   config: any;
   env = environment;
   constructor(private _router: Router,
     objTrans: RolelevelTransfarmer,
     private route: ActivatedRoute) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      this._router.navigate(['login']);
+      window.location.href='login';
     }
     this.arrOjectEntity = this.route.snapshot.data['RolelevelList'];
     this.arrOject = objTrans.RolelevelTransfarmers(this.arrOjectEntity);

@@ -106,12 +106,12 @@ export class ProcessFormMappingComponent extends FormComponentBase
 
   save(): void {
     if (this.ProcessId === undefined) {
-      this.defaultLayoutComponent.Massage('Somethig Wrong',
+      this.defaultLayoutComponent.Massage('Technical Error Please connect to Ajax Support team',
         'Please select process name', 'modal-danger');
       return;
     }
     if (this.dataSource.filteredData.length < 1) {
-      this.defaultLayoutComponent.Massage('Somethig Wrong',
+      this.defaultLayoutComponent.Massage('Technical Error Please connect to Ajax Support team',
         'No Item Found', 'modal-danger');
       return;
     }

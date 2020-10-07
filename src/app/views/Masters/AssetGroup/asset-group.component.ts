@@ -62,6 +62,9 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
       ControlisActive: ['', []],
     });
     this.form.controls['ControlassetGroupCode'].disable();
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href='login';
+    }
     this.bindObj = {
       assetGroupCode: null,
       assetGroupNameENG: null,
@@ -127,7 +130,7 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
             this.router.navigate(['AssetGroupList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -142,7 +145,7 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
             this.router.navigate(['AssetGroupList']);
           } else {
             this.defaultLayoutComponent.Massage('',
-              'Somethig Wrong', 'modal-info');
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
