@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { Circle, CircleEntity } from '../../Module/Masters/Circle.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class CircleService {
@@ -34,6 +35,10 @@ export class CircleService {
 
     Update(updateEntityObj: CircleEntity): Observable<CircleEntity> {
         return this.httpClient.post<CircleEntity>(this.str + '/Circle', updateEntityObj
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+    checkCircle(circle : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Circle/getCircleByName?name=' + circle
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 

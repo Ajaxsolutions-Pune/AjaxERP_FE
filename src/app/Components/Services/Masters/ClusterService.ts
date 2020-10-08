@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { Cluster, ClusterEntity } from '../../Module/Masters/Cluster.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class ClusterService {
@@ -27,14 +28,16 @@ export class ClusterService {
         return this.httpClient.post<Insertstatus>(this.str + '/Cluster', saveEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-
     Update(updateEntityObj: ClusterEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
         return this.httpClient.post<Insertstatus>(this.str + '/Cluster', updateEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-
+    checkCluster(cluster : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Cluster/getClusterByName?name=' + cluster
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {
             console.error('client side error', errorResponse.error.message);

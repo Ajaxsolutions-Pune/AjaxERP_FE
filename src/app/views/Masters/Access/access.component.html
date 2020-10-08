@@ -34,6 +34,9 @@
                                     formControlName="ControlAccessName" maxlength="50">                                    
                                   <mat-error>
                                     {{ formErrors['ControlAccessName']}}
+                                    <!--<span *ngIf="isAccessExist()">
+                                        Circle Name is already taken.
+                                    </span>-->  
                                   </mat-error>
                                 </mat-form-field>
                                

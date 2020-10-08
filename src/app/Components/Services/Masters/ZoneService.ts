@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { Zone, ZoneEntity } from '../../Module/Masters/Zone.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class ZoneService {
@@ -29,6 +30,11 @@ export class ZoneService {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<Insertstatus>(this.str + '/Zone', saveEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+
+    checkZone(zone : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Zone/getZoneByName?name=' + zone
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: ZoneEntity): Observable<Insertstatus> {

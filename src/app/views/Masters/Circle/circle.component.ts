@@ -11,6 +11,7 @@ import { CircleService } from '../../../Components/Services/Masters/CircleServic
 import { CircleTransfarmer } from '../../../Components/Transformer/Masters/Circle-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import { circleAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-circle',
@@ -55,12 +56,13 @@ export class CircleComponent extends FormComponentBase implements OnInit, AfterV
     }, 250);
     this.startControlMonitoring(this.form);
   }
-
+  isCircleExist(): boolean {
+    return this.form.get('ControlcircleNameENG').hasError('queExist');
+  }
   ngOnInit() {
     this.form = this.formBuilder.group({
       ControlcircleCode: ['', []],
-      ControlcircleNameENG: ['', [
-        Validators.required]],
+      ControlcircleNameENG: ['', [Validators.required], [circleAsyncValidator(this.circleService)] ],
       ControlzoneCode: ['', [
         Validators.required]],
       ControlcircleNameUNI: ['', []],

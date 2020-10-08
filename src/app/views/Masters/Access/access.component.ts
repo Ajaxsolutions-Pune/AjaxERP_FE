@@ -39,10 +39,16 @@ export class AccessComponent extends FormComponentBase implements OnInit, AfterV
       ControlAccessName: '',
     };
   }
+  
+  // isAccessExist(): boolean {
+  //   return this.form.get('ControlAccessName').hasError('queExist');
+  // }
   ngOnInit() {
     this.form = this.formBuilder.group({
       ControlAccessName: ['', [
         Validators.required]],
+        
+      //  ControlAccessName: ['', [Validators.required], [AccessAsyncValidator(this.accessService)] ],
       ControlAccessId: ['', []],
       ControlisActive: ['', []]
     });

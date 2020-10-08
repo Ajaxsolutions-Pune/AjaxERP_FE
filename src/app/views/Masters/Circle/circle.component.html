@@ -25,7 +25,9 @@
                                     required formControlName="ControlcircleNameENG" #txtcircleNameENG
                                     name="txtcircleNameENG">
                                 <mat-error>
-                                    {{ formErrors['ControlcircleNameENG'] }}
+                                    <span *ngIf="isCircleExist()">
+                                        Circle Name is already taken.
+                                    </span>
                                 </mat-error>
                             </mat-form-field>
                             <div class="col-md-4"></div>

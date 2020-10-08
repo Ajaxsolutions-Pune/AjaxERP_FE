@@ -19,6 +19,7 @@ export class FormQueAnsMapping {
     modifiedBy: string;
     modifiedDate: string;
     updateFlag: string;
+    queNames: string[];
 }
 export class FormQueAnsMappingEntity {
     fqamId: number;

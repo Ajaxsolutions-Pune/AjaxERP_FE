@@ -8,6 +8,7 @@ import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-fiel
 import { RegionTransfarmer } from '../../../Components/Transformer/Masters/Region-Transfarmer';
 import { RegionService } from '../../../Components/Services/Masters/RegionService';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import { regionAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-region',
@@ -83,11 +84,13 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
       );
     }
   }
+  isRegionExist(): boolean {
+    return this.form.get('ControlregionNameENG').hasError('queExist');
+  }
   ngOnInit() {
     this.form = this.formBuilder.group({
       ControlregionCode: ['', []],
-      ControlregionNameENG: ['', [
-        Validators.required]],
+      ControlregionNameENG: ['', [Validators.required], [regionAsyncValidator(this.regionService)] ],
       ControlregionNameUNI: ['', []],
       ControlisActive: ['', []],
     });

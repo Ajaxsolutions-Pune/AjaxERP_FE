@@ -30,7 +30,9 @@
                                      #txtclusterNameENG
                                     name="txtclusterNameENG">
                                 <mat-error>
-                                    {{ formErrors['ControlclusterNameENG'] }}
+                                    <span *ngIf="isClusterExist()">
+                                        Cluster Name is already taken.
+                                    </span>
                                 </mat-error>
                             </mat-form-field>
                             <div class="col-md-4"></div>

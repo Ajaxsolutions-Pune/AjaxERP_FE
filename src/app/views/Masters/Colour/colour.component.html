@@ -33,7 +33,9 @@
                                 #txtcolourNameENG
                                 name="txtcolourNameENG">
                                 <mat-error>
-                                    {{ formErrors['ControlcolourNameENG'] }}
+                                    <span *ngIf="isColourExist()">
+                                        Colour Name is already taken.
+                                    </span>
                                 </mat-error>
                             </mat-form-field>
                             <div class="col-md-4"></div>

@@ -8,6 +8,7 @@ import { GlobalService } from '../../../Components/Services/GlobalServices/Globa
 import { ColourService } from '../../../Components/Services/Masters/ColourService';
 import { ColourTransfarmer } from '../../../Components/Transformer/Masters/Colour-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
+import { colourAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-colour',
@@ -55,12 +56,13 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
     }, 250);
     this.startControlMonitoring(this.form);
   }
-
+  isColourExist(): boolean {
+    return this.form.get('ControlcolourNameENG').hasError('queExist');
+  }
   ngOnInit() {
     this.form = this.formBuilder.group({
       ControlcolourCode: ['', []],
-      ControlcolourNameENG: ['', [
-        Validators.required]],
+      ControlcolourNameENG: ['', [Validators.required], [colourAsyncValidator(this.colourService)] ],
       ControlcolourNameUNI: ['', []],
       ControlisActive: ['', []],
     });

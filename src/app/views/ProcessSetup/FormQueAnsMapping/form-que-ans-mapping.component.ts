@@ -32,6 +32,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   implements OnInit {
 
   formObj: FormObj[];
+  QueNames: string[]
   displayedColumns = ['FormQuestionsAnswerMapping', 'QuestionsText'
     , 'QuestionsMandatoryText', 'FormQuestionssequence', 'answerText',
     'QuestionsGroup', 'nextQueGroup', 'NextFormText', 'ActiveText', 'actions'];
@@ -88,12 +89,18 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   }
 
   addNew() {
+    // this.QueNames = 
+    this.QueNames = [];
+    this.dataSource.filteredData.forEach(element => {
+      this.QueNames.push(element.questionId);
+    });
     const dialogRef = this.dialog.open(AddDialogComponent, {
       data: {
         isQuestionMandatory: ''.toString(),
         formId: this.FormId,
         isActive: ''.toString(),
-        updateFlag: '1'
+        updateFlag: '1',
+        queNames: this.QueNames
       }
     });
     dialogRef.afterClosed().subscribe(result => {

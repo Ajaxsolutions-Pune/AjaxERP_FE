@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { Colour, ColourEntity } from '../../Module/Masters/Colour.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class ColourService {
@@ -35,7 +36,10 @@ export class ColourService {
         return this.httpClient.post<Insertstatus>(this.str + '/Colour', updateEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-
+    checkColour(colour : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Colour/getColourByName?name=' + colour
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {
             console.error('client side error', errorResponse.error.message);

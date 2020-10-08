@@ -11,6 +11,7 @@ import { ClusterTransfarmer } from '../../../Components/Transformer/Masters/Clus
 import { Circle } from '../../../Components/Module/Masters/Circle.model';
 import { DefaultLayoutComponent } from '../../../containers';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import { clusterAsyncValidator } from '../../../helper/async-validator';
 @Component({
   selector: 'app-cluster',
   templateUrl: './cluster.component.html',
@@ -55,11 +56,13 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
     this.startControlMonitoring(this.form);
   }
 
+  isClusterExist(): boolean {
+    return this.form.get('ControlclusterNameENG').hasError('queExist');
+  }
   ngOnInit() {
     this.form = this.formBuilder.group({
       ControlclusterCode: ['', []],
-      ControlclusterNameENG: ['', [
-        Validators.required]],
+      ControlclusterNameENG: ['', [Validators.required], [clusterAsyncValidator(this.clusterService)] ],
       ControlcircleCode: ['', [
         Validators.required]],
       ControlclusterNameUNI: ['', []],

@@ -6,6 +6,7 @@ import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { DialogService } from '../MatServices/Dialog.service';
 import { Access, AccessEntity } from '../../Module/Masters/Access.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class AccessService {
@@ -33,6 +34,10 @@ export class AccessService {
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
+    checkAccess(access : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Access/getAccessByName?name=' + access
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
     Update(updateEntityObj: AccessEntity): Observable<Insertstatus> {
         // tslint:disable-next-line:max-line-length
         return this.httpClient.post<Insertstatus>(this.str + '/Access', updateEntityObj

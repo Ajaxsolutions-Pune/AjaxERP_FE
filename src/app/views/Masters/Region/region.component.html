@@ -33,7 +33,9 @@
                                 #txtregionNameENG
                                 name="txtregionNameENG">
                                 <mat-error>
-                                    {{ formErrors['ControlregionNameENG'] }}
+                                    <span *ngIf="isRegionExist()">
+                                        Region Name is already taken.
+                                    </span>
                                 </mat-error>
                             </mat-form-field>
                             <div class="col-md-4"></div>

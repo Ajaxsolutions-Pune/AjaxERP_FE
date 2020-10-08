@@ -8,6 +8,7 @@ import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-fiel
 import { ZoneService } from '../../../Components/Services/Masters/ZoneService';
 import { ZoneTransfarmer } from '../../../Components/Transformer/Masters/ZoneTransfarmer';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import { questionAsyncValidator, zoneAsyncValidator } from '../../../helper/async-validator';
 @Component({
   selector: 'app-zone',
   templateUrl: './zone.component.html',
@@ -50,17 +51,19 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
     this.startControlMonitoring(this.form);
   }
 
+  isZoneExist(): boolean {
+    return this.form.get('ControlzoneNameENG').hasError('queExist');
+  }
   ngOnInit() {
     this.form = this.formBuilder.group({
       ControlzoneCode: ['', []],
-      ControlzoneNameENG: ['', [
-        Validators.required]],
+      ControlzoneNameENG: ['', [Validators.required], [zoneAsyncValidator(this.zoneService)] ],
       ControlzoneNameUNI: ['', []],
       ControlisActive: ['', []],
     });
     this.form.controls['ControlzoneCode'].disable();
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href='login';
+      window.location.href = 'login';
     }
     status = '';
     this.bindObj = {
@@ -84,7 +87,7 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['ZoneList']);
-          }   else {
+          } else {
             this.defaultLayoutComponent.Massage('',
               'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
@@ -98,7 +101,7 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['ZoneList']);
-          }   else {
+          } else {
             this.defaultLayoutComponent.Massage('',
               'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
