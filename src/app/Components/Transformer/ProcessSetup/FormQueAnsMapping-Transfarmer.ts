@@ -29,6 +29,7 @@ export class FormQueAnsMappingTransfarmer {
             this.Oject.queGroup = element.queGroup;
             this.Oject.nextQueGroup = element.nextQueGroup;
             this.Oject.nextFormId = element.nextFormId;
+            this.Oject.queNames = element.queNames;
             this.Oject.nextFormIdText = element.nextFormIdText;
             this.Oject.isActiveText = element.isActiveText;
             if (element.isQuestionMandatory === '1') {
@@ -50,6 +51,7 @@ export class FormQueAnsMappingTransfarmer {
             this.Oject.formId = element.formId;
             this.Oject.formQueSeqNo = element.formQueSeqNo;
             this.Oject.questionId = element.questionId;
+            this.Oject.queNames = element.queNames;
             this.Oject.questionIdText = element.questionIdText;
             this.Oject.isQuestionMandatoryText = element.isQuestionMandatoryText;
             this.Oject.answerId = element.answerId.toString();
@@ -94,6 +96,7 @@ export class FormQueAnsMappingTransfarmer {
         this.Oject.nextQueGroup = Entity.nextQueGroup;
         this.Oject.nextFormId = Entity.nextFormId;
         this.Oject.nextFormIdText = Entity.nextFormIdText;
+        this.Oject.queNames = Entity.queNames;
         this.Oject.isActiveText = Entity.isActiveText;
         this.Oject.isActive = Entity.isActive;
         this.Oject.createdBy = Entity.createdBy;

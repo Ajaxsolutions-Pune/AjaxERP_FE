@@ -42,4 +42,5 @@ export class FormQueAnsMappingEntity {
     modifiedBy: string;
     modifiedDate: string;
     updateFlag: string;
+    queNames: string[];
 }
