@@ -60,17 +60,8 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
     return this.form.get('ControlclusterNameENG').hasError('queExist');
   }
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlclusterCode: ['', []],
-      ControlclusterNameENG: ['', [Validators.required], [clusterAsyncValidator(this.clusterService)] ],
-      ControlcircleCode: ['', [
-        Validators.required]],
-      ControlclusterNameUNI: ['', []],
-      ControlisActive: ['', []],
-    });
-    this.form.controls['ControlclusterCode'].disable();
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href='login';
+      window.location.href = 'login';
     }
     this.circleService.fillCircleDrp().subscribe(
       (par) => {
@@ -91,6 +82,16 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getCluster(str);
+      this.form = this.formBuilder.group({
+        ControlclusterCode: ['', []],
+        ControlclusterNameENG: ['', [Validators.required],
+          [clusterAsyncValidator(this.clusterService, str)]],
+        ControlcircleCode: ['', [
+          Validators.required]],
+        ControlclusterNameUNI: ['', []],
+        ControlisActive: ['', []],
+      });
+      this.form.controls['ControlclusterCode'].disable();
     });
   }
 
@@ -137,7 +138,7 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
               'Data saved successfully !', 'modal-info');
             clusterForm.reset();
             this.router.navigate(['ClusterList']);
-          }   else {
+          } else {
             this.defaultLayoutComponent.Massage('',
               'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
@@ -152,7 +153,7 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
               'Data saved successfully !', 'modal-info');
             clusterForm.reset();
             this.router.navigate(['ClusterList']);
-          }   else {
+          } else {
             this.defaultLayoutComponent.Massage('',
               'Technical Error Please connect to Ajax Support team', 'modal-info');
           }

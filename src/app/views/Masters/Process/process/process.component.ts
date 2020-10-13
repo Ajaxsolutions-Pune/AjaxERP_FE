@@ -48,15 +48,15 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     this.form = this.formBuilder.group({
       ControlprocessName: ['', [
         Validators.required]],
-        ControlassetGroup: ['', [
-          Validators.required]],
+      ControlassetGroup: ['', [
+        Validators.required]],
       Controlgeofence: ['', []],
       ControlprocessId: ['', []],
       ControlisActive: ['', []]
     });
     this.form.controls['ControlprocessId'].disable();
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href='login';
+      window.location.href = 'login';
     }
     status = '';
     this.process = {
@@ -64,6 +64,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       isActive: 'true',
       processId: null,
       processName: null,
+      assetGroupNameENG: null,
       assetGroupCode: null,
       createdBy: localStorage.getItem('username'),
       createdDate: this.globalService.GerCurrntDateStamp(),
@@ -117,6 +118,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       isActive: 'true',
       processId: null,
       processName: null,
+      assetGroupNameENG: null,
       assetGroupCode: null,
       createdBy: localStorage.getItem('username'),
       createdDate: this.globalService.GerCurrntDateStamp(),
@@ -128,6 +130,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
         processId: null,
         processName: null,
         geofence: '',
+        assetGroupNameENG: null,
         isActive: 'true',
         assetGroupCode: null,
         createdBy: localStorage.getItem('username'),

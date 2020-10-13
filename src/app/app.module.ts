@@ -262,6 +262,11 @@ import { RolelevelListResolverService } from './Components/Resolver/Masters/Role
 import { UserListComponent } from './views/Masters/User/List-user.component';
 import { UserComponent } from './views/Masters/User/user-master.component';
 import { UserListResolverService } from './Components/Resolver/Masters/User-List-Resolver.Service';
+import { UserDeviceRegListComponent } from './views/Masters/UserDeviceReg/user-device-reg-list.component';
+import { UserDeviceRegComponent } from './views/Masters/UserDeviceReg/user-device-reg.component';
+import { UserDeviceRegTransfarmer } from './Components/Transformer/Masters/UserDeviceReg-Transfarmer';
+import { UserDeviceRegListResolverService } from './Components/Resolver/Masters/UserDeviceReg-List-Resolver.Service';
+import { UserDeviceRegService } from './Components/Services/Masters/UserDeviceRegService';
 
 @NgModule({
   imports: [
@@ -353,14 +358,15 @@ import { UserListResolverService } from './Components/Resolver/Masters/User-List
     TransmissionLineComponent, TransmissionLineListComponent, HubListComponent, HubComponent,
     ProcessFormMappingComponent, UserDeviceMappingComponent,
     DeviceAssetMappingComponent, ContactListComponent, ContactComponent,
-    AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent
+    AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent,
+     UserDeviceRegListComponent, UserDeviceRegComponent
   ],
   providers: [
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
-    HubService, ContactService, AccessService,
+    HubService, ContactService, AccessService, UserDeviceDataService,
     CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
@@ -370,10 +376,10 @@ import { UserListResolverService } from './Components/Resolver/Masters/User-List
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
-    HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer,
+    HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer, UserDeviceRegTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
-    AssetCategoryService, DataService, UserService,
+    AssetCategoryService, DataService, UserService, UserDeviceRegService,
     FormListResolverService, RegionListResolverService, ColourListResolverService,
     AssetListResolverService, ProcessListResolverService, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
@@ -383,6 +389,7 @@ import { UserListResolverService } from './Components/Resolver/Masters/User-List
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
     DeviceListResolverService, ClusterListResolverService, TransmissionLineListResolverService,
     HubListResolverService, ContactListResolverService, AccessListResolverService,
+    UserDeviceRegListResolverService,
     ProcessListResolverService, RoleListResolverService,
     DialogTemplateComponent,
     DialogService, RolelevelListResolverService,

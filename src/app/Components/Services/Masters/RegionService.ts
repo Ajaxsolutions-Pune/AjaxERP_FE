@@ -16,25 +16,28 @@ export class RegionService {
     }
     getRegions(): Observable<RegionEntity[]> {
         return this.httpClient.get<RegionEntity[]>(this.str + '/Region/getList'
-        , this.env.httpOptions);
+            , this.env.httpOptions);
     }
     getRegion(qaTypeCode: string): Observable<RegionEntity> {
         return this.httpClient.get<RegionEntity>(this.str + '/Region/' + qaTypeCode
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: RegionEntity): Observable<Insertstatus> {
         return this.httpClient.post<Insertstatus>(this.str + '/Region', saveEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Update(updateEntityObj: RegionEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
         return this.httpClient.post<Insertstatus>(this.str + '/Region', updateEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-    checkRegion(region : string): Observable<CommonEntity> {
-        return this.httpClient.get<CommonEntity>(this.str + '/Region/getRegionByName?name=' + region
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+    checkRegion(region: string, Code: string): Observable<CommonEntity> {
+        console.log(this.str + '/Region/getRegionByName?name='
+        + region + '&code=' + Code)
+        return this.httpClient.get<CommonEntity>(this.str + '/Region/getRegionByName?name='
+            + region + '&code=' + Code
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {

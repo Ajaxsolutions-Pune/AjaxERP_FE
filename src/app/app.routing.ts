@@ -120,6 +120,9 @@ import { RolelevelComponent } from './views/Masters/Rolelevel/rolelevel.componen
 import { UserListComponent } from './views/Masters/User/List-user.component';
 import { UserListResolverService } from './Components/Resolver/Masters/User-List-Resolver.Service';
 import { UserComponent } from './views/Masters/User/user-master.component';
+import { UserDeviceRegListComponent } from './views/Masters/UserDeviceReg/user-device-reg-list.component';
+import { UserDeviceRegListResolverService } from './Components/Resolver/Masters/UserDeviceReg-List-Resolver.Service';
+import { UserDeviceRegComponent } from './views/Masters/UserDeviceReg/user-device-reg.component';
 
 export const routes: Routes = [
   {
@@ -1088,6 +1091,23 @@ export const routes: Routes = [
         component: UserComponent,
         data: {
           title: 'Edit User'
+        }
+      },
+      {
+        path: 'UserDeviceRegList',
+        component: UserDeviceRegListComponent,
+        data: {
+          title: 'User Approve List'
+        },
+        resolve: {
+          UserDeviceRegList: UserDeviceRegListResolverService,
+        },
+      },
+      {
+        path: 'UserDeviceReg/:id',
+        component: UserDeviceRegComponent,
+        data: {
+          title: 'User Approve'
         }
       },
 

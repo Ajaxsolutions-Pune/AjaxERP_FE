@@ -88,15 +88,8 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
     return this.form.get('ControlregionNameENG').hasError('queExist');
   }
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlregionCode: ['', []],
-      ControlregionNameENG: ['', [Validators.required], [regionAsyncValidator(this.regionService)] ],
-      ControlregionNameUNI: ['', []],
-      ControlisActive: ['', []],
-    });
-    this.form.controls['ControlregionCode'].disable();
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href='login';
+      window.location.href = 'login';
     }
     status = '';
     this.bindObj = {
@@ -113,6 +106,15 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getregion(str);
+      
+      this.form = this.formBuilder.group({
+        ControlregionCode: ['', []],
+        ControlregionNameENG: ['', [Validators.required],
+          [regionAsyncValidator(this.regionService, str)]],
+        ControlregionNameUNI: ['', []],
+        ControlisActive: ['', []],
+      });
+      this.form.controls['ControlregionCode'].disable();
     });
   }
 
@@ -151,7 +153,8 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
       this.regionService.getRegion(region_Code).subscribe(
         (par) => {
           this.regionEntity = par;
-          this.bindObj = this.regionTransfarmer.RegionTransfarmerEntity(this.regionEntity); },
+          this.bindObj = this.regionTransfarmer.RegionTransfarmerEntity(this.regionEntity);
+        },
         (err: any) => console.log(err));
       status = 'Update';
     }

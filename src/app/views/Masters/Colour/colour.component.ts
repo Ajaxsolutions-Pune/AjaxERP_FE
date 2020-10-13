@@ -60,15 +60,8 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
     return this.form.get('ControlcolourNameENG').hasError('queExist');
   }
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlcolourCode: ['', []],
-      ControlcolourNameENG: ['', [Validators.required], [colourAsyncValidator(this.colourService)] ],
-      ControlcolourNameUNI: ['', []],
-      ControlisActive: ['', []],
-    });
-    this.form.controls['ControlcolourCode'].disable();
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href='login';
+      window.location.href = 'login';
     }
     this.WithoutFilterObj = this.arrOject;
     this.bindObj = {
@@ -81,7 +74,18 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
-    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getcolour(str); });
+
+    this.route.paramMap.subscribe(parameterMap => { 
+      const str = parameterMap.get('id'); this.getcolour(str); 
+    this.form = this.formBuilder.group({
+      ControlcolourCode: ['', []],
+      ControlcolourNameENG: ['', [Validators.required],
+        [colourAsyncValidator(this.colourService, str)]],
+      ControlcolourNameUNI: ['', []],
+      ControlisActive: ['', []],
+    });
+    this.form.controls['ControlcolourCode'].disable();
+    });
 
   }
 
@@ -111,7 +115,9 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
 
     } else {
       this.colourService.getColour(ColourCode).subscribe(
-        (par) => this.bindObj = this.colourTransfarmer.ColourTransfarmerEntity(par),
+        (par) => {
+          this.bindObj = this.colourTransfarmer.ColourTransfarmerEntity(par);
+        },
         (err: any) => console.log(err));
       status = 'Update';
     }
@@ -124,7 +130,7 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
-           // clusterForm.reset();
+            // clusterForm.reset();
             this.router.navigate(['ColourList']);
           } else {
             this.defaultLayoutComponent.Massage('',
@@ -139,7 +145,7 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
-           // clusterForm.reset();
+            // clusterForm.reset();
             this.router.navigate(['ColourList']);
           } else {
             this.defaultLayoutComponent.Massage('',

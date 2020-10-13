@@ -16,29 +16,33 @@ export class ColourService {
     }
     getColours(): Observable<ColourEntity[]> {
         return this.httpClient.get<ColourEntity[]>(this.str + '/Colour/getList'
-        , this.env.httpOptions);
+            , this.env.httpOptions);
     }
     fillColoursDrp(): Observable<ColourEntity[]> {
         return this.httpClient.get<ColourEntity[]>(this.str + '/Colour/getList?status=1'
-        , this.env.httpOptions);
+            , this.env.httpOptions);
     }
     getColour(qaTypeCode: string): Observable<ColourEntity> {
         return this.httpClient.get<ColourEntity>(this.str + '/Colour/' + qaTypeCode
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: ColourEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<Insertstatus>(this.str + '/Colour', saveEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: ColourEntity): Observable<Insertstatus> {
         return this.httpClient.post<Insertstatus>(this.str + '/Colour', updateEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-    checkColour(colour : string): Observable<CommonEntity> {
-        return this.httpClient.get<CommonEntity>(this.str + '/Colour/getColourByName?name=' + colour
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+    checkColour(colour: string, Code: string): Observable<CommonEntity> {
+        console.log(this.str
+            + '/Colour/getColourByName?name=' + colour + '&code=' + Code
+        );
+        return this.httpClient.get<CommonEntity>(this.str
+            + '/Colour/getColourByName?name=' + colour + '&code=' + Code
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {

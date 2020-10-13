@@ -32,9 +32,12 @@ export class ZoneService {
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    checkZone(zone : string): Observable<CommonEntity> {
-        return this.httpClient.get<CommonEntity>(this.str + '/Zone/getZoneByName?name=' + zone
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+    checkZone(zone: string, Id: string): Observable<CommonEntity> {
+        console.log(this.str + '/Zone/getZoneByName?name="' +
+        zone + '"&code=' + Id + '');
+        return this.httpClient.get<CommonEntity>(this.str + '/Zone/getZoneByName?name=' +
+            zone + '&code=' + Id + ''
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: ZoneEntity): Observable<Insertstatus> {

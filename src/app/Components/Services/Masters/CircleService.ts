@@ -16,30 +16,31 @@ export class CircleService {
     }
     fillCircleDrp(): Observable<CircleEntity[]> {
         return this.httpClient.get<CircleEntity[]>(this.str + '/Circle/getList'
-        , this.env.httpOptions);
+            , this.env.httpOptions);
     }
 
     getCircles(): Observable<CircleEntity[]> {
         return this.httpClient.get<CircleEntity[]>(this.str + '/Circle/getList'
-        , this.env.httpOptions);
+            , this.env.httpOptions);
     }
 
     getCircle(qaTypeCode: string): Observable<CircleEntity> {
         return this.httpClient.get<CircleEntity>(this.str + '/Circle/' + qaTypeCode
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: CircleEntity): Observable<CircleEntity> {
         return this.httpClient.post<CircleEntity>(this.str + '/Circle', saveEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: CircleEntity): Observable<CircleEntity> {
         return this.httpClient.post<CircleEntity>(this.str + '/Circle', updateEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-    checkCircle(circle : string): Observable<CommonEntity> {
-        return this.httpClient.get<CommonEntity>(this.str + '/Circle/getCircleByName?name=' + circle
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+    checkCircle(circle: string, Code: string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str
+            + '/Circle/getCircleByName?name=' + circle + '&code=' + Code
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

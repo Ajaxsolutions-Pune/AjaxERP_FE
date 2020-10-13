@@ -30,7 +30,8 @@
                                 placeholder="Zone Name"
                                 [(ngModel)]="bindObj.zoneNameENG" required
                                 formControlName="ControlzoneNameENG"
-                                #txtzoneNameENG
+                                #txtzoneNameENG                                
+                                (keypress)="omit_special_char($event)"
                                 name="txtzoneNameENG">
                                 <mat-error>
                                     <span *ngIf="isZoneExist()">

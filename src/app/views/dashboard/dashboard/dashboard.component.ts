@@ -21,6 +21,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href = 'login';
+    }
   }
 
   search(): void {

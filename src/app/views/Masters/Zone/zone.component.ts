@@ -54,18 +54,12 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
   isZoneExist(): boolean {
     return this.form.get('ControlzoneNameENG').hasError('queExist');
   }
+  omit_special_char(event) {
+    let k;
+    k = event.charCode;  //         k = event.keyCode;  (Both can be used)
+    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k === 8 || k === 32 || (k >= 48 && k <= 57));
+  }
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlzoneCode: ['', []],
-      ControlzoneNameENG: ['', [Validators.required], [zoneAsyncValidator(this.zoneService)] ],
-      ControlzoneNameUNI: ['', []],
-      ControlisActive: ['', []],
-    });
-    this.form.controls['ControlzoneCode'].disable();
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href = 'login';
-    }
-    status = '';
     this.bindObj = {
       zoneCode: null,
       zoneNameENG: null,
@@ -76,7 +70,23 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
-    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getquestion(str); });
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href = 'login';
+    }
+    status = '';
+    this.route.paramMap.subscribe(parameterMap => {
+      const str = parameterMap.get('id');
+      this.getquestion(str);
+    });
+    this.form = this.formBuilder.group({
+      ControlzoneCode: ['', []],
+      ControlzoneNameENG: ['', [Validators.required],
+        [zoneAsyncValidator(this.zoneService,
+          '1')]],
+      ControlzoneNameUNI: ['', []],
+      ControlisActive: ['', []],
+    });
+    this.form.controls['ControlzoneCode'].disable();
   }
   save(zoneForm: NgForm): void {
     if (status !== 'Update') {

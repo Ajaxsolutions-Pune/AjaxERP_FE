@@ -1,0 +1,97 @@
+<main class="form-main">
+    <form #formUserDeviceReg="ngForm" [formGroup]="form" autocomplete="off">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>User Device Reg.</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Code"
+                                    formControlName="ControlCode"
+                                    [(ngModel)]="userDeviceRegobj.id"
+                                     #txtCode name="txtCode">
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="User Device Reg. Code" 
+                                    formControlName="ControlUserDeviceRegCode"
+                                    [(ngModel)]="userDeviceRegobj.deviceRegNo"
+                                    #txtassetNameUNI
+                                        name="txtUserDeviceRegCode">
+                                </mat-form-field>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="First Name"
+                                    formControlName="ControlfirstName"
+                                    [(ngModel)]="userDeviceRegobj.firstName"
+                                     #txtfirstName name="txtfirstName">
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Last Name" 
+                                    formControlName="ControllastName"
+                                    [(ngModel)]="userDeviceRegobj.lastName"
+                                    #txtassetNameUNI
+                                        name="txtlastName">
+                                </mat-form-field>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Employee Id"
+                                    formControlName="ControlemployeeId"
+                                    [(ngModel)]="userDeviceRegobj.employeeId"
+                                     #txtemployeeId name="txtemployeeId">
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Mobile No" 
+                                    formControlName="ControlmobileNo"
+                                    [(ngModel)]="userDeviceRegobj.mobileNo"
+                                    #txtmobileNo
+                                        name="txtmobileNo">
+                                </mat-form-field>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Email Id" 
+                                    formControlName="ControlemailId"
+                                    [(ngModel)]="userDeviceRegobj.emailId"
+                                    #txtemailId
+                                        name="txtemailId">
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Approved"
+                                    formControlName="ControlisApproved"
+                                    [(ngModel)]="userDeviceRegobj.isApproved"
+                                     #txtisApproved name="txtisApproved">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button [disabled]="!form.valid"
+                                    (click)="Approve()"
+                                        color="primary">Approv</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button mat-raised-button [disabled]="!form.valid"
+                                            color="primary">Reject</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button mat-raised-button color="warn" routerLink="/UserDeviceRegList">
+                                        Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </form>
+</main>

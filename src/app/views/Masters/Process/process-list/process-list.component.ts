@@ -23,13 +23,13 @@ export class ProcessListComponent implements OnInit {
   config: any;
   env = environment;
   constructor(private _router: Router,
-     objTrans: ProcessTransfarmer1,
+    objTrans: ProcessTransfarmer1,
     private route: ActivatedRoute) {
-      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-        window.location.href='login';
-      }
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href = 'login';
+    }
     this.processEntity = this.route.snapshot.data['ProcessList1'];
-     this.processs = objTrans.processTransfarmers(this.processEntity);
+    this.processs = objTrans.processTransfarmers(this.processEntity);
     this.WithoutFilterprocess = this.processs;
     this.config = {
       itemsPerPage: this.env.paginationPageSize,
@@ -43,6 +43,7 @@ export class ProcessListComponent implements OnInit {
     this.bindObj = {
       processId: null,
       processName: null,
+      assetGroupNameENG: null,
       geofence: null,
       assetGroupCode: null,
       isActive: '3',

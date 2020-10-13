@@ -34,9 +34,13 @@ export class ClusterService {
         return this.httpClient.post<Insertstatus>(this.str + '/Cluster', updateEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-    checkCluster(cluster : string): Observable<CommonEntity> {
-        return this.httpClient.get<CommonEntity>(this.str + '/Cluster/getClusterByName?name=' + cluster
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+    checkCluster(cluster: string, Code: string): Observable<CommonEntity> {
+        console.log(this.str
+            + '/Cluster/getClusterByName?name=' + cluster + '&code=' + Code
+            );
+        return this.httpClient.get<CommonEntity>(this.str
+            + '/Cluster/getClusterByName?name=' + cluster + '&code=' + Code
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {

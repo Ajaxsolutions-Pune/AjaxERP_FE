@@ -60,18 +60,9 @@ export class CircleComponent extends FormComponentBase implements OnInit, AfterV
     return this.form.get('ControlcircleNameENG').hasError('queExist');
   }
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlcircleCode: ['', []],
-      ControlcircleNameENG: ['', [Validators.required], [circleAsyncValidator(this.circleService)] ],
-      ControlzoneCode: ['', [
-        Validators.required]],
-      ControlcircleNameUNI: ['', []],
-      ControlisActive: ['', []],
-    });
     status = '';
-    this.form.controls['ControlcircleCode'].disable();
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href='login';
+      window.location.href = 'login';
     }
     this.zoneService.fillZoneDrp().subscribe(
       (par) => {
@@ -92,6 +83,16 @@ export class CircleComponent extends FormComponentBase implements OnInit, AfterV
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getCircle(str);
+      this.form = this.formBuilder.group({
+        ControlcircleCode: ['', []],
+        ControlcircleNameENG: ['', [Validators.required],
+          [circleAsyncValidator(this.circleService, str)]],
+        ControlzoneCode: ['', [
+          Validators.required]],
+        ControlcircleNameUNI: ['', []],
+        ControlisActive: ['', []],
+      });
+      this.form.controls['ControlcircleCode'].disable();
     });
 
   }
@@ -105,7 +106,7 @@ export class CircleComponent extends FormComponentBase implements OnInit, AfterV
               'Data saved successfully !', 'modal-info');
             circleForm.reset();
             this.router.navigate(['CircleList']);
-          }   else {
+          } else {
             this.defaultLayoutComponent.Massage('',
               'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
@@ -120,7 +121,7 @@ export class CircleComponent extends FormComponentBase implements OnInit, AfterV
               'Data saved successfully !', 'modal-info');
             circleForm.reset();
             this.router.navigate(['CircleList']);
-          }   else {
+          } else {
             this.defaultLayoutComponent.Massage('',
               'Technical Error Please connect to Ajax Support team', 'modal-info');
           }

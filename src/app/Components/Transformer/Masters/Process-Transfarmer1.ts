@@ -19,7 +19,7 @@ export class ProcessTransfarmer1 {
             this.process = new Process();
             this.process.processId = element.processId;
             this.process.processName = element.processName;
-            //this.process.geofence = element.geofence;           
+            this.process.assetGroupNameENG = element.assetGroupNameENG;           
             if (element.geofence === '1') {
                 this.process.geofence = 'Yes'.toString().trim();
             } else { this.process.geofence = 'No'.toString().trim(); }
@@ -40,6 +40,7 @@ export class ProcessTransfarmer1 {
         this.process.processId = Entity.processId;
         this.process.processName = Entity.processName;
         this.process.assetGroupCode = Entity.assetGroupCode;
+        this.process.assetGroupNameENG = Entity.assetGroupNameENG;
         this.process.createdBy = Entity.createdBy;
         this.process.createdDate = Entity.createdDate;
         this.process.modifiedBy = Entity.modifiedBy;
@@ -59,6 +60,7 @@ export class ProcessTransfarmer1 {
         this.processEntity = new ProcessEntity();
         this.processEntity.processId = process1.processId;
         this.processEntity.processName = process1.processName;
+        this.processEntity.assetGroupNameENG = process1.assetGroupNameENG;
         this.processEntity.assetGroupCode = process1.assetGroupCode;
         this.processEntity.createdBy = process1.createdBy;
         this.processEntity.createdDate = process1.createdDate;
