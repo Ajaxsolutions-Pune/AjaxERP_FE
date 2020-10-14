@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../Module/environment';
 import { FormObj, FormEntity } from '../../Module/Masters/form.model';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class FormService {
@@ -28,6 +29,12 @@ export class FormService {
         return this.httpClient.get<FormEntity[]>(this.str + '/Form/getList?status=1', this.env.httpOptions);
     }
 
+    checkForm(form : string,code : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Form/getFormByName?name=' + form +
+        '&id=' + code
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+    
 
     getForm(formCode: string): Observable<FormEntity> {
         return this.httpClient.get<FormEntity>(this.str + '/Form/' + formCode

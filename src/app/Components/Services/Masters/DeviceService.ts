@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { Device, DeviceEntity } from '../../Module/Masters/Device.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class DeviceService {
@@ -25,6 +26,12 @@ export class DeviceService {
 
     fillDrpDevices(): Observable<DeviceEntity[]> {
         return this.httpClient.get<DeviceEntity[]>(this.str + '/Device/getList', this.env.httpOptions);
+    }
+
+    checkDevice(device : string, code : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Device/getDeviceByName?name=' + device +
+        '&id=' + code
+        , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     getDevice(qaTypeCode: string): Observable<DeviceEntity> {

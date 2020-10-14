@@ -11,7 +11,7 @@ import { GlobalService } from '../../../../Components/Services/GlobalServices/Gl
 import { AssetGroup } from '../../../../Components/Module/Masters/AssetGroup.model';
 import { AssetGroupService } from '../../../../Components/Services/Masters/AssetGroupService';
 import { AssetGroupTransfarmer } from '../../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
-
+import { processAsyncValidator } from '../../../../helper/async-validator';
 @Component({
   selector: 'app-process',
   templateUrl: './process.component.html',
@@ -34,29 +34,16 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     private defaultLayoutComponent: DefaultLayoutComponent,
     private processService: ProcessService1, private router: Router,
     private formBuilder: FormBuilder) {
-    super();
-    this.validationMessages = {
-      ControlprocessName: {
-        required: 'Process Name is required.',
-      }
-    };
-    this.formErrors = {
-      ControlprocessName: '',
-    };
+    super();       
   }
-  ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlprocessName: ['', [
-        Validators.required]],
-      ControlassetGroup: ['', [
-        Validators.required]],
-      Controlgeofence: ['', []],
-      ControlprocessId: ['', []],
-      ControlisActive: ['', []]
-    });
-    this.form.controls['ControlprocessId'].disable();
+
+  isQueExist(): boolean {
+    return this.form.get('ControlprocessName').hasError('queExist');
+  }
+
+  ngOnInit() {    
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href = 'login';
+      window.location.href='login';
     }
     status = '';
     this.process = {
@@ -64,17 +51,33 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       isActive: 'true',
       processId: null,
       processName: null,
-      assetGroupNameENG: null,
       assetGroupCode: null,
+      assetGroupNameENG:null,
       createdBy: localStorage.getItem('username'),
       createdDate: this.globalService.GerCurrntDateStamp(),
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
+
+   
+
     this.assetGroupService.getAssetGroups().subscribe(
       (par) => this.assetGroupObj = this.assetGroupTransfarmer.AssetGroupTransfarmers(par),
       (err: any) => console.log(err));
-    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getprocess(str); });
+    this.route.paramMap.subscribe(parameterMap =>
+       { const str = parameterMap.get('id'); this.getprocess(str);
+      
+       this.form = this.formBuilder.group({
+        ControlprocessName: ['', [Validators.required], [processAsyncValidator(this.processService,str)] ],
+        ControlassetGroup: ['', [ Validators.required]],
+        Controlgeofence: ['', []],
+        ControlprocessId: ['', []],
+        ControlisActive: ['', []]
+      });
+      this.form.controls['ControlprocessId'].disable();
+      
+      
+      });
   }
 
   ngAfterViewInit(): void {
@@ -118,7 +121,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       isActive: 'true',
       processId: null,
       processName: null,
-      assetGroupNameENG: null,
+      assetGroupNameENG:null,
       assetGroupCode: null,
       createdBy: localStorage.getItem('username'),
       createdDate: this.globalService.GerCurrntDateStamp(),
@@ -129,8 +132,8 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       this.process = {
         processId: null,
         processName: null,
+        assetGroupNameENG:null,
         geofence: '',
-        assetGroupNameENG: null,
         isActive: 'true',
         assetGroupCode: null,
         createdBy: localStorage.getItem('username'),
@@ -145,6 +148,8 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
         (par) => {
           this.processEntity = par;
           this.process = this.processTransfarmer.processTransfarmerEntity(this.processEntity);
+        
+          
         },
         (err: any) => console.log(err));
       status = 'Update';

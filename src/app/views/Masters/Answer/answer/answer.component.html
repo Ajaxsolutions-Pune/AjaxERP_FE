@@ -31,10 +31,12 @@
                                     [(ngModel)]="answer.answer"
                                     formControlName="ControlAnswer"
                                     #txtAnswer
-                                    name="txtAnswer" maxlength="100">
+                                    name="txtAnswer" maxlength="100">                                    
                                     <mat-error>
-                                        {{ formErrors['ControlAnswer'] }}
-                                    </mat-error>
+                                        <span *ngIf="isQueExist()">
+                                            Answer is already taken.
+                                        </span> 
+                                    </mat-error> 
                                 </mat-form-field>
                                 <div class="col-md-4"></div>
                             </div>

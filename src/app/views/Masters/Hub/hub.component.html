@@ -29,12 +29,14 @@
                                 <input matInput
                                 placeholder="HUB Name"
                                 [(ngModel)]="bindObj.hubNameENG" required
-                                formControlName="ControlhubNameENG"
+                                formControlName="ControlhubNameENG" maxlength="50"
                                 #txtHubNameENG
                                 name="txtHubNameENG">
                                 <mat-error>
-                                    {{ formErrors['ControlhubNameENG'] }}
-                                </mat-error>
+                                    <span *ngIf="isQueExist()">
+                                        Hub is already taken.
+                                    </span> 
+                                </mat-error> 
                             </mat-form-field>
                             <div class="col-md-4"></div>
                         </div>

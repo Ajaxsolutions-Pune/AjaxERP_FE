@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { Asset, AssetEntity } from '../../Module/Masters/Asset.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class AssetService {
@@ -28,7 +29,11 @@ export class AssetService {
         return this.httpClient.get<AssetEntity[]>(this.str + '/Asset/getList', this.env.httpOptions);
     }
 
-
+    checkAsset(asset : string, code : string ): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Asset/getAssetByName?name=' + asset +
+        '&code=' + code
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
 
     Save(saveEntityObj: AssetEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

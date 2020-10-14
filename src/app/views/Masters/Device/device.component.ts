@@ -9,6 +9,7 @@ import { DeviceService } from '../../../Components/Services/Masters/DeviceServic
 import { DeviceTransfarmer } from '../../../Components/Transformer/Masters/Device-Transfarmer';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { LoginUser } from '../../../Components/Module/LoginUser';
+import { deviceAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-device',
@@ -42,35 +43,14 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
       Controlimei1: '',
     };
   }
+
+  isQueExist(): boolean {
+    return this.form.get('ControldeviceName').hasError('queExist');
+  }
+
+
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      Controlimei1: ['', [
-        Validators.required]],
-      ControlisActive: ['', []],
-      ControldeviceId: ['', []],
-      Controlimei2: ['', []],
-      ControldeviceName: ['', []],
-      Controlmodel: ['', []],
-      ControlosVersion: ['', []],
-      ControlappVersion: ['', []],
-      txtuiVersion: ['', []],
-      Controlprocessor: ['', []],
-      Controlram: ['', []],
-      Controlstorage: ['', []],
-      ControlstatusIp: ['', []],
-      ControluiVersion: ['', []],
-      Controlsim1Provider: ['', []],
-      ControllockTypeCode: ['', [
-        Validators.required]],
-      ControlisTracking: ['', [
-        Validators.required]],
-      Controlsim2Provider: ['', []],
-      ControltrackingIntervalMin: ['', []],
-      Controlsim1MobleNo: ['', []],
-      Controlsim2MobleNo: ['', []],
-    });
-    this.form.controls['ControldeviceId'].disable();
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href='login';
     }
     this.bindObj = {
@@ -99,8 +79,40 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
-    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getasset(str); });
 
+   
+
+    this.route.paramMap.subscribe(parameterMap => 
+      { const str = parameterMap.get('id'); this.getasset(str); 
+      this.form = this.formBuilder.group({
+        Controlimei1: ['', [
+          Validators.required]],
+        ControlisActive: ['', []],
+        ControldeviceId: ['', []],
+        Controlimei2: ['', []],     
+        ControldeviceName: ['', [Validators.required],
+         [deviceAsyncValidator(this.deviceService,str)]],      
+        Controlmodel: ['', []],
+        ControlosVersion: ['', []],
+        ControlappVersion: ['', []],
+        txtuiVersion: ['', []],
+        Controlprocessor: ['', []],
+        Controlram: ['', []],
+        Controlstorage: ['', []],
+        ControlstatusIp: ['', []],
+        ControluiVersion: ['', []],
+        Controlsim1Provider: ['', []],
+        ControllockTypeCode: ['', [
+          Validators.required]],
+        ControlisTracking: ['', [
+          Validators.required]],
+        Controlsim2Provider: ['', []],
+        ControltrackingIntervalMin: ['', []],
+        Controlsim1MobleNo: ['', []],
+        Controlsim2MobleNo: ['', []],
+      });
+      this.form.controls['ControldeviceId'].disable();    
+    });
   }
 
   private getasset(asset_Code: string) {
@@ -194,6 +206,8 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
             this.bindObj.createdDate = this.globalService.GerCurrntDateStamp();
             this.bindObj.modifiedBy = localStorage.getItem('username');
             this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
+
+
         },
         (err: any) => console.log(err));
       status = 'Update';

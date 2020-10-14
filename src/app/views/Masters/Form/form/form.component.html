@@ -32,9 +32,11 @@
                                     spellcheck="false" [(ngModel)]="formobj.formName"
                                     placeholder="Form Name *"
                                     formControlName="ControlformName" maxlength="50">                                    
-                                  <mat-error>
-                                    {{ formErrors['ControlformName']}}
-                                  </mat-error>
+                                    <mat-error>
+                                        <span *ngIf="isQueExist()">
+                                            Form is already taken.
+                                        </span> 
+                                    </mat-error> 
                                 </mat-form-field>
                                
                                 <div class="col-md-4"></div>

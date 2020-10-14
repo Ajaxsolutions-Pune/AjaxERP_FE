@@ -31,10 +31,12 @@
                                 [(ngModel)]="bindObj.tlNameENG" required
                                 formControlName="ControltlNameENG"
                                 #txtTransmissionLineNameENG
-                                name="txtTransmissionLineNameENG">
+                                name="txtTransmissionLineNameENG" maxlength="50" >
                                 <mat-error>
-                                    {{ formErrors['ControltlNameENG'] }}
-                                </mat-error>
+                                    <span *ngIf="isQueExist()">
+                                        Transmission line is already taken.
+                                    </span> 
+                                </mat-error> 
                             </mat-form-field>
                             <div class="col-md-4"></div>
                         </div>

@@ -28,8 +28,10 @@
                                 placeholder="Process Name *" 
                                 maxlength="50" formControlName="ControlprocessName">
                                 <mat-error>
-                                    {{ formErrors['ControlprocessName'] }}
-                                </mat-error>
+                                    <span *ngIf="isQueExist()">
+                                        Process is already taken.
+                                    </span> 
+                                </mat-error> 
                             </mat-form-field>
                             <div class="col-md-4"></div>
                         </div>

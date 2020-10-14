@@ -18,7 +18,9 @@
                                 #txtControlassetCategoryCode
                                 name="txtControlassetCategoryCode">
                                 <mat-error>
-                                    {{ formErrors['ControlassetCategoryCode'] }}
+                                    <span *ngIf="isQueExist()">
+                                        Asset category is already taken.
+                                    </span> 
                                 </mat-error>
                             </mat-form-field>
                             <div class="col-md-4"></div>
@@ -29,7 +31,7 @@
                                 <input matInput
                                 placeholder="Asset Category Name"
                                 [(ngModel)]="bindObj.assetCategoryNameENG" required
-                                formControlName="ControlCategoryNameENG"
+                                formControlName="ControlCategoryNameENG" maxlength="50"
                                 #txtassetCategoryNameENG
                                 name="txtassetCategoryNameENG">
                                 <mat-error>

@@ -29,8 +29,10 @@
                                     #txtProject
                                     name="txtProject">
                                     <mat-error>
-                                        {{ formErrors['ControlProject'] }}
-                                    </mat-error>
+                                        <span *ngIf="isQueExist()">
+                                            Project is already taken.
+                                        </span> 
+                                    </mat-error> 
                                 </mat-form-field>
                                 <div class="col-md-2"></div>
                             </div>

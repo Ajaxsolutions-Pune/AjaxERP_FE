@@ -8,20 +8,21 @@ import { AssetGroupService } from '../../../Components/Services/Masters/AssetGro
 import { AssetGroupTransfarmer } from '../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import { assetGroupAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-asset-group',
   templateUrl: './asset-group.component.html',
   styleUrls: ['./asset-group.component.scss']
 })
-export class AssetGroupComponent extends FormComponentBase implements OnInit, AfterViewInit {
 
+export class AssetGroupComponent extends FormComponentBase implements OnInit, AfterViewInit {
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
   bindObj: AssetGroup;
   bindObjEntity: AssetGroupEntity;
   validationMessages: { ControlassetGroupCode:
-    { required: string; }; ControlassetGroupNameENG: { required: string; }; ControlzregionNameUNI: { required: string; }; };
+    { required: string; };  ControlzregionNameUNI: { required: string; }; };
   formErrors: { ControlisActive: string; };
   constructor(private _router: Router,
     private assetGroupTransfarmer: AssetGroupTransfarmer,
@@ -34,10 +35,7 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
     this.validationMessages = {
       ControlassetGroupCode: {
         required: 'Asset Group Code is required.',
-      },
-      ControlassetGroupNameENG: {
-        required: 'Asset Group Name ENG is required.',
-      },
+      },     
       ControlzregionNameUNI: {
         required: 'Asset Group Name UNI is required.',
       }
@@ -53,15 +51,12 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
     this.startControlMonitoring(this.form);
   }
 
+  isQueExist(): boolean {
+    return this.form.get('ControlassetGroupNameENG').hasError('queExist');
+  }
+
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlassetGroupCode: ['', []],
-      ControlassetGroupNameENG: ['', [
-        Validators.required]],
-        ControlassetGroupNameUNI: ['', []],
-      ControlisActive: ['', []],
-    });
-    this.form.controls['ControlassetGroupCode'].disable();
+   
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href='login';
     }
@@ -75,9 +70,20 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
+    
+
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getassetGroup(str);
+
+      this.form = this.formBuilder.group({
+        ControlassetGroupCode: ['', []],      
+        ControlassetGroupNameENG: ['', [Validators.required], [assetGroupAsyncValidator(this.assetGroupService,str)] ],
+        ControlassetGroupNameUNI: ['', []],
+        ControlisActive: ['', []],
+      });
+      this.form.controls['ControlassetGroupCode'].disable();
+
     });
   }
 
@@ -109,8 +115,13 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
       this.assetGroupService.getAssetGroup(assetGroup_Code).subscribe(
         (par) => {
           this.bindObjEntity = par;
-          this.bindObj = this.assetGroupTransfarmer.AssetGroupTransfarmerEntity(this.bindObjEntity); },
-        (err: any) => console.log(err));
+          this.bindObj = this.assetGroupTransfarmer.AssetGroupTransfarmerEntity(this.bindObjEntity); 
+        
+          
+        
+        },      
+       
+          (err: any) => console.log(err));
       status = 'Update';
     }
   }

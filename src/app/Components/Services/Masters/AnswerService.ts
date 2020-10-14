@@ -7,6 +7,7 @@ import { Answer, AnswerEntity } from '../../Module/Masters/Answer.model';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { DialogService } from '../MatServices/Dialog.service';
 import { DatePipe } from '@angular/common';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class AnswerService {
@@ -30,6 +31,13 @@ export class AnswerService {
         return this.httpClient.get<AnswerEntity>(this.str + '/Answer/' + AnswerCode,
             this.env.httpOptions).pipe(catchError(this.handleError));
     }
+
+    checkAnswer(answer : string,code : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Answer/getAnsByName?name=' + answer +
+        '&id=' + code
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }    
+
     Save(saveEntityObj: AnswerEntity): Observable<Insertstatus> {
         saveEntityObj.answerId = null;
         return this.httpClient.post<Insertstatus>(this.str + '/Answer',

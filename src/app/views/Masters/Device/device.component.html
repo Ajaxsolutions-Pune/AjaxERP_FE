@@ -37,7 +37,12 @@
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
                 <input matInput placeholder="Device Name" [(ngModel)]="bindObj.deviceName" #txtdeviceName
-                  formControlName="ControldeviceName" name="txtdeviceName">
+                  formControlName="ControldeviceName" maxlength="50" name="txtdeviceName">
+                  <mat-error>
+                    <span *ngIf="isQueExist()">
+                        Device is already taken.
+                    </span> 
+                </mat-error> 
               </mat-form-field>
               <mat-form-field class="col-md-4">
                 <mat-label>Lock Type</mat-label>

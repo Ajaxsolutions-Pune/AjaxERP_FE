@@ -7,6 +7,7 @@ import { Project, ProjectEntity } from '../../Module/Masters/Project.model';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { DialogService } from '../MatServices/Dialog.service';
 import { DatePipe } from '@angular/common';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class ProjectService {
@@ -31,6 +32,12 @@ export class ProjectService {
         return this.httpClient.get<ProjectEntity>(this.str + '/Project/' + ProjectCode,
             this.env.httpOptions).pipe(catchError(this.handleError));
     }
+
+    checkProject(project : string,code : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Project/getProjectByName?name=' + project +
+        '&code=' + code
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    } 
 
     Save(saveEntityObj: ProjectEntity): Observable<Insertstatus> {
         saveEntityObj.projectCode = null;

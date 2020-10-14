@@ -8,6 +8,7 @@ import { FormService } from '../../../../Components/Services/Masters/FormService
 import { FormComponentBase } from '../../AngularDemo/infrastructure/form-component-base';
 import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-field-error-matcher';
 import { GlobalService } from '../../../../Components/Services/GlobalServices/Global.service';
+import { formAsyncValidator } from '../../../../helper/async-validator';
 
 @Component({
   selector: 'app-form',
@@ -29,24 +30,23 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
     private globalService: GlobalService,
     private router: Router, private formBuilder: FormBuilder) {
     super();
-    this.validationMessages = {
-      ControlformName: {
-        required: 'Form Name is required.',
-      }
-    };
+    //this.validationMessages = {
+    //  ControlformName: {
+    //    required: 'Form Name is required.',
+    //  }
+    //};
 
-    this.formErrors = {
-      ControlformName: '',
-    };
+    //this.formErrors = {
+    //  ControlformName: '',
+    //};
   }
+
+  isQueExist(): boolean {
+    return this.form.get('ControlformName').hasError('queExist');
+  }
+
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlformName: ['', [
-        Validators.required]],
-      ControlformId: ['', []],
-      ControlisActive: ['', []]
-    });
-    this.form.controls['ControlformId'].disable();
+   
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href='login';
     }
@@ -61,7 +61,19 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
-    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getform(str); });
+
+    
+
+    this.route.paramMap.subscribe(parameterMap => 
+      { const str = parameterMap.get('id'); this.getform(str);
+    
+      this.form = this.formBuilder.group({      
+        ControlformName: ['', [Validators.required], [formAsyncValidator(this.formService,str)] ],
+        ControlformId: ['', []],
+        ControlisActive: ['', []]
+      });
+      this.form.controls['ControlformId'].disable();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -141,6 +153,9 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
         (par) => {
           this.formEntity = par;
           this.formobj = this.formTransfarmer.formTransfarmerEntity(this.formEntity);
+       
+         
+       
         },
         (err: any) => console.log(err));
       status = 'Update';

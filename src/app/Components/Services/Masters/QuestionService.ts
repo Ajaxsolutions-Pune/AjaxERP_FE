@@ -40,10 +40,11 @@ export class QuestionService {
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    checkQuestion(question : string): Observable<CommonEntity> {
-        return this.httpClient.get<CommonEntity>(this.str + '/Question/getQueByName?name=' + question
+    checkQuestion(question : string, code : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Question/getQueByName?name=' + question +
+        '&id=' + code
         , this.env.httpOptions).pipe(catchError(this.handleError));
-    }
+    } 
 
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {

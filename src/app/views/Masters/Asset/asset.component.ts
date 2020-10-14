@@ -38,6 +38,7 @@ import { GlobalService } from '../../../Components/Services/GlobalServices/Globa
 import { DeviceService } from '../../../Components/Services/Masters/DeviceService';
 import { DeviceTransfarmer } from '../../../Components/Transformer/Masters/Device-Transfarmer';
 import { Device } from '../../../Components/Module/Masters/Device.model';
+import { assetAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-asset',
@@ -93,9 +94,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       ControlassetCode: {
         required: 'Asset Code is required.',
       },
-      ControlassetNameENG: {
-        required: 'Asset Name is required.',
-      },
+     
       ControlAssetCategory: {
         required: 'Asset Category is required.',
       },
@@ -200,71 +199,12 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       ControlpositionCode: '',
     };
   }
-  ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlassetCode: ['', []],
-      ControldeviceIdCode: ['', [
-      Validators.required]],
-      ControlassetNameENG: ['', [
-        Validators.required]],
-      ControlAssetCategory: ['', [
-        Validators.required]],
-      ControlassetNameUNI: ['', []],
-      ControlplaceName: ['', [
-        Validators.required]],
-      ControlassetGroupCode: ['', [
-        Validators.required]],
-      ControlcustomerCode: ['', [
-        Validators.required]],
-      ControlprojectCode: ['', [
-        Validators.required]],
-      ControlzoneCode: ['', [
-        Validators.required]],
-      ControlcircleCode: ['', [
-        Validators.required]],
-      ControlclusterCode: ['', [
-        Validators.required]],
-      ControlregionCode: ['', [
-        Validators.required]],
-      ControlcountryCode: ['', [
-        Validators.required]],
-      ControlstateCode: ['', [
-        Validators.required]],
-      Controllatitude: ['', [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10),
-        Validators.pattern('^[0-9]+(.[0-9]{0,7})?$')
-      ]],
-      Controllongitude: ['', [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10),
-        Validators.pattern('^[0-9]+(.[0-9]{0,7})?$')
-      ]],
-      ControlRedius: ['', [
-        Validators.required]],
-      ControlpinCode: ['', []],
-      ControlcolourCode: ['', [
-        Validators.required]],
-      ControlgeofenceCode: ['', [
-        Validators.required]],
-      ControlsharedCode: ['', [
-        Validators.required]],
-      ControlcircuitCode: ['', [
-        Validators.required]],
-      ControlconductorCode: ['', [
-        Validators.required]],
-      ControlclassificationCode: ['', [
-        Validators.required]],
-      ControlstructureCode: ['', [
-        Validators.required]],
-      ControlpositionCode: ['', [
-        Validators.required]],
-      ControlisActive: ['', []],
-      Controladdress: ['', []],
-    });
-    this.form.controls['ControlassetCode'].disable();
+
+  isQueExist(): boolean {    
+    return this.form.get('ControlassetNameENG').hasError('queExist');
+  }
+
+  ngOnInit() {   
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href='login';
     }
@@ -346,7 +286,76 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       (par) => this.assetCategoryObj = this.assetCategoryTransfarmer.AssetCategoryTransfarmers(par),
       (err: any) => console.log(err));
 
-    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getasset(str); });
+     
+
+
+    this.route.paramMap.subscribe(parameterMap => 
+      { const str = parameterMap.get('id'); this.getasset(str);
+    
+      this.form = this.formBuilder.group({
+        ControlassetCode: ['', []],
+        ControldeviceIdCode: ['', [
+        Validators.required]],
+        ControlassetNameENG: ['', [Validators.required], [assetAsyncValidator(this.assetService,str)]],    
+        ControlAssetCategory: ['', [
+          Validators.required]],
+        ControlassetNameUNI: ['', []],
+        ControlplaceName: ['', [
+          Validators.required]],
+        ControlassetGroupCode: ['', [
+          Validators.required]],
+        ControlcustomerCode: ['', [
+          Validators.required]],
+        ControlprojectCode: ['', [
+          Validators.required]],
+        ControlzoneCode: ['', [
+          Validators.required]],
+        ControlcircleCode: ['', [
+          Validators.required]],
+        ControlclusterCode: ['', [
+          Validators.required]],
+        ControlregionCode: ['', [
+          Validators.required]],
+        ControlcountryCode: ['', [
+          Validators.required]],
+        ControlstateCode: ['', [
+          Validators.required]],
+        Controllatitude: ['', [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+          Validators.pattern('^[0-9]+(.[0-9]{0,7})?$')
+        ]],
+        Controllongitude: ['', [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+          Validators.pattern('^[0-9]+(.[0-9]{0,7})?$')
+        ]],
+        ControlRedius: ['', [
+          Validators.required]],
+        ControlpinCode: ['', []],
+        ControlcolourCode: ['', [
+          Validators.required]],
+        ControlgeofenceCode: ['', [
+          Validators.required]],
+        ControlsharedCode: ['', [
+          Validators.required]],
+        ControlcircuitCode: ['', [
+          Validators.required]],
+        ControlconductorCode: ['', [
+          Validators.required]],
+        ControlclassificationCode: ['', [
+          Validators.required]],
+        ControlstructureCode: ['', [
+          Validators.required]],
+        ControlpositionCode: ['', [
+          Validators.required]],
+        ControlisActive: ['', []],
+        Controladdress: ['', []],
+      });
+      this.form.controls['ControlassetCode'].disable();
+    });
 
   }
 
@@ -491,6 +500,8 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         (par) => {
           this.ObjEntity = par;
           this.bindObj = this.assetTransfarmer.AssetTransfarmerEntity(this.ObjEntity);
+          
+          
         },
         (err: any) => console.log(err));
       status = 'Update';

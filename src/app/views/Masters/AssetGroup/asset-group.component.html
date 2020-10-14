@@ -29,11 +29,13 @@
                                 <input matInput
                                 placeholder="Asset Group Name"
                                 [(ngModel)]="bindObj.assetGroupNameENG" required
-                                formControlName="ControlassetGroupNameENG"
+                                formControlName="ControlassetGroupNameENG" maxlength="50"
                                 #txtassetGroupNameENG
                                 name="txtassetGroupNameENG">
                                 <mat-error>
-                                    {{ formErrors['ControlassetGroupNameENG'] }}
+                                    <span *ngIf="isQueExist()">
+                                        Asset group is already taken.
+                                    </span> 
                                 </mat-error>
                             </mat-form-field>
                             <div class="col-md-4"></div>

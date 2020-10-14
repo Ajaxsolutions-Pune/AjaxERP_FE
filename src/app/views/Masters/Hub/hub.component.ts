@@ -13,6 +13,7 @@ import { TransmissionLineService } from '../../../Components/Services/Masters/Tr
 import { TransmissionLineTransfarmer } from '../../../Components/Transformer/Masters/TransmissionLine-Transfarmer';
 import { TransmissionLine } from '../../../Components/Module/Masters/TransmissionLine.model';
 import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
+import { hubAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-hub',
@@ -44,10 +45,7 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
       ControlhubCode: {
         required: 'Hub Code is required.',
         pattern: 'Value cross max limit of Hub Code.',
-      },
-      ControlhubNameENG: {
-        required: 'Hub Name is required.',
-      },
+      },     
       ControltlCode: {
         required: 'Transmission Line is required.',
       },
@@ -66,22 +64,12 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
     };
   }
 
+  isQueExist(): boolean {    
+    return this.form.get('ControlhubNameENG').hasError('queExist');
+  }
+
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlhubCode: ['', [
-        Validators.required]],
-      ControlhubNameENG: ['', [
-        Validators.required]],
-      ControlHubNameUNI: ['', []],
-      ControltlCode: ['', [
-        Validators.required]],
-      ControlhubTypeCode: ['', [
-        Validators.required]],
-      ControlhubGroupCode: ['', [
-        Validators.required]],
-      ControlisActive: ['', []],
-    });
-    //  this.form.controls['ControlhubCode'].disable();
+   
     status = '';
     this.transmissionLineService.fillDrpTransmissionLines().subscribe(
       (par) => {
@@ -112,9 +100,28 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
+    
+
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getregion(str);
+
+      this.form = this.formBuilder.group({
+        ControlhubCode: ['', [
+          Validators.required]],     
+        ControlhubNameENG: ['', [Validators.required], [hubAsyncValidator(this.hubService,str)] ],
+        ControlHubNameUNI: ['', []],
+        ControltlCode: ['', [
+          Validators.required]],
+        ControlhubTypeCode: ['', [
+          Validators.required]],
+        ControlhubGroupCode: ['', [
+          Validators.required]],
+        ControlisActive: ['', []],
+      });
+        this.form.controls['ControlhubCode'].disable();
+
+
     });
   }
   ngAfterViewInit(): void {
@@ -208,12 +215,12 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
       this.hubService.getHub(Hub_Code).subscribe(
         (par) => {
           this.bindObjEntity = par;
-          this.form.controls['ControlhubCode'].disable();
+          //this.form.controls['ControlhubCode'].disable();
           if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
             window.location.href='login';
           }
           this.bindObj = this.hubTransfarmer.
-            HubTransfarmerEntity(this.bindObjEntity);
+            HubTransfarmerEntity(this.bindObjEntity);            
         },
         (err: any) => console.log(err));
       status = 'Update';

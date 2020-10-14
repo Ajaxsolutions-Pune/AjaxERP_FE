@@ -11,7 +11,7 @@ import { environment } from '../../../Components/Module/environment';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { LoginUser } from '../../../Components/Module/LoginUser';
 import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
-
+import { projectAsyncValidator } from '../../../helper/async-validator';
 import { Employee} from '../../../Components/Module/Masters/Employee.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -60,6 +60,10 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
       return this.httpClient.get<Employee[]>(this.str + '/Employee/getList', this.env.httpOptions);
       }
 
+      isQueExist(): boolean {    
+        return this.form.get('ControlProject').hasError('queExist');
+      }    
+
   ngOnInit() {
 
     //project group combo
@@ -81,25 +85,8 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
       (par) => {
         this.employeeDrp = par;
       },
-      (err: any) => console.log(err)); 
+      (err: any) => console.log(err));     
     
-    this.form = this.formBuilder.group({
-      ControlProjectID: ['', []],
-      ControlisActive: ['', []],
-      ControlProjectDesc: ['', []],
-      ControlStartDate: ['', []],
-      ControlEndDate : ['', []],     
-      ControlAccessType : ['',[]],
-      ControlPriority: ['', []],
-      ControlisTimesheetRequire: ['', []],
-      ControlAccountCode: ['', []],
-      ControlBudget: ['', []],
-      ControlProjectType: ['', []],
-      ControlProjectGroup: ['', []],
-      ControlProjectManager: ['', []],
-      ControlProject: ['', [Validators.required]]
-    });
-    this.form.controls['ControlProjectID'].disable();
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href='login';
     }
@@ -125,7 +112,33 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
         modifiedBy: localStorage.getItem('username'),
         modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
-    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getproject(str); });
+
+    
+
+    this.route.paramMap.subscribe(parameterMap => 
+      { const str = parameterMap.get('id'); 
+      this.getproject(str);
+    
+      this.form = this.formBuilder.group({
+        ControlProjectID: ['', []],
+        ControlisActive: ['', []],
+        ControlProjectDesc: ['', []],
+        ControlStartDate: ['', []],
+        ControlEndDate : ['', []],     
+        ControlAccessType : ['',[]],
+        ControlPriority: ['', []],
+        ControlisTimesheetRequire: ['', []],
+        ControlAccountCode: ['', []],
+        ControlBudget: ['', []],
+        ControlProjectType: ['', []],
+        ControlProjectGroup: ['', []],
+        ControlProjectManager: ['', []],    
+        ControlProject: ['', [Validators.required], [projectAsyncValidator(this.projectService,str)] ]
+      });
+      this.form.controls['ControlProjectID'].disable();
+    
+    
+    });
   } 
 
   ngAfterViewInit(): void {
@@ -261,6 +274,9 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
           this.project.modifiedBy = localStorage.getItem('username');
           this.project.createdDate = this.globalService.GerCurrntDateStamp();
           this.project.modifiedDate = this.globalService.GerCurrntDateStamp();
+
+         
+
         },
         (err: any) => console.log(err));
       status = 'Update';

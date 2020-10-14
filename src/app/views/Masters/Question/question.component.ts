@@ -42,19 +42,12 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
     };
   }
 
-  isQueExist(): boolean {
+  isQueExist(): boolean {    
     return this.form.get('question1').hasError('queExist');
   }
 
   ngOnInit() { 
-    this.form = this.formBuilder.group({
-      ControlquestionId: ['', []],
-      ControlisActive: ['', []],
-      question1: ['', [Validators.required], [questionAsyncValidator(this.questionService)] ],
-      ControlqaTypeCode: ['', [
-        Validators.required]]
-    });
-    this.form.controls['ControlquestionId'].disable();
+   
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href='login';
     }
@@ -73,8 +66,22 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
       createdDate: this.globalService.GerCurrntDateStamp(),
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
-    };
-    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getquestion(str); });
+    };   
+
+    this.route.paramMap.subscribe(parameterMap => 
+      { const str = parameterMap.get('id'); this.getquestion(str);
+    
+      this.form = this.formBuilder.group({
+        ControlquestionId: ['', []],
+        ControlisActive: ['', []],
+        question1: ['', [Validators.required], 
+        [questionAsyncValidator(this.questionService,str)] ],
+        ControlqaTypeCode: ['', [
+          Validators.required]]
+      });
+      this.form.controls['ControlquestionId'].disable();
+    
+    });
   }
 
   ngAfterViewInit(): void {
@@ -159,6 +166,8 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
         (par) => {
           this.questionEntity = par;
           this.question = this.questionTransfarmer.QuestionTransfarmerEntity(this.questionEntity);
+       
+          
         },
         (err: any) => console.log(err));
       status = 'Update';

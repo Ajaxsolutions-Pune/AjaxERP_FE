@@ -6,6 +6,9 @@ import { UserDeviceReg, UserDeviceRegEntity } from '../../../Components/Module/M
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { UserDeviceRegTransfarmer } from '../../../Components/Transformer/Masters/UserDeviceReg-Transfarmer';
 
+import * as alasql from 'alasql';
+alasql['private'].externalXlsxLib = require('xlsx');
+
 @Component({
   selector: 'app-user-device-reg-list',
   templateUrl: './user-device-reg-list.component.html',
@@ -87,6 +90,22 @@ export class UserDeviceRegListComponent implements OnInit {
           this.bindObj.employeeId.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
+    if (this.bindObj.isApproved !== null && this.bindObj.isApproved.toString() !== '-1') {
+      console.log(this.bindObj.isApproved);
+      if (this.bindObj.isApproved.toString() === '3') {
+        this.ResultOject = this.ResultOject.filter(SubResultProd =>
+          SubResultProd.isApproved.toString() !== '-1');
+      } else {
+        this.ResultOject = this.ResultOject.filter(SubResult =>
+          SubResult.isApproved.toString().toLowerCase().indexOf(
+            this.bindObj.isApproved.toString().toLowerCase()) !== -1);
+        console.log(this.ResultOject.filter(SubResultProd => {
+          SubResultProd.isApproved.trim()
+            === this.bindObj.isApproved.trim()
+        }));
+      }
+      this.SerachCri = 1;
+    }
     if (this.bindObj.isActive !== null && this.bindObj.isActive.toString() !== '-1') {
       if (this.bindObj.isActive.toString() === '3') {
         this.ResultOject = this.ResultOject.filter(SubResultProd =>
@@ -94,21 +113,6 @@ export class UserDeviceRegListComponent implements OnInit {
       } else {
         this.ResultOject = this.ResultOject.filter(SubResultProd =>
           SubResultProd.isActive.toString() === this.bindObj.isActive.toString());
-      }
-      this.SerachCri = 1;
-    }
-    if (this.bindObj.isApproved !== null && this.bindObj.isApproved.toString() !== '-1') {
-      console.log(this.bindObj.isApproved);
-      if (this.bindObj.isApproved.toString() === '3') {
-        this.ResultOject = this.ResultOject.filter(SubResultProd =>
-          SubResultProd.isApproved.toString() !== '-1');
-      } else {
-        this.ResultOject = this.ResultOject.filter(SubResultProd => {
-          console.log(SubResultProd.isApproved.toString().trim()
-          === this.bindObj.isApproved.toString().trim());
-          SubResultProd.isApproved.toString().trim()
-            === this.bindObj.isApproved.toString().trim()
-        });
       }
       this.SerachCri = 1;
     }
@@ -124,7 +128,7 @@ export class UserDeviceRegListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT UserDeviceRegId UserDeviceReg_Code,UserDeviceRegName UserDeviceReg_Name,' +
-      'isActive Status INTO XLSX("AssetList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
+    alasql('SELECT deviceRegNo Device_Reg_No,emailId Email,employeeId Employee_Id,firstName Name,' +
+      'isApproved Status INTO XLSX("AssetList.xlsx",{headers:true}) FROM ?', [this.arrOject]);
   }
 }

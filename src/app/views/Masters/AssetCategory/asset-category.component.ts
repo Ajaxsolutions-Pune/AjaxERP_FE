@@ -14,6 +14,7 @@ import { AssetCategoryService } from '../../../Components/Services/Masters/Asset
 import { AssetCategoryTransfarmer } from '../../../Components/Transformer/Masters/Asset-Category-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import { assetCategoryAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-asset-category',
@@ -45,9 +46,7 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
       ControlassetCategoryCode: {
         required: 'Category Code is required.',
       },
-      ControlCategoryNameENG: {
-        required: 'Category Name is required.',
-      },
+      
       ControlassetGroup: {
         required: 'Asset Group is required.',
       },
@@ -63,19 +62,12 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
     };
   }
 
+  isQueExist(): boolean {
+    return this.form.get('ControlCategoryNameENG').hasError('queExist');
+  }
+
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlassetCategoryCode: ['', []],
-      ControlCategoryNameENG: ['', [
-        Validators.required]],
-      ControlassetCategoryNameUNI: ['', []],
-      ControlassetGroup: ['', [
-        Validators.required]],
-      Controlcolour: ['', [
-        Validators.required]],
-      ControlisActive: ['', []],
-    });
-    this.form.controls['ControlassetCategoryCode'].disable();
+    
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href='login';
     }
@@ -104,9 +96,26 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
+
+   
+
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getregion(str);
+
+      this.form = this.formBuilder.group({
+        ControlassetCategoryCode: ['', []],
+        ControlCategoryNameENG: ['', [Validators.required], [assetCategoryAsyncValidator(this.assetCategoryService,str)] ],
+        ControlassetCategoryNameUNI: ['', []],
+        ControlassetGroup: ['', [
+          Validators.required]],
+        Controlcolour: ['', [
+          Validators.required]],
+        ControlisActive: ['', []],
+      });
+      this.form.controls['ControlassetCategoryCode'].disable();
+
+
     });
   }
   ngAfterViewInit(): void {
@@ -190,6 +199,9 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
           this.bindObjEntity = par;
           this.bindObj = this.assetCategoryTransfarmer.
             AssetCategoryTransfarmerEntity(this.bindObjEntity);
+
+           
+
         },
         (err: any) => console.log(err));
       status = 'Update';

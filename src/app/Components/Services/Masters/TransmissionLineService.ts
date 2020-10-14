@@ -6,6 +6,7 @@ import { environment } from '../../Module/environment';
 import { TransmissionLine, TransmissionLineEntity } from '../../Module/Masters/TransmissionLine.model';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { DialogService } from '../MatServices/Dialog.service';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class TransmissionLineService {
@@ -32,6 +33,15 @@ export class TransmissionLineService {
         return this.httpClient.post<Insertstatus>(this.str + '/TransmissionLine',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
+
+    checkTransmissionLine(transmissionLine : string,code : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/TransmissionLine/getTransmissionLineByName?name=' + transmissionLine +
+        '&code=' + code
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+
+    
+
 
     Update(updateEntityObj: TransmissionLineEntity): Observable<Insertstatus> {
         // tslint:disable-next-line:max-line-length

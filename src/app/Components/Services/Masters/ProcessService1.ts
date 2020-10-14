@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../Module/environment';
 import { Process, ProcessEntity } from '../../Module/Masters/Process.model';
 import { ProcessFormMappingEntity } from '../../Module/ProcessSetup/ProcessFormMapping.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class ProcessService1 {
@@ -34,7 +35,13 @@ export class ProcessService1 {
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
+    checkProcess(process : string,code : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Process/getProcessByName?name=' + process +
+        '&id=' + code
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
 
+  
 
     Save(saveEntityObj: ProcessEntity): Observable<ProcessEntity> {
         saveEntityObj.processId = null;

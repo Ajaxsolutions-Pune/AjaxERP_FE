@@ -18,7 +18,7 @@ import { environment } from '../../../Components/Module/environment';
 import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
 import { Project } from '../../../Components/Module/Masters/Project.model';
 import { ProjectService } from '../../../Components/Services/Masters/ProjectService';
-
+import { transmissionAsyncValidator } from '../../../helper/async-validator';
 @Component({
   selector: 'app-transmission-line',
   templateUrl: './transmission-line.component.html',
@@ -51,10 +51,7 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
     this.validationMessages = {
       ControltlCode: {
         required: 'Transmission Line Code is required.',
-      },
-      ControltlNameENG: {
-        required: 'Transmission Line Name is required.',
-      },
+      },      
       ControlProject: {
         required: 'Project is required.',
       },
@@ -73,20 +70,12 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
     };
   }
 
+  isQueExist(): boolean {
+    return this.form.get('ControltlNameENG').hasError('queExist');
+  }
+
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControltlCode: ['', []],
-      ControltlNameENG: ['', [
-        Validators.required]],
-      ControlTransmissionLineNameUNI: ['', []],
-      ControlProject: ['', [
-        Validators.required]],
-      ControltlTypeCode: ['', [
-        Validators.required]],
-      ControltlGroupCode: ['', [
-        Validators.required]],
-      ControlisActive: ['', []],
-    });
+   
     status = '';
     this.colourService.fillColoursDrp().subscribe(
       (par) => {
@@ -122,9 +111,26 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
+    
+
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getregion(str);
+
+      this.form = this.formBuilder.group({
+        ControltlCode: ['', []],
+        ControltlNameENG: ['', [Validators.required], [transmissionAsyncValidator(this.transmissionLineService,str)] ],
+        ControlTransmissionLineNameUNI: ['', []],
+        ControlProject: ['', [
+          Validators.required]],
+        ControltlTypeCode: ['', [
+          Validators.required]],
+        ControltlGroupCode: ['', [
+          Validators.required]],
+        ControlisActive: ['', []],
+      });
+      this.form.controls['ControltlCode'].disable();
+
     });
   }
   ngAfterViewInit(): void {
@@ -216,13 +222,15 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
     } else {
       this.transmissionLineService.getTransmissionLine(TransmissionLine_Code).subscribe(
         (par) => {
-          this.form.controls['ControltlCode'].disable();
+          //this.form.controls['ControltlCode'].disable();
           if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
             window.location.href='login';
           }
           this.bindObjEntity = par;
           this.bindObj = this.transmissionLineTransfarmer.
             TransmissionLineTransfarmerEntity(this.bindObjEntity);
+
+            
         },
         (err: any) => console.log(err));
       status = 'Update';

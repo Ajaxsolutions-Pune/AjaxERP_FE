@@ -6,6 +6,7 @@ import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { DialogService } from '../MatServices/Dialog.service';
 import { Hub, HubEntity } from '../../Module/Masters/Hub.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class HubService {
@@ -32,6 +33,12 @@ export class HubService {
         return this.httpClient.post<Insertstatus>(this.str + '/Hub',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
+
+    checkHub(hub : string, code : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Hub/getHubByName?name=' + hub +
+        '&code=' + code
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }   
 
     Update(updateEntityObj: HubEntity): Observable<Insertstatus> {
         // tslint:disable-next-line:max-line-length

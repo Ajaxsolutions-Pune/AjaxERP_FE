@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { AssetGroup, AssetGroupEntity } from '../../Module/Masters/AssetGroup.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class AssetGroupService {
@@ -21,7 +22,6 @@ export class AssetGroupService {
         return this.httpClient.get<AssetGroupEntity[]>(this.str + '/AssetGroup/getList?status=1'
         , this.env.httpOptions);
     }
-
     getAssetGroup(qaTypeCode: string): Observable<AssetGroupEntity> {
         return this.httpClient.get<AssetGroupEntity>(this.str + '/AssetGroup/' + qaTypeCode
         , this.env.httpOptions).pipe(catchError(this.handleError));
@@ -31,6 +31,14 @@ export class AssetGroupService {
         return this.httpClient.post<Insertstatus>(this.str + '/AssetGroup', saveEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
+
+    checkAssetGroup(assetGroup : string,code : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/AssetGroup/getAssetGroupByName?name=' + assetGroup +
+        '&code=' + code
+        , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+
+   
 
     Update(updateEntityObj: AssetGroupEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

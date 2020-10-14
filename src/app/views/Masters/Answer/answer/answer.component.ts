@@ -10,6 +10,7 @@ import { CrossFieldErrorMatcher } from '../../AngularDemo/infrastructure/cross-f
 import { environment } from '../../../../Components/Module/environment';
 import { GlobalService } from '../../../../Components/Services/GlobalServices/Global.service';
 import { LoginUser } from '../../../../Components/Module/LoginUser';
+import { answerAsyncValidator } from '../../../../helper/async-validator';
 
 @Component({
   selector: 'app-answer',
@@ -46,14 +47,16 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
       ControlAnswer: '',
     };
   }
+
+  isQueExist(): boolean {
+    return this.form.get('ControlAnswer').hasError('queExist');
+  }
+
+
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlAnswerID: ['', []],
-      ControlisActive: ['', []],
-      ControlAnswer: ['', [
-        Validators.required]]
-    });
-    this.form.controls['ControlAnswerID'].disable();
+
+    
+   
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href='login';
     }
@@ -67,7 +70,20 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
-    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getanswer(str); });
+
+    this.route.paramMap.subscribe(parameterMap => 
+      { const str = parameterMap.get('id'); 
+      this.getanswer(str);
+
+      this.form = this.formBuilder.group({
+        ControlAnswerID: ['', []],
+        ControlisActive: ['', []],
+        ControlAnswer: ['', [Validators.required], 
+        [answerAsyncValidator(this.answerService,str)]],
+      });
+      this.form.controls['ControlAnswerID'].disable();    
+    }); 
+  
   }
 
   ngAfterViewInit(): void {
@@ -153,6 +169,10 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
         modifiedBy: localStorage.getItem('username'),
         modifiedDate: this.globalService.GerCurrntDateStamp(),
       };
+
+
+     
+
       this.answerService.getAnswer(answer_Code).subscribe(
         (par) => {
           this.answerEntity = par;
@@ -161,9 +181,15 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
           this.answer.modifiedBy = localStorage.getItem('username');
           this.answer.createdDate = this.globalService.GerCurrntDateStamp();
           this.answer.modifiedDate = this.globalService.GerCurrntDateStamp();
+          console.log(this.answer);      
+
+           
         },
         (err: any) => console.log(err));
       status = 'Update';
+
+     
+      
     }
   }
 }
