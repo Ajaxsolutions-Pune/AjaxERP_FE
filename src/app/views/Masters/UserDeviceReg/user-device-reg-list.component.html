@@ -18,8 +18,8 @@
             <select id="ShiftId" name="ShiftId" (change)="resultChanged()" [(ngModel)]="bindObj.isApproved"
                 class="form-control">
                 <option value="3">All</option>
-                <option value="Approved">Approved</option>
-                <option value="Pendding For Approval">Not Approved</option>
+                <option *ngFor="let obj of statusDrp"
+                [value]="obj.listDescENG">{{obj.listDescENG}}</option>
             </select>
         </div>
         <!-- <div class="col-md-2">

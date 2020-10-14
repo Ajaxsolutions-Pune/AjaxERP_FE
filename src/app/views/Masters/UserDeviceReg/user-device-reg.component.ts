@@ -1,6 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ConfirmDialogService } from '../../../Components/confirm-dialog/confirm-dialog.service';
+import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
 import { UserDeviceReg, UserDeviceRegEntity } from '../../../Components/Module/Masters/UserDeviceReg.model';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { UserDeviceRegService } from '../../../Components/Services/Masters/UserDeviceRegService';
@@ -19,10 +22,16 @@ export class UserDeviceRegComponent extends FormComponentBase implements OnInit,
   // @ViewChild('UserDeviceRegName') firstItem: ElementRef;
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
-  userDeviceRegobj: UserDeviceReg;
+  userDeviceRegobj: UserDeviceReg;  
   userDeviceRegEntity: UserDeviceRegEntity;
   str: string;
+  bodyStr1: string;
+  HederStr1: string;
+  massageStyle1: string;
+  @ViewChild('ConfirmReject', { static: false }) public ConfirmReject: ModalDirective;
+  @ViewChild('ConfirmApprove', { static: false }) public ConfirmApprove: ModalDirective;
   constructor(private route: ActivatedRoute,
+    private confirmDialogService: ConfirmDialogService,  
     private UserDeviceRegTransfarmer: UserDeviceRegTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private UserDeviceRegService: UserDeviceRegService,
@@ -40,6 +49,13 @@ export class UserDeviceRegComponent extends FormComponentBase implements OnInit,
     };
   }
 
+  ConfirmRejectMassage() {
+    this.ConfirmReject.show();
+  }
+
+  ConfirmApproveMassage() {
+    this.ConfirmApprove.show();
+  }
   // isUserDeviceRegExist(): boolean {
   //   return this.form.get('ControlUserDeviceRegName').hasError('queExist');
   // }
@@ -114,6 +130,22 @@ export class UserDeviceRegComponent extends FormComponentBase implements OnInit,
           this.defaultLayoutComponent.Massage('',
           par.status, 'modal-info');
           this.router.navigate(['UserDeviceRegList']);
+          this.ConfirmApprove.hide();
+        }
+      }
+    );
+  }
+  Resject(): void {
+    this.userDeviceRegobj.approveFlag = 'R';
+    this.userDeviceRegobj.deviceRegNo = this.userDeviceRegobj.id;
+    this.UserDeviceRegService.Resject
+    (this.UserDeviceRegTransfarmer.userDeviceRegTransfarmer(this.userDeviceRegobj)).subscribe(
+      (par) => {
+        if (par !== null) {
+          this.defaultLayoutComponent.Massage('',
+          par.status, 'modal-info');
+          this.router.navigate(['UserDeviceRegList']);
+          this.ConfirmReject.hide();
         }
       }
     );

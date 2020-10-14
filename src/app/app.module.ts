@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy, PathLocationStrategy, DatePipe } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, PathLocationStrategy, DatePipe, CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { CookieService } from 'ngx-cookie-service';
@@ -267,6 +267,8 @@ import { UserDeviceRegComponent } from './views/Masters/UserDeviceReg/user-devic
 import { UserDeviceRegTransfarmer } from './Components/Transformer/Masters/UserDeviceReg-Transfarmer';
 import { UserDeviceRegListResolverService } from './Components/Resolver/Masters/UserDeviceReg-List-Resolver.Service';
 import { UserDeviceRegService } from './Components/Services/Masters/UserDeviceRegService';
+import { ConfirmDialogComponent } from './Components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from './Components/confirm-dialog/confirm-dialog.service';
 
 @NgModule({
   imports: [
@@ -274,7 +276,7 @@ import { UserDeviceRegService } from './Components/Services/Masters/UserDeviceRe
     TreeGridModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AppAsideModule,
+    AppAsideModule, CommonModule,
     AppBreadcrumbModule.forRoot(),
     AppFooterModule,
     AppHeaderModule,
@@ -320,6 +322,7 @@ import { UserDeviceRegService } from './Components/Services/Masters/UserDeviceRe
     DialogTemplateComponent
   ],
   declarations: [
+    ConfirmDialogComponent,
     AddDialogComponent,
     EditDialogComponent,
     DeleteDialogComponent,
@@ -359,9 +362,10 @@ import { UserDeviceRegService } from './Components/Services/Masters/UserDeviceRe
     ProcessFormMappingComponent, UserDeviceMappingComponent,
     DeviceAssetMappingComponent, ContactListComponent, ContactComponent,
     AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent,
-     UserDeviceRegListComponent, UserDeviceRegComponent
+    UserDeviceRegListComponent, UserDeviceRegComponent
   ],
   providers: [
+    ConfirmDialogService,
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,

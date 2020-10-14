@@ -11,65 +11,47 @@
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput placeholder="Code"
-                                    formControlName="ControlCode"
-                                    [(ngModel)]="userDeviceRegobj.id"
-                                     #txtCode name="txtCode">
+                                    <input matInput placeholder="Code" formControlName="ControlCode"
+                                        [(ngModel)]="userDeviceRegobj.id" #txtCode name="txtCode">
                                 </mat-form-field>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput placeholder="User Device Reg. Code" 
-                                    formControlName="ControlUserDeviceRegCode"
-                                    [(ngModel)]="userDeviceRegobj.deviceRegNo"
-                                    #txtassetNameUNI
+                                    <input matInput placeholder="User Device Reg. Code"
+                                        formControlName="ControlUserDeviceRegCode"
+                                        [(ngModel)]="userDeviceRegobj.deviceRegNo" #txtassetNameUNI
                                         name="txtUserDeviceRegCode">
                                 </mat-form-field>
                             </div>
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput placeholder="First Name"
-                                    formControlName="ControlfirstName"
-                                    [(ngModel)]="userDeviceRegobj.firstName"
-                                     #txtfirstName name="txtfirstName">
+                                    <input matInput placeholder="First Name" formControlName="ControlfirstName"
+                                        [(ngModel)]="userDeviceRegobj.firstName" #txtfirstName name="txtfirstName">
                                 </mat-form-field>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput placeholder="Last Name" 
-                                    formControlName="ControllastName"
-                                    [(ngModel)]="userDeviceRegobj.lastName"
-                                    #txtassetNameUNI
-                                        name="txtlastName">
+                                    <input matInput placeholder="Last Name" formControlName="ControllastName"
+                                        [(ngModel)]="userDeviceRegobj.lastName" #txtassetNameUNI name="txtlastName">
                                 </mat-form-field>
                             </div>
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput placeholder="Employee Id"
-                                    formControlName="ControlemployeeId"
-                                    [(ngModel)]="userDeviceRegobj.employeeId"
-                                     #txtemployeeId name="txtemployeeId">
+                                    <input matInput placeholder="Employee Id" formControlName="ControlemployeeId"
+                                        [(ngModel)]="userDeviceRegobj.employeeId" #txtemployeeId name="txtemployeeId">
                                 </mat-form-field>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput placeholder="Mobile No" 
-                                    formControlName="ControlmobileNo"
-                                    [(ngModel)]="userDeviceRegobj.mobileNo"
-                                    #txtmobileNo
-                                        name="txtmobileNo">
+                                    <input matInput placeholder="Mobile No" formControlName="ControlmobileNo"
+                                        [(ngModel)]="userDeviceRegobj.mobileNo" #txtmobileNo name="txtmobileNo">
                                 </mat-form-field>
                             </div>
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput placeholder="Email Id" 
-                                    formControlName="ControlemailId"
-                                    [(ngModel)]="userDeviceRegobj.emailId"
-                                    #txtemailId
-                                        name="txtemailId">
+                                    <input matInput placeholder="Email Id" formControlName="ControlemailId"
+                                        [(ngModel)]="userDeviceRegobj.emailId" #txtemailId name="txtemailId">
                                 </mat-form-field>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput placeholder="Approved"
-                                    formControlName="ControlisApproved"
-                                    [(ngModel)]="userDeviceRegobj.isApproved"
-                                     #txtisApproved name="txtisApproved">
+                                    <input matInput placeholder="Approved" formControlName="ControlisApproved"
+                                        [(ngModel)]="userDeviceRegobj.isApproved" #txtisApproved name="txtisApproved">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -77,11 +59,11 @@
                             <div class="row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
-                                    <button mat-raised-button [disabled]="!form.valid"
-                                    (click)="Approve()"
+                                    <button mat-raised-button [disabled]="!form.valid" (click)="ConfirmApproveMassage()"
                                         color="primary">Approv</button> &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <button mat-raised-button [disabled]="!form.valid"
-                                            color="primary">Reject</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button mat-raised-button [disabled]="!form.valid" 
+                                    (click)="ConfirmRejectMassage()"
+                                        color="primary">Reject</button> &nbsp; &nbsp; &nbsp; &nbsp;
                                     <button mat-raised-button color="warn" routerLink="/UserDeviceRegList">
                                         Cancel</button>
                                 </div>
@@ -95,3 +77,50 @@
         </div>
     </form>
 </main>
+<div bsModal #ConfirmApprove="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+ aria-labelledby="confirmApproveLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-info">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm Approve</h4>
+                <button type="button" class="close" (click)="ConfirmApprove.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to approve ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                 (click)="Approve()">Yes</button>
+                 <button type="button" class="btn btn-secondary"
+                  (click)="ConfirmApprove.hide()">No</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #ConfirmReject="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+ aria-labelledby="confirmRejectLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm Reject</h4>
+                <button type="button" class="close" (click)="ConfirmReject.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to reject ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                 (click)="Resject()">Yes</button>
+                 <button type="button" class="btn btn-secondary"
+                  (click)="ConfirmReject.hide()">No</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

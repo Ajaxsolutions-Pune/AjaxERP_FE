@@ -35,12 +35,11 @@ export class UserDeviceRegTransfarmer {
             this.userDeviceReg.createdDate = element.createdDate;
             this.userDeviceReg.modifiedBy = element.modifiedBy;
             this.userDeviceReg.modifiedDate = element.modifiedDate;
-            if (element.isApproved === '1') {
+            this.userDeviceReg.isApproved =element.isApproved;
+            if (element.isActive === '1') {
                 this.userDeviceReg.isActive = 'Active'.toString().trim();
             } else { this.userDeviceReg.isActive = 'Inactive'.toString().trim(); }
-            if (element.isApproved === '1') {
-                this.userDeviceReg.isApproved = 'Approved'.toString().trim();
-            } else { this.userDeviceReg.isApproved = 'Pendding For Approval'.toString().trim(); }
+            this.userDeviceReg.id = element.id;
             this.userDeviceRegs.push(this.userDeviceReg);
         });
         return this.userDeviceRegs;
