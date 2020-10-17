@@ -62,7 +62,21 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
 
       isQueExist(): boolean {    
         return this.form.get('ControlProject').hasError('queExist');
-      }    
+      }   
+      
+      special_char_val(event) {
+        let k;
+        k = event.charCode;
+        return this.globalService.SpecialCharValidator(k);
+        
+      }
+
+      only_number_val(event) {
+        let k;
+        k = event.charCode;
+        return this.globalService.NumberValidator(k);        
+      }
+
 
   ngOnInit() {
 

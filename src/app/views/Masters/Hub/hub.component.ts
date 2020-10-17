@@ -130,6 +130,13 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
     this.startControlMonitoring(this.form);
   }
 
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
+  }
+
   save(ObjForm: NgForm): void {
      this.bindObj.createdBy = localStorage.getItem('username');
      this.bindObj.createdDate = this.globalService.GerCurrntDateStamp();

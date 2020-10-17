@@ -12,6 +12,7 @@ import { FormService } from '../../../../../Components/Services/Masters/FormServ
 import { FormTransfarmer } from '../../../../../Components/Transformer/Masters/Form-Transfarmer';
 import { FormObj } from '../../../../../Components/Module/Masters/Form.model';
 import { FormQueAnsMapping } from '../../../../../Components/Module/ProcessSetup/FormQueAnsMapping.model';
+import { GlobalService } from '../../../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-add.dialog',
@@ -33,17 +34,23 @@ export class AddDialogComponent implements OnInit {
     private questionsService: QuestionService,
     private questionsTransfarmer: QuestionTransfarmer,
     private answersService: AnswerService,
+    private globalService: GlobalService,
     private answersTransfarmer: AnswerTransfarmer,
     private formService: FormService,
     private formTransfarmer: FormTransfarmer,
     public dataService: DataService) {
   }
 
+  Number_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.NumberValidator(k);
+
+  }
   formControl = new FormControl('', [
     Validators.required
     // Validators.email,
   ]);
-
   ngOnInit() {
     this.questionsService.fillDrpQuestions().subscribe(
       (par) => this.questionsObj = this.questionsTransfarmer.QuestionTransfarmers(par),

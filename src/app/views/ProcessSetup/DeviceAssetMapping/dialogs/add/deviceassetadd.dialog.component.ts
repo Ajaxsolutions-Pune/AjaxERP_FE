@@ -8,6 +8,7 @@ import { Asset} from '../../../../../Components/Module/Masters/Asset.model';
 
 import { DeviceAssetMapping } from '../../../../../Components/Module/ProcessSetup/DeviceAssetMapping.model';
 import { DeviceAssetDataService } from '../../deviceassetdata.service';
+import { GlobalService } from '../../../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-add.dialog',
@@ -22,6 +23,7 @@ export class DeviceAssetAddDialogComponent implements OnInit{
   constructor(public dialogRef: MatDialogRef<DeviceAssetAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DeviceAssetMapping,   
     private assetService: AssetService,
+    private globalService: GlobalService,
     private assetTransfarmer: AssetTransfarmer,
     public dataService: DeviceAssetDataService) {
   }

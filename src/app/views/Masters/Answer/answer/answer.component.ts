@@ -137,6 +137,13 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
     }
   }
 
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
+  }
+
   private getanswer(answer_Code: string) {
     this.answer = {
       answer: null,

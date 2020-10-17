@@ -24,7 +24,7 @@
                             <mat-form-field class="col-md-4">
                                 <input matInput #processName 
                                 spellcheck="false" [(ngModel)]="process.processName" 
-                                (keypress)="omit_special_char($event)" 
+                                (keypress)="special_char_val($event)"
                                 placeholder="Process Name *" 
                                 maxlength="50" formControlName="ControlprocessName">
                                 <mat-error>

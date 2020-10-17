@@ -13,6 +13,7 @@ import { FormService } from '../../../../../Components/Services/Masters/FormServ
 import { FormTransfarmer } from '../../../../../Components/Transformer/Masters/Form-Transfarmer';
 import { elementAt } from 'rxjs/operators';
 import { FormQueAnsMapping } from '../../../../../Components/Module/ProcessSetup/FormQueAnsMapping.model';
+import { GlobalService } from '../../../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-baza.dialog',
@@ -27,8 +28,16 @@ export class EditDialogComponent implements OnInit {
   objquestionIdText: string;
   objanswerIdText: string;
 
+  Number_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.NumberValidator(k);
+
+  }
+
   constructor(public dialogRef: MatDialogRef<EditDialogComponent>,
     private questionsService: QuestionService,
+    private globalService: GlobalService,
     private questionsTransfarmer: QuestionTransfarmer,
     private answersService: AnswerService,
     private answersTransfarmer: AnswerTransfarmer,

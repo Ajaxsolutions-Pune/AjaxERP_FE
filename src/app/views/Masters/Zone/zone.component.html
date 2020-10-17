@@ -12,7 +12,7 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Zone Code"
+                                placeholder="Zone Code"  maxlength="5"
                                 [(ngModel)]="bindObj.zoneCode"
                                 formControlName="ControlzoneCode"
                                 #txtzoneCode
@@ -27,11 +27,11 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Zone Name"
+                                placeholder="Zone Name" maxlength="50"
                                 [(ngModel)]="bindObj.zoneNameENG" required
                                 formControlName="ControlzoneNameENG"
                                 #txtzoneNameENG                                
-                                (keypress)="omit_special_char($event)"
+                                (keypress)="special_char_val($event)"
                                 name="txtzoneNameENG">
                                 <mat-error>
                                     <span *ngIf="isZoneExist()">
@@ -45,7 +45,7 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Zone Name"
+                                placeholder="Zone Name"  maxlength="50"
                                 [(ngModel)]="bindObj.zoneNameUNI"
                                 formControlName="ControlzoneNameUNI"
                                 #txtzoneNameUNI

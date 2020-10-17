@@ -62,6 +62,13 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
     };
   }
 
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
+  }
+
   isQueExist(): boolean {
     return this.form.get('ControlCategoryNameENG').hasError('queExist');
   }
@@ -97,6 +104,7 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
 
+   
    
 
     this.route.paramMap.subscribe(parameterMap => {

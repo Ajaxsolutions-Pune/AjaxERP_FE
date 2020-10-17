@@ -10,8 +10,11 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
-                                <input matInput placeholder="Circle Code" [(ngModel)]="bindObj.circleCode"
-                                    formControlName="ControlcircleCode" #txtcircleCode name="txtcircleCode">
+                                <input matInput placeholder="Circle Code" 
+                                [(ngModel)]="bindObj.circleCode"
+                                maxlength="5"
+                                    formControlName="ControlcircleCode" #txtcircleCode 
+                                    name="txtcircleCode">
                                 <mat-error>
                                     {{ formErrors['ControlcircleCode'] }}
                                 </mat-error>
@@ -21,8 +24,10 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
-                                <input matInput placeholder="Circle Name" [(ngModel)]="bindObj.circleNameENG"
+                                <input matInput placeholder="Circle Name"
+                                maxlength="50" [(ngModel)]="bindObj.circleNameENG"
                                     required formControlName="ControlcircleNameENG" #txtcircleNameENG
+                                    (keypress)="special_char_val($event)"
                                     name="txtcircleNameENG">
                                 <mat-error>
                                     <span *ngIf="isCircleExist()">
@@ -36,6 +41,7 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput placeholder="Circle Name UNI"
+                                maxlength="50"
                                  [(ngModel)]="bindObj.circleNameUNI"
                                     formControlName="ControlcircleNameUNI"
                                      #txtcircleNameUNI name="txtcircleNameUNI">

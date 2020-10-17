@@ -6,6 +6,7 @@ import { GlobalService } from '../../../Components/Services/GlobalServices/Globa
 import { AccessService } from '../../../Components/Services/Masters/AccessService';
 import { AccessTransfarmer } from '../../../Components/Transformer/Masters/Access-Transfarmer';
 import { DefaultLayoutComponent } from '../../../containers';
+import { AccessAsyncValidator } from '../../../helper/async-validator';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 
@@ -16,7 +17,7 @@ import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-
 })
 export class AccessComponent extends FormComponentBase implements OnInit, AfterViewInit {
   // @ts-ignore
- // @ViewChild('AccessName') firstItem: ElementRef;
+  // @ViewChild('AccessName') firstItem: ElementRef;
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
   accessobj: Access;
@@ -39,23 +40,13 @@ export class AccessComponent extends FormComponentBase implements OnInit, AfterV
       ControlAccessName: '',
     };
   }
-  
-  // isAccessExist(): boolean {
-  //   return this.form.get('ControlAccessName').hasError('queExist');
-  // }
+
+  isAccessExist(): boolean {
+    return this.form.get('ControlAccessName').hasError('queExist');
+  }
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      ControlAccessName: ['', [
-        Validators.required]],
-        
-      //  ControlAccessName: ['', [Validators.required], [AccessAsyncValidator(this.accessService)] ],
-      ControlAccessId: ['', []],
-      ControlisActive: ['', []]
-    });
-    this.form.controls['ControlAccessId'].disable();
-    console.log('hii')
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href='login';
+      window.location.href = 'login';
     }
     status = '';
     this.accessobj = {
@@ -67,12 +58,25 @@ export class AccessComponent extends FormComponentBase implements OnInit, AfterV
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
-    this.route.paramMap.subscribe(parameterMap => { const str = parameterMap.get('id'); this.getAccess(str); });
+    this.route.paramMap.subscribe(parameterMap => {
+      const str = parameterMap.get('id'); this.getAccess(str);
+      this.form = this.formBuilder.group({
+        ControlAccessName: ['', [Validators.required], [AccessAsyncValidator(this.accessService, str)]],
+        ControlAccessId: ['', []],
+        ControlisActive: ['', []]
+      });
+      this.form.controls['ControlAccessId'].disable();
+    });
   }
-
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
+  }
   ngAfterViewInit(): void {
     setTimeout(() => {
-    //  this.firstItem.nativeElement.focus();
+      //  this.firstItem.nativeElement.focus();
     }, 250);
     this.startControlMonitoring(this.form);
   }

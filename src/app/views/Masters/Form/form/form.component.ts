@@ -76,6 +76,13 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
     });
   }
 
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
+  }
+
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.firstItem.nativeElement.focus();

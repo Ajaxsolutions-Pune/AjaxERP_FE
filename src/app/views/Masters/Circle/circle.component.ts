@@ -51,6 +51,12 @@ export class CircleComponent extends FormComponentBase implements OnInit, AfterV
     };
   }
 
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+
+  }
   ngAfterViewInit(): void {
     setTimeout(() => {
     }, 250);

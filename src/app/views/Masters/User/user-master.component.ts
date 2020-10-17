@@ -302,6 +302,7 @@ import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
             (par) => {
               this.userEntity = par;
               this.user = this.userTransfarmer.UserTransfarmerEntity(this.userEntity);
+              this.form.controls['Controlpassword'].disable()
             },
             (err: any) => console.log(err));
           status = 'Update';

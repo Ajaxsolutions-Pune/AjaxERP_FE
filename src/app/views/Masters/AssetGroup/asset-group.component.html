@@ -28,6 +28,7 @@
                             <mat-form-field class="col-md-4">
                                 <input matInput
                                 placeholder="Asset Group Name"
+                                (keypress)="special_char_val($event)"
                                 [(ngModel)]="bindObj.assetGroupNameENG" required
                                 formControlName="ControlassetGroupNameENG" maxlength="50"
                                 #txtassetGroupNameENG

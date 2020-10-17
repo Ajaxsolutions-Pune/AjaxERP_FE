@@ -18,7 +18,8 @@ import { ClusterService } from '../Components/Services/Masters/ClusterService';
 import { ColourService } from '../Components/Services/Masters/ColourService';
 import { RegionService } from '../Components/Services/Masters/RegionService';
 import { ZoneService } from '../Components/Services/Masters/ZoneService';
-
+import { ModuleobjService } from '../Components/Services/Masters/ModuleService';
+import { ScreenObjService } from '../Components/Services/Masters/ScreenService';
 
 export const questionAsyncValidator = (queService: QuestionService,code:string ,time: number = 500) => {
     return (input: FormControl) => {
@@ -260,10 +261,39 @@ export const questionAsyncValidator = (queService: QuestionService,code:string ,
     };
   };
 
-  export const AccessAsyncValidator = (accessService: AccessService, time: number = 500) => {
+  export const AccessAsyncValidator = (accessService: AccessService, Code: string, time: number = 500) => {
     return (input: FormControl) => {
       return timer(time).pipe(
-        switchMap(() => accessService.checkAccess(input.value)),
+        switchMap(() => accessService.checkAccess(input.value,Code)),
+        map(res => {
+          if (res.status == 'notexist') {
+            return null;
+          } else {
+            return { queExist: true };
+          }
+        })
+      );
+    };
+  };
+  export const ModuleAsyncValidator = (moduleService: ModuleobjService, Code: string, time: number = 500) => {
+    return (input: FormControl) => {
+      return timer(time).pipe(
+        switchMap(() => moduleService.checkModuleobj(input.value, Code)),
+        map(res => {
+          if (res.status == 'notexist') {
+            return null;
+          } else {
+            return { queExist: true };
+          }
+        })
+      );
+    };
+  };
+  export const ScreenAsyncValidator = (ScreenService: ScreenObjService, Code: string,
+     time: number = 500) => {
+    return (input: FormControl) => {
+      return timer(time).pipe(
+        switchMap(() => ScreenService.checkScreen(input.value, Code)),
         map(res => {
           if (res.status == 'notexist') {
             return null;

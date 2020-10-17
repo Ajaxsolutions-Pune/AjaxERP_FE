@@ -75,20 +75,25 @@ export class ColourComponent extends FormComponentBase implements OnInit, AfterV
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
 
-    this.route.paramMap.subscribe(parameterMap => { 
-      const str = parameterMap.get('id'); this.getcolour(str); 
-    this.form = this.formBuilder.group({
-      ControlcolourCode: ['', []],
-      ControlcolourNameENG: ['', [Validators.required],
-        [colourAsyncValidator(this.colourService, str)]],
-      ControlcolourNameUNI: ['', []],
-      ControlisActive: ['', []],
-    });
-    this.form.controls['ControlcolourCode'].disable();
+    this.route.paramMap.subscribe(parameterMap => {
+      const str = parameterMap.get('id'); this.getcolour(str);
+      this.form = this.formBuilder.group({
+        ControlcolourCode: ['', []],
+        ControlcolourNameENG: ['', [Validators.required],
+          [colourAsyncValidator(this.colourService, str)]],
+        ControlcolourNameUNI: ['', []],
+        ControlisActive: ['', []],
+      });
+      this.form.controls['ControlcolourCode'].disable();
     });
 
   }
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
 
+  }
   private getcolour(ColourCode: string) {
     this.bindObj = {
       colourCode: null,

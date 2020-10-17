@@ -41,6 +41,13 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     return this.form.get('ControlprocessName').hasError('queExist');
   }
 
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
+  }
+
   ngOnInit() {    
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href='login';
@@ -51,8 +58,8 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       isActive: 'true',
       processId: null,
       processName: null,
+      assetGroupNameENG: null,
       assetGroupCode: null,
-      assetGroupNameENG:null,
       createdBy: localStorage.getItem('username'),
       createdDate: this.globalService.GerCurrntDateStamp(),
       modifiedBy: localStorage.getItem('username'),
@@ -121,7 +128,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       isActive: 'true',
       processId: null,
       processName: null,
-      assetGroupNameENG:null,
+      assetGroupNameENG: null,
       assetGroupCode: null,
       createdBy: localStorage.getItem('username'),
       createdDate: this.globalService.GerCurrntDateStamp(),
@@ -132,7 +139,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       this.process = {
         processId: null,
         processName: null,
-        assetGroupNameENG:null,
+        assetGroupNameENG: null,
         geofence: '',
         isActive: 'true',
         assetGroupCode: null,

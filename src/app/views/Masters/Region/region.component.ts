@@ -9,14 +9,12 @@ import { RegionTransfarmer } from '../../../Components/Transformer/Masters/Regio
 import { RegionService } from '../../../Components/Services/Masters/RegionService';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { regionAsyncValidator } from '../../../helper/async-validator';
-
 @Component({
   selector: 'app-region',
   templateUrl: './region.component.html',
   styleUrls: ['./region.component.scss']
 })
 export class RegionComponent extends FormComponentBase implements OnInit, AfterViewInit {
-
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
   bindObj: Region;
@@ -118,10 +116,11 @@ export class RegionComponent extends FormComponentBase implements OnInit, AfterV
     });
   }
 
-  omit_special_char(event) {
+  special_char_val(event) {
     let k;
-    k = event.charCode;  //         k = event.keyCode;  (Both can be used)
-    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k === 8 || k === 32 || (k >= 48 && k <= 57));
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
   }
   private getregion(region_Code: string) {
     this.bindObj = {

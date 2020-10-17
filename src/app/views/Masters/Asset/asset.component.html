@@ -35,6 +35,7 @@
               <mat-form-field class="col-md-4">
                 <input matInput placeholder="Asset Name" required
                  [(ngModel)]="bindObj.assetNameENG" #txtassetNameENG
+                 (keypress)="special_char_val($event)"
                  maxlength="100"
                  formControlName="ControlassetNameENG"
                   name="txtassetNameENG">
@@ -66,6 +67,8 @@
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
                 <input matInput placeholder="Place Name" required
+                maxlength="100"
+                (keypress)="special_char_val($event)"
                 formControlName="ControlplaceName"
                 [(ngModel)]="bindObj.placeName" #txtplaceName
                   name="txtplaceName">
@@ -226,6 +229,7 @@
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
                 <input matInput placeholder="Latitude" required 
+                maxlength="20"
                 formControlName="Controllatitude"
                  [(ngModel)]="bindObj.latitude" #txtlatitude
                   name="txtlatitude">
@@ -235,6 +239,7 @@
               </mat-form-field>
               <mat-form-field class="col-md-4">
                 <input matInput placeholder="Longitude" 
+                maxlength="20"
                 [(ngModel)]="bindObj.longitude" required 
                 formControlName="Controllongitude"
                 #txtlongitude
@@ -258,6 +263,8 @@
               </mat-form-field>
               <mat-form-field class="col-md-4">
                 <input matInput placeholder="PIN" 
+                maxlength="6"
+                (keypress)="only_number_val($event)"  
                 [(ngModel)]="bindObj.pinCode" #txtpinCode
                 formControlName="ControlpinCode"
                   name="txtpinCode">
@@ -363,7 +370,7 @@
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <mat-label>structure</mat-label>
+                <mat-label>Structure</mat-label>
                 <mat-select required 
                 formControlName="ControlstructureCode"
                 [(ngModel)]="bindObj.structureCode">
@@ -409,12 +416,24 @@
                 {{ formErrors['ControldeviceIdCode'] }}
                 </mat-error>
               </mat-form-field>
+
+              <mat-form-field class="col-md-4">
+                <input matInput placeholder="Email Id" 
+                formControlName="ControlEmailId"
+                [(ngModel)]="bindObj.emailId" #txtredius
+                  name="txtemail">
+                  <mat-error>
+                  {{ formErrors['ControlEmailId'] }}
+                  </mat-error>
+              </mat-form-field>
+
               <div class="col-md-2"></div>
             </div>
             <div class="row">      
               <div class="col-md-2"></div>        
               <mat-form-field class="col-md-8">
                 <input matInput placeholder="Address" 
+                maxlength="200"
                 [(ngModel)]="bindObj.address" #txtaddress
                 formControlName="Controladdress"
                   name="txtaddress">

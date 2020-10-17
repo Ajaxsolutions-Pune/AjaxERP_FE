@@ -15,7 +15,7 @@
                                 placeholder="Colour Code"
                                 [(ngModel)]="bindObj.colourCode"
                                 formControlName="ControlcolourCode"
-                                #txtcolourCode
+                                #txtcolourCode maxlength="5"
                                 name="txtcolourCode">
                                 <mat-error>
                                     {{ formErrors['ControlcolourCode'] }}
@@ -29,8 +29,9 @@
                                 <input matInput
                                 placeholder="Colour Name"
                                 [(ngModel)]="bindObj.colourNameENG" required
+                                (keypress)="special_char_val($event)" 
                                 formControlName="ControlcolourNameENG"
-                                #txtcolourNameENG
+                                #txtcolourNameENG maxlength="50"
                                 name="txtcolourNameENG">
                                 <mat-error>
                                     <span *ngIf="isColourExist()">
@@ -44,7 +45,7 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Colour Name UNI"
+                                placeholder="Colour Name UNI"  maxlength="50"
                                 [(ngModel)]="bindObj.colourNameUNI"
                                 formControlName="ControlcolourNameUNI"
                                 #txtcolourNameUNI

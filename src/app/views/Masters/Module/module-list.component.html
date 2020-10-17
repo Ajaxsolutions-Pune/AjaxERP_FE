@@ -1,0 +1,68 @@
+<div class="form-group">
+    <div class="row">  
+      <div class="col-md-3">Module Code</div>
+      <div class="col-md-3">Module Name</div>
+      <div class="col-md-2">Status</div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+          <input id="txtModuleCode" required name="txtModuleCode" 
+          type="text" class="form-control" placeholder="Module Code" 
+          (input)="resultChanged()" [(ngModel)]="bindObj.moduleId">
+      </div>
+      <div class="col-md-3">
+          <input id="txtModuleNameENG" required 
+          name="txtModuleNameENG" type="text" class="form-control" 
+          placeholder="Module Name"
+          (input)="resultChanged()" 
+          [(ngModel)]="bindObj.moduleName">
+      </div>
+      <div class="col-md-2">
+        <select id="ShiftId" name="ShiftId" (change)="resultChanged()" [(ngModel)]="bindObj.isActive"
+          class="form-control">
+          <option value="3">All</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+      <div class="col-md-1">
+          <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" 
+          title="Create Module" routerLink="/Module"></button>
+      </div>
+      <div class="col-md-1">
+        <i class="fa fa-file-excel-o" style="font-size:35px;color: #20a8d8" aria-hidden="true"
+          (click)="ExportToExcel()"></i>
+      </div>
+  </div>
+  </div>
+  
+  <table class="table table-responsive-sm table-hover table-outline mb-0">
+      <thead class="thead-light">
+        <tr>
+          <th>Module Code</th>
+          <th>Module Name</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let Oject of arrOject | paginate: config">
+          <td>
+            <div>{{Oject.moduleId}}</div>
+          </td>
+          <td>
+            {{Oject.moduleName}}
+          </td> 
+          <td>
+            {{Oject.isActive}}
+          </td>
+          <td>
+          <button mat-icon-button [routerLink]="['/Module/',Oject.moduleId]"
+           color="accent">
+            <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+          </button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

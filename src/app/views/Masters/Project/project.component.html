@@ -1,5 +1,5 @@
 <main class="form-main">
-    <form #projectForm="ngForm" [formGroup]="form">
+    <form autocomplete="off" #projectForm="ngForm" [formGroup]="form">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-11 container">
@@ -25,6 +25,7 @@
                                     <input matInput
                                     placeholder="Project"
                                     [(ngModel)]="project.projectName"
+                                    (keypress)="special_char_val($event)"
                                     formControlName="ControlProject"
                                     #txtProject
                                     name="txtProject">
@@ -76,6 +77,7 @@
                                     <input matInput
                                     placeholder="Project Description"
                                     [(ngModel)]="project.projectDescription"    
+                                    (keypress)="special_char_val($event)"
                                     formControlName="ControlProjectDesc"        
                                     #txtProjectDesc        
                                     name="txtProjectDesc">                                  
@@ -122,8 +124,10 @@
                                   </mat-form-field>    
                                 <mat-form-field class="col-md-4">
                                     <input matInput
+                                    maxlength="3"
                                     placeholder="Priority"
                                     [(ngModel)]="project.priority"   
+                                    (keypress)="only_number_val($event)"
                                     formControlName="ControlPriority"       
                                     #txtPriority                         
                                    name="txtPriority">                                   
@@ -135,7 +139,9 @@
                                 <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
                                     <input matInput
+                                    maxlength="20"
                                     placeholder="Main Account Code"
+                                    (keypress)="only_number_val($event)"
                                     [(ngModel)]="project.mainAccountHeadCode"   
                                     formControlName="ControlAccountCode"          
                                     #txtMainAccountCode                          
@@ -143,7 +149,9 @@
                                 </mat-form-field>
                                 <mat-form-field class="col-md-4">
                                     <input matInput
+                                    maxlength="20"
                                     placeholder="Budget"
+                                    (keypress)="only_number_val($event)"
                                     [(ngModel)]="project.budget" 
                                     formControlName="ControlBudget"         
                                     #txtBudget                          

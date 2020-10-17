@@ -1,0 +1,35 @@
+
+.dashboard-main
+{
+    border-radius:10px 0px 0px 10px; 
+    border-left: solid 10px #2ff563; 
+    height:100px; 
+    background-color:whitesmoke;
+    margin-right: 20px;
+}
+
+    .dashboard-main div 
+    {
+        padding :10px 0px;
+    }
+
+
+    .headline
+    {
+        font-weight: bold; 
+        font-size: 15px;        
+    }
+
+    .dash-line
+    {
+        display:block;
+        height: 2px;
+        background-color:#2ff563;
+        margin-top: 5px;        
+    }
+
+    .dash-count
+    {
+        color:#2ff563 ;
+        font-size: 40px;
+    }

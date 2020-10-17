@@ -28,6 +28,7 @@
                             <mat-form-field class="col-md-4">
                                 <input matInput
                                 placeholder="Question * "
+                                (keypress)="special_char_val($event)"
                                 [(ngModel)]="question.question"
                                 formControlName="question1" 
                                 id="question1" 

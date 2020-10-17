@@ -28,6 +28,7 @@
                             <mat-form-field class="col-md-4">
                                 <input matInput
                                 placeholder="HUB Name"
+                                (keypress)="special_char_val($event)"
                                 [(ngModel)]="bindObj.hubNameENG" required
                                 formControlName="ControlhubNameENG" maxlength="50"
                                 #txtHubNameENG

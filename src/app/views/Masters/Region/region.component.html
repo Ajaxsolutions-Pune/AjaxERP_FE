@@ -11,7 +11,7 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Region Code"
+                                placeholder="Region Code"  maxlength="5"
                                 [(ngModel)]="bindObj.regionCode"
                                 formControlName="ControlregionCode"
                                 #txtregionCode
@@ -28,7 +28,7 @@
                                 <input matInput
                                 placeholder="Region Name"
                                 [(ngModel)]="bindObj.regionNameENG" required
-                                (keypress)="omit_special_char($event)" 
+                                (keypress)="special_char_val($event)"  maxlength="50"
                                 formControlName="ControlregionNameENG"
                                 #txtregionNameENG
                                 name="txtregionNameENG">
@@ -43,7 +43,7 @@
                         <div class="row" style="display: none;">
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
-                                <input matInput
+                                <input matInput  maxlength="50"
                                 placeholder="Region Name UNI"
                                 [(ngModel)]="bindObj.regionNameUNI"
                                 formControlName="ControlregionNameUNI"

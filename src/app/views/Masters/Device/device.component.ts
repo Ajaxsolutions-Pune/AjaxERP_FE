@@ -115,6 +115,20 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
     });
   }
 
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
+  }
+
+  only_number_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.NumberValidator(k);
+    
+  }
+
   private getasset(asset_Code: string) {
     this.bindObj = {
       deviceId: null,

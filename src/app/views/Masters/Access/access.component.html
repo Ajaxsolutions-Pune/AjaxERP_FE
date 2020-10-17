@@ -30,13 +30,14 @@
                                   <input matInput
                                     #AccessName
                                     spellcheck="false" [(ngModel)]="accessobj.accessName"
-                                    placeholder="Access Name *"
+                                    placeholder="Access Name *"      
+                                (keypress)="special_char_val($event)"
                                     formControlName="ControlAccessName" maxlength="50">                                    
                                   <mat-error>
                                     {{ formErrors['ControlAccessName']}}
-                                    <!--<span *ngIf="isAccessExist()">
-                                        Circle Name is already taken.
-                                    </span>-->  
+                                     <span *ngIf="isAccessExist()">
+                                        Access Name is already taken.
+                                    </span> 
                                   </mat-error>
                                 </mat-form-field>
                                

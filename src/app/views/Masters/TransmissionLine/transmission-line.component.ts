@@ -19,11 +19,13 @@ import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
 import { Project } from '../../../Components/Module/Masters/Project.model';
 import { ProjectService } from '../../../Components/Services/Masters/ProjectService';
 import { transmissionAsyncValidator } from '../../../helper/async-validator';
+
 @Component({
   selector: 'app-transmission-line',
   templateUrl: './transmission-line.component.html',
   styleUrls: ['./transmission-line.component.scss']
 })
+
 export class TransmissionLineComponent extends FormComponentBase implements OnInit, AfterViewInit {
 
   form!: FormGroup;
@@ -72,6 +74,13 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
 
   isQueExist(): boolean {
     return this.form.get('ControltlNameENG').hasError('queExist');
+  }
+
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
   }
 
   ngOnInit() {

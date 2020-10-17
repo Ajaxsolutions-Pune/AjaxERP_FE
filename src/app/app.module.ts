@@ -147,8 +147,6 @@ import { ClusterListComponent } from './views/Masters/Cluster/cluster-list.compo
 import { ClusterComponent } from './views/Masters/Cluster/cluster.component';
 import { AssetCategoryListComponent } from './views/Masters/AssetCategory/asset-category-list.component';
 import { AssetCategoryComponent } from './views/Masters/AssetCategory/asset-category.component';
-import { AssetComponent } from './views/Masters/Asset/asset.component';
-import { AssetListComponent } from './views/Masters/Asset/asset-list.component';
 import { DeviceListComponent } from './views/Masters/Device/device-list.component';
 import { DeviceComponent } from './views/Masters/Device/device.component';
 import { DialogService } from './Components/Services/MatServices/Dialog.service';
@@ -269,6 +267,18 @@ import { UserDeviceRegListResolverService } from './Components/Resolver/Masters/
 import { UserDeviceRegService } from './Components/Services/Masters/UserDeviceRegService';
 import { ConfirmDialogComponent } from './Components/confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogService } from './Components/confirm-dialog/confirm-dialog.service';
+import { ModuleListComponent } from './views/Masters/Module/module-list.component';
+import { ModuleComponent } from './views/Masters/Module/module.component';
+import { ModuleobjListResolverService } from './Components/Resolver/Masters/Module-List-Resolver.Service';
+import { ModuleobjService } from './Components/Services/Masters/ModuleService';
+import { ModuleobjTransfarmer } from './Components/Transformer/Masters/Module-Transfarmer';
+import { ScreenObjListResolverService } from './Components/Resolver/Masters/Screen-List-Resolver.Service';
+import { ScreenObjService } from './Components/Services/Masters/ScreenService';
+import { ScreenObjTransfarmer } from './Components/Transformer/Masters/Screen-Transfarmer';
+import { ScreenComponent } from './views/Masters/Screen/screen.component';
+import { ScreenListComponent } from './views/Masters/Screen/screen-list.component';
+import { AssetListComponent } from './views/Masters/Asset/asset-list.component';
+import { AssetComponent } from './views/Masters/Asset/asset.component';
 
 @NgModule({
   imports: [
@@ -362,7 +372,7 @@ import { ConfirmDialogService } from './Components/confirm-dialog/confirm-dialog
     ProcessFormMappingComponent, UserDeviceMappingComponent,
     DeviceAssetMappingComponent, ContactListComponent, ContactComponent,
     AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent,
-    UserDeviceRegListComponent, UserDeviceRegComponent
+    UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent, ScreenComponent, ScreenListComponent
   ],
   providers: [
     ConfirmDialogService,
@@ -370,7 +380,7 @@ import { ConfirmDialogService } from './Components/confirm-dialog/confirm-dialog
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
-    HubService, ContactService, AccessService, UserDeviceDataService,
+    HubService, ContactService, AccessService, ModuleobjService, ScreenObjService, UserDeviceDataService,
     CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
@@ -380,7 +390,8 @@ import { ConfirmDialogService } from './Components/confirm-dialog/confirm-dialog
     DeviceTransfarmer, AssetCategoryTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
-    HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer, UserDeviceRegTransfarmer,
+    HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer
+    , ModuleobjTransfarmer, ScreenObjTransfarmer, UserDeviceRegTransfarmer,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService, UserService, UserDeviceRegService,
@@ -392,7 +403,8 @@ import { ConfirmDialogService } from './Components/confirm-dialog/confirm-dialog
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
     DeviceListResolverService, ClusterListResolverService, TransmissionLineListResolverService,
-    HubListResolverService, ContactListResolverService, AccessListResolverService,
+    HubListResolverService, ContactListResolverService, AccessListResolverService
+    , ModuleobjListResolverService, ScreenObjListResolverService,
     UserDeviceRegListResolverService,
     ProcessListResolverService, RoleListResolverService,
     DialogTemplateComponent,

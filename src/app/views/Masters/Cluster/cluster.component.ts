@@ -128,6 +128,12 @@ export class ClusterComponent extends FormComponentBase implements OnInit, After
       status = 'Update';
     }
   }
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+
+  }
   save(clusterForm: NgForm): void {
     if (status !== 'Update') {
       this.bindObj.clusterCode = null;

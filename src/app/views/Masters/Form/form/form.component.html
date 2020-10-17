@@ -30,6 +30,7 @@
                                   <input matInput
                                     #formName
                                     spellcheck="false" [(ngModel)]="formobj.formName"
+                                    (keypress)="special_char_val($event)"
                                     placeholder="Form Name *"
                                     formControlName="ControlformName" maxlength="50">                                    
                                     <mat-error>

@@ -33,7 +33,7 @@
           oninput="javascript: if (this.value.length > this.maxLength) 
           this.value = this.value.slice(0, this.maxLength);"
           #input
-          placeholder="Sort By"
+          placeholder="Sort"
            [(ngModel)]="data.sortBy" name="sortBy" required >
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
           

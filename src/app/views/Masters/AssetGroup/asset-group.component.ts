@@ -87,6 +87,13 @@ export class AssetGroupComponent extends FormComponentBase implements OnInit, Af
     });
   }
 
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
+  }
+
   private getassetGroup(assetGroup_Code: string) {
     this.bindObj = {
       assetGroupCode: null,

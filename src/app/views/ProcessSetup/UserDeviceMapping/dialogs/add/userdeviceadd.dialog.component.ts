@@ -8,6 +8,7 @@ import { User} from '../../../../../Components/Module/Masters/User.model';
 
 import { UserDeviceMapping } from '../../../../../Components/Module/ProcessSetup/UserDeviceMapping.model';
 import { UserDeviceDataService } from '../../userdevicedata.service';
+import { GlobalService } from '../../../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-add.dialog',
@@ -22,6 +23,7 @@ export class UserDeviceAddDialogComponent implements OnInit{
   constructor(public dialogRef: MatDialogRef<UserDeviceAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserDeviceMapping,   
     private userService: UserService,
+    private globalService: GlobalService,
     private userTransfarmer: UserTransfarmer,
     public dataService: UserDeviceDataService) {
   }
@@ -31,6 +33,12 @@ export class UserDeviceAddDialogComponent implements OnInit{
     // Validators.email,
   ]);
 
+  Number_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.NumberValidator(k);
+
+  }
   ngOnInit() {   
     this.userService.fillDrpUsers().subscribe(
       (par) => this.user = this.userTransfarmer.UserTransfarmers(par),

@@ -1,4 +1,4 @@
-<form #ObjForm="ngForm" [formGroup]="form">
+<form autocomplete="off" #ObjForm="ngForm" [formGroup]="form">
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-11 container">
@@ -22,21 +22,29 @@
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Device Reg. 1" required [(ngModel)]="bindObj.imei1" #txtimei1
+                <input matInput placeholder="Device Reg. 1" 
+                maxlength="40"
+                (keypress)="special_char_val($event)"
+                required [(ngModel)]="bindObj.imei1" #txtimei1
                   formControlName="Controlimei1" name="txtimei1">
                 <mat-error>
                   {{ formErrors['Controlimei1'] }}
                 </mat-error>
               </mat-form-field>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Device Reg. 2" [(ngModel)]="bindObj.imei2" #txtimei2
+                <input matInput placeholder="Device Reg. 2" 
+                maxlength="40"
+                (keypress)="special_char_val($event)"
+                [(ngModel)]="bindObj.imei2" #txtimei2
                   formControlName="Controlimei2" name="txtimei2">
               </mat-form-field>
             </div>
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Device Name" [(ngModel)]="bindObj.deviceName" #txtdeviceName
+                <input matInput placeholder="Device Name"               
+                (keypress)="special_char_val($event)"
+                [(ngModel)]="bindObj.deviceName" #txtdeviceName
                   formControlName="ControldeviceName" maxlength="50" name="txtdeviceName">
                   <mat-error>
                     <span *ngIf="isQueExist()">
@@ -46,7 +54,8 @@
               </mat-form-field>
               <mat-form-field class="col-md-4">
                 <mat-label>Lock Type</mat-label>
-                <mat-select required formControlName="ControllockTypeCode" [(ngModel)]="bindObj.lockTypeCode">
+                <mat-select required formControlName="ControllockTypeCode"                
+                [(ngModel)]="bindObj.lockTypeCode">
                   <mat-option>Lock Type</mat-option>
                   <mat-option value="1">Yes</mat-option>
                   <mat-option value="0">No</mat-option>
@@ -59,7 +68,9 @@
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Interval (min)" 
+                <input matInput placeholder="Interval (min)"
+                maxlength="10" 
+                (keypress)="only_number_val($event)"
                 [(ngModel)]="bindObj.trackingIntervalMin" #txttrackingIntervalMin
                   formControlName="ControltrackingIntervalMin" name="txttrackingIntervalMin">
               </mat-form-field>
@@ -102,44 +113,60 @@
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Sim 1 Moble No" [(ngModel)]="bindObj.sim1MobleNo" #txtsim1MobleNo
+                <input matInput placeholder="Sim 1 Moble No" 
+                maxlength="10"
+                (keypress)="only_number_val($event)"
+                [(ngModel)]="bindObj.sim1MobleNo" #txtsim1MobleNo
                   formControlName="Controlsim1MobleNo" name="txtsim1MobleNo">
               </mat-form-field>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Sim 2 Moble No" [(ngModel)]="bindObj.sim2MobleNo" #txtsim2MobleNo
+                <input matInput placeholder="Sim 2 Moble No" 
+                maxlength="10"
+                (keypress)="only_number_val($event)"
+                [(ngModel)]="bindObj.sim2MobleNo" #txtsim2MobleNo
                   formControlName="Controlsim2MobleNo" name="txtsim2MobleNo">
               </mat-form-field>
             </div>
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Sim 1 Provider" [(ngModel)]="bindObj.sim1Provider" #txtsim1Provider
+                <input matInput placeholder="Sim 1 Provider" 
+                maxlength="30"
+                [(ngModel)]="bindObj.sim1Provider" #txtsim1Provider
                   formControlName="Controlsim1Provider" name="txtsim1Provider">
               </mat-form-field>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Sim 2 Provider" [(ngModel)]="bindObj.sim2Provider" #txtsim2Provider
+                <input matInput placeholder="Sim 2 Provider" 
+                maxlength="30"
+                [(ngModel)]="bindObj.sim2Provider" #txtsim2Provider
                   formControlName="Controlsim2Provider" name="txtsim2Provider">
               </mat-form-field>
             </div>
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="RAM" [(ngModel)]="bindObj.ram" #txtram formControlName="Controlram"
+                <input matInput placeholder="RAM" 
+                maxlength="20"
+                [(ngModel)]="bindObj.ram" #txtram formControlName="Controlram"
                   name="txtram">
               </mat-form-field>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Storage" [(ngModel)]="bindObj.storage" #txtstorage
+                <input matInput placeholder="Storage" 
+                maxlength="20"
+                [(ngModel)]="bindObj.storage" #txtstorage
                   formControlName="Controlstorage" name="txtstorage">
               </mat-form-field>
             </div>
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Status Ip" [(ngModel)]="bindObj.statusIp" #txtstatusIp
+                <input matInput placeholder="Status Ip" 
+                [(ngModel)]="bindObj.statusIp" #txtstatusIp
                   formControlName="ControlstatusIp" name="txtstatusIp">
               </mat-form-field>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Model" [(ngModel)]="bindObj.model" #txtmodel formControlName="Controlmodel"
+                <input matInput placeholder="Model" 
+                [(ngModel)]="bindObj.model" #txtmodel formControlName="Controlmodel"
                   name="txtmodel">
               </mat-form-field>
             </div>

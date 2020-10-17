@@ -1,5 +1,5 @@
 <main class="form-main">
-    <form #userForm="ngForm" [formGroup]="form">
+    <form #userForm="ngForm" [formGroup]="form" autocomplete="off">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-11 container">
@@ -40,6 +40,7 @@
                                 <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
                                     <input matInput
+                                     type="password"
                                     placeholder="Password"
                                     [(ngModel)]="user.pwd"
                                     formControlName="Controlpassword"
@@ -125,7 +126,7 @@
                             <div class="row">
                                 <div class="col-md-2"></div>                            
                                     <mat-form-field color="accent" class="col-md-4">        
-                                      <mat-label>User Group</mat-label>
+                                      <mat-label>Entity Group</mat-label>
                                       <mat-select  
                                       formControlName="ControluserGroupCode"                                                            
                                       [(ngModel)]="user.userGroupCode"
@@ -156,7 +157,7 @@
 
 
                                     <mat-form-field color="accent" class="col-md-4">        
-                                        <mat-label>Entity</mat-label>
+                                        <mat-label>Entity Name</mat-label>
                                         <mat-select  
                                         formControlName="ControlentityCode"                                                            
                                         [(ngModel)]="user.entityCode">

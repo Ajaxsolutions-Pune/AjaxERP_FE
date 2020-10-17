@@ -1,0 +1,107 @@
+<main class="form-main">
+    <form #formModule="ngForm" [formGroup]="form" autocomplete="off">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Module</strong>
+                        </div>
+                        <div class="card-body">
+                           <!--<h6 class="text-right">* - Mandatory fields</h6>--> 
+                            <div class="row">
+                                <div class="col-md-4"></div>                            
+                                <mat-form-field class="col-md-2">
+                                    <input matInput
+                                    #ModuleID
+                                    spellcheck="false" [(ngModel)]="moduleobj.moduleId"
+                                    placeholder="Module Code"
+                                    formControlName="ControlModuleId" >
+                                    <mat-error>
+                                    {{ formErrors['ControlModuleId'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>   
+                                <mat-form-field class="col-md-4">
+                                  <input matInput
+                                    #ModuleName
+                                    spellcheck="false" [(ngModel)]="moduleobj.moduleName"
+                                    placeholder="Module Name *"
+                                    (keypress)="special_char_val($event)" 
+                                    formControlName="ControlModuleName" maxlength="50">                                    
+                                  <mat-error>
+                                    <span *ngIf="isModuleExist()">
+                                        Module Name is already taken.
+                                    </span>
+                                  </mat-error>
+                                </mat-form-field>                               
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>   
+                                <mat-form-field class="col-md-4">
+                                  <input matInput
+                                    #imagePath
+                                    spellcheck="false" [(ngModel)]="moduleobj.imagePath"
+                                    placeholder="Image Path"
+                                    (keypress)="special_char_val($event)" 
+                                    formControlName="ControlimagePath" maxlength="50">                                    
+                                  <mat-error>
+                                    {{ formErrors['ControlimagePath']}}
+                                  </mat-error>
+                                </mat-form-field>                               
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>   
+                                <mat-form-field class="col-md-4">
+                                    <input matInput
+                                    #checkOrder
+                                    spellcheck="false" [(ngModel)]="moduleobj.checkOrder"
+                                    placeholder="Check Order"
+                                    (keypress)="special_char_val($event)" 
+                                    formControlName="ControlcheckOrder" maxlength="50">                                    
+                                  <mat-error>
+                                    {{ formErrors['ControlcheckOrder']}}
+                                  </mat-error>
+                                </mat-form-field>                               
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-sm-2">                                    
+                                    <mat-checkbox name="chkisActive"
+                                    #chkisActive 
+                                    formControlName="ControlisActive"
+                                     [(ngModel)]="moduleobj.isActive">Active
+                                    </mat-checkbox>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">                                    
+                                    <button mat-raised-button
+                                    [disabled]="!form.valid"
+                                    (click)="save()"
+                                    color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button mat-raised-button color="warn"
+                                         routerLink="/ModuleList" >
+                                            Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </form>
+    </main>
+    <div style="display: none;"> {{moduleobj | json}}</div>

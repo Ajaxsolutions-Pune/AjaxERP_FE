@@ -46,6 +46,13 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
     return this.form.get('question1').hasError('queExist');
   }
 
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
+  }
+
   ngOnInit() { 
    
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {

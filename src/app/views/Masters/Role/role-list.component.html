@@ -48,25 +48,32 @@
     </thead>
     <tbody>
       <tr *ngFor="let Role of roles | paginate: config">     
-        <td>
+        <td style=" padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
           <div>{{Role.roleId}}</div>
         </td>
-        <td>
+        <td style=" padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
           {{Role.roleName}}
         </td>
-        <td>
+        <td style=" padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
           {{Role.roleDescription}}
         </td>
-        <td>
+        <td style=" padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
           {{Role.roleCreateFor}}
         </td>
-        <td>
+        <td style=" padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
           {{Role.roleLevel}}
         </td>
-        <td>
+        <td style="padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
           {{Role.isActive}}
         </td>
-        <td [ngSwitch]="1">
+        <td style=" padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
             <button mat-icon-button [routerLink]="['/Role/',Role.roleId]"
              color="accent">
               <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>

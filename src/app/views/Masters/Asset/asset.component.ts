@@ -197,7 +197,22 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       ControlclassificationCode: '',
       ControlstructureCode: '',
       ControlpositionCode: '',
+      ControlEmailId: '',
     };
+  }
+
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
+  }
+
+  only_number_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.NumberValidator(k);
+    
   }
 
   isQueExist(): boolean {    

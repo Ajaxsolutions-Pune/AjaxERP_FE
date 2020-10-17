@@ -29,9 +29,8 @@
     <div class="form">
       <mat-form-field color="accent">
         <input matInput #formQueSeqNo class="form-control" maxlength="5"
-        type="number"
-        oninput="javascript: if (this.value.length > this.maxLength) 
-        this.value = this.value.slice(0, this.maxLength);"
+        type="text"
+        (keypress)="Number_val($event)"
         #input
         placeholder="Form Question Sequence"
          [(ngModel)]="data.formQueSeqNo" name="formQueSeqNo" required >
@@ -57,9 +56,9 @@
     <div class="form">
       <mat-form-field color="accent">
         <input matInput #input class="form-control" placeholder="Question Group"
-        #input  maxlength="5" type="number"
-        oninput="javascript: if (this.value.length > this.maxLength) 
-        this.value = this.value.slice(0, this.maxLength);"
+        #input  maxlength="5"
+        type="text"
+        (keypress)="Number_val($event)"
          [(ngModel)]="data.queGroup" name="queGroup" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
@@ -68,9 +67,9 @@
     <div class="form">
       <mat-form-field color="accent">
         <input matInput #input class="form-control" placeholder="Next Que Group"
-        #input  maxlength="5" type="number"
-        oninput="javascript: if (this.value.length > this.maxLength) 
-        this.value = this.value.slice(0, this.maxLength);"
+        #input  maxlength="5"
+        type="text"
+        (keypress)="Number_val($event)"
          [(ngModel)]="data.nextQueGroup" name="queGroup" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>

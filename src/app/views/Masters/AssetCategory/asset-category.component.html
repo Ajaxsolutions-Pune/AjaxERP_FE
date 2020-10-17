@@ -32,6 +32,7 @@
                                 placeholder="Asset Category Name"
                                 [(ngModel)]="bindObj.assetCategoryNameENG" required
                                 formControlName="ControlCategoryNameENG" maxlength="50"
+                                (keypress)="special_char_val($event)"
                                 #txtassetCategoryNameENG
                                 name="txtassetCategoryNameENG">
                                 <mat-error>

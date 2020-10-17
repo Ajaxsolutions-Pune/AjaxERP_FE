@@ -9,8 +9,8 @@ alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
     selector: 'app-user-list',
-    templateUrl: './List-user.component.html'
-    //styleUrls: ['./Answer-list.component.scss']
+    templateUrl: './List-user.component.html',
+    styleUrls: ['./List-user.component.scss']
   })
 
 

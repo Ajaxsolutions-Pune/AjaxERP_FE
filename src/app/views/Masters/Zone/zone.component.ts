@@ -44,20 +44,19 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
       ControlisActive: '',
     };
   }
-
   ngAfterViewInit(): void {
     setTimeout(() => {
     }, 250);
     this.startControlMonitoring(this.form);
   }
-
   isZoneExist(): boolean {
     return this.form.get('ControlzoneNameENG').hasError('queExist');
   }
-  omit_special_char(event) {
+  special_char_val(event) {
     let k;
-    k = event.charCode;  //         k = event.keyCode;  (Both can be used)
-    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k === 8 || k === 32 || (k >= 48 && k <= 57));
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+    
   }
   ngOnInit() {
     this.bindObj = {

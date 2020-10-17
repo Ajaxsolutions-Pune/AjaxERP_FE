@@ -21,6 +21,23 @@ export class GlobalService {
         return this.datePipe.transform(this.myDate, 'yyyy-MM-dd hh:mm:ss.sss');
     }
 
+    SpecialCharValidator(charCode: number): boolean {
+        return (charCode === 8 || charCode === 32 || charCode === 44 ||
+            (charCode >= 45 && charCode <= 57) ||
+            (charCode > 62 && charCode < 91) || charCode === 95 ||
+            (charCode > 96 && charCode < 123));
+    }
+    PassCharValidator(charCode: number): boolean {
+        return (charCode === 8 || charCode === 35 || charCode === 36 || charCode === 37
+            || charCode === 42 || (charCode >= 45 && charCode <= 57) ||
+            (charCode > 62 && charCode < 91)
+            || charCode === 95 || charCode === 44 ||
+            (charCode > 96 && charCode < 123));
+    }
+    NumberValidator(charCode: number): boolean {
+        return (charCode > 47 && charCode < 58);
+    }
+
     fillMasterDrp(MasterCode: string): Observable<MasterDrp[]> {
         return this.httpClient.get<MasterDrp[]>(this.str + '/MastersList/' + MasterCode, this.env.httpOptions);
     }

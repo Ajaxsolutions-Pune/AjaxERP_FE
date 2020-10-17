@@ -1,6 +1,6 @@
-<form #ObjCluster="ngForm"  [formGroup]="form" autocomplete="off">
+<form #ObjCluster="ngForm" [formGroup]="form" autocomplete="off">
     <div class="animated fadeIn">
-        
+
         <div class="row">
             <div class="col-md-11 container">
                 <div class="card">
@@ -12,9 +12,9 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput placeholder="Cluster Code" 
-                                [(ngModel)]="bindObj.clusterCode"
+                                    [(ngModel)]="bindObj.clusterCode"  maxlength="5"
                                     formControlName="ControlclusterCode"
-                                     #txtclusterCode name="txtclusterCode">
+                                    #txtclusterCode name="txtclusterCode">
                                 <mat-error>
                                     {{ formErrors['ControlclusterCode'] }}
                                 </mat-error>
@@ -24,11 +24,10 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
-                                <input matInput placeholder="Cluster Name" 
-                                [(ngModel)]="bindObj.clusterNameENG"
-                                    required formControlName="ControlclusterNameENG"
-                                     #txtclusterNameENG
-                                    name="txtclusterNameENG">
+                                <input matInput placeholder="Cluster Name" maxlength="50"
+                                (keypress)="special_char_val($event)"
+                                 [(ngModel)]="bindObj.clusterNameENG" required
+                                    formControlName="ControlclusterNameENG" #txtclusterNameENG name="txtclusterNameENG">
                                 <mat-error>
                                     <span *ngIf="isClusterExist()">
                                         Cluster Name is already taken.
@@ -42,8 +41,8 @@
                             <mat-form-field class="col-md-4" style="display: none;">
                                 <input matInput placeholder="Cluster Name UNI" 
                                 [(ngModel)]="bindObj.clusterNameUNI"
-                                    formControlName="ControlclusterNameUNI" 
-                                    #txtclusterNameUNI name="txtclusterNameUNI">
+                                maxlength="50"
+                                    formControlName="ControlclusterNameUNI" #txtclusterNameUNI name="txtclusterNameUNI">
                                 <mat-error>
                                     {{ formErrors['ControlclusterNameUNI'] }}
                                 </mat-error>
@@ -57,9 +56,8 @@
                                 <mat-select required formControlName="ControlcircleCode"
                                     [(ngModel)]="bindObj.circleCode">
                                     <mat-option>Circle</mat-option>
-                                    <mat-option *ngFor="let obj of circledrp"
-                                     [value]="obj.circleCode">
-                                      {{obj.circleNameENG}}
+                                    <mat-option *ngFor="let obj of circledrp" [value]="obj.circleCode">
+                                        {{obj.circleNameENG}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error>
@@ -81,10 +79,9 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <button mat-raised-button [disabled]="!form.valid" 
-                                (click)="save(ObjCluster)"                                
+                                <button mat-raised-button [disabled]="!form.valid" (click)="save(ObjCluster)"
                                     color="primary">Submit</button>
-                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                 <button mat-raised-button color="warn" routerLink="/ClusterList">
                                     Cancel</button>
                             </div>

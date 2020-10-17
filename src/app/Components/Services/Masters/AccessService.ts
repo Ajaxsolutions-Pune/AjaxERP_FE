@@ -34,9 +34,9 @@ export class AccessService {
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    checkAccess(access : string): Observable<CommonEntity> {
-        return this.httpClient.get<CommonEntity>(this.str + '/Access/getAccessByName?name=' + access
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+    checkAccess(access : string,Code : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Access/getAccessByName?name=' + access +
+        '&id=' + Code, this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Update(updateEntityObj: AccessEntity): Observable<Insertstatus> {
         // tslint:disable-next-line:max-line-length

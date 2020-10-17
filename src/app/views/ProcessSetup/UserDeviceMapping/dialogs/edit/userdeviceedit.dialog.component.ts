@@ -11,6 +11,7 @@ import { UserTransfarmer } from '../../../../../Components/Transformer/Masters/U
 import { elementAt } from 'rxjs/operators';
 import { UserDeviceMapping } from '../../../../../Components/Module/ProcessSetup/UserDeviceMapping.model';
 import { UserDeviceDataService } from '../../userdevicedata.service';
+import { GlobalService } from '../../../../../Components/Services/GlobalServices/Global.service';
 
 @Component({
   selector: 'app-baza.dialog',
@@ -23,6 +24,7 @@ export class UserDeviceEditDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<UserDeviceEditDialogComponent>,    
     private userService: UserService,
+    private globalService: GlobalService,
     private userTransfarmer: UserTransfarmer,
     @Inject(MAT_DIALOG_DATA) public data: UserDeviceMapping, public dataService: UserDeviceDataService) {
   }
@@ -31,7 +33,12 @@ export class UserDeviceEditDialogComponent implements OnInit {
     // Validators.email,
   ]);
 
+  Number_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.NumberValidator(k);
 
+  }
   ngOnInit() {   
     this.userService.fillDrpUsers().subscribe(
       (par) => {

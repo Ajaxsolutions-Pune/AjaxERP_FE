@@ -33,9 +33,8 @@
       <div class="form">
         <mat-form-field color="accent">
           <input matInput #formQueSeqNo class="form-control" maxlength="5"
-          type="number"  onkeydown="javascript: return event.keyCode == 69 ? false : true"
-          oninput="javascript: if (this.value.length > this.maxLength) 
-          this.value = this.value.slice(0, this.maxLength);"
+          type="text"
+          (keypress)="Number_val($event)"
           #input
           placeholder="Sort"
            [(ngModel)]="data.sortBy" name="sortBy" required >

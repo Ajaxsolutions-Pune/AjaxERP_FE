@@ -123,6 +123,12 @@ import { UserComponent } from './views/Masters/User/user-master.component';
 import { UserDeviceRegListComponent } from './views/Masters/UserDeviceReg/user-device-reg-list.component';
 import { UserDeviceRegListResolverService } from './Components/Resolver/Masters/UserDeviceReg-List-Resolver.Service';
 import { UserDeviceRegComponent } from './views/Masters/UserDeviceReg/user-device-reg.component';
+import { ModuleobjListResolverService } from './Components/Resolver/Masters/Module-List-Resolver.Service';
+import { ModuleListComponent } from './views/Masters/Module/module-list.component';
+import { ModuleComponent } from './views/Masters/Module/module.component';
+import { ScreenObjListResolverService } from './Components/Resolver/Masters/Screen-List-Resolver.Service';
+import { ScreenListComponent } from './views/Masters/Screen/screen-list.component';
+import { ScreenComponent } from './views/Masters/Screen/screen.component';
 
 export const routes: Routes = [
   {
@@ -876,6 +882,60 @@ export const routes: Routes = [
         component: RolelevelComponent,
         data: {
           title: 'Add Rolelevel'
+        },
+        resolve: {
+          AssetList: AssetListResolverService
+        }
+      },
+      {
+        path: 'ModuleList',
+        component: ModuleListComponent,
+        data: {
+          title: 'Module List'
+        },
+        resolve: {
+          ModuleList: ModuleobjListResolverService
+        }
+      },
+      {
+        path: 'Module/:id',
+        component: ModuleComponent,
+        data: {
+          title: 'Edit Module'
+        }
+      },
+      {
+        path: 'Module',
+        component: ModuleComponent,
+        data: {
+          title: 'Add Module'
+        },
+        resolve: {
+          AssetList: ModuleobjListResolverService
+        }
+      },
+      {
+        path: 'ScreenList',
+        component: ScreenListComponent,
+        data: {
+          title: 'Screen List'
+        },
+        resolve: {
+          ScreenList: ScreenObjListResolverService
+        }
+      },
+      {
+        path: 'Screen/:id',
+        component: ScreenComponent,
+        data: {
+          title: 'Edit Screen'
+        }
+      },
+      {
+        path: 'Screen',
+        component: ScreenComponent,
+        data: {
+          title: 'Add Screen'
         },
         resolve: {
           AssetList: AssetListResolverService
