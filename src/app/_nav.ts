@@ -246,52 +246,62 @@ export const navItems: NavData[] = [
     ]
 
   },
-  {
-    name: 'CRM',
-    url: '/CRM',
-    //   icon: 'fa fa-newspaper-o',
-    children: [
-      {
-        name: 'Contact',
-        url: '/ContactList',
-        icon: 'icon-puzzle'
-      }
-    ]
+ //{
+ //  name: 'CRM',
+ //  url: '/CRM',
+ //  //   icon: 'fa fa-newspaper-o',
+ //  children: [
+ //    {
+ //      name: 'Contact',
+ //      url: '/ContactList',
+ //      icon: 'icon-puzzle'
+ //    }
+ //  ]
 
-  },
-  {
-    name: 'User Setup',
-    url: '/User Setup',
-    //   icon: 'fa fa-newspaper-o',
-    children: [
-      {
-        name: 'Access',
-        url: '/AccessList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Role',
-        url: '/RoleList',
-        icon: 'icon-puzzle'
-      },
-       {
-         name: 'Role Level',
-         url: '/RolelevelList',
-         icon: 'icon-puzzle'
-       },
-       {
-         name: 'User',
-         url: '/UserList',
-         icon: 'icon-puzzle'
-       },
-       {
-         name: 'User Approve',
-         url: '/UserDeviceRegList',
-         icon: 'icon-puzzle'
-       },
-    ]
-
-  },
+ //},
+  //{
+  //  name: 'User Setup',
+  //  url: '/User Setup',
+  //  //   icon: 'fa fa-newspaper-o',
+  //  children: [
+  //    {
+  //      name: 'Access',
+  //      url: '/AccessList',
+  //      icon: 'icon-puzzle'
+  //    },
+  //    {
+  //      name: 'Module',
+  //      url: '/ModuleList',
+  //      icon: 'icon-puzzle'
+  //    },
+  //    {
+  //      name: 'Screen',
+  //      url: '/ScreenList',
+  //      icon: 'icon-puzzle'
+  //    },
+  //    {
+  //      name: 'Role',
+  //      url: '/RoleList',
+  //      icon: 'icon-puzzle'
+  //    },
+  //     {
+  //       name: 'Role Level',
+  //       url: '/RolelevelList',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'User',
+  //       url: '/UserList',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'User Approve',
+  //       url: '/UserDeviceRegList',
+  //       icon: 'icon-puzzle'
+  //     },
+  //  ]
+//
+  //},
   {
     name: 'Monitoring Reports',
     url: '/Reports',
