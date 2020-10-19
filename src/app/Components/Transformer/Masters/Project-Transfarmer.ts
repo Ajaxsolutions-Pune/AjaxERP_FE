@@ -19,7 +19,7 @@ export class ProjectTransfarmer {
         this.projects = [];
         Entity.forEach(element => {
             this.project = new Project();   
-            this.project.ouCode = '12';      
+            this.project.ouCode = this.env.OuCode;
             this.project.projectCode = element.projectCode;
             this.project.projectName = element.projectName;
             this.project.projectDescription= element.projectDescription;
@@ -50,7 +50,7 @@ export class ProjectTransfarmer {
      ProjectTransfarmerEntity(Entity: ProjectEntity): Project {
         console.log(Entity);
         this.project = new Project();
-        this.project.ouCode = '12';
+        this.project.ouCode =  this.env.OuCode;
         this.project.projectCode = Entity.projectCode;
         this.project.projectName = Entity.projectName;
         this.project.projectDescription= Entity.projectDescription;
@@ -84,7 +84,7 @@ export class ProjectTransfarmer {
 
     ProjectTransfarmer(Project1: Project): ProjectEntity {
         this.projectEntity = new ProjectEntity();
-        this.projectEntity.ouCode = '12';
+        this.projectEntity.ouCode =  this.env.OuCode;
         this.projectEntity.projectCode = Project1.projectCode ;
         this.projectEntity.projectName = Project1.projectName;
         

@@ -20,7 +20,7 @@ export class DeviceAssetMappingTransfarmer {
             this.Oject.daId = element.daId;
             this.Oject.deviceId = element.deviceId;           
             this.Oject.assetCode = element.assetCode;
-            this.Oject.assetCodeText = element.assetCodeText;
+            this.Oject.assetName = element.assetName;
             this.Oject.sortBy = '0'; 
                    
             if (element.isActive === '1') 
@@ -45,7 +45,7 @@ export class DeviceAssetMappingTransfarmer {
             this.Oject.ouCode = 12;      
             this.Oject.deviceId = element.deviceId;           
             this.Oject.assetCode = element.assetCode;
-            this.Oject.assetCodeText = element.assetCodeText;            
+            this.Oject.assetName = element.assetName;            
             this.Oject.sortBy = '0';       
             this.Oject.createdBy = element.createdBy;
             this.Oject.createdDate = element.createdDate;
@@ -70,7 +70,7 @@ export class DeviceAssetMappingTransfarmer {
         this.Oject.daId = Entity.daId;
         this.Oject.deviceId = Entity.deviceId;           
         this.Oject.assetCode = Entity.assetCode;
-        this.Oject.assetCodeText = Entity.assetCodeText;               
+        this.Oject.assetName = Entity.assetName;               
         this.Oject.sortBy = Entity.sortBy;         
         this.Oject.isActive = Entity.isActive;
         this.Oject.createdBy = Entity.createdBy;
@@ -94,7 +94,7 @@ export class DeviceAssetMappingTransfarmer {
         this.Oject.daId = element.daId;
         this.Oject.deviceId = element.deviceId;           
         this.Oject.assetCode = element.assetCode;
-        this.Oject.assetCodeText = element.assetCodeText;       
+        this.Oject.assetName = element.assetName;       
         this.Oject.sortBy = element.sortBy;               
         this.OjectEntity.createdBy = element.createdBy;
         this.OjectEntity.createdDate = element.createdDate;

@@ -106,7 +106,7 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
     }
     status = '';
     this.project = {
-        ouCode : '12',
+        ouCode :  this.env.OuCode,
         projectName: null,
         projectCode: null,
         projectDescription : null,
@@ -236,7 +236,7 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
 
     if (project_Code === null || project_Code === '') {
       this.project = {
-        ouCode : '12',
+        ouCode :  this.env.OuCode,
         projectName: null,
         projectCode: null,
         projectDescription : null,
@@ -260,7 +260,7 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
 
     } else {
       this.projectEntity = {
-        ouCode : '12',
+        ouCode :  this.env.OuCode,
         projectName: null,
         projectCode: null,
         projectDescription : null,

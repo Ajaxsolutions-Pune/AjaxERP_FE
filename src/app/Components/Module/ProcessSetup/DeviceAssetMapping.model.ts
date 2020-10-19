@@ -3,7 +3,7 @@ export class DeviceAssetMapping {
     ouCode:number;
     deviceId: string;   
     assetCode: string;
-    assetCodeText: string;  
+    assetName: string;  
     sortBy  : string;   
     isActive: string;
     isActiveText: string;
@@ -18,7 +18,7 @@ export class DeviceAssetMappingEntity {
     ouCode : number;
     deviceId : string;   
     assetCode: string;
-    assetCodeText: string;  
+    assetName: string;  
     sortBy  : string;   
     isActive: string;
     isActiveText: string;

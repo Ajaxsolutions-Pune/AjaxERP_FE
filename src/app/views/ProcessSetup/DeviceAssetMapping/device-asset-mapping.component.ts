@@ -347,7 +347,7 @@ export class ExampleDataSource extends DataSource<DeviceAssetMapping> {
 
       switch (this._sort.active) {
         case 'DeviceAssetMapping': [propertyA, propertyB] = [a.daId, b.daId]; break;
-        case 'AssetText': [propertyA, propertyB] = [a.assetCodeText, b.assetCodeText]; break;
+        case 'AssetText': [propertyA, propertyB] = [a.assetName, b.assetName]; break;
         case 'SortBy': [propertyA, propertyB] = [a.sortBy, b.sortBy]; break;      
       }
 

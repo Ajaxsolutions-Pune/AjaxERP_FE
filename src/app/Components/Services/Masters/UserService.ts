@@ -29,7 +29,8 @@ export class UserService {
     }
 
     getUser(UserCode: string): Observable<UserEntity> {
-        return this.httpClient.get<UserEntity>(this.str + '/User/' + UserCode +'/12',
+        return this.httpClient.get<UserEntity>(this.str + '/User/' + UserCode +'/' + this.env.OuCode +
+        '',
             this.env.httpOptions).pipe(catchError(this.handleError));
     }
     

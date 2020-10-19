@@ -69,7 +69,7 @@ export class UserDeviceAddDialogComponent implements OnInit{
   }
 
   public confirmAdd(): void {    
-    this.data.loginIdText = this.objloginIdText;    
+    this.data.userNameENG = this.objloginIdText;    
    
     if (this.data.isActive.toString() === 'true') {
       this.data.isActiveText = 'Active';

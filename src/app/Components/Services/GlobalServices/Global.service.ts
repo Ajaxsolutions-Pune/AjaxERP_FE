@@ -18,7 +18,7 @@ export class GlobalService {
         this.str = this.env.apiServiceIPPort;
     }
     GerCurrntDateStamp(): string {
-        return this.datePipe.transform(this.myDate, 'yyyy-MM-dd hh:mm:ss.sss');
+        return this.datePipe.transform(this.myDate, 'yyyy-MM-dd HH:mm:ss.sss');
     }
 
     SpecialCharValidator(charCode: number): boolean {
@@ -36,6 +36,12 @@ export class GlobalService {
     }
     NumberValidator(charCode: number): boolean {
         return (charCode > 47 && charCode < 58);
+    }
+    ConfirmPasswor(PassFild: string, ConfirmPassFild: string): any {
+        if (PassFild == ConfirmPassFild)
+            return true;
+        else
+            return false;
     }
 
     fillMasterDrp(MasterCode: string): Observable<MasterDrp[]> {

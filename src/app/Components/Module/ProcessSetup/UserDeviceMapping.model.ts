@@ -3,7 +3,7 @@ export class UserDeviceMapping {
     ouCode:number;
     deviceId: string;   
     loginId: string;
-    loginIdText: string;  
+    userNameENG: string;  
     sortBy  : string;   
     isActive: string;
     isActiveText: string;
@@ -18,7 +18,7 @@ export class UserDeviceMappingEntity {
     adId: number;
     deviceId: string;   
     loginId: string;
-    loginIdText: string;  
+    userNameENG: string;  
     sortBy  : string;   
     isActive: string;
     isActiveText: string;
@@ -26,5 +26,5 @@ export class UserDeviceMappingEntity {
     createdDate: string;
     modifiedBy: string;
     modifiedDate: string;
-    updateFlag: string;
+    updateFlag: string;    
 }

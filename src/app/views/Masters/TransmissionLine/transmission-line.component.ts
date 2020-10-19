@@ -91,11 +91,11 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
         this.colourdrp = this.colourTransfarmer.ColourTransfarmers(par);
       },
       (err: any) => console.log(err));
-      this.projectService.getProjectDrp().subscribe(
-        (par) => {
-          this.projectDrp = this.ProjectTransfarmer.ProjectTransfarmers(par);
-        },
-        (err: any) => console.log(err));
+      //this.projectService.getProjectDrp().subscribe(
+      //  (par) => {
+      //    this.projectDrp = this.ProjectTransfarmer.ProjectTransfarmers(par);
+      //  },
+      //  (err: any) => console.log(err));
       this.globalService.fillMasterDrp('TRLTY').subscribe(
         (par) => {
           this.TransmissionLineTypeDrp = par;

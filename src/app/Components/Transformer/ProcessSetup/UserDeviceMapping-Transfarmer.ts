@@ -20,7 +20,7 @@ export class UserDeviceMappingTransfarmer {
             this.Oject.adId = element.adId;
             this.Oject.deviceId = element.deviceId;           
             this.Oject.loginId = element.loginId;
-            this.Oject.loginIdText = element.loginIdText;
+            this.Oject.userNameENG = element.userNameENG;
             this.Oject.sortBy = '0';   
                    
             if (element.isActive === '1') 
@@ -45,7 +45,7 @@ export class UserDeviceMappingTransfarmer {
             this.Oject.ouCode = 12;      
             this.Oject.deviceId = element.deviceId;           
             this.Oject.loginId = element.loginId;
-            this.Oject.loginIdText = element.loginIdText;            
+            this.Oject.userNameENG = element.userNameENG;            
             this.Oject.sortBy = '0';       
             this.Oject.createdBy = element.createdBy;
             this.Oject.createdDate = element.createdDate;
@@ -70,7 +70,7 @@ export class UserDeviceMappingTransfarmer {
         this.Oject.adId = Entity.adId;
         this.Oject.deviceId = Entity.deviceId;           
         this.Oject.loginId = Entity.loginId;
-        this.Oject.loginIdText = Entity.loginIdText;               
+        this.Oject.userNameENG = Entity.userNameENG;               
         this.Oject.sortBy = Entity.sortBy;         
         this.Oject.isActive = Entity.isActive;
         this.Oject.createdBy = Entity.createdBy;
@@ -94,7 +94,7 @@ export class UserDeviceMappingTransfarmer {
         this.Oject.adId = element.adId;
         this.Oject.deviceId = element.deviceId;           
         this.Oject.loginId = element.loginId;
-        this.Oject.loginIdText = element.loginIdText;       
+        this.Oject.userNameENG = element.userNameENG;       
         this.Oject.sortBy = element.sortBy;               
         this.OjectEntity.createdBy = element.createdBy;
         this.OjectEntity.createdDate = element.createdDate;

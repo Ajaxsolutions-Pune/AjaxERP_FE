@@ -8,7 +8,3 @@ export class UserEntity_ {
 
 }
 
-
-//fillMasterDrp(MasterCode: string): Observable<MasterDrp[]> {
-//    return this.httpClient.get<MasterDrp[]>(this.str + '/MastersList/' + MasterCode, this.env.httpOptions);
-//}

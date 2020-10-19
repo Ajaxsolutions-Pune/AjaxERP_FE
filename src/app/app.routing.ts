@@ -1031,7 +1031,7 @@ export const routes: Routes = [
         },
       },
       {
-        path: 'Demo',
+        path: 'Demo1',
         component: AngularDemoComponent,
         data: {
           title: 'Demo'

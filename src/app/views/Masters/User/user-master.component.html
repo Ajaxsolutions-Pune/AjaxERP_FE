@@ -9,233 +9,184 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                
-                                <div class="col-md-2"></div>                                
+                                <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput
-                                    placeholder="Login ID"
-                                    [(ngModel)]="user.loginID"
-                                    formControlName="ControlloginID"
-                                    #txtLoginID
-                                    name="txtLoginID">
+                                    <input matInput placeholder="Login ID" [(ngModel)]="user.loginID"
+                                        formControlName="ControlloginID" #txtLoginID name="txtLoginID">
                                     <mat-error>
                                         {{ formErrors['ControlloginID'] }}
                                     </mat-error>
                                 </mat-form-field>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput
-                                    placeholder="User Name"
-                                    [(ngModel)]="user.userNameENG"
-                                    formControlName="ControluserName"
-                                    #txtAnswer
-                                    name="txtUserName">
+                                    <input matInput placeholder="User Name *" [(ngModel)]="user.userNameENG"
+                                        formControlName="ControluserName" #txtAnswer name="txtUserName">
                                     <mat-error>
                                         {{ formErrors['ControluserName'] }}
                                     </mat-error>
                                 </mat-form-field>
                                 <div class="col-md-2"></div>
-                            </div>                           
+                            </div>
 
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput
-                                     type="password"
-                                    placeholder="Password"
-                                    [(ngModel)]="user.pwd"
-                                    formControlName="Controlpassword"
-                                    #txtPassword
-                                    name="txtPassword">
-                                    <mat-error>
-                                        {{ formErrors['Controlpassword'] }}
-                                    </mat-error>
-                                </mat-form-field>
-                                <mat-form-field color="accent" class="col-md-4">        
-                                    <mat-label>User Type</mat-label>
-                                    <mat-select  
-                                    formControlName="ControluserType"                                                            
-                                    [(ngModel)]="user.userTypeCode">
-                                    <mat-option>Select</mat-option>
-                                    <mat-option *ngFor="let userType of userTypeDrp"
-                                     [value]="userType.listCode">
-                                      {{userType.listDescENG}}                                    
-                                    </mat-option>
-                                    </mat-select>
-                                   <mat-error>
-                                      {{ formErrors['ControlroleLevel'] }}
-                                  </mat-error>
-                                  </mat-form-field>  
-                                <div class="col-md-2"></div>
-                            </div>   
-
-                            <div class="row">
-                                <div class="col-md-2"></div>
-                                <mat-form-field class="col-md-4">
-                                    <input matInput
-                                    placeholder="Email Id"
-                                    [(ngModel)]="user.emailID"
-                                    formControlName="Controlemail"
-                                    #txtPassword
-                                    name="txtEmail">
+                                    <input matInput placeholder="Email Id *" [(ngModel)]="user.emailID"
+                                        formControlName="Controlemail" #txtPassword name="txtEmail">
                                     <mat-error>
                                         {{ formErrors['Controlemail'] }}
                                     </mat-error>
                                 </mat-form-field>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput
-                                    placeholder="Mobile No"
-                                    [(ngModel)]="user.mobileNo"
-                                    formControlName="Controlmobile"
-                                    #txtPassword
-                                    name="txtMobile">
+                                    <input matInput placeholder="Mobile No *" [(ngModel)]="user.mobileNo"
+                                        formControlName="Controlmobile" #txtPassword name="txtMobile">
                                     <mat-error>
                                         {{ formErrors['Controlmobile'] }}
                                     </mat-error>
                                 </mat-form-field>
                                 <div class="col-md-2"></div>
-                            </div>    
-                                                         
-                            
+                            </div>
+
+
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput
-                                    placeholder="Password Change Date"
-                                    [(ngModel)]="user.pwdChangedDate"
-                                    formControlName="ControlPassChangeDate"
-                                    #txtPasswordChangeDate
-                                    name="txtPasswordChangeDate">
+                                    <input matInput type="password" placeholder="Password *" [(ngModel)]="user.pwd"
+                                        maxlength="20" formControlName="Controlpassword" #txtPassword
+                                        name="txtPassword">
+                                    <mat-error>
+                                        {{ formErrors['Controlpassword'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput type="password" placeholder="Confirm Password"
+                                        [(ngModel)]="user.confipwd" maxlength="20" 
+                                        formControlName="Controlconfipwd"
+                                        [errorStateMatcher]="matcher" #txtconfipwd name="txtconfipwd">
+                                    <mat-error *ngIf="form.hasError('notSame')">
+                                        Passwords do not match
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-2"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field color="accent" class="col-md-4">
+                                    <mat-label>User Type</mat-label>
+                                    <mat-select formControlName="ControluserType" [(ngModel)]="user.userTypeCode">
+                                        <mat-option>Select</mat-option>
+                                        <mat-option *ngFor="let userType of userTypeDrp" [value]="userType.listCode">
+                                            {{userType.listDescENG}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        {{ formErrors['ControlroleLevel'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-2"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Password Change Date" [(ngModel)]="user.pwdChangedDate"
+                                        formControlName="ControlPassChangeDate" #txtPasswordChangeDate
+                                        name="txtPasswordChangeDate">
                                     <mat-error>
                                         {{ formErrors['ControlPassChangeDate'] }}
                                     </mat-error>
                                 </mat-form-field>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput
-                                    placeholder="Password Expiry Date"
-                                    [(ngModel)]="user.pwdExpiryDate"
-                                    formControlName="ControlPassExpiryDate"
-                                    #txtPasswordExpiryDate
-                                    name="txtPasswordExpiryDate">
+                                    <input matInput placeholder="Password Expiry Date" [(ngModel)]="user.pwdExpiryDate"
+                                        formControlName="ControlPassExpiryDate" #txtPasswordExpiryDate
+                                        name="txtPasswordExpiryDate">
                                     <mat-error>
                                         {{ formErrors['ControlPassExpiryDate'] }}
                                     </mat-error>
                                 </mat-form-field>
                                 <div class="col-md-2"></div>
-                            </div>                               
-                            
+                            </div>
+
                             <div class="row">
-                                <div class="col-md-2"></div>                            
-                                    <mat-form-field color="accent" class="col-md-4">        
-                                      <mat-label>Entity Group</mat-label>
-                                      <mat-select  
-                                      formControlName="ControluserGroupCode"                                                            
-                                      [(ngModel)]="user.userGroupCode"
-                                      (selectionChange)="EntityChange($event)">
-                                      <mat-option>Select</mat-option>
-                                      <mat-option *ngFor="let userGroup of userGroupDrp"                                       
-                                        [value]="userGroup.listCode">
-                                        {{userGroup.listDescENG}}
-                                      </mat-option>
-                                      </mat-select>
-                                     <mat-error>
+                                <div class="col-md-2"></div>
+                                <mat-form-field color="accent" class="col-md-4">
+                                    <mat-label>Entity Group</mat-label>
+                                    <mat-select formControlName="ControluserGroupCode" [(ngModel)]="user.userGroupCode"
+                                        (selectionChange)="EntityChange($event)">
+                                        <mat-option>Select</mat-option>
+                                        <mat-option *ngFor="let userGroup of userGroupDrp" [value]="userGroup.listCode">
+                                            {{userGroup.listDescENG}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
                                         {{ formErrors['ControluserGroupCode'] }}
                                     </mat-error>
-                                    </mat-form-field>  
-
-                                  <!--<mat-form-field class="col-md-4">
-                                        <mat-label>Device</mat-label>
-                                        <mat-select required  [(ngModel)]="DeviceId"
-                                         (selectionChange)="DeviceChange($event)">
-                                            <mat-option *ngFor="let device of deviceObj" [value]="device.deviceId">
-                                              {{device.deviceId}} - {{device.deviceName}}
-                                            </mat-option>
-                                        </mat-select>
-                                        <mat-error>
-                                            {{formErrors['ControlDeviceCode']}}
-                                        </mat-error>
-                                    </mat-form-field>--> 
-
-
-                                    <mat-form-field color="accent" class="col-md-4">        
-                                        <mat-label>Entity Name</mat-label>
-                                        <mat-select  
-                                        formControlName="ControlentityCode"                                                            
-                                        [(ngModel)]="user.entityCode">
+                                </mat-form-field>
+                                <mat-form-field color="accent" class="col-md-4">
+                                    <mat-label>Entity Name</mat-label>
+                                    <mat-select formControlName="ControlentityCode" [(ngModel)]="user.entityCode">
                                         <mat-option>Select</mat-option>
                                         <mat-option *ngFor="let userEntity of userEntityDrp"
-                                         [value]="userEntity.entityCode">
-                                          {{userEntity.entityName}}
+                                            [value]="userEntity.entityCode">
+                                            {{userEntity.entityName}}
                                         </mat-option>
-                                        </mat-select>
-                                       <mat-error>
-                                          {{ formErrors['ControlentityCode'] }}
-                                      </mat-error>
-                                      </mat-form-field>                               
-                                  <div class="col-md-4"></div>
-                            </div>                                                   
+                                    </mat-select>
+                                    <mat-error>
+                                        {{ formErrors['ControlentityCode'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
 
                             <div class="row">
-                                <div class="col-md-2"></div>                          
-                                     <mat-form-field class="col-md-4">
-                                        <input matInput
-                                        placeholder="Entity Branch (Location)"
-                                        [(ngModel)]="user.entityBranchCode"
-                                        formControlName="ControlentityBranchCode"
-                                        #txtEntityBranchCode
-                                        name="txtEntityBranchCode">
-                                        <mat-error>
-                                            {{ formErrors['ControlentityBranchCode'] }}
-                                        </mat-error>
-                                    </mat-form-field>
+                                <div class="col-md-2"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Entity Branch (Location)"
+                                        [(ngModel)]="user.entityBranchCode" formControlName="ControlentityBranchCode"
+                                        #txtEntityBranchCode name="txtEntityBranchCode">
+                                    <mat-error>
+                                        {{ formErrors['ControlentityBranchCode'] }}
+                                    </mat-error>
+                                </mat-form-field>
 
-                                    <mat-form-field class="col-md-4">
-                                        <input matInput
-                                        placeholder="Designation"
-                                        [(ngModel)]="user.desigination"
-                                        formControlName="Controldesigination"
-                                        #txtDesignation
-                                        name="txtDesignation">
-                                        <mat-error>
-                                            {{ formErrors['Controldesigination']}}
-                                        </mat-error>
-                                    </mat-form-field>                            
-                                  <div class="col-md-2"></div>
-                            </div>                            
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Designation" [(ngModel)]="user.desigination"
+                                        formControlName="Controldesigination" #txtDesignation name="txtDesignation">
+                                    <mat-error>
+                                        {{ formErrors['Controldesigination']}}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-2"></div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <div class="col-sm-4" style="padding-top:20px;">
-                                    <mat-checkbox name="chkPasswordChanged"
-                                    #chkPasswordChanged
-                                    formControlName="ControlpasswordChanged"
-                                     [(ngModel)]="user.isPswdChanged">Password Changed
+                                    <mat-checkbox name="chkPasswordChanged" #chkPasswordChanged
+                                        formControlName="ControlpasswordChanged" [(ngModel)]="user.isPswdChanged">
+                                        Password Changed
                                     </mat-checkbox>
                                 </div>
                                 <div class="col-sm-2" style="padding-top:20px;">
-                                    <mat-checkbox name="chkisBlock"
-                                    #chkisBlock
-                                    formControlName="ControlisBlocked"
-                                     [(ngModel)]="user.isBlocked">Block
+                                    <mat-checkbox name="chkisBlock" #chkisBlock formControlName="ControlisBlocked"
+                                        [(ngModel)]="user.isBlocked">Block
                                     </mat-checkbox>
                                 </div>
                                 <div class="col-sm-2" style="padding-top: 20px;">
-                                    <mat-checkbox name="chkisActive"
-                                    #chkisActive
-                                    formControlName="ControlisActive"
-                                     [(ngModel)]="user.isActive">Active
+                                    <mat-checkbox name="chkisActive" #chkisActive formControlName="ControlisActive"
+                                        [(ngModel)]="user.isActive">Active
                                     </mat-checkbox>
                                 </div>
                                 <div class="col-md-4"></div>
-                            </div>                         
+                            </div>
                         </div>
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
-                                    <button mat-raised-button [disabled] = "!form.valid"
-                                    (click)="save(userForm)"
+                                    <button mat-raised-button [disabled]="!form.valid" (click)="save(userForm)"
                                         color="primary">Submit</button> &nbsp;
-                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
                                     <button mat-raised-button color="warn" routerLink="/UserList"><i
                                             class="fa fa-ban"></i>
                                         Cancel</button>
@@ -251,5 +202,3 @@
     </form>
 </main>
 <!--<div style="display: none;"> {{user | json}}</div>-->
-
-

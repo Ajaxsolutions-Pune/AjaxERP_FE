@@ -284,7 +284,7 @@ export class ExampleDataSource extends DataSource<UserDeviceMapping> {
     return merge(...displayDataChanges).pipe(map(() => {
       // Filter data
       this.filteredData = this._exampleDatabase.data.slice().filter((userDeviceMapping: UserDeviceMapping) => {
-        const searchStr = (userDeviceMapping.adId + userDeviceMapping.loginIdText
+        const searchStr = (userDeviceMapping.adId + userDeviceMapping.userNameENG
           + userDeviceMapping.sortBy + userDeviceMapping.isActiveText).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
@@ -314,7 +314,7 @@ export class ExampleDataSource extends DataSource<UserDeviceMapping> {
 
       switch (this._sort.active) {
         case 'UserDeviceMapping': [propertyA, propertyB] = [a.adId, b.adId]; break;
-        case 'LoginText': [propertyA, propertyB] = [a.loginIdText, b.loginIdText]; break;
+        case 'LoginText': [propertyA, propertyB] = [a.userNameENG, b.userNameENG]; break;
         case 'SortBy': [propertyA, propertyB] = [a.sortBy, b.sortBy]; break;
       }
 

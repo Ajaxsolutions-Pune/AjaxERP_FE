@@ -25,7 +25,7 @@ export class FormQueAnsMappingService {
 
     getFormQueAnsMapping(formId: string): Observable<FormQueAnsMappingEntity[]> {
         return this.httpClient.get<FormQueAnsMappingEntity[]>(
-            this.str + '/GetFQAMapping/getList/Sudarshan/' + this.env.OuCode +
+            this.str + '/GetFQAMapping/getList/' + localStorage.getItem('username').toString() + '/' + this.env.OuCode +
             '?formId=' + formId
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }

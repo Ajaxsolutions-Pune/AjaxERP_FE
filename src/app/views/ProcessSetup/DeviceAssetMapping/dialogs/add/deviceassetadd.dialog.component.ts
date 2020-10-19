@@ -63,7 +63,7 @@ export class DeviceAssetAddDialogComponent implements OnInit{
   }
 
   public confirmAdd(): void {    
-    this.data.assetCodeText = this.objassetCodeText;    
+    this.data.assetName = this.objassetCodeText;    
    
     if (this.data.isActive.toString() === 'true') {
       this.data.isActiveText = 'Active';

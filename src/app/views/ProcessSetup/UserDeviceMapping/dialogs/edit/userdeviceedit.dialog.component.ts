@@ -72,7 +72,7 @@ export class UserDeviceEditDialogComponent implements OnInit {
   stopEdit(): void {
         this.objnextUserIdText = this.user.
       find(element => element.loginID === this.data.loginId).userNameENG;
-      this.data.loginIdText = this.objnextUserIdText;
+      this.data.userNameENG = this.objnextUserIdText;
       if (this.data.isActive.toString() === 'true') {
         this.data.isActiveText = 'Active';
       } else {

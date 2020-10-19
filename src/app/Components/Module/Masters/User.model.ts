@@ -4,6 +4,7 @@ export class User {
     ouCode: string;
     loginID: string;
     pwd:string;
+    confipwd:string;
     userNameENG: string;
     userNameUNI: string;
     userTypeCode:string;

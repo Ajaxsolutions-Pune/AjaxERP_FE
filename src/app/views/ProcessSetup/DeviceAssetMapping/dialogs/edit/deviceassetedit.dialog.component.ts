@@ -17,6 +17,7 @@ import { DeviceAssetDataService } from '../../deviceassetdata.service';
   templateUrl: '../../dialogs/edit/deviceassetedit.dialog.html',
   styleUrls: ['../../dialogs/edit/deviceassetedit.dialog.css']
 })
+
 export class DeviceAssetEditDialogComponent implements OnInit {
   asset: Asset[];
   objnextAssetIdText: string;
@@ -26,11 +27,11 @@ export class DeviceAssetEditDialogComponent implements OnInit {
     private assetTransfarmer: AssetTransfarmer,
     @Inject(MAT_DIALOG_DATA) public data: DeviceAssetMapping, public dataService: DeviceAssetDataService) {
   }
+
   formControl = new FormControl('', [
     Validators.required
     // Validators.email,
   ]);
-
 
   ngOnInit() {
     this.assetService.fillDrpAssets().subscribe(
@@ -39,6 +40,7 @@ export class DeviceAssetEditDialogComponent implements OnInit {
       },
       (err: any) => console.log(err));
   }
+  
   getErrorMessage() {
     return this.formControl.hasError('required') ? 'Required field' :
       this.formControl.hasError('email') ? 'Not a valid email' :
@@ -65,7 +67,7 @@ export class DeviceAssetEditDialogComponent implements OnInit {
   stopEdit(): void {
     this.objnextAssetIdText = this.asset.
       find(element => element.assetCode === this.data.assetCode).assetNameENG;
-    this.data.assetCodeText = this.objnextAssetIdText;
+    this.data.assetName = this.objnextAssetIdText;
     if (this.data.isActive.toString() === 'true') {
       this.data.isActiveText = 'Active';
     } else {
