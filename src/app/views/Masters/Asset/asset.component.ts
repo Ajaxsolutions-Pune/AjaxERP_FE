@@ -62,59 +62,36 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
 
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
-  @Input() AssetInput: Asset;
-  bindObj: Asset;
-  ObjEntity: AssetEntity;
-  assetGroupObj: AssetGroup[];
-  statesObj: State[];
-  zoneObj: Zone[];
-  circleObj: Circle[];
-  clusterObj: Cluster[];
-  regionObj: Region[];
-  countryObj: Country[];
-  colourObj: Colour[];
-  deviceObj: Device[];
-  drpHubObj: Hub[];
-  drpProjectObj: Project[];
+  @Input() AssetInput: Asset;  bindObj: Asset;
+  ObjEntity: AssetEntity;  assetGroupObj: AssetGroup[];
+  statesObj: State[];  zoneObj: Zone[];
+  circleObj: Circle[];  clusterObj: Cluster[];
+  regionObj: Region[];  countryObj: Country[];
+  colourObj: Colour[];  deviceObj: Device[];
+  drpHubObj: Hub[];  drpProjectObj: Project[];
   CustomerEntityDrp: UserEntity_[];
   env = environment;
   str: string;
   drpTransmissionLineObj: TransmissionLine[];
   assetCategoryObj: AssetCategory[];
-  constructor(private route: ActivatedRoute,
-    private httpClient: HttpClient,
-    private _router: Router,
-    private globalService: GlobalService,
+  constructor(private route: ActivatedRoute,    private httpClient: HttpClient,
+    private _router: Router,    private globalService: GlobalService,
     private defaultLayoutComponent: DefaultLayoutComponent,
-    private assetService: AssetService,
-    private assetTransfarmer: AssetTransfarmer,
-    private deviceService: DeviceService,
-    private deviceTransfarmer: DeviceTransfarmer,
-    private stateService: StateService,
-    private stateTransfarmer: StateTransfarmer,
-    private assetGroupService: AssetGroupService,
-    private assetGroupTransfarmer: AssetGroupTransfarmer,
-    private zoneService: ZoneService,
-    private zoneTransfarmer: ZoneTransfarmer,
-    private circleService: CircleService,
-    private circleTransfarmer: CircleTransfarmer,
-    private clusterService: ClusterService,
-    private clusterTransfarmer: ClusterTransfarmer,
-    private regionService: RegionService,
-    private regionTransfarmer: RegionTransfarmer,
-    private countryService: CountryService,
-    private countryTransfarmer: CountryTransfarmer,
-    private colourService: ColourService,
-    private colourTransfarmer: ColourTransfarmer,
-    private assetCategoryService: AssetCategoryService,
-    private assetCategoryTransfarmer: AssetCategoryTransfarmer,
-
+    private assetService: AssetService,    private assetTransfarmer: AssetTransfarmer,
+    private deviceService: DeviceService,    private deviceTransfarmer: DeviceTransfarmer,
+    private stateService: StateService,    private stateTransfarmer: StateTransfarmer,
+    private assetGroupService: AssetGroupService,    private assetGroupTransfarmer: AssetGroupTransfarmer,
+    private zoneService: ZoneService,    private zoneTransfarmer: ZoneTransfarmer,
+    private circleService: CircleService,    private circleTransfarmer: CircleTransfarmer,
+    private clusterService: ClusterService,    private clusterTransfarmer: ClusterTransfarmer,
+    private regionService: RegionService,    private regionTransfarmer: RegionTransfarmer,
+    private countryService: CountryService,    private countryTransfarmer: CountryTransfarmer,
+    private colourService: ColourService,    private colourTransfarmer: ColourTransfarmer,
+    private assetCategoryService: AssetCategoryService,    private assetCategoryTransfarmer: AssetCategoryTransfarmer,
     private transmissionLineService: TransmissionLineService,
     private transmissionLineTransfarmer: TransmissionLineTransfarmer,
-    private hubService: HubService,
-    private hubTransfarmer: HubTransfarmer,
-    private projectService: ProjectService,
-    private projectTransfarmer: ProjectTransfarmer,
+    private hubService: HubService,    private hubTransfarmer: HubTransfarmer,
+    private projectService: ProjectService,    private projectTransfarmer: ProjectTransfarmer,
     private formBuilder: FormBuilder) {
     super();
     this.validationMessages = {
@@ -203,32 +180,19 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       }
     };
     this.formErrors = {
-      ControlassetCode: '',
-      ControlassetNameENG: '',
-      ControlAssetCategory: '',
-      ControlplaceName: '',
-      ControlassetGroupCode: '',
-      ControlcustomerCode: '',
-      ControlprojectCode: '',
-      ControlzoneCode: '',
-      ControlcircleCode: '',
-      ControlclusterCode: '',
-      ControlregionCode: '',
-      ControlcountryCode: '',
-      ControlstateCode: '',
-      Controllatitude: '',
-      Controllongitude: '',
-      ControlRedius: '',
-      ControlcolourCode: '',
-      ControlgeofenceCode: '',
-      ControlsharedCode: '',
-      ControlcircuitCode: '',
-      ControlconductorCode: '',
-      ControlclassificationCode: '',
-      ControlstructureCode: '',
-      ControlpositionCode: '',
-      ControlEmailId: '',
-      ControlmobileNo: ''
+      ControlassetCode: '',     ControlassetNameENG: '',
+      ControlAssetCategory: '',      ControlplaceName: '',
+      ControlassetGroupCode: '',      ControlcustomerCode: '',
+      ControlprojectCode: '',      ControlzoneCode: '',
+      ControlcircleCode: '',      ControlclusterCode: '',
+      ControlregionCode: '',      ControlcountryCode: '',
+      ControlstateCode: '',      Controllatitude: '',
+      Controllongitude: '',      ControlRedius: '',
+      ControlcolourCode: '',      ControlgeofenceCode: '',
+      ControlsharedCode: '',      ControlcircuitCode: '',
+      ControlconductorCode: '',      ControlclassificationCode: '',
+      ControlstructureCode: '',      ControlpositionCode: '',
+      ControlEmailId: '',      ControlmobileNo: ''
     };
     this.str = this.env.apiServiceIPPort;
   }
@@ -260,31 +224,19 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       window.location.href = 'login';
     }
     this.bindObj = {
-      ouCode: this.env.OuCode,
-      assetCode: null,
-      assetNameENG: null,
-      deviceId: null,
-      sortBy: null,
-      source: 'ERP',
-      assetNameUNI: null,
-      placeName: null,
+      ouCode: this.env.OuCode,      assetCode: null,
+      assetNameENG: null,      deviceId: null,
+      sortBy: null,      source: 'ERP',
+      assetNameUNI: null,      placeName: null,
       assetGroupCode: null,
-      assetCategoryCode: null,
-      customerCode: null,
-      projectCode: null,
-      zoneCode: null,
-      circleCode: null,
-      clusterCode: null,
-      countryCode: null,
-      stateCode: null,
-      latitude: null,
-      longitude: null,
-      redius: null,
-      pinCode: null,
-      regionCode: null,
-      address: null,
-      colourCode: null,
-      geofenceCode: null,
+      assetCategoryCode: null,      customerCode: null,
+      projectCode: null,      zoneCode: null,
+      circleCode: null,      clusterCode: null,
+      countryCode: null,      stateCode: null,
+      latitude: null,      longitude: null,
+      redius: null,      pinCode: null,
+      regionCode: null,      address: null,
+      colourCode: null,      geofenceCode: null,
       sharedCode: null,
       circuitCode: null,
       conductorCode: null,
@@ -361,7 +313,8 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
 
       this.form = this.formBuilder.group({
         ControlassetCode: ['', []],
-        ControlassetNameENG: ['', [Validators.required], [assetAsyncValidator(this.assetService, str)]],
+        ControlassetNameENG: ['', [Validators.required],
+         [assetAsyncValidator(this.assetService, str)]],
         ControlAssetCategory: ['', [
           Validators.required]],
         ControlassetNameUNI: ['', []],
@@ -439,7 +392,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       assetNameUNI: null,
       placeName: null,
       assetGroupCode: null,
-      assetCategoryCode: '0',
+      assetCategoryCode:  null,
       customerCode: null,
       projectCode: null,
       zoneCode: null,
@@ -484,7 +437,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         assetNameUNI: null,
         placeName: null,
         assetGroupCode: null,
-        assetCategoryCode: '0',
+        assetCategoryCode:  null,
         customerCode: null,
         projectCode: null,
         zoneCode: null,
@@ -531,7 +484,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         assetNameUNI: null,
         placeName: null,
         assetGroupCode: null,
-        assetCategoryCode: '0',
+        assetCategoryCode:  null,
         customerCode: null,
         projectCode: null,
         zoneCode: null,
@@ -610,8 +563,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
     } else {
       this.assetService.Update(this.assetTransfarmer.AssetTransfarmer(this.bindObj)).subscribe(
         (par) => {
-          console.log(par.result);
-          if (par.result !== 'success') {
+          if (par !== null) {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this._router.navigate(['AssetList']);

@@ -56,13 +56,16 @@
     </thead>
     <tbody>
       <tr *ngFor="let Project of projects | paginate: config">
-        <td>
+        <td style="padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
           <div>{{Project.projectCode}}</div>
         </td>
-        <td>
+        <td style="padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
           {{Project.projectName}}
         </td>
-        <td>
+        <td style="padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
           {{Project.projectDescription}}
         </td>
        <!-- <td>
@@ -86,10 +89,12 @@
         <td>
             {{Project.budget}}
         </td>-->
-        <td>
+        <td style="padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
           {{Project.isActive}}
         </td>
-        <td [ngSwitch]="1">
+        <td  style="padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;">
             <button mat-icon-button [routerLink]="['/Project/',Project.projectCode]"
              color="accent">
               <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>

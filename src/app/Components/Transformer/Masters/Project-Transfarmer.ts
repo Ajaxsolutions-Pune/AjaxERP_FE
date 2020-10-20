@@ -19,7 +19,7 @@ export class ProjectTransfarmer {
         this.projects = [];
         Entity.forEach(element => {
             this.project = new Project();   
-            this.project.ouCode = this.env.OuCode;
+            this.project.ouCode = '12';      
             this.project.projectCode = element.projectCode;
             this.project.projectName = element.projectName;
             this.project.projectDescription= element.projectDescription;
@@ -43,14 +43,15 @@ export class ProjectTransfarmer {
                 this.project.isActive = 'Active'.toString().trim();
             } else { this.project.isActive = 'Inactive'.toString().trim(); }
             this.projects.push(this.project);
-        });
+        });       
         return this.projects;
+        
     }
 
      ProjectTransfarmerEntity(Entity: ProjectEntity): Project {
         console.log(Entity);
         this.project = new Project();
-        this.project.ouCode =  this.env.OuCode;
+        this.project.ouCode = '12';
         this.project.projectCode = Entity.projectCode;
         this.project.projectName = Entity.projectName;
         this.project.projectDescription= Entity.projectDescription;
@@ -79,12 +80,14 @@ export class ProjectTransfarmer {
          // tslint:disable-next-line:max-line-length
          if (Entity.isActive === '1') { this.project.isActive = 'true'.toString().trim(); } else { this.project.isActive = ''.toString().trim(); }
         console.log(this.project.isActive);
+      
         return this.project;
+       
     }    
 
     ProjectTransfarmer(Project1: Project): ProjectEntity {
         this.projectEntity = new ProjectEntity();
-        this.projectEntity.ouCode =  this.env.OuCode;
+        this.projectEntity.ouCode = '12';
         this.projectEntity.projectCode = Project1.projectCode ;
         this.projectEntity.projectName = Project1.projectName;
         
@@ -111,6 +114,8 @@ export class ProjectTransfarmer {
         this.projectEntity.modifiedBy = Project1.modifiedBy;
         this.projectEntity.modifiedDate = Project1.modifiedDate;
          if (Project1.isActive.toString().trim() === 'true') { this.projectEntity.isActive = '1'; } else { this.projectEntity.isActive = '0'; }
-        return this.projectEntity;
+        
+         return this.projectEntity;
+       
     }
 }

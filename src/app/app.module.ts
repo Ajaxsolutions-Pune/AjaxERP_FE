@@ -35,7 +35,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { DashboardComponent } from './views/dashboard/dashboard/dashboard.component';
-import { DashboardService } from './Components/Services/Dashboard.service';
 
 
 import { LogIn } from './Components/Module/login.model';
@@ -155,7 +154,7 @@ import {
   MatInputModule, MatDialogModule, MatButtonModule,
   ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, MatFormFieldModule, MatIconModule,
   MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule, MatSelectModule, MatCardModule,
-  MatSortModule, MatTableModule, MatToolbarModule, MatPaginatorModule
+  MatSortModule, MatTabsModule, MatTableModule, MatToolbarModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE
 } from '@angular/material';
 import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.component';
 import { AssetTransfarmer } from './Components/Transformer/Masters/Asset-Transfarmer';
@@ -279,18 +278,30 @@ import { ScreenComponent } from './views/Masters/Screen/screen.component';
 import { ScreenListComponent } from './views/Masters/Screen/screen-list.component';
 import { AssetListComponent } from './views/Masters/Asset/asset-list.component';
 import { AssetComponent } from './views/Masters/Asset/asset.component';
+import { MonitoringReportComponent } from './Report/Monitoring/MonitoringReport/monitoring-report.component';
+import { DashboardService } from './Components/Services/Masters/DashboardService';
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MM YYYY',
+  },
+};
 
 @NgModule({
   imports: [
     BrowserModule,
     TreeGridModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
-    AppAsideModule, CommonModule,
+    AppRoutingModule, AppAsideModule, CommonModule,
     AppBreadcrumbModule.forRoot(),
     AppFooterModule,
     AppHeaderModule,
-    AppSidebarModule,
+    AppSidebarModule, MatTabsModule,
     FormsModule, HttpModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
@@ -308,6 +319,8 @@ import { AssetComponent } from './views/Masters/Asset/asset.component';
     MatCardModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatButtonModule,
     MatInputModule,
     MatIconModule,
@@ -372,7 +385,7 @@ import { AssetComponent } from './views/Masters/Asset/asset.component';
     ProcessFormMappingComponent, UserDeviceMappingComponent,
     DeviceAssetMappingComponent, ContactListComponent, ContactComponent,
     AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent,
-    UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent, ScreenComponent, ScreenListComponent
+    UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent, ScreenComponent, ScreenListComponent, MonitoringReportComponent
   ],
   providers: [
     ConfirmDialogService,
@@ -398,7 +411,7 @@ import { AssetComponent } from './views/Masters/Asset/asset.component';
     FormListResolverService, RegionListResolverService, ColourListResolverService,
     AssetListResolverService, ProcessListResolverService, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
-    AssetCategoryListResolverService, UserListResolverService,
+    AssetCategoryListResolverService, UserListResolverService, DashboardService,
     QuestionListResolverService, TehsilListResolverService, TehsilMasterResolverService,
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
@@ -416,13 +429,21 @@ import { AssetComponent } from './views/Masters/Asset/asset.component';
     ProcessDataService,
     UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer, DeviceAssetMappingService,
     DeviceAssetDataService,
-    DeviceAssetMappingTransfarmer,
+    DeviceAssetMappingTransfarmer, {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'it'
+    },
+
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: MY_FORMATS
+    },
     JwtHelperService],
   bootstrap: [AppComponent]
 })

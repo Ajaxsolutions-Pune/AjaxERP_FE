@@ -1,160 +1,350 @@
 
 <span class="clearfix"></span>
 
-<div class="">
-    <div style="border-left: solid 10px #2ff563;" class="col-md-1 col-xs-6 pull-left dashboard-main">
-        <div>
+<div class="row">
+  <div class="col-sm-2 col-xs-6">
+    <div style="border-left: solid 10px #2ff563;" class="dashboard-main">            
             <span class="headline">Check In</span>           
             <span class="dash-line"> </span>
-            <label  style="color:#2ff563 ;font-size: 40px;">369</label>
-        </div>
+            <label  style="color:#2ff563 ;font-size: 40px;">{{dashboardObj.dashboardCount.checkIn}}</label>
+       </div>
     </div> 
-    <div style="border-left: solid 10px #95219c;" class="col-md-1 col-xs-6 pull-left dashboard-main">
-        <div>
+
+    <div class="col-sm-2 col-xs-6">
+    <div style="border-left: solid 10px #95219c;" class="dashboard-main">        
             <span class="headline">CheckOut</span>
             <span  class="dash-line" style="background-color:#95219c;"></span>
-            <label style="color:#95219c ;font-size: 40px;">46</label>
+            <label style="color:#95219c ;font-size: 40px;">{{dashboardObj.dashboardCount.checkOut}}</label>
         </div>       
     </div>
-    <div style="border-left: solid 10px #19cfbf;" class="col-md-1 col-xs-6 pull-left dashboard-main">
-        <div>
-            <span class="headline">Idle</span>
+
+    <div class="col-md-2 col-xs-6">
+    <div style="border-left: solid 10px #19cfbf;" class="dashboard-main">
+         <span class="headline">Idle</span>
             <span class="dash-line" style="background-color:#19cfbf;"> </span>
-            <label style="color:#19cfbf ;font-size: 40px;">8</label>
+            <label style="color:#19cfbf ;font-size: 40px;">{{dashboardObj.dashboardCount.idle}}</label>
         </div>
     </div>
-    <div style=" border-left: solid 10px #c7203e;" class="col-md-1 col-xs-6 pull-left dashboard-main">
-        <div>
-            <span class="headline">Leave</span>
+
+    <div class="col-md-2 col-xs-6">
+    <div style=" border-left: solid 10px #c7203e;" class="dashboard-main">
+         <span class="headline">Leave</span>
             <span  class="dash-line" style="background-color:#c7203e;"> </span>
-            <label style="color:#c7203e ;font-size: 40px;">55</label>
+            <label style="color:#c7203e ;font-size: 40px;">{{dashboardObj.dashboardCount.leave}}</label>
         </div>  
     </div>
-    <div  style="border-left: solid 10px #5e60d6; " class="col-md-1 col-xs-6 pull-left dashboard-main">
-        <div>
+
+    <div class="col-md-2 col-xs-6">
+    <div  style="border-left: solid 10px #5e60d6; " class="dashboard-main">        
             <span class="headline">Inactive</span>
             <span class="dash-line" style="background-color:#5e60d6;"> </span>
-            <label style="color:#5e60d6 ;font-size: 40px;">105</label>
+            <label style="color:#5e60d6 ;font-size: 40px;">{{dashboardObj.dashboardCount.inactive}}</label>
         </div> 
     </div>
-    <div style=" border-left: solid 10px #7712a6; " class="col-md-1 col-xs-6 pull-left dashboard-main">
-        <div>
+
+    <div class="col-md-2 col-xs-6">
+    <div style=" border-left: solid 10px #7712a6; " class="dashboard-main">       
             <span class="headline">Total</span>
             <span class="dash-line" style="background-color:#7712a6 ;"> </span>
-            <label style="color:#7712a6 ;font-size: 40px;">78</label>
-        </div> 
+            <label style="color:#7712a6 ;font-size: 40px;">{{dashboardObj.dashboardCount.total}}</label>
     </div>  
+  </div>
+</div>
 
-    <span class="clearfix"></span>
+   
     <div style="margin-top: 50px;"></div>
 
-<div class="col-md-3 pull-left" >
 
- <div style="background-color: white;">
- <table class="table table-bordered">
-    <thead style="background-color: #bdffce;">
-      <tr>
-        <th>User</th>
-        <th>Distance</th>       
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>fgvdfg </td>
-        <td>fdgf</td>      
-      </tr>
-      <tr>
-        <td>Mliolary</td>
-        <td>Mocvcxvxcve</td>        
-      </tr>
-      <tr>
-        <td>wqeqwe</td>
-        <td>Doofbbgbgley</td>        
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
+<div style="border:solid 1px #5e60d6">
+    <mat-tab-group  dynamicHeight>
+      <mat-tab >
+        <ng-template mat-tab-label>
+          <span>Top &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-up"></i></span>       
+       </ng-template>
+        <div class="col-md-3 pull-left" style="padding-top:15px; background-color:#adc1f0" >
+          <div style="background-color: white;">
+          <table class="table table-bordered">
+             <thead style="background-color: #bdffce;">
+               <tr>                
+                 <th>User</th>
+                 <th style="width:10px;text-align:right;">Distance</th>       
+               </tr>    
+             </thead>
+             <tbody>
+               <tr *ngFor="let DashboardTop of dashboardTopObj">               
+                 <td>
+                   <div>{{DashboardTop.userName}}</div>
+                 </td>
+                 <td>
+                   <div class="text-right">{{DashboardTop.distance}}</div>
+                 </td>    
+               </tr>   
+             </tbody>
+           </table>
+         </div>
+         </div>
+         
+         <div class="col-md-3 pull-left" style="padding-top:15px; background-color:#adc1f0">
+             <div style="background-color: white;">
+                 <table class="table table-bordered">
+                     <thead style="background-color: #bdffce;">
+                       <tr>
+                         <th>User</th>
+                         <th>Places</th>       
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <td>fgvdfg </td>
+                         <td>fdgf</td>      
+                       </tr>
+                       <tr>
+                         <td>Mliolary</td>
+                         <td>Mocvcxvxcve</td>        
+                       </tr>
+                       <tr>
+                         <td>wqeqwe</td>
+                         <td>Doofbbgbgley</td>        
+                       </tr>
+                       <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                      <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                     </tbody>
+                   </table>    
+             </div>
+         </div>
+         
+         <div class="col-md-3 pull-left" style="padding-top:15px; background-color:#adc1f0">
+             <div style="background-color: white;">
+                 <table class="table table-bordered">
+                     <thead style="background-color: #bdffce;">
+                       <tr>
+                         <th>User</th>
+                         <th>Form</th>       
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <td>fgvdfg </td>
+                         <td>fdgf</td>      
+                       </tr>
+                       <tr>
+                         <td>Mliolary</td>
+                         <td>Mocvcxvxcve</td>        
+                       </tr>
+                       <tr>
+                         <td>wqeqwe</td>
+                         <td>Doofbbgbgley</td>        
+                       </tr>
+                       <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                      <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                     </tbody>
+                   </table>
+                 </div>
+         </div>
+         
+         <div class="col-md-3 pull-left" style="padding-top:15px; background-color:#adc1f0">
+             <div style="background-color: white;">    
+                 <table class="table table-bordered">
+                     <thead style="background-color: #bdffce;">
+                       <tr>
+                         <th>User</th>
+                         <th>Visit</th>       
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <td>fgvdfg </td>
+                         <td>fdgf</td>      
+                       </tr>
+                       <tr>
+                         <td>Mliolary</td>
+                         <td>Mocvcxvxcve</td>        
+                       </tr>
+                       <tr>
+                         <td>wqeqwe</td>
+                         <td>Doofbbgbgley</td>        
+                       </tr>
+                       <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                      <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                     </tbody>
+                   </table>    
+             </div>
+         </div>
+      </mat-tab>
 
-<div class="col-md-3 pull-left" >
-    <div style="background-color: white;">
-        <table class="table table-bordered">
-            <thead style="background-color: #bdffce;">
-              <tr>
-                <th>User</th>
-                <th>Places</th>       
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>fgvdfg </td>
-                <td>fdgf</td>      
-              </tr>
-              <tr>
-                <td>Mliolary</td>
-                <td>Mocvcxvxcve</td>        
-              </tr>
-              <tr>
-                <td>wqeqwe</td>
-                <td>Doofbbgbgley</td>        
-              </tr>
-            </tbody>
-          </table>    
-    </div>
-</div>
+      <mat-tab >
+        <ng-template mat-tab-label>
+          <span>Bottom &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-down"></i> </span>       
+        </ng-template>
+        <div class="col-md-3 pull-left" style="padding-top:15px; background-color:#bde4e1">
+          <div style="background-color: white;">
+          <table class="table table-bordered">
+             <thead style="background-color: #bdffce;">
+               <tr>
+                 <!--<th>Sr.No.</th>-->
+                 <th>User</th>
+                 <th>Distance</th>       
+               </tr>    
+             </thead>
+             <tbody>
+               <tr *ngFor="let DashboardBottom of dashboardBottomObj">
+                 <!--<td>
+                   <div>{{DashboardTop.topNDistance}}</div>
+                 </td>-->
+                 <td>
+                   <div>{{DashboardBottom.userName}}</div>
+                 </td>
+                 <td>
+                   <div>{{DashboardBottom.distance}}</div>
+                 </td>    
+               </tr>   
+             </tbody>
+           </table>
+         </div>
+         </div>
+         
+         <div class="col-md-3 pull-left" style="padding-top:15px; background-color:#bde4e1">
+             <div style="background-color: white;">
+                 <table class="table table-bordered">
+                     <thead style="background-color: #bdffce;">
+                       <tr>
+                         <th>User</th>
+                         <th>Places</th>       
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <td>fgvdfg </td>
+                         <td>fdgf</td>      
+                       </tr>
+                       <tr>
+                         <td>Mliolary</td>
+                         <td>Mocvcxvxcve</td>        
+                       </tr>
+                       <tr>
+                         <td>wqeqwe</td>
+                         <td>Doofbbgbgley</td>        
+                       </tr>
+                       <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                      <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                     </tbody>
+                   </table>    
+             </div>
+         </div>
+         
+         <div class="col-md-3 pull-left"  style="padding-top:15px; background-color:#bde4e1">
+             <div style="background-color: white;">
+                 <table class="table table-bordered">
+                     <thead style="background-color: #bdffce;">
+                       <tr>
+                         <th>User</th>
+                         <th>Form</th>       
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <td>fgvdfg </td>
+                         <td>fdgf</td>      
+                       </tr>
+                       <tr>
+                         <td>Mliolary</td>
+                         <td>Mocvcxvxcve</td>        
+                       </tr>
+                       <tr>
+                         <td>wqeqwe</td>
+                         <td>Doofbbgbgley</td>        
+                       </tr>
+                       <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                      <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                     
+                     </tbody>
+                   </table>
+                 </div>
+         </div>
+         
+         <div class="col-md-3 pull-left" style="padding-top:15px; background-color:#bde4e1">
+             <div style="background-color: white;">    
+                 <table class="table table-bordered">
+                     <thead style="background-color: #bdffce;">
+                       <tr>
+                         <th>User</th>
+                         <th>Visit</th>       
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <td>fgvdfg </td>
+                         <td>fdgf</td>      
+                       </tr>
+                       <tr>
+                         <td>Mliolary</td>
+                         <td>Mocvcxvxcve</td>        
+                       </tr>
+                       <tr>
+                         <td>wqeqwe</td>
+                         <td>Doofbbgbgley</td>        
+                       </tr>
+                       <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                      <tr>
+                        <td>wqeqwe</td>
+                        <td>Doofbbgbgley</td>        
+                      </tr>
+                     </tbody>
+                   </table>    
+             </div>
+         </div>    
+      </mat-tab>
+    </mat-tab-group>
+  </div>
 
-<div class="col-md-3 pull-left" >
-    <div style="background-color: white;">
-        <table class="table table-bordered">
-            <thead style="background-color: #bdffce;">
-              <tr>
-                <th>User</th>
-                <th>Form</th>       
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>fgvdfg </td>
-                <td>fdgf</td>      
-              </tr>
-              <tr>
-                <td>Mliolary</td>
-                <td>Mocvcxvxcve</td>        
-              </tr>
-              <tr>
-                <td>wqeqwe</td>
-                <td>Doofbbgbgley</td>        
-              </tr>
-            </tbody>
-          </table>
-        </div>
-</div>
 
-<div class="col-md-3 pull-left" >
-    <div style="background-color: white;">    
-        <table class="table table-bordered">
-            <thead style="background-color: #bdffce;">
-              <tr>
-                <th>User</th>
-                <th>Visit</th>       
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>fgvdfg </td>
-                <td>fdgf</td>      
-              </tr>
-              <tr>
-                <td>Mliolary</td>
-                <td>Mocvcxvxcve</td>        
-              </tr>
-              <tr>
-                <td>wqeqwe</td>
-                <td>Doofbbgbgley</td>        
-              </tr>
-            </tbody>
-          </table>    
-    </div>
-</div>
-</div>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 

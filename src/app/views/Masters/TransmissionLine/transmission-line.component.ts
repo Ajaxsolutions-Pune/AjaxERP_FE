@@ -75,14 +75,12 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
   isQueExist(): boolean {
     return this.form.get('ControltlNameENG').hasError('queExist');
   }
-
   special_char_val(event) {
     let k;
     k = event.charCode;
     return this.globalService.SpecialCharValidator(k);
     
   }
-
   ngOnInit() {
    
     status = '';
@@ -91,11 +89,11 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
         this.colourdrp = this.colourTransfarmer.ColourTransfarmers(par);
       },
       (err: any) => console.log(err));
-      //this.projectService.getProjectDrp().subscribe(
-      //  (par) => {
-      //    this.projectDrp = this.ProjectTransfarmer.ProjectTransfarmers(par);
-      //  },
-      //  (err: any) => console.log(err));
+      this.projectService.fillDrpProjects().subscribe(
+        (par) => {
+          this.projectDrp = this.ProjectTransfarmer.ProjectTransfarmers(par);
+        },
+        (err: any) => console.log(err));
       this.globalService.fillMasterDrp('TRLTY').subscribe(
         (par) => {
           this.TransmissionLineTypeDrp = par;
@@ -128,7 +126,8 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
 
       this.form = this.formBuilder.group({
         ControltlCode: ['', []],
-        ControltlNameENG: ['', [Validators.required], [transmissionAsyncValidator(this.transmissionLineService,str)] ],
+        ControltlNameENG: ['', [Validators.required],
+         [transmissionAsyncValidator(this.transmissionLineService,str)] ],
         ControlTransmissionLineNameUNI: ['', []],
         ControlProject: ['', [
           Validators.required]],

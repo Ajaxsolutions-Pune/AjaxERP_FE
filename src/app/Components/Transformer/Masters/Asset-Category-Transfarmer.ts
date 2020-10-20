@@ -25,8 +25,8 @@ export class AssetCategoryTransfarmer {
             this.Oject.modifiedBy = element.modifiedBy;
             this.Oject.modifiedDate = element.modifiedDate;
             this.Oject.colourCode = element.colourCode;
-            this.Oject.assetGroupText = 'GroupText ' + element.assetGroupCode;
-            this.Oject.colourText = 'colourText  ' + element.assetGroupCode;
+            this.Oject.assetGroupText = element.assetGroupNameENG;
+            this.Oject.colourText = element.colourNameENG;
             if (element.isActive === '1') {
                 this.Oject.isActive = 'Active'.toString().trim();
             } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
@@ -45,8 +45,8 @@ export class AssetCategoryTransfarmer {
         this.Oject.modifiedBy = element.modifiedBy;
         this.Oject.modifiedDate = element.modifiedDate;
         this.Oject.colourCode = element.colourCode;
-        this.Oject.assetGroupText = 'GroupText ' + element.assetGroupCode;
-        this.Oject.colourText = 'colourText  ' + element.assetGroupCode;
+        this.Oject.assetGroupText = element.assetGroupNameENG;
+        this.Oject.colourText = element.colourCode;
         if (element.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
         } else { this.Oject.isActive = ''.toString().trim(); }
@@ -64,8 +64,8 @@ export class AssetCategoryTransfarmer {
         this.OjectEntity.modifiedBy = element.modifiedBy;
         this.OjectEntity.modifiedDate = element.modifiedDate;
         this.OjectEntity.colourCode = element.colourCode;
-        this.OjectEntity.assetGroupText = 'GroupText ' + element.assetGroupCode;
-        this.OjectEntity.colourText = 'colourText  ' + element.assetGroupCode;
+        this.OjectEntity.assetGroupNameENG = element.assetGroupText;
+        this.OjectEntity.colourCode = element.colourText;
 
         if (element.isActive === 'true') {
             this.OjectEntity.isActive = '1';

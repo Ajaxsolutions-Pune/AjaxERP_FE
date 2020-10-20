@@ -38,6 +38,8 @@ export class CircleService {
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     checkCircle(circle: string, Code: string): Observable<CommonEntity> {
+        console.log(this.str
+            + '/Circle/getCircleByName?name=' + circle + '&code=' + Code);
         return this.httpClient.get<CommonEntity>(this.str
             + '/Circle/getCircleByName?name=' + circle + '&code=' + Code
             , this.env.httpOptions).pipe(catchError(this.handleError));

@@ -76,16 +76,19 @@ export class ZoneComponent extends FormComponentBase implements OnInit, AfterVie
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getquestion(str);
+
+      this.form = this.formBuilder.group({
+        ControlzoneCode: ['', []],
+        ControlzoneNameENG: ['', [Validators.required],
+          [zoneAsyncValidator(this.zoneService,
+            str)]],
+        ControlzoneNameUNI: ['', []],
+        ControlisActive: ['', []],
+      });
+      this.form.controls['ControlzoneCode'].disable();
+
     });
-    this.form = this.formBuilder.group({
-      ControlzoneCode: ['', []],
-      ControlzoneNameENG: ['', [Validators.required],
-        [zoneAsyncValidator(this.zoneService,
-          '1')]],
-      ControlzoneNameUNI: ['', []],
-      ControlisActive: ['', []],
-    });
-    this.form.controls['ControlzoneCode'].disable();
+  
   }
   save(zoneForm: NgForm): void {
     if (status !== 'Update') {

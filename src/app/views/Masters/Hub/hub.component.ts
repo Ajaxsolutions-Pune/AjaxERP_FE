@@ -119,7 +119,7 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
           Validators.required]],
         ControlisActive: ['', []],
       });
-        this.form.controls['ControlhubCode'].disable();
+      //  this.form.controls['ControlhubCode'].disable();
 
 
     });
@@ -147,9 +147,10 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
       
       this.hubService.getHub(this.bindObj.hubCode).subscribe(
         (par) => {
+          console.log(par);
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
-            'This hub code already exist !', 'modal-danger');
+            'This hub code already exist !', 'modal-info');
             return;
           }
           this.hubService.Save(this.hubTransfarmer.
@@ -162,7 +163,7 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
                   this.router.navigate(['HubList']);
                 } else {
                   this.defaultLayoutComponent.Massage('',
-                    'Technical Error Please connect to Ajax Support team', 'modal-danger');
+                    'Technical Error Please connect to Ajax Support team', 'modal-info');
                 }
               }
             );

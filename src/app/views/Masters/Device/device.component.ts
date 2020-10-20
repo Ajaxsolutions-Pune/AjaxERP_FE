@@ -112,6 +112,8 @@ export class DeviceComponent extends FormComponentBase implements OnInit, AfterV
         Controlsim2MobleNo: ['', []],
       });
       this.form.controls['ControldeviceId'].disable();    
+      this.form.controls['Controlimei1'].disable();    
+      this.form.controls['Controlimei2'].disable();    
     });
   }
 

@@ -11,7 +11,7 @@ import { DialogService } from '../MatServices/Dialog.service';
 export class DashboardService {
 
     str: string;
-    dashboardObj: dashboard[];
+    dashboardObj: dashboard;
 
     env = environment;  
 
@@ -19,11 +19,12 @@ export class DashboardService {
         private httpClient: HttpClient, 
         public dialogService: DialogService) 
     {
-        this.str = this.env.apiServiceIPPort;
-    }  
+        this.str = this.env.apiServiceIPPort;  
+    }      
 
-    getDashboardData(): Observable<dashboard[]> {
-        return this.httpClient.get<dashboard[]>(this.str + '/Dashboard/getList/Sumit', this.env.httpOptions);
+
+    getDashboardData(): Observable<dashboard> {
+        return this.httpClient.get<dashboard>(this.str + '/Dashboard/getList/Sumit', this.env.httpOptions);
     }   
 
     private handleError(errorResponse: HttpErrorResponse) {

@@ -129,6 +129,7 @@ import { ModuleComponent } from './views/Masters/Module/module.component';
 import { ScreenObjListResolverService } from './Components/Resolver/Masters/Screen-List-Resolver.Service';
 import { ScreenListComponent } from './views/Masters/Screen/screen-list.component';
 import { ScreenComponent } from './views/Masters/Screen/screen.component';
+import { MonitoringReportComponent } from './Report/Monitoring/MonitoringReport/monitoring-report.component';
 
 export const routes: Routes = [
   {
@@ -820,14 +821,14 @@ export const routes: Routes = [
         path: 'Asset/:id',
         component: AssetComponent,
         data: {
-          title: 'Edit Asset Category'
+          title: 'Edit Asset'
         }
       },
       {
         path: 'Asset',
         component: AssetComponent,
         data: {
-          title: 'Add Aset'
+          title: 'Add Asset'
         },
         resolve: {
           AssetList: AssetListResolverService
@@ -1168,6 +1169,16 @@ export const routes: Routes = [
         component: UserDeviceRegComponent,
         data: {
           title: 'User Approve'
+        }
+      },
+
+      /////Reports 
+      
+      {
+        path: 'MonitoringReport',
+        component: MonitoringReportComponent,
+        data: {
+          title: 'Monitoring Report'
         }
       },
 

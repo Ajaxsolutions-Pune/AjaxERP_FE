@@ -303,10 +303,15 @@ export const navItems: NavData[] = [
 
   },
   {
-    name: 'Monitoring Reports',
+    name: 'Reports',
     url: '/Reports',
     //   icon: 'fa fa-newspaper-o',
     children: [
+      {
+        name: 'Monitoring Report',
+        url: '/MonitoringReport',
+        icon: 'icon-puzzle'
+      },
     ]
 
   }

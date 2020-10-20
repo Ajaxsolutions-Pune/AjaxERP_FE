@@ -17,8 +17,8 @@ export class AssetCategoryEntity {
     assetCategoryNameENG: string;
     assetCategoryNameUNI: string;
     assetGroupCode: string;
-    colourText: string;
-    assetGroupText: string;
+    assetGroupNameENG: string;
+    colourNameENG: string;
     colourCode: string;
     isActive: string;
     createdBy: string;

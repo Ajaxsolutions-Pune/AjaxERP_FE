@@ -34,7 +34,7 @@ export class AssetListComponent implements OnInit {
     this.config = {
       itemsPerPage: this.env.paginationPageSize,
       currentPage: 1,
-      totalItems: this.arrOject.length
+      totalItems: 100
     };
   }
 
@@ -120,7 +120,7 @@ export class AssetListComponent implements OnInit {
     this.config = {
       itemsPerPage: this.env.paginationPageSize,
       currentPage: 1,
-      totalItems: this.arrOject.length
+      totalItems: 100
     };
   }
   ExportToExcel(): void {

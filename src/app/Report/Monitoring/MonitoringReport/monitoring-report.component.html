@@ -1,0 +1,154 @@
+<main class="form-main">
+    <form #formAccess="ngForm" [formGroup]="form" autocomplete="off">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Monitoring Report</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field color="accent" class="col-md-4">
+                                    <mat-label>Asset Group</mat-label>
+                                    <mat-select formControlName="ControlAssetGroup">
+                                        <!--[(ngModel)]="project.projectGroupCode"-->
+                                        <mat-option>Select</mat-option>
+                                        <mat-option *ngFor="let assetGroup of assetGroupDrp"
+                                            [value]="assetGroup.assetGroupCode">
+                                            {{assetGroup.assetGroupNameENG}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        {{ formErrors['ControlAssetGroup'] }}
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field color="accent" class="col-md-4">
+                                    <mat-label>Process</mat-label>
+                                    <mat-select formControlName="ControlProcess">
+                                        <!--[(ngModel)]="project.projectGroupCode"-->
+                                        <mat-option>Select</mat-option>
+                                        <mat-option *ngFor="let process of processDrp" [value]="process.processId">
+                                            {{process.processName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        {{ formErrors['ControlProcess'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field color="accent" class="col-md-4">
+                                    <mat-label>Asset</mat-label>
+                                    <mat-select formControlName="ControlAsset">
+                                        <!--[(ngModel)]="project.projectGroupCode"-->
+                                        <mat-option>Select</mat-option>
+                                        <mat-option *ngFor="let asset of assetDrp" [value]="asset.assetCode">
+                                            {{asset.assetNameENG}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        {{ formErrors['ControlAsset'] }}
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field color="accent" class="col-md-4">
+                                    <mat-label>State</mat-label>
+                                    <mat-select formControlName="ControlState">
+                                        <!--[(ngModel)]="project.projectGroupCode"-->
+                                        <mat-option>Select</mat-option>
+                                        <mat-option *ngFor="let state of stateDrp" [value]="state.stateCode">
+                                            {{state.stateNameEng}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        {{ formErrors['ControlState'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field color="accent" class="col-md-4">
+                                    <mat-label>User</mat-label>
+                                    <mat-select formControlName="ControlUser">
+                                        <!--[(ngModel)]="project.projectGroupCode"-->
+                                        <mat-option>Select</mat-option>
+                                        <mat-option *ngFor="let user of userDrp" [value]="user.loginID">
+                                            {{user.userNameENG}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        {{ formErrors['ControlUser'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field color="accent" class="col-md-2">
+                                    <mat-label>Form</mat-label>
+                                    <mat-select formControlName="ControlForm">
+                                        <!--[(ngModel)]="project.projectGroupCode"-->
+                                        <mat-option>Select</mat-option>
+                                        <mat-option *ngFor="let form of formDrp" [value]="form.formId">
+                                            {{form.formName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        {{ formErrors['ControlForm'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-sm-1" style="padding-top: 20px;">
+                                    <mat-checkbox name="ControlisImage" #chkisImage formControlName="ControlisImage">With
+                                        Image
+                                    </mat-checkbox>
+                                    <!--[(ngModel)]="user.isActive"-->
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field appearance="fill" class="col-md-4">
+                                    <mat-label>Start Date</mat-label>
+                                    <input matInput [matDatepicker]="picker1"  formControlName="ControlStartDate" 
+                                     [formControl]="date">
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                    <mat-datepicker  #picker1></mat-datepicker>
+                                    <mat-error>
+                                        {{ formErrors['ControlStartDate']}}
+                                    </mat-error>
+                                  </mat-form-field>
+                                  <mat-form-field appearance="fill" class="col-md-4">
+                                      <mat-label>End Date</mat-label>
+                                      <input matInput [matDatepicker]="picker2" 
+                                       formControlName="ControlEndDate" 
+                                       [formControl]="date">
+                                      <mat-datepicker-toggle matSuffix [for]="picker2">
+                                      </mat-datepicker-toggle>
+                                      <mat-datepicker  #picker2></mat-datepicker>
+                                      <mat-error>
+                                          {{ formErrors['ControlEndDate']}}
+                                      </mat-error>
+                                    </mat-form-field>
+                                    <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-2">
+                                    <button mat-raised-button color="primary">Download</button> &nbsp; &nbsp; &nbsp;
+                                    &nbsp;
+                                </div>
+                                <div class="col-md-5"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </form>
+</main>
+<!--<div style="display: none;"> {{accessobj | json}}</div> -->

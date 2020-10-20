@@ -33,7 +33,8 @@
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
                 <input matInput placeholder="Asset Name" required [(ngModel)]="bindObj.assetNameENG" #txtassetNameENG
-                  (keypress)="special_char_val($event)" maxlength="100" formControlName="ControlassetNameENG"
+                  (keypress)="special_char_val($event)"
+                   maxlength="100" formControlName="ControlassetNameENG"
                   name="txtassetNameENG">
                 <mat-error>
                   <span *ngIf="isQueExist()">

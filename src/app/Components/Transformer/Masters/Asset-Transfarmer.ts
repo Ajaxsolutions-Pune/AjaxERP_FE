@@ -62,6 +62,10 @@ export class AssetTransfarmer {
             if (element.isActive === '1') {
                 this.Oject.isActive = 'Active'.toString().trim();
             } else { this.Oject.isActive = 'Inactive'.toString().trim(); }
+            
+            if (element.isRetag === '1') {
+                this.Oject.isRetag = 'No'.toString().trim();
+            } else { this.Oject.isRetag = 'Yes'.toString().trim(); }
             this.arrOject.push(this.Oject);
         });
         return this.arrOject;
@@ -116,6 +120,10 @@ export class AssetTransfarmer {
         if (element.isActive === '1') {
             this.Oject.isActive = 'true'.toString().trim();
         } else { this.Oject.isActive = ''.toString().trim(); }
+        
+        if (element.isRetag === '1') {
+            this.Oject.isRetag = 'true'.toString().trim();
+        } else { this.Oject.isRetag = ''.toString().trim(); }
 
         return this.Oject;
     }
@@ -164,10 +172,13 @@ export class AssetTransfarmer {
         this.OjectEntity.hubCode = element.hubCode;
         this.OjectEntity.mobileNo = element.mobileNo;
         this.OjectEntity.emailId = element.emailId;
-
-        if (element.isActive === 'true') {
+        if (element.isActive.toString().trim() === 'true') {
             this.OjectEntity.isActive = '1';
         } else { this.OjectEntity.isActive = '0'; }
+        
+        if (element.isRetag.toString().trim() === 'true') {
+            this.OjectEntity.isRetag = '1';
+        } else { this.OjectEntity.isRetag = '0'; }
         return this.OjectEntity;
     }
 }
