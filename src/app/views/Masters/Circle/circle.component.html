@@ -26,7 +26,8 @@
                             <mat-form-field class="col-md-4">
                                 <input matInput placeholder="Circle Name"
                                 maxlength="50" [(ngModel)]="bindObj.circleNameENG"
-                                    required formControlName="ControlcircleNameENG" #txtcircleNameENG
+                                    required formControlName="ControlcircleNameENG"
+                                    #txtcircleNameENG
                                     (keypress)="special_char_val($event)"
                                     name="txtcircleNameENG">
                                 <mat-error>

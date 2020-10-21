@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { environment } from '../../Components/Module/environment';
 import '../../../assets/JS/Global.js';
+declare var jQuery: any;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html',
@@ -34,6 +35,15 @@ export class DefaultLayoutComponent implements OnDestroy {
     @Inject(DOCUMENT) _document?: any) {
     this.router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {
+       // (function ($) {
+       //   $(document).ready(function () {
+       //   //  alert("dasdasdddd");
+       //     $("#defaultMain").bind("click", function () {
+       //       alert("dddd");
+       //     });
+    //
+       //   });
+       // })(jQuery);
         this.showLoddingIndicator = true;
 
       }

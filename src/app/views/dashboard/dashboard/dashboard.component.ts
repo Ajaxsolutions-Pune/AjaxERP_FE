@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { dashboard, dashboardBottom, dashboardTop } from '../../../Components/Module/Masters/Dashboard.model';
+import { dashboard,bottomDistance, topDistance, topPlacesTagged,bottomPlacesTagged,topForm,
+  bottomForm,topPlacesVisit,bottomPlacesVisit} from '../../../Components/Module/Masters/Dashboard.model';
 import { DashboardService } from '../../../Components/Services/Masters/DashboardService';
 import * as alasql from 'alasql';
 alasql['private'].externalXlsxLib = require('xlsx');
@@ -17,8 +18,15 @@ import { environment } from '../../../Components/Module/environment';
 export class DashboardComponent implements OnInit {
   @Input() FormInput: dashboard;
   dashboardObj: dashboard;
-  dashboardTopObj: dashboardTop[];
-  dashboardBottomObj: dashboardBottom[];
+  topDistanceObj: topDistance[];
+  bottomDistanceObj: bottomDistance[];
+
+  topPlacesTaggedObj: topPlacesTagged[];
+  bottomPlacesTaggedObj: bottomPlacesTagged[];
+  topFormObj: topForm[];
+  bottomFormObj: bottomForm[];
+  topPlacesVisitObj: topPlacesVisit[];
+  bottomPlacesVisitObj: bottomPlacesVisit[];
 
 
   config: any;
@@ -49,8 +57,14 @@ export class DashboardComponent implements OnInit {
     this.dashboardObj
     this.dashboardObj = {
       dashboardCount: null,
-      dashboardBottom: [],
-      dashboardTop: []
+      bottomDistance: [],
+      topDistance: [],
+      topPlacesTagged : [],
+      bottomPlacesTagged: [],
+      topForm:[],
+      bottomForm:[],
+      topPlacesVisit:[],
+      bottomPlacesVisit:[]
     };
     this.dashboardObj.dashboardCount = {
       checkIn: null,
@@ -61,12 +75,26 @@ export class DashboardComponent implements OnInit {
       total: null,
     }
 
-    this.dashboardTopObj = [];
-    this.dashboardBottomObj = [];
+    this.topDistanceObj = [];
+    this.bottomDistanceObj = [];
+    this.topPlacesTaggedObj= [];
+    this.bottomPlacesTaggedObj= [];
+    this.topFormObj = [];
+    this.bottomFormObj = [];
+    this.topPlacesVisitObj = [];
+    this.bottomPlacesVisitObj = [];
+  
+
     this.dashboardService.getDashboardData().subscribe(t => {
       this.dashboardObj = t;
-      this.dashboardTopObj = this.dashboardObj.dashboardTop;
-      this.dashboardBottomObj = this.dashboardObj.dashboardBottom;
+      this.topDistanceObj = this.dashboardObj.topDistance;
+      this.bottomDistanceObj = this.dashboardObj.bottomDistance;
+      this.topPlacesTaggedObj = this.dashboardObj.topPlacesTagged;
+      this.bottomPlacesTaggedObj= this.dashboardObj.bottomPlacesTagged;
+      this.topFormObj = this.dashboardObj.topForm;
+      this.bottomFormObj = this.dashboardObj.bottomForm;
+      this.topPlacesVisitObj = this.dashboardObj.topPlacesVisit;
+      this.bottomPlacesVisitObj = this.dashboardObj.bottomPlacesVisit;
     });
 
   }

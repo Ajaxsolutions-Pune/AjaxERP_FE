@@ -7,6 +7,7 @@ import { User, UserEntity } from '../../Module/Masters/User.model';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { DialogService } from '../MatServices/Dialog.service';
 import { DatePipe } from '@angular/common';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class UserService {
@@ -19,13 +20,21 @@ export class UserService {
     }
     Listanswer: User[];
     getUsers(): Observable<UserEntity[]> {
-        console.log(this.httpClient.get<UserEntity[]>(this.str + '/User/getList'));
-        return this.httpClient.get<UserEntity[]>(this.str + '/User/getList', this.env.httpOptions);
+        console.log(this.str + '/User/getList');
+        return this.httpClient.get<UserEntity[]>(this.str + '/User/getList?ouCode='+this.env.OuCode, this.env.httpOptions);
     }
 
     fillDrpUsers(): Observable<UserEntity[]> {
         console.log(this.httpClient.get<UserEntity[]>(this.str + '/User/getList'));
         return this.httpClient.get<UserEntity[]>(this.str + '/User/getList?status=1', this.env.httpOptions);
+    }
+
+    checkUser(zone: string, Id: string): Observable<CommonEntity> {
+        console.log(this.str + '/User/getUserByName?name="' +
+        zone + '"&code=' + Id + '');
+        return this.httpClient.get<CommonEntity>(this.str + '/User/getUserByName?name=' +
+            zone + '&code=' + Id + ''
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     getUser(UserCode: string): Observable<UserEntity> {
@@ -55,14 +64,5 @@ export class UserService {
             console.error('client side error', errorResponse.error.message);
         }
         return throwError('d');
-        const data = null; // call api
-        console.log(this.dialogService);
-        this.dialogService.openModal('Title1', 'Message Test', () => {
-            // confirmed
-            console.log('Yes');
-        }, () => {
-            // not confirmed
-            console.log('No');
-        });
     }
 }

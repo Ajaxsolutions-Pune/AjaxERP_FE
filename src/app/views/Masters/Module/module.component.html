@@ -30,6 +30,7 @@
                                     #ModuleName
                                     spellcheck="false" [(ngModel)]="moduleobj.moduleName"
                                     placeholder="Module Name *"
+                                    [errorStateMatcher]="matcher"
                                     (keypress)="special_char_val($event)" 
                                     formControlName="ControlModuleName" maxlength="50">                                    
                                   <mat-error>

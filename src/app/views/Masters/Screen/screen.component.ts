@@ -12,6 +12,7 @@ import { DefaultLayoutComponent } from '../../../containers';
 import { ScreenAsyncValidator } from '../../../helper/async-validator';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
+import { MyErrorStateMatcher } from '../AngularDemo/MyErrorStateMatcher.component';
 
 @Component({
   selector: 'app-screen',
@@ -21,11 +22,12 @@ import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-
 export class ScreenComponent extends FormComponentBase implements OnInit, AfterViewInit {
   // @ts-ignore
   form!: FormGroup;
-  errorMatcher = new CrossFieldErrorMatcher();
+  // errorMatcher = new CrossFieldErrorMatcher();
   screenobj: ScreenObj;
   moduledrp: Moduleobj[];
   screenEntity: ScreenObjEntity;
   str: string;
+  matcher = new MyErrorStateMatcher();
   constructor(private route: ActivatedRoute,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private screenService: ScreenObjService,
@@ -83,7 +85,6 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
     };
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id'); this.getScreen(str);
-
       this.form = this.formBuilder.group({
         ControlscreenName: ['', [Validators.required],
           [ScreenAsyncValidator(this.screenService, str)]],

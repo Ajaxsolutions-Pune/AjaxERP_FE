@@ -284,21 +284,21 @@ export const navItems: NavData[] = [
         url: '/RoleList',
         icon: 'icon-puzzle'
       },
-       {
-         name: 'Role Level',
-         url: '/RolelevelList',
-         icon: 'icon-puzzle'
-       },
-       {
-         name: 'User',
-         url: '/UserList',
-         icon: 'icon-puzzle'
-       },
-       {
-         name: 'User Approve',
-         url: '/UserDeviceRegList',
-         icon: 'icon-puzzle'
-       },
+      {
+        name: 'Role Level',
+        url: '/RolelevelList',
+        icon: 'icon-puzzle'
+      },
+      //{
+      //  name: 'User',
+      //  url: '/UserList',
+      //  icon: 'icon-puzzle'
+      //},
+      {
+        name: 'User Approve',
+        url: '/UserDeviceRegList',
+        icon: 'icon-puzzle'
+      },
     ]
 
   },

@@ -9,6 +9,7 @@ import { DefaultLayoutComponent } from '../../../containers';
 import { AccessAsyncValidator, circleAsyncValidator, ModuleAsyncValidator } from '../../../helper/async-validator';
 import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
+import { MyErrorStateMatcher } from '../AngularDemo/MyErrorStateMatcher.component';
 
 @Component({
   selector: 'app-module',
@@ -23,6 +24,7 @@ export class ModuleComponent extends FormComponentBase implements OnInit, AfterV
   moduleobj: Moduleobj;
   moduleEntity: ModuleobjEntity;
   str: string;
+  matcher = new MyErrorStateMatcher();
   constructor(private route: ActivatedRoute,
     private moduleTransfarmer: ModuleobjTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,

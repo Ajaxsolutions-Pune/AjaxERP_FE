@@ -155,8 +155,8 @@
                                     <mat-label>Start Date</mat-label>
                                     <input matInput [matDatepicker]="picker2"
                                     (keypress)="Date_char_val($event)"
-                                    formControlName="ControlStartDate" 
-                                     [formControl]="startDate">
+                                    [(ngModel)]="startDate"
+                                    formControlName="ControlStartDate" >
                                     <mat-datepicker-toggle matSuffix [for]="picker2">
                                     </mat-datepicker-toggle>
                                     <mat-datepicker  #picker2></mat-datepicker>
@@ -179,8 +179,8 @@
                                     <mat-label>End Date</mat-label>
                                     <input matInput [matDatepicker]="picker3"
                                     (keypress)="Date_char_val($event)"
-                                     formControlName="ControlEndDate"                                       
-                                     [formControl]="endDate">
+                                     formControlName="ControlEndDate"
+                                     [(ngModel)]="endDate">
                                     <mat-datepicker-toggle matSuffix [for]="picker3">
                                     </mat-datepicker-toggle>
                                     <mat-datepicker  #picker3></mat-datepicker>

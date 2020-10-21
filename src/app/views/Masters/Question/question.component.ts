@@ -87,6 +87,7 @@ export class QuestionComponent extends FormComponentBase implements OnInit, Afte
           Validators.required]]
       });
       this.form.controls['ControlquestionId'].disable();
+      this.form.controls['ControlisActive'].disable();
     
     });
   }

@@ -16,7 +16,6 @@ export class UserTransfarmer {
     }
     UserTransfarmers(Entity: UserEntity[]): User[] {
         this.users = [];
-        console.log(Entity);
         Entity.forEach(element => {
             this.user = new User();
             this.user.ouCode = this.env.OuCode;
@@ -61,13 +60,12 @@ export class UserTransfarmer {
     }
 
     UserTransfarmerEntity(Entity: UserEntity): User {
-        console.log(Entity);
         this.user = new User();
         this.user.ouCode =  this.env.OuCode;
         this.user.id = Entity.id;
         this.user.loginID = Entity.loginID;
-        this.user.pwd =  '123456789';//Entity.pwd;
-        this.user.confipwd = '123456789';//Entity.pwd;
+        this.user.pwd =  Entity.pwd;
+        this.user.confipwd = Entity.pwd;
         this.user.userNameENG = Entity.userNameENG;
         this.user.userNameUNI = Entity.userNameUNI;
         this.user.userTypeCode = Entity.userTypeCode;
@@ -97,14 +95,11 @@ export class UserTransfarmer {
         this.user.createdDate = Entity.createdDate;
         this.user.modifiedBy = Entity.modifiedBy;
         this.user.modifiedDate = Entity.modifiedDate;
-        console.log(Entity.isActive.toString().trim() === '1');
-        console.log(Entity.isActive);
         if (Entity.isActive === '1') {
             this.user.isActive = 'true'.toString().trim();
         } else {
             this.user.isActive = ''.toString().trim();
         }
-        console.log(this.user.isActive);
         return this.user;
     }
 
@@ -138,6 +133,8 @@ export class UserTransfarmer {
         this.userEntity.modifiedDate = User1.modifiedDate;
         if (User1.isActive.toString().trim() === 'true') { this.userEntity.isActive = '1'; }
         else { this.userEntity.isActive = '0'; }
+
+        console.log(this.userEntity);
         return this.userEntity;
     }
 }

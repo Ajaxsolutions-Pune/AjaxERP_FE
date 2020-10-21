@@ -59,7 +59,7 @@
     <mat-tab-group  dynamicHeight>
       <mat-tab >
         <ng-template mat-tab-label>
-          <span>Top &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-up"></i></span>       
+          <span>Top &nbsp;&nbsp;&nbsp;<i style="color:green" class="fa fa-arrow-up"></i></span>       
        </ng-template>
         <div class="col-md-3 pull-left" style="padding-top:15px; background-color:#adc1f0" >
           <div style="background-color: white;">
@@ -71,7 +71,7 @@
                </tr>    
              </thead>
              <tbody>
-               <tr *ngFor="let DashboardTop of dashboardTopObj">               
+               <tr *ngFor="let DashboardTop of topDistanceObj">               
                  <td>
                    <div>{{DashboardTop.userName}}</div>
                  </td>
@@ -94,26 +94,14 @@
                        </tr>
                      </thead>
                      <tbody>
-                       <tr>
-                         <td>fgvdfg </td>
-                         <td>fdgf</td>      
-                       </tr>
-                       <tr>
-                         <td>Mliolary</td>
-                         <td>Mocvcxvxcve</td>        
-                       </tr>
-                       <tr>
-                         <td>wqeqwe</td>
-                         <td>Doofbbgbgley</td>        
-                       </tr>
-                       <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
-                      <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
+                      <tr *ngFor="let PlacesTaggedTop of topPlacesTaggedObj">               
+                        <td>
+                          <div>{{PlacesTaggedTop.userName}}</div>
+                        </td>
+                        <td>
+                          <div class="text-right">{{PlacesTaggedTop.placesTagged}}</div>
+                        </td>    
+                      </tr>   
                      </tbody>
                    </table>    
              </div>
@@ -129,26 +117,14 @@
                        </tr>
                      </thead>
                      <tbody>
-                       <tr>
-                         <td>fgvdfg </td>
-                         <td>fdgf</td>      
-                       </tr>
-                       <tr>
-                         <td>Mliolary</td>
-                         <td>Mocvcxvxcve</td>        
-                       </tr>
-                       <tr>
-                         <td>wqeqwe</td>
-                         <td>Doofbbgbgley</td>        
-                       </tr>
-                       <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
-                      <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
+                      <tr *ngFor="let FormsTop of topFormObj">               
+                        <td>
+                          <div>{{FormsTop.userName}}</div>
+                        </td>
+                        <td>
+                          <div class="text-right">{{FormsTop.formCount}}</div>
+                        </td>    
+                      </tr>   
                      </tbody>
                    </table>
                  </div>
@@ -164,26 +140,14 @@
                        </tr>
                      </thead>
                      <tbody>
-                       <tr>
-                         <td>fgvdfg </td>
-                         <td>fdgf</td>      
-                       </tr>
-                       <tr>
-                         <td>Mliolary</td>
-                         <td>Mocvcxvxcve</td>        
-                       </tr>
-                       <tr>
-                         <td>wqeqwe</td>
-                         <td>Doofbbgbgley</td>        
-                       </tr>
-                       <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
-                      <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
+                      <tr *ngFor="let PlaceVisitTop of topPlacesVisitObj">               
+                        <td>
+                          <div>{{PlaceVisitTop.userName}}</div>
+                        </td>
+                        <td>
+                          <div class="text-right">{{PlaceVisitTop.placesVisit}}</div>
+                        </td>    
+                      </tr>   
                      </tbody>
                    </table>    
              </div>
@@ -192,7 +156,7 @@
 
       <mat-tab >
         <ng-template mat-tab-label>
-          <span>Bottom &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-down"></i> </span>       
+          <span>Bottom &nbsp;&nbsp;&nbsp;<i style="color:red" class="fa fa-arrow-down"></i></span>       
         </ng-template>
         <div class="col-md-3 pull-left" style="padding-top:15px; background-color:#bde4e1">
           <div style="background-color: white;">
@@ -205,15 +169,12 @@
                </tr>    
              </thead>
              <tbody>
-               <tr *ngFor="let DashboardBottom of dashboardBottomObj">
-                 <!--<td>
-                   <div>{{DashboardTop.topNDistance}}</div>
-                 </td>-->
+               <tr *ngFor="let DistanceBottom of bottomDistanceObj">               
                  <td>
-                   <div>{{DashboardBottom.userName}}</div>
+                   <div>{{DistanceBottom.userName}}</div>
                  </td>
                  <td>
-                   <div>{{DashboardBottom.distance}}</div>
+                   <div>{{DistanceBottom.distance}}</div>
                  </td>    
                </tr>   
              </tbody>
@@ -231,26 +192,14 @@
                        </tr>
                      </thead>
                      <tbody>
-                       <tr>
-                         <td>fgvdfg </td>
-                         <td>fdgf</td>      
-                       </tr>
-                       <tr>
-                         <td>Mliolary</td>
-                         <td>Mocvcxvxcve</td>        
-                       </tr>
-                       <tr>
-                         <td>wqeqwe</td>
-                         <td>Doofbbgbgley</td>        
-                       </tr>
-                       <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
-                      <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
+                      <tr *ngFor="let PlaceTaggedBottom of bottomPlacesTaggedObj">               
+                        <td>
+                          <div>{{PlaceTaggedBottom.userName}}</div>
+                        </td>
+                        <td>
+                          <div>{{PlaceTaggedBottom.placesTagged}}</div>
+                        </td>    
+                      </tr>   
                      </tbody>
                    </table>    
              </div>
@@ -266,27 +215,14 @@
                        </tr>
                      </thead>
                      <tbody>
-                       <tr>
-                         <td>fgvdfg </td>
-                         <td>fdgf</td>      
-                       </tr>
-                       <tr>
-                         <td>Mliolary</td>
-                         <td>Mocvcxvxcve</td>        
-                       </tr>
-                       <tr>
-                         <td>wqeqwe</td>
-                         <td>Doofbbgbgley</td>        
-                       </tr>
-                       <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
-                      <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
-                     
+                      <tr *ngFor="let FormBottom of bottomFormObj">               
+                        <td>
+                          <div>{{FormBottom.userName}}</div>
+                        </td>
+                        <td>
+                          <div>{{FormBottom.formCount}}</div>
+                        </td>    
+                      </tr>   
                      </tbody>
                    </table>
                  </div>
@@ -302,26 +238,14 @@
                        </tr>
                      </thead>
                      <tbody>
-                       <tr>
-                         <td>fgvdfg </td>
-                         <td>fdgf</td>      
-                       </tr>
-                       <tr>
-                         <td>Mliolary</td>
-                         <td>Mocvcxvxcve</td>        
-                       </tr>
-                       <tr>
-                         <td>wqeqwe</td>
-                         <td>Doofbbgbgley</td>        
-                       </tr>
-                       <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
-                      <tr>
-                        <td>wqeqwe</td>
-                        <td>Doofbbgbgley</td>        
-                      </tr>
+                      <tr *ngFor="let PlaceVisitBottom of bottomPlacesVisitObj">               
+                        <td>
+                          <div>{{PlaceVisitBottom.userName}}</div>
+                        </td>
+                        <td>
+                          <div>{{PlaceVisitBottom.placesVisit}}</div>
+                        </td>    
+                      </tr>   
                      </tbody>
                    </table>    
              </div>

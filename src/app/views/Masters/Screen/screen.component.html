@@ -30,6 +30,7 @@
                                     #screenName
                                     spellcheck="false" [(ngModel)]="screenobj.screenName"
                                     placeholder="Screen Name *"
+                                    [errorStateMatcher]="matcher"
                                     (keypress)="special_char_val($event)" 
                                     formControlName="ControlscreenName" maxlength="50">                                    
                                   <mat-error>
@@ -44,7 +45,7 @@
                                 <div class="col-md-4"></div>
                                 <mat-form-field class="col-md-4">
                                     <mat-label>Module</mat-label>
-                                    <mat-select required 
+                                    <mat-select 
                                     formControlName="ControlmoduleId"
                                      [(ngModel)]="screenobj.moduleId">
                                      <mat-option>Module</mat-option>

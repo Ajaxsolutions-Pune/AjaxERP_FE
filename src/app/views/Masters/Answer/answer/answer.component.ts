@@ -82,6 +82,7 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
         [answerAsyncValidator(this.answerService,str)]],
       });
       this.form.controls['ControlAnswerID'].disable();    
+      this.form.controls['ControlisActive'].disable();    
     }); 
   
   }

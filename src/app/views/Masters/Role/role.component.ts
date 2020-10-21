@@ -6,7 +6,6 @@ import { RoleTransfarmer} from '../../../Components/Transformer/Masters/Role-Tra
 import { DefaultLayoutComponent } from '../../../containers';
 import { RoleService } from '../../../Components/Services/Masters/RoleService';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
-import { CrossFieldErrorMatcher } from '../AngularDemo/infrastructure/cross-field-error-matcher';
 import { environment } from '../../../Components/Module/environment';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { RoleLevel } from '../../../Components/Module/Masters/RoleLevel.model';
@@ -24,7 +23,7 @@ import { RolelevelTransfarmer} from '../../../Components/Transformer/Masters/Rol
     // @ts-ignore
     @ViewChild('txtRoleID') firstItem: ElementRef;
     form!: FormGroup;
-    errorMatcher = new CrossFieldErrorMatcher();
+    // errorMatcher = new CrossFieldErrorMatcher();
     role: Role;
     roleEntity: RoleEntity;
     str: string;

@@ -65,7 +65,7 @@ export class AssetCategoryTransfarmer {
         this.OjectEntity.modifiedDate = element.modifiedDate;
         this.OjectEntity.colourCode = element.colourCode;
         this.OjectEntity.assetGroupNameENG = element.assetGroupText;
-        this.OjectEntity.colourCode = element.colourText;
+        this.OjectEntity.colourCode = element.colourCode;
 
         if (element.isActive === 'true') {
             this.OjectEntity.isActive = '1';
@@ -75,6 +75,7 @@ export class AssetCategoryTransfarmer {
         } else {
             this.OjectEntity.isActive = '0';
         }
+        console.log(this.OjectEntity);
         return this.OjectEntity;
     }
 }

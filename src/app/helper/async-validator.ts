@@ -21,6 +21,7 @@ import { ZoneService } from '../Components/Services/Masters/ZoneService';
 import { ModuleobjService } from '../Components/Services/Masters/ModuleService';
 import { ScreenObjService } from '../Components/Services/Masters/ScreenService';
 import { GlobalService } from '../Components/Services/GlobalServices/Global.service';
+import { UserService } from '../Components/Services/Masters/UserService';
 
 export const ConfirmPasswordValidator = (globalService: GlobalService, PassFild: string, ConfirmPassFild: string, time: number = 500) => {
   return (input: FormControl) => {
@@ -310,6 +311,22 @@ export const ScreenAsyncValidator = (ScreenService: ScreenObjService, Code: stri
   return (input: FormControl) => {
     return timer(time).pipe(
       switchMap(() => ScreenService.checkScreen(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+export const UserAsyncValidator = (userService: UserService, Code: string,
+  time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => userService.checkUser(input.value, Code)),
       map(res => {
         if (res.status == 'notexist') {
           return null;

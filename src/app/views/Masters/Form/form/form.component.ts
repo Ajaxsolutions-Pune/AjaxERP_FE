@@ -60,19 +60,19 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
       createdDate: this.globalService.GerCurrntDateStamp(),
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
-    };
-
-    
+    };   
 
     this.route.paramMap.subscribe(parameterMap => 
-      { const str = parameterMap.get('id'); this.getform(str);
-    
+      { const str = parameterMap.get('id');
+       this.getform(str);    
       this.form = this.formBuilder.group({      
-        ControlformName: ['', [Validators.required], [formAsyncValidator(this.formService,str)] ],
+        ControlformName: ['', [Validators.required],
+         [formAsyncValidator(this.formService,str)] ],
         ControlformId: ['', []],
         ControlisActive: ['', []]
       });
       this.form.controls['ControlformId'].disable();
+      this.form.controls['ControlisActive'].disable();
     });
   }
 
@@ -159,10 +159,7 @@ export class FormComponent extends FormComponentBase implements OnInit, AfterVie
       this.formService.getForm(form_Code).subscribe(
         (par) => {
           this.formEntity = par;
-          this.formobj = this.formTransfarmer.formTransfarmerEntity(this.formEntity);
-       
-         
-       
+          this.formobj = this.formTransfarmer.formTransfarmerEntity(this.formEntity);     
         },
         (err: any) => console.log(err));
       status = 'Update';

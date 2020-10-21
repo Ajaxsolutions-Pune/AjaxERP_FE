@@ -125,7 +125,7 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
       this.getregion(str);
 
       this.form = this.formBuilder.group({
-        ControltlCode: ['', []],
+        ControltlCode: ['', [Validators.required]],
         ControltlNameENG: ['', [Validators.required],
          [transmissionAsyncValidator(this.transmissionLineService,str)] ],
         ControlTransmissionLineNameUNI: ['', []],
@@ -137,7 +137,7 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
           Validators.required]],
         ControlisActive: ['', []],
       });
-      this.form.controls['ControltlCode'].disable();
+      // this.form.controls['ControltlCode'].disable();
 
     });
   }
@@ -152,6 +152,7 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
     this.bindObj.createdDate = this.globalService.GerCurrntDateStamp();
     this.bindObj.modifiedBy = localStorage.getItem('username');
     this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
+    console.log(status);
     if (status !== 'Update') {
       
       this.transmissionLineService.getTransmissionLine(this.bindObj.tlCode).subscribe(
@@ -164,6 +165,7 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
           this.transmissionLineService.Save(this.transmissionLineTransfarmer.
             TransmissionLineTransfarmer(this.bindObj)).subscribe(
               (par) => {
+                console.log(par);
                 if (par !== null) {
                   this.defaultLayoutComponent.Massage('',
                     'Data saved successfully !', 'modal-info');

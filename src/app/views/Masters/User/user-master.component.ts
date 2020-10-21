@@ -20,6 +20,8 @@ import { Observable } from 'rxjs';
 
 import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
 import { MyErrorStateMatcher } from '../AngularDemo/MyErrorStateMatcher.component';
+import { UserAsyncValidator } from '../../../helper/async-validator';
+import { ConfirmPassErrorStateMatcher } from '../../../Components/ErrorStateMatcher/ConfirmPassErrorStateMatcher.component';
 @Component({
   selector: 'app-user',
   templateUrl: './user-master.component.html'
@@ -39,7 +41,7 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
   userTypeDrp: MasterDrp[];
   userEntityDrp: UserEntity_[];
 
-  matcher = new MyErrorStateMatcher();
+  matcher = new ConfirmPassErrorStateMatcher();
   constructor(private route: ActivatedRoute,
     private userTransfarmer: UserTransfarmer,
     private defaultLayoutComponent: DefaultLayoutComponent,
@@ -79,6 +81,9 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
     this.str = this.env.apiServiceIPPort;
   }
 
+  isUserExist(): boolean {
+    return this.form.get('ControluserName').hasError('queExist');
+  }
   fillEntityDrp(GroupEntity: string): Observable<UserEntity_[]> {
     return this.httpClient.get<UserEntity_[]>(this.str +
       '/GetEntity/getList/' + localStorage.getItem('username').toString() + '/' + this.env.OuCode +
@@ -96,20 +101,6 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
       (par) => { this.userTypeDrp = par; },
       (err: any) => console.log(err));
 
-    this.form = this.formBuilder.group({
-      ControlloginID: ['', []], ControluserName: ['', [Validators.required]],
-      Controlconfipwd: ['', [Validators.required]],
-      Controlpassword: ['', [Validators.required]], Controlemail: ['', [Validators.required]],
-      Controlmobile: ['', [Validators.required]], ControluserType: ['', []],
-      ControlPassChangeDate: ['', []], ControlPassExpiryDate: ['', []],
-      ControluserGroupCode: ['', []], ControlentityCode: ['', []],
-      ControlentityBranchCode: ['', []], Controldesigination: ['', []],
-      ControlisBlocked: ['', []], ControlisActive: ['', []],
-      ControlpasswordChanged: ['', []],
-    }, { validator: this.checkPasswords });
-
-    this.form.controls['ControlPassChangeDate'].disable()
-    this.form.controls['ControlPassExpiryDate'].disable()
     // this.form.controls['ControlloginID'].disable();
     status = '';
     this.user = {
@@ -123,7 +114,32 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getuser(str);
+      this.form = this.formBuilder.group({
+        ControlloginID: ['', []],
+        ControluserName: ['', [Validators.required],
+          [UserAsyncValidator(this.userService, str)]],
+        Controlconfipwd: ['', [Validators.required]],
+        Controlpassword: ['', [Validators.required]], Controlemail: ['', [Validators.required]],
+        Controlmobile: ['', [Validators.required]], ControluserType: ['', []],
+        ControlPassChangeDate: ['', []], ControlPassExpiryDate: ['', []],
+        ControluserGroupCode: ['', []], ControlentityCode: ['', []],
+        ControlentityBranchCode: ['', []], Controldesigination: ['', []],
+        ControlisBlocked: ['', []], ControlisActive: ['', []],
+        ControlpasswordChanged: ['', []],
+      }, { validator: this.checkPasswords });
+
+      this.form.controls['ControlPassChangeDate'].disable()
+      this.form.controls['ControlPassExpiryDate'].disable()
     });
+  }
+  special_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.SpecialCharValidator(k);
+
+  }
+  isCircleExist(): boolean {
+    return this.form.get('ControlcircleNameENG').hasError('queExist');
   }
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
     let pass = group.controls.Controlpassword.value;
@@ -162,18 +178,14 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
   }
 
   save(userForm: NgForm): void {
-
     this.user.createdBy = localStorage.getItem('username');
     this.user.createdDate = this.globalService.GerCurrntDateStamp();
     this.user.modifiedBy = localStorage.getItem('username');
     this.user.modifiedDate = this.globalService.GerCurrntDateStamp();
-
     if (status !== 'Update') {
       this.user.id = null;
-
-      console.log(this.user);
-      // if (this.question.isActive === 'true') { this.question.isActive = '1'; } else { this.question.isActive = '0'; }
-
+      this.user.pwdChangedDate = this.globalService.GerCurrntDateStamp();
+      this.user.pwdExpiryDate = this.globalService.GerCurrntDateStamp();
       this.userService.Save(this.userTransfarmer.UserTransfarmer(this.user)).subscribe(
         (par) => {
           console.log(par);
@@ -283,8 +295,8 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
         (par) => {
           this.userEntity = par;
           this.user = this.userTransfarmer.UserTransfarmerEntity(this.userEntity);
-          this.form.controls['Controlpassword'].disable()
-          this.form.controls['Controlconfipwd'].disable()
+         // this.form.controls['Controlpassword'].disable()
+         // this.form.controls['Controlconfipwd'].disable()
           this.form.controls['ControlloginID'].disable()
         },
         (err: any) => console.log(err));

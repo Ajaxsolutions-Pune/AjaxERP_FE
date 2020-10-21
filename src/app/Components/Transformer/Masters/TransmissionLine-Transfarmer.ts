@@ -71,6 +71,7 @@ export class TransmissionLineTransfarmer {
         if (transmissionLine.isActive.toString().trim() === 'true') {
             this.transmissionLineEntity.isActive = '1';
         } else { this.transmissionLineEntity.isActive = '0'; }
+        console.log(this.transmissionLineEntity);
         return this.transmissionLineEntity;
     }
 }

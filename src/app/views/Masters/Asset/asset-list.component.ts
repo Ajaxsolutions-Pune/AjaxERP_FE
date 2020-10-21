@@ -32,9 +32,9 @@ export class AssetListComponent implements OnInit {
     this.arrOject = objTrans.AssetTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
     this.config = {
-      itemsPerPage: this.env.paginationPageSize,
+      itemsPerPage: 100,
       currentPage: 1,
-      totalItems: 100
+      totalItems: this.arrOject.length
     };
   }
 
@@ -118,9 +118,9 @@ export class AssetListComponent implements OnInit {
     }
     this.arrOject = this.ResultOject;
     this.config = {
-      itemsPerPage: this.env.paginationPageSize,
+      itemsPerPage: 100,
       currentPage: 1,
-      totalItems: 100
+      totalItems: this.arrOject.length
     };
   }
   ExportToExcel(): void {

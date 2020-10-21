@@ -35,9 +35,8 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
   employeeDrp: Employee[];
   StartDate: Date;
   EndDate: Date;
-  startDate: FormControl;
-  endDate: FormControl;
-
+  startDate: Date;
+  endDate: Date;
   constructor(private route: ActivatedRoute,
     private projectTransfarmer: ProjectTransfarmer,
     private projectService: ProjectService,
@@ -183,16 +182,16 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
     
   }
   save(projectForm: NgForm): void {
-    // console.log(this.startDate.value);
+    console.log(this.startDate);
     this.project.createdBy = localStorage.getItem('username');
     this.project.createdDate = this.globalService.GerCurrntDateStamp();
     this.project.modifiedBy = localStorage.getItem('username');
     this.project.modifiedDate = this.globalService.GerCurrntDateStamp();
 
-    this.StartDate = new Date(this.startDate.value);
+    this.StartDate = new Date(this.startDate);
     this.project.startDate = this.datepipe.transform(this.StartDate, 'yyyy-MM-dd');
 
-    this.EndDate = new Date(this.endDate.value);
+    this.EndDate = new Date(this.endDate);
     this.project.endDate = this.datepipe.transform(this.EndDate, 'yyyy-MM-dd');
 
     if (this.project.projectDescription == null) {
@@ -312,8 +311,10 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
           this.project.modifiedBy = localStorage.getItem('username');
           this.project.createdDate = this.globalService.GerCurrntDateStamp();
           this.project.modifiedDate = this.globalService.GerCurrntDateStamp();
-          this.endDate = new FormControl(new Date(this.project.endDate), Validators.required);
-          this.startDate = new FormControl(new Date(this.project.startDate), Validators.required);
+          // this.endDate = new FormControl(new Date(this.project.endDate), Validators.required);
+         // this.startDate = new FormControl(new Date(this.project.startDate), Validators.required);
+         this.startDate = new Date(this.project.startDate);
+         this.endDate = new Date(this.project.endDate);
         },
         (err: any) => console.log(err));
       status = 'Update';
