@@ -107,6 +107,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
       if (result === 1) {
         this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
         this.insertData.dataChange.value.push(this.dataService.getDialogData());
+        console.log(this.insertData.dataChange.value);
         this.refreshTable();
       }
     });

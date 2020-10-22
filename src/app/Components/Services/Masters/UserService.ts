@@ -25,8 +25,9 @@ export class UserService {
     }
 
     fillDrpUsers(): Observable<UserEntity[]> {
-        console.log(this.httpClient.get<UserEntity[]>(this.str + '/User/getList'));
-        return this.httpClient.get<UserEntity[]>(this.str + '/User/getList?status=1', this.env.httpOptions);
+        console.log(this.str + '/User/getList?ouCode='+this.env.OuCode+'?status=1');
+        return this.httpClient.get<UserEntity[]>(this.str + '/User/getList?'
+        +'ouCode='+this.env.OuCode+'&status=1', this.env.httpOptions);
     }
 
     checkUser(zone: string, Id: string): Observable<CommonEntity> {

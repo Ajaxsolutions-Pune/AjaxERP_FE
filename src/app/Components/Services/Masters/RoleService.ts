@@ -33,6 +33,8 @@ export class RoleService {
     }
 
     Save(saveEntityObj: Role): Observable<Insertstatus> {
+
+        console.log(saveEntityObj);
         saveEntityObj.roleId = null;
         return this.httpClient.post<Insertstatus>(this.str + '/Role',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));

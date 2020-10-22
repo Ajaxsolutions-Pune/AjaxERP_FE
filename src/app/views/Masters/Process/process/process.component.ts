@@ -82,7 +82,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
         ControlisActive: ['', []]
       });
       this.form.controls['ControlprocessId'].disable();
-      this.form.controls['ControlisActive'].disable();
+      // this.form.controls['ControlisActive'].disable();
       
       
       });

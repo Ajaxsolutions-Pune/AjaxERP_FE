@@ -118,7 +118,6 @@ import { RolelevelTransfarmer} from '../../../Components/Transformer/Masters/Rol
         if (status !== 'Update') 
         {
           this.role.roleId = null;
-          console.log(this.role);
           // if (this.question.isActive === 'true') { this.question.isActive = '1'; } else { this.question.isActive = '0'; }
     
           this.roleService.Save(this.roleTransfarmer.RoleTransfarmer(this.role)).subscribe(          

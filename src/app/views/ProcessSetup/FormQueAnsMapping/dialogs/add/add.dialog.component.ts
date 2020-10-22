@@ -106,20 +106,20 @@ export class AddDialogComponent implements OnInit {
   }
 
   public confirmAdd(): void {
-    console.log(this.data.queNames)
-   // this.data.nextFormIdText = this.objnextFormIdText;
-   // this.data.questionIdText = this.objquestionIdText;
-   // this.data.answerIdText = this.objanswerIdText;
-   // if (this.data.isQuestionMandatory.toString() === 'true') {
-   //   this.data.isQuestionMandatoryText = 'Yes';
-   // } else {
-   //   this.data.isQuestionMandatoryText = 'No';
-   // }
-   // if (this.data.isActive.toString() === 'true') {
-   //   this.data.isActiveText = 'Active';
-   // } else {
-   //   this.data.isActiveText = 'Inactive';
-   // }
-   // this.dataService.addFormQueAnsMapping(this.data);
+    //console.log(this.data.queNames)
+    this.data.nextFormIdText = this.objnextFormIdText;
+    this.data.questionIdText = this.objquestionIdText;
+    this.data.answerIdText = this.objanswerIdText;
+    if (this.data.isQuestionMandatory.toString() === 'true') {
+      this.data.isQuestionMandatoryText = 'Yes';
+    } else {
+      this.data.isQuestionMandatoryText = 'No';
+    }
+    if (this.data.isActive.toString() === 'true') {
+      this.data.isActiveText = 'Active';
+    } else {
+      this.data.isActiveText = 'Inactive';
+    }
+    this.dataService.addFormQueAnsMapping(this.data);
   }
 }
