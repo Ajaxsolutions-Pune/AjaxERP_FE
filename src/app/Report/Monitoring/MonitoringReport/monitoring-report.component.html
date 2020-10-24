@@ -12,7 +12,9 @@
                                 <div class="col-md-2"></div>
                                 <mat-form-field color="accent" class="col-md-4">
                                     <mat-label>Asset Group</mat-label>
-                                    <mat-select formControlName="ControlAssetGroup">
+                                    <mat-select formControlName="ControlAssetGroup"
+                                    (selectionChange)="AssetGroupChange($event)"
+                                    [(ngModel)]="assetGroupCode">
                                         <!--[(ngModel)]="project.projectGroupCode"-->
                                         <mat-option>Select</mat-option>
                                         <mat-option *ngFor="let assetGroup of assetGroupDrp"
@@ -27,7 +29,8 @@
 
                                 <mat-form-field color="accent" class="col-md-4">
                                     <mat-label>Process</mat-label>
-                                    <mat-select formControlName="ControlProcess">
+                                    <mat-select formControlName="ControlProcess"
+                                    [(ngModel)]="processId">
                                         <!--[(ngModel)]="project.projectGroupCode"-->
                                         <mat-option>Select</mat-option>
                                         <mat-option *ngFor="let process of processDrp" [value]="process.processId">
@@ -44,10 +47,13 @@
                                 <div class="col-md-2"></div>
                                 <mat-form-field color="accent" class="col-md-4">
                                     <mat-label>Asset</mat-label>
-                                    <mat-select formControlName="ControlAsset">
+                                    <mat-select formControlName="ControlAsset"
+                                    [(ngModel)]="assetCode">
                                         <!--[(ngModel)]="project.projectGroupCode"-->
                                         <mat-option>Select</mat-option>
-                                        <mat-option *ngFor="let asset of assetDrp" [value]="asset.assetCode">
+                                        <mat-option value="All">All</mat-option>
+                                        <mat-option *ngFor="let asset of assetDrp" 
+                                        [value]="asset.assetCode">
                                             {{asset.assetNameENG}}
                                         </mat-option>
                                     </mat-select>
@@ -58,9 +64,11 @@
 
                                 <mat-form-field color="accent" class="col-md-4">
                                     <mat-label>State</mat-label>
-                                    <mat-select formControlName="ControlState">
+                                    <mat-select formControlName="ControlState"
+                                    [(ngModel)]="state">
                                         <!--[(ngModel)]="project.projectGroupCode"-->
                                         <mat-option>Select</mat-option>
+                                        <mat-option value="All">All</mat-option>
                                         <mat-option *ngFor="let state of stateDrp" [value]="state.stateCode">
                                             {{state.stateNameEng}}
                                         </mat-option>
@@ -73,30 +81,34 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-2"></div>
-                                <mat-form-field color="accent" class="col-md-4">
+                                <mat-form-field class="col-md-4">
+                                  <mat-label>Customer</mat-label>
+                                  <mat-select required formControlName="ControlcustomerCode" 
+                                  [(ngModel)]="customerCode">
+                                    <mat-option>Customer</mat-option>
+                                    <mat-option value="All">All</mat-option>
+                                    <mat-option *ngFor="let userEntity of CustomerEntityDrp"
+                                        [value]="userEntity.entityCode">
+                                        {{userEntity.entityName}}
+                                    </mat-option>
+                                  </mat-select>
+                                  <mat-error>
+                                    {{ formErrors['ControlcustomerCode'] }}
+                                  </mat-error>
+                                </mat-form-field>
+                                <mat-form-field color="accent" class="col-md-2">
                                     <mat-label>User</mat-label>
-                                    <mat-select formControlName="ControlUser">
+                                    <mat-select formControlName="ControlUser"
+                                    [(ngModel)]="userId">
                                         <!--[(ngModel)]="project.projectGroupCode"-->
                                         <mat-option>Select</mat-option>
+                                        <mat-option value="All">All</mat-option>
                                         <mat-option *ngFor="let user of userDrp" [value]="user.loginID">
                                             {{user.userNameENG}}
                                         </mat-option>
                                     </mat-select>
                                     <mat-error>
                                         {{ formErrors['ControlUser'] }}
-                                    </mat-error>
-                                </mat-form-field>
-                                <mat-form-field color="accent" class="col-md-2">
-                                    <mat-label>Form</mat-label>
-                                    <mat-select formControlName="ControlForm">
-                                        <!--[(ngModel)]="project.projectGroupCode"-->
-                                        <mat-option>Select</mat-option>
-                                        <mat-option *ngFor="let form of formDrp" [value]="form.formId">
-                                            {{form.formName}}
-                                        </mat-option>
-                                    </mat-select>
-                                    <mat-error>
-                                        {{ formErrors['ControlForm'] }}
                                     </mat-error>
                                 </mat-form-field>
                                 <div class="col-sm-1" style="padding-top: 20px;">
@@ -111,7 +123,9 @@
                                 <div class="col-md-2"></div>
                                 <mat-form-field appearance="fill" class="col-md-4">
                                     <mat-label>Start Date</mat-label>
-                                    <input matInput [matDatepicker]="picker1"  formControlName="ControlStartDate" 
+                                    <input matInput [matDatepicker]="picker1" 
+                                     formControlName="ControlStartDate" 
+                                     [(ngModel)]="fromDate"
                                      [formControl]="date">
                                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                     <mat-datepicker  #picker1></mat-datepicker>
@@ -123,6 +137,7 @@
                                       <mat-label>End Date</mat-label>
                                       <input matInput [matDatepicker]="picker2" 
                                        formControlName="ControlEndDate" 
+                                       [(ngModel)]="toDate"
                                        [formControl]="date">
                                       <mat-datepicker-toggle matSuffix [for]="picker2">
                                       </mat-datepicker-toggle>
@@ -133,12 +148,18 @@
                                     </mat-form-field>
                                     <div class="col-md-2"></div>
                             </div>
+                            <div class="row">
+                              <div class="col-md-2"></div>
+                              <div class="col-md-2"></div>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-md-5"></div>
                                 <div class="col-md-2">
-                                    <button mat-raised-button color="primary">Download</button> &nbsp; &nbsp; &nbsp;
+                                    <button mat-raised-button color="primary"
+                                    (click)="save()">
+                                        Download</button> &nbsp; &nbsp; &nbsp;
                                     &nbsp;
                                 </div>
                                 <div class="col-md-5"></div>

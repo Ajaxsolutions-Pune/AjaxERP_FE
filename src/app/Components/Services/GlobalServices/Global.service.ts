@@ -3,9 +3,14 @@ import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { MasterDrp } from '../../Module/Masters/MasterDrp.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { DialogService } from '../MatServices/Dialog.service';
+
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class GlobalService {
@@ -45,8 +50,36 @@ export class GlobalService {
     }
 
     fillMasterDrp(MasterCode: string): Observable<MasterDrp[]> {
-        return this.httpClient.get<MasterDrp[]>(this.str + '/MastersList/' + MasterCode, this.env.httpOptions);
+        return this.httpClient.get<MasterDrp[]>(this.str + '/MastersList/'
+            + MasterCode, this.env.httpOptions);
     }
+
+    getExcelfil(fromDate: string, toDate: string, assetGroupCode: string, processId: string
+        , userId: string, customerCode: string, assetCode: string) {
+        let ReportUrl = '/Report/assetMonitoringRpt?ouCode=' + this.env.OuCode +
+            '&loginId=' + localStorage.getItem('username').toString() +
+            '&fromDate=' + fromDate + '&toDate=' + toDate + '&' +
+            'assetGroupCode=2&processId=1&userId=ALL&customerCode=ALL&assetCode=ALL';
+        console.log(this.str + ReportUrl);
+        const baseUrl = this.str + ReportUrl;
+        const token = localStorage.getItem('token').toString();
+        const headers = new HttpHeaders().set('authorization', 'Bearer ' + token);
+        this.httpClient.get(baseUrl, { headers, responseType: 'blob' as 'json' }).subscribe(
+            (response: any) => {
+                let dataType = response.type;
+                let binaryData = [];
+                binaryData.push(response);
+                let downloadLink = document.createElement('a');
+                downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
+                if (true)
+                    downloadLink.setAttribute('download', 'MonitoringReport.xlsx');
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+            }
+        )
+    }
+
+
 
     limitKeypress(event, value, maxLength) {
         if (value !== undefined && value.toString().length >= maxLength) {

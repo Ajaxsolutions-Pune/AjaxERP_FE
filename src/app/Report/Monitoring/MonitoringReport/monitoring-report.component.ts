@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from '../../../Components/Module/environment';
@@ -15,11 +15,16 @@ import { GlobalService } from '../../../Components/Services/GlobalServices/Globa
 import { DefaultLayoutComponent } from '../../../containers';
 import { CrossFieldErrorMatcher } from '../../../views/Masters/AngularDemo/infrastructure/cross-field-error-matcher';
 import { FormComponentBase } from '../../../views/Masters/AngularDemo/infrastructure/form-component-base';
-
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { AssetGroupService } from '../../../Components/Services/Masters/AssetGroupService';
 import { AssetGroupTransfarmer } from '../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
+import { DatePipe } from '@angular/common';
+import { AssetService } from '../../../Components/Services/Masters/AssetService';
+import { AssetTransfarmer } from '../../../Components/Transformer/Masters/Asset-Transfarmer';
+import { ProcessService1 } from '../../../Components/Services/Masters/ProcessService1';
+import { ProcessTransfarmer1 } from '../../../Components/Transformer/Masters/Process-Transfarmer1';
+import { UserEntity_ } from '../../../Components/Module/Masters/UserEntity.model';
 @Component({
   selector: 'app-monitoring-report',
   templateUrl: './monitoring-report.component.html',
@@ -27,20 +32,21 @@ import { AssetGroupTransfarmer } from '../../../Components/Transformer/Masters/A
 })
 export class MonitoringReportComponent extends FormComponentBase implements OnInit, AfterViewInit {
   // @ts-ignore
- // @ViewChild('txtProjectID') firstItem: ElementRef;
+  // @ViewChild('txtProjectID') firstItem: ElementRef;
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
   str: string;
-  env = environment; 
-  assetGroupDrp : AssetGroup[];
-  processDrp : Process[];
-  userDrp : User[];
-  stateDrp : StateEntity[];
-  assetDrp : Asset[];
-  formDrp : FormObj[];
-  monitoringReport : MonitoringReport[];
+  env = environment;
+  assetGroupDrp: AssetGroup[];
+  processDrp: Process[];
+  userDrp: User[];
+  stateDrp: StateEntity[];
+  CustomerEntityDrp: UserEntity_[];
+  assetDrp: Asset[];
+  formDrp: FormObj[];
+  monitoringReport: MonitoringReport[];
   fieldsvalues: Object;
-  data: Array<Object> = [];   
+  data: Array<Object> = [];
   fields: Object;
   datePickerConfig: Partial<BsDatepickerConfig>;
   value: string;
@@ -48,97 +54,117 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
   placeholder: string;
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
-
-  constructor(private route: ActivatedRoute,   
+  fromDate: Date;
+  toDate: Date;
+  fromDateStr: string;
+  toDateStr: string;
+  assetGroupCode: string; processId: string;
+  userId: string; customerCode: string; assetCode: string; state: string;
+  constructor(private route: ActivatedRoute,
     //private projectService: ProjectService,
     private globalService: GlobalService,
     private assetGroupService: AssetGroupService,
     private assetGroupTransfarmer: AssetGroupTransfarmer,
+    private assetService: AssetService,
+    private assetTransfarmer: AssetTransfarmer,
+    private processService: ProcessService1,
+    private processTransfarmer: ProcessTransfarmer1,
     private httpClient: HttpClient,
-    private defaultLayoutComponent: DefaultLayoutComponent,       
-    private router: Router, private formBuilder: FormBuilder    
-    ) {
-        super();       
-        this.datePickerConfig = Object.assign({},
-          {
-            containerClass: 'theme-dark-blue',
-            showWeekNumbers: false,
-            dateInputFormat: 'DD/MM/YYYY'
-          });
-     this.str = this.env.apiServiceIPPort;
+    private datepipe: DatePipe,
+    private defaultLayoutComponent: DefaultLayoutComponent,
+    private router: Router, private formBuilder: FormBuilder
+  ) {
+    super();
+    this.datePickerConfig = Object.assign({},
+      {
+        containerClass: 'theme-dark-blue',
+        showWeekNumbers: false,
+        dateInputFormat: 'DD/MM/YYYY'
+      });
+    this.str = this.env.apiServiceIPPort;
   }
-  fillProcessDrp(): Observable<Process[]> {
-      return this.httpClient.get<Process[]>(this.str + '/Process/getList', this.env.httpOptions);
-      }
 
   fillUserDrp(): Observable<User[]> {
-      return this.httpClient.get<User[]>(this.str + '/User/getList', this.env.httpOptions);
-      }
+    return this.httpClient.get<User[]>(this.str + '/User/getList', this.env.httpOptions);
+  }
 
   fillStateDrp(): Observable<StateEntity[]> {
-     return this.httpClient.get<StateEntity[]>(this.str + '/State/getList', this.env.httpOptions);
-      }
+    return this.httpClient.get<StateEntity[]>(this.str + '/State/getList', this.env.httpOptions);
+  }
 
   fillAssetDrp(): Observable<Asset[]> {
-     return this.httpClient.get<Asset[]>(this.str + '/Asset/getList', this.env.httpOptions);
-      } 
-      
-  fillFormDrp(): Observable<FormObj[]> {
-      return this.httpClient.get<FormObj[]>(this.str + '/Form/getList', this.env.httpOptions);
-      } 
+    return this.httpClient.get<Asset[]>(this.str + '/Asset/getList', this.env.httpOptions);
+  }
+  save(): void {
+    this.fromDateStr = this.datepipe.transform(this.fromDate, 'yyyy-MM-dd');
+    this.toDateStr = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
+    this.globalService.getExcelfil(this.fromDateStr, this.toDateStr, '', '', '', '', '');
+  }
 
-  ngOnInit() {   
+  ngOnInit() {
     this.Date1 = null;
+   // this.processId = 'All';
+    this.state = 'All';
+    this.userId = 'All'; this.customerCode = 'All'; this.assetCode = 'All';
     //Asset Group combo
     this.assetGroupService.fillAssetGroupDrp().subscribe(
-      (par) => { this.assetGroupDrp =this.assetGroupTransfarmer.AssetGroupTransfarmers(par)},
-      (err: any) => console.log(err)); 
-
-    //Process combo
-    this.fillProcessDrp().subscribe(
-      (par) => { this.processDrp = par;},
-      (err: any) => console.log(err)); 
+      (par) => { this.assetGroupDrp = this.assetGroupTransfarmer.AssetGroupTransfarmers(par) },
+      (err: any) => console.log(err));
 
     //Process combo
     this.fillUserDrp().subscribe(
-      (par) => { this.userDrp = par;},
-      (err: any) => console.log(err)); 
-
-    //State combo
-    this.fillStateDrp().subscribe(
-      (par) => { this.stateDrp = par;},
-      (err: any) => console.log(err)); 
+      (par) => { this.userDrp = par; },
+      (err: any) => console.log(err));
+    this.assetGroupCode = '2';
 
     //Asset combo
-    this.fillAssetDrp().subscribe(
-      (par) => { this.assetDrp = par;},
-      (err: any) => console.log(err)); 
+    this.assetService.fillDrpAssetsByAssetGruopCode(this.assetGroupCode).subscribe(
+      (par) => { this.assetDrp = this.assetTransfarmer.AssetTransfarmers(par); },
+      (err: any) => console.log(err));
 
-    //Form combo
-    this.fillFormDrp().subscribe(
-      (par) => { this.formDrp = par;},
-      (err: any) => console.log(err)); 
-     
+    //Process combo
+    this.processService.fillProcessDrpByAssetGroup(this.assetGroupCode).subscribe(
+      (par) => { this.processDrp = this.processTransfarmer.processTransfarmers(par); },
+      (err: any) => console.log(err));
+    //State combo
+    this.fillStateDrp().subscribe(
+      (par) => { this.stateDrp = par; },
+      (err: any) => console.log(err));
+
+    this.fillEntityDrp('CUS').subscribe(
+      (par) => {
+        this.CustomerEntityDrp = par;
+        console.log();
+      },
+      (err: any) => console.log(err));
+
+
     this.form = this.formBuilder.group({
-        ControlAssetGroup: ['', []],      
-        ControlProcess : ['', []],  
-        ControlUser : ['', []],  
-        ControlState : ['', []],  
-        ControlAsset : ['', []], 
-        ControlisImage: ['', []],      
-        ControlStartDate: ['', []], 
-        ControlEndDate: ['', []],  
-        ControlForm: ['', []],  
-    });   
+      ControlAssetGroup: ['', []],
+      ControlProcess: ['', []],
+      ControlcustomerCode: ['', []],
+      ControlUser: ['', []],
+      ControlState: ['', []],
+      ControlAsset: ['', []],
+      ControlisImage: ['', []],
+      ControlStartDate: ['', []],
+      ControlEndDate: ['', []],
+      ControlForm: ['', []],
+    });
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href='login';
+      window.location.href = 'login';
     }
-    status = '';    
-  } 
+    status = '';
+  }
 
+  fillEntityDrp(GroupEntity: string): Observable<UserEntity_[]> {
+    return this.httpClient.get<UserEntity_[]>(this.str +
+      '/GetEntity/getList/' + localStorage.getItem('username').toString() + '/' + this.env.OuCode +
+      '?entityGroupCode=' + GroupEntity + '&entityCode=NULL&activeStatus=1', this.env.httpOptions);
+  }
   ngAfterViewInit(): void {
     setTimeout(() => {
-     // this.firstItem.nativeElement.focus();
+      // this.firstItem.nativeElement.focus();
     }, 250);
     this.startControlMonitoring(this.form);
   }
@@ -148,6 +174,26 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
       return;
     }
     alert('Registration Complete');
+  }
+
+  AssetGroupChange(event) {
+    const target = event.source.selected._element.nativeElement;
+    const selectedData = {
+      value: event.value,
+      text: target.innerText.trim()
+    };
+
+    this.state = 'All';
+    this.userId = 'All'; this.customerCode = 'All'; this.assetCode = 'All';
+    //Asset combo
+    this.assetService.fillDrpAssetsByAssetGruopCode(selectedData.value).subscribe(
+      (par) => { this.assetDrp = this.assetTransfarmer.AssetTransfarmers(par); },
+      (err: any) => console.log(err));
+
+    //Process combo
+    this.processService.fillProcessDrpByAssetGroup(selectedData.value).subscribe(
+      (par) => { this.processDrp = this.processTransfarmer.processTransfarmers(par); },
+      (err: any) => console.log(err));
   }
 
 }

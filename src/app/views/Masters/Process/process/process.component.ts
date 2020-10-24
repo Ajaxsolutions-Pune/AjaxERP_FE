@@ -12,6 +12,8 @@ import { AssetGroup } from '../../../../Components/Module/Masters/AssetGroup.mod
 import { AssetGroupService } from '../../../../Components/Services/Masters/AssetGroupService';
 import { AssetGroupTransfarmer } from '../../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
 import { processAsyncValidator } from '../../../../helper/async-validator';
+import { EventSettingsModel, DayService, WeekService, MonthService, Timezone } from '@syncfusion/ej2-angular-schedule';
+
 @Component({
   selector: 'app-process',
   templateUrl: './process.component.html',
@@ -34,7 +36,7 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     private defaultLayoutComponent: DefaultLayoutComponent,
     private processService: ProcessService1, private router: Router,
     private formBuilder: FormBuilder) {
-    super();       
+    super();
   }
 
   isQueExist(): boolean {
@@ -45,12 +47,16 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     let k;
     k = event.charCode;
     return this.globalService.SpecialCharValidator(k);
-    
+
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+    let timezone: Timezone = new Timezone();
+    let date: Date = new Date(2018,11,5,15,25,11);
+    let timeZoneOffset: number = timezone.offset(date,"Europe/Paris");
+    console.log(timeZoneOffset); //-60
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href='login';
+      window.location.href = 'login';
     }
     status = '';
     this.process = {
@@ -66,26 +72,26 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
 
-   
+
 
     this.assetGroupService.getAssetGroups().subscribe(
       (par) => this.assetGroupObj = this.assetGroupTransfarmer.AssetGroupTransfarmers(par),
       (err: any) => console.log(err));
-    this.route.paramMap.subscribe(parameterMap =>
-       { const str = parameterMap.get('id'); this.getprocess(str);
-      
-       this.form = this.formBuilder.group({
-        ControlprocessName: ['', [Validators.required], [processAsyncValidator(this.processService,str)] ],
-        ControlassetGroup: ['', [ Validators.required]],
+    this.route.paramMap.subscribe(parameterMap => {
+      const str = parameterMap.get('id'); this.getprocess(str);
+
+      this.form = this.formBuilder.group({
+        ControlprocessName: ['', [Validators.required], [processAsyncValidator(this.processService, str)]],
+        ControlassetGroup: ['', [Validators.required]],
         Controlgeofence: ['', []],
         ControlprocessId: ['', []],
         ControlisActive: ['', []]
       });
       this.form.controls['ControlprocessId'].disable();
       // this.form.controls['ControlisActive'].disable();
-      
-      
-      });
+
+
+    });
   }
 
   ngAfterViewInit(): void {
@@ -99,7 +105,6 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     this.process.createdDate = this.globalService.GerCurrntDateStamp();
     this.process.modifiedBy = localStorage.getItem('username');
     this.process.modifiedDate = this.globalService.GerCurrntDateStamp();
-
     if (status !== 'Update') {
       this.process.processId = null;
       this.processService.Save(this.processTransfarmer.processTransfarmer(this.process)).subscribe(
@@ -156,8 +161,8 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
         (par) => {
           this.processEntity = par;
           this.process = this.processTransfarmer.processTransfarmerEntity(this.processEntity);
-        
-          
+
+
         },
         (err: any) => console.log(err));
       status = 'Update';

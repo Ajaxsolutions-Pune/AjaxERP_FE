@@ -23,7 +23,11 @@ export class ProcessService1 {
     filldrpProcessFormMappings(): Observable<ProcessEntity[]> {
         return this.httpClient.get<ProcessEntity[]>(this.str +
             '/ProcessFormMapping/getList?status=1',
-            this.env.httpOptions);            
+            this.env.httpOptions);
+    }
+
+    fillProcessDrpByAssetGroup(assetGruopCode: string): Observable<Process[]> {
+        return this.httpClient.get<Process[]>(this.str + '/Process/getList?status=1&assetGroupCode=' + assetGruopCode, this.env.httpOptions);
     }
 
     fillDrpProcess(): Observable<ProcessEntity[]> {
@@ -35,13 +39,13 @@ export class ProcessService1 {
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    checkProcess(process : string,code : string): Observable<CommonEntity> {
+    checkProcess(process: string, code: string): Observable<CommonEntity> {
         return this.httpClient.get<CommonEntity>(this.str + '/Process/getProcessByName?name=' + process +
-        '&id=' + code
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            '&id=' + code
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-  
+
 
     Save(saveEntityObj: ProcessEntity): Observable<ProcessEntity> {
         saveEntityObj.processId = null;

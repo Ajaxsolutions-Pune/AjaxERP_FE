@@ -17,33 +17,38 @@ export class AssetService {
     }
     getAssets(): Observable<AssetEntity[]> {
         return this.httpClient.get<AssetEntity[]>(this.str + '/Asset/getList'
-        , this.env.httpOptions);
+            , this.env.httpOptions);
     }
 
     getAsset(qaTypeCode: string): Observable<AssetEntity> {
         return this.httpClient.get<AssetEntity>(this.str + '/Asset/' + qaTypeCode
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     fillDrpAssets(): Observable<AssetEntity[]> {
-        return this.httpClient.get<AssetEntity[]>(this.str + '/Asset/getList', this.env.httpOptions);
+        return this.httpClient.get<AssetEntity[]>(this.str + '/Asset/getList?status=1', this.env.httpOptions);
     }
 
-    checkAsset(asset : string, code : string ): Observable<CommonEntity> {
+    fillDrpAssetsByAssetGruopCode(sssetGruopCode: string): Observable<AssetEntity[]> {
+        return this.httpClient.get<AssetEntity[]>(this.str +
+            '/Asset/getList?status=1&assetGroupCode=' + sssetGruopCode, this.env.httpOptions);
+    }
+
+    checkAsset(asset: string, code: string): Observable<CommonEntity> {
         return this.httpClient.get<CommonEntity>(this.str + '/Asset/getAssetByName?name=' + asset +
-        '&code=' + code
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            '&code=' + code
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Save(saveEntityObj: AssetEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         return this.httpClient.post<Insertstatus>(this.str + '/Asset', saveEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntityObj: AssetEntity): Observable<Insertstatus> {
         return this.httpClient.post<Insertstatus>(this.str + '/Asset', updateEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {
