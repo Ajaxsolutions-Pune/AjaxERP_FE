@@ -13,7 +13,7 @@ import { TransmissionLineService } from '../../../Components/Services/Masters/Tr
 import { TransmissionLineTransfarmer } from '../../../Components/Transformer/Masters/TransmissionLine-Transfarmer';
 import { TransmissionLine } from '../../../Components/Module/Masters/TransmissionLine.model';
 import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
-import { hubAsyncValidator } from '../../../helper/async-validator';
+import { hubAsyncValidator, hubCodeAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-hub',
@@ -68,6 +68,9 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
     return this.form.get('ControlhubNameENG').hasError('queExist');
   }
 
+  HubCodeExist(): boolean {    
+    return this.form.get('ControlhubCode').hasError('queExist');
+  }
   ngOnInit() {
    
     status = '';
@@ -108,8 +111,11 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
 
       this.form = this.formBuilder.group({
         ControlhubCode: ['', [
-          Validators.required]],     
-        ControlhubNameENG: ['', [Validators.required], [hubAsyncValidator(this.hubService,str)] ],
+          Validators.required],
+          [hubCodeAsyncValidator(this.hubService,str)]],     
+        ControlhubNameENG: ['', [Validators.required]
+        // , [hubAsyncValidator(this.hubService,str)]
+       ],
         ControlHubNameUNI: ['', []],
         ControltlCode: ['', [
           Validators.required]],
@@ -119,7 +125,7 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
           Validators.required]],
         ControlisActive: ['', []],
       });
-      //  this.form.controls['ControlhubCode'].disable();
+     
 
 
     });
@@ -228,7 +234,8 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
             window.location.href='login';
           }
           this.bindObj = this.hubTransfarmer.
-            HubTransfarmerEntity(this.bindObjEntity);            
+            HubTransfarmerEntity(this.bindObjEntity);   
+            this.form.controls['ControlhubCode'].disable();         
         },
         (err: any) => console.log(err));
       status = 'Update';

@@ -29,21 +29,30 @@ export class HubService {
             this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: HubEntity): Observable<Insertstatus> {
-     //   saveEntityObj.tlCode = null;
+        //   saveEntityObj.tlCode = null;
         return this.httpClient.post<Insertstatus>(this.str + '/Hub',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    checkHub(hub : string, code : string): Observable<CommonEntity> {
-        return this.httpClient.get<CommonEntity>(this.str + '/Hub/getHubByName?name=' + hub +
-        '&code=' + code
-        , this.env.httpOptions).pipe(catchError(this.handleError));
-    }   
+    checkHub(hub: string, code: string): Observable<CommonEntity> {
+        console.log(this.str + '/Hub/getHubByName?name=' + hub +
+            '&code=' + code)
+        return this.httpClient.get<CommonEntity>(this.str + '/Hub/getHubByNameOrCode?ouCode=' +
+            this.env.OuCode + '&name=' + hub
+            , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+    checkHubByCode(code: string): Observable<CommonEntity> {
+        console.log(this.str +
+            '/Hub/getHubByNameOrCode?ouCode=' + this.env.OuCode + '&code=' + code);
+        return this.httpClient.get<CommonEntity>(this.str +
+            '/Hub/getHubByNameOrCode?ouCode=' + this.env.OuCode + '&code=' + code
+            , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
 
     Update(updateEntityObj: HubEntity): Observable<Insertstatus> {
         // tslint:disable-next-line:max-line-length
         return this.httpClient.post<Insertstatus>(this.str + '/Hub', updateEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

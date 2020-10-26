@@ -173,6 +173,22 @@ export const hubAsyncValidator = (hubService: HubService, code: string, time: nu
   };
 };
 
+export const hubCodeAsyncValidator = (hubService: HubService, Hubcode: string,
+   time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => hubService.checkHubByCode(input.value)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
 export const assetAsyncValidator = (assetService: AssetService, code: string, time: number = 500) => {
   return (input: FormControl) => {
     return timer(time).pipe(
@@ -327,6 +343,21 @@ export const UserAsyncValidator = (userService: UserService, Code: string,
   return (input: FormControl) => {
     return timer(time).pipe(
       switchMap(() => userService.checkUser(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+export const UserLoginAsyncValidator = (userService: UserService,
+  time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => userService.checkLoginId(input.value)),
       map(res => {
         if (res.status == 'notexist') {
           return null;

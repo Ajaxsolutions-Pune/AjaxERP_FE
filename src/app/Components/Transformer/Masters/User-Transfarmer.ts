@@ -64,8 +64,8 @@ export class UserTransfarmer {
         this.user.ouCode =  this.env.OuCode;
         this.user.id = Entity.id;
         this.user.loginID = Entity.loginID;
-        this.user.pwd =  Entity.pwd;
-        this.user.confipwd = Entity.pwd;
+        this.user.pwd =  '';//Entity.pwd;
+        this.user.confipwd = '';//Entity.pwd;
         this.user.userNameENG = Entity.userNameENG;
         this.user.userNameUNI = Entity.userNameUNI;
         this.user.userTypeCode = Entity.userTypeCode;

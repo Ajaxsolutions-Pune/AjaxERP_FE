@@ -14,7 +14,9 @@
                                     <input matInput placeholder="Login ID" [(ngModel)]="user.loginID"
                                         formControlName="ControlloginID" #txtLoginID name="txtLoginID">
                                     <mat-error>
-                                        {{ formErrors['ControlloginID'] }}
+                                        <span *ngIf="UserLoginExist()">
+                                            User ID is already taken.
+                                        </span>
                                     </mat-error>
                                 </mat-form-field>
                                 <mat-form-field class="col-md-4">

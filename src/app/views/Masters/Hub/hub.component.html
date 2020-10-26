@@ -18,6 +18,9 @@
                                 #txtControlhubCode
                                 name="txtControlhubCode">
                                 <mat-error>
+                                    <span *ngIf="HubCodeExist()">
+                                        Hub Code is already taken.
+                                    </span> 
                                     {{ formErrors['ControlhubCode'] }}
                                 </mat-error>
                             </mat-form-field>

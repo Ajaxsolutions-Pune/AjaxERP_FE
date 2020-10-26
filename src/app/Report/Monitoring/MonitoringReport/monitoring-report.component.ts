@@ -98,13 +98,16 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
   save(): void {
     this.fromDateStr = this.datepipe.transform(this.fromDate, 'yyyy-MM-dd');
     this.toDateStr = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
-    this.globalService.getExcelfil(this.fromDateStr, this.toDateStr, '', '', '', '', '');
+    this.globalService.getExcelfil(this.fromDateStr, this.toDateStr, this.assetGroupCode, this.processId
+      , this.userId, this.customerCode, this.assetCode);
   }
 
   ngOnInit() {
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href = 'login';
+    }
     this.Date1 = null;
-   // this.processId = 'All';
-    this.state = 'All';
+    this.state = 'All'; this.processId = '1';
     this.userId = 'All'; this.customerCode = 'All'; this.assetCode = 'All';
     //Asset Group combo
     this.assetGroupService.fillAssetGroupDrp().subscribe(
@@ -151,10 +154,9 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
       ControlEndDate: ['', []],
       ControlForm: ['', []],
     });
-    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href = 'login';
-    }
     status = '';
+    this.fromDate = new Date();
+    this.toDate = new Date();
   }
 
   fillEntityDrp(GroupEntity: string): Observable<UserEntity_[]> {

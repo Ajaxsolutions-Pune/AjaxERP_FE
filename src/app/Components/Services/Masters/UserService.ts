@@ -21,43 +21,50 @@ export class UserService {
     Listanswer: User[];
     getUsers(): Observable<UserEntity[]> {
         console.log(this.str + '/User/getList');
-        return this.httpClient.get<UserEntity[]>(this.str + '/User/getList?ouCode='+this.env.OuCode, this.env.httpOptions);
+        return this.httpClient.get<UserEntity[]>(this.str + '/User/getList?ouCode=' + this.env.OuCode, this.env.httpOptions);
     }
 
     fillDrpUsers(): Observable<UserEntity[]> {
-        console.log(this.str + '/User/getList?ouCode='+this.env.OuCode+'?status=1');
+        console.log(this.str + '/User/getList?ouCode=' + this.env.OuCode + '?status=1');
         return this.httpClient.get<UserEntity[]>(this.str + '/User/getList?'
-        +'ouCode='+this.env.OuCode+'&status=1', this.env.httpOptions);
+            + 'ouCode=' + this.env.OuCode + '&status=1', this.env.httpOptions);
     }
 
     checkUser(zone: string, Id: string): Observable<CommonEntity> {
         console.log(this.str + '/User/getUserByName?name="' +
-        zone + '"&code=' + Id + '');
+            zone + '"&code=' + Id + '');
         return this.httpClient.get<CommonEntity>(this.str + '/User/getUserByName?name=' +
             zone + '&code=' + Id + ''
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
+    checkLoginId(LoginId: string): Observable<CommonEntity> {
+        console.log(this.str +
+            '/User/getUserByLoginId?ouCode=' + this.env.OuCode + '&loginID=' + LoginId);
+        return this.httpClient.get<CommonEntity>(this.str +
+            '/User/getUserByLoginId?ouCode=' + this.env.OuCode + '&loginID=' + LoginId
+            , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
 
     getUser(UserCode: string): Observable<UserEntity> {
-        return this.httpClient.get<UserEntity>(this.str + '/User/' + UserCode +'/' + this.env.OuCode +
-        '',
+        return this.httpClient.get<UserEntity>(this.str + '/User/' + UserCode + '/' + this.env.OuCode +
+            '',
             this.env.httpOptions).pipe(catchError(this.handleError));
     }
-    
+
     Save(saveEntityObj: UserEntity): Observable<Insertstatus> {
         saveEntityObj.id = null;
         //console.log(this.str + '/User');
         console.log(saveEntityObj);
         return this.httpClient.post<Insertstatus>(this.str + '/User',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
-        
+
     }
 
     Update(updateEntityObj: UserEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
         return this.httpClient.post<Insertstatus>(this.str + '/User', updateEntityObj
-        , this.env.httpOptions).pipe(catchError(this.handleError));
+            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

@@ -20,7 +20,7 @@ import { Observable } from 'rxjs';
 
 import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
 import { MyErrorStateMatcher } from '../AngularDemo/MyErrorStateMatcher.component';
-import { UserAsyncValidator } from '../../../helper/async-validator';
+import { UserAsyncValidator, UserLoginAsyncValidator } from '../../../helper/async-validator';
 import { ConfirmPassErrorStateMatcher } from '../../../Components/ErrorStateMatcher/ConfirmPassErrorStateMatcher.component';
 @Component({
   selector: 'app-user',
@@ -84,6 +84,9 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
   isUserExist(): boolean {
     return this.form.get('ControluserName').hasError('queExist');
   }
+  UserLoginExist(): boolean {
+    return this.form.get('ControlloginID').hasError('queExist');
+  }
   fillEntityDrp(GroupEntity: string): Observable<UserEntity_[]> {
     return this.httpClient.get<UserEntity_[]>(this.str +
       '/GetEntity/getList/' + localStorage.getItem('username').toString() + '/' + this.env.OuCode +
@@ -114,22 +117,6 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getuser(str);
-      this.form = this.formBuilder.group({
-        ControlloginID: ['', []],
-        ControluserName: ['', [Validators.required],
-          [UserAsyncValidator(this.userService, str)]],
-        Controlconfipwd: ['', [Validators.required]],
-        Controlpassword: ['', [Validators.required]], Controlemail: ['', [Validators.required]],
-        Controlmobile: ['', [Validators.required]], ControluserType: ['', []],
-        ControlPassChangeDate: ['', []], ControlPassExpiryDate: ['', []],
-        ControluserGroupCode: ['', []], ControlentityCode: ['', []],
-        ControlentityBranchCode: ['', []], Controldesigination: ['', []],
-        ControlisBlocked: ['', []], ControlisActive: ['', []],
-        ControlpasswordChanged: ['', []],
-      }, { validator: this.checkPasswords });
-
-      this.form.controls['ControlPassChangeDate'].disable()
-      this.form.controls['ControlPassExpiryDate'].disable()
     });
   }
   special_char_val(event) {
@@ -265,6 +252,23 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
       };
       status = '';
 
+      this.form = this.formBuilder.group({
+        ControlloginID: ['', [Validators.required],
+        [UserLoginAsyncValidator(this.userService)]],
+        ControluserName: ['', [Validators.required],
+          [UserAsyncValidator(this.userService, Login_Id)]],
+        Controlconfipwd: ['', [Validators.required]],
+        Controlpassword: ['', [Validators.required]], Controlemail: ['', [Validators.required]],
+        Controlmobile: ['', [Validators.required]], ControluserType: ['', []],
+        ControlPassChangeDate: ['', []], ControlPassExpiryDate: ['', []],
+        ControluserGroupCode: ['', []], ControlentityCode: ['', []],
+        ControlentityBranchCode: ['', []], Controldesigination: ['', []],
+        ControlisBlocked: ['', []], ControlisActive: ['', []],
+        ControlpasswordChanged: ['', []],
+      }, { validator: this.checkPasswords });
+
+      this.form.controls['ControlPassChangeDate'].disable()
+      this.form.controls['ControlPassExpiryDate'].disable()
     }
     else {
       this.userEntity = {
@@ -291,12 +295,27 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
         modifiedBy: null,
         modifiedDate: null,
       };
+      
+
+      this.form = this.formBuilder.group({
+        ControlloginID: ['', [Validators.required]],
+        ControluserName: ['', [Validators.required]],
+        Controlconfipwd: ['', [Validators.required]],
+        Controlpassword: ['', [Validators.required]], Controlemail: ['', [Validators.required]],
+        Controlmobile: ['', [Validators.required]], ControluserType: ['', []],
+        ControlPassChangeDate: ['', []], ControlPassExpiryDate: ['', []],
+        ControluserGroupCode: ['', []], ControlentityCode: ['', []],
+        ControlentityBranchCode: ['', []], Controldesigination: ['', []],
+        ControlisBlocked: ['', []], ControlisActive: ['', []],
+        ControlpasswordChanged: ['', []],
+      });
+
+      this.form.controls['ControlPassChangeDate'].disable()
+      this.form.controls['ControlPassExpiryDate'].disable()
       this.userService.getUser(Login_Id).subscribe(
         (par) => {
           this.userEntity = par;
           this.user = this.userTransfarmer.UserTransfarmerEntity(this.userEntity);
-         // this.form.controls['Controlpassword'].disable()
-         // this.form.controls['Controlconfipwd'].disable()
           this.form.controls['ControlloginID'].disable()
         },
         (err: any) => console.log(err));
