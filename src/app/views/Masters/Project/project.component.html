@@ -30,6 +30,9 @@
                                     #txtProject
                                     name="txtProject">
                                     <mat-error>
+                                        <mat-error>
+                                           {{ formErrors['ControlProject'] }}
+                                       </mat-error>
                                         <span *ngIf="isQueExist()">
                                             Project is already taken.
                                         </span> 
@@ -121,7 +124,8 @@
                                 <mat-form-field class="col-md-4">
                                     <input matInput
                                     maxlength="20"
-                                    placeholder="Main Account Code"                                  
+                                    placeholder="Main Account Code"     
+                                    (keypress)="only_number_val($event)"                             
                                     [(ngModel)]="project.mainAccountHeadCode"   
                                     formControlName="ControlAccountCode"          
                                     #txtMainAccountCode                          

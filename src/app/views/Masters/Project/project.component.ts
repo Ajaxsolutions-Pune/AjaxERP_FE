@@ -140,7 +140,7 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
       this.getproject(str);
 
       this.form = this.formBuilder.group({
-        ControlProjectID: ['', []],
+        ControlProjectID: ['', [Validators.required]],
         ControlisActive: ['', []],
         ControlProjectDesc: ['', []],
         ControlStartDate: ['', []],
