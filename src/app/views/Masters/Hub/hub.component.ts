@@ -114,7 +114,7 @@ export class HubComponent extends FormComponentBase implements OnInit, AfterView
           Validators.required],
           [hubCodeAsyncValidator(this.hubService,str)]],     
         ControlhubNameENG: ['', [Validators.required]
-        // , [hubAsyncValidator(this.hubService,str)]
+         , [hubAsyncValidator(this.hubService,str)]
        ],
         ControlHubNameUNI: ['', []],
         ControltlCode: ['', [

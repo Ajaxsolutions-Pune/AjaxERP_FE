@@ -289,11 +289,11 @@ export const navItems: NavData[] = [
         url: '/RolelevelList',
         icon: 'icon-puzzle'
       },
-      //{
-      //  name: 'User',
-      //  url: '/UserList',
-      //  icon: 'icon-puzzle'
-      //},
+      {
+        name: 'User',
+        url: '/UserList',
+        icon: 'icon-puzzle'
+      },
       {
         name: 'User Approve',
         url: '/UserDeviceRegList',
