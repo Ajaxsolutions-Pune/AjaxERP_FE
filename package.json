@@ -44,6 +44,7 @@
     "@coreui/icons": "0.3.0",
     "@ng-bootstrap/ng-bootstrap": "^5.3.1",
     "@okta/okta-auth-js": "2.11.0",
+    "@syncfusion/ej2-angular-schedule": "^18.3.42",
     "@syncfusion/ej2-angular-treegrid": "^18.2.47",
     "@types/file-saver": "^2.0.1",
     "alasql": "^0.4.11",
