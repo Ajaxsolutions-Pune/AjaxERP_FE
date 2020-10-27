@@ -280,6 +280,11 @@ import { AssetListComponent } from './views/Masters/Asset/asset-list.component';
 import { AssetComponent } from './views/Masters/Asset/asset.component';
 import { MonitoringReportComponent } from './Report/Monitoring/MonitoringReport/monitoring-report.component';
 import { DashboardService } from './Components/Services/Masters/DashboardService';
+import { UserGroupListResolverService } from './Components/Resolver/Masters/UserGroup-List-Resolver.Service';
+import { UserGroupService } from './Components/Services/Masters/UserGroupService';
+import { UserGroupTransfarmer } from './Components/Transformer/Masters/UserGroup-Transfarmer';
+import { UserGroupListComponent } from './views/Masters/UserGroup/user-group-list.component';
+import { UserGroupComponent } from './views/Masters/UserGroup/user-group.component';
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -385,7 +390,7 @@ export const MY_FORMATS = {
     ProcessFormMappingComponent, UserDeviceMappingComponent,
     DeviceAssetMappingComponent, ContactListComponent, ContactComponent,
     AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent,
-    UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent, ScreenComponent, ScreenListComponent, MonitoringReportComponent
+    UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent, ScreenComponent, ScreenListComponent, MonitoringReportComponent, UserGroupListComponent, UserGroupComponent
   ],
   providers: [
     ConfirmDialogService,
@@ -401,14 +406,15 @@ export const MY_FORMATS = {
     AnswerTransfarmer, ProcessTransfarmer1, ZoneTransfarmer, CircleTransfarmer,
     FormQueAnsMappingTransfarmer, DatePipe, GlobalService,
     DeviceTransfarmer, AssetCategoryTransfarmer,
-    ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,
+    ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,UserGroupTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
     HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer
     , ModuleobjTransfarmer, ScreenObjTransfarmer, UserDeviceRegTransfarmer,
-    ZoneService, CircleService, ClusterService, ColourService, DeviceService,
+    ZoneService, CircleService, ClusterService, ColourService, DeviceService,  UserGroupService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService, UserService, UserDeviceRegService,
     FormListResolverService, RegionListResolverService, ColourListResolverService,
+    UserGroupListResolverService,
     AssetListResolverService, ProcessListResolverService, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
     AssetCategoryListResolverService, UserListResolverService, DashboardService,

@@ -109,7 +109,8 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
     this.user = {
       ouCode: null, confipwd: null, id: null, loginID: null,
       pwd: null, userNameENG: null, userNameUNI: null, userTypeCode: null,
-      emailID: null, mobileNo: null, pwdChangedDate: null, pwdExpiryDate: null,
+      emailID: null, mobileNo: null, pwdChangedDate: this.globalService.GerCurrntDateStamp(),
+       pwdExpiryDate: this.globalService.GerCurrntDateStamp(),
       isBlocked: null, userGroupCode: null, entityCode: null, entityBranchCode: null,
       desigination: null, isPswdChanged: null, isActive: null, createdBy: null,
       createdDate: null, modifiedBy: null, modifiedDate: null,
@@ -125,13 +126,19 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
     return this.globalService.SpecialCharValidator(k);
 
   }
+  
+  number_char_val(event) {
+    let k;
+    k = event.charCode;
+    return this.globalService.NumberValidator(k);
+
+  }
   isCircleExist(): boolean {
     return this.form.get('ControlcircleNameENG').hasError('queExist');
   }
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
     let pass = group.controls.Controlpassword.value;
     let confirmPass = group.controls.Controlconfipwd.value;
-
     return pass === confirmPass ? null : { notSame: true }
   }
 
@@ -209,8 +216,8 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
       userTypeCode: null,
       emailID: null,
       mobileNo: null,
-      pwdChangedDate: null,
-      pwdExpiryDate: null,
+      pwdChangedDate: this.globalService.GerCurrntDateStamp(),
+      pwdExpiryDate: this.globalService.GerCurrntDateStamp(),
       isBlocked: 'false',
       userGroupCode: null,
       entityCode: null,
@@ -236,8 +243,8 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
         userTypeCode: null,
         emailID: null,
         mobileNo: null,
-        pwdChangedDate: null,
-        pwdExpiryDate: null,
+        pwdChangedDate: this.globalService.GerCurrntDateStamp(),
+        pwdExpiryDate: this.globalService.GerCurrntDateStamp(),
         isBlocked: 'false',
         userGroupCode: null,
         entityCode: null,
@@ -255,8 +262,7 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
       this.form = this.formBuilder.group({
         ControlloginID: ['', [Validators.required],
         [UserLoginAsyncValidator(this.userService)]],
-        ControluserName: ['', [Validators.required],
-          [UserAsyncValidator(this.userService, Login_Id)]],
+        ControluserName: ['', [Validators.required]],
         Controlconfipwd: ['', [Validators.required]],
         Controlpassword: ['', [Validators.required]], Controlemail: ['', [Validators.required]],
         Controlmobile: ['', [Validators.required]], ControluserType: ['', []],
@@ -281,8 +287,8 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
         userTypeCode: null,
         emailID: null,
         mobileNo: null,
-        pwdChangedDate: null,
-        pwdExpiryDate: null,
+        pwdChangedDate: this.globalService.GerCurrntDateStamp(),
+        pwdExpiryDate: this.globalService.GerCurrntDateStamp(),
         isBlocked: null,
         userGroupCode: null,
         entityCode: null,

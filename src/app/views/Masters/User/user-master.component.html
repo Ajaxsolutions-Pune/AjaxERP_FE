@@ -46,7 +46,10 @@
                                 </mat-form-field>
                                 <mat-form-field class="col-md-4">
                                     <input matInput placeholder="Mobile No *" [(ngModel)]="user.mobileNo"
-                                        formControlName="Controlmobile" #txtPassword name="txtMobile">
+                                    maxlength="10"   
+                                    formControlName="Controlmobile" #txtPassword 
+                                        (keypress)="number_char_val($event)"
+                                          name="txtMobile">
                                     <mat-error>
                                         {{ formErrors['Controlmobile'] }}
                                     </mat-error>
@@ -136,8 +139,10 @@
                                     </mat-error>
                                 </mat-form-field>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput placeholder="Password Expiry Date" [(ngModel)]="user.pwdExpiryDate"
-                                        formControlName="ControlPassExpiryDate" #txtPasswordExpiryDate
+                                    <input matInput placeholder="Password Expiry Date" 
+                                    [(ngModel)]="user.pwdExpiryDate"
+                                        formControlName="ControlPassExpiryDate"
+                                         #txtPasswordExpiryDate
                                         name="txtPasswordExpiryDate">
                                     <mat-error>
                                         {{ formErrors['ControlPassExpiryDate'] }}

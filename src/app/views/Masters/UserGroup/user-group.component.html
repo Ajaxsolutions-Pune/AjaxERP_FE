@@ -1,0 +1,73 @@
+<main class="form-main">
+    <form #userForm="ngForm" [formGroup]="form" autocomplete="off">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>User Group</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="User Group Code"
+                                     #txtUserGroup Code="txtUserGroupCode">
+                                </mat-form-field>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="User Group Name *" maxlength="20"
+                                     #txtUserGroup Name="txtUserGroupName">
+                                </mat-form-field></div>
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <mat-form-field color="accent" class="col-md-4">
+                                        <mat-label>User Manager</mat-label>
+                                        <mat-select>
+                                            <mat-option>Select</mat-option>
+                                            <mat-option>User Manager 1</mat-option>
+                                            <mat-option>User Manager 2</mat-option>
+                                            <mat-option>User Manager 3</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <mat-form-field color="accent" class="col-md-4">
+                                        <mat-label>User Group Type</mat-label>
+                                        <mat-select>
+                                            <mat-option>Select</mat-option>
+                                            <mat-option>User Group Type 1</mat-option>
+                                            <mat-option>User Group Type 2</mat-option>
+                                            <mat-option>User Group Type 3</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div class="col-md-4"></div>
+                                </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button
+                                    
+                                        color="primary">Submit</button> &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button mat-raised-button color="warn" routerLink="/UserGroupList">
+                                        Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </form>
+</main>
+<!--<div style="display: none;"> {{user | json}}</div>-->

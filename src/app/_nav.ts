@@ -299,6 +299,11 @@ export const navItems: NavData[] = [
         url: '/UserDeviceRegList',
         icon: 'icon-puzzle'
       },
+      {
+        name: 'User Group',
+        url: '/UserGroupList',
+        icon: 'icon-puzzle'
+      },
     ]
 
   },

@@ -130,6 +130,8 @@ import { ScreenObjListResolverService } from './Components/Resolver/Masters/Scre
 import { ScreenListComponent } from './views/Masters/Screen/screen-list.component';
 import { ScreenComponent } from './views/Masters/Screen/screen.component';
 import { MonitoringReportComponent } from './Report/Monitoring/MonitoringReport/monitoring-report.component';
+import { UserGroupListComponent } from './views/Masters/UserGroup/user-group-list.component';
+import { UserGroupComponent } from './views/Masters/UserGroup/user-group.component';
 
 export const routes: Routes = [
   {
@@ -1172,6 +1174,27 @@ export const routes: Routes = [
         }
       },
 
+      {
+        path: 'UserGroupList',
+        component: UserGroupListComponent,
+        data: {
+          title: 'User Group List'
+        }
+      },
+      {
+        path: 'UserGroup',
+        component: UserGroupComponent,
+        data: {
+          title: 'Add User Group'
+        }
+      },
+      {
+        path: 'UserGroup/:id',
+        component: UserGroupComponent,
+        data: {
+          title: 'Edit User Group'
+        }
+      },
       /////Reports 
       
       {
