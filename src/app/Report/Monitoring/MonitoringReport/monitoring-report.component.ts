@@ -57,6 +57,7 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
   fromDate: Date;
   toDate: Date;
   fromDateStr: string;
+  withImage: string;
   toDateStr: string;
   assetGroupCode: string; processId: string;
   userId: string; customerCode: string; assetCode: string; state: string;
@@ -98,8 +99,12 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
   save(): void {
     this.fromDateStr = this.datepipe.transform(this.fromDate, 'yyyy-MM-dd');
     this.toDateStr = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
-    this.globalService.getExcelfil(this.fromDateStr, this.toDateStr, this.assetGroupCode, this.processId
-      , this.userId, this.customerCode, this.assetCode);
+    if (this.withImage.toString().trim() === 'true') {
+      this.withImage = '1';
+    } else { this.withImage = '0'; }
+    this.globalService.getExcelfil(this.fromDateStr, this.toDateStr, 
+    this.assetGroupCode, this.processId
+    ,this.userId, this.customerCode, this.assetCode, this.withImage);
   }
 
   ngOnInit() {
@@ -111,7 +116,8 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
     this.userId = 'All'; this.customerCode = 'All'; this.assetCode = 'All';
     //Asset Group combo
     this.assetGroupService.fillAssetGroupDrp().subscribe(
-      (par) => { this.assetGroupDrp = this.assetGroupTransfarmer.AssetGroupTransfarmers(par) },
+      (par) => { this.assetGroupDrp = 
+        this.assetGroupTransfarmer.AssetGroupTransfarmers(par) },
       (err: any) => console.log(err));
 
     //Process combo
@@ -122,12 +128,14 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
 
     //Asset combo
     this.assetService.fillDrpAssetsByAssetGruopCode(this.assetGroupCode).subscribe(
-      (par) => { this.assetDrp = this.assetTransfarmer.AssetTransfarmers(par); },
+      (par) => { this.assetDrp = 
+        this.assetTransfarmer.AssetTransfarmers(par); },
       (err: any) => console.log(err));
 
     //Process combo
     this.processService.fillProcessDrpByAssetGroup(this.assetGroupCode).subscribe(
-      (par) => { this.processDrp = this.processTransfarmer.processTransfarmers(par); },
+      (par) => { this.processDrp = 
+        this.processTransfarmer.processTransfarmers(par); },
       (err: any) => console.log(err));
     //State combo
     this.fillStateDrp().subscribe(

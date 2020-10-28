@@ -55,12 +55,13 @@ export class GlobalService {
     }
 
     getExcelfil(fromDate: string, toDate: string, assetGroupCode: string, processId: string
-        , userId: string, customerCode: string, assetCode: string) {
+        , userId: string, customerCode: string, assetCode: string,withImage: string) {
         let ReportUrl = '/Report/assetMonitoringRpt?ouCode=' + this.env.OuCode +
             '&loginId=' + localStorage.getItem('username').toString() +
             '&fromDate=' + fromDate + '&toDate=' + toDate + '&' +
             'assetGroupCode=' + assetGroupCode + '&processId=' + processId +
-             '&userId=' + userId + '&customerCode=' + customerCode + '&assetCode=' + customerCode + '';
+             '&userId=' + userId + '&customerCode=' + customerCode
+              + '&assetCode=' + assetCode + '&withImage='+ withImage;
         console.log(this.str + ReportUrl);
          const baseUrl = this.str + ReportUrl;
          const token = localStorage.getItem('token').toString();

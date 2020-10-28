@@ -112,7 +112,9 @@
                                     </mat-error>
                                 </mat-form-field>
                                 <div class="col-sm-1" style="padding-top: 20px;">
-                                    <mat-checkbox name="ControlisImage" #chkisImage formControlName="ControlisImage">With
+                                    <mat-checkbox name="ControlisImage" 
+                                    [(ngModel)]="withImage"
+                                    #chkisImage formControlName="ControlisImage">With
                                         Image
                                     </mat-checkbox>
                                     <!--[(ngModel)]="user.isActive"-->
