@@ -9,11 +9,11 @@ import { DeviceAssetAddDialogComponent } from './dialogs/add/deviceassetadd.dial
 import { DeviceAssetEditDialogComponent } from './dialogs/edit/deviceassetedit.dialog.component';
 //import { ProcessDeleteDialogComponent } from './dialogs/delete/processdelete.dialog.component';
 
-import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, merge, Observable, ReplaySubject, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 //import { UserDeviceDataService } from './userdevicedata.service';
 import { FormComponentBase } from '../../Masters/AngularDemo/infrastructure/form-component-base';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../../Masters/AngularDemo/infrastructure/cross-field-error-matcher';
 
 import { Device } from '../../../Components/Module/Masters/Device.model';
@@ -29,19 +29,21 @@ import { DefaultLayoutComponent } from '../../../containers';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { DeviceAssetDataService } from './deviceassetdata.service';
+import { MatSelect } from '@angular/material/select';
+import { FormObj } from '../../../Components/Module/Masters/form.model';
 
 
 @Component({
   selector: 'app-device-Asset-mapping',
   templateUrl: 'device-asset-mapping.component.html',
-  styleUrls:  ['device-asset-mapping.component.scss']
+  styleUrls: ['device-asset-mapping.component.scss']
 })
 
 export class DeviceAssetMappingComponent extends FormComponentBase
   implements OnInit {
 
   deviceObj: Device[];
-  displayedColumns = ['DeviceAssetMapping', 'AssetText','SortBy',  'ActiveText', 'actions'];
+  displayedColumns = ['DeviceAssetMapping', 'AssetText', 'SortBy', 'ActiveText', 'actions'];
   exampleDatabase: DeviceAssetDataService | null;
   insertData: DeviceAssetDataService | null;
   dataSource: ExampleDataSource | null;
@@ -54,6 +56,10 @@ export class DeviceAssetMappingComponent extends FormComponentBase
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
 
+  public deviceFilterCtrl: FormControl = new FormControl();
+  public filteredDevices: ReplaySubject<Device[]> = new ReplaySubject<Device[]>(1);
+  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
+  protected _onDestroy = new Subject<void>();
   constructor(public httpClient: HttpClient,
     private router: Router,
     private defaultLayoutComponent: DefaultLayoutComponent,
@@ -67,7 +73,7 @@ export class DeviceAssetMappingComponent extends FormComponentBase
     private formBuilder: FormBuilder) {
     super();
     this.validationMessages = {
-        ControlDeviceCode: {
+      ControlDeviceCode: {
         required: 'Device is required.',
       }
     };
@@ -85,9 +91,33 @@ export class DeviceAssetMappingComponent extends FormComponentBase
     this.deviceService.fillDrpAnswers().subscribe(
       (par) => {
         this.deviceObj = this.deviceTransfarmer.DeviceTransfarmers(par);
+        console.log(this.deviceObj);
+        this.filteredDevices.next(this.deviceObj.slice());
+        this.deviceFilterCtrl.valueChanges
+          .pipe(takeUntil(this._onDestroy))
+          .subscribe(() => {
+            this.filterDevices();
+          });
       },
       (err: any) => console.log(err));
     this.loadData();
+  }
+
+  protected filterDevices() {
+    if (!this.deviceObj) {
+      return;
+    }
+    // get the search keyword
+    let search = this.deviceFilterCtrl.value;
+    if (!search) {
+      this.filteredDevices.next(this.deviceObj.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    this.filteredDevices.next(
+      this.deviceObj.filter(Device => Device.deviceName.toLowerCase().indexOf(search) > -1)
+    );
   }
 
   refresh() {
@@ -96,11 +126,11 @@ export class DeviceAssetMappingComponent extends FormComponentBase
 
   addNew() {
     const dialogRef = this.dialog.open(DeviceAssetAddDialogComponent, {
-    
+
       data: {
-       // isQuestionMandatory: ''.toString(),
-      
-        deviceId: this.DeviceId,        
+        // isQuestionMandatory: ''.toString(),
+
+        deviceId: this.DeviceId,
         isActive: ''.toString(),
         updateFlag: '1'
       }
@@ -108,7 +138,7 @@ export class DeviceAssetMappingComponent extends FormComponentBase
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
         this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
-        this.insertData.dataChange.value.push(this.dataService.getDialogData());  
+        this.insertData.dataChange.value.push(this.dataService.getDialogData());
         this.refreshTable();
       }
     });
@@ -135,10 +165,10 @@ export class DeviceAssetMappingComponent extends FormComponentBase
     });
     this.objDeviceAssetMapping = [];
     this.objDeviceAssetMapping = this.dataSource.filteredData.filter(e => {
-    });   
-    
+    });
+
     this.deviceAssetMappingService.Save(this.deviceAssetMappingTransfarmer.
-      ObjectToEntityDeviceAssetMappingTransfarmers (this.insertData.dataChange.value)).subscribe(
+      ObjectToEntityDeviceAssetMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
         (par) => {
           if (par.status === 'Success') {
             this.defaultLayoutComponent.Massage('',
@@ -149,44 +179,14 @@ export class DeviceAssetMappingComponent extends FormComponentBase
           }
         }
       );
-    }
+  }
 
-    GetRouteData(Device_Id: string): void {
-      const selectedData = {
-        value: Device_Id,
-        text: Device_Id
-      };
-      this.objDeviceAssetMapping = [];
-      this.insertData.dataChange.value.splice(0);
-  
-      this.exampleDatabase.dataChange.value.splice(0, 100);
-      this.refreshTable();
-      this.deviceAssetMappingService.getDeviceAssetMapping(selectedData.value).subscribe(
-        (par) => {
-          this.objDeviceAssetMapping = this.deviceAssetMappingTransfarmer.
-          DeviceAssetMappingTransfarmers(par);
-          this.objDeviceAssetMapping.forEach(a => {
-            a.deviceId = selectedData.value;
-          });
-          this.objDeviceAssetMapping.forEach(element => {
-            this.exampleDatabase.dataChange.value.push(element);
-            this.refreshTable();
-          });
-  
-        },
-        (err: any) => console.log(err));
-    }
-  
-
-    DeviceChange(event) {
-    const target = event.source.selected._element.nativeElement;
+  GetRouteData(Device_Id: string): void {
     const selectedData = {
-      value: event.value,
-      text: target.innerText.trim()
+      value: Device_Id,
+      text: Device_Id
     };
     this.objDeviceAssetMapping = [];
-     
-  
     this.insertData.dataChange.value.splice(0);
 
     this.exampleDatabase.dataChange.value.splice(0, 100);
@@ -194,7 +194,37 @@ export class DeviceAssetMappingComponent extends FormComponentBase
     this.deviceAssetMappingService.getDeviceAssetMapping(selectedData.value).subscribe(
       (par) => {
         this.objDeviceAssetMapping = this.deviceAssetMappingTransfarmer.
-        DeviceAssetMappingTransfarmers(par);
+          DeviceAssetMappingTransfarmers(par);
+        this.objDeviceAssetMapping.forEach(a => {
+          a.deviceId = selectedData.value;
+        });
+        this.objDeviceAssetMapping.forEach(element => {
+          this.exampleDatabase.dataChange.value.push(element);
+          this.refreshTable();
+        });
+
+      },
+      (err: any) => console.log(err));
+  }
+
+
+  DeviceChange(event) {
+    const target = event.source.selected._element.nativeElement;
+    const selectedData = {
+      value: event.value,
+      text: target.innerText.trim()
+    };
+    this.objDeviceAssetMapping = [];
+
+
+    this.insertData.dataChange.value.splice(0);
+
+    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.refreshTable();
+    this.deviceAssetMappingService.getDeviceAssetMapping(selectedData.value).subscribe(
+      (par) => {
+        this.objDeviceAssetMapping = this.deviceAssetMappingTransfarmer.
+          DeviceAssetMappingTransfarmers(par);
         this.objDeviceAssetMapping.forEach(a => {
           a.deviceId = selectedData.value;
         });
@@ -209,16 +239,16 @@ export class DeviceAssetMappingComponent extends FormComponentBase
 
   startEdit(i: number,
     daId: number,
-    assetCode: string,   
+    assetCode: string,
     sortBy: string,
     isActive: string) {
     this.id = daId;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
-    const dialogRef = this.dialog.open(DeviceAssetEditDialogComponent,{
+    const dialogRef = this.dialog.open(DeviceAssetEditDialogComponent, {
       data: {
         daId: daId,
-        assetCode: assetCode, 
+        assetCode: assetCode,
         sortBy: sortBy,
         isActive: isActive,
         updateFlag: '1'
@@ -231,13 +261,13 @@ export class DeviceAssetMappingComponent extends FormComponentBase
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.daId === this.id);
         // Then you update that record using data from dialogData (values you enetered)
         this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
-         // Added by ...
+        // Added by ...
         const findInsertIndex = this.insertData.dataChange.value.findIndex(x => x.daId === this.id);
-        if(findInsertIndex > -1){
-          this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData(); 
-        }else{
+        if (findInsertIndex > -1) {
+          this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData();
+        } else {
           this.insertData.dataChange.value.push(this.exampleDatabase.dataChange.value[foundIndex]);
-        }        
+        }
         // And lastly refresh table
         this.refreshTable();
       }
@@ -348,7 +378,7 @@ export class ExampleDataSource extends DataSource<DeviceAssetMapping> {
       switch (this._sort.active) {
         case 'DeviceAssetMapping': [propertyA, propertyB] = [a.daId, b.daId]; break;
         case 'AssetText': [propertyA, propertyB] = [a.assetName, b.assetName]; break;
-        case 'SortBy': [propertyA, propertyB] = [a.sortBy, b.sortBy]; break;      
+        case 'SortBy': [propertyA, propertyB] = [a.sortBy, b.sortBy]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
@@ -372,9 +402,9 @@ import { FormService} from '../../../Components/Services/Masters/FormService';
 export class ProcessFormMappingComponent implements OnInit {
   processFormMappingForm: FormGroup;
   processes : {};
-  forms: {}; 
+  forms: {};
 
-  constructor(private processService1: ProcessService1, private formService: FormService) { } 
+  constructor(private processService1: ProcessService1, private formService: FormService) { }
   ngOnInit() {
     this.processService1.fillDrpProcess().subscribe(
       data => this.processes = data
@@ -386,7 +416,7 @@ export class ProcessFormMappingComponent implements OnInit {
 
     this.processFormMappingForm = new FormGroup({
       country: new FormControl(''),
-      form: new FormControl(''),     
+      form: new FormControl(''),
     });
   }
 }*/

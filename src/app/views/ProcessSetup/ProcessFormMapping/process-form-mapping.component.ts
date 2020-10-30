@@ -7,11 +7,11 @@ import { DataSource } from '@angular/cdk/collections';
 import { ProcessAddDialogComponent } from './dialogs/add/processadd.dialog.component';
 import { ProcessEditDialogComponent } from './dialogs/edit/processedit.dialog.component';
 import { ProcessDeleteDialogComponent } from './dialogs/delete/processdelete.dialog.component';
-import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, merge, Observable, ReplaySubject, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { ProcessDataService } from './processdata.service';
 import { FormComponentBase } from '../../Masters/AngularDemo/infrastructure/form-component-base';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../../Masters/AngularDemo/infrastructure/cross-field-error-matcher';
 import { Process } from '../../../Components/Module/Masters/Process.model';
 import { ProcessTransfarmer1 } from '../../../Components/Transformer/Masters/Process-Transfarmer1';
@@ -22,6 +22,8 @@ import { DefaultLayoutComponent } from '../../../containers';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { ProcessService1 } from '../../../Components/Services/Masters/ProcessService1';
+import { MatSelect } from '@angular/material/select';
+import { FormObj } from '../../../Components/Module/Masters/form.model';
 
 @Component({
   selector: 'app-process-form-mapping',
@@ -45,6 +47,11 @@ export class ProcessFormMappingComponent extends FormComponentBase
   addObjProcessFormMapping: ProcessFormMapping;
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
+
+  public processFilterCtrl: FormControl = new FormControl();
+  public filteredProcess: ReplaySubject<Process[]> = new ReplaySubject<Process[]>(1);
+  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
+  protected _onDestroy = new Subject<void>();
 
   constructor(public httpClient: HttpClient,
     private router: Router,
@@ -77,9 +84,34 @@ export class ProcessFormMappingComponent extends FormComponentBase
     this.processService.fillDrpProcess().subscribe(
       (par) => {
         this.processObj = this.processTransfarmer.processTransfarmers(par);
+        
+    this.filteredProcess.next(this.processObj.slice());
+    this.processFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterProcess();
+      });
+
       },
       (err: any) => console.log(err));
     this.loadData();
+  }
+
+  protected filterProcess() {
+    if (!this.processObj) {
+      return;
+    }
+    // get the search keyword
+    let search = this.processFilterCtrl.value;
+    if (!search) {
+      this.filteredProcess.next(this.processObj.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    this.filteredProcess.next(
+      this.processObj.filter(proces => proces.processName.toLowerCase().indexOf(search) > -1)
+    );
   }
 
   refresh() {

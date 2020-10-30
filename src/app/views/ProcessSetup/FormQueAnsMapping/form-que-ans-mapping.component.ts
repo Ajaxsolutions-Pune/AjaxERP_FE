@@ -11,7 +11,7 @@ import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { FormComponentBase } from '../../Masters/AngularDemo/infrastructure/form-component-base';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../../Masters/AngularDemo/infrastructure/cross-field-error-matcher';
 import { FormObj } from '../../../Components/Module/Masters/Form.model';
 import { FormService } from '../../../Components/Services/Masters/FormService';
@@ -22,6 +22,9 @@ import { FormQueAnsMappingService } from '../../../Components/Services/ProcessSe
 import { DefaultLayoutComponent } from '../../../containers';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import { ReplaySubject, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-form-que-ans-mapping',
@@ -47,6 +50,13 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   addObjFormQueAnsMapping: FormQueAnsMapping;
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
+
+
+  
+  public formFilterCtrl: FormControl = new FormControl();
+  public filteredForms: ReplaySubject<FormObj[]> = new ReplaySubject<FormObj[]>(1);
+  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
+  protected _onDestroy = new Subject<void>();
 
   constructor(public httpClient: HttpClient,
     private router: Router,
@@ -79,9 +89,34 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     this.formService.fillDrpForms().subscribe(
       (par) => {
         this.formObj = this.formTransfarmer.fTransfarmers(par);
+
+    this.filteredForms.next(this.formObj.slice());
+    this.formFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterForms();
+      });
+
       },
       (err: any) => console.log(err));
-    this.loadData();
+    this.loadData();    
+  }
+
+  protected filterForms() {
+    if (!this.formObj) {
+      return;
+    }
+    // get the search keyword
+    let search = this.formFilterCtrl.value;
+    if (!search) {
+      this.filteredForms.next(this.formObj.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    this.filteredForms.next(
+      this.formObj.filter(form => form.formName.toLowerCase().indexOf(search) > -1)
+    );
   }
 
   refresh() {

@@ -3,8 +3,13 @@
     <mat-form-field class="col-md-4">
         <mat-label>Device</mat-label>
         <mat-select required  [(ngModel)]="DeviceId"
-         (selectionChange)="DeviceChange($event)">
-            <mat-option *ngFor="let device of deviceObj" [value]="device.deviceId">
+         (selectionChange)="DeviceChange($event)" #singleSelect>
+         <mat-option>
+           <ngx-mat-select-search [formControl]="deviceFilterCtrl" 
+           placeholderLabel="Find Devices..." 
+           noEntriesFoundLabel="No matching devices found"></ngx-mat-select-search>
+         </mat-option>
+            <mat-option *ngFor="let device of filteredDevices | async" [value]="device.deviceId">
               {{device.deviceId}} - {{device.deviceName}}
             </mat-option>
         </mat-select>

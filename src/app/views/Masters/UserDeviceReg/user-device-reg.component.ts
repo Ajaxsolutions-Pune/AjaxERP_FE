@@ -28,8 +28,8 @@ export class UserDeviceRegComponent extends FormComponentBase implements OnInit,
   bodyStr1: string;
   HederStr1: string;
   massageStyle1: string;
-  @ViewChild('ConfirmReject', { static: false }) public ConfirmReject: ModalDirective;
-  @ViewChild('ConfirmApprove', { static: false }) public ConfirmApprove: ModalDirective;
+  @ViewChild('ConfirmReject') public ConfirmReject: ModalDirective;
+  @ViewChild('ConfirmApprove') public ConfirmApprove: ModalDirective;
   constructor(private route: ActivatedRoute,
     private confirmDialogService: ConfirmDialogService,  
     private UserDeviceRegTransfarmer: UserDeviceRegTransfarmer,
