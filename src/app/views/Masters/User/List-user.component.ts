@@ -80,7 +80,6 @@ export class UserListComponent implements OnInit {
     this.Resultuser = this.WithoutFilterRole;
 
     if (this.objUser.userNameENG !== null && this.objUser.userNameENG !== '') {
-      console.log(this.objUser.userNameENG.toString().toLowerCase());
       this.Resultuser = this.Resultuser.filter(SubResult =>
         SubResult.userNameENG.toLowerCase().indexOf(this.objUser.userNameENG.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;

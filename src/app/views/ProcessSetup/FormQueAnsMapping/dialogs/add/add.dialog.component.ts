@@ -106,7 +106,6 @@ export class AddDialogComponent implements OnInit {
   }
 
   public confirmAdd(): void {
-    //console.log(this.data.queNames)
     this.data.nextFormIdText = this.objnextFormIdText;
     this.data.questionIdText = this.objquestionIdText;
     this.data.answerIdText = this.objanswerIdText;

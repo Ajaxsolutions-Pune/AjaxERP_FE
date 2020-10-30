@@ -20,26 +20,20 @@ export class UserService {
     }
     Listanswer: User[];
     getUsers(): Observable<UserEntity[]> {
-        console.log(this.str + '/User/getList');
         return this.httpClient.get<UserEntity[]>(this.str + '/User/getList?ouCode=' + this.env.OuCode, this.env.httpOptions);
     }
 
     fillDrpUsers(): Observable<UserEntity[]> {
-        console.log(this.str + '/User/getList?ouCode=' + this.env.OuCode + '?status=1');
         return this.httpClient.get<UserEntity[]>(this.str + '/User/getList?'
             + 'ouCode=' + this.env.OuCode + '&status=1', this.env.httpOptions);
     }
 
     checkUser(zone: string, Id: string): Observable<CommonEntity> {
-        console.log(this.str + '/User/getUserByName?name="' +
-            zone + '"&code=' + Id + '');
         return this.httpClient.get<CommonEntity>(this.str + '/User/getUserByName?name=' +
             zone + '&code=' + Id + ''
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     checkLoginId(LoginId: string): Observable<CommonEntity> {
-        console.log(this.str +
-            '/User/getUserByLoginId?ouCode=' + this.env.OuCode + '&loginID=' + LoginId);
         return this.httpClient.get<CommonEntity>(this.str +
             '/User/getUserByLoginId?ouCode=' + this.env.OuCode + '&loginID=' + LoginId
             , this.env.httpOptions).pipe(catchError(this.handleError));
@@ -53,8 +47,6 @@ export class UserService {
 
     Save(saveEntityObj: UserEntity): Observable<Insertstatus> {
         saveEntityObj.id = null;
-        //console.log(this.str + '/User');
-        console.log(saveEntityObj);
         return this.httpClient.post<Insertstatus>(this.str + '/User',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
 

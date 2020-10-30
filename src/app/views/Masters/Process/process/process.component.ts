@@ -54,7 +54,6 @@ export class ProcessComponent extends FormComponentBase implements OnInit, After
     let timezone: Timezone = new Timezone();
     let date: Date = new Date(2018,11,5,15,25,11);
     let timeZoneOffset: number = timezone.offset(date,"Europe/Paris");
-    console.log(timeZoneOffset); //-60
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href = 'login';
     }

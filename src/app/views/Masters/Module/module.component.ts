@@ -51,7 +51,6 @@ export class ModuleComponent extends FormComponentBase implements OnInit, AfterV
     return this.globalService.SpecialCharValidator(k);    
   }
   ngOnInit() {
-    console.log('hii')
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href = 'login';
     }

@@ -220,7 +220,6 @@ export const projectAsyncValidator = (projectService: ProjectService, code: stri
 };
 
 export const zoneAsyncValidator = (zoneService: ZoneService, Id: string, time: number = 500) => {
-  console.log(Id);
   return (input: FormControl) => {
     return timer(time).pipe(
       switchMap(() => zoneService.checkZone(input.value, Id)),

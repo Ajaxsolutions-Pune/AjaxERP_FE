@@ -33,8 +33,6 @@ export class ModuleobjService {
     }
 
     checkModuleobj(Moduleobj: string, Code: string): Observable<CommonEntity> {
-        console.log(this.str + '/Module/getModuleByName?name=' +
-        Moduleobj + '&code=' + Code);
         return this.httpClient.get<CommonEntity>(this.str + '/Module/getModuleByName?name=' +
             Moduleobj + '&code=' + Code
             , this.env.httpOptions).pipe(catchError(this.handleError));

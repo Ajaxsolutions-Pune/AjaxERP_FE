@@ -33,8 +33,6 @@ export class ScreenObjService {
     }
 
     checkScreen(Screen: string, Code: string): Observable<CommonEntity> {
-        console.log(this.str + '/Screen/getScreenByName?name=' +
-        Screen + '&code=' + Code);
         return this.httpClient.get<CommonEntity>(this.str + '/Screen/getScreenByName?name=' +
             Screen + '&code=' + Code
             , this.env.httpOptions).pipe(catchError(this.handleError));

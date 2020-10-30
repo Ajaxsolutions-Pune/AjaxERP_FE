@@ -182,7 +182,6 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
       this.user.pwdExpiryDate = this.globalService.GerCurrntDateStamp();
       this.userService.Save(this.userTransfarmer.UserTransfarmer(this.user)).subscribe(
         (par) => {
-          console.log(par);
           if (par !== null) {
             userForm.reset();
             this.defaultLayoutComponent.Massage('',

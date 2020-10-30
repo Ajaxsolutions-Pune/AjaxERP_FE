@@ -152,7 +152,6 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
     this.bindObj.createdDate = this.globalService.GerCurrntDateStamp();
     this.bindObj.modifiedBy = localStorage.getItem('username');
     this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
-    console.log(status);
     if (status !== 'Update') {
       
       this.transmissionLineService.getTransmissionLine(this.bindObj.tlCode).subscribe(
@@ -165,7 +164,6 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
           this.transmissionLineService.Save(this.transmissionLineTransfarmer.
             TransmissionLineTransfarmer(this.bindObj)).subscribe(
               (par) => {
-                console.log(par);
                 if (par !== null) {
                   this.defaultLayoutComponent.Massage('',
                     'Data saved successfully !', 'modal-info');

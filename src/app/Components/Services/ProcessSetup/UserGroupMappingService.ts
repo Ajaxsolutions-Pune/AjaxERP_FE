@@ -4,39 +4,38 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
-import { RegionEntity } from '../../Module/Masters/Region.model';
-import { CommonEntity } from '../../Module/common.model';
-
+import { UserGroupMappingEntity } from '../../Module/ProcessSetup/UserGroupMapping.model';
 @Injectable()
-export class RegionService {
+export class UserGroupMappingService {
     str: string;
     env = environment;
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
     }
-    getRegions(): Observable<RegionEntity[]> {
-        return this.httpClient.get<RegionEntity[]>(this.str + '/Region/getList'
-            , this.env.httpOptions);
+    getUserGroupMappings(): Observable<UserGroupMappingEntity[]> {
+        return this.httpClient.get<UserGroupMappingEntity[]>(this.str +
+            '/UserGroupUserMapping/getList',            
+            this.env.httpOptions);
+            //'/ProcessFormMapping/getList',
     }
-    getRegion(qaTypeCode: string): Observable<RegionEntity> {
-        return this.httpClient.get<RegionEntity>(this.str + '/Region/' + qaTypeCode
+    getUserGroupMapping(deviceId: string): Observable<UserGroupMappingEntity[]> {
+        return this.httpClient.get<UserGroupMappingEntity[]>(
+            this.str + '/UserGroupUserMapping/getList/' + this.env.OuCode + '?userGroupId=' + deviceId
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-    Save(saveEntityObj: RegionEntity): Observable<Insertstatus> {
-        return this.httpClient.post<Insertstatus>(this.str + '/Region', saveEntityObj
+
+    Save(saveEntityObj: UserGroupMappingEntity[]): Observable<Insertstatus> {
+        return this.httpClient.post<Insertstatus>(this.str + '/UserGroupUserMapping/createList', saveEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-    Update(updateEntityObj: RegionEntity): Observable<Insertstatus> {
+
+    Update(updateEntityObj: UserGroupMappingEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<Insertstatus>(this.str + '/Region', updateEntityObj
+        return this.httpClient.post<Insertstatus>(this.str + '/UserGroupUserMapping', updateEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
-    checkRegion(region: string, Code: string): Observable<CommonEntity> {
-        return this.httpClient.get<CommonEntity>(this.str + '/Region/getRegionByName?name='
-            + region + '&code=' + Code
-            , this.env.httpOptions).pipe(catchError(this.handleError));
-    }
+
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {
             console.error('client side error', errorResponse.error.message);

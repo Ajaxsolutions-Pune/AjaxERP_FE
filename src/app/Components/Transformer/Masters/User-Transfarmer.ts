@@ -134,7 +134,6 @@ export class UserTransfarmer {
         if (User1.isActive.toString().trim() === 'true') { this.userEntity.isActive = '1'; }
         else { this.userEntity.isActive = '0'; }
 
-        console.log(this.userEntity);
         return this.userEntity;
     }
 }

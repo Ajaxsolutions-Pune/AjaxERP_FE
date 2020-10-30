@@ -20,7 +20,7 @@ export class DefaultLayoutComponent implements OnDestroy {
   EmployeId: number;
   bodyStr: string;
   massageStyle: string;
-  @ViewChild('myModal') public myModal: ModalDirective;
+  @ViewChild('myModal', { static: false }) public myModal: ModalDirective;
   // end
   str: string;
   public navItems = navItems;

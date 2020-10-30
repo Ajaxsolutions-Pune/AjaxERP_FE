@@ -33,8 +33,6 @@ export class ZoneService {
     }
 
     checkZone(zone: string, Id: string): Observable<CommonEntity> {
-        console.log(this.str + '/Zone/getZoneByName?name="' +
-        zone + '"&code=' + Id + '');
         return this.httpClient.get<CommonEntity>(this.str + '/Zone/getZoneByName?name=' +
             zone + '&code=' + Id + ''
             , this.env.httpOptions).pipe(catchError(this.handleError));

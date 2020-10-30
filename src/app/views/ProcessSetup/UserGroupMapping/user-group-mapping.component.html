@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <mat-form-field class="col-md-4">
+    <mat-label>Device</mat-label>
+    <mat-select required [(ngModel)]="userGroupId" (selectionChange)="DeviceChange($event)">
+      <mat-option *ngFor="let userGroup of userGroupObj" [value]="userGroup.userGroupId">
+        {{userGroup.userGroupId}} - {{userGroup.groupName}}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      {{formErrors['ControluserGroupCode']}}
+    </mat-error>
+  </mat-form-field>
+</div>
+
+<div class="container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" [matSortDisableClear]="false" matSort class="mat-cell">
+    ng update @angular/cli @angular/core
+    <ng-container matColumnDef="UserGroupMapping">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Map Id</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.ugmId}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="UserText">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>User</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.loginId}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="SortBy">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Sort</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.sortBy}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ActiveText">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.isActiveText}}</mat-cell>
+    </ng-container>
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="addNew()">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent" (click)="startEdit(i,
+          row.ugmId,
+          row.loginId,      
+          row.sortBy,
+          row.isActive)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+    No results
+  </div>
+  <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>
+<div class="row" style="padding-top: 20px;">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <button mat-raised-button (click)="save()" color="primary">Submit</button>
+    <button mat-raised-button color="warn" routerLink="/dashboard">
+      Cancel</button>
+  </div>
+  <div class="col-md-4"></div>
+</div>

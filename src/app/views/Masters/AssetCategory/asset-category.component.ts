@@ -137,7 +137,6 @@ export class AssetCategoryComponent extends FormComponentBase implements OnInit,
     this.bindObj.createdDate = this.globalService.GerCurrntDateStamp();
     this.bindObj.modifiedBy = localStorage.getItem('username');
     this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
-    console.log(status);
     if (status !== 'Update') {
       this.bindObj.assetCategoryCode = null;
       this.assetCategoryService.Save(this.assetCategoryTransfarmer.AssetCategoryTransfarmer(this.bindObj)).subscribe(

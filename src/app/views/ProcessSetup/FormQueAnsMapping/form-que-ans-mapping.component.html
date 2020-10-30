@@ -4,14 +4,8 @@
   <mat-form-field class="col-md-4">
       <mat-label>Form</mat-label>
       <mat-select required  [(ngModel)]="FormId"
-       (selectionChange)="FormChange($event)"       
-      placeholder="Form" #singleSelect>
-      <mat-option>
-        <ngx-mat-select-search [formControl]="formFilterCtrl" 
-        placeholderLabel="Find Forms..." 
-        noEntriesFoundLabel="No matching forms found"></ngx-mat-select-search>
-      </mat-option>
-          <mat-option *ngFor="let form of filteredForms | async" [value]="form.formId">
+       (selectionChange)="FormChange($event)">
+          <mat-option *ngFor="let form of formObj" [value]="form.formId">
             {{form.formId}} - {{form.formName}}
           </mat-option>
       </mat-select>

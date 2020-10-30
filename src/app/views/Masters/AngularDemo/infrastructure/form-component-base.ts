@@ -1,9 +1,8 @@
-import { ViewChildren, ElementRef, Directive } from '@angular/core';
+import { ViewChildren, ElementRef } from '@angular/core';
 import { FormControlName, FormGroup } from '@angular/forms';
 import { Observable, fromEvent, merge } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-@Directive()
 export class FormComponentBase {
     // @ts-ignore
     @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];

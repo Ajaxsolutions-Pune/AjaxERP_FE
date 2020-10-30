@@ -189,7 +189,6 @@ export class AnswerComponent extends FormComponentBase implements OnInit, AfterV
           this.answer.modifiedBy = localStorage.getItem('username');
           this.answer.createdDate = this.globalService.GerCurrntDateStamp();
           this.answer.modifiedDate = this.globalService.GerCurrntDateStamp();
-          console.log(this.answer);      
 
            
         },

@@ -145,7 +145,6 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
     this.fillEntityDrp('CUS').subscribe(
       (par) => {
         this.CustomerEntityDrp = par;
-        console.log();
       },
       (err: any) => console.log(err));
 

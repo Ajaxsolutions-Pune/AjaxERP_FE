@@ -35,15 +35,11 @@ export class HubService {
     }
 
     checkHub(hub: string, code: string): Observable<CommonEntity> {
-        console.log(this.str + '/Hub/getHubByNameOrCode?name=' + hub +
-            '&code=' + code + '&ouCode=' + this.env.OuCode)
         return this.httpClient.get<CommonEntity>(this.str + '/Hub/getHubByNameOrCode?ouCode=' +
             this.env.OuCode + '&name=' + hub + '&ouCode=' + this.env.OuCode
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     checkHubByCode(code: string): Observable<CommonEntity> {
-        console.log(this.str +
-            '/Hub/getHubByNameOrCode?ouCode=' + this.env.OuCode + '&code=' + code);
         return this.httpClient.get<CommonEntity>(this.str +
             '/Hub/getHubByNameOrCode?ouCode=' + this.env.OuCode + '&code=' + code
             , this.env.httpOptions).pipe(catchError(this.handleError));

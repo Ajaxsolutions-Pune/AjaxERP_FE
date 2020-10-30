@@ -91,7 +91,6 @@ export class UserDeviceRegListComponent implements OnInit {
       this.SerachCri = 1;
     }
     if (this.bindObj.isApproved !== null && this.bindObj.isApproved.toString() !== '-1') {
-      console.log(this.bindObj.isApproved);
       if (this.bindObj.isApproved.toString() === '3') {
         this.ResultOject = this.ResultOject.filter(SubResultProd =>
           SubResultProd.isApproved.toString() !== '-1');
@@ -99,10 +98,6 @@ export class UserDeviceRegListComponent implements OnInit {
         this.ResultOject = this.ResultOject.filter(SubResult =>
           SubResult.isApproved.toString().toLowerCase().indexOf(
             this.bindObj.isApproved.toString().toLowerCase()) !== -1);
-        console.log(this.ResultOject.filter(SubResultProd => {
-          SubResultProd.isApproved.trim()
-            === this.bindObj.isApproved.trim()
-        }));
       }
       this.SerachCri = 1;
     }

@@ -75,7 +75,6 @@ export class AssetCategoryTransfarmer {
         } else {
             this.OjectEntity.isActive = '0';
         }
-        console.log(this.OjectEntity);
         return this.OjectEntity;
     }
 }

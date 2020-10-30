@@ -303,6 +303,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       (err: any) => console.log(err));
     this.fillEntityDrp('CUS').subscribe(
       (par) => {
+        console.log(this.CustomerEntityDrp);
         this.CustomerEntityDrp = par;
         console.log();
       },

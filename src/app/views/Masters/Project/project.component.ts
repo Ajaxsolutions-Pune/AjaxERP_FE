@@ -103,6 +103,7 @@ export class ProjectComponent extends FormComponentBase implements OnInit, After
     //Employee combo
     this.fillEmployeeDrp().subscribe(
       (par) => {
+        console.log(par);
         this.employeeDrp = par;
       },
       (err: any) => console.log(err));

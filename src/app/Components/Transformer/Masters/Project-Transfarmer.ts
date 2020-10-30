@@ -49,7 +49,6 @@ export class ProjectTransfarmer {
     }
 
      ProjectTransfarmerEntity(Entity: ProjectEntity): Project {
-        console.log(Entity);
         this.project = new Project();
         this.project.ouCode = '12';
         this.project.projectCode = Entity.projectCode;
@@ -75,12 +74,9 @@ export class ProjectTransfarmer {
         this.project.createdDate = Entity.createdDate;
         this.project.modifiedBy = Entity.modifiedBy;
         this.project.modifiedDate = Entity.modifiedDate;
-        console.log(Entity.isActive.toString().trim() === '1');
-        console.log(Entity.isActive);
          // tslint:disable-next-line:max-line-length
          if (Entity.isActive === '1') { this.project.isActive = 'true'.toString().trim(); } else { this.project.isActive = ''.toString().trim(); }
-        console.log(this.project.isActive);
-      
+        
         return this.project;
        
     }    

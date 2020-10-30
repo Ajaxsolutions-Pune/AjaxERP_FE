@@ -37,9 +37,6 @@ export class ColourService {
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     checkColour(colour: string, Code: string): Observable<CommonEntity> {
-        console.log(this.str
-            + '/Colour/getColourByName?name=' + colour + '&code=' + Code
-        );
         return this.httpClient.get<CommonEntity>(this.str
             + '/Colour/getColourByName?name=' + colour + '&code=' + Code
             , this.env.httpOptions).pipe(catchError(this.handleError));

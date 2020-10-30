@@ -132,6 +132,7 @@ import { ScreenComponent } from './views/Masters/Screen/screen.component';
 import { MonitoringReportComponent } from './Report/Monitoring/MonitoringReport/monitoring-report.component';
 import { UserGroupListComponent } from './views/Masters/UserGroup/user-group-list.component';
 import { UserGroupComponent } from './views/Masters/UserGroup/user-group.component';
+import { UserGroupMappingComponent } from './views/ProcessSetup/UserGroupMapping/user-group-mapping.component';
 
 export const routes: Routes = [
   {
@@ -1075,6 +1076,13 @@ export const routes: Routes = [
         component: DeviceAssetMappingComponent,
         data: {
           title: 'Device Asset Mapping'
+        },
+      },
+      {
+        path: 'UserGroupMapping',
+        component: UserGroupMappingComponent,
+        data: {
+          title: 'User Group Mapping'
         },
       },
       

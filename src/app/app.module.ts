@@ -150,21 +150,12 @@ import { DeviceListComponent } from './views/Masters/Device/device-list.componen
 import { DeviceComponent } from './views/Masters/Device/device.component';
 import { DialogService } from './Components/Services/MatServices/Dialog.service';
 import { DialogTemplateComponent } from './Components/Services/MatServices/dialog-template.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule } from '@angular/material/checkbox';
-import { ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import {
+  MatInputModule, MatDialogModule, MatButtonModule,
+  ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, MatFormFieldModule, MatIconModule,
+  MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule, MatSelectModule, MatCardModule,
+  MatSortModule, MatTabsModule, MatTableModule, MatToolbarModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE
+} from '@angular/material';
 import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.component';
 import { AssetTransfarmer } from './Components/Transformer/Masters/Asset-Transfarmer';
 import { AssetListResolverService } from './Components/Resolver/Masters/Asset-List-Resolver.Service';
@@ -294,9 +285,12 @@ import { UserGroupService } from './Components/Services/Masters/UserGroupService
 import { UserGroupTransfarmer } from './Components/Transformer/Masters/UserGroup-Transfarmer';
 import { UserGroupListComponent } from './views/Masters/UserGroup/user-group-list.component';
 import { UserGroupComponent } from './views/Masters/UserGroup/user-group.component';
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-
-
+import { UserGroupMappingComponent } from './views/ProcessSetup/UserGroupMapping/user-group-mapping.component';
+import { UserGroupMappingTransfarmer } from './Components/Transformer/ProcessSetup/UserGroupMapping-Teansfarmet';
+import { UserGroupMappingService } from './Components/Services/ProcessSetup/UserGroupMappingService';
+import { UserGroupMappingDataService } from './views/ProcessSetup/UserGroupMapping/userdevicedata.service';
+import { UserGroupUserMappingAddDialogComponent } from './views/ProcessSetup/UserGroupMapping/dialogs/add/UserGroupMappingadd.dialog.component';
+import { UserGroupMappingEditDialogComponent } from './views/ProcessSetup/UserGroupMapping/dialogs/edit/UserGroupMappingedit.dialog.component';
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -345,7 +339,7 @@ export const MY_FORMATS = {
     MatTableModule,
     MatToolbarModule,
     MatPaginatorModule,
-    NgxMatSelectSearchModule,
+
     NgxPaginationModule
   ],
   entryComponents: [
@@ -359,6 +353,8 @@ export const MY_FORMATS = {
     UserDeviceEditDialogComponent,
     DeviceAssetAddDialogComponent,
     DeviceAssetEditDialogComponent,
+    UserGroupUserMappingAddDialogComponent,
+    UserGroupMappingEditDialogComponent,
     DialogTemplateComponent
   ],
   declarations: [
@@ -367,6 +363,8 @@ export const MY_FORMATS = {
     EditDialogComponent,
     DeleteDialogComponent,
     ProcessAddDialogComponent,
+    UserGroupUserMappingAddDialogComponent,
+    UserGroupMappingEditDialogComponent,
     ProcessDeleteDialogComponent,
     ProcessEditDialogComponent,
     UserDeviceAddDialogComponent,
@@ -402,7 +400,9 @@ export const MY_FORMATS = {
     ProcessFormMappingComponent, UserDeviceMappingComponent,
     DeviceAssetMappingComponent, ContactListComponent, ContactComponent,
     AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent,
-    UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent, ScreenComponent, ScreenListComponent, MonitoringReportComponent, UserGroupListComponent, UserGroupComponent
+    UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent,
+    ScreenComponent, ScreenListComponent, MonitoringReportComponent, UserGroupListComponent, UserGroupComponent,
+    UserGroupMappingComponent
   ],
   providers: [
     ConfirmDialogService,
@@ -418,11 +418,11 @@ export const MY_FORMATS = {
     AnswerTransfarmer, ProcessTransfarmer1, ZoneTransfarmer, CircleTransfarmer,
     FormQueAnsMappingTransfarmer, DatePipe, GlobalService,
     DeviceTransfarmer, AssetCategoryTransfarmer,
-    ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer,UserGroupTransfarmer,
+    ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer, UserGroupTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
     HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer
     , ModuleobjTransfarmer, ScreenObjTransfarmer, UserDeviceRegTransfarmer,
-    ZoneService, CircleService, ClusterService, ColourService, DeviceService,  UserGroupService,
+    ZoneService, CircleService, ClusterService, ColourService, DeviceService, UserGroupService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService, UserService, UserDeviceRegService,
     FormListResolverService, RegionListResolverService, ColourListResolverService,
@@ -446,6 +446,7 @@ export const MY_FORMATS = {
     ProcessFormMappingService, ProcessFormMappingTransfarmer, ProcessDataService, UserDeviceDataService,
     ProcessDataService,
     UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer, DeviceAssetMappingService,
+    UserGroupMappingTransfarmer, UserGroupMappingService, UserGroupMappingDataService,
     DeviceAssetDataService,
     DeviceAssetMappingTransfarmer, {
       provide: MAT_DATE_LOCALE,

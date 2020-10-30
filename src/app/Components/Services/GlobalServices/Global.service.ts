@@ -62,7 +62,6 @@ export class GlobalService {
             'assetGroupCode=' + assetGroupCode + '&processId=' + processId +
              '&userId=' + userId + '&customerCode=' + customerCode
               + '&assetCode=' + assetCode + '&withImage='+ withImage;
-        console.log(this.str + ReportUrl);
          const baseUrl = this.str + ReportUrl;
          const token = localStorage.getItem('token').toString();
          const headers = new HttpHeaders().set('authorization', 'Bearer ' + token);
