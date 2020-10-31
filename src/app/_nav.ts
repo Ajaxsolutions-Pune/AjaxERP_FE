@@ -211,11 +211,11 @@ export const navItems: NavData[] = [
         url: '/DeviceAssetMapping',
         icon: 'icon-puzzle'
       },
-      {
-        name: 'User Group Mapg',
-        url: '/UserGroupMapping',
-        icon: 'icon-puzzle'
-      },
+    // {
+    //   name: 'User Group Mapg',
+    //   url: '/UserGroupMapping',
+    //   icon: 'icon-puzzle'
+    // },
     ]
   },
   {
