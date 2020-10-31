@@ -8,6 +8,8 @@ export class dashboard  {
     bottomForm: bottomForm[];
     topPlacesVisit: topPlacesVisit[];
     bottomPlacesVisit: bottomPlacesVisit[];
+    realTimeTrackingData: realTimeTrackingData[];
+    places: places[];
 }
 
 export class dashboardCount {    
@@ -64,6 +66,45 @@ export class bottomPlacesVisit  {
     topN: string;
     userName: string;
     placesVisit: string;
+}
+
+export class realTimeTrackingData  {   
+    loginId: string;
+    userNameENG: string;
+    location: string;
+    speed: string;
+    batteryPer: string;
+    dateTime: string;
+    latitude: string;
+    longitude: string;
+    distanceTraveled: string;
+    placesVisit: string;
+    formCount: string;
+    placesTagged: string;
+    status: string;
+    userGroup: string;
+    gps: string;
+    highAccurecy: string;
+    model: string;
+    imei1: string;
+    osVersion: string;
+    appVersion: string;
+    appType: string;
+}
+
+export class places  {  
+    placeCode: string;
+    assetName: string;
+    placeGroupCode: string;
+    placeGroupName: string;
+    placeName: string;
+    locationName: string;
+    latitude: string;
+    longitude: string;
+    placeAddress: string;
+    pinCode: string;
+    stateName: string;
+    countryName: string;
 }
 
 

@@ -291,6 +291,7 @@ import { UserGroupMappingService } from './Components/Services/ProcessSetup/User
 import { UserGroupMappingDataService } from './views/ProcessSetup/UserGroupMapping/userdevicedata.service';
 import { UserGroupUserMappingAddDialogComponent } from './views/ProcessSetup/UserGroupMapping/dialogs/add/UserGroupMappingadd.dialog.component';
 import { UserGroupMappingEditDialogComponent } from './views/ProcessSetup/UserGroupMapping/dialogs/edit/UserGroupMappingedit.dialog.component';
+import { MapComponent } from './views/Map/map.component';
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -402,7 +403,8 @@ export const MY_FORMATS = {
     AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent,
     UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent,
     ScreenComponent, ScreenListComponent, MonitoringReportComponent, UserGroupListComponent, UserGroupComponent,
-    UserGroupMappingComponent
+    UserGroupMappingComponent,
+    MapComponent
   ],
   providers: [
     ConfirmDialogService,

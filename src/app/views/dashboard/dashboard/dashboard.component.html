@@ -255,6 +255,109 @@
   </div>
 
 
+  <div class="col-md-12" style="margin-top:50px">
+    <div class="row"> 
+    <table class="table table-responsive table-bordered" style="background-color:white;" >
+      <thead style="background-color: #bdffce;">
+        <tr>                   
+          <th scope="col">Login Id</th>
+          <th scope="col">User Name</th>
+          <th scope="col">Location</th>
+          <th scope="col">Speed</th>
+          <th scope="col">Battery</th>
+          <th scope="col">Last Update</th>
+          <th scope="col">latitude</th>
+          <th scope="col">longitude</th>
+          <th scope="col">Distance</th>
+          <th scope="col">Visits</th>
+          <th scope="col">Form</th>
+          <th scope="col">Places</th>
+          <th scope="col">Status</th>
+          <th scope="col">User Group</th>
+
+          <th scope="col">GPS</th>
+          <th scope="col">High Accurecy</th>
+          <th scope="col">Model</th>
+          <th scope="col">IMEI1</th>
+          <th scope="col">OS Version</th>
+          <th scope="col">App Version</th>
+          <th scope="col">App Type</th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr *ngFor="let realTimeTrackingData of realTimeTrackingDataObj">               
+         <td>
+           <span>{{realTimeTrackingData.loginId}}</span>
+         </td>
+         <td>
+           <span>{{realTimeTrackingData.userNameENG}}</span>
+         </td>  
+         <td style="width:auto;">
+          <span  style="width:auto;">{{realTimeTrackingData.location}}</span>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.speed}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.batteryPer}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.dateTime}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.latitude}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.longitude}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.distanceTraveled}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.placesVisit}}</div>
+        </td>
+        <td>
+          <div>{{realTimeTrackingData.formCount}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.placesTagged}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.status}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.userGroup}}</div>
+        </td> 
+
+        <td>
+          <div>{{realTimeTrackingData.gps}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.highAccurecy}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.model}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.imei1}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.osVersion}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.appVersion}}</div>
+        </td> 
+        <td>
+          <div>{{realTimeTrackingData.appType}}</div>
+        </td> 
+           
+       </tr>   
+      </tbody>
+    </table>    
+  </div>
+  </div>
+
+
 
     
     

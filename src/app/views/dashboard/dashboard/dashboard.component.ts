@@ -1,19 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { dashboard,bottomDistance, topDistance, topPlacesTagged,bottomPlacesTagged,topForm,
-  bottomForm,topPlacesVisit,bottomPlacesVisit} from '../../../Components/Module/Masters/Dashboard.model';
+  bottomForm,topPlacesVisit,bottomPlacesVisit,
+  realTimeTrackingData,places} from '../../../Components/Module/Masters/Dashboard.model';
 import { DashboardService } from '../../../Components/Services/Masters/DashboardService';
 import * as alasql from 'alasql';
 alasql['private'].externalXlsxLib = require('xlsx');
 import { environment } from '../../../Components/Module/environment';
-
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-
 
 export class DashboardComponent implements OnInit {
   @Input() FormInput: dashboard;
@@ -27,7 +26,8 @@ export class DashboardComponent implements OnInit {
   bottomFormObj: bottomForm[];
   topPlacesVisitObj: topPlacesVisit[];
   bottomPlacesVisitObj: bottomPlacesVisit[];
-
+  realTimeTrackingDataObj: realTimeTrackingData[];
+  placesObj : places[];
 
   config: any;
   env = environment;
@@ -64,7 +64,9 @@ export class DashboardComponent implements OnInit {
       topForm:[],
       bottomForm:[],
       topPlacesVisit:[],
-      bottomPlacesVisit:[]
+      bottomPlacesVisit:[],
+      realTimeTrackingData:[],
+      places:[]      
     };
     this.dashboardObj.dashboardCount = {
       checkIn: null,
@@ -83,6 +85,8 @@ export class DashboardComponent implements OnInit {
     this.bottomFormObj = [];
     this.topPlacesVisitObj = [];
     this.bottomPlacesVisitObj = [];
+    this.realTimeTrackingDataObj = [];
+    this.placesObj = [];
   
 
     this.dashboardService.getDashboardData().subscribe(t => {
@@ -95,7 +99,9 @@ export class DashboardComponent implements OnInit {
       this.bottomFormObj = this.dashboardObj.bottomForm;
       this.topPlacesVisitObj = this.dashboardObj.topPlacesVisit;
       this.bottomPlacesVisitObj = this.dashboardObj.bottomPlacesVisit;
-    });
+      this.realTimeTrackingDataObj = this.dashboardObj.realTimeTrackingData;
+      this.placesObj = this.dashboardObj.places;
 
+    });
   }
 }

@@ -40,6 +40,11 @@ export const navItems: NavData[] = [
     }
   },
   {
+    name: 'Map',
+    url: '/map',
+    icon: 'icon-map',   
+  },
+  {
     name: 'Monitoring Masters',
     url: '/Masters',
     //  icon: 'nav-icon icon-layers',

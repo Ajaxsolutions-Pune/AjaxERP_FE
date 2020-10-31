@@ -133,6 +133,7 @@ import { MonitoringReportComponent } from './Report/Monitoring/MonitoringReport/
 import { UserGroupListComponent } from './views/Masters/UserGroup/user-group-list.component';
 import { UserGroupComponent } from './views/Masters/UserGroup/user-group.component';
 import { UserGroupMappingComponent } from './views/ProcessSetup/UserGroupMapping/user-group-mapping.component';
+import { MapComponent } from './views/Map/map.component';
 
 export const routes: Routes = [
   {
@@ -182,6 +183,16 @@ export const routes: Routes = [
           title: 'Dashboard'
         }
       },
+
+      {
+        path: 'map',
+        component: MapComponent,
+        data: {
+          title: 'Map'
+        }
+      },
+
+
       {
         path: 'UnitList',
         component: ListUOMComponent,

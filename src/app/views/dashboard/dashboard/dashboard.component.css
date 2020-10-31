@@ -4,7 +4,13 @@ td, th{
     padding: 7px;
     margin-top: 0px;
     margin-bottom: 0px;
+    height:5px;
   }
+
+td > div{
+    height:15px;
+    width: auto;
+}
 
 .dashboard-main
 {

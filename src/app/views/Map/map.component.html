@@ -1,0 +1,180 @@
+
+
+
+<div class="container-fluid row"  id="googleMap" style="width:100%;height:100vh;"></div>
+
+
+<!--<div style="height:200px;position:fixed;top:90px;left:200px;">
+   <div style ="background-color:blue;padding: 5px;" >
+     <span style="color:#bdffce;font-size:18px;"> Map Toolbar</span>
+   </div>
+   <div style="background-color: #bdffce;">
+
+    <mat-tab-group  dynamicHeight>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <h5 class="text-center" style="margin-top:10px;margin-right: 5px;" >User</h5>
+              <i style="color:green;font-size: 25px;" class="fa fa-user"></i> 
+            </ng-template>
+            <div class="col-md-12 pull-left" style="padding-top:15px; background-color:#bde4e1">                
+                <mat-form-field color="accent" class="col-md-12">        
+                    <mat-label>Name</mat-label>
+                    <mat-select  
+                    formControlName=""                                                            
+                    [(ngModel)]="answer.answerId">
+                    <mat-option>Select</mat-option>
+                    <mat-option *ngFor="let answer of answer"
+                     [value]="answer.answerId">
+                      {{answer.answerId}}
+                    </mat-option>
+                    </mat-select>                   
+                </mat-form-field>       
+                
+                <mat-form-field class="col-md-12">
+                    <input matInput
+                    placeholder="Search"
+                    [(ngModel)]="answer.answerId"
+                    formControlName=""
+                    #txtAnswerID
+                    name="">                   
+                </mat-form-field>    
+                
+                <table class="table table-responsive-sm table-hover table-outline mb-0">
+                    <thead class="thead-light">
+                      <tr>
+                        <th></th>
+                        <th>Status</th>
+                        <th>Count</th>                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td> </td>
+                        <td>
+                            <mat-checkbox name="chkAll"
+                            #chkAll                            
+                            [(ngModel)]="answer.answerId">All
+                            </mat-checkbox>
+                        </td>
+                        <td>
+                             0
+                        </td>                      
+                      </tr>
+
+                      <tr>
+                        <td> </td>
+                        <td>
+                            <mat-checkbox name="chkCheckIn"
+                            #chkCheckIn                            
+                            [(ngModel)]="answer.answerId">Check In
+                            </mat-checkbox>
+                        </td>
+                        <td>
+                             0
+                        </td>                      
+                      </tr>
+
+                      <tr>
+                        <td> </td>
+                        <td>
+                            <mat-checkbox name="chkCheckOut"
+                            #chkCheckOut                            
+                            [(ngModel)]="answer.answerId">Check Out
+                            </mat-checkbox>
+                        </td>
+                        <td>
+                             0
+                        </td>                      
+                      </tr>
+
+                      <tr>
+                        <td> </td>
+                        <td>
+                            <mat-checkbox name="chkOff"
+                            #chkOff                            
+                            [(ngModel)]="answer.answerId">Off
+                            </mat-checkbox>
+                        </td>
+                        <td>
+                             0
+                        </td>                      
+                      </tr>
+
+                      <tr>
+                        <td> </td>
+                        <td>
+                            <mat-checkbox name="chkInactive"
+                            #chkInactive                            
+                            [(ngModel)]="answer.answerId">Inactive
+                            </mat-checkbox>
+                        </td>
+                        <td>
+                             0
+                        </td>                      
+                      </tr>
+
+                    </tbody>
+                  </table>
+             </div>           
+          </mat-tab>
+  
+        <mat-tab >
+          <ng-template mat-tab-label style="width:20px">
+            <h5 class="text-center" style="margin-top: 10px;margin-right: 5px;" >Places</h5>
+            <i style="color:green;font-size: 25px;" class="fa fa-map-marker"></i> 
+          </ng-template>
+          <div class="col-md-12 pull-left" style="padding-top:15px; background-color:#bde4e1">
+            <label>
+              <input type="checkbox" [value]="Tower" (change)="onCheckboxChange($event)" />    
+              Tower           
+            </label>
+            <label>
+              <input type="checkbox" [value]="Substation" (change)="onCheckboxChange($event)" />    
+              Sub Station           
+            </label>
+          </div>           
+        </mat-tab>
+
+        <mat-tab >
+            <ng-template mat-tab-label>
+            <h5 class="text-center" style="margin-top: 10px;margin-right: 5px;" > Map Type</h5>
+            <i style="color:green;font-size: 25px;" class="fa fa-map"></i>             
+            </ng-template>
+            <div class="col-md-12 pull-left" style="padding-top:15px; background-color:#bde4e1">
+                <h5 class="text-center" >Map Type</h5>
+
+                <input id="ROADMAP" 
+                type="radio" 
+                value="ROADMAP" 
+                name="MAPTYPE" 
+                formControlName="Maptype" 
+                (change)="changeMapType($event)">
+                <label for="ROADMAP">RoadMap</label>
+
+                <input id="SATELLITE" 
+                type="radio" 
+                value="SATELLITE" 
+                name="MAPTYPE" 
+                formControlName="Maptype" 
+                (change)="changeMapType($event)">
+                <label for="SATELLITE">Satellite</label>
+
+                <input id="HYBRID" 
+                type="radio" 
+                value="HYBRID" 
+                name="MAPTYPE" 
+                formControlName="Maptype" 
+                (change)="changeMapType($event)">
+                <label for="HYBRID ">Hybrid</label>          
+
+             </div>           
+          </mat-tab> 
+      </mat-tab-group>        
+   </div>   
+</div> -->
+
+
+
+
+
+  
