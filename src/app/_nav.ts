@@ -72,7 +72,7 @@ export const navItems: NavData[] = [
 
       // {
       //   name: 'QuestionType',
-      //   url: '/QuestionTypeList',
+      //    url: '/QuestionTypeList',
       //   icon: 'icon-puzzle'
       // },X
       {
