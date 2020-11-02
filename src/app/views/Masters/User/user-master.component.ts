@@ -40,7 +40,7 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
   userGroupDrp: MasterDrp[];
   userTypeDrp: MasterDrp[];
   userEntityDrp: UserEntity_[];
-
+  passDisply: boolean;
   matcher = new ConfirmPassErrorStateMatcher();
   constructor(private route: ActivatedRoute,
     private userTransfarmer: UserTransfarmer,
@@ -110,7 +110,7 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
       ouCode: null, confipwd: null, id: null, loginID: null,
       pwd: null, userNameENG: null, userNameUNI: null, userTypeCode: null,
       emailID: null, mobileNo: null, pwdChangedDate: this.globalService.GerCurrntDateStamp(),
-       pwdExpiryDate: this.globalService.GerCurrntDateStamp(),
+      pwdExpiryDate: this.globalService.GerCurrntDateStamp(),
       isBlocked: null, userGroupCode: null, entityCode: null, entityBranchCode: null,
       desigination: null, isPswdChanged: null, isActive: null, createdBy: null,
       createdDate: null, modifiedBy: null, modifiedDate: null,
@@ -126,7 +126,7 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
     return this.globalService.SpecialCharValidator(k);
 
   }
-  
+
   number_char_val(event) {
     let k;
     k = event.charCode;
@@ -178,10 +178,11 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
     this.user.modifiedDate = this.globalService.GerCurrntDateStamp();
     if (status !== 'Update') {
       this.user.id = null;
-      this.user.pwdChangedDate = this.globalService.GerCurrntDateStamp();
-      this.user.pwdExpiryDate = this.globalService.GerCurrntDateStamp();
+      this.user.pwdChangedDate = this.globalService.GerCurrntDate();
+      this.user.pwdExpiryDate = this.globalService.GerCurrntDate();
       this.userService.Save(this.userTransfarmer.UserTransfarmer(this.user)).subscribe(
         (par) => {
+          console.log(par);
           if (par !== null) {
             userForm.reset();
             this.defaultLayoutComponent.Massage('',
@@ -215,8 +216,8 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
       userTypeCode: null,
       emailID: null,
       mobileNo: null,
-      pwdChangedDate: this.globalService.GerCurrntDateStamp(),
-      pwdExpiryDate: this.globalService.GerCurrntDateStamp(),
+      pwdChangedDate: this.globalService.GerCurrntDate(),
+      pwdExpiryDate: this.globalService.GerCurrntDate(),
       isBlocked: 'false',
       userGroupCode: null,
       entityCode: null,
@@ -229,8 +230,8 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
       modifiedBy: null,
       modifiedDate: null,
     };
-
     if (Login_Id === null || Login_Id === '') {
+      this.passDisply = true;
       this.user = {
         ouCode: null,
         confipwd: null,
@@ -242,8 +243,8 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
         userTypeCode: null,
         emailID: null,
         mobileNo: null,
-        pwdChangedDate: this.globalService.GerCurrntDateStamp(),
-        pwdExpiryDate: this.globalService.GerCurrntDateStamp(),
+        pwdChangedDate: this.globalService.GerCurrntDate(),
+        pwdExpiryDate: this.globalService.GerCurrntDate(),
         isBlocked: 'false',
         userGroupCode: null,
         entityCode: null,
@@ -257,10 +258,9 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
         modifiedDate: null,
       };
       status = '';
-
       this.form = this.formBuilder.group({
         ControlloginID: ['', [Validators.required],
-        [UserLoginAsyncValidator(this.userService)]],
+          [UserLoginAsyncValidator(this.userService)]],
         ControluserName: ['', [Validators.required]],
         Controlconfipwd: ['', [Validators.required]],
         Controlpassword: ['', [Validators.required]], Controlemail: ['', [Validators.required]],
@@ -276,6 +276,7 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
       this.form.controls['ControlPassExpiryDate'].disable()
     }
     else {
+      this.passDisply = false;
       this.userEntity = {
         ouCode: null,
         id: null,
@@ -286,8 +287,8 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
         userTypeCode: null,
         emailID: null,
         mobileNo: null,
-        pwdChangedDate: this.globalService.GerCurrntDateStamp(),
-        pwdExpiryDate: this.globalService.GerCurrntDateStamp(),
+        pwdChangedDate: this.globalService.GerCurrntDate(),
+        pwdExpiryDate: this.globalService.GerCurrntDate(),
         isBlocked: null,
         userGroupCode: null,
         entityCode: null,
@@ -300,13 +301,13 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
         modifiedBy: null,
         modifiedDate: null,
       };
-      
+
 
       this.form = this.formBuilder.group({
         ControlloginID: ['', [Validators.required]],
         ControluserName: ['', [Validators.required]],
-        Controlconfipwd: ['', [Validators.required]],
-        Controlpassword: ['', [Validators.required]], Controlemail: ['', [Validators.required]],
+        Controlconfipwd: [''],
+        Controlpassword: [''], Controlemail: ['', [Validators.required]],
         Controlmobile: ['', [Validators.required]], ControluserType: ['', []],
         ControlPassChangeDate: ['', []], ControlPassExpiryDate: ['', []],
         ControluserGroupCode: ['', []], ControlentityCode: ['', []],

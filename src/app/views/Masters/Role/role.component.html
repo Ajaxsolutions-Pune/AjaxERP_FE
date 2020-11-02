@@ -57,21 +57,24 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4"></div>
-                                <mat-form-field class="col-md-4">
-                                    <input matInput
-                                    placeholder="Role Created For"
-                                    [(ngModel)]="role.roleCreateFor"
-                                    formControlName="ControlroleCreateFor"
-                                    #txtAnswer
-                                    name="txtRoleCreateFor">
-                                    <mat-error>
+                                <div class="col-md-4"></div>                            
+                                    <mat-form-field color="accent" class="col-md-4">        
+                                      <mat-label>Role Created For</mat-label>
+                                      <mat-select  
+                                      formControlName="ControlroleCreateFor"                                                            
+                                      [(ngModel)]="role.roleCreateFor">
+                                      <mat-option>Select</mat-option>
+                                      <mat-option *ngFor="let obj of drproleCreateFor"
+                                       [value]="obj.listCode">
+                                        {{obj.listDescENG}}
+                                      </mat-option>
+                                      </mat-select>
+                                      <mat-error>
                                         {{ formErrors['ControlroleCreateFor'] }}
                                     </mat-error>
-                                </mat-form-field>
-                                <div class="col-md-4"></div>
-                            </div>
-
+                                    </mat-form-field>                              
+                                  <div class="col-md-4"></div>
+                                </div>
                             <!--(selectionChange)="RoleLevelChange($event)"-->
                             <div class="row">
                             <div class="col-md-4"></div>                            
@@ -148,8 +151,7 @@
                                     (click)="save(roleForm)"
                                         color="primary">Submit</button> &nbsp;
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <button mat-raised-button color="warn" routerLink="/RoleList"><i
-                                            class="fa fa-ban"></i>
+                                    <button mat-raised-button color="warn" routerLink="/RoleList">
                                         Cancel</button>
                                 </div>
                                 <div class="col-md-4"></div>

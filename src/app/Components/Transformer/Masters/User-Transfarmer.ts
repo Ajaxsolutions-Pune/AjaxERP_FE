@@ -61,10 +61,10 @@ export class UserTransfarmer {
 
     UserTransfarmerEntity(Entity: UserEntity): User {
         this.user = new User();
-        this.user.ouCode =  this.env.OuCode;
+        this.user.ouCode = this.env.OuCode;
         this.user.id = Entity.id;
         this.user.loginID = Entity.loginID;
-        this.user.pwd =  '';//Entity.pwd;
+        this.user.pwd = '';//Entity.pwd;
         this.user.confipwd = '';//Entity.pwd;
         this.user.userNameENG = Entity.userNameENG;
         this.user.userNameUNI = Entity.userNameUNI;
@@ -106,7 +106,7 @@ export class UserTransfarmer {
     UserTransfarmer(User1: User): UserEntity {
         this.userEntity = new UserEntity();
         this.userEntity.id = User1.id;
-        this.userEntity.ouCode =  this.env.OuCode;
+        this.userEntity.ouCode = this.env.OuCode;
         this.userEntity.loginID = User1.loginID;
         this.userEntity.pwd = User1.pwd;
         this.userEntity.userNameENG = User1.userNameENG;
@@ -133,7 +133,7 @@ export class UserTransfarmer {
         this.userEntity.modifiedDate = User1.modifiedDate;
         if (User1.isActive.toString().trim() === 'true') { this.userEntity.isActive = '1'; }
         else { this.userEntity.isActive = '0'; }
-
+        console.log(this.userEntity);
         return this.userEntity;
     }
 }

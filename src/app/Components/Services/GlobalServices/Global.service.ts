@@ -25,6 +25,9 @@ export class GlobalService {
     GerCurrntDateStamp(): string {
         return this.datePipe.transform(this.myDate, 'yyyy-MM-dd HH:mm:ss.sss');
     }
+    GerCurrntDate(): string {
+        return this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
+    }
 
     SpecialCharValidator(charCode: number): boolean {
         return (charCode === 8 || charCode === 32 || charCode === 44 ||
