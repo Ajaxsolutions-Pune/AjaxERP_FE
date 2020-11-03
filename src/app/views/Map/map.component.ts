@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { Script } from 'vm';
 alasql['private'].externalXlsxLib = require('xlsx');
 import { environment } from '../../Components/Module/environment';
-import { MapModel } from '../../Components/Module/Masters/Map.model';
+//import { MapModel } from '../../Components/Module/Masters/Map.model';
 import { dashboard,bottomDistance, topDistance, topPlacesTagged,bottomPlacesTagged,topForm,
   bottomForm,topPlacesVisit,bottomPlacesVisit,
   realTimeTrackingData,places} from '../../Components/Module/Masters/Dashboard.model';
@@ -20,7 +20,9 @@ declare var jQuery: any;
 declare var google: any;
 declare var myMap: any;
 declare var myMapFunction: Function;
-declare var myMapAssetFunction : Function;
+declare var myMapAssetFunction : Function; 
+declare var myMapAssetHideFunction : Function;
+
 declare var dragElement: Function;
 
 
@@ -49,6 +51,8 @@ export class MapComponent implements OnInit {
   lng: number = 0;
 
   MapType: string = "ROADMAP";
+  AssetType: string = "Tower";
+  Checked : string = "false";
 
   dashboardObj: dashboard;
   topDistanceObj: topDistance[];
@@ -149,6 +153,16 @@ export class MapComponent implements OnInit {
     this.createMap();
   }
 
+  onTowerChange(e)
+  {    
+    myMapAssetHideFunction('Tower');
+  }
+
+  onSubStationChange(e)
+  {
+    myMapAssetHideFunction('SubStation');
+  }
+
 
   createMap()
   {
@@ -200,10 +214,6 @@ export class MapComponent implements OnInit {
         var Location = this.placesObj[i]['location'];                  
       myMapAssetFunction(lat,lang, PlaceGroupName,AssetName,Location,PlaceAddress,iconBase,StateName,PinCode,map);
       }
-
-
     } 
   }
-
-
 }

@@ -2,10 +2,10 @@ agm-map{
     height: 400px;
 }
 
-
 td,th{
     padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
         margin-bottom: 0px;
+        height: 5px;
   }
 
 
@@ -24,4 +24,10 @@ td,th{
     z-index: 10;
     background-color: #2196F3;
     color: #fff;
+  }
+
+  .circle{
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
   }

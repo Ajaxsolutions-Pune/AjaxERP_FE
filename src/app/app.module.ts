@@ -156,6 +156,9 @@ import {
   MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule, MatSelectModule, MatCardModule,
   MatSortModule, MatTabsModule, MatTableModule, MatToolbarModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE
 } from '@angular/material';
+
+import {MatExpansionModule} from '@angular/material/expansion';
+
 import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.component';
 import { AssetTransfarmer } from './Components/Transformer/Masters/Asset-Transfarmer';
 import { AssetListResolverService } from './Components/Resolver/Masters/Asset-List-Resolver.Service';
@@ -340,7 +343,7 @@ export const MY_FORMATS = {
     MatTableModule,
     MatToolbarModule,
     MatPaginatorModule,
-
+    MatExpansionModule,
     NgxPaginationModule
   ],
   entryComponents: [

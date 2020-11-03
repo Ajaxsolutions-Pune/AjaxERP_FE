@@ -9,7 +9,13 @@
   <meta name="author" content="Ajax Solutions">
 	<link rel="shortcut icon" href="assets/img/brand/Logo.png">
   <title>JBS Enterpeises Pvt Ltd.</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvO0AHfg1cuND1KXbw3t5xZr5p4PVrEk4"></script>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  
   <style>
     .errorMessage{
        color: red;
@@ -21,11 +27,16 @@
 
 <script>
   //google map create user markers
+  var UserMarker;
+  var TowerMarker;
+  var UserMarkers = [];
+  var TowerMarkers = [];
+
   function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map ) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang);
-    const marker2 = new google.maps.Marker({
+    UserMarker = new google.maps.Marker({
       position: myLatlng2,
-      icon: iconBase + 'mobile_icon.jpg',
+      icon: iconBase + 'Mobile1.png',
       map: map,
       title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -33,17 +44,17 @@
              "--Battery : " +  Battery + 
              "--Speed : " + Speed + 
              "--Last Update : " +  LastUpdate   + 
-             "--Location : " + Location ,                  
-      animation: google.maps.Animation.DROP  
+             "--Location : " + Location   
     });    
-    marker2.setMap(map);  
-  }
+    UserMarker.setMap(map);     
+    UserMarkers.push(UserMarker);        
+  } 
   
   //google map create asset markers
   function myMapAssetFunction(lat,lang, PlaceGroupName,AssetName,Location,PlaceAddress,
   iconBase,StateName,PinCode,map ) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang);
-    const marker2 = new google.maps.Marker({
+      TowerMarker = new google.maps.Marker({
       position: myLatlng2,
       icon: iconBase + 'Tower.jpg',
       map: map,
@@ -52,10 +63,31 @@
              "--Location : " +  Location + 
              "--Place Address : " + PlaceAddress + 
              "--State Name : " +  StateName   + 
-             "--Pin Code : " + PinCode ,                  
-      animation: google.maps.Animation.DROP  
+             "--Pin Code : " + PinCode  
     });    
-    marker2.setMap(map);  
+    TowerMarker.setMap(map);  
+    TowerMarker.setVisible(false);
+    TowerMarkers.push(TowerMarker);    
+  }
+
+  //google map hide tower
+  function myMapAssetHideFunction(AssetType) {    
+    if(AssetType === 'Tower')
+    {      
+      for (i = 0; i < TowerMarkers.length; i++)
+      {
+        var marker = TowerMarkers[i];
+        if (!marker.getVisible()) {
+          marker.setVisible(true);
+        } else {
+          marker.setVisible(false);
+        }
+      }
+    }
+    if(AssetType === "SubStation")
+    {
+
+    }
   }
   </script>
 
