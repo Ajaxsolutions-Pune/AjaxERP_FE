@@ -300,6 +300,12 @@ import { UserGroupMappingService } from './Components/Services/ProcessSetup/User
 import { UserGroupMappingDataService } from './views/ProcessSetup/UserGroupMapping/userdevicedata.service';
 import { UserGroupUserMappingAddDialogComponent } from './views/ProcessSetup/UserGroupMapping/dialogs/add/UserGroupMappingadd.dialog.component';
 import { UserGroupMappingEditDialogComponent } from './views/ProcessSetup/UserGroupMapping/dialogs/edit/UserGroupMappingedit.dialog.component';
+import { ComboBoxComponent } from './views/Masters/AngularDemo/combo-box/combo-box.component';
+import { FormQueAnsMappingListResolverService } from './Components/Resolver/ProcessSetup/FormQueAnsMapping-List-Resolver.service';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { AutoCompleteModule, ComboBoxModule } from '@syncfusion/ej2-angular-dropdowns';
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -314,8 +320,10 @@ export const MY_FORMATS = {
 
 @NgModule({
   imports: [
+    ComboBoxModule,
     BrowserModule,
     TreeGridModule,
+    AutoCompleteModule ,
     BrowserAnimationsModule,
     AppRoutingModule, AppAsideModule, CommonModule,
     AppBreadcrumbModule.forRoot(),
@@ -347,8 +355,9 @@ export const MY_FORMATS = {
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
+    AutocompleteLibModule,
     MatPaginatorModule,
-
+    MatAutocompleteModule,
     NgxPaginationModule
   ],
   entryComponents: [
@@ -368,7 +377,7 @@ export const MY_FORMATS = {
   ],
   declarations: [
     ConfirmDialogComponent,
-    AddDialogComponent,
+    AddDialogComponent, ComboBoxComponent,
     EditDialogComponent,
     DeleteDialogComponent,
     ProcessAddDialogComponent,
@@ -436,6 +445,7 @@ export const MY_FORMATS = {
     AssetCategoryService, DataService, UserService, UserDeviceRegService,
     FormListResolverService, RegionListResolverService, ColourListResolverService,
     UserGroupListResolverService,
+    FormQueAnsMappingListResolverService,
     AssetListResolverService, ProcessListResolverService, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
     AssetCategoryListResolverService, UserListResolverService, DashboardService,
