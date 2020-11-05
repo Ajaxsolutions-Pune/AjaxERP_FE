@@ -65,7 +65,8 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     this.FormId = selectedData.value;
     this.objFormQueAnsMapping = [];
     this.insertData.dataChange.value.splice(0);
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.formQueAnsMappingService.getFormQueAnsMapping(selectedData.value).subscribe(
       (par) => {
@@ -206,6 +207,14 @@ export class FormQueAnsMappingComponent extends FormComponentBase
             this.FormId = this.FormId;
             this.GetRouteData(this.FormId);
           }
+          else if (par.status === 'Failed') {
+            this.defaultLayoutComponent.Massage('',
+              'Asset already exist', 'modal-info');
+          } else {
+            this.defaultLayoutComponent.Massage('',
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
+          }
+        
         }
       );
 
@@ -217,7 +226,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     };
     this.objFormQueAnsMapping = [];
     this.insertData.dataChange.value.splice(0);
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.formQueAnsMappingService.getFormQueAnsMapping(selectedData.value).subscribe(
       (par) => {
@@ -242,7 +251,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     };
     this.objFormQueAnsMapping = [];
     this.insertData.dataChange.value.splice(0);
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.formQueAnsMappingService.getFormQueAnsMapping(selectedData.value).subscribe(
       (par) => {

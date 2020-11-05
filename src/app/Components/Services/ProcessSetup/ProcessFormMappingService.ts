@@ -25,6 +25,9 @@ export class ProcessFormMappingService {
     }
 
     getProcessFormMapping(processId: string): Observable<ProcessFormMappingEntity[]> {
+        console.log(
+            this.str + '/GetPFMapping/getList/' + localStorage.getItem('username').toString() 
+            + '/' + this.env.OuCode +'?processId='+ processId + '');
         return this.httpClient.get<ProcessFormMappingEntity[]>(
             this.str + '/GetPFMapping/getList/' + localStorage.getItem('username').toString() 
             + '/' + this.env.OuCode +'?processId='+ processId + ''

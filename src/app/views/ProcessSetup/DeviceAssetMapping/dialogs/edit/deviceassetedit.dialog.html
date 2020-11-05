@@ -27,7 +27,7 @@
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>     
-      <div class="form">
+      <div class="form" style="display: none;">
         <mat-form-field color="accent">
           <input matInput #input class="form-control" maxlength="5"
           type="number"
@@ -35,7 +35,7 @@
           this.value = this.value.slice(0, this.maxLength);"
           #input
           placeholder="Sort"
-           [(ngModel)]="data.sortBy" name="sortBy" required >
+           [(ngModel)]="data.sortBy" name="sortBy">
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
       </div>  

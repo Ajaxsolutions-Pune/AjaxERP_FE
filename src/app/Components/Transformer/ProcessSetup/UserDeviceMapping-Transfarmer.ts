@@ -62,6 +62,8 @@ export class UserDeviceMappingTransfarmer {
             }
             this.arrOjectEntity.push(this.Oject);
         });
+        console.log('hi');
+        console.log(this.arrOjectEntity);
         return this.arrOjectEntity;
     }
 

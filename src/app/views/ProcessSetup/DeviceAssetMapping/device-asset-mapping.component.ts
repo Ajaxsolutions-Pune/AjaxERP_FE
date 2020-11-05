@@ -41,7 +41,7 @@ export class DeviceAssetMappingComponent extends FormComponentBase
   implements OnInit {
 
   deviceObj: Device[];
-  displayedColumns = ['DeviceAssetMapping', 'AssetText','SortBy',  'ActiveText', 'actions'];
+  displayedColumns = ['DeviceAssetMapping', 'AssetText',  'ActiveText', 'actions'];
   exampleDatabase: DeviceAssetDataService | null;
   insertData: DeviceAssetDataService | null;
   dataSource: ExampleDataSource | null;
@@ -140,12 +140,20 @@ export class DeviceAssetMappingComponent extends FormComponentBase
     this.deviceAssetMappingService.Save(this.deviceAssetMappingTransfarmer.
       ObjectToEntityDeviceAssetMappingTransfarmers (this.insertData.dataChange.value)).subscribe(
         (par) => {
+          console.log(par.status);
           if (par.status === 'Success') {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['DeviceAssetMapping']);
             this.DeviceId = this.DeviceId;
             this.GetRouteData(this.DeviceId);
+          }
+          else if (par.status === 'Failed') {
+            this.defaultLayoutComponent.Massage('',
+              'Asset already exist', 'modal-info');
+          } else {
+            this.defaultLayoutComponent.Massage('',
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
@@ -157,9 +165,8 @@ export class DeviceAssetMappingComponent extends FormComponentBase
         text: Device_Id
       };
       this.objDeviceAssetMapping = [];
-      this.insertData.dataChange.value.splice(0);
-  
-      this.exampleDatabase.dataChange.value.splice(0, 100);
+      this.insertData.dataChange.value.splice(0);  
+      this.exampleDatabase.dataChange.value.splice(0,10000);
       this.refreshTable();
       this.deviceAssetMappingService.getDeviceAssetMapping(selectedData.value).subscribe(
         (par) => {
@@ -171,8 +178,7 @@ export class DeviceAssetMappingComponent extends FormComponentBase
           this.objDeviceAssetMapping.forEach(element => {
             this.exampleDatabase.dataChange.value.push(element);
             this.refreshTable();
-          });
-  
+          });  
         },
         (err: any) => console.log(err));
     }
@@ -189,7 +195,7 @@ export class DeviceAssetMappingComponent extends FormComponentBase
   
     this.insertData.dataChange.value.splice(0);
 
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.deviceAssetMappingService.getDeviceAssetMapping(selectedData.value).subscribe(
       (par) => {
@@ -243,31 +249,6 @@ export class DeviceAssetMappingComponent extends FormComponentBase
       }
     });
   }
-
-  /*deleteItem(i: number, FormQuestionsAnswerMapping: number, Questions: string, QuestionsMandatory: string,
-    FormQuestionssequence: string, answer: string, QuestionsGroup: string, NextForm: string) {
-    this.index = i;
-    this.id = FormQuestionsAnswerMapping;
-    const dialogRef = this.dialog.open(ProcessDeleteDialogComponent, {
-      data: {
-        FormQuestionsAnswerMapping: FormQuestionsAnswerMapping,
-        Questions: Questions, QuestionsMandatory: QuestionsMandatory,
-        FormQuestionssequence: FormQuestionssequence, answer: answer,
-        QuestionsGroup: QuestionsGroup, NextForm: NextForm
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x =>
-          x.udmId === this.id);
-        // for delete we use splice in order to remove single object from DataService
-        this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-        this.refreshTable();
-      }
-    });
-  }*/
-
 
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);

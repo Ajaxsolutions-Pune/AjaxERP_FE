@@ -138,6 +138,7 @@ export class UserDeviceMappingComponent extends FormComponentBase
     this.userDeviceMappingService.Save(this.userDeviceMappingTransfarmer.
       ObjectToEntityUserDeviceMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
         (par) => {
+          console.log(par.status);
           if (par.status === 'Success') {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
@@ -157,7 +158,7 @@ export class UserDeviceMappingComponent extends FormComponentBase
     this.objUserDeviceMapping = [];
     this.insertData.dataChange.value.splice(0);
 
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.userDeviceMappingService.getUserDeviceMapping(selectedData.value).subscribe(
       (par) => {
@@ -186,7 +187,7 @@ export class UserDeviceMappingComponent extends FormComponentBase
 
     this.insertData.dataChange.value.splice(0);
 
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.userDeviceMappingService.getUserDeviceMapping(selectedData.value).subscribe(
       (par) => {

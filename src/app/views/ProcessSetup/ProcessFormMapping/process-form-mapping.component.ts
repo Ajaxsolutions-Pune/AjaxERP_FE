@@ -33,7 +33,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
   implements OnInit {
 
   processObj: Process[];
-  displayedColumns = ['ProcFormMapping', 'FormText', 'SortBy', 'ActiveText', 'actions'];
+  displayedColumns = ['ProcFormMapping', 'FormText', 'ActiveText', 'actions'];
   exampleDatabase: ProcessDataService | null;
   insertData: ProcessDataService | null;
   dataSource: ExampleDataSource | null;
@@ -135,6 +135,13 @@ export class ProcessFormMappingComponent extends FormComponentBase
             this.ProcessId = this.ProcessId;
             this.GetRouteData(this.ProcessId);
           }
+          else if (par.status === 'Failed') {
+            this.defaultLayoutComponent.Massage('',
+              'Form already exist', 'modal-info');
+          } else {
+            this.defaultLayoutComponent.Massage('',
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
+          }
         }
       );
   }
@@ -147,7 +154,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
     this.objProcessFormMapping = [];
     this.insertData.dataChange.value.splice(0);
 
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.processformMappingService.getProcessFormMapping(selectedData.value).subscribe(
       (par) => {
@@ -174,7 +181,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
     this.objProcessFormMapping = [];
     // Added by Rahul
     this.insertData.dataChange.value.splice(0);
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.processformMappingService.getProcessFormMapping(selectedData.value).subscribe(
       (par) => {

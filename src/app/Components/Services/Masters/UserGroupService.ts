@@ -16,13 +16,15 @@ export class UserGroupService {
         this.str = this.env.apiServiceIPPort;
     }
     getUserGroups(): Observable<UserGroupEntity[]> {
-        return this.httpClient.get<UserGroupEntity[]>(this.str + '/UserGroup/getList',
+        return this.httpClient.get<UserGroupEntity[]>(this.str + '/UserGroup/getList/'+ this.env.OuCode,
          this.env.httpOptions);
     }
 
     fillDrpUserGroups(): Observable<UserGroupEntity[]> {
+        console.log(this.str + 
+            '/UserGroup/getList'+ this.env.OuCode+'?status=1');
         return this.httpClient.get<UserGroupEntity[]>(this.str + 
-            '/UserGroup/getList?status=1', this.env.httpOptions);
+            '/UserGroup/getList/'+ this.env.OuCode+'?status=1', this.env.httpOptions);
     }
 
     getUserGroup(UserGroupCode: string): Observable<UserGroupEntity> {
