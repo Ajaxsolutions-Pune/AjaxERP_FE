@@ -211,11 +211,11 @@ export const navItems: NavData[] = [
         url: '/DeviceAssetMapping',
         icon: 'icon-puzzle'
       },
-     // {
-     //   name: 'User Group Map',
-     //   url: '/UserGroupMapping',
-     //   icon: 'icon-puzzle'
-     // },
+      {
+        name: 'User Group Map',
+        url: '/UserGroupMapping',
+        icon: 'icon-puzzle'
+      },
     ]
   },
   {
@@ -269,31 +269,31 @@ export const navItems: NavData[] = [
     url: '/User Setup',
     //   icon: 'fa fa-newspaper-o',
     children: [
-    // {
-    //   name: 'Access',
-    //   url: '/AccessList',
-    //   icon: 'icon-puzzle'
-    // },
-    // {
-    //   name: 'Module',
-    //   url: '/ModuleList',
-    //   icon: 'icon-puzzle'
-    // },
-    // {
-    //   name: 'Screen',
-    //   url: '/ScreenList',
-    //   icon: 'icon-puzzle'
-    // },
-    // {
-    //   name: 'Role',
-    //   url: '/RoleList',
-    //   icon: 'icon-puzzle'
-    // },
-    // {
-    //   name: 'Role Level',
-    //   url: '/RolelevelList',
-    //   icon: 'icon-puzzle'
-    // },
+     {
+       name: 'Access',
+       url: '/AccessList',
+       icon: 'icon-puzzle'
+     },
+     {
+       name: 'Module',
+       url: '/ModuleList',
+       icon: 'icon-puzzle'
+     },
+     {
+       name: 'Screen',
+       url: '/ScreenList',
+       icon: 'icon-puzzle'
+     },
+     {
+       name: 'Role',
+       url: '/RoleList',
+       icon: 'icon-puzzle'
+     },
+     {
+       name: 'Role Level',
+       url: '/RolelevelList',
+       icon: 'icon-puzzle'
+     },
       {
         name: 'User',
         url: '/UserList',

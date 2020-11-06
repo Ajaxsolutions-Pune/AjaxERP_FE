@@ -114,6 +114,7 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
     this.Date1 = null;
     this.state = 'All'; this.processId = '1';
     this.userId = 'All'; this.customerCode = 'All'; this.assetCode = 'All';
+  this.withImage='';
     //Asset Group combo
     this.assetGroupService.fillAssetGroupDrp().subscribe(
       (par) => { this.assetGroupDrp = 

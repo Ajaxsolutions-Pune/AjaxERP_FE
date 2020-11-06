@@ -20,7 +20,7 @@
     <div class="row">
       <div class="input-container">
         <ng-autocomplete [data]="data" #auto
-         [searchKeyword]="keyword" placeHolder="Enter the form Name"
+         [searchKeyword]="keyword" placeHolder="Select Form Name"
           (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
            id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)' 
            
@@ -32,8 +32,11 @@
         <ng-template #notFoundTemplate let-notFound>
           <div [innerHTML]="notFound"></div>
         </ng-template>
-       <i class="icon" (click)="my()"> 
-         <mat-icon>{{hidePassword ? 'keyboard_arrow_left' : 'keyboard_arrow_down'}}</mat-icon></i>
+       <!--<i class="icon" (click)="my()"> 
+         <mat-icon>{{hidePassword ? 'keyboard_arrow_left' : 'keyboard_arrow_down'}}</mat-icon></i>-->
+         
+        <i class="icon" (click)="my()"> 
+          <mat-icon>arrow_drop_down</mat-icon></i>
       </div>
     </div>
   </div>
@@ -117,6 +120,7 @@
     No results
   </div>
   <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+
     [pageSizeOptions]="[5, 10, 25, 100]">
   </mat-paginator>
 </div>
