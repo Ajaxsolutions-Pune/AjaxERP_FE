@@ -68,10 +68,12 @@ export class LogInComponent implements OnInit {
 
         this.logInService.Login(this.loginobj).subscribe(
           (par) => {
+            //console.log(par);
             this.loginstatus = par;
-            if (this.loginstatus.status.toLowerCase() === 'success') {
-             
-
+            //console.log(this.loginstatus.userMenuModel);
+            localStorage.setItem('navMenuList', JSON.stringify(this.loginstatus.userMenuModel));
+           // console.log(localStorage.getItem('navMenuList'));
+            if (this.loginstatus.status.toLowerCase() === 'success') {             
               localStorage.setItem('token', this.loginstatus.token);
               const httpOptions = {
                 headers:
