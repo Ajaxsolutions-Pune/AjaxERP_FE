@@ -73,7 +73,7 @@ export class UserGroupMappingComponent extends FormComponentBase
   ngOnInit() {
     this.userGroupService.fillDrpUserGroups().subscribe(
       (par) => {
-        this.userGroupObj = this.userGroupTransfarmer.AccessTransfarmers(par);
+        this.userGroupObj = this.userGroupTransfarmer.UserGroupTransfarmers(par);
       },
       (err: any) => console.log(err));
     this.loadData();

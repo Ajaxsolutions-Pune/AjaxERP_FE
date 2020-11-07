@@ -1,0 +1,67 @@
+ <div class="form-group">
+    <div class="row">
+        <div class="col-md-3">Notification ID</div>
+         <div class="col-md-3">Notification Message</div>
+        <div class="col-md-3">Status</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <input id="txtnotificationId"
+            [(ngModel)]="notificationObj.notificationId"
+             name="txtnotificationId" type="text" class="form-control"  (input)="resultChanged()" 
+            placeholder="Notification ID">
+        </div>
+        <div class="col-md-3">
+            <input id="txtnotificationMessage" (input)="resultChanged()" [(ngModel)]="notificationObj.notificationMessage"
+             required name="txtnotificationMessage" type="text" class="form-control"
+                placeholder="Notification Message">
+        </div>
+        <div class="col-md-2">
+            <select id="Active" (change)="resultChanged()" 
+            [(ngModel)]="notificationObj.isActive" name="Active"
+                class="form-control">
+                <option value="3" selected>All</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+        </div>
+        <div class="col-md-1">
+          <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Add Notification"
+            routerLink="/Notification"></button>
+        </div>
+        <div class="col-md-1">
+            <i class="fa fa-file-excel-o"
+            (click)="ExportToExcel()" style="font-size:35px;color: #20a8d8"
+             aria-hidden="true"></i>
+        </div>
+    </div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+        <tr>
+            <th>Notification ID</th>
+            <th>Notification Message</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let notificationObj of notificationObjs | paginate: config">
+          <td>
+            <div>{{notificationObj.notificationId}}</div>
+          </td>
+          <td>
+            {{notificationObj.notificationMessage}}
+          </td>
+          <td>
+            <label class="col-md-3 col-form-label" style="text-anchor: unset">{{notificationObj.isActive}}</label>
+          </td>
+          <td [ngSwitch]="1">
+            <button class="btn btn-primary"
+              [routerLink]="['/Notification/',notificationObj.notificationId]">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+</table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls> 

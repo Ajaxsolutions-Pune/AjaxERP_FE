@@ -12,49 +12,84 @@
                                 <div class="col-md-4"></div>
                                 <mat-form-field class="col-md-4">
                                     <input matInput placeholder="User Group Code"
+                                    [(ngModel)]="userGroup.userGroupId"
+                                    formControlName="ControlUserGroupCode"
                                      #txtUserGroup Code="txtUserGroupCode">
+                                     <mat-error>
+                                     {{ formErrors['ControlUserGroupCode'] }}
+                                     </mat-error>
                                 </mat-form-field>
                                 <div class="col-md-2"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4"></div>
                                 <mat-form-field class="col-md-4">
-                                    <input matInput placeholder="User Group Name *" maxlength="20"
-                                     #txtUserGroup Name="txtUserGroupName">
-                                </mat-form-field></div>
-                                <div class="row">
-                                    <div class="col-md-4"></div>
-                                    <mat-form-field color="accent" class="col-md-4">
-                                        <mat-label>User Manager</mat-label>
-                                        <mat-select>
-                                            <mat-option>Select</mat-option>
-                                            <mat-option>User Manager 1</mat-option>
-                                            <mat-option>User Manager 2</mat-option>
-                                            <mat-option>User Manager 3</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                    <div class="col-md-4"></div>
+                                    <input matInput placeholder="User Group Name *" 
+                                    [(ngModel)]="userGroup.groupName"
+                                    maxlength="20"
+                                     #txtUserGroup Name="txtUserGroupName"
+                                     formControlName="ControlUserGroupName">
+                                     <mat-error>
+                                     {{ formErrors['ControlUserGroupName'] }}
+                                     </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field color="accent" class="col-md-4">
+                                    <mat-label>User Group Type</mat-label>
+                                    <mat-select 
+                                    [(ngModel)]="userGroup.userGroupType"
+                                    formControlName="ControluserGroupType">
+                                        <mat-option>Select</mat-option>
+                                        <mat-option *ngFor="let obj of userDrp"
+                                            [value]="obj.id">
+                                            {{obj.userNameENG}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                    {{ formErrors['ControluserGroupType'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field color="accent" class="col-md-4">
+                                    <mat-label>User Manager</mat-label>
+                                    <mat-select 
+                                    [(ngModel)]="userGroup.managerId"
+                                    formControlName="ControlUserManagerCode">
+                                        <mat-option>Select</mat-option>
+                                        <mat-option *ngFor="let obj of userDrp"
+                                            [value]="obj.id">
+                                            {{obj.userNameENG}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                    {{ formErrors['ControlUserManagerCode'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-sm-4">                                    
+                                    <mat-checkbox name="chkisActive"
+                                    #chkisActive 
+                                    formControlName="ControlisActive"
+                                     [(ngModel)]="userGroup.isActive">Active
+                                    </mat-checkbox>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4"></div>
-                                    <mat-form-field color="accent" class="col-md-4">
-                                        <mat-label>User Group Type</mat-label>
-                                        <mat-select>
-                                            <mat-option>Select</mat-option>
-                                            <mat-option>User Group Type 1</mat-option>
-                                            <mat-option>User Group Type 2</mat-option>
-                                            <mat-option>User Group Type 3</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                    <div class="col-md-4"></div>
-                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
-                                    <button mat-raised-button
-                                        color="primary">Submit</button> &nbsp;
+                                    <button mat-raised-button [disabled]="!form.valid" (click)="save()"
+                                    color="primary">Submit</button> &nbsp;
                                     &nbsp; &nbsp; &nbsp; &nbsp;
                                     <button mat-raised-button color="warn" routerLink="/UserGroupList">
                                         Cancel</button>
@@ -69,4 +104,4 @@
         </div>
     </form>
 </main>
-<!--<div style="display: none;"> {{user | json}}</div>-->
+<div style="display: none;"> {{userGroup | json}}</div>
