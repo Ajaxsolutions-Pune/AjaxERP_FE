@@ -1,5 +1,5 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 //import { Question } from '../../../../../Components/Module/Masters/Question.model';
@@ -12,6 +12,7 @@ import { elementAt } from 'rxjs/operators';
 import { UserDeviceMapping } from '../../../../../Components/Module/ProcessSetup/UserDeviceMapping.model';
 import { UserDeviceDataService } from '../../userdevicedata.service';
 import { GlobalService } from '../../../../../Components/Services/GlobalServices/Global.service';
+import { CustomComboBox } from '../../../../../Components/Module/GlobalModule/CustomComboBox.model';
 
 @Component({
   selector: 'app-baza.dialog',
@@ -22,6 +23,23 @@ export class UserDeviceEditDialogComponent implements OnInit {
   user: User[];
   objnextUserIdText: string;  
 
+
+  dataUserObj: CustomComboBox[];
+  nextFormcount=1;
+  @ViewChild('auto', null) auto: any;
+  keyword = 'name';
+
+  selectEvent(item) {
+    if(this.nextFormcount !==1){
+      const selectedData = {
+        value: item.id,
+        text: item.name
+      };
+      this.data.loginId = selectedData.value;
+      this.objnextUserIdText = selectedData.text;
+
+    }this.nextFormcount=2;
+  }
   constructor(public dialogRef: MatDialogRef<UserDeviceEditDialogComponent>,    
     private userService: UserService,
     private globalService: GlobalService,
@@ -43,6 +61,11 @@ export class UserDeviceEditDialogComponent implements OnInit {
     this.userService.fillDrpUsers().subscribe(
       (par) => {
         this.user = this.userTransfarmer.UserTransfarmers(par);
+        
+        this.dataUserObj = [];
+        this.user.forEach(a => {
+          this.dataUserObj.push({ id: a.loginID, name: a.userNameENG })
+        });
       },
       (err: any) => console.log(err));
   }

@@ -473,8 +473,7 @@ export const MY_FORMATS = {
     UserGroupMappingTransfarmer, UserGroupMappingService, UserGroupMappingDataService,
     DeviceAssetDataService,
     DeviceAssetMappingTransfarmer, {
-      provide: MAT_DATE_LOCALE,
-      useValue: 'it'
+      provide: MAT_DATE_LOCALE, useValue: 'en-GB'
     },
 
     {

@@ -12,7 +12,31 @@
         </mat-form-field>
       </div>   
 
-      <div class="form">
+      <div class="row form">
+        <div class="col-md-12" style="padding-bottom:2%;">
+          <span style="font-family: Nunito Sans, sans-serif; color: gray;">Assets</span>
+          <div class="ng-autocompletein">
+            <div class="row">
+              <div class="input-container">
+                <ng-autocomplete [data]="dataAssetObj" #auto (selected)='selectEvent($event)'
+                  [searchKeyword]="keyword" [initialValue]="data.assetName" placeHolder="Select Asset"
+                  id="autocomplete" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+                <ng-template #itemTemplate let-item>
+                  <a [innerHTML]="item.name"></a>
+                </ng-template>
+                <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                </ng-template>
+                <i class="icon">
+                  <mat-icon>arrow_drop_down</mat-icon>
+                </i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div class="form">
         <mat-form-field color="accent">        
           <mat-label>Asset</mat-label>
           <mat-select  (selectionChange)="AssetsChange($event)"
@@ -26,7 +50,8 @@
           </mat-select>
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
-      </div>     
+      </div>    -->
+
       <div class="form" style="display: none;">
         <mat-form-field color="accent">
           <input matInput #input class="form-control" maxlength="5"

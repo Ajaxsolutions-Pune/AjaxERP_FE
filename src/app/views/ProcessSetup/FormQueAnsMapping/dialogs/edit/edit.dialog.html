@@ -2,16 +2,40 @@
   <h3 mat-dialog-title>Edit Form Question Answer Mapping</h3>
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" autocomplete="off">
-
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="FormQuestionAnswerMapping"
-        disabled
-         [(ngModel)]="data.fqamId" name="fqamId" required >
+        <input matInput #input class="form-control" placeholder="FormQuestionAnswerMapping" disabled
+          [(ngModel)]="data.fqamId" name="fqamId" required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div>   
-    <div class="form">
+    </div>
+
+    <div class="row form">
+      <div class="col-md-12" style="padding-bottom:2%;">
+        <span style="font-family: Nunito Sans, sans-serif; color: gray;">Question</span>
+        <div class="ng-autocompletein">
+          <div class="row">
+            <div class="input-container">
+              <ng-autocomplete [data]="dataquestionsObj" #auto (selected)='selectEvent($event)'
+                [searchKeyword]="keyword" [initialValue]="data.questionIdText" placeHolder="Select Question"
+                id="autocomplete" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+              </ng-autocomplete>
+              <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.name"></a>
+              </ng-template>
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+              <i class="icon">
+                <mat-icon>arrow_drop_down</mat-icon>
+              </i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="form">
       <mat-form-field color="accent">        
         <mat-label>Question</mat-label>
         <mat-select  (selectionChange)="QuestionsChange($event)"
@@ -25,19 +49,41 @@
         </mat-select>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div>
+    </div>-->
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #input class="form-control" maxlength="5"
-        type="text"
-        (keypress)="Number_val($event)"
-        #input
-        placeholder="Form Question Sequence"
-         [(ngModel)]="data.formQueSeqNo" name="formQueSeqNo" required >
+        <input matInput #input class="form-control" maxlength="5" type="text" (keypress)="Number_val($event)" #input
+          placeholder="Form Question Sequence" [(ngModel)]="data.formQueSeqNo" name="formQueSeqNo" required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div>   
-    <div class="form">
+    </div>
+
+    <div class="row form">
+      <div class="col-md-12" style="padding-bottom:2%;">
+        <span style="font-family: Nunito Sans, sans-serif; color: gray;">Answer</span>
+        <div class="ng-autocompletein">
+          <div class="row">
+            <div class="input-container">
+              <ng-autocomplete [data]="dataanswersObj" #auto (selected)='answersselectEvent($event)'
+                [searchKeyword]="keyword" [initialValue]="data.answerIdText" placeHolder="Select Answer"
+                id="autocomplete" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+              </ng-autocomplete>
+              <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.name"></a>
+              </ng-template>
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+              <i class="icon">
+                <mat-icon>arrow_drop_down</mat-icon>
+              </i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="form">
       <mat-form-field color="accent">        
         <mat-label>Answer</mat-label>
         <mat-select (selectionChange)="AnswerTextChange($event)"
@@ -50,56 +96,70 @@
         </mat-select>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
+    </div>-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" placeholder="Question Group" maxlength="5" type="text"
+          (keypress)="Number_val($event)" #input [(ngModel)]="data.queGroup" name="QuestionsGroup" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
     </div>
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="Question Group"
-        maxlength="5"
-        type="text"
-        (keypress)="Number_val($event)"
-        #input
-         [(ngModel)]="data.queGroup" name="QuestionsGroup" required >
+        <input matInput #input class="form-control" placeholder="Next Que Group" maxlength="5" type="text"
+          (keypress)="Number_val($event)" #input [(ngModel)]="data.nextQueGroup" name="queGroup" required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div>     
+    </div>
     <div class="form">
-      <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="Next Que Group"
-        maxlength="5"
-        type="text"
-        (keypress)="Number_val($event)"
-        #input
-         [(ngModel)]="data.nextQueGroup" name="queGroup" required >
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
-    </div> 
-    <div class="form">
-      <mat-checkbox name="chkQuestionsMandatory"
-      [(ngModel)]="data.isQuestionMandatory">Question Mandatory</mat-checkbox>
+      <mat-checkbox name="chkQuestionsMandatory" [(ngModel)]="data.isQuestionMandatory">Question Mandatory
+      </mat-checkbox>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <mat-checkbox name="chkActive" [(ngModel)]="data.isActive">Active</mat-checkbox>
     </div>
-    <div class="form">
-      <mat-form-field color="accent">        
+
+    <div class="row form">
+      <div class="col-md-12" style="padding-bottom:2%;">
+        <span style="font-family: Nunito Sans, sans-serif; color: gray;">Form</span>
+        <div class="ng-autocompletein">
+          <div class="row">
+            <div class="input-container">
+              <ng-autocomplete [data]="dataNextFormObj" #auto (selected)='NextFormselectEvent($event)'
+                [searchKeyword]="keyword" [initialValue]="data.nextFormIdText" placeHolder="Select Form"
+                id="autocomplete" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+              </ng-autocomplete>
+              <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.name"></a>
+              </ng-template>
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+              <i class="icon">
+                <mat-icon>arrow_drop_down</mat-icon>
+              </i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<div class="form">
+      <mat-form-field color="accent">
         <mat-label>Next Form</mat-label>
-        <mat-select (selectionChange)="NextFormChange($event)" required name="NextForm" 
-        #input
-        [(ngModel)]="data.nextFormId">
+        <mat-select (selectionChange)="NextFormChange($event)" required name="NextForm" #input
+          [(ngModel)]="data.nextFormId">
           <mat-option *ngFor="let form of formObj" [value]="form.formId">
             {{form.formName}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div>
+    </div>-->
     <div mat-dialog-actions>
-      <button mat-raised-button [type]="submit" 
-      [disabled]="!formControl.valid" [mat-dialog-close]="1"
-      (click)="stopEdit()"
-          color="primary">Save</button>
-          <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
-            Cancel</button>
+      <button mat-raised-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+        (click)="stopEdit()" color="primary">Save</button>
+      <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+        Cancel</button>
     </div>
   </form>
 </div>

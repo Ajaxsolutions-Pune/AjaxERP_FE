@@ -1,5 +1,5 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DataService } from '../../data.service';
 import { Question } from '../../../../../Components/Module/Masters/Question.model';
@@ -14,6 +14,7 @@ import { FormTransfarmer } from '../../../../../Components/Transformer/Masters/F
 import { elementAt } from 'rxjs/operators';
 import { FormQueAnsMapping } from '../../../../../Components/Module/ProcessSetup/FormQueAnsMapping.model';
 import { GlobalService } from '../../../../../Components/Services/GlobalServices/Global.service';
+import { CustomComboBox } from '../../../../../Components/Module/GlobalModule/CustomComboBox.model';
 
 @Component({
   selector: 'app-baza.dialog',
@@ -27,12 +28,55 @@ export class EditDialogComponent implements OnInit {
   objnextFormIdText: string;
   objquestionIdText: string;
   objanswerIdText: string;
-
+  count=1;
   Number_val(event) {
     let k;
     k = event.charCode;
     return this.globalService.NumberValidator(k);
 
+  }
+
+  dataquestionsObj: CustomComboBox[];
+  dataanswersObj: CustomComboBox[];
+  answercount=1;
+  dataNextFormObj: CustomComboBox[];
+  nextFormcount=1;
+  @ViewChild('auto', null) auto: any;
+  keyword = 'name';
+
+  selectEvent(item) {
+    console.log(this.count);
+    if(this.count !==1){
+      const selectedData = {
+        value: item.id,
+        text: item.name
+      };
+      this.data.questionId = selectedData.value;
+      this.objquestionIdText = selectedData.text;
+
+    }this.count=2;
+  }
+  NextFormselectEvent(item) {
+    if(this.nextFormcount !==1){
+      const selectedData = {
+        value: item.id,
+        text: item.name
+      };
+      this.data.nextFormId = selectedData.value;
+      this.objnextFormIdText = selectedData.text;
+
+    }this.nextFormcount=2;
+  }
+  answersselectEvent(item) {
+    if(this.answercount !==1){
+      const selectedData = {
+        value: item.id,
+        text: item.name
+      };
+      this.data.answerId = selectedData.value;
+      this.objquestionIdText = selectedData.text;
+
+    }this.answercount=2;
   }
 
   constructor(public dialogRef: MatDialogRef<EditDialogComponent>,
@@ -52,20 +96,35 @@ export class EditDialogComponent implements OnInit {
 
 
   ngOnInit() {
+    
     this.questionsService.fillDrpQuestions().subscribe(
       (par) => {
         this.questionsObj = this.questionsTransfarmer.QuestionTransfarmers(par);
+        this.dataquestionsObj = [];
+        this.questionsObj.forEach(a => {
+          this.dataquestionsObj.push({ id: a.questionId, name: a.question })
+        });
       },
       (err: any) => console.log(err));
     this.answersService.fillDrpAnswers().subscribe(
       (par) => {
         this.answersObj = this.answersTransfarmer.AnswerTransfarmers(par);
+        this.dataanswersObj = [];
+        this.answersObj.forEach(a => {
+          this.dataanswersObj.push({ id: a.answerId, name: a.answer })
+        });
        // this.data.answerId = '2';
       },
       (err: any) => console.log(err));
+
+      
     this.formService.fillDrpForms().subscribe(
       (par) => {
         this.formObj = this.formTransfarmer.fTransfarmers(par);
+        this.dataNextFormObj = [];
+        this.formObj.forEach(a => {
+          this.dataNextFormObj.push({ id: a.formId, name: a.formName })
+        });
       },
       (err: any) => console.log(err));
   }

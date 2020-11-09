@@ -117,7 +117,6 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     super();
     this.formObjEntity = this.route.snapshot.data['FormList'];
     this.formObj = formTransfarmer.fTransfarmers(this.formObjEntity);
-    let objcombo: CustomComboBox;
     this.data = [];
     this.formObj.forEach(a => {
       this.data.push({ id: a.formId, name: a.formName })
@@ -207,10 +206,11 @@ export class FormQueAnsMappingComponent extends FormComponentBase
             this.FormId = this.FormId;
             this.GetRouteData(this.FormId);
           }
-          else if (par.status === 'Failed') {
-            this.defaultLayoutComponent.Massage('',
-              'Asset already exist', 'modal-info');
-          } else {
+         //else if (par.status === 'Failed') {
+         //  this.defaultLayoutComponent.Massage('',
+         //    'Asset already exist', 'modal-info');
+         //}
+           else {
             this.defaultLayoutComponent.Massage('',
               'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
@@ -271,12 +271,15 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   startEdit(i: number,
     fqamId: number,
     questionId: string,
+    questionIdText: string,
     isQuestionMandatory: string,
     formQueSeqNo: string,
     answerId: string,
+    answerText: string,
     queGroup: string,
     nextQueGroup: string,
     nextFormId: string,
+    nextFormText: string,
     isActive: string) {
     this.id = fqamId;
     this.index = i;
@@ -284,10 +287,11 @@ export class FormQueAnsMappingComponent extends FormComponentBase
       data: {
         fqamId: fqamId,
         questionId: questionId, isQuestionMandatory: isQuestionMandatory,
-        formQueSeqNo: formQueSeqNo, answerId: answerId,
+        formQueSeqNo: formQueSeqNo, answerId: answerId, answerIdText: answerText,
+        objquestionIdText:questionIdText,
         queGroup: queGroup,
         nextQueGroup: nextQueGroup,
-        nextFormId: nextFormId,
+        nextFormId: nextFormId, nextFormIdText: nextFormText,
         isActive: isActive,
         updateFlag: '1'
       }

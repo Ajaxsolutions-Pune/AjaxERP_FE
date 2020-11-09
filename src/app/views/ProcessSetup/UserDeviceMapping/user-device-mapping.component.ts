@@ -27,6 +27,7 @@ import { UserDeviceMappingService } from '../../../Components/Services/ProcessSe
 import { DefaultLayoutComponent } from '../../../containers';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import { CustomComboBox } from '../../../Components/Module/GlobalModule/CustomComboBox.model';
 
 
 @Component({
@@ -52,6 +53,59 @@ export class UserDeviceMappingComponent extends FormComponentBase
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
 
+  @ViewChild('auto', null) auto: any;
+  keyword = 'name';
+  data: CustomComboBox[];
+  hidePassword: boolean = true;
+
+  selectEvent(item) {
+    const selectedData = {
+      value: item.id,
+      text: item.name
+    };
+    this.DeviceId = selectedData.value;
+    
+    this.objUserDeviceMapping = [];
+
+
+    this.insertData.dataChange.value.splice(0);
+
+    this.exampleDatabase.dataChange.value.splice(0,10000);
+    this.refreshTable();
+    this.userDeviceMappingService.getUserDeviceMapping(selectedData.value).subscribe(
+      (par) => {
+        this.objUserDeviceMapping = this.userDeviceMappingTransfarmer.
+          UserDeviceMappingTransfarmers(par);
+        this.objUserDeviceMapping.forEach(a => {
+          a.deviceId = selectedData.value;
+        });
+        this.objUserDeviceMapping.forEach(element => {
+          this.exampleDatabase.dataChange.value.push(element);
+          this.refreshTable();
+        });
+
+      },
+      (err: any) => console.log(err));
+  }
+  my() {
+    this.hidePassword = !this.hidePassword;
+    var name = document.getElementById('auto');
+    //  alert(name);
+    this.auto.focus();
+    name.focus();
+  }
+  onChangeSearch(val: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e) {
+    this.hidePassword = !this.hidePassword;
+    // do something when input is focused
+  }
+  myFunction() {
+    // alert('a');
+  }
   constructor(public httpClient: HttpClient,
     private router: Router,
     private defaultLayoutComponent: DefaultLayoutComponent,
@@ -82,7 +136,12 @@ export class UserDeviceMappingComponent extends FormComponentBase
   ngOnInit() {
     this.deviceService.fillDrpAnswers().subscribe(
       (par) => {
-        this.deviceObj = this.deviceTransfarmer.DeviceTransfarmers(par);
+        this.deviceObj = this.deviceTransfarmer.DeviceTransfarmers(par);       
+
+        this.data = [];
+        this.deviceObj.forEach(a => {
+          this.data.push({ id: a.deviceId, name: a.deviceName })
+        })
       },
       (err: any) => console.log(err));
     this.loadData();
@@ -208,6 +267,7 @@ export class UserDeviceMappingComponent extends FormComponentBase
   startEdit(i: number,
     adId: number,
     loginId: string,
+    userName: string,
     sortBy: string,
     isActive: string) {
     this.id = adId;
@@ -218,6 +278,7 @@ export class UserDeviceMappingComponent extends FormComponentBase
         adId: adId,
         loginId: loginId,
         sortBy: sortBy,
+        userNameENG:userName ,
         isActive: isActive,
         updateFlag: '1'
       }

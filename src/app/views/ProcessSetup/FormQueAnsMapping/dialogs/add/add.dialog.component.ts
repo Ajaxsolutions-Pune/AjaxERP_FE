@@ -1,5 +1,5 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators, Form } from '@angular/forms';
 import { DataService } from '../../data.service';
 import { Question } from '../../../../../Components/Module/Masters/Question.model';
@@ -13,6 +13,7 @@ import { FormTransfarmer } from '../../../../../Components/Transformer/Masters/F
 import { FormObj } from '../../../../../Components/Module/Masters/Form.model';
 import { FormQueAnsMapping } from '../../../../../Components/Module/ProcessSetup/FormQueAnsMapping.model';
 import { GlobalService } from '../../../../../Components/Services/GlobalServices/Global.service';
+import { CustomComboBox } from '../../../../../Components/Module/GlobalModule/CustomComboBox.model';
 
 @Component({
   selector: 'app-add.dialog',
@@ -29,8 +30,44 @@ export class AddDialogComponent implements OnInit {
   objquestionIdText: string;
   objanswerIdText: string;
 
+  dataquestionsObj: CustomComboBox[];
+  dataAnswersObj: CustomComboBox[];
+  dataNextFormObj: CustomComboBox[];
+  @ViewChild('auto', null) auto: any;
+  keyword = 'name';
+
+  selectEvent(item) {
+    const selectedData = {
+      value: item.id,
+      text: item.name
+    };
+    this.data1.questionId = selectedData.value;
+    this.objquestionIdText = selectedData.text;
+    // alert(this.data1.questionId);
+  }
+
+  selectAnswersEvent(item) {
+    const selectedData = {
+      value: item.id,
+      text: item.name
+    };
+    this.data1.answerId = selectedData.value;
+    this.objanswerIdText = selectedData.text;
+    // alert(this.data1.questionId);
+  }
+
+  selectNextFormEvent(item) {
+    const selectedData = {
+      value: item.id,
+      text: item.name
+    };
+    this.data1.nextFormId = selectedData.value;
+    this.objnextFormIdText = selectedData.text;
+    // alert(this.data1.questionId);
+  }
+
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: FormQueAnsMapping,
+    @Inject(MAT_DIALOG_DATA) public data1: FormQueAnsMapping,
     private questionsService: QuestionService,
     private questionsTransfarmer: QuestionTransfarmer,
     private answersService: AnswerService,
@@ -53,16 +90,35 @@ export class AddDialogComponent implements OnInit {
   ]);
   ngOnInit() {
     this.questionsService.fillDrpQuestions().subscribe(
-      (par) => this.questionsObj = this.questionsTransfarmer.QuestionTransfarmers(par),
+      (par) => {
+        this.questionsObj = this.questionsTransfarmer.QuestionTransfarmers(par);
+        this.dataquestionsObj = [];
+        this.questionsObj.forEach(a => {
+          this.dataquestionsObj.push({ id: a.questionId, name: a.question })
+        });
+      },
       (err: any) => console.log(err));
 
     this.answersService.fillDrpAnswers().subscribe(
-      (par) => this.answersObj = this.answersTransfarmer.AnswerTransfarmers(par),
+      (par) => {
+        this.answersObj = this.answersTransfarmer.AnswerTransfarmers(par);
+        this.dataAnswersObj = [];
+        this.answersObj.forEach(a => {
+          this.dataAnswersObj.push({ id: a.answerId, name: a.answer })
+        });
+      },
       (err: any) => console.log(err));
-      
+
     this.formService.fillDrpForms().subscribe(
-      (par) => this.formObj = this.formTransfarmer.fTransfarmers(par),
+      (par) => {
+        this.formObj = this.formTransfarmer.fTransfarmers(par);
+        this.dataNextFormObj = [];
+        this.formObj.forEach(a => {
+          this.dataNextFormObj.push({ id: a.formId, name: a.formName });
+        });
+      },
       (err: any) => console.log(err));
+
   }
   getErrorMessage() {
     return this.formControl.hasError('required') ? 'Required field' :
@@ -86,6 +142,7 @@ export class AddDialogComponent implements OnInit {
       text: target.innerText.trim()
     };
     this.objnextFormIdText = selectedData.text;
+    // this.data1.questionId = selectedData.value;
   }
   QuestionsChange(event) {
     const target = event.source.selected._element.nativeElement;
@@ -106,19 +163,19 @@ export class AddDialogComponent implements OnInit {
   }
 
   public confirmAdd(): void {
-    this.data.nextFormIdText = this.objnextFormIdText;
-    this.data.questionIdText = this.objquestionIdText;
-    this.data.answerIdText = this.objanswerIdText;
-    if (this.data.isQuestionMandatory.toString() === 'true') {
-      this.data.isQuestionMandatoryText = 'Yes';
+    this.data1.nextFormIdText = this.objnextFormIdText;
+    this.data1.questionIdText = this.objquestionIdText;
+    this.data1.answerIdText = this.objanswerIdText;
+    if (this.data1.isQuestionMandatory.toString() === 'true') {
+      this.data1.isQuestionMandatoryText = 'Yes';
     } else {
-      this.data.isQuestionMandatoryText = 'No';
+      this.data1.isQuestionMandatoryText = 'No';
     }
-    if (this.data.isActive.toString() === 'true') {
-      this.data.isActiveText = 'Active';
+    if (this.data1.isActive.toString() === 'true') {
+      this.data1.isActiveText = 'Active';
     } else {
-      this.data.isActiveText = 'Inactive';
+      this.data1.isActiveText = 'Inactive';
     }
-    this.dataService.addFormQueAnsMapping(this.data);
+    this.dataService.addFormQueAnsMapping(this.data1);
   }
 }
