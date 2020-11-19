@@ -25,7 +25,8 @@ export class DefaultLayoutComponent implements OnDestroy {
   @ViewChild('myModal', { static: false }) public myModal: ModalDirective;
   // end
   str: string;
-  public navItems: NavMenuObj[];
+  // public navItems: NavMenuObj[];
+  public navItems = navItems;
   public itemsObj: NavMenuObj;
   public sidebarMinimized = true;
   private changes: MutationObserver;
@@ -58,16 +59,9 @@ export class DefaultLayoutComponent implements OnDestroy {
       }
     });
 
-    var testObject = [{ name: "test", time: "Date 2017-02-03T08:38:04.449Z" }, { name: "test2", time: "Date 2017-02-03T08:38:04.449Z" }];
-    localStorage.setItem('testObject', JSON.stringify(testObject));
-    //  var retrievedObject = localStorage.getItem('testObject');
-
-    // console.log('retrievedObject: ', JSON.parse(retrievedObject));
-
-
-    var retrievedObject = localStorage.getItem('navMenuList');
-    this.navItems = JSON.parse(retrievedObject);
-    [{ name: 'Dashboard',  icon: 'icon-speedometer',url: '/dashboard',children:null}].concat(this.navItems);
+   // var retrievedObject = localStorage.getItem('navMenuList');
+   // this.navItems = JSON.parse(retrievedObject);
+   // [{ name: 'Dashboard', icon: 'icon-speedometer', url: '/dashboard', children: null }].concat(this.navItems);
   }
 
   ngOnDestroy(): void {

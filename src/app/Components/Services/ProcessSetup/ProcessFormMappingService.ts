@@ -35,6 +35,8 @@ export class ProcessFormMappingService {
     }
 
     Save(saveEntityObj: ProcessFormMappingEntity[]): Observable<Insertstatus> {
+        console.log("Save");
+        console.log(saveEntityObj);
         return this.httpClient.post<Insertstatus>(this.str + '/ProcessFormMapping/createList', saveEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
