@@ -27,18 +27,8 @@ export class UserGroupService {
 
     fillDrpUserGroups(): Observable<UserGroupEntity[]> {
         console.log(this.str + '/UserGroup/getList?ouCode='+this.env.OuCode+'?status=1');
-        return this.httpClient.get<UserGroupEntity[]>(this.str + '/UserGroup/getList?'
-        +'ouCode='+this.env.OuCode+'&status=1', this.env.httpOptions);
+        return this.httpClient.get<UserGroupEntity[]>(this.str + '/UserGroup/getList/'+this.env.OuCode, this.env.httpOptions);
     }
-
-    checkUserGroup(zone: string, Id: string): Observable<CommonEntity> {
-        console.log(this.str + '/UserGroup/getUserByName?name="' +
-        zone + '"&code=' + Id + '');
-        return this.httpClient.get<CommonEntity>(this.str + '/UserGroup/getUserByName?name=' +
-            zone + '&code=' + Id + ''
-            , this.env.httpOptions).pipe(catchError(this.handleError));
-    }
-
     getUserGroup(UserCode: string): Observable<UserGroupEntity> {
         return this.httpClient.get<UserGroupEntity>(this.str + '/UserGroup/' + UserCode,
             this.env.httpOptions).pipe(catchError(this.handleError));
@@ -52,7 +42,12 @@ export class UserGroupService {
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
         
     }
-
+    checkUserGroup(userGroup : string,Code : string): Observable<CommonEntity> {
+        console.log(this.str + '/UserGroup/getGroupByName?name=\'' + userGroup +
+        '\'&id=' + Code);
+        return this.httpClient.get<CommonEntity>(this.str + '/UserGroup/getGroupByName?name=\'' +
+         userGroup +'\'&id=' + Code, this.env.httpOptions).pipe(catchError(this.handleError));
+    }
     Update(updateEntityObj: UserGroupEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length

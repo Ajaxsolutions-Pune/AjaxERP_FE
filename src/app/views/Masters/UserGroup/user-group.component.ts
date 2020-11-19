@@ -11,6 +11,7 @@ import { environment } from '../../../Components/Module/environment';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { UserGroup } from '../../../Components/Module/Masters/UserGroup.model';
 import { UserGroupTransfarmer } from '../../../Components/Transformer/Masters/UserGroup-Transfarmer';
+import { UserGroupAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-userGroup',
@@ -47,28 +48,32 @@ export class UserGroupComponent extends FormComponentBase implements OnInit, Aft
       }
     };
   }
+  isUserGroupExist(): boolean {
+    return this.form.get('ControlUserGroupName').hasError('queExist');
+  }
   ngOnInit() {
     status = '';
     this.userService.fillDrpUsers().subscribe(
       (par) => this.userDrp = this.userTransfarmer.UserTransfarmers(par),
       (err: any) => console.log(err));
-      
-    this.userService.fillDrpUsers().subscribe(a => this.userDrp = this.userTransfarmer.UserTransfarmers(a))
-    this.form = this.formBuilder.group({
-      ControlUserGroupCode: ['', [Validators.required],],
-      ControlUserGroupName: ['', [Validators.required]],
-      ControlUserManagerCode: ['', []],
-      ControluserGroupType: ['', []],
-      ControlisActive: ['', []]
-    });
-    this.form.controls['ControlUserGroupCode'].disable();
+
+    this.userService.fillDrpUsers().subscribe(a => this.userDrp = this.userTransfarmer.UserTransfarmers(a));
     // this.form.controls['ControlisActive'].disable();
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id'); this.getUserGroup(str);
-   
+      this.form = this.formBuilder.group({
+        ControlUserGroupCode: ['', [Validators.required],],
+        ControlUserGroupName: ['', [Validators.required],
+        [UserGroupAsyncValidator(this.userGroupService, str)]],
+        ControlUserManagerCode: ['', []],
+        ControluserGroupType: ['', []],
+        ControlisActive: ['', []]
+      });
+      this.form.controls['ControlUserGroupCode'].disable();
+
     });
   }
-  
+
   save(): void {
     console.log('a');
     if (status !== 'Update') {
@@ -145,7 +150,8 @@ export class UserGroupComponent extends FormComponentBase implements OnInit, Aft
     } else {
       this.userGroupService.getUserGroup(Id).subscribe(
         (par) => {
-          this.userGroup = this.userGroupTransformer.UserGroupTransfarmerEntity(par);        },
+          this.userGroup = this.userGroupTransformer.UserGroupTransfarmerEntity(par);
+        },
         (err: any) => console.log(err));
       status = 'Update';
     }

@@ -31,6 +31,9 @@
                                      formControlName="ControlUserGroupName">
                                      <mat-error>
                                      {{ formErrors['ControlUserGroupName'] }}
+                                     <span *ngIf="isUserGroupExist()">
+                                      UserGroup Name is already taken.
+                                    </span> 
                                      </mat-error>
                                 </mat-form-field>
                             </div>

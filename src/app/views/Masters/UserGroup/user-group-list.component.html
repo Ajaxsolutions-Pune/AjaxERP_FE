@@ -61,8 +61,10 @@
             <label class="col-md-3 col-form-label" style="text-anchor: unset">{{userGroup.isActive}}</label>
           </td>
           <td [ngSwitch]="1">
-            <button class="btn btn-primary" [disabled]="userGroup.userGroupId === ''"
-              [routerLink]="['/UserGroup/',userGroup.userGroupId]">Edit</button>
+            <button mat-icon-button [routerLink]="['/UserGroup/',userGroup.userGroupId]"
+            color="accent">
+             <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+           </button>
           </td>
         </tr>
       </tbody>

@@ -22,6 +22,7 @@ import { ModuleobjService } from '../Components/Services/Masters/ModuleService';
 import { ScreenObjService } from '../Components/Services/Masters/ScreenService';
 import { GlobalService } from '../Components/Services/GlobalServices/Global.service';
 import { UserService } from '../Components/Services/Masters/UserService';
+import { UserGroupService } from '../Components/Services/Masters/UserGroupService';
 
 export const ConfirmPasswordValidator = (globalService: GlobalService, PassFild: string, ConfirmPassFild: string, time: number = 500) => {
   return (input: FormControl) => {
@@ -367,5 +368,19 @@ export const UserLoginAsyncValidator = (userService: UserService,
     );
   };
 };
-
+export const UserGroupAsyncValidator = (userGroupService: UserGroupService,Code:string,
+  time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => userGroupService.checkUserGroup(input.value,Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
 

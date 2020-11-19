@@ -58,8 +58,10 @@
             <label class="col-md-3 col-form-label" style="text-anchor: unset">{{notificationObj.isActive}}</label>
           </td>
           <td [ngSwitch]="1">
-            <button class="btn btn-primary"
-              [routerLink]="['/Notification/',notificationObj.notificationId]">Edit</button>
+            <button mat-icon-button [routerLink]="['/Notification/',notificationObj.notificationId]"
+           color="accent">
+            <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+          </button>
           </td>
         </tr>
       </tbody>

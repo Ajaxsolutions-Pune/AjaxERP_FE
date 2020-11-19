@@ -29,14 +29,6 @@ export class NotificationObjService {
         +'ouCode='+this.env.OuCode+'&status=1', this.env.httpOptions);
     }
 
-    checkNotificationObj(zone: string, Id: string): Observable<CommonEntity> {
-        console.log(this.str + '/Notification/getUserByName?name="' +
-        zone + '"&code=' + Id + '');
-        return this.httpClient.get<CommonEntity>(this.str + '/Notification/getUserByName?name=' +
-            zone + '&code=' + Id + ''
-            , this.env.httpOptions).pipe(catchError(this.handleError));
-    }
-
     getNotificationObj(UserCode: string): Observable<NotificationObjEntity> {
         return this.httpClient.get<NotificationObjEntity>(this.str + '/Notification/' + UserCode,
             this.env.httpOptions).pipe(catchError(this.handleError));
@@ -50,7 +42,7 @@ export class NotificationObjService {
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
         
     }
-
+    
     Update(updateEntityObj: NotificationObjEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
