@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,17 +11,19 @@ import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { FormComponentBase } from '../../Masters/AngularDemo/infrastructure/form-component-base';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../../Masters/AngularDemo/infrastructure/cross-field-error-matcher';
-import { FormObj } from '../../../Components/Module/Masters/Form.model';
+import { FormEntity, FormObj } from '../../../Components/Module/Masters/Form.model';
 import { FormService } from '../../../Components/Services/Masters/FormService';
 import { FormTransfarmer } from '../../../Components/Transformer/Masters/Form-Transfarmer';
 import { FormQueAnsMapping } from '../../../Components/Module/ProcessSetup/FormQueAnsMapping.model';
 import { FormQueAnsMappingTransfarmer } from '../../../Components/Transformer/ProcessSetup/FormQueAnsMapping-Transfarmer';
 import { FormQueAnsMappingService } from '../../../Components/Services/ProcessSetup/FormQueAnsMappingService';
 import { DefaultLayoutComponent } from '../../../containers';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import { CustomComboBox } from '../../../Components/Module/GlobalModule/CustomComboBox.model';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-form-que-ans-mapping',
@@ -30,9 +32,14 @@ import { GlobalService } from '../../../Components/Services/GlobalServices/Globa
 })
 export class FormQueAnsMappingComponent extends FormComponentBase
   implements OnInit {
+  @Input('hide-arrow') hideArrow: boolean = false;
 
   formObj: FormObj[];
+  formObjEntity: FormEntity[];
+  data: CustomComboBox[];
+  hidePassword: boolean = true;
   QueNames: string[]
+  keyword = 'name';
   displayedColumns = ['FormQuestionsAnswerMapping', 'QuestionsText'
     , 'QuestionsMandatoryText', 'FormQuestionssequence', 'answerText',
     'QuestionsGroup', 'nextQueGroup', 'NextFormText', 'ActiveText', 'actions'];
@@ -48,6 +55,53 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
 
+  @ViewChild('auto', null) auto: any;
+
+  selectEvent(item) {
+    const selectedData = {
+      value: item.id,
+      text: item.name
+    };
+    this.FormId = selectedData.value;
+    this.objFormQueAnsMapping = [];
+    this.insertData.dataChange.value.splice(0);
+    
+    this.exampleDatabase.dataChange.value.splice(0,10000);
+    this.refreshTable();
+    this.formQueAnsMappingService.getFormQueAnsMapping(selectedData.value).subscribe(
+      (par) => {
+        this.objFormQueAnsMapping = this.formQueAnsMappingTransfarmer.
+          FormQueAnsMappingTransfarmers(par);
+        this.objFormQueAnsMapping.forEach(a => {
+          a.formId = selectedData.value;
+        });
+        this.objFormQueAnsMapping.forEach(element => {
+          this.exampleDatabase.dataChange.value.push(element);
+          this.refreshTable();
+        });
+
+      },
+      (err: any) => console.log(err));
+  }
+  my() {
+    this.hidePassword = !this.hidePassword;
+    var name = document.getElementById('auto');
+    //  alert(name);
+    this.auto.focus();
+    name.focus();
+  }
+  onChangeSearch(val: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e) {
+    this.hidePassword = !this.hidePassword;
+    // do something when input is focused
+  }
+  myFunction() {
+    // alert('a');
+  }
   constructor(public httpClient: HttpClient,
     private router: Router,
     private defaultLayoutComponent: DefaultLayoutComponent,
@@ -58,8 +112,15 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     public dialog: MatDialog,
     public dataService: DataService,
     private globalService: GlobalService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute) {
     super();
+    this.formObjEntity = this.route.snapshot.data['FormList'];
+    this.formObj = formTransfarmer.fTransfarmers(this.formObjEntity);
+    this.data = [];
+    this.formObj.forEach(a => {
+      this.data.push({ id: a.formId, name: a.formName })
+    })
     this.validationMessages = {
       ControlFormCode: {
         required: 'Form is required.',
@@ -74,13 +135,12 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
-
   ngOnInit() {
-    this.formService.fillDrpForms().subscribe(
-      (par) => {
-        this.formObj = this.formTransfarmer.fTransfarmers(par);
-      },
-      (err: any) => console.log(err));
+    // this.formService.fillDrpForms().subscribe(
+    //   (par) => {
+    //     this.formObj = this.formTransfarmer.fTransfarmers(par);
+    //   },
+    //   (err: any) => console.log(err));
     this.loadData();
   }
 
@@ -146,6 +206,15 @@ export class FormQueAnsMappingComponent extends FormComponentBase
             this.FormId = this.FormId;
             this.GetRouteData(this.FormId);
           }
+         //else if (par.status === 'Failed') {
+         //  this.defaultLayoutComponent.Massage('',
+         //    'Asset already exist', 'modal-info');
+         //}
+           else {
+            this.defaultLayoutComponent.Massage('',
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
+          }
+        
         }
       );
 
@@ -157,7 +226,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     };
     this.objFormQueAnsMapping = [];
     this.insertData.dataChange.value.splice(0);
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.formQueAnsMappingService.getFormQueAnsMapping(selectedData.value).subscribe(
       (par) => {
@@ -182,7 +251,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
     };
     this.objFormQueAnsMapping = [];
     this.insertData.dataChange.value.splice(0);
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.formQueAnsMappingService.getFormQueAnsMapping(selectedData.value).subscribe(
       (par) => {
@@ -202,12 +271,15 @@ export class FormQueAnsMappingComponent extends FormComponentBase
   startEdit(i: number,
     fqamId: number,
     questionId: string,
+    questionIdText: string,
     isQuestionMandatory: string,
     formQueSeqNo: string,
     answerId: string,
+    answerText: string,
     queGroup: string,
     nextQueGroup: string,
     nextFormId: string,
+    nextFormText: string,
     isActive: string) {
     this.id = fqamId;
     this.index = i;
@@ -215,10 +287,11 @@ export class FormQueAnsMappingComponent extends FormComponentBase
       data: {
         fqamId: fqamId,
         questionId: questionId, isQuestionMandatory: isQuestionMandatory,
-        formQueSeqNo: formQueSeqNo, answerId: answerId,
+        formQueSeqNo: formQueSeqNo, answerId: answerId, answerIdText: answerText,
+        objquestionIdText:questionIdText,
         queGroup: queGroup,
         nextQueGroup: nextQueGroup,
-        nextFormId: nextFormId,
+        nextFormId: nextFormId, nextFormIdText: nextFormText,
         isActive: isActive,
         updateFlag: '1'
       }

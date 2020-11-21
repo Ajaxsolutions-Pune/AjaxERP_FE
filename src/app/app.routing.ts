@@ -130,9 +130,14 @@ import { ScreenObjListResolverService } from './Components/Resolver/Masters/Scre
 import { ScreenListComponent } from './views/Masters/Screen/screen-list.component';
 import { ScreenComponent } from './views/Masters/Screen/screen.component';
 import { MonitoringReportComponent } from './Report/Monitoring/MonitoringReport/monitoring-report.component';
+import { UserGroupMappingComponent } from './views/ProcessSetup/UserGroupMapping/user-group-mapping.component';
+import { FormQueAnsMappingListResolverService } from './Components/Resolver/ProcessSetup/FormQueAnsMapping-List-Resolver.service';
+import { UserGroupListResolverService } from './Components/Resolver/Masters/UserGroup-List-Resolver.Service';
 import { UserGroupListComponent } from './views/Masters/UserGroup/user-group-list.component';
 import { UserGroupComponent } from './views/Masters/UserGroup/user-group.component';
-import { UserGroupMappingComponent } from './views/ProcessSetup/UserGroupMapping/user-group-mapping.component';
+import { NotificationObjListResolverService } from './Components/Resolver/Masters/NotificationObj-List-Resolver.Service';
+import { NotificationObjListComponent } from './views/Masters/Notification/notification-list.component';
+import { NotificationObjComponent } from './views/Masters/Notification/notification.component';
 import { MapComponent } from './views/Map/map.component';
 
 export const routes: Routes = [
@@ -183,7 +188,6 @@ export const routes: Routes = [
           title: 'Dashboard'
         }
       },
-
       {
         path: 'map',
         component: MapComponent,
@@ -191,8 +195,6 @@ export const routes: Routes = [
           title: 'Map'
         }
       },
-
-
       {
         path: 'UnitList',
         component: ListUOMComponent,
@@ -568,6 +570,30 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'UserGroupList',
+        component: UserGroupListComponent,
+        data: {
+          title: 'User Group List'
+        },
+        resolve: {
+          UserGroupList: UserGroupListResolverService,
+        },
+      },
+      {
+        path: 'UserGroup',
+        component: UserGroupComponent,
+        data: {
+          title: 'Add User Group'
+        }
+      },
+      {
+        path: 'UserGroup/:id',
+        component: UserGroupComponent,
+        data: {
+          title: 'Edit User Group'
+        }
+      },
+      {
         path: 'Form',
         component: FormComponent,
         data: {
@@ -699,6 +725,30 @@ export const routes: Routes = [
         component: RegionComponent,
         data: {
           title: 'Edit Region'
+        }
+      },
+      {
+        path: 'NotificationList',
+        component:NotificationObjListComponent,
+        data: {
+          title: 'Notification List'
+        },
+        resolve: {
+          NotificationObjList: NotificationObjListResolverService,
+        },
+      },
+      {
+        path: 'Notification',
+        component: NotificationObjComponent,
+        data: {
+          title: 'Add Notification'
+        }
+      },
+      {
+        path: 'Notification/:id',
+        component: NotificationObjComponent,
+        data: {
+          title: 'Edit Notification'
         }
       },
       {
@@ -1065,6 +1115,9 @@ export const routes: Routes = [
         data: {
           title: 'Form Question Answer Mapping'
         },
+        resolve: {
+          FormList: FormQueAnsMappingListResolverService
+        }
       },
       {
         path: 'ProcessFormMapping',

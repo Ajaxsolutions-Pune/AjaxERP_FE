@@ -73,7 +73,7 @@ export class UserGroupMappingComponent extends FormComponentBase
   ngOnInit() {
     this.userGroupService.fillDrpUserGroups().subscribe(
       (par) => {
-        this.userGroupObj = this.userGroupTransfarmer.AccessTransfarmers(par);
+        this.userGroupObj = this.userGroupTransfarmer.UserGroupTransfarmers(par);
       },
       (err: any) => console.log(err));
     this.loadData();
@@ -158,7 +158,7 @@ export class UserGroupMappingComponent extends FormComponentBase
     this.objUserGroupMapping = [];
     this.insertData.dataChange.value.splice(0);
 
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.userGroupMappingService.getUserGroupMapping(selectedData.value).subscribe(
       (par) => {
@@ -184,7 +184,7 @@ export class UserGroupMappingComponent extends FormComponentBase
     };
     this.objUserGroupMapping = [];
     this.insertData.dataChange.value.splice(0);
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.userGroupMappingService.getUserGroupMapping(selectedData.value).subscribe(
       (par) => {

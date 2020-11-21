@@ -1,5 +1,5 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 //import { Question } from '../../../../../Components/Module/Masters/Question.model';
@@ -11,6 +11,7 @@ import { AssetTransfarmer } from '../../../../../Components/Transformer/Masters/
 import { elementAt } from 'rxjs/operators';
 import { DeviceAssetMapping } from '../../../../../Components/Module/ProcessSetup/DeviceAssetMapping.model';
 import { DeviceAssetDataService } from '../../deviceassetdata.service';
+import { CustomComboBox } from '../../../../../Components/Module/GlobalModule/CustomComboBox.model';
 
 @Component({
   selector: 'app-baza.dialog',
@@ -22,6 +23,22 @@ export class DeviceAssetEditDialogComponent implements OnInit {
   asset: Asset[];
   objnextAssetIdText: string;
 
+  dataAssetObj: CustomComboBox[];
+  nextFormcount=1;
+  @ViewChild('auto', null) auto: any;
+  keyword = 'name';
+
+  selectEvent(item) {
+    if(this.nextFormcount !==1){
+      const selectedData = {
+        value: item.id,
+        text: item.name
+      };
+      this.data.assetCode = selectedData.value;
+      this.objnextAssetIdText = selectedData.text;
+
+    }this.nextFormcount=2;
+  }
   constructor(public dialogRef: MatDialogRef<DeviceAssetEditDialogComponent>,
     private assetService: AssetService,
     private assetTransfarmer: AssetTransfarmer,
@@ -37,6 +54,10 @@ export class DeviceAssetEditDialogComponent implements OnInit {
     this.assetService.fillDrpAssets().subscribe(
       (par) => {
         this.asset = this.assetTransfarmer.AssetTransfarmers(par);
+        this.dataAssetObj = [];
+        this.asset.forEach(a => {
+          this.dataAssetObj.push({ id: a.assetCode, name: a.assetNameENG })
+        });
       },
       (err: any) => console.log(err));
   }

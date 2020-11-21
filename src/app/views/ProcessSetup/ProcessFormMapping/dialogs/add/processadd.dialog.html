@@ -12,6 +12,31 @@
         </mat-form-field>
       </div>   
 
+<div class="row form">
+  <div class="col-md-12" style="padding-bottom:2%;">
+    <span style="font-family: Nunito Sans, sans-serif; color: gray;">Forms</span>
+    <div class="ng-autocompletein">
+      <div class="row">
+        <div class="input-container">
+          <ng-autocomplete [data]="dataFormObj" #auto (selected)='selectEvent($event)' [searchKeyword]="keyword"
+            placeHolder="Select Form" id="autocomplete" [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+          <i class="icon">
+            <mat-icon>arrow_drop_down</mat-icon>
+          </i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
       <div class="form">
         <mat-form-field color="accent">        
           <mat-label>Form</mat-label>
@@ -24,9 +49,9 @@
            {{form.formName}}
           </mat-option>
           </mat-select>
-         <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>-->
+         <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
-      </div>
+      </div>-->
 
 
     

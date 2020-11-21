@@ -1,4 +1,4 @@
-<div class="row">
+<!--<div class="row">
     <div class="col-md-4"></div>
     <mat-form-field class="col-md-4">
         <mat-label>Device</mat-label>
@@ -13,8 +13,39 @@
         </mat-error>
     </mat-form-field>
   </div>
+-->
   
-  
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4" style="padding-bottom:2%;">
+    <div class="ng-autocompletein">
+      <div class="row">
+        <div class="input-container">
+          <ng-autocomplete [data]="data" #auto
+           [searchKeyword]="keyword" placeHolder="Select Device Name"
+            (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+             id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)' 
+             
+            [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+         <!--<i class="icon" (click)="my()"> 
+           <mat-icon>{{hidePassword ? 'keyboard_arrow_left' : 'keyboard_arrow_down'}}</mat-icon></i>-->
+           
+          <i class="icon" (click)="my()"> 
+            <mat-icon>arrow_drop_down</mat-icon></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  </div>
   <div class="container mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource"
     [matSortDisableClear]="false"
@@ -32,10 +63,10 @@
         <mat-cell *matCellDef="let row"> {{row.assetCode}} - {{row.assetName}}</mat-cell>
       </ng-container>
      
-      <ng-container matColumnDef="SortBy">
+      <!--<ng-container matColumnDef="SortBy">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Sort</mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.sortBy}}</mat-cell>
-      </ng-container>
+      </ng-container>-->
       
       <ng-container matColumnDef="ActiveText">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
@@ -53,6 +84,7 @@
           <button mat-icon-button color="accent" (click)="startEdit(i,
           row.daId,
           row.assetCode,      
+          row.assetName,      
           row.sortBy,
           row.isActive)">
             <mat-icon aria-label="Edit">edit</mat-icon>

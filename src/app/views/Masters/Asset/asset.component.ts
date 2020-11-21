@@ -342,14 +342,14 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         Controllatitude: ['', [
           Validators.required,
           Validators.minLength(10),
-          Validators.maxLength(10),
-          Validators.pattern('^[0-9]+(.[0-9]{0,7})?$')
+          Validators.maxLength(20),
+          Validators.pattern('^[0-9]+(.[0-9]{0,17})?$')
         ]],
         Controllongitude: ['', [
           Validators.required,
           Validators.minLength(10),
-          Validators.maxLength(10),
-          Validators.pattern('^[0-9]+(.[0-9]{0,7})?$')
+          Validators.maxLength(20),
+          Validators.pattern('^[0-9]+(.[0-9]{0,17})?$')
         ]],
         ControlRedius: ['', [
           Validators.required]],

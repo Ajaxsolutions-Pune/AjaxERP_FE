@@ -22,6 +22,7 @@ import { DefaultLayoutComponent } from '../../../containers';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { ProcessService1 } from '../../../Components/Services/Masters/ProcessService1';
+import { CustomComboBox } from '../../../Components/Module/GlobalModule/CustomComboBox.model';
 
 @Component({
   selector: 'app-process-form-mapping',
@@ -33,7 +34,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
   implements OnInit {
 
   processObj: Process[];
-  displayedColumns = ['ProcFormMapping', 'FormText', 'SortBy', 'ActiveText', 'actions'];
+  displayedColumns = ['ProcFormMapping', 'FormText', 'ActiveText', 'actions'];
   exampleDatabase: ProcessDataService | null;
   insertData: ProcessDataService | null;
   dataSource: ExampleDataSource | null;
@@ -45,7 +46,15 @@ export class ProcessFormMappingComponent extends FormComponentBase
   addObjProcessFormMapping: ProcessFormMapping;
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild('filter', { static: true }) filter: ElementRef;
 
+
+  @ViewChild('auto', null) auto: any;  
+  keyword = 'name';
+  data: CustomComboBox[];
+  hidePassword: boolean = true;
   constructor(public httpClient: HttpClient,
     private router: Router,
     private defaultLayoutComponent: DefaultLayoutComponent,
@@ -68,15 +77,60 @@ export class ProcessFormMappingComponent extends FormComponentBase
     };
   }
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild('filter', { static: true }) filter: ElementRef;
+  selectEvent(item) {
+    const selectedData = {
+      value: item.id,
+      text: item.name
+    };
+    this.ProcessId = selectedData.value;
+    this.objProcessFormMapping = [];
+    // Added by Rahul
+    this.insertData.dataChange.value.splice(0);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
+    this.refreshTable();
+    this.processformMappingService.getProcessFormMapping(selectedData.value).subscribe(
+      (par) => {
+        this.objProcessFormMapping = this.processFormMappingTransfarmer.
+          ProcessFormMappingTransfarmers(par);
+        this.objProcessFormMapping.forEach(a => {
+          a.processId = selectedData.value;
+        });
+        this.objProcessFormMapping.forEach(element => {
+          this.exampleDatabase.dataChange.value.push(element);
+          this.refreshTable();
+        });
 
+      },
+      (err: any) => console.log(err));
+  }
+  my() {
+    this.hidePassword = !this.hidePassword;
+    var name = document.getElementById('auto');
+    //  alert(name);
+    this.auto.focus();
+    name.focus();
+  }
+  onChangeSearch(val: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
 
+  onFocused(e) {
+    this.hidePassword = !this.hidePassword;
+    // do something when input is focused
+  }
+  myFunction() {
+    // alert('a');
+  }
   ngOnInit() {
     this.processService.fillDrpProcess().subscribe(
       (par) => {
         this.processObj = this.processTransfarmer.processTransfarmers(par);
+        
+    this.data = [];
+    this.processObj.forEach(a => {
+      this.data.push({ id: a.processId, name: a.processName })
+    })
       },
       (err: any) => console.log(err));
     this.loadData();
@@ -135,6 +189,13 @@ export class ProcessFormMappingComponent extends FormComponentBase
             this.ProcessId = this.ProcessId;
             this.GetRouteData(this.ProcessId);
           }
+          else if (par.status === 'Failed') {
+            this.defaultLayoutComponent.Massage('',
+              'Form already exist', 'modal-info');
+          } else {
+            this.defaultLayoutComponent.Massage('',
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
+          }
         }
       );
   }
@@ -147,7 +208,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
     this.objProcessFormMapping = [];
     this.insertData.dataChange.value.splice(0);
 
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.processformMappingService.getProcessFormMapping(selectedData.value).subscribe(
       (par) => {
@@ -174,7 +235,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
     this.objProcessFormMapping = [];
     // Added by Rahul
     this.insertData.dataChange.value.splice(0);
-    this.exampleDatabase.dataChange.value.splice(0, 100);
+    this.exampleDatabase.dataChange.value.splice(0,10000);
     this.refreshTable();
     this.processformMappingService.getProcessFormMapping(selectedData.value).subscribe(
       (par) => {
@@ -197,6 +258,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
   startEdit(i: number,
     pfmId: number,
     formId: string,
+    formText: string,
     sortBy: string,
     isActive: string) {
     this.id = pfmId;
@@ -207,6 +269,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
         pfmId: pfmId,
         formId: formId,
         sortBy: sortBy,
+        formName: formText,
         isActive: isActive,
         updateFlag: '1'
       }

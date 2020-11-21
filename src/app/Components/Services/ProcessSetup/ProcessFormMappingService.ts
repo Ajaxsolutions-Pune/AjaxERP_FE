@@ -25,6 +25,9 @@ export class ProcessFormMappingService {
     }
 
     getProcessFormMapping(processId: string): Observable<ProcessFormMappingEntity[]> {
+        console.log(
+            this.str + '/GetPFMapping/getList/' + localStorage.getItem('username').toString() 
+            + '/' + this.env.OuCode +'?processId='+ processId + '');
         return this.httpClient.get<ProcessFormMappingEntity[]>(
             this.str + '/GetPFMapping/getList/' + localStorage.getItem('username').toString() 
             + '/' + this.env.OuCode +'?processId='+ processId + ''
@@ -32,6 +35,8 @@ export class ProcessFormMappingService {
     }
 
     Save(saveEntityObj: ProcessFormMappingEntity[]): Observable<Insertstatus> {
+        console.log("Save");
+        console.log(saveEntityObj);
         return this.httpClient.post<Insertstatus>(this.str + '/ProcessFormMapping/createList', saveEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }

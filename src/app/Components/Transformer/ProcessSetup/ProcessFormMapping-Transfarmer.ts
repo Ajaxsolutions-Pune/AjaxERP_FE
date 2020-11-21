@@ -15,6 +15,7 @@ export class ProcessFormMappingTransfarmer {
     
     ProcessFormMappingTransfarmers(Entity: ProcessFormMappingEntity[]): ProcessFormMapping[] {
         this.arrOject = [];
+        console.log(Entity);
         Entity.forEach(element => {
             this.Oject = new ProcessFormMapping();
             this.Oject.pfmId = element.pfmId;

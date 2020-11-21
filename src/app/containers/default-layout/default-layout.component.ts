@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { environment } from '../../Components/Module/environment';
 import '../../../assets/JS/Global.js';
+import { NavMenuObj } from '../../Components/Module/Role/Navobj.model';
+import { ThemeService } from 'ng2-charts';
 declare var jQuery: any;
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +25,9 @@ export class DefaultLayoutComponent implements OnDestroy {
   @ViewChild('myModal', { static: false }) public myModal: ModalDirective;
   // end
   str: string;
+  // public navItems: NavMenuObj[];
   public navItems = navItems;
+  public itemsObj: NavMenuObj;
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement;
@@ -35,19 +39,18 @@ export class DefaultLayoutComponent implements OnDestroy {
     @Inject(DOCUMENT) _document?: any) {
     this.router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {
-       // (function ($) {
-       //   $(document).ready(function () {
-       //   //  alert("dasdasdddd");
-       //     $("#defaultMain").bind("click", function () {
-       //       alert("dddd");
-       //     });
-    //
-       //   });
-       // })(jQuery);
+        // (function ($) {
+        //   $(document).ready(function () {
+        //   //  alert("dasdasdddd");
+        //     $("#defaultMain").bind("click", function () {
+        //       alert("dddd");
+        //     });
+        //
+        //   });
+        // })(jQuery);
         this.showLoddingIndicator = true;
 
       }
-
       if (routerEvent instanceof NavigationEnd ||
         routerEvent instanceof NavigationCancel ||
         routerEvent instanceof NavigationError) {
@@ -55,6 +58,10 @@ export class DefaultLayoutComponent implements OnDestroy {
 
       }
     });
+
+   // var retrievedObject = localStorage.getItem('navMenuList');
+   // this.navItems = JSON.parse(retrievedObject);
+   // [{ name: 'Dashboard', icon: 'icon-speedometer', url: '/dashboard', children: null }].concat(this.navItems);
   }
 
   ngOnDestroy(): void {

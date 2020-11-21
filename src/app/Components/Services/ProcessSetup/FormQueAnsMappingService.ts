@@ -24,6 +24,9 @@ export class FormQueAnsMappingService {
     }
 
     getFormQueAnsMapping(formId: string): Observable<FormQueAnsMappingEntity[]> {
+        console.log(
+            this.str + '/GetFQAMapping/getList/' + localStorage.getItem('username').toString() + '/' + this.env.OuCode +
+            '?formId=' + formId);
         return this.httpClient.get<FormQueAnsMappingEntity[]>(
             this.str + '/GetFQAMapping/getList/' + localStorage.getItem('username').toString() + '/' + this.env.OuCode +
             '?formId=' + formId

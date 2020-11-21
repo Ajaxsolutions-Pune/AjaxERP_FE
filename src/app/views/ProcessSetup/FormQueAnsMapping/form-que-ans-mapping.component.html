@@ -1,115 +1,140 @@
-
-<div class="row">
+<!--<div class="row">
   <div class="col-md-4"></div>
   <mat-form-field class="col-md-4">
-      <mat-label>Form</mat-label>
-      <mat-select required  [(ngModel)]="FormId"
-       (selectionChange)="FormChange($event)">
-          <mat-option *ngFor="let form of formObj" [value]="form.formId">
-            {{form.formId}} - {{form.formName}}
-          </mat-option>
-      </mat-select>
-      <mat-error>
-          {{ formErrors['ControlFormCode'] }}
-      </mat-error>
+    <mat-label>Form</mat-label>
+    <mat-select required [(ngModel)]="FormId" (selectionChange)="FormChange($event)">
+      <mat-option *ngFor="let form of formObj" [value]="form.formId">
+        {{form.formId}} - {{form.formName}}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      {{ formErrors['ControlFormCode'] }}
+    </mat-error>
   </mat-form-field>
-</div>
+</div>-->
 
-  <div class="container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource"
-    [matSortDisableClear]="false"
-    matSort class="mat-cell">
-      ng update @angular/cli @angular/core
-      <!--- Note that these columns can be defined in any order.
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4" style="padding-bottom:2%;">
+  <div class="ng-autocompletein">
+    <div class="row">
+      <div class="input-container">
+        <ng-autocomplete [data]="data" #auto
+         [searchKeyword]="keyword" placeHolder="Select Form Name"
+          (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+           id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)' 
+           
+          [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.name"></a>
+        </ng-template>
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+       <!--<i class="icon" (click)="my()"> 
+         <mat-icon>{{hidePassword ? 'keyboard_arrow_left' : 'keyboard_arrow_down'}}</mat-icon></i>-->
+         
+        <i class="icon" (click)="my()"> 
+          <mat-icon>arrow_drop_down</mat-icon></i>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+</div>
+<div class="container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" [matSortDisableClear]="false" matSort class="mat-cell">
+    ng update @angular/cli @angular/core
+    <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
-      <ng-container matColumnDef="FormQuestionsAnswerMapping">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>MapId</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.fqamId}}</mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="FormQuestionsAnswerMapping">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>MapId</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.fqamId}}</mat-cell>
+    </ng-container>
 
-      <ng-container matColumnDef="QuestionsText">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Question</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.questionId}}-{{row.questionIdText}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="QuestionsMandatoryText">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Mandatory</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.isQuestionMandatoryText}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="FormQuestionssequence">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Que Seq.</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.formQueSeqNo}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="answerText">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Answer</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.answerId}}-{{row.answerIdText}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="QuestionsGroup">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Que Group</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.queGroup}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="nextQueGroup">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Next Que Group</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.nextQueGroup}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="NextFormText">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Next Form</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.nextFormId}}-{{row.nextFormIdText}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="ActiveText">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.isActiveText}}</mat-cell>
-      </ng-container>
-      <!-- actions -->
-      <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>
-          <button mat-icon-button color="primary" (click)="addNew()">
-            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-          </button>
-        </mat-header-cell>
+    <ng-container matColumnDef="QuestionsText">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Question</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.questionId}}-{{row.questionIdText}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="QuestionsMandatoryText">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Mandatory</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.isQuestionMandatoryText}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="FormQuestionssequence">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Que Seq.</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.formQueSeqNo}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="answerText">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Answer</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.answerId}}-{{row.answerIdText}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="QuestionsGroup">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Que Group</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.queGroup}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nextQueGroup">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Next Que Group</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.nextQueGroup}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="NextFormText">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Next Form</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.nextFormId}}-{{row.nextFormIdText}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ActiveText">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.isActiveText}}</mat-cell>
+    </ng-container>
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="addNew()">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </mat-header-cell>
 
-        <mat-cell *matCellDef="let row; let i=index;">
-          <button mat-icon-button color="accent" (click)="startEdit(i,
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent" (click)="startEdit(i,
           row.fqamId,
           row.questionId, 
+          row.questionIdText, 
           row.isQuestionMandatory,
           row.formQueSeqNo,
           row.answerId,
+          row.answerIdText, 
           row.queGroup,
           row.nextQueGroup,
           row.nextFormId,
+          row.nextFormIdText,
           row.isActive)">
-            <mat-icon aria-label="Edit">edit</mat-icon>
-          </button>
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
 
-        </mat-cell>
-      </ng-container>
+      </mat-cell>
+    </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
 
 
-    <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-      No results
-    </div>
-    <mat-paginator #paginator
-                  [length]="dataSource.filteredData.length"
-                  [pageIndex]="0"
-                  [pageSize]="10"
-                  [pageSizeOptions]="[5, 10, 25, 100]">
-    </mat-paginator>
+  <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+    No results
   </div>
-  
-  <div class="row" style="padding-top: 20px;">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <button mat-raised-button
-        (click)="save()"
-            color="primary">Submit</button>
-        <button mat-raised-button color="warn" routerLink="/dashboard">
-            Cancel</button>
-    </div>
-    <div class="col-md-4"></div>
+  <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+
+    [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
 </div>
-<!-- <div> {{dataSource.filteredData | json}}</div>-->
+
+<div class="row" style="padding-top: 20px;">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <button mat-raised-button (click)="save()" color="primary">Submit</button>
+    <button mat-raised-button color="warn" routerLink="/dashboard">
+      Cancel</button>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<div> {{FormId | json}}</div>

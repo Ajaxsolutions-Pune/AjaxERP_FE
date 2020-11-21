@@ -1,5 +1,5 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FormObj } from '../../../../../Components/Module/Masters/Form.model';
 import { FormService } from '../../../../../Components/Services/Masters/FormService';
@@ -8,6 +8,7 @@ import { elementAt } from 'rxjs/operators';
 import { ProcessFormMapping } from '../../../../../Components/Module/ProcessSetup/ProcessFormMapping.model';
 import { ProcessDataService } from '../../processdata.service';
 import { GlobalService } from '../../../../../Components/Services/GlobalServices/Global.service';
+import { CustomComboBox } from '../../../../../Components/Module/GlobalModule/CustomComboBox.model';
 
 @Component({
   selector: 'app-baza.dialog',
@@ -18,6 +19,23 @@ export class ProcessEditDialogComponent implements OnInit {
   formObj: FormObj[];
   objnextFormIdText: string;
 
+
+  dataFormObj: CustomComboBox[];
+  nextFormcount=1;
+  @ViewChild('auto', null) auto: any;
+  keyword = 'name';
+
+  selectEvent(item) {
+    if(this.nextFormcount !==1){
+      const selectedData = {
+        value: item.id,
+        text: item.name
+      };
+      this.data.formId = selectedData.value;
+      this.objnextFormIdText = selectedData.text;
+
+    }this.nextFormcount=2;
+  }
   constructor(public dialogRef: MatDialogRef<ProcessEditDialogComponent>,
     private globalService: GlobalService,
     private formService: FormService,
@@ -34,6 +52,17 @@ export class ProcessEditDialogComponent implements OnInit {
 
   }
   ngOnInit() {
+    
+    this.formService.fillDrpForms().subscribe(
+      (par) => {
+        this.formObj = this.formTransfarmer.fTransfarmers(par);
+        this.dataFormObj = [];
+        this.formObj.forEach(a => {
+          this.dataFormObj.push({ id: a.formId, name: a.formName })
+        });
+      },
+      (err: any) => console.log(err));
+
     this.formService.fillDrpForms().subscribe(
       (par) => {
         this.formObj = this.formTransfarmer.fTransfarmers(par);

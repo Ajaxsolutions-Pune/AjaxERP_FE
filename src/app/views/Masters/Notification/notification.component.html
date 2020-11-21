@@ -1,0 +1,116 @@
+<main class="form-main">
+    <form #userForm="ngForm" [formGroup]="form" autocomplete="off">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Notification</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Notification Id"
+                                    [(ngModel)]="notificationObj.notificationId"
+                                    formControlName="ControlNotificationObjId">
+                                     <mat-error>
+                                     {{ formErrors['ControlNotificationObjId'] }}
+                                     </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field color="accent" class="col-md-4">
+                                    <mat-label>User Group</mat-label>
+                                    <mat-select 
+                                    [(ngModel)]="notificationObj.userGroupId"
+                                    formControlName="ControlUserGroupId">
+                                        <mat-option>Select</mat-option>
+                                        <mat-option *ngFor="let obj of userDrp"
+                                            [value]="obj.userGroupId">
+                                            {{obj.groupName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                    {{ formErrors['ControlUserGroupId'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Notification Message *" 
+                                    [(ngModel)]="notificationObj.notificationMessage"
+                                    maxlength="50"
+                                     formControlName="ControlNotificationMessage">
+                                     <mat-error>
+                                     {{ formErrors['ControlNotificationMessage'] }}
+                                     </mat-error>
+                                </mat-form-field>
+                            </div>                                                                      
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <mat-form-field appearance="fill" class="col-md-4">
+                                    <mat-label>Start Date</mat-label>
+                                    <input matInput [matDatepicker]="picker1" 
+                                     formControlName="ControlStartDate" 
+                                     [(ngModel)]="startDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                    <mat-datepicker  #picker1></mat-datepicker>
+                                    <mat-error>
+                                        {{ formErrors['ControlStartDate']}}
+                                    </mat-error>
+                                  </mat-form-field>
+                                  <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                  <mat-form-field appearance="fill" class="col-md-4">
+                                      <mat-label>End Date</mat-label>
+                                      <input matInput [matDatepicker]="picker2" 
+                                       formControlName="ControlEndDate" 
+                                       [(ngModel)]="endDate">
+                                      <mat-datepicker-toggle matSuffix [for]="picker2">
+                                      </mat-datepicker-toggle>
+                                      <mat-datepicker  #picker2></mat-datepicker>
+                                      <mat-error>
+                                          {{ formErrors['ControlEndDate']}}
+                                      </mat-error>
+                                    </mat-form-field>
+                                    <div class="col-md-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-sm-4">                                    
+                                    <mat-checkbox name="chkisActive"
+                                    #chkisActive 
+                                    formControlName="ControlisActive"
+                                     [(ngModel)]="notificationObj.isActive">Active
+                                    </mat-checkbox>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button [disabled]="!form.valid" (click)="save()"
+                                    color="primary">Submit</button> &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button mat-raised-button color="warn" routerLink="/NotificationList">
+                                        Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </form>
+</main>

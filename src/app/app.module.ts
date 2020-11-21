@@ -291,7 +291,6 @@ import { MonitoringReportComponent } from './Report/Monitoring/MonitoringReport/
 import { DashboardService } from './Components/Services/Masters/DashboardService';
 import { UserGroupListResolverService } from './Components/Resolver/Masters/UserGroup-List-Resolver.Service';
 import { UserGroupService } from './Components/Services/Masters/UserGroupService';
-import { UserGroupTransfarmer } from './Components/Transformer/Masters/UserGroup-Transfarmer';
 import { UserGroupListComponent } from './views/Masters/UserGroup/user-group-list.component';
 import { UserGroupComponent } from './views/Masters/UserGroup/user-group.component';
 import { UserGroupMappingComponent } from './views/ProcessSetup/UserGroupMapping/user-group-mapping.component';
@@ -300,10 +299,21 @@ import { UserGroupMappingService } from './Components/Services/ProcessSetup/User
 import { UserGroupMappingDataService } from './views/ProcessSetup/UserGroupMapping/userdevicedata.service';
 import { UserGroupUserMappingAddDialogComponent } from './views/ProcessSetup/UserGroupMapping/dialogs/add/UserGroupMappingadd.dialog.component';
 import { UserGroupMappingEditDialogComponent } from './views/ProcessSetup/UserGroupMapping/dialogs/edit/UserGroupMappingedit.dialog.component';
+import { ComboBoxComponent } from './views/Masters/AngularDemo/combo-box/combo-box.component';
+import { FormQueAnsMappingListResolverService } from './Components/Resolver/ProcessSetup/FormQueAnsMapping-List-Resolver.service';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AutoCompleteModule, ComboBoxModule } from '@syncfusion/ej2-angular-dropdowns';
+import { UserGroupTransfarmer } from './Components/Transformer/Masters/UserGroup-Transfarmer';
+import { NotificationObjListResolverService } from './Components/Resolver/Masters/NotificationObj-List-Resolver.Service';
+import { NotificationObjService } from './Components/Services/Masters/NotificationObjService';
+import { NotificationObjTransfarmer } from './Components/Transformer/Masters/NotificationObj-Transfarmer';
+import { NotificationObjListComponent } from './views/Masters/Notification/notification-list.component';
+import { NotificationObjComponent } from './views/Masters/Notification/notification.component';
+
 import { MapComponent } from './views/Map/map.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MapService } from './Components/Services/Masters/MapService';
-
 
 export const MY_FORMATS = {
   parse: {
@@ -319,8 +329,10 @@ export const MY_FORMATS = {
 
 @NgModule({
   imports: [
+    ComboBoxModule,
     BrowserModule,
     TreeGridModule,
+    AutoCompleteModule,
     BrowserAnimationsModule,
     AppRoutingModule, AppAsideModule, CommonModule,
     AppBreadcrumbModule.forRoot(),
@@ -352,7 +364,9 @@ export const MY_FORMATS = {
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
+    AutocompleteLibModule,
     MatPaginatorModule,
+    MatAutocompleteModule,
     MatExpansionModule,
     NgxPaginationModule
   ],
@@ -373,7 +387,7 @@ export const MY_FORMATS = {
   ],
   declarations: [
     ConfirmDialogComponent,
-    AddDialogComponent,
+    AddDialogComponent, ComboBoxComponent,
     EditDialogComponent,
     DeleteDialogComponent,
     ProcessAddDialogComponent,
@@ -416,7 +430,7 @@ export const MY_FORMATS = {
     AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent,
     UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent,
     ScreenComponent, ScreenListComponent, MonitoringReportComponent, UserGroupListComponent, UserGroupComponent,
-    UserGroupMappingComponent,
+    UserGroupMappingComponent, NotificationObjListComponent, NotificationObjComponent,
     MapComponent
   ],
   providers: [
@@ -432,7 +446,7 @@ export const MY_FORMATS = {
     AssetTransfarmer, AssetGroupTransfarmer, TehsilTransfarmer, QuestionTransfarmer,
     AnswerTransfarmer, ProcessTransfarmer1, ZoneTransfarmer, CircleTransfarmer,
     FormQueAnsMappingTransfarmer, DatePipe, GlobalService,
-    DeviceTransfarmer, AssetCategoryTransfarmer,
+    DeviceTransfarmer, AssetCategoryTransfarmer, NotificationObjService, NotificationObjListResolverService, NotificationObjTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer, UserGroupTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
     HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer
@@ -442,6 +456,7 @@ export const MY_FORMATS = {
     AssetCategoryService, DataService, UserService, UserDeviceRegService,
     FormListResolverService, RegionListResolverService, ColourListResolverService,
     UserGroupListResolverService,
+    FormQueAnsMappingListResolverService,
     AssetListResolverService, ProcessListResolverService, AnswerListResolverService,
     StateListResolverService, CountryResolverService, BrandListResolverService,
     AssetCategoryListResolverService, UserListResolverService, DashboardService,
@@ -457,15 +472,14 @@ export const MY_FORMATS = {
     DialogService, RolelevelListResolverService,
     RoleService, RolelevelService, RoleTransfarmer, RolelevelTransfarmer, UserTransfarmer,
     ProjectService, ProjectTransfarmer, ProjectListResolverService,
-
+    MapService,
     ProcessFormMappingService, ProcessFormMappingTransfarmer, ProcessDataService, UserDeviceDataService,
     ProcessDataService,
     UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer, DeviceAssetMappingService,
     UserGroupMappingTransfarmer, UserGroupMappingService, UserGroupMappingDataService,
-    DeviceAssetDataService,MapService,
+    DeviceAssetDataService,
     DeviceAssetMappingTransfarmer, {
-      provide: MAT_DATE_LOCALE,
-      useValue: 'it'
+      provide: MAT_DATE_LOCALE, useValue: 'en-GB'
     },
 
     {

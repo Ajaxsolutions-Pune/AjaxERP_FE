@@ -217,7 +217,7 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
-        name: 'User Group Mapg',
+        name: 'User Group Map',
         url: '/UserGroupMapping',
         icon: 'icon-puzzle'
       },
@@ -309,11 +309,16 @@ export const navItems: NavData[] = [
         url: '/UserDeviceRegList',
         icon: 'icon-puzzle'
       },
-      // {
-      //   name: 'User Group',
-      //   url: '/UserGroupList',
-      //   icon: 'icon-puzzle'
-      // },
+      {
+        name: 'User Group',
+        url: '/UserGroupList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Notification',
+        url: '/NotificationList',
+        icon: 'icon-puzzle'
+      },
     ]
 
   },

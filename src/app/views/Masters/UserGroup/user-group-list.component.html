@@ -1,23 +1,27 @@
-<div class="form-group">
+  <div class="form-group">
     <div class="row">
         <div class="col-md-3">User Group ID</div>
         <div class="col-md-3">User Group Name</div>
         <div class="col-md-3">User Manager</div>
-       <!--<div class="col-md-2">Status</div>--> 
     </div>
     <div class="row">
         <div class="col-md-3">
-            <input id="txtgroupId" required name="txtgroupId" type="text" class="form-control"
+            <input id="txtgroupId"
+            [(ngModel)]="userGroup.userGroupId"
+             name="txtgroupId" type="text" class="form-control"  (input)="resultChanged()" 
             placeholder="User Group ID">
         </div>
         <div class="col-md-3">
-            <input id="txtuserGroup Name" required name="txtuserGroupName" type="text" class="form-control"
+            <input id="txtuserGroup Name" (input)="resultChanged()" [(ngModel)]="userGroup.groupName" required name="txtuserGroupName" type="text" class="form-control"
                 placeholder="User Group Name">
         </div>
         <div class="col-md-2">
-            <select id="User Manager" name="User Manager"
+            <select id="User Manager" (change)="resultChanged()" 
+            [(ngModel)]="userGroup.isActive" name="User Manager"
                 class="form-control">
-                <option value="3">All</option>
+                <option value="3" selected>All</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
             </select>
         </div>
         <div class="col-md-1">
@@ -25,7 +29,8 @@
             routerLink="/UserGroup"></button>
         </div>
         <div class="col-md-1">
-            <i class="fa fa-file-excel-o" style="font-size:35px;color: #20a8d8"
+            <i class="fa fa-file-excel-o"
+            (click)="ExportToExcel()" style="font-size:35px;color: #20a8d8"
              aria-hidden="true"></i>
         </div>
     </div>
@@ -37,26 +42,31 @@
             <th>User Group Code</th>
             <th>User Group Name</th>
             <th>User Manager</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                <div>1</div>
-            </td>
-            <td>
-                Group 11
-            </td>
-            <td>
-              manager 12
-            </td>
-            <td style="height: 35px;">
-                <button mat-icon-button [routerLink]="['/UserGroup/',1]" color="accent">
-                    <mat-icon color="#FFFFFF" aria-label="Edit"
-                   >edit</mat-icon>
-                </button>
-            </td>
+        <tr *ngFor="let userGroup of userGroups  | paginate: config">
+          <td>
+            <div>{{userGroup.userGroupId}}</div>
+          </td>
+          <td>
+            {{userGroup.groupName}}
+          </td>
+          <td>
+            <label class="col-md-3 col-form-label" style="text-anchor: unset">{{userGroup.managerId}}</label>
+          </td>
+          <td>
+            <label class="col-md-3 col-form-label" style="text-anchor: unset">{{userGroup.isActive}}</label>
+          </td>
+          <td [ngSwitch]="1">
+            <button mat-icon-button [routerLink]="['/UserGroup/',userGroup.userGroupId]"
+            color="accent">
+             <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+           </button>
+          </td>
         </tr>
-    </tbody>
+      </tbody>
 </table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls> 

@@ -1,5 +1,5 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators, Form } from '@angular/forms';
 
 import { UserService } from '../../../../../Components/Services/Masters/UserService';
@@ -9,6 +9,7 @@ import { User} from '../../../../../Components/Module/Masters/User.model';
 import { UserDeviceMapping } from '../../../../../Components/Module/ProcessSetup/UserDeviceMapping.model';
 import { UserDeviceDataService } from '../../userdevicedata.service';
 import { GlobalService } from '../../../../../Components/Services/GlobalServices/Global.service';
+import { CustomComboBox } from '../../../../../Components/Module/GlobalModule/CustomComboBox.model';
 
 @Component({
   selector: 'app-add.dialog',
@@ -20,6 +21,19 @@ export class UserDeviceAddDialogComponent implements OnInit{
   user: User[];  
   objloginIdText: string;    
 
+  dataUserObj: CustomComboBox[];
+  @ViewChild('auto', null) auto: any;
+  keyword = 'name';
+
+  selectEvent(item) {
+    const selectedData = {
+      value: item.id,
+      text: item.name
+    };
+    this.data.loginId = selectedData.value;
+    this.objloginIdText = selectedData.text;
+    // alert(this.data1.questionId);
+  }
   constructor(public dialogRef: MatDialogRef<UserDeviceAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserDeviceMapping,   
     private userService: UserService,
@@ -41,7 +55,13 @@ export class UserDeviceAddDialogComponent implements OnInit{
   }
   ngOnInit() {   
     this.userService.fillDrpUsers().subscribe(
-      (par) => this.user = this.userTransfarmer.UserTransfarmers(par),
+      (par) =>{
+
+        this.user = this.userTransfarmer.UserTransfarmers(par)
+        this.dataUserObj = [];
+        this.user.forEach(a => {
+          this.dataUserObj.push({ id: a.loginID, name: a.userNameENG })
+        })},
       (err: any) => console.log(err));
   }
   
@@ -69,6 +89,7 @@ export class UserDeviceAddDialogComponent implements OnInit{
   }
 
   public confirmAdd(): void {    
+    console.log(this.objloginIdText);
     this.data.userNameENG = this.objloginIdText;    
    
     if (this.data.isActive.toString() === 'true') {

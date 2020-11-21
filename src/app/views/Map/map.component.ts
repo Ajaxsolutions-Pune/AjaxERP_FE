@@ -7,13 +7,13 @@ import { Script } from 'vm';
 alasql['private'].externalXlsxLib = require('xlsx');
 import { environment } from '../../Components/Module/environment';
 //import { MapModel } from '../../Components/Module/Masters/Map.model';
-import { dashboard,bottomDistance, topDistance, topPlacesTagged,bottomPlacesTagged,topForm,
-  bottomForm,topPlacesVisit,bottomPlacesVisit,
-  realTimeTrackingData,places} from '../../Components/Module/Masters/Dashboard.model';
+//import { dashboard,bottomDistance, topDistance, topPlacesTagged,bottomPlacesTagged,topForm,
+//  bottomForm,topPlacesVisit,bottomPlacesVisit,
+//  realTimeTrackingData,places} from '../../Components/Module/Masters/Dashboard.model';
 
 import{mapModel,placeSummery,placeDetail,userSummery,userDetail} from '../../Components/Module/Masters/Map.model';
 import{MapService} from '../../Components/Services/Masters/MapService';
-import { DashboardService } from '../../Components/Services/Masters/DashboardService';
+//import { DashboardService } from '../../Components/Services/Masters/DashboardService';
 
 //temp
 import { Answer,AnswerEntity } from '../../Components/Module/Masters/Answer.model';
@@ -61,7 +61,7 @@ export class MapComponent implements OnInit {
   AssetType: string = "Tower";
   Checked : string = "false";
 
-  dashboardObj: dashboard;
+  /*dashboardObj: dashboard;
   topDistanceObj: topDistance[];
   bottomDistanceObj: bottomDistance[];
   topPlacesTaggedObj: topPlacesTagged[];
@@ -71,7 +71,7 @@ export class MapComponent implements OnInit {
   topPlacesVisitObj: topPlacesVisit[];
   bottomPlacesVisitObj: bottomPlacesVisit[];
   realTimeTrackingDataObj: realTimeTrackingData[];
-  placesObj : places[];
+  placesObj : places[];*/
 
   mapModelObj : mapModel;
   placeSummeryObj : placeSummery[];
@@ -92,7 +92,7 @@ export class MapComponent implements OnInit {
   answer = Answer;
   constructor(private _router: Router,
     private route: ActivatedRoute,
-    private dashboardService: DashboardService,
+    //private dashboardService: DashboardService,
     private mapService : MapService
     ) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
@@ -154,7 +154,7 @@ export class MapComponent implements OnInit {
       userDetail:[]
     };
 
-    this.dashboardObj
+    /*this.dashboardObj
     this.dashboardObj = {
       dashboardCount: null,
       bottomDistance: [],
@@ -186,7 +186,7 @@ export class MapComponent implements OnInit {
     this.topPlacesVisitObj = [];
     this.bottomPlacesVisitObj = [];
     this.realTimeTrackingDataObj = [];
-    this.placesObj = [];
+    this.placesObj = [];*/
 
     this.placeSummeryObj = [];
     this.placeDetailObj = [];
@@ -194,7 +194,7 @@ export class MapComponent implements OnInit {
     this.userDetailObj = [];
   
     //User data from dashboard service
-    this.dashboardService.getDashboardData().subscribe(t => {
+    /*this.dashboardService.getDashboardData().subscribe(t => {
       this.dashboardObj = t;
       this.topDistanceObj = this.dashboardObj.topDistance;
       this.bottomDistanceObj = this.dashboardObj.bottomDistance;
@@ -207,11 +207,11 @@ export class MapComponent implements OnInit {
       this.realTimeTrackingDataObj = this.dashboardObj.realTimeTrackingData;    
       this.placesObj = this.dashboardObj.places;     
       
-      if(this.realTimeTrackingDataObj.length > 0 ) //!= []
+      if(this.userDetailObj.length > 0 ) //!= []
       {      
         this.createMap();
       }    
-    });
+    });*/
 
     //Asset data from map service
     this.mapService.getMapData().subscribe(t => {
@@ -220,6 +220,11 @@ export class MapComponent implements OnInit {
       this.placeDetailObj = this.mapModelObj.placeDetail;   
       this.userSummaryObj = this.mapModelObj.userSummery;
       this.userDetailObj = this.mapModelObj.userDetail;
+
+      if(this.userDetailObj.length > 0 ) //!= []
+      {      
+        this.createMap();
+      }    
       
       if(this.placeSummeryObj.length > 0 ) //
       {
