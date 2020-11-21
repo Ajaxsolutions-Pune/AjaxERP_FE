@@ -150,15 +150,21 @@ import { DeviceListComponent } from './views/Masters/Device/device-list.componen
 import { DeviceComponent } from './views/Masters/Device/device.component';
 import { DialogService } from './Components/Services/MatServices/Dialog.service';
 import { DialogTemplateComponent } from './Components/Services/MatServices/dialog-template.component';
-import {
-  MatInputModule, MatDialogModule, MatButtonModule,
-  ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, MatFormFieldModule, MatIconModule,
-  MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule, MatSelectModule, MatCardModule,
-  MatSortModule, MatTabsModule, MatTableModule, MatToolbarModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE
-} from '@angular/material';
-
-import {MatExpansionModule} from '@angular/material/expansion';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MAT_CHECKBOX_CLICK_ACTION, MatCheckboxModule } from '@angular/material/checkbox';
+import { ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AngularDemoComponent } from './views/Masters/AngularDemo/angular-demo.component';
 import { AssetTransfarmer } from './Components/Transformer/Masters/Asset-Transfarmer';
 import { AssetListResolverService } from './Components/Resolver/Masters/Asset-List-Resolver.Service';
@@ -295,6 +301,10 @@ import { UserGroupMappingDataService } from './views/ProcessSetup/UserGroupMappi
 import { UserGroupUserMappingAddDialogComponent } from './views/ProcessSetup/UserGroupMapping/dialogs/add/UserGroupMappingadd.dialog.component';
 import { UserGroupMappingEditDialogComponent } from './views/ProcessSetup/UserGroupMapping/dialogs/edit/UserGroupMappingedit.dialog.component';
 import { MapComponent } from './views/Map/map.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MapService } from './Components/Services/Masters/MapService';
+
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -452,7 +462,7 @@ export const MY_FORMATS = {
     ProcessDataService,
     UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer, DeviceAssetMappingService,
     UserGroupMappingTransfarmer, UserGroupMappingService, UserGroupMappingDataService,
-    DeviceAssetDataService,
+    DeviceAssetDataService,MapService,
     DeviceAssetMappingTransfarmer, {
       provide: MAT_DATE_LOCALE,
       useValue: 'it'

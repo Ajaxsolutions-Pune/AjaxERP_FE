@@ -77,7 +77,7 @@ export const navItems: NavData[] = [
 
       // {
       //   name: 'QuestionType',
-      //   url: '/QuestionTypeList',
+      //    url: '/QuestionTypeList',
       //   icon: 'icon-puzzle'
       // },X
       {
@@ -107,7 +107,7 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
-        name: 'Hub',
+        name: 'HUB',
         url: '/HubList',
         icon: 'icon-puzzle'
       },
@@ -216,11 +216,11 @@ export const navItems: NavData[] = [
         url: '/DeviceAssetMapping',
         icon: 'icon-puzzle'
       },
-      //{
-       //    name: 'User Group Mapg',
-       // url: '/UserGroupMapping',
-       // icon: 'icon-puzzle'
-      //}, 
+      {
+        name: 'User Group Mapg',
+        url: '/UserGroupMapping',
+        icon: 'icon-puzzle'
+      },
     ]
   },
   {
@@ -256,7 +256,7 @@ export const navItems: NavData[] = [
     ]
 
   },
- // {
+  // {
   //  name: 'CRM',
   //  url: '/CRM',
   //  //   icon: 'fa fa-newspaper-o',
@@ -267,53 +267,53 @@ export const navItems: NavData[] = [
   //      icon: 'icon-puzzle'
   //    }
   //  ]
-//
+  //
   //},
   {
     name: 'User Setup',
     url: '/User Setup',
     //   icon: 'fa fa-newspaper-o',
     children: [
-     // {
-     //   name: 'Access',
-     //   url: '/AccessList',
-     //   icon: 'icon-puzzle'
-     // },
-     // {
-     //   name: 'Module',
-     //   url: '/ModuleList',
-     //   icon: 'icon-puzzle'
-     // },
-     // {
-     //   name: 'Screen',
-     //   url: '/ScreenList',
-     //   icon: 'icon-puzzle'
-     // },
-     // {
-     //   name: 'Role',
-     //   url: '/RoleList',
-     //   icon: 'icon-puzzle'
-     // },
-     // {
-     //   name: 'Role Level',
-     //   url: '/RolelevelList',
-     //   icon: 'icon-puzzle'
-     // },
-        {
-          name: 'User',
-          url: '/UserList',
-          icon: 'icon-puzzle'
-        },
-        {
-          name: 'User Approve',
-          url: '/UserDeviceRegList',
-          icon: 'icon-puzzle'
-        },
-     // {
-     //   name: 'User Group',
-     //   url: '/UserGroupList',
-     //   icon: 'icon-puzzle'
-     // },
+      {
+        name: 'Access',
+        url: '/AccessList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Module',
+        url: '/ModuleList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Screen',
+        url: '/ScreenList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Role',
+        url: '/RoleList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Role Level',
+        url: '/RolelevelList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'User',
+        url: '/UserList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'User Approve',
+        url: '/UserDeviceRegList',
+        icon: 'icon-puzzle'
+      },
+      // {
+      //   name: 'User Group',
+      //   url: '/UserGroupList',
+      //   icon: 'icon-puzzle'
+      // },
     ]
 
   },

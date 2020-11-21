@@ -34,6 +34,8 @@ export class UserService {
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     checkLoginId(LoginId: string): Observable<CommonEntity> {
+        console.log(this.str +
+            '/User/getUserByLoginId?ouCode=' + this.env.OuCode + '&loginID=' + LoginId);
         return this.httpClient.get<CommonEntity>(this.str +
             '/User/getUserByLoginId?ouCode=' + this.env.OuCode + '&loginID=' + LoginId
             , this.env.httpOptions).pipe(catchError(this.handleError));

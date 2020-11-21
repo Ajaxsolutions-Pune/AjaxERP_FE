@@ -9,6 +9,7 @@
             <span style="color:#bdffce;font-size:18px;"> Map Toolbar</span>
           </div>  -->    
           <span>Map Toolbar</span>
+        
        </div> 
        
       </mat-panel-title>
@@ -47,8 +48,8 @@
                        formControlName=""
                        #txtAnswerID
                        name="">                   
-                   </mat-form-field>    
-                  </div>
+                   </mat-form-field>   
+                  </div> 
                    <table class="table table-responsive-sm table-hover table-outline mb-0">
                        <thead class="thead-light">
                          <tr>
@@ -57,19 +58,7 @@
                            <th>Count</th>                       
                          </tr>
                        </thead>
-                       <tbody>
-                         <tr>
-                           <td> </td>
-                           <td>
-                            <label>
-                              <input type="checkbox" [value]="Tower" (change)="onTowerChange($event)" />    
-                             Check All           
-                           </label>
-                           </td>
-                           <td>
-                                0
-                           </td>                      
-                         </tr>
+                       <tbody>                        
    
                          <tr>
                            <td>
@@ -77,12 +66,12 @@
                           </td>
                            <td>
                             <label>
-                              <input style="background-color: green;" type="checkbox" [value]="Tower" (change)="onTowerChange($event)" />    
+                              <input checked  type="checkbox"  [value]="Tower" (change)="onUserCheckInChange($event)" />    
                              Check In           
                            </label>
                            </td>
                            <td>
-                                0
+                                {{this.CheckIn}}
                            </td>                      
                          </tr>
    
@@ -92,12 +81,12 @@
                            </td>
                            <td>
                             <label>
-                              <input type="checkbox" [value]="Tower" (change)="onTowerChange($event)" />    
+                              <input checked type="checkbox" [value]="Tower" (change)="onUserCheckOutChange($event)" />    
                              Check Out           
                            </label>
                            </td>
                            <td>
-                                0
+                            {{this.CheckOut}}
                            </td>                      
                          </tr>
    
@@ -107,12 +96,12 @@
                           </td>
                            <td>
                             <label>
-                              <input type="checkbox" [value]="Tower" (change)="onTowerChange($event)" />    
+                              <input checked type="checkbox" [value]="Tower" (change)="onUserOfChange($event)" />    
                              Off           
                            </label>
                            </td>
                            <td>
-                                0
+                            {{this.Off}}
                            </td>                      
                          </tr>
    
@@ -122,17 +111,18 @@
                           </td>
                            <td>
                             <label>
-                              <input type="checkbox" [value]="Tower" (change)="onTowerChange($event)" />    
+                              <input checked type="checkbox" [value]="Tower" (change)="onUserInactiveChange($event)" />    
                              Inactive           
                            </label>
                            </td>
                            <td>
-                                0
+                            {{this.Inactive}}
                            </td>                      
                          </tr>
                        </tbody>
                      </table>
-                </div>           
+                </div>  
+                        
              </mat-tab>
      
            <mat-tab >
@@ -145,14 +135,20 @@
                 <li>
                   <label>
                      <input type="checkbox" [value]="Tower" (change)="onTowerChange($event)" />    
-                    Tower           
+                    Tower    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+                  </label>
+                  <label>
+                      {{this.TowerCount}}
                   </label>
                 </li>
                 <li>
                   <label>
                     <input type="checkbox" [value]="Substation" (change)="onSubStationChange($event)" />    
-                   Sub Station           
+                   Sub Station     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
                   </label>
+                  <label >
+                    {{this.SubStationCount}}
+                </label>
                 </li>
               </ul>
              </div>           
@@ -166,7 +162,7 @@
                <div class="col-md-12 pull-left" style="padding-top:15px; background-color:#bde4e1">
                   
 
-            <ul style="list-style-type:none">
+           <ul style="list-style-type:none">
               <li>
                 <input id="ROADMAP" 
                 type="radio" 
@@ -180,8 +176,7 @@
                 <input id="SATELLITE" 
                 type="radio" 
                 value="SATELLITE" 
-                name="MAPTYPE" 
-                formControlName="Maptype" 
+                name="MAPTYPE"                 
                 (change)="changeMapType($event)">
                 <label for="SATELLITE">Satellite</label>
               </li>
@@ -189,16 +184,17 @@
                 <input id="HYBRID" 
                 type="radio" 
                 value="HYBRID" 
-                name="MAPTYPE" 
-                formControlName="Maptype" 
+                name="MAPTYPE"                
                 (change)="changeMapType($event)">
                 <label for="HYBRID ">Hybrid</label>    
               </li>
-            </ul>      
+            </ul>    
             </div>           
-          </mat-tab> 
+          </mat-tab>           
         </mat-tab-group>        
       </div>
+      <button  mat-raised-button color="primary" style="width:200px;margin-top:5px;" 
+  (click)="AutoRefreshStart()">Auto Refresh In  : {{this.Count}} Seconds</button>
   </mat-expansion-panel> 
 </mat-accordion>
 </div>

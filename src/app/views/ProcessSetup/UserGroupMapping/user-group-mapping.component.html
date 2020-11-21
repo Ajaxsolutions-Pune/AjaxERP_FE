@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-4"></div>
   <mat-form-field class="col-md-4">
-    <mat-label>Device</mat-label>
+    <mat-label>User Group</mat-label>
     <mat-select required [(ngModel)]="userGroupId" (selectionChange)="DeviceChange($event)">
       <mat-option *ngFor="let userGroup of userGroupObj" [value]="userGroup.userGroupId">
         {{userGroup.userGroupId}} - {{userGroup.groupName}}

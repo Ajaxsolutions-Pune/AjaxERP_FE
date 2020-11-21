@@ -1,7 +1,7 @@
 
-<span class="clearfix"></span>
+    
+<div class="row">  
 
-<div class="row">
   <div class="col-sm-2 col-xs-6">
     <div style="border-left: solid 10px #2ff563;" class="dashboard-main">            
             <span class="headline">Check In</span>           
@@ -51,9 +51,13 @@
   </div>
 </div>
 
-   
-    <div style="margin-top: 50px;"></div>
 
+   
+<div style="margin-top: 25px;"></div>
+
+<button  mat-raised-button color="primary" style="width:200px;margin-bottom: 10px;" 
+  (click)="AutoRefreshStart()">Auto Refresh In  : {{this.Count}} Seconds</button>
+  <div style="margin-top: 25px;"></div>
 
 <div style="border:solid 1px #5e60d6">
     <mat-tab-group  dynamicHeight>
@@ -254,10 +258,10 @@
     </mat-tab-group>
   </div>
 
-
   <div class="col-md-12" style="margin-top:50px">
+
     <div class="row"> 
-    <table class="table table-responsive table-bordered" style="background-color:white;" >
+      <table class="table table-responsive table-bordered" style="background-color:white;" >
       <thead style="background-color: #bdffce;">
         <tr>                   
           <th scope="col">Login Id</th>
@@ -349,8 +353,7 @@
         </td> 
         <td>
           <div>{{realTimeTrackingData.appType}}</div>
-        </td> 
-           
+        </td>            
        </tr>   
       </tbody>
     </table>    
