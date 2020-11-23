@@ -15,7 +15,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  
+
   <style>
     .errorMessage{
        color: red;
@@ -45,32 +45,36 @@
   var UserOff_Markers = [];
   var UserInactive_Markers = [];
 
-
-
   function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map ) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang);     
     if(Status === 'Check In')
     {
        UserCheckIn_Marker = new google.maps.Marker({
-        position: myLatlng2,
-        icon: iconBase + 'Mobile_CheckIn.png',
-        map: map,
-        title: "User Code : " +  UserCode + 
+      position: myLatlng2,
+      // icon: iconBase + 'Mobile_CheckIn.png',      
+      icon: {                
+              url: '../../../assets/img/Content/Mobile_CheckIn.png',               
+            },
+      map: map,
+      title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
              "--status : " +  Status  + 
              "--Battery : " +  Battery + 
              "--Speed : " + Speed + 
              "--Last Update : " +  LastUpdate   + 
              "--Location : " + Location   
-        });    
-        UserCheckIn_Marker.setMap(map);     
-        UserCheckIn_Markers.push(UserCheckIn_Marker);    
+      });    
+      UserCheckIn_Marker.setMap(map);     
+      UserCheckIn_Markers.push(UserCheckIn_Marker);    
     }    
     if(Status === 'Check Out')
     {
       UserCheckOut_Marker = new google.maps.Marker({
         position: myLatlng2,
-        icon: iconBase + 'Mobile_CheckOut.png',
+        //icon: iconBase + 'Mobile_CheckOut.png',
+        icon: {                
+              url: '../../../assets/img/Content/Mobile_CheckOut.png',               
+            },
         map: map,
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -87,7 +91,10 @@
     {
       UserInactive_Marker = new google.maps.Marker({
         position: myLatlng2,
-        icon: iconBase + 'Mobile_Inactive.png',
+        //icon: iconBase + 'Mobile_Inactive.png',
+        icon: {                
+              url: '../../../assets/img/Content/Mobile_Inactive.png',               
+            },
         map: map,
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -104,7 +111,10 @@
     {
       UserOff_Marker = new google.maps.Marker({
         position: myLatlng2,
-        icon: iconBase + 'Mobile_Off.png',
+        //icon: iconBase + 'Mobile_Off.png',
+        icon: {                
+              url: '../../../assets/img/Content/Mobile_Off.png',               
+            },
         map: map,
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -126,7 +136,10 @@
       if(placeGroupCode === '2'){
         TowerMarker = new google.maps.Marker({
         position: myLatlng2,
-        icon: iconBase + 'Tower.jpg',
+        //icon: iconBase + 'Tower.jpg',
+        icon: {                
+              url: '../../../assets/img/Content/Tower.jpg',               
+            },
         map: map,
         title: "Tower Name : " +  AssetName + 
              "--Place Group Name : " +  PlaceGroupName  +           
@@ -143,7 +156,10 @@
       if(placeGroupCode === '3'){
         SubStationMarker = new google.maps.Marker({
         position: myLatlng2,
-        icon: iconBase + 'SubStation-Icon.png',
+        //icon: iconBase + 'SubStation-Icon.png',
+        icon: {                
+              url: '../../../assets/img/Content/SubStation-Icon.png',               
+            },
         map: map,
         title: "Sub Station Name : " +  AssetName + 
              "--Place Group Name : " +  PlaceGroupName  +           
@@ -202,8 +218,7 @@
     if(UserType === 'Off')
     {               
       for (i = 0; i < UserOff_Markers.length; i++)
-      {
-        
+      {        
         var marker = UserOff_Markers[i];
         if (!marker.getVisible()) {
           marker.setVisible(true);
@@ -242,7 +257,6 @@
     }
   }
   </script>
-
 
 </head>
 <body class="app">

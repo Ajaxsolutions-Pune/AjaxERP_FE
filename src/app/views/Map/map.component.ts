@@ -306,7 +306,6 @@ export class MapComponent implements OnInit {
     myMapUserHideFunction('Inactive');
   }
 
-
   createMap()
   {
     const myLatlng = new google.maps.LatLng(this.userDetailObj[0]['latitude'],this.userDetailObj[0]['longitude']);
