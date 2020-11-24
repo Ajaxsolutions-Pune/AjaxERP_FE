@@ -48,13 +48,14 @@
   function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map ) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang);     
     if(Status === 'Check In')
-    {
+    {     
+      var ico = new google.maps.MarkerImage("../../../assets/img/Content/Mobile_CheckIn.png")
        UserCheckIn_Marker = new google.maps.Marker({
       position: myLatlng2,
       // icon: iconBase + 'Mobile_CheckIn.png',      
-      icon: {                
-              url: '../../../assets/img/Content/Mobile_CheckIn.png',               
-            },
+      icon: ico ,//{                
+            //  url: '../../../assets/img/Content/Mobile_CheckIn.png',               
+            //},
       map: map,
       title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -69,12 +70,13 @@
     }    
     if(Status === 'Check Out')
     {
+      var ico = new google.maps.MarkerImage("https://webdevtrick.com/wp-content/uploads/location.png")
       UserCheckOut_Marker = new google.maps.Marker({
         position: myLatlng2,
         //icon: iconBase + 'Mobile_CheckOut.png',
-        icon: {                
-              url: '../../../assets/img/Content/Mobile_CheckOut.png',               
-            },
+        icon: ico,// {                
+              //url: '../../../assets/img/Content/Mobile_CheckOut.png',               
+            //},
         map: map,
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
