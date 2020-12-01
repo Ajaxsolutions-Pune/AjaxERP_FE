@@ -28,6 +28,7 @@ export class ProcessAddDialogComponent implements OnInit {
   processObj: Process[];
   formObj: FormObj[];
   objformIdText: string;
+  formVal: boolean;
 
 
   constructor(public dialogRef: MatDialogRef<ProcessAddDialogComponent>,
@@ -46,6 +47,7 @@ export class ProcessAddDialogComponent implements OnInit {
       value: item.id,
       text: item.name
     };
+    this.formVal = false;
     this.data.formId = selectedData.value;
     this.objformIdText = selectedData.text;
     // alert(this.data1.questionId);
@@ -62,7 +64,7 @@ export class ProcessAddDialogComponent implements OnInit {
   ]);
 
   ngOnInit() {
-
+    this.formVal = true;
     this.formService.fillDrpForms().subscribe(
       (par) => {
         this.formObj = this.formTransfarmer.fTransfarmers(par)

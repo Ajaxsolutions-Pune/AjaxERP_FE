@@ -17,7 +17,8 @@
           <div class="row">
             <div class="input-container">
               <ng-autocomplete [data]="dataquestionsObj" #auto (selected)='selectEvent($event)'
-                [searchKeyword]="keyword" [initialValue]="data.questionIdText" placeHolder="Select Question"
+                [searchKeyword]="keyword" [initialValue]="data.questionIdText"
+                 placeHolder="Select Question *"
                 id="autocomplete" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
               </ng-autocomplete>
               <ng-template #itemTemplate let-item>
@@ -65,7 +66,8 @@
           <div class="row">
             <div class="input-container">
               <ng-autocomplete [data]="dataanswersObj" #auto (selected)='answersselectEvent($event)'
-                [searchKeyword]="keyword" [initialValue]="data.answerIdText" placeHolder="Select Answer"
+                [searchKeyword]="keyword" [initialValue]="data.answerIdText"
+                 placeHolder="Select Answer *"
                 id="autocomplete" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
               </ng-autocomplete>
               <ng-template #itemTemplate let-item>
@@ -126,7 +128,8 @@
           <div class="row">
             <div class="input-container">
               <ng-autocomplete [data]="dataNextFormObj" #auto (selected)='NextFormselectEvent($event)'
-                [searchKeyword]="keyword" [initialValue]="data.nextFormIdText" placeHolder="Select Form"
+                [searchKeyword]="keyword" [initialValue]="data.nextFormIdText"
+                 placeHolder="Select Form *"
                 id="autocomplete" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
               </ng-autocomplete>
               <ng-template #itemTemplate let-item>

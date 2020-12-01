@@ -90,6 +90,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
     this.refreshTable();
     this.processformMappingService.getProcessFormMapping(selectedData.value).subscribe(
       (par) => {
+        console.log();
         this.objProcessFormMapping = this.processFormMappingTransfarmer.
           ProcessFormMappingTransfarmers(par);
         this.objProcessFormMapping.forEach(a => {

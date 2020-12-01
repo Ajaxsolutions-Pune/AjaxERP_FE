@@ -14,6 +14,7 @@ import { FormObj } from '../../../../../Components/Module/Masters/Form.model';
 import { FormQueAnsMapping } from '../../../../../Components/Module/ProcessSetup/FormQueAnsMapping.model';
 import { GlobalService } from '../../../../../Components/Services/GlobalServices/Global.service';
 import { CustomComboBox } from '../../../../../Components/Module/GlobalModule/CustomComboBox.model';
+import { DefaultLayoutComponent } from '../../../../../containers';
 
 @Component({
   selector: 'app-add.dialog',
@@ -29,6 +30,10 @@ export class AddDialogComponent implements OnInit {
   objnextFormIdText: string;
   objquestionIdText: string;
   objanswerIdText: string;
+  errormsg: string;
+  quetionValFlag: boolean;
+  ansValFlag: boolean;
+  nextFormValFlag: boolean;
 
   dataquestionsObj: CustomComboBox[];
   dataAnswersObj: CustomComboBox[];
@@ -41,6 +46,7 @@ export class AddDialogComponent implements OnInit {
       value: item.id,
       text: item.name
     };
+    this.quetionValFlag = false;
     this.data1.questionId = selectedData.value;
     this.objquestionIdText = selectedData.text;
     // alert(this.data1.questionId);
@@ -53,6 +59,7 @@ export class AddDialogComponent implements OnInit {
     };
     this.data1.answerId = selectedData.value;
     this.objanswerIdText = selectedData.text;
+    this.ansValFlag = false;
     // alert(this.data1.questionId);
   }
 
@@ -61,6 +68,7 @@ export class AddDialogComponent implements OnInit {
       value: item.id,
       text: item.name
     };
+    this.nextFormValFlag = false;
     this.data1.nextFormId = selectedData.value;
     this.objnextFormIdText = selectedData.text;
     // alert(this.data1.questionId);
@@ -69,6 +77,7 @@ export class AddDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data1: FormQueAnsMapping,
     private questionsService: QuestionService,
+    private defaultLayoutComponent: DefaultLayoutComponent,
     private questionsTransfarmer: QuestionTransfarmer,
     private answersService: AnswerService,
     private globalService: GlobalService,
@@ -89,6 +98,9 @@ export class AddDialogComponent implements OnInit {
     // Validators.email,
   ]);
   ngOnInit() {
+    this.quetionValFlag = true;
+    this.ansValFlag = true;
+    this.nextFormValFlag = true;
     this.questionsService.fillDrpQuestions().subscribe(
       (par) => {
         this.questionsObj = this.questionsTransfarmer.QuestionTransfarmers(par);
@@ -135,6 +147,12 @@ export class AddDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  closePanel(e): void {
+    console.log(e);
+    e.stopPropagation();
+    this.auto.close();
+  }
+
   NextFormChange(event) {
     const target = event.source.selected._element.nativeElement;
     const selectedData = {
@@ -163,6 +181,20 @@ export class AddDialogComponent implements OnInit {
   }
 
   public confirmAdd(): void {
+    if (this.data1.questionId == undefined) {
+      this.errormsg = 'Question required';
+      // this.defaultLayoutComponent.Massage('Technical Error Please connect to Ajax Support team',
+      //   'Please select form name', 'modal-danger');
+      return;
+    }
+    if (this.data1.nextFormId == undefined) {
+      alert('Next Form required');
+      return;
+    }
+    if (this.data1.answerId == undefined) {
+      alert('Answer required');
+      return;
+    }
     this.data1.nextFormIdText = this.objnextFormIdText;
     this.data1.questionIdText = this.objquestionIdText;
     this.data1.answerIdText = this.objanswerIdText;

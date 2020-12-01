@@ -19,7 +19,8 @@ import { CustomComboBox } from '../../../../../Components/Module/GlobalModule/Cu
 
 export class DeviceAssetAddDialogComponent implements OnInit{ 
   asset: Asset[];  
-  objassetCodeText: string;    
+  objassetCodeText: string;   
+  assetVal: boolean;     
 
   constructor(public dialogRef: MatDialogRef<DeviceAssetAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DeviceAssetMapping,   
@@ -37,6 +38,7 @@ export class DeviceAssetAddDialogComponent implements OnInit{
       value: item.id,
       text: item.name
     };
+    this.assetVal = false
     this.data.assetCode = selectedData.value;
     this.objassetCodeText = selectedData.text;
     // alert(this.data1.questionId);
@@ -47,6 +49,7 @@ export class DeviceAssetAddDialogComponent implements OnInit{
   ]);
 
   ngOnInit() {       
+    this.assetVal = true
       this.assetService.fillDrpAssets().subscribe(
         (par) => {
           

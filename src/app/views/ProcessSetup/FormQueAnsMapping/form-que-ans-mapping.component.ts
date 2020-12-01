@@ -288,7 +288,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
         fqamId: fqamId,
         questionId: questionId, isQuestionMandatory: isQuestionMandatory,
         formQueSeqNo: formQueSeqNo, answerId: answerId, answerIdText: answerText,
-        objquestionIdText:questionIdText,
+        questionIdText:questionIdText,
         queGroup: queGroup,
         nextQueGroup: nextQueGroup,
         nextFormId: nextFormId, nextFormIdText: nextFormText,

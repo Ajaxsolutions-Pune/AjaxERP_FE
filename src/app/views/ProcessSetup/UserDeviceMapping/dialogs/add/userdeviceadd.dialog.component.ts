@@ -20,6 +20,7 @@ import { CustomComboBox } from '../../../../../Components/Module/GlobalModule/Cu
 export class UserDeviceAddDialogComponent implements OnInit{ 
   user: User[];  
   objloginIdText: string;    
+  loginVal: boolean;    
 
   dataUserObj: CustomComboBox[];
   @ViewChild('auto', null) auto: any;
@@ -30,6 +31,7 @@ export class UserDeviceAddDialogComponent implements OnInit{
       value: item.id,
       text: item.name
     };
+    this.loginVal = false;
     this.data.loginId = selectedData.value;
     this.objloginIdText = selectedData.text;
     // alert(this.data1.questionId);
@@ -54,6 +56,7 @@ export class UserDeviceAddDialogComponent implements OnInit{
 
   }
   ngOnInit() {   
+    this.loginVal = true;
     this.userService.fillDrpUsers().subscribe(
       (par) =>{
 
