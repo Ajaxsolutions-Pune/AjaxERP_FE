@@ -11,18 +11,15 @@
   <title>JBS Enterpeises Pvt Ltd.</title>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvO0AHfg1cuND1KXbw3t5xZr5p4PVrEk4"></script>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap" rel="stylesheet">
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-
   <style>
     .errorMessage{
        color: red;
      }
      .has-error .form-control{
     border-color: lightcoral !important;
- }
+    }
   </style>
 
 <script>
@@ -30,20 +27,18 @@
   //var UserMarker;
   var TowerMarker;
   var SubStationMarker;
-
   var UserCheckIn_Marker;
   var UserCheckOut_Marker;
   var UserOff_Marker;
-  var UserInactive_Marker;
-
-  //var UserMarkers = [];
+  var UserInactive_Marker; 
   var TowerMarkers = [];
   var SubStationMarkers = [];
-
   var UserCheckIn_Markers = [];
   var UserCheckOut_Markers = [];
   var UserOff_Markers = [];
   var UserInactive_Markers = [];
+  var coords = [];
+  var mapnew;
 
   function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map ) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang);     
@@ -51,8 +46,7 @@
     {     
       var ico = new google.maps.MarkerImage("../../../assets/img/Content/Mobile_CheckIn.png")
        UserCheckIn_Marker = new google.maps.Marker({
-      position: myLatlng2,
-      // icon: iconBase + 'Mobile_CheckIn.png',      
+      position: myLatlng2,         
       icon: ico ,//{                
             //  url: '../../../assets/img/Content/Mobile_CheckIn.png',               
             //},
@@ -70,7 +64,7 @@
     }    
     if(Status === 'Check Out')
     {
-      var ico = new google.maps.MarkerImage("https://webdevtrick.com/wp-content/uploads/location.png")
+      var ico = new google.maps.MarkerImage("https://webdevtrick.com/wp-content/uploads/location.png")      
       UserCheckOut_Marker = new google.maps.Marker({
         position: myLatlng2,
         //icon: iconBase + 'Mobile_CheckOut.png',
@@ -128,7 +122,7 @@
         });    
         UserOff_Marker.setMap(map);     
         UserOff_Markers.push(UserOff_Marker); 
-    }
+      }
   } 
   
   //google map create asset markers
@@ -140,7 +134,7 @@
         position: myLatlng2,
         //icon: iconBase + 'Tower.jpg',
         icon: {                
-              url: '../../../assets/img/Content/Tower.jpg',               
+              url: '../../../assets/img/Content/Tower.png',               
             },
         map: map,
         title: "Tower Name : " +  AssetName + 
@@ -153,6 +147,7 @@
         TowerMarker.setMap(map);  
         TowerMarker.setVisible(false);
         TowerMarkers.push(TowerMarker);   
+        coords.push(myLatlng2);
       }
 
       if(placeGroupCode === '3'){
@@ -172,17 +167,31 @@
         });    
         SubStationMarker.setMap(map);  
         SubStationMarker.setVisible(false);
-        SubStationMarkers.push(SubStationMarker);   
-      }      
+        SubStationMarkers.push(SubStationMarker);          
+      }     
+
+      mapnew = map;
   }
+
+  function CreateTransmissionLine()
+  {    
+    /*var line= new google.maps.Polyline({
+      path: coords,
+      geodesic: true,
+      strokeColor: '#FF0000',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+      });
+      line.setMap(mapnew);*/
+  }
+
 
   //google map user hide 
   function myMapUserHideFunction(UserType) {    
     if(UserType === 'Check In')
     {                 
       for (i = 0; i < UserCheckIn_Markers.length; i++)
-      {
-            
+      {            
         var marker = UserCheckIn_Markers[i];
         if (!marker.getVisible()) {
           marker.setVisible(true);
@@ -194,8 +203,7 @@
     if(UserType === 'Check Out')
     {            
       for (i = 0; i < UserCheckOut_Markers.length; i++)
-      {
-         
+      {         
         var marker = UserCheckOut_Markers[i];
         if (!marker.getVisible()) {
           marker.setVisible(true);
@@ -207,8 +215,7 @@
     if(UserType === 'Inactive')
     {                 
       for (i = 0; i < UserInactive_Markers.length; i++)
-      {
-        
+      {        
         var marker = UserInactive_Markers[i];
         if (!marker.getVisible()) {
           marker.setVisible(true);
@@ -217,7 +224,7 @@
         }
       }
     }
-    if(UserType === 'Off')
+    if(UserType === 'Off') 
     {               
       for (i = 0; i < UserOff_Markers.length; i++)
       {        
@@ -243,7 +250,7 @@
         } else {
           marker.setVisible(false);
         }
-      }
+      } 
     }
     if(AssetType === "SubStation")
     {
@@ -258,7 +265,7 @@
       }
     }
   }
-  </script>
+</script>
 
 </head>
 <body class="app">

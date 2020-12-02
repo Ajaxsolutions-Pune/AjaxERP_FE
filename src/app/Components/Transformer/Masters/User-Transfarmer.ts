@@ -104,6 +104,9 @@ export class UserTransfarmer {
     }
 
     UserTransfarmer(User1: User): UserEntity {
+
+        console.log(User1);
+
         this.userEntity = new UserEntity();
         this.userEntity.id = User1.id;
         this.userEntity.ouCode = this.env.OuCode;

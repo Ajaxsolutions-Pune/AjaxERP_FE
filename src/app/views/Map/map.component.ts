@@ -2,32 +2,23 @@ import { ArrayType, sharedStylesheetJitUrl } from '@angular/compiler';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as alasql from 'alasql';
-import { map } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Script } from 'vm';
 alasql['private'].externalXlsxLib = require('xlsx');
 import { environment } from '../../Components/Module/environment';
-//import { MapModel } from '../../Components/Module/Masters/Map.model';
-//import { dashboard,bottomDistance, topDistance, topPlacesTagged,bottomPlacesTagged,topForm,
-//  bottomForm,topPlacesVisit,bottomPlacesVisit,
-//  realTimeTrackingData,places} from '../../Components/Module/Masters/Dashboard.model';
-
 import{mapModel,placeSummery,placeDetail,userSummery,userDetail} from '../../Components/Module/Masters/Map.model';
 import{MapService} from '../../Components/Services/Masters/MapService';
-//import { DashboardService } from '../../Components/Services/Masters/DashboardService';
 
 //temp
 import { Answer,AnswerEntity } from '../../Components/Module/Masters/Answer.model';
 
-declare var jQuery: any;
 declare var google: any;
-declare var myMap: any;
 declare var myMapFunction: Function;
 declare var myMapAssetFunction : Function; 
 declare var myMapAssetHideFunction : Function;
 declare var myMapUserHideFunction : Function;
-
+declare var CreateTransmissionLine : Function;
 declare var dragElement: Function;
-
 
 @Component({
   selector: 'app-map',  
@@ -35,21 +26,11 @@ declare var dragElement: Function;
   styleUrls: ['./map.component.css']  
 })
 
-
-/*type MyArrayType = Array<{id: number, text: string}>;
-const arr: MyArrayType = [
-    {id: 1, text: 'Sentence 1'},
-    {id: 2, text: 'Sentence 2'},
-    {id: 3, text: 'Sentence 3'},
-    {id: 4, text: 'Sentenc 4'},
-];*/
-
-
 export class MapComponent implements OnInit {
   //@Input() FormInput: map;  
+  form!: FormGroup;
   config: any;
-  env = environment;
-  //mapObject: MapModel[];
+  env = environment;  
   lat: number = 0;
   lng: number = 0;
   id : any;
@@ -61,24 +42,16 @@ export class MapComponent implements OnInit {
   AssetType: string = "Tower";
   Checked : string = "false";
 
-  /*dashboardObj: dashboard;
-  topDistanceObj: topDistance[];
-  bottomDistanceObj: bottomDistance[];
-  topPlacesTaggedObj: topPlacesTagged[];
-  bottomPlacesTaggedObj: bottomPlacesTagged[];
-  topFormObj: topForm[];
-  bottomFormObj: bottomForm[];
-  topPlacesVisitObj: topPlacesVisit[];
-  bottomPlacesVisitObj: bottomPlacesVisit[];
-  realTimeTrackingDataObj: realTimeTrackingData[];
-  placesObj : places[];*/
+  UserName_Search : string = "";
 
   mapModelObj : mapModel;
   placeSummeryObj : placeSummery[];
   placeDetailObj : placeDetail[];
   userSummaryObj : userSummery[];
   userDetailObj : userDetail[];
+  ResultUser: userDetail[];
 
+  map;
   TowerCount : string = "0";
   SubStationCount : string = "0";
 
@@ -86,26 +59,25 @@ export class MapComponent implements OnInit {
   CheckOut : string = "0";
   Off : string = "0";
   Inactive : string = "0";
-
   polling: any;
 
   answer = Answer;
   constructor(private _router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute,   
     //private dashboardService: DashboardService,
-    private mapService : MapService
+    private mapService : MapService,
+    private router: Router, private formBuilder: FormBuilder,
     ) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href = 'login';
     }
-
+    this.ResultUser = this.userDetailObj;
     this.config = {
       itemsPerPage: this.env.paginationPageSize,
       currentPage: 1,
       //totalItems: this.forms.length
     }; 
   } 
-
   AutoRefreshStart(): void {   
     this.Count = 60;
     if(this.isAutoRefresh === 0)
@@ -136,83 +108,52 @@ export class MapComponent implements OnInit {
     }
   }
 
+  SearchUser(value): void {       
+    this.UserName_Search = value;     
+    this.ResultUser = this.userDetailObj;
+    if (this.UserName_Search !== null && this.UserName_Search !== '') {
+      this.ResultUser = this.ResultUser.filter(SubResult =>
+          SubResult.userNameENG.toLowerCase().indexOf(this.UserName_Search.toString().toLowerCase()) !== -1);
+        }        
+      if(this.ResultUser.length !== 0)
+      {          
+        this.map.setCenter({
+          lat : Number(this.ResultUser[0]['latitude']) ,
+          lng : Number(this.ResultUser[0]['longitude']) ,
+          zoom : 25
+        });        
+        
+      }
+  }        
+
   ngOnInit() {    
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href = 'login';
     }
-    this.MapLoad();       
+    this.MapLoad();        
+    this.route.paramMap.subscribe(parameterMap => 
+      {
+      this.form = this.formBuilder.group({
+        ControlSearchUser: ['', []],     
+      });     
+    }); 
   }
-
 
   MapLoad()
   {
     this.mapModelObj
     this.mapModelObj = {
-      placeSummery: [],
+      placeSummery:[],
       placeDetail:[],
       userSummery:[],
       userDetail:[]
-    };
-
-    /*this.dashboardObj
-    this.dashboardObj = {
-      dashboardCount: null,
-      bottomDistance: [],
-      topDistance: [],
-      topPlacesTagged : [],
-      bottomPlacesTagged: [],
-      topForm:[],
-      bottomForm:[],
-      topPlacesVisit:[],
-      bottomPlacesVisit:[],
-      realTimeTrackingData:[],
-      places:[]
-    };
-    this.dashboardObj.dashboardCount = {
-      checkIn: null,
-      checkOut: null,
-      idle: null,
-      inactive: null,
-      leave: null,
-      total: null,
-    }
-
-    this.topDistanceObj = [];
-    this.bottomDistanceObj = [];
-    this.topPlacesTaggedObj= [];
-    this.bottomPlacesTaggedObj= [];
-    this.topFormObj = [];
-    this.bottomFormObj = [];
-    this.topPlacesVisitObj = [];
-    this.bottomPlacesVisitObj = [];
-    this.realTimeTrackingDataObj = [];
-    this.placesObj = [];*/
+    };    
 
     this.placeSummeryObj = [];
     this.placeDetailObj = [];
     this.userSummaryObj = [];
-    this.userDetailObj = [];
-  
-    //User data from dashboard service
-    /*this.dashboardService.getDashboardData().subscribe(t => {
-      this.dashboardObj = t;
-      this.topDistanceObj = this.dashboardObj.topDistance;
-      this.bottomDistanceObj = this.dashboardObj.bottomDistance;
-      this.topPlacesTaggedObj = this.dashboardObj.topPlacesTagged;
-      this.bottomPlacesTaggedObj= this.dashboardObj.bottomPlacesTagged;
-      this.topFormObj = this.dashboardObj.topForm;
-      this.bottomFormObj = this.dashboardObj.bottomForm;
-      this.topPlacesVisitObj = this.dashboardObj.topPlacesVisit;
-      this.bottomPlacesVisitObj = this.dashboardObj.bottomPlacesVisit;
-      this.realTimeTrackingDataObj = this.dashboardObj.realTimeTrackingData;    
-      this.placesObj = this.dashboardObj.places;     
-      
-      if(this.userDetailObj.length > 0 ) //!= []
-      {      
-        this.createMap();
-      }    
-    });*/
-
+    this.userDetailObj = [];  
+   
     //Asset data from map service
     this.mapService.getMapData().subscribe(t => {
       this.mapModelObj = t;
@@ -220,6 +161,7 @@ export class MapComponent implements OnInit {
       this.placeDetailObj = this.mapModelObj.placeDetail;   
       this.userSummaryObj = this.mapModelObj.userSummery;
       this.userDetailObj = this.mapModelObj.userDetail;
+      this.ResultUser = this.userDetailObj;
 
       if(this.userDetailObj.length > 0 ) //!= []
       {      
@@ -263,10 +205,8 @@ export class MapComponent implements OnInit {
             }           
         }   
       }
-
     }); 
   }
-
 
   changeMapType(e) {
     //console.log(e.target.value);
@@ -283,8 +223,6 @@ export class MapComponent implements OnInit {
   {
     myMapAssetHideFunction('SubStation');
   }
-
-  
 
   onUserCheckInChange(e)
   {
@@ -312,21 +250,21 @@ export class MapComponent implements OnInit {
     const iconBase = '../../../assets/img/Content/';
     const mapProp= {         
       center:myLatlng,      
-      zoom:12,          
+      zoom:15,          
     };    
-    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);          
+    this.map = new google.maps.Map(document.getElementById("googleMap"),mapProp);          
     
     if(this.MapType === 'SATELLITE')
     {
-      map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+      this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
     }
     else if(this.MapType === 'HYBRID')
     {
-      map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+      this.map.setMapTypeId(google.maps.MapTypeId.HYBRID);
     }
     else if(this.MapType === 'ROADMAP')
     {
-      map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+      this.map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
     }
 
     //user    
@@ -340,8 +278,10 @@ export class MapComponent implements OnInit {
       var Speed =  this.userDetailObj[i]['speed'] ;
       var LastUpdate = ""; //this.realTimeTrackingDataObj[i]['dateTime'];
       var Location = this.userDetailObj[i]['googleAddress'];                
-    myMapFunction(lat,lang,UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map);  
+    myMapFunction(lat,lang,UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,this.map);  
     }
+
+     
     
     //Asset    
     for (var i=0; i < this.placeDetailObj.length; i++) {    
@@ -354,7 +294,12 @@ export class MapComponent implements OnInit {
       var StateName =  this.placeDetailObj[i]['stateName'];
       var PinCode =  this.placeDetailObj[i]['pinCode'] ;      
       var Location = this.placeDetailObj[i]['location'];                  
-    myMapAssetFunction(placeGroupCode,lat,lang, PlaceGroupName,AssetName,Location,PlaceAddress,iconBase,StateName,PinCode,map);
+      myMapAssetFunction(placeGroupCode,lat,lang, PlaceGroupName,AssetName,
+      Location,PlaceAddress,iconBase,StateName,PinCode,this.map);
     }    
+
+    //Create transmission line
+    CreateTransmissionLine(); 
+
   }
 }
