@@ -15,8 +15,10 @@
         <div class="ng-autocompletein">
           <div class="row">
             <div class="input-container">
-              <ng-autocomplete [data]="dataUserObj" #auto (selected)='selectEvent($event)' [searchKeyword]="keyword"
-                placeHolder="Select Users" id="autocomplete" [itemTemplate]="itemTemplate"
+              <ng-autocomplete [data]="dataUserObj" #auto
+               (selected)='selectEvent($event)' [searchKeyword]="keyword"
+                placeHolder="Select Users *" id="autocomplete"
+                 [itemTemplate]="itemTemplate"
                 [notFoundTemplate]="notFoundTemplate">
               </ng-autocomplete>
               <ng-template #itemTemplate let-item>
@@ -67,7 +69,7 @@
    
     <div mat-dialog-actions>
       <button mat-raised-button [type]="submit" 
-      [disabled]="!formControl.valid" [mat-dialog-close]="1"
+      [disabled]="loginVal || !formControl.valid" [mat-dialog-close]="1"
       (click)="confirmAdd()"
           color="primary">Save</button>
           <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">

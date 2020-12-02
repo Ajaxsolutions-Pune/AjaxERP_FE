@@ -2,8 +2,7 @@
     <h3 mat-dialog-title>Add New Process Form Mapping</h3>
   
     <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" autocomplete="off">
-  
-      <div class="form">
+  <div class="form">
         <mat-form-field color="accent">
           <input matInput #pfmId class="form-control" placeholder="Id" 
           disabled
@@ -18,8 +17,10 @@
     <div class="ng-autocompletein">
       <div class="row">
         <div class="input-container">
-          <ng-autocomplete [data]="dataFormObj" #auto (selected)='selectEvent($event)' [searchKeyword]="keyword"
-            placeHolder="Select Form" id="autocomplete" [itemTemplate]="itemTemplate"
+          <ng-autocomplete [data]="dataFormObj" #auto (selected)='selectEvent($event)'
+           [searchKeyword]="keyword"
+            placeHolder="Select Form *" id="autocomplete" 
+            [itemTemplate]="itemTemplate"
             [notFoundTemplate]="notFoundTemplate">
           </ng-autocomplete>
           <ng-template #itemTemplate let-item>
@@ -74,7 +75,7 @@
      
       <div mat-dialog-actions>
         <button mat-raised-button [type]="submit" 
-        [disabled]="!formControl.valid" [mat-dialog-close]="1"
+        [disabled]="formVal || !formControl.valid" [mat-dialog-close]="1"
         (click)="confirmAdd()"
             color="primary">Save</button>
             <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
