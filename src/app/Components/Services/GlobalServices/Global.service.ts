@@ -73,6 +73,10 @@ export class GlobalService {
                  let dataType = response.type;
                  let binaryData = [];
                  binaryData.push(response);
+                 if(binaryData[0].size<=0){
+                    alert("No Data Found");
+                    return;
+                 }
                  let downloadLink = document.createElement('a');
                  downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
                  if (true)
