@@ -111,19 +111,11 @@ export const navItems: NavData[] = [
         url: '/HubList',
         icon: 'icon-puzzle'
       },
-<<<<<<< HEAD
      {
          name: 'Country',
          url: '/CountryList',
          icon: 'icon-puzzle'
       },
-=======
-      // { 
-      //   name: 'Country',
-      //   url: '/CountryList',
-      //   icon: 'icon-puzzle'
-      // },
->>>>>>> dca983933a5c8289d0b1394f62cfc9124c4b692c
       // {
       //   name: 'State',
       //   url: '/StateList',
