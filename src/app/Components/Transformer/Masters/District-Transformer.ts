@@ -4,8 +4,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { State } from '../../Module/Masters/State.model';
 import { StateEntity } from '../../Module/Masters/StateEntity.model';
+import { DistrictEntity } from '../../Module/Masters/District.Entity.model';
 import { District } from '../../Module/Masters/District';
-import { DistrictEntity } from '../../Module/Masters/DistrictEntity.model';
 
 @Injectable()
 export class DistrictTransfarmer {
@@ -20,13 +20,22 @@ export class DistrictTransfarmer {
     ListState: State[];
     DistrictTransfarmers(Entity: DistrictEntity[]): District[] {
         // this.states = new State()[Entity.length + 1];
+        this.districts = [];
         Entity.forEach(element => {
             this.district = new District();
             this.district.districtCode = element.districtCode;
-            this.district.districtNameUni = element.districtNameUni;
-            this.district.districtNameEng = element.districtName;
+            this.district.districtNameUni = element.districtNameUNI;
+            this.district.districtNameEng = element.districtNameENG;
             this.district.isActive = element.isActive;
+            this.district.createdBy = element.createdBy;
+            this.district.createdDate = element.createdDate;
+            this.district.modifiedBy = element.modifiedBy;
+            this.district.modifiedDate = element.modifiedDate;
             this.district.stateCode = element.stateCode;
+            //this.districts.push(this.district);
+            if (element.isActive === '1') {
+                this.district.isActive = 'Active'.toString().trim();
+            } else { this.district.isActive = 'Inactive'.toString().trim(); }
             this.districts.push(this.district);
         });
         return this.districts;
@@ -34,20 +43,34 @@ export class DistrictTransfarmer {
     DistrictTransfarmerEntity(Entity: DistrictEntity): District {
         this.district = new District();
             this.district.districtCode = Entity.districtCode;
-            this.district.districtNameEng = Entity.districtName;
-            this.district.districtNameUni = Entity.districtNameUni;
+            this.district.districtNameEng = Entity.districtNameENG;
+            this.district.districtNameUni = Entity.districtNameUNI;
             this.district.stateCode = Entity.stateCode;
+            this.district.createdBy = Entity.createdBy;
+            this.district.createdDate = Entity.createdDate;
+            this.district.modifiedBy = Entity.modifiedBy;
+            this.district.modifiedDate = Entity.modifiedDate;
             this.district.isActive = Entity.isActive;
-        return this.district;
+            if (Entity.isActive === '1') {
+                this.district.isActive = 'true'.toString().trim();
+            } else { this.district.isActive = ''.toString().trim(); }
+            return this.district;
     }
 
     DistrictTransfarmer(district: District): DistrictEntity {
         this.districtEntity = new DistrictEntity();
         this.districtEntity.districtCode = district.districtCode;
-        this.districtEntity.districtNameUni = district.districtNameUni;
+        this.districtEntity.districtNameENG = district.districtNameEng;
+        this.districtEntity.districtNameUNI = district.districtNameUni;
         this.districtEntity.isActive = district.isActive;
         this.districtEntity.stateCode = district.stateCode;
-        if (district.isActive === 'true') { this.district.isActive = '1'; } else { this.district.isActive = '1'; }
+        this.districtEntity.createdBy = district.createdBy;
+        this.districtEntity.createdDate = district.createdDate;
+        this.districtEntity.modifiedBy = district.modifiedBy;
+        this.districtEntity.modifiedDate = district.modifiedDate;
+        if (district.isActive.toString().trim() === 'true') {
+            this.districtEntity.isActive = '1';
+        } else { this.districtEntity.isActive = '0'; }
         return this.districtEntity;
     }
 }

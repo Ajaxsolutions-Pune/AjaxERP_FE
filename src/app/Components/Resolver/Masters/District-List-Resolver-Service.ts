@@ -5,7 +5,7 @@ import { Brand } from '../../Module/Masters/Brand.model';
 import { BrandService } from '../../Services/Masters/BrandService';
 import { DistrictService } from '../../Services/Masters/DistrictService';
 import { District } from '../../Module/Masters/District';
-import { DistrictEntity } from '../../Module/Masters/DistrictEntity.model';
+import { DistrictEntity } from '../../Module/Masters/District.Entity.model';
 
 @Injectable()
 

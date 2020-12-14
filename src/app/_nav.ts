@@ -111,21 +111,21 @@ export const navItems: NavData[] = [
         url: '/HubList',
         icon: 'icon-puzzle'
       },
-      // {
-      //   name: 'Country',
-      //   url: '/CountryList',
-      //   icon: 'icon-puzzle'
-      // },
+     {
+         name: 'Country',
+         url: '/CountryList',
+         icon: 'icon-puzzle'
+      },
       // {
       //   name: 'State',
       //   url: '/StateList',
       //   icon: 'icon-puzzle'
       // },
-      // {
-      //   name: 'District',
-      //   url: '/DistrictList',
-      //   icon: 'icon-puzzle'
-      // },
+      {
+         name: 'District',
+         url: '/DistrictList',
+         icon: 'icon-puzzle'
+      },
       // {
       //   name: 'Tehsil',
       //   url: '/TehsilList',

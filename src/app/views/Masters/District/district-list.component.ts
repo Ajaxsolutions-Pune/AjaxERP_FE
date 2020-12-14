@@ -1,9 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { District} from '../../../Components/Module/Masters/District';
 import { DistrictService } from '../../../Components/Services/Masters/DistrictService';
 import { DistrictTransfarmer } from '../../../Components/Transformer/Masters/District-Transformer';
-import { DistrictEntity } from '../../../Components/Module/Masters/DistrictEntity.model';
+import { environment } from '../../../Components/Module/environment';
+import * as alasql from 'alasql';
+import { DistrictEntity } from '../../../Components/Module/Masters/District.Entity.model';
+import { District } from '../../../Components/Module/Masters/District';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
   selector: 'app-district-list',
@@ -14,12 +17,12 @@ export class DistrictListComponent implements OnInit {
 
   districts: District[];
   districtEntity: DistrictEntity[];
-
-  WithoutFilterCitys: District[];
+  WithoutFilterDistricts: District[];
   Resultdistrict: District[];
   SerachCri: number;
   district: District;
-  WithoutFilterDistricts: any[];
+  config: { itemsPerPage: any; currentPage: number; totalItems: any; };
+  env= environment;
 
   constructor(private _router: Router,
     private districtService: DistrictService,
@@ -31,25 +34,31 @@ export class DistrictListComponent implements OnInit {
     this.districtEntity = this.route.snapshot.data['DistrictList'];
     this.districts = this.districtTransfarmer.DistrictTransfarmers(this.districtEntity);
     this.WithoutFilterDistricts = this.districts;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.districts.length
+    };
   }
-
   ngOnInit() {
-    this.districtService.getDistricts().subscribe(
-      (par) => this.districtEntity = par,
-      (err: any) => console.log(err));
-      this.districts = this.districtTransfarmer.DistrictTransfarmers(this.districtEntity);
       this.WithoutFilterDistricts = this.districts;
-    this.district = {
+     this.district = {
       ID: null,
       districtCode: null,
       districtNameEng: null,
       districtNameUni: null,
       stateCode: null,
-      isActive: '1',
-
+      isActive: '3',
+      createdBy:null,
+      createdDate:null,
+      modifiedBy:null,
+      modifiedDate:null,
+      sortBy:null,
     };
   }
-
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultdistrict = this.WithoutFilterDistricts;
@@ -57,20 +66,38 @@ export class DistrictListComponent implements OnInit {
       this.Resultdistrict = this.Resultdistrict.filter(SubResult =>
         SubResult.districtNameEng.toLowerCase().indexOf(this.district.districtNameEng.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
+      console.log('districtNameEng');
     }
     if (this.district.districtCode !== null && this.district.districtCode.toString() !== '') {
       this.Resultdistrict = this.Resultdistrict.filter(SubResult =>
         SubResult.districtCode.toString().toLowerCase().indexOf(this.district.districtCode.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
+    if (this.district.isActive !== null && this.district.isActive.toString() !== '-1') {
+      if (this.district.isActive.toString() === '3') {
+        this.Resultdistrict = this.Resultdistrict.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === 'Active' || SubResultProd.isActive.toString() === 'Inactive');
+      } else {
+        this.Resultdistrict = this.Resultdistrict.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === this.district.isActive.toString());
+      }
+      this.SerachCri = 1;
+      console.log('districtCode');
+      console.log(this.Resultdistrict);
+    }
     if (this.SerachCri === 0) {
       this.Resultdistrict = this.WithoutFilterDistricts;
     }
     this.districts = this.Resultdistrict;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.districts.length
+    };
   }
 
   ExportToExcel(): void {
-    alasql('SELECT Brand_Code,Brand_Id,Brand_Name_ENg,Brand_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("brandList.xlsx",{headers:true}) FROM ?', [this.districts]);
+    alasql('SELECT districtCode District_Code,districtNameEng District_Name,' +
+      'isActive Status INTO XLSX("districtList.xlsx",{headers:true}) FROM ?', [this.districts]);
   }
 }

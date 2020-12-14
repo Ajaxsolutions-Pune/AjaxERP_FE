@@ -1,4 +1,4 @@
-<form #districtForm="ngForm" (ngSubmit)="save(districtForm);" autocomplete="off">
+<form #countryForm="ngForm"[formGroup]="form" autocomplete="off">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
@@ -8,60 +8,94 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtDistrictCode">District Code</label>
-                            <div class="col-sm-4">
-                                <input id="txtDistrictCode" [(ngModel)]="district.districtCode" name="DistrictCode" type="text"
-                                    class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="District Code "
+                                [(ngModel)]="district.districtCode"
+                                formControlName="ControldistrictCode"
+                                #txtControlCountryCode
+                                name="txtControldistrictCode">
+                                <mat-error> 
+                                    {{ formErrors['ControldistrictCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtDistrictNameEn">District Name
-                                (Eng)</label>
-                            <div class="col-sm-4">
-                                <input id="txtDistrictNameEn" [(ngModel)]="district.districtNameEng" required name="DistrictNameEn"
-                                    type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="District Name *" maxlength="10"
+                                [(ngModel)]="district.districtNameEng"
+                                formControlName="ControldistrictNameEng"
+                                #txtControldistrictNameEng
+                                name="txtdistrictNameEng">
+                                <mat-error> 
+                                    {{ formErrors['ControldistrictNameEng'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row" style="display: none;">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="District Name Uni *" maxlength="10"
+                                [(ngModel)]="district.districtNameUni"
+                                formControlName="ControldistrictNameUni"
+                                #txtControldistrictNameUni
+                                name="txtControldistrictNameUni">
+                                <mat-error> 
+                                    {{ formErrors['ControldistrictNameUni'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtDistrictNameUni">District Name
-                                (Uni)</label>
-                            <div class="col-sm-4">
-                                <input id="txtDistrictNameUni" [(ngModel)]="district.districtNameUni" required name="DistrictNameUni"
-                                    type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>State</mat-label>
+                                <mat-select required 
+                                formControlName="ControlstateCode"
+                                 [(ngModel)]="district.stateCode">
+                                    <mat-option>State Code</mat-option>
+                                    <mat-option *ngFor="let obj of stateDrp"
+                                     [value]="obj.stateCode">
+                                      {{obj.stateNameENG}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlstateCode'] }}
+                                </mat-error>
+                            </mat-form-field>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="chkDistrictActive">Active</label>
-                            <div class="col-sm-4">
-                                <input type="checkbox" 
-                                [(ngModel)]="district.isActive" name="chkDistrictActive"></div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <div class="col-sm-4" style="padding-top: 20px;">
+                                <mat-checkbox name="chkisActive" #chkisActive formControlName="ControlisActive"
+                                    [(ngModel)]="district.isActive">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
-                                    Submit</button>
-                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
-                                    Reset</button>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button mat-raised-button [disabled]="!form.valid"(click)="save()"
+                                    color="primary">Submit</button> &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button mat-raised-button color="warn" routerLink="/DistrictList">
+                                    Cancel</button>
                             </div>
-                            <div class="col-md-5"></div>
+                            <div class="col-md-4"></div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
         <!--/.row-->
     </div>
-    <div> {{district | json}}</div>
 </form>

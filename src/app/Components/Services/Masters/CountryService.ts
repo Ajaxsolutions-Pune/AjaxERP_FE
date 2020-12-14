@@ -5,6 +5,8 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '../../Module/environment';
 import { Country, CountryEntity } from '../../Module/Masters/Country.model';
 import { CountryTransfarmer } from '../../Transformer/Masters/Country-Transfarmer';
+import { CommonEntity } from '../../Module/common.model';
+import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 
 @Injectable()
 export class CountryService {
@@ -23,25 +25,27 @@ export class CountryService {
     }
 
     getCountry(countrysId: string): Observable<CountryEntity> {
-        return this.httpClient.get<CountryEntity>(this.str + 'Country/'
+        console.log(this.str + '/Country/'+ countrysId);
+                return this.httpClient.get<CountryEntity>(this.str + '/Country/'
             + countrysId, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     getRole(): void {
     }
-    Save(country: Country): Observable<CountryEntity> {
-        this.countryEntity = this.countryTransfarmer.CountryTransfarmer(country);
-        this.countryEntity.countryCode = null;
-        const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this.httpClient.post<CountryEntity>(this.str + '/Country',
-            this.countryEntity, this.env.httpOptions).pipe(catchError(this.handleError));
+    Save(saveEntitycountry: CountryEntity): Observable<Insertstatus> {
+        console.log(saveEntitycountry);
+        return this.httpClient.post<Insertstatus>(this.str + '/Country',
+            saveEntitycountry, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    Update(country: Country): string {
-        const Index = this.countrys.findIndex(a => a.id === country.id);
-        this.countrys[Index] = country;
-        return '';
+
+    Update(updateEntitycountry: CountryEntity): Observable<Insertstatus> {
+        console.log(updateEntitycountry);
+        //   saveEntityObj.tlCode = null;
+        return this.httpClient.post<Insertstatus>(this.str + '/Country',
+        updateEntitycountry, this.env.httpOptions).pipe(catchError(this.handleError));
     }
+
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {
             console.error('client side error', errorResponse.error.message);

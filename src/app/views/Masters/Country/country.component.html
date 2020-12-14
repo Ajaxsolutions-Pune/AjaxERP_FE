@@ -1,4 +1,4 @@
-<form #countryForm="ngForm" (ngSubmit)="save(countryForm);" autocomplete="off">
+<form #countryForm="ngForm"[formGroup]="form" autocomplete="off">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
@@ -8,54 +8,72 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtCountryCode">Country Code</label>
-                            <div class="col-sm-4">
-                                <input id="txtCountryCode" [(ngModel)]="country.countryCode" required name="CountryCode"
-                                    type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Country Code *"
+                                [(ngModel)]="country.countryCode"
+                                formControlName="ControlCountryCode"
+                                #txtControlCountryCode
+                                name="txtControlCountryCode">
+                                <mat-error> 
+                                    {{ formErrors['ControlCountryCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtCountryNameEn">UOM Description
-                                (Eng)</label>
-                            <div class="col-sm-4">
-                                <input id="txtCountryNameEn" required name="countryNameEn" type="text"
-                                    [(ngModel)]="country.Country_Name_ENg" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Country Name *" maxlength="10"
+                                [(ngModel)]="country.Country_Name_Eng"
+                                formControlName="ControlCountry_Name_Eng"
+                                #txtControlCountry_Name_ENg
+                                name="txtControlCountry_Name_Eng">
+                                <mat-error> 
+                                    {{ formErrors['ControlCountry_Name_Eng'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row" style="display: none;">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Country Name Uni *" maxlength="10"
+                                [(ngModel)]="country.Country_Name_Uni"
+                                formControlName="ControlCountry_Name_Uni"
+                                #txtControlCountry_Name_Uni
+                                name="txtControlCountry_Name_Uni">
+                                <mat-error> 
+                                    {{ formErrors['ControlCountry_Name_Uni'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtCountryNameUni">UOM Description
-                                (Uni)</label>
-                            <div class="col-sm-4">
-                                <input id="txtCountryNameUni" required name="CountryNameUni" type="text"
-                                    [(ngModel)]="country.Country_Name_Uni" class="form-control form-control-sm">
+                            <div class="col-md-4"></div>
+                            <div class="col-sm-4" style="padding-top: 20px;">
+                                <mat-checkbox name="chkisActive" #chkisActive formControlName="ControlisActive"
+                                    [(ngModel)]="country.isActive">Active
+                                </mat-checkbox>
                             </div>
-                            <div class="col-md-3"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtCountryNameUni">Active</label>
-                            <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="country.IsActive" name="IsActive"></div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
-                                    Submit</button>
-                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
-                                    Reset</button>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button mat-raised-button [disabled]="!form.valid"(click)="save()"
+                                    color="primary">Submit</button> &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button mat-raised-button color="warn" routerLink="/CountryList">
+                                    Cancel</button>
                             </div>
-                            <div class="col-md-5"></div>
+                            <div class="col-md-4"></div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -63,4 +81,3 @@
         <!--/.row-->
     </div>
 </form>
-<div> {{country | json}}</div>

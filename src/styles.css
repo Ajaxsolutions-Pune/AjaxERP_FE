@@ -13,3 +13,7 @@
   .CheckIn{
     content: url("../../../assets/img/brand/Logo_2.jpg");    
   }
+
+  h1{
+    color:red;
+  }

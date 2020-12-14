@@ -20,29 +20,50 @@ export class CountryTransfarmer {
         Entity.forEach(element => {
             this.country = new Country();
             this.country.countryCode = element.countryCode;
-            this.country.Country_Name_Uni = element.countryNameUni;
-            this.country.Country_Name_ENg = element.countryNameEng;
-            this.country.IsActive = element.isActive;
+            this.country.Country_Name_Uni = element.countryNameUNI;
+            this.country.Country_Name_Eng = element.countryNameENG;
+            this.country.CreatedBy = element.createdBy;
+            this.country.CreDate = element.createdDate;
+            this.country.ModifiedBy = element.modifiedBy;
+            this.country.ModDate = element.modifiedDate;
+            this.country.isActive = element.isActive;
+            // this.countrys.push(this.country);
+            if (element.isActive === '1') {
+                this.country.isActive = 'Active'.toString().trim();
+            } else { this.country.isActive = 'Inactive'.toString().trim(); }
             this.countrys.push(this.country);
         });
         return this.countrys;
     }
-    CountryTransfarmerOne(Entity: CountryEntity): Country {
+    CountryTransfarmerEntity(Entity: CountryEntity): Country {
         // this.states = new State()[Entity.length + 1];
         this.country = new Country();
         this.country.countryCode = Entity.countryCode;
-        this.country.Country_Name_Uni = Entity.countryNameUni;
-        this.country.Country_Name_ENg = Entity.countryNameEng;
-        this.country.IsActive = Entity.isActive;
+        this.country.Country_Name_Uni = Entity.countryNameUNI;
+        this.country.Country_Name_Eng = Entity.countryNameENG;
+        this.country.CreDate = Entity.createdBy;
+        this.country.CreatedBy = Entity.createdDate;
+        this.country.ModDate = Entity.modifiedBy;
+        this.country.ModifiedBy = Entity.modifiedDate;
+        this.country.isActive = Entity.isActive;
         this.countrys.push(this.country);
+        if (Entity.isActive === '1') {
+            this.country.isActive = 'true'.toString().trim();
+        } else { this.country.isActive = ''.toString().trim(); }
         return this.country;
     }
     CountryTransfarmer(country: Country): CountryEntity {
         this.countryEntity = new CountryEntity();
         this.countryEntity.countryCode = country.countryCode;
-        this.countryEntity.countryNameUni = country.Country_Name_Uni;
-        this.countryEntity.countryNameEng = country.Country_Name_ENg;
-        if (country.IsActive === 'true') { this.countryEntity.isActive = '1'; } else { this.countryEntity.isActive = '1'; }
+        this.countryEntity.countryNameUNI = country.Country_Name_Uni;
+        this.countryEntity.countryNameENG = country.Country_Name_Eng;
+        this.countryEntity.createdBy = country.CreatedBy;
+        this.countryEntity.createdDate = country.CreDate;
+        this.countryEntity.modifiedBy = country.ModifiedBy;
+        this.countryEntity.modifiedDate = country.ModDate;
+        if (country.isActive.toString().trim() === 'true') {
+            this.countryEntity.isActive = '1';
+        } else { this.countryEntity.isActive = '0'; }
         return this.countryEntity;
     }
 }

@@ -1,57 +1,62 @@
-<div class="form-group row">
+<div class="form-group">
+  <div class="row">
+    <div class="col-md-3">Country Code</div>
+    <div class="col-md-3">Country Name</div>
+    <div class="col-md-2">Status</div>
+  </div>
+  <div class="row">
     <div class="col-md-3">
-        <input id="txtUnitDescription" required name="UnitDescription" type="text" class="form-control" placeholder="Unit Short Description" 
-        (input)="resultChanged()" [(ngModel)]="country.Country_Name_ENg">
+      <input id="txtcountryCode" required name="txtcountry Code" type="text" class="form-control" placeholder="Country Code"
+        (input)="resultChanged()" [(ngModel)]="country.countryCode">
     </div>
     <div class="col-md-3">
-        <input id="txtUnitId" required name="txtUnitId" type="text" class="form-control" placeholder="Unit Id"
-        (input)="resultChanged()" [(ngModel)]="country.id">
+      <input id="txtCountryName" required name="CountryName" type="text" class="form-control"
+        placeholder="Country Name" (input)="resultChanged()" [(ngModel)]="country.Country_Name_Eng">
+    </div>
+
+    <div class="col-md-2">
+      <select id="Active" (change)="resultChanged()" [(ngModel)]="country.isActive" name="Active" class="form-control">
+        <option value="3" selected>All</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
     </div>
     <div class="col-md-1">
-        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create User" routerLink="/Country"></button>
+      <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Country"
+        routerLink="/Country"></button>
     </div>
     <div class="col-md-1">
-        <input type="image" name="imgbtn" src="assets/img/Content/excel.png" height="30px" width="30px" alt="Export To Excel" (click)="ExportToExcel()">
+      <i class="fa fa-file-excel-o" style="font-size:35px;color: #20a8d8" aria-hidden="true"
+        (click)="ExportToExcel()"></i>
     </div>
+  </div>
 </div>
 
-<table class="table table-responsive-sm table-hover table-outline mb-0">
-    <thead class="thead-light">
-      <tr>
-        <th>Unit Id</th>
-        <th>Unit Short Description</th>
-        <th>Unit Description</th>
-        <th>Active</th>
-        <th>Creation Date</th>
-        <th>Created By</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let countr of countrys">
-        <td>
-          <div>{{countr.countryCode}}</div>
-        </td>
-        <td>
-          {{countr.Country_Name_ENg}}
-        </td>
-        <td>
-          <label class="col-md-3 col-form-label" style="text-anchor: unset">{{countr.Country_Name_Uni}}</label>
-        </td>
-        <td [ngSwitch]="countr.IsActive">
-          <span *ngSwitchCase="true">Yes</span>
-          <span *ngSwitchDefault>No</span>
-        </td>
-        <td>
-          {{ countr.CreDate}}
-        </td>
-        <td>
-          {{ countr.CreatedBy }}
-        </td>
-        <td [ngSwitch]="1">
-          <button class="btn btn-primary" [disabled]="countr.Country_Id === '0'"
-            [routerLink]="['/Country/',countr.countryCode]">Edit</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<table class="table table-respageChanged ponsive-sm table-hover table-outline mb-0">
+  <thead class="thead-light">
+    <tr>
+      <th>Country Code</th>
+      <th>Country Name</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let country of countrys | paginate: config">
+      <td>
+        <div>{{country.countryCode}}</div>
+      </td>
+      <td>
+        {{country.Country_Name_Eng}}
+      </td>
+      <td>
+        {{country.isActive}}
+      </td>
+      <td> <button mat-icon-button [routerLink]="['/Country/',country.countryCode]" color="accent">
+          <mat-icon color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

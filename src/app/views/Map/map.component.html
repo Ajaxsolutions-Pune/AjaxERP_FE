@@ -119,6 +119,17 @@
                <i style="color:green;font-size: 25px;" class="fa fa-map-marker"></i> 
              </ng-template>
              <div class="col-md-12 pull-left" style="padding-top:15px; background-color:#bde4e1">
+              
+              
+              <mat-form-field class="col-md-6">
+                <input #PlaceName id="PlaceName" matInput
+                  placeholder="Place Name"
+                  [(ngModel)]="this.PlaceName_Search"
+                  formControlName="ControlSearchPlace">                        
+              </mat-form-field> 
+              <button mat-raised-button color="primary" style="height:35px;width:100px;margin-top:5px;" 
+              (click)="SearchPlace(PlaceName.value)">Search Place</button>
+              
               <ul style="list-style-type: none;">
                 <li>
                   <label>

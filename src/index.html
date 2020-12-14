@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/html" href="styles.css" />
+
+<link rel="stylesheet" type="text/html" href="styles.css" />
 <link href="MaterialIcons.css" rel="stylesheet" type="text/html">
   <base href="/">
   <meta charset="utf-8">
@@ -20,6 +21,10 @@
      .has-error .form-control{
     border-color: lightcoral !important;
     }
+
+    .CssCheckIn{
+    content: url("assets/img/brand/Logo_2.jpg");    
+  }  
   </style>
 
 <script>
@@ -89,9 +94,9 @@
         position: myLatlng2,
         //icon: iconBase + 'Mobile_Inactive.png',
         icon: {                
-              url: '../../../assets/img/Content/Mobile_Inactive.png',               
-            },
-        map: map,
+                url: '../../../assets/img/Content/Mobile_Inactive.png',   
+             },        
+        map: map, 
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
              "--status : " +  Status  + 
@@ -126,7 +131,7 @@
   } 
   
   //google map create asset markers
-  function myMapAssetFunction(placeGroupCode,lat,lang, PlaceGroupName,AssetName,Location,PlaceAddress,
+  function myMapAssetFunction(placeGroupCode,lat,lang,PlaceName,PlaceGroupName,AssetName,Location,PlaceAddress,
   iconBase,StateName,PinCode,map) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang);
       if(placeGroupCode === '2'){
@@ -138,10 +143,11 @@
             },
         map: map,
         title: "Tower Name : " +  AssetName + 
+             "--Place Name : " + PlaceName + 
              "--Place Group Name : " +  PlaceGroupName  +           
              "--Location : " +  Location + 
              "--Place Address : " + PlaceAddress + 
-             "--State Name : " +  StateName   + 
+             "--State Name : " +  StateName  + 
              "--Pin Code : " + PinCode  
         });    
         TowerMarker.setMap(map);  
@@ -159,17 +165,17 @@
             },
         map: map,
         title: "Sub Station Name : " +  AssetName + 
+             "--Place Name : " + PlaceName + 
              "--Place Group Name : " +  PlaceGroupName  +           
              "--Location : " +  Location + 
              "--Place Address : " + PlaceAddress + 
-             "--State Name : " +  StateName   + 
+             "--State Name : " +  StateName + 
              "--Pin Code : " + PinCode  
         });    
         SubStationMarker.setMap(map);  
         SubStationMarker.setVisible(false);
         SubStationMarkers.push(SubStationMarker);          
       }     
-
       mapnew = map;
   }
 
@@ -268,9 +274,9 @@
 </script>
 
 </head>
-<body class="app">
+<body class="app">   
   <app-root>
-    
+   
   </app-root>
 </body>
 </html>

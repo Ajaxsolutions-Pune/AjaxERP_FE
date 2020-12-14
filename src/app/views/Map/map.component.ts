@@ -43,6 +43,7 @@ export class MapComponent implements OnInit {
   Checked : string = "false";
 
   UserName_Search : string = "";
+  PlaceName_Search : string = "";
 
   mapModelObj : mapModel;
   placeSummeryObj : placeSummery[];
@@ -50,6 +51,7 @@ export class MapComponent implements OnInit {
   userSummaryObj : userSummery[];
   userDetailObj : userDetail[];
   ResultUser: userDetail[];
+  ResultPlace: placeDetail[];
 
   map;
   TowerCount : string = "0";
@@ -72,6 +74,7 @@ export class MapComponent implements OnInit {
       window.location.href = 'login';
     }
     this.ResultUser = this.userDetailObj;
+    this.ResultPlace = this.placeDetailObj;
     this.config = {
       itemsPerPage: this.env.paginationPageSize,
       currentPage: 1,
@@ -119,10 +122,27 @@ export class MapComponent implements OnInit {
       {          
         this.map.setCenter({
           lat : Number(this.ResultUser[0]['latitude']) ,
-          lng : Number(this.ResultUser[0]['longitude']) ,
-          zoom : 25
-        });        
-        
+          lng : Number(this.ResultUser[0]['longitude']) ,         
+        });       
+      }
+  }        
+
+  SearchPlace(value): void {       
+    this.PlaceName_Search = value;  
+    
+    alert(this.PlaceName_Search);
+    
+    this.ResultPlace = this.placeDetailObj;
+    if (this.PlaceName_Search !== null && this.PlaceName_Search !== '') {
+      this.ResultPlace = this.ResultPlace.filter(SubResult =>
+          SubResult.placeName.toLowerCase().indexOf(this.PlaceName_Search.toString().toLowerCase()) !== -1);
+        }        
+      if(this.ResultPlace.length !== 0)
+      {          
+        this.map.setCenter({
+          lat : Number(this.ResultPlace[0]['latitude']) ,
+          lng : Number(this.ResultPlace[0]['longitude']) ,         
+        });       
       }
   }        
 
@@ -135,6 +155,9 @@ export class MapComponent implements OnInit {
       {
       this.form = this.formBuilder.group({
         ControlSearchUser: ['', []],     
+      });   
+      this.form = this.formBuilder.group({
+        ControlSearchPlace: ['', []],     
       });     
     }); 
   }
@@ -288,13 +311,14 @@ export class MapComponent implements OnInit {
       var placeGroupCode = this.placeDetailObj[i]['placeGroupCode'] ;
       var lat = this.placeDetailObj[i]['latitude'];
       var lang = this.placeDetailObj[i]['longitude'];
+      var PlaceName = this.placeDetailObj[i]['placeName'];
       var PlaceGroupName = this.placeDetailObj[i]['placeGroupName'];
       var AssetName = this.placeDetailObj[i]['assetName'];
       var PlaceAddress = this.placeDetailObj[i]['placeAddress'];
       var StateName =  this.placeDetailObj[i]['stateName'];
       var PinCode =  this.placeDetailObj[i]['pinCode'] ;      
       var Location = this.placeDetailObj[i]['location'];                  
-      myMapAssetFunction(placeGroupCode,lat,lang, PlaceGroupName,AssetName,
+      myMapAssetFunction(placeGroupCode,lat,lang,PlaceName, PlaceGroupName,AssetName,
       Location,PlaceAddress,iconBase,StateName,PinCode,this.map);
     }    
 

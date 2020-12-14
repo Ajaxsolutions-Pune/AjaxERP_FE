@@ -3,7 +3,9 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { District } from '../../Module/Masters/District';
-import { DistrictEntity } from '../../Module/Masters/DistrictEntity.model';
+import { Insertstatus } from '../../Module/Masters/Insert_status.model';
+import { catchError } from 'rxjs/operators';
+import { DistrictEntity } from '../../Module/Masters/District.Entity.model';
 
 @Injectable()
 export class DistrictService {
@@ -20,24 +22,27 @@ export class DistrictService {
          this.env.httpOptions);
     }
 
-    getDistrict(DistrictCode: number): Observable<DistrictEntity> {
-        return this.httpClient.get<DistrictEntity>(this.str + 'District/' + DistrictCode
+    getDistrict(DistrictCode: string): Observable<DistrictEntity> {
+        return this.httpClient.get<DistrictEntity>(this.str + '/District/' + DistrictCode
         , this.env.httpOptions);
 
     }
     getMaxDistrictId(): number {
         return this.Districts.length;
     }
-    Save(district: District): District {
-        this.Districts.push(district);
-        return district;
-
+    Save(saveEntitydistrict: DistrictEntity): Observable<Insertstatus> {
+        //   saveEntityObj.tlCode = null;
+        console.log(saveEntitydistrict);
+        return this.httpClient.post<Insertstatus>(this.str + '/District',
+            saveEntitydistrict, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    Update(district: District): string {
-        const Index = this.Districts.findIndex(a => a.districtCode === district.districtCode);
-        this.Districts[Index] = district;
-        return '';
+    Update(updateEntitydistrict: DistrictEntity): Observable<Insertstatus> {
+        //   saveEntityObj.tlCode = null;
+        console.log(updateEntitydistrict);
+        return this.httpClient.post<Insertstatus>(this.str + '/District',
+        updateEntitydistrict, this.env.httpOptions).pipe(catchError(this.handleError));
+        
     }
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {

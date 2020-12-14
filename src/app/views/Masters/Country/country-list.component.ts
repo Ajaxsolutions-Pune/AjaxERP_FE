@@ -3,6 +3,9 @@ import { CountryService } from '../../../Components/Services/Masters/CountryServ
 import { ActivatedRoute, Router } from '@angular/router';
 import { Country, CountryEntity } from '../../../Components/Module/Masters/Country.model';
 import { CountryTransfarmer } from '../../../Components/Transformer/Masters/Country-Transfarmer';
+import * as alasql from 'alasql';
+import { environment } from '../../../Components/Module/environment';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
   selector: 'app-country-list',
@@ -18,44 +21,51 @@ export class CountryListComponent implements OnInit {
   Resultcountrys: Country[];
   SerachCri: number;
   country: Country;
+  env = environment;
+  config: { itemsPerPage: any; currentPage: number; totalItems: any; };
+  Country: Country[];
 
   constructor(private _router: Router,
     private countryService: CountryService,
     private countryTransfarmer: CountryTransfarmer,
     private route: ActivatedRoute) {
-      if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-         window.location.href='login';
-      }
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+      window.location.href = 'login';
+    }
     this.countrysEntitys = this.route.snapshot.data['CountryList'];
-    this.countrys = this.countryTransfarmer.CountryTransfarmers(this.countrysEntitys);
+    this.countrys = this.countryTransfarmer.CountryTransfarmers(this.route.snapshot.data['CountryList']);
+    this.WithoutFiltercountrys = this.countrys;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.countrys.length
+    };
   }
 
   ngOnInit() {
-
-    this.countryService.getCountrys().subscribe(
-      (par) => this.countrysEntitys = par,
-      (err: any) => console.log(err));
     this.country = {
-      Country_Name_ENg: null,
+      countryCode: null,
+      Country_Name_Eng: null,
       Country_Name_Uni: null,
       CreatedBy: null,
       ModifiedBy: null,
       CreDate: null,
       ModDate: null,
-      IsActive: null,
-      countryCode: null,
+      isActive: '3',
       id: null,
     };
-    this.countrys = this.countryTransfarmer.CountryTransfarmers(this.countrysEntitys);
-    this.WithoutFiltercountrys = this.countrys;
-  }
 
+  }
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
+  
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultcountrys = this.WithoutFiltercountrys;
-    if (this.country.Country_Name_ENg !== null && this.country.Country_Name_ENg !== '') {
+    if (this.country.Country_Name_Eng !== null && this.country.Country_Name_Eng !== '') {
       this.Resultcountrys = this.Resultcountrys.filter(SubResultcountry =>
-        SubResultcountry.Country_Name_ENg.toLowerCase().indexOf(this.country.Country_Name_ENg.toString().toLowerCase()) !== -1);
+        SubResultcountry.Country_Name_Eng.toLowerCase().indexOf(this.country.Country_Name_Eng.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
     if (this.country.countryCode !== null && this.country.countryCode.toString() !== '') {
@@ -63,14 +73,30 @@ export class CountryListComponent implements OnInit {
         SubResultcountry.countryCode.toString().toLowerCase().indexOf(this.country.countryCode.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
+    if (this.country.isActive !== null && this.country.isActive.toString() !== '-1') {
+      if (this.country.isActive.toString() === '3') {
+        this.Resultcountrys = this.Resultcountrys.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === 'Active' || SubResultProd.isActive.toString() === 'Inactive');
+      } else {
+        this.Resultcountrys = this.Resultcountrys.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === this.country.isActive.toString());
+      }
+      this.SerachCri = 1;
+      console.log('Country_Name_Eng');
+      console.log(this.Resultcountrys);
+    }
     if (this.SerachCri === 0) {
       this.Resultcountrys = this.WithoutFiltercountrys;
     }
     this.countrys = this.Resultcountrys;
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.countrys.length
+    };
   }
-
-  ExportToExcel(): void {
-    alasql('SELECT Country_Id,Country_Name_ENg,Country_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("unitList.xlsx",{headers:true}) FROM ?', [this.countrys]);
+    ExportToExcel(): void {
+      alasql('SELECT countryCode Country_Code,Country_Name_Eng Country_Name,' +
+      'isActive Status INTO XLSX("countryList.xlsx",{headers:true}) FROM ?', [this.countrys]);
   }
 }
