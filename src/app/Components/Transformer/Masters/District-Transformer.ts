@@ -3,7 +3,6 @@ import { throwError, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { State } from '../../Module/Masters/State.model';
-import { StateEntity } from '../../Module/Masters/StateEntity.model';
 import { DistrictEntity } from '../../Module/Masters/District.Entity.model';
 import { District } from '../../Module/Masters/District';
 

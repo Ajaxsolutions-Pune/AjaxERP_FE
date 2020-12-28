@@ -139,6 +139,8 @@ import { NotificationObjListResolverService } from './Components/Resolver/Master
 import { NotificationObjListComponent } from './views/Masters/Notification/notification-list.component';
 import { NotificationObjComponent } from './views/Masters/Notification/notification.component';
 import { MapComponent } from './views/Map/map.component';
+import { CityListResolverService } from './Components/Resolver/Masters/City-List-Resolver-Service';
+import { CityGroupListResolverService } from './Components/Resolver/Masters/CityGroup-List-Resolver-Service';
 
 export const routes: Routes = [
   {
@@ -296,7 +298,11 @@ export const routes: Routes = [
         component: CityListComponent,
         data: {
           title: 'City List'
-        }
+        },
+        resolve: {
+          CityList: CityListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
       },
       {
         path: 'City',
@@ -355,13 +361,20 @@ export const routes: Routes = [
           // ProduReport: ProductionReportResolverService
         },
       },
+
       {
         path: 'CityGroupList',
         component: CityGroupListComponent,
         data: {
           title: 'CityGroup List'
-        }
+        },
+        resolve: {
+          CityGroup: CityGroupListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
       },
+      
+
       {
         path: 'CityGroup',
         component: CityGroupComponent,

@@ -7,8 +7,8 @@ export class Tehsil {
 }
 export class TehsilEntity {
     tehsilCode: Number;
-    tehsilNameEng: string;
-    tehsilNameUni: string;
+    tehsilNameENG: string;
+    tehsilNameUNI: string;
     districtCode: string;
     isActive: string;
 }

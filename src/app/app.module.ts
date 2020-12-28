@@ -314,6 +314,10 @@ import { NotificationObjComponent } from './views/Masters/Notification/notificat
 import { MapComponent } from './views/Map/map.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MapService } from './Components/Services/Masters/MapService';
+import { CityListResolverService } from './Components/Resolver/Masters/City-List-Resolver-Service';
+import { CityTransfarmer } from './Components/Transformer/Masters/City-Transfarmer';
+import { CityGroupListResolverService } from './Components/Resolver/Masters/CityGroup-List-Resolver-Service';
+import { CityGroupTransfarmer } from './Components/Transformer/Masters/CityGroup-Transfarmer';
 
 export const MY_FORMATS = {
   parse: {
@@ -437,7 +441,7 @@ export const MY_FORMATS = {
     ConfirmDialogService,
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
-    CityService, UOMService, DefaultLayoutComponent, CookieService,
+    CityService,CityTransfarmer, CityGroupTransfarmer, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
     HubService, ContactService, AccessService, ModuleobjService, ScreenObjService, UserDeviceDataService,
     CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
@@ -462,6 +466,7 @@ export const MY_FORMATS = {
     AssetCategoryListResolverService, UserListResolverService, DashboardService,
     QuestionListResolverService, TehsilListResolverService, TehsilMasterResolverService,
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
+    CityListResolverService,CityGroupListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
     DeviceListResolverService, ClusterListResolverService, TransmissionLineListResolverService,
     HubListResolverService, ContactListResolverService, AccessListResolverService

@@ -1,4 +1,4 @@
-<form #countryForm="ngForm"[formGroup]="form" autocomplete="off">
+<form #countryForm="ngForm" [formGroup]="form" autocomplete="off">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
@@ -33,6 +33,9 @@
                                 name="txtControlCountry_Name_Eng">
                                 <mat-error> 
                                     {{ formErrors['ControlCountry_Name_Eng'] }}
+                                    <span *ngIf="isCountryExist()">
+                                        Country Name is already taken.
+                                      </span> 
                                 </mat-error>
                             </mat-form-field>
                             <div class="col-md-4"></div>

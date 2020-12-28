@@ -33,7 +33,7 @@
                                 formControlName="question1" 
                                 id="question1" 
                                 #txtquestion
-                                name="txtquestion" maxlength="100">
+                                name="txtquestion" maxlength="150">
                                <mat-error>
                                     <span *ngIf="isQueExist()">
                                         Question is already taken.
@@ -86,8 +86,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </div>        
     </div>
 </form>
 <div style="display: none;"> {{question | json}}</div>

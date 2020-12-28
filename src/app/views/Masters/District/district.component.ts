@@ -10,6 +10,8 @@ import { StateService } from '../../../Components/Services/Masters/StateService'
 import { State } from '../../../Components/Module/Masters/State.model';
 import { DistrictEntity } from '../../../Components/Module/Masters/District.Entity.model';
 import { District } from '../../../Components/Module/Masters/District';
+import { DistrictAsyncValidator } from '../../../helper/async-validator';
+import { StateTransfarmer } from '../../../Components/Transformer/Masters/State-transformer';
 
 @Component({
   selector: 'app-district',
@@ -26,6 +28,7 @@ export class DistrictComponent extends FormComponentBase implements OnInit, Afte
   constructor(private route: ActivatedRoute,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private districtTransfarmer: DistrictTransfarmer,
+    private stateTransfarmer: StateTransfarmer,
     private districtService: DistrictService, 
     private globalService: GlobalService, 
     private stateService: StateService, 
@@ -52,11 +55,15 @@ export class DistrictComponent extends FormComponentBase implements OnInit, Afte
         ControlisActive: '',
       };
   }
+  isDistrictExist(): boolean {
+    return this.form.get('ControldistrictNameEng').hasError('queExist');
+    
+  }
   ngOnInit() {
     status = '';
         this.stateService.getStates().subscribe(
           (par) => {
-            this.stateDrp = par;
+            this.stateDrp = this.stateTransfarmer.StateTransfarmers(par);
             console.log(this.stateDrp);
           },
           (err: any) => console.log(err));
@@ -80,7 +87,8 @@ export class DistrictComponent extends FormComponentBase implements OnInit, Afte
       this.getregion(str);
       this.form = this.formBuilder.group({
         ControldistrictCode: ['', []],     
-        ControldistrictNameEng: ['', [Validators.required]],
+        ControldistrictNameEng: ['', [Validators.required],
+        [DistrictAsyncValidator(this.districtService, str)]],
         ControldistrictNameUni: ['', []],
         ControlstateCode: ['', [ Validators.required]],
         ControlisActive: ['', []],

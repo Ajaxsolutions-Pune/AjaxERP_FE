@@ -33,6 +33,9 @@
                                 name="txtdistrictNameEng">
                                 <mat-error> 
                                     {{ formErrors['ControldistrictNameEng'] }}
+                                    <span *ngIf="isDistrictExist()">
+                                        District Name is already taken.
+                                      </span> 
                                 </mat-error>
                             </mat-form-field>
                             <div class="col-md-4"></div>

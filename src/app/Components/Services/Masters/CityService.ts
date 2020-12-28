@@ -1,76 +1,54 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { map, switchMap, debounceTime, catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
-import { Country } from '../../Module/Masters/Country.model';
-import { Brand } from '../../Module/Masters/Brand.model';
-import { City } from '../../Module/City';
+import { District } from '../../Module/Masters/District';
+import { Insertstatus } from '../../Module/Masters/Insert_status.model';
+import { catchError } from 'rxjs/operators';
+import { DistrictEntity } from '../../Module/Masters/District.Entity.model';
+import { City, CityEntity } from '../../Module/City';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class CityService {
     str: string;
     Citys: City[];
     env = environment;
+    Listcity: City[];
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
-        this.Citys = [{
-            ID: 1,
-            City_Code: '01',
-            City_Name_ENG: 'Pune',
-            City_Name_UNI: 'Pune',
-            CityGroup_Code: '1001',
-            District_Code: '1001',
-            Thesil_Code: '1',
-            Zip_Pin_Code: 'a',
-            Is_Auto: true,
-            Sort_By: '1',
-            Is_Active: true,
-            Created_By: 'SUPERADMIN',
-            Modified_By: 'SUPERADMIN',
-            Created_Date: '08-03-2019',
-            Modified_Date: null
-        }, {
-            ID: 1,
-            City_Code: '02',
-            City_Name_ENG: 'Dhule',
-            City_Name_UNI: 'Dhule',
-            CityGroup_Code: '1002',
-            District_Code: '1002',
-            Thesil_Code: '2',
-            Zip_Pin_Code: 'a',
-            Is_Auto: true,
-            Sort_By: '1',
-            Is_Active: true,
-            Created_By: 'SUPERADMIN',
-            Modified_By: 'SUPERADMIN',
-            Created_Date: '08-03-2019',
-            Modified_Date: null
-        },
-        ];
     }
     ListCity: City[];
-    getCitys(): City[] {
-        return this.Citys;
+    getCitys(): Observable<CityEntity[]> {
+        return this.httpClient.get<CityEntity[]>(this.str + '/City/getList',
+         this.env.httpOptions);
     }
 
-    getCity(CityCode: number): City[] {
-        this.ListCity = this.Citys.filter(Citys => Citys.City_Code.toString().indexOf(CityCode.toString()) !== -1);
-        return this.Citys;
+    getCity(cityCode: string): Observable<CityEntity> {
+        return this.httpClient.get<CityEntity>(this.str + '/City/' + cityCode
+        , this.env.httpOptions);
+
     }
-    getMaxCityId(): number {
+    getMaxDistrictId(): number {
         return this.Citys.length;
     }
-    Save(city: City): City {
-        this.Citys.push(city);
-        return city;
-
+    Save(saveEntitycity: CityEntity): Observable<Insertstatus> {
+        //   saveEntityObj.tlCode = null;
+        return this.httpClient.post<Insertstatus>(this.str + '/City',
+        saveEntitycity, this.env.httpOptions).pipe(catchError(this.handleError));
     }
-
-    Update(city: City): string {
-        const Index = this.Citys.findIndex(a => a.City_Code === city.City_Code);
-        this.Citys[Index] = city;
-        return '';
+    checkCity(city : string,Code : string): Observable<CommonEntity> {
+        console.log(this.str + '/City/getCityByName?name=' + city +
+        '&id=' + Code);
+        return this.httpClient.get<CommonEntity>(this.str + '/City/getCityByName?name=' +
+        city + '&id=' + Code, this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+    Update(updateEntitydistrict: CityEntity): Observable<Insertstatus> {
+        //   saveEntityObj.tlCode = null;
+        console.log(updateEntitydistrict);
+        return this.httpClient.post<Insertstatus>(this.str + '/City',
+        updateEntitydistrict, this.env.httpOptions).pipe(catchError(this.handleError));
+        
     }
     private handleError(errorResponse: HttpErrorResponse) {
         if (errorResponse.error instanceof ErrorEvent) {

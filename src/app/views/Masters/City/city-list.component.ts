@@ -1,7 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { City } from '../../../Components/Module/City';
+import { City, CityEntity } from '../../../Components/Module/City';
 import { CityService } from '../../../Components/Services/Masters/CityService';
 import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from '../../../Components/Module/environment';
+import { CityTransfarmer } from '../../../Components/Transformer/Masters/City-Transfarmer';
+import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
+import * as alasql from 'alasql';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
   selector: 'app-city-list',
@@ -10,57 +15,80 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CityListComponent implements OnInit {
 
-  Citys: City;
   citys: City[];
-
+  cityEntity: CityEntity[];
   WithoutFilterCitys: City[];
   Resultcitys: City[];
   SerachCri: number;
   city: City;
+  config: { itemsPerPage: any; currentPage: number; totalItems: any; };
+  env= environment;
 
   constructor(private _router: Router,
     private cityService: CityService,
-    private route: ActivatedRoute) {
+    private cityTransfarmer: CityTransfarmer,
+    private globalService: GlobalService, 
+    private route: ActivatedRoute,
+    ) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
         window.location.href='login';
       }
-    this.citys = this.cityService.getCitys();
-    this.WithoutFilterCitys = this.citys;
+      this.cityEntity = this.route.snapshot.data['CityList'];
+      console.log(this.cityEntity);
+      this.citys = this.cityTransfarmer.CityTransfarmers(this.cityEntity);
+      this.WithoutFilterCitys = this.citys;
+      this.config = {
+        itemsPerPage: this.env.paginationPageSize,
+        currentPage: 1,
+        totalItems: this.citys.length
+      };
   }
-
   ngOnInit() {
-    this.citys = this.cityService.getCitys();
+    this.WithoutFilterCitys = this.citys;
     this.city = {
-      ID: null,
-      City_Code: null,
-      City_Name_ENG: null,
-      City_Name_UNI: null,
-      CityGroup_Code: null,
-      District_Code: null,
-      Is_Active: null,
-      Is_Auto: null,
-      Sort_By: null,
-      Thesil_Code: null,
-      Zip_Pin_Code: null,
-      Created_By: null,
-      Created_Date: null,
-      Modified_By: null,
-      Modified_Date: null,
+    cityCode: null,
+    cityNameENG: null,
+    cityNameUNI: null,
+    districtCode:null,
+    tehsilCode:null,
+    cityGroupCode: null,
+    zipPinCode: null,
+    sortBy: null,
+    isActive:'3',
+    createdBy:localStorage.getItem('username'),
+    createdDate:this.globalService.GerCurrntDateStamp(),
+    modifiedBy:this.globalService.GerCurrntDateStamp(),
+    modifiedDate:localStorage.getItem('username'),
+     
     };
   }
-
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultcitys = this.WithoutFilterCitys;
-    if (this.city.City_Name_ENG !== null && this.city.City_Name_ENG !== '') {
+    if (this.city.cityNameENG !== null && this.city.cityNameENG !== '') {
       this.Resultcitys = this.Resultcitys.filter(SubResult =>
-        SubResult.City_Name_ENG.toLowerCase().indexOf(this.city.City_Name_ENG.toString().toLowerCase()) !== -1);
+        SubResult.cityNameENG.toLowerCase().indexOf(this.city.cityNameENG.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
-    if (this.city.City_Code !== null && this.city.City_Code.toString() !== '') {
+    if (this.city.cityCode !== null && this.city.cityCode.toString() !== '') {
       this.Resultcitys = this.Resultcitys.filter(SubResult =>
-        SubResult.City_Code.toString().toLowerCase().indexOf(this.city.City_Code.toString().toLowerCase()) !== -1);
+        SubResult.cityCode.toString().toLowerCase().indexOf(this.city.cityCode.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
+    }
+    if (this.city.isActive !== null && this.city.isActive.toString() !== '-1') {
+      if (this.city.isActive.toString() === '3') {
+        this.Resultcitys = this.Resultcitys.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === 'Active' || SubResultProd.isActive.toString() === 'Inactive');
+      } else {
+        this.Resultcitys = this.Resultcitys.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === this.city.isActive.toString());
+      }
+      this.SerachCri = 1;
+      console.log('cityCode');
+      console.log(this.Resultcitys);
     }
     if (this.SerachCri === 0) {
       this.Resultcitys = this.WithoutFilterCitys;
@@ -69,7 +97,7 @@ export class CityListComponent implements OnInit {
   }
 
   ExportToExcel(): void {
-    alasql('SELECT Brand_Code,Brand_Id,Brand_Name_ENg,Brand_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("brandList.xlsx",{headers:true}) FROM ?', [this.citys]);
+    alasql('SELECT cityCode City_Code,cityNameENG City_Name,' +
+      'isActive Status INTO XLSX("cityList.xlsx",{headers:true}) FROM ?', [this.citys]);
   }
 }

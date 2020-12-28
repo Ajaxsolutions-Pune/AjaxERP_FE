@@ -6,6 +6,7 @@ import { District } from '../../Module/Masters/District';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { catchError } from 'rxjs/operators';
 import { DistrictEntity } from '../../Module/Masters/District.Entity.model';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class DistrictService {
@@ -35,6 +36,10 @@ export class DistrictService {
         console.log(saveEntitydistrict);
         return this.httpClient.post<Insertstatus>(this.str + '/District',
             saveEntitydistrict, this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+    checkDistrict(district : string,Code : string): Observable<CommonEntity> {      
+        return this.httpClient.get<CommonEntity>(this.str + '/District/getDistrictByName?name=' + district +
+        '&id=' + Code, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Update(updateEntitydistrict: DistrictEntity): Observable<Insertstatus> {

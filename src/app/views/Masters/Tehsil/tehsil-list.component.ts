@@ -1,8 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Tehsil, TehsilEntity } from '../../../Components/Module/Masters/Tehsil';
 import { TehsilService } from '../../../Components/Services/Masters/TehsilService';
 import { TehsilTransfarmer } from '../../../Components/Transformer/Masters/Tehsil-Transfarmer';
+import * as alasql from 'alasql';
+import { environment } from '../../../Components/Module/environment';
+import { Component, OnInit } from '@angular/core';
+alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
   selector: 'app-tehsil-list',
@@ -14,11 +17,12 @@ export class TehsilListComponent implements OnInit {
   tehsils: Tehsil[];
   tehsilsEntity: TehsilEntity[];
 
-  WithoutFilterCitys: Tehsil[];
-  resultTehsil: Tehsil[];
+  WithoutFilterTehsils: Tehsil[];
+  Resulttehsil: Tehsil[];
   SerachCri: number;
   tehsil: Tehsil;
-  WithoutFilterTehsils: any[];
+  config: { itemsPerPage: any; currentPage: number; totalItems: any; };
+  env= environment;
 
   constructor(private _router: Router,
     private tehsilsService: TehsilService,
@@ -30,43 +34,61 @@ export class TehsilListComponent implements OnInit {
     this.tehsilsEntity = this.route.snapshot.data['TehsilList'];
     this.tehsils = this.tehsilsTransfarmer.TehsilTransfarmers(this.tehsilsEntity);
     this.WithoutFilterTehsils = this.tehsils;
-  }
-
-  ngOnInit() {
-    this.tehsilsService.getTehsils().subscribe(
-      (par) => this.tehsils = par,
-      (err: any) => console.log(err));
-    this.tehsil = {
-      tehsilCode: null,
-      districtCode: null,
-      isActive: null,
-      tehsilNameEng: null,
-      tehsilNameUni: null,
-
+    this.config = {
+      itemsPerPage: this.env.paginationPageSize,
+      currentPage: 1,
+      totalItems: this.tehsils.length
     };
   }
 
+  ngOnInit() {
+    this.WithoutFilterTehsils = this.tehsils;
+    this.tehsil = {
+      tehsilCode: null,
+      districtCode: null,
+      isActive: '3',
+      tehsilNameEng: null,
+      tehsilNameUni: null,
+      
+
+    };
+  }
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
   resultChanged(): void {
     this.SerachCri = 0;
-    this.resultTehsil = this.WithoutFilterTehsils;
+    this.Resulttehsil = this.WithoutFilterTehsils;
     if (this.tehsil.tehsilNameEng !== null && this.tehsil.tehsilNameEng !== '') {
-      this.resultTehsil = this.resultTehsil.filter(SubResult =>
+      this.Resulttehsil = this.Resulttehsil.filter(SubResult =>
         SubResult.tehsilNameEng.toLowerCase().indexOf(this.tehsil.tehsilNameEng.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
     if (this.tehsil.tehsilCode !== null && this.tehsil.tehsilCode.toString() !== '') {
-      this.resultTehsil = this.resultTehsil.filter(SubResult =>
+      this.Resulttehsil = this.Resulttehsil.filter(SubResult =>
         SubResult.tehsilCode.toString().toLowerCase().indexOf(this.tehsil.tehsilCode.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
-    if (this.SerachCri === 0) {
-      this.resultTehsil = this.WithoutFilterTehsils;
+    if (this.tehsil.isActive !== null && this.tehsil.isActive.toString() !== '-1') {
+      if (this.tehsil.isActive.toString() === '3') {
+        this.Resulttehsil = this.Resulttehsil.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === 'Active' || SubResultProd.isActive.toString() === 'Inactive');
+      } else {
+        this.Resulttehsil = this.Resulttehsil.filter(SubResultProd =>
+          SubResultProd.isActive.toString() === this.tehsil.isActive.toString());
+      }
+      this.SerachCri = 1;
     }
-    this.tehsils = this.resultTehsil;
+    if (this.SerachCri === 0) {
+      this.Resulttehsil = this.WithoutFilterTehsils;
+    }
+    this.tehsils = this.Resulttehsil;
+    
+    console.log(this.tehsils);
   }
 
   ExportToExcel(): void {
-    alasql('SELECT Brand_Code,Brand_Id,Brand_Name_ENg,Brand_Name_Uni,CreatedBy,ModifiedBy,' +
-      'CreDate,ModDate,IsActive INTO XLSX("brandList.xlsx",{headers:true}) FROM ?', [this.tehsils]);
+    alasql('SELECT tehsilCode Tehsil_Code,tehsilNameEng Tehsil_Name,' +
+      'isActive Status INTO XLSX("tehsilList.xlsx",{headers:true}) FROM ?', [this.tehsils]);
   }
 }

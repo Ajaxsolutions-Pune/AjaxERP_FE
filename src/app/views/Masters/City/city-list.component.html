@@ -1,23 +1,36 @@
-<div class="form-group row">
+<div class="form-group">
+  <div class="row">
+    <div class="col-md-3">City Code</div>
+    <div class="col-md-3">City Name</div>
+    <div class="col-md-2">Status</div>
+  </div>
+  <div class="row">
     <div class="col-md-3">
-        <input id="txtCityName" name="CityName" type="text"
-        (input)="resultChanged()"  [(ngModel)]="city.City_Name_ENG"
-         class="form-control" placeholder="City Name" 
-       >
+      <input id="txtCityCode"
+      (input)="resultChanged()"  [(ngModel)]="city.cityCode"
+       name="txtcityCode" type="text" class="form-control"
+        placeholder="City Code">
     </div>
     <div class="col-md-3">
-        <input id="txtCityCode"
-        (input)="resultChanged()"  [(ngModel)]="city.City_Code"
-         name="txtCityCode" type="text" class="form-control"
-          placeholder="City Code">
+        <input id="txtCityName" name="cityNameENG" type="text"
+        (input)="resultChanged()"  [(ngModel)]="city.cityNameENG"
+         class="form-control" placeholder="City Name" >
     </div>
+    <div class="col-md-2">
+      <select id="ShiftId" (change)="resultChanged()" [(ngModel)]="city.isActive" name="ShiftId" class="form-control">
+        <option value="3" selected>All</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+    </div>
+    
     <div class="col-md-1">
-        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create User"
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create City"
          routerLink="/City"></button>
     </div>
     <div class="col-md-1">
-        <input type="image" name="imgbtn" src="assets/img/Content/excel.png"
-         height="30px" width="30px" alt="Export To Excel">
+      <i class="fa fa-file-excel-o" style="font-size:35px;color: #20a8d8" aria-hidden="true"
+        (click)="ExportToExcel()"></i>
     </div>
 </div>
 
@@ -25,27 +38,27 @@
     <thead class="thead-light">
       <tr>
         <th>City Code</th>
-        <th>City Description</th>
+        <th>City Name</th>
         <th>Active</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let city of citys">
+      <tr *ngFor="let city of citys | paginate: config">
         <td>
-          <div>{{city.City_Code}}</div>
-        </td>
-        <td>
-          <label class="col-md-3 col-form-label" style="text-anchor: unset">{{city.City_Name_ENG}}</label>
-        </td>
-        <td [ngSwitch]="city.IsActive">
-          <span *ngSwitchCase="true">Yes</span>
-          <span *ngSwitchDefault>No</span>
+          <div>{{city.cityCode}}</div>
         </td>
         <td>
-          <button class="btn btn-primary"
-            [routerLink]="['/City/',city.ID]">Edit</button>
+          <div>{{city.cityNameENG}}</div>
         </td>
+        <td>
+          <div>{{city.isActive}}</div>
+        </td>
+        <td> <button mat-icon-button [routerLink]="['/City/',city.cityCode]" color="accent">
+          <mat-icon color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+        </button>
+      </td>
       </tr>
     </tbody>
   </table>
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

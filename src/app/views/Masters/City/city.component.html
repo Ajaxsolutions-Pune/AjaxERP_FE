@@ -1,4 +1,4 @@
-<form #cityForm="ngForm" (ngSubmit)="save(cityForm);" autocomplete="off">
+<form #cityForm="ngForm" [formGroup]="form"  (ngSubmit)="save(cityForm);" autocomplete="off">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
@@ -8,54 +8,144 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtCityCode">City Code</label>
-                            <div class="col-sm-4">
-                                <input id="txtCityCode" [(ngModel)]="city.City_Code" name="CityCode" type="text"
-                                    class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="City Code "
+                                [(ngModel)]="city.cityCode"
+                                formControlName="ControlcityCode"
+                                #txtControlCity_Code
+                                name="txtControlcityCode">
+                                <mat-error> 
+                                    {{ formErrors['ControlcityCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtCityNameEn">City Name
-                                (Eng)</label>
-                            <div class="col-sm-4">
-                                <input id="txtCityNameEn" [(ngModel)]="city.City_Name_ENG" required name="CityNameEn"
-                                    type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="City Name *" maxlength="10"
+                                [(ngModel)]="city.cityNameENG"
+                                formControlName="ControlcityNameENG"
+                                #txtControlcityNameENG
+                                name="txtcityNameENG">
+                                <mat-error> 
+                                    {{ formErrors['ControlcityNameENG'] }}
+                                    <span *ngIf="isCityExist()">
+                                        City Name is already taken.
+                                      </span> 
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row" style="display: none;">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="City Name Uni *" maxlength="10"
+                                [(ngModel)]="city.cityNameUNI"
+                                formControlName="ControlcityNameUNI"
+                                #txtControlcityNameUNI
+                                name="txtControlcityNameUNI">
+                                <mat-error> 
+                                    {{ formErrors['ControlcityNameUNI'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="txtCityNameUni">City Name
-                                (Uni)</label>
-                            <div class="col-sm-4">
-                                <input id="txtCityNameUni" [(ngModel)]="city.Is_Active" required name="CityNameUni"
-                                    type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>District</mat-label>
+                                <mat-select required 
+                                formControlName="ControldistrictCode"
+                                 [(ngModel)]="city.districtCode">
+                                    <mat-option>District Code</mat-option>
+                                    <mat-option *ngFor="let obj of districtDrp"
+                                     [value]="obj.districtCode">
+                                      {{obj.districtNameEng}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControldistrictCode'] }}
+                                </mat-error>
+                            </mat-form-field>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <label class="col-md-2 col-form-label" for="chkCityActive">Active</label>
-                            <div class="col-sm-4">
-                                <input type="checkbox" [(ngModel)]="city.Is_Active" name="chkCityActive"></div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Tehsil</mat-label>
+                                <mat-select required 
+                                formControlName="ControltehsilCode"
+                                 [(ngModel)]="city.tehsilCode">
+                                    <mat-option>Tehsil Code</mat-option>
+                                    <mat-option *ngFor="let obj of tehsilDrp"
+                                     [value]="obj.tehsilCode">
+                                      {{obj.tehsilNameEng}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControltehsilCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>City Group</mat-label>
+                                <mat-select required 
+                                formControlName="ControlCityGroup_Code"
+                                 [(ngModel)]="city.cityGroupCode">
+                                    <mat-option>CityGroup Code</mat-option>
+                                    <mat-option *ngFor="let obj of cityGroupDrp"
+                                     [value]="obj.CityGroup_Code">
+                                      {{obj.CityGroup_Name_ENG}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlCityGroup_Code'] }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput
+                                placeholder="Zip Pin Code *"
+                                [(ngModel)]="city.zipPinCode"
+                                formControlName="ControlzipPinCode"
+                                #txtControlzipPinCode
+                                name="txtControlzipPinCode">
+                                <mat-error> 
+                                    {{ formErrors['ControlzipPinCode'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-sm-4" style="padding-top: 20px;">
+                                <mat-checkbox name="chkisActive" #chkisActive 
+                                formControlName="ControlisActive" [(ngModel)]="city.isActive">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
-                                    Submit</button>
-                                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>
-                                    Reset</button>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button mat-raised-button [disabled]="!form.valid"(click)="save()"
+                                    color="primary">Submit</button> &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button mat-raised-button color="warn" routerLink="/CityList">
+                                    Cancel</button>
                             </div>
-                            <div class="col-md-5"></div>
+                            <div class="col-md-4"></div>
                         </div>
-
                     </div>
                 </div>
             </div>

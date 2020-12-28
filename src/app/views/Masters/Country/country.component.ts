@@ -7,6 +7,7 @@ import { CountryTransfarmer } from '../../../Components/Transformer/Masters/Coun
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
 import { CountryService } from '../../../Components/Services/Masters/CountryService';
+import { CountryAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-country',
@@ -44,6 +45,10 @@ export class CountryComponent  extends FormComponentBase implements OnInit, Afte
         ControlisActive: '',
       };
     }
+    isCountryExist(): boolean {
+      return this.form.get('ControlCountry_Name_Eng').hasError('queExist');
+      
+    }
   ngOnInit() {
     status = '';
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
@@ -66,7 +71,8 @@ export class CountryComponent  extends FormComponentBase implements OnInit, Afte
       this.getcountry(str);
       this.form = this.formBuilder.group({
         ControlCountryCode: ['', []],   
-        ControlCountry_Name_Eng: ['', [Validators.required]],
+        ControlCountry_Name_Eng: ['', [Validators.required],
+        [CountryAsyncValidator(this.countryService, str)]],
         ControlCountry_Name_Uni: ['', []],
         ControlisActive: ['', []],
 

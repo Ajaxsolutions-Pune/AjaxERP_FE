@@ -111,41 +111,6 @@ export const navItems: NavData[] = [
         url: '/HubList',
         icon: 'icon-puzzle'
       },
-     {
-         name: 'Country',
-         url: '/CountryList',
-         icon: 'icon-puzzle'
-      },
-      // {
-      //   name: 'State',
-      //   url: '/StateList',
-      //   icon: 'icon-puzzle'
-      // },
-      {
-         name: 'District',
-         url: '/DistrictList',
-         icon: 'icon-puzzle'
-      },
-      // {
-      //   name: 'Tehsil',
-      //   url: '/TehsilList',
-      //   icon: 'icon-puzzle'
-      // },
-      // {
-      //   name: 'City',
-      //   url: '/CityList',
-      //   icon: 'icon-puzzle'
-      // },
-      // {
-      //   name: 'City Group',
-      //   url: '/CityGroupList',
-      //   icon: 'icon-puzzle'
-      // },
-      // {
-      //   name: 'Unit',
-      //   url: '/UnitList',
-      //   icon: 'icon-puzzle'
-      // },
       // {
       //   name: 'Brand',
       // url: '/BrandList',
@@ -187,8 +152,6 @@ export const navItems: NavData[] = [
       //     url: '/ItemSubGroupList',
       //      icon: 'icon-puzzle'
       //    },
-
-
     ]
   },
   {
@@ -253,6 +216,42 @@ export const navItems: NavData[] = [
         url: '/CircleList',
         icon: 'icon-puzzle'
       },
+      {
+        name: 'Country',
+        url: '/CountryList',
+        icon: 'icon-puzzle'
+     },
+     // {
+     //   name: 'State',
+     //   url: '/StateList',
+     //   icon: 'icon-puzzle'
+     // },
+     {
+        name: 'District',
+        url: '/DistrictList',
+        icon: 'icon-puzzle'
+     },
+     // {
+     //   name: 'Tehsil',
+     //   url: '/TehsilList',
+     //   icon: 'icon-puzzle'
+     // },
+      {
+        name: 'City',
+        url: '/CityList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'City Group',
+        url: '/CityGroupList',
+        icon: 'icon-puzzle'
+      },
+     // {
+     //   name: 'Unit',
+     //   url: '/UnitList',
+     //   icon: 'icon-puzzle'
+     // },
+    
     ]
 
   },

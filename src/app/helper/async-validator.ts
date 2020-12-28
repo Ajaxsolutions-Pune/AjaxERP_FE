@@ -23,6 +23,12 @@ import { ScreenObjService } from '../Components/Services/Masters/ScreenService';
 import { GlobalService } from '../Components/Services/GlobalServices/Global.service';
 import { UserService } from '../Components/Services/Masters/UserService';
 import { UserGroupService } from '../Components/Services/Masters/UserGroupService';
+import { CityService } from '../Components/Services/Masters/CityService';
+import { CountryService } from '../Components/Services/Masters/CountryService';
+import { DistrictService } from '../Components/Services/Masters/DistrictService';
+import { CityGroupService} from '../Components/Services/Masters/CityGroupService';
+import { TehsilService} from '../Components/Services/Masters/TehsilService';
+
 
 export const ConfirmPasswordValidator = (globalService: GlobalService, PassFild: string, ConfirmPassFild: string, time: number = 500) => {
   return (input: FormControl) => {
@@ -383,4 +389,86 @@ export const UserGroupAsyncValidator = (userGroupService: UserGroupService,Code:
     );
   };
 };
+export const CityAsyncValidator = (cityService: CityService,Code:string,
+  time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => cityService.checkCity(input.value,Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+export const CountryAsyncValidator = (countryService: CountryService,Code:string,
+  time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => countryService.checkCountry(input.value,Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+export const DistrictAsyncValidator = (districtService: DistrictService,Code:string,
+  time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => districtService.checkDistrict(input.value,Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+export const CityGroupAsyncValidator = (cityGroupService: CityGroupService,Code:string,
+  time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => cityGroupService.checkCityGroup(input.value,Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+  export const TehsilAsyncValidator = (tehsilService: TehsilService,Code:string,
+    time: number = 500) => {
+    return (input: FormControl) => {
+      return timer(time).pipe(
+        switchMap(() => tehsilService.checkTehsil(input.value,Code)),
+        map(res => {
+          if (res.status == 'notexist') {
+            return null;
+          } else {
+            return { queExist: true };
+          }
+        })
+      );
+    };
+  };
+
+  
+
+
+
 

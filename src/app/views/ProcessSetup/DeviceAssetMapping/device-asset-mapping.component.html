@@ -17,107 +17,107 @@
   
 
 <div class="row">
-  <div class="col-md-4"></div>
-  <div class="col-md-4" style="padding-bottom:2%;">
-    <div class="ng-autocompletein">
-      <div class="row">
-        <div class="input-container">
-          <ng-autocomplete [data]="data" #auto
-           [searchKeyword]="keyword" placeHolder="Select Device Name"
-            (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
-             id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)' 
+    <div class="col-md-4"></div>
+    <div class="col-md-4" style="padding-bottom:2%;">
+      <div class="ng-autocompletein">
+        <div class="row">
+          <div class="input-container">
+            <ng-autocomplete [data]="data" #auto
+             [searchKeyword]="keyword" placeHolder="Select Device Name"
+              (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+               id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)' 
+               
+              [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.name"></a>
+            </ng-template>
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+           <!--<i class="icon" (click)="my()"> 
+             <mat-icon>{{hidePassword ? 'keyboard_arrow_left' : 'keyboard_arrow_down'}}</mat-icon></i>-->
              
-            [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
-          </ng-autocomplete>
-          <ng-template #itemTemplate let-item>
-            <a [innerHTML]="item.name"></a>
-          </ng-template>
-          <ng-template #notFoundTemplate let-notFound>
-            <div [innerHTML]="notFound"></div>
-          </ng-template>
-         <!--<i class="icon" (click)="my()"> 
-           <mat-icon>{{hidePassword ? 'keyboard_arrow_left' : 'keyboard_arrow_down'}}</mat-icon></i>-->
-           
-          <i class="icon" (click)="my()"> 
-            <mat-icon>arrow_drop_down</mat-icon></i>
+            <i class="icon" (click)="my()"> 
+              <mat-icon>arrow_drop_down</mat-icon></i>
+          </div>
         </div>
       </div>
+      <div class="col-md-4"></div>
     </div>
-    <div class="col-md-4"></div>
-  </div>
-  </div>
-  <div class="container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource"
-    [matSortDisableClear]="false"
-    matSort class="mat-cell">
-      ng update @angular/cli @angular/core
-      
-  
-      <ng-container matColumnDef="DeviceAssetMapping">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Map Id</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.daId}}</mat-cell>
-      </ng-container>   
-  
-      <ng-container matColumnDef="AssetText">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Asset</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.assetCode}} - {{row.assetName}}</mat-cell>
-      </ng-container>
-     
-      <!--<ng-container matColumnDef="SortBy">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Sort</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.sortBy}}</mat-cell>
-      </ng-container>-->
-      
-      <ng-container matColumnDef="ActiveText">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.isActiveText}}</mat-cell>
-      </ng-container> 
-       <!-- actions -->
-      <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>
-          <button mat-icon-button color="primary" (click)="addNew()">
-            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-          </button>
-        </mat-header-cell>
-  
-        <mat-cell *matCellDef="let row; let i=index;">
-          <button mat-icon-button color="accent" (click)="startEdit(i,
-          row.daId,
-          row.assetCode,      
-          row.assetName,      
-          row.sortBy,
-          row.isActive)">
-            <mat-icon aria-label="Edit">edit</mat-icon>
-          </button>
-  
-        </mat-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  
-  
-    <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-      No results
     </div>
-    <mat-paginator #paginator
-                  [length]="dataSource.filteredData.length"
-                  [pageIndex]="0"
-                  [pageSize]="10"
-                  [pageSizeOptions]="[5, 10, 25, 100]">
-    </mat-paginator>
-  </div>
-  
-  <div class="row" style="padding-top: 20px;">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <button mat-raised-button
-        (click)="save()"
-            color="primary">Submit</button>
-        <button mat-raised-button color="warn" routerLink="/dashboard">
-            Cancel</button>
+    <div class="container mat-elevation-z8">
+      <mat-table #table [dataSource]="dataSource"
+      [matSortDisableClear]="false"
+      matSort class="mat-cell">
+        ng update @angular/cli @angular/core
+        
+    
+        <ng-container matColumnDef="DeviceAssetMapping">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Map Id</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.daId}}</mat-cell>
+        </ng-container>   
+    
+        <ng-container matColumnDef="AssetText">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Asset</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.assetCode}} - {{row.assetName}}</mat-cell>
+        </ng-container>
+       
+        <!--<ng-container matColumnDef="SortBy">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Sort</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.sortBy}}</mat-cell>
+        </ng-container>-->
+        
+        <ng-container matColumnDef="ActiveText">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.isActiveText}}</mat-cell>
+        </ng-container> 
+         <!-- actions -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button color="primary" (click)="addNew()">
+              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+            </button>
+          </mat-header-cell>
+    
+          <mat-cell *matCellDef="let row; let i=index;">
+            <button mat-icon-button color="accent" (click)="startEdit(i,
+            row.daId,
+            row.assetCode,      
+            row.assetName,      
+            row.sortBy,
+            row.isActive)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+    
+          </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    
+    
+      <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+        No results
+      </div>
+      <mat-paginator #paginator
+                    [length]="dataSource.filteredData.length"
+                    [pageIndex]="0"
+                    [pageSize]="10"
+                    [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
     </div>
-    <div class="col-md-4"></div>
-  </div>
-  
+    
+    <div class="row" style="padding-top: 20px;">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+          <button mat-raised-button
+          (click)="save()"
+              color="primary">Submit</button>
+          <button mat-raised-button color="warn" routerLink="/dashboard">
+              Cancel</button>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+    

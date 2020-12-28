@@ -10,7 +10,6 @@ export class TehsilMasterResolverService implements Resolve<TehsilEntity> {
     constructor(private tehsilService: TehsilService, private route: ActivatedRoute) { }
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<TehsilEntity> {
         this.tehsilNumber = route.params.id;
-        return this.tehsilService.getTehsil(+this.tehsilNumber);
+        return this.tehsilService.getTehsil(this.tehsilNumber);
     }
-
 }

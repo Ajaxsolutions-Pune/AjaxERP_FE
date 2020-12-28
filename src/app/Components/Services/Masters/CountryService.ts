@@ -37,8 +37,11 @@ export class CountryService {
         return this.httpClient.post<Insertstatus>(this.str + '/Country',
             saveEntitycountry, this.env.httpOptions).pipe(catchError(this.handleError));
     }
-
-
+    checkCountry(country : string,Code : string): Observable<CommonEntity> {
+        return this.httpClient.get<CommonEntity>(this.str + '/Country/getCountryByName?name=' +
+        country +'&id=' + Code, this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+    
     Update(updateEntitycountry: CountryEntity): Observable<Insertstatus> {
         console.log(updateEntitycountry);
         //   saveEntityObj.tlCode = null;
