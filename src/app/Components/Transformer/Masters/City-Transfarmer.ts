@@ -20,8 +20,7 @@ export class CityTransfarmer {
         // this.states = new State()[Entity.length + 1];
         this.citys = [];
         console.log(Entity);
-        Entity.forEach(element => {
-            
+        Entity.forEach(element => {            
             this.city = new City();
             this.city.cityCode = element.cityCode;
             this.city.cityNameENG = element.cityNameENG;

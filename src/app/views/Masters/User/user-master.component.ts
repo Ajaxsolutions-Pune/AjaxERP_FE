@@ -162,7 +162,7 @@ export class UserComponent extends FormComponentBase implements OnInit, AfterVie
       value: event.value,
       text: target.innerText.trim()
     };
-
+alert(selectedData.value);
     //Entity combo
     this.fillEntityDrp(selectedData.value).subscribe(
       (par) => {

@@ -39,11 +39,11 @@ export const navItems: NavData[] = [
       text: 'NEW'
     }
   },
-  {
+  /*{
     name: 'Map',
     url: '/map',
     icon: 'icon-map',   
-  },
+  },*/
   {
     name: 'Monitoring Masters',
     url: '/Masters',
@@ -179,11 +179,11 @@ export const navItems: NavData[] = [
         url: '/DeviceAssetMapping',
         icon: 'icon-puzzle'
       },
-      {
+      /*{
         name: 'User Group Map',
         url: '/UserGroupMapping',
         icon: 'icon-puzzle'
-      },
+      },*/
     ]
   },
   {
@@ -216,7 +216,7 @@ export const navItems: NavData[] = [
         url: '/CircleList',
         icon: 'icon-puzzle'
       },
-      {
+      /*{
         name: 'Country',
         url: '/CountryList',
         icon: 'icon-puzzle'
@@ -245,7 +245,7 @@ export const navItems: NavData[] = [
         name: 'City Group',
         url: '/CityGroupList',
         icon: 'icon-puzzle'
-      },
+      },*/
      // {
      //   name: 'Unit',
      //   url: '/UnitList',
@@ -273,7 +273,7 @@ export const navItems: NavData[] = [
     url: '/User Setup',
     //   icon: 'fa fa-newspaper-o',
     children: [
-      {
+      /*{
         name: 'Access',
         url: '/AccessList',
         icon: 'icon-puzzle'
@@ -297,7 +297,7 @@ export const navItems: NavData[] = [
         name: 'Role Level',
         url: '/RolelevelList',
         icon: 'icon-puzzle'
-      },
+      },*/
       {
         name: 'User',
         url: '/UserList',
@@ -308,7 +308,7 @@ export const navItems: NavData[] = [
         url: '/UserDeviceRegList',
         icon: 'icon-puzzle'
       },
-      {
+      /*{
         name: 'User Group',
         url: '/UserGroupList',
         icon: 'icon-puzzle'
@@ -317,7 +317,7 @@ export const navItems: NavData[] = [
         name: 'Notification',
         url: '/NotificationList',
         icon: 'icon-puzzle'
-      },
+      },*/
     ]
 
   },
