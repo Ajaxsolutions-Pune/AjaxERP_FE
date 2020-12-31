@@ -106,6 +106,7 @@ export class CityGroupComponent extends FormComponentBase implements OnInit, Aft
     return this.globalService.SpecialCharValidator(k);
     
   }
+
   save(CityGroupForm: NgForm): void {
     this.citygroup.createdBy=localStorage.getItem('username');
     this.citygroup.createdDate=this.globalService.GerCurrntDateStamp();
@@ -141,6 +142,9 @@ export class CityGroupComponent extends FormComponentBase implements OnInit, Aft
        );
    }
  }
+
+
+ 
  private getregion(Id: string) {
   this.citygroup = {
     CityGroup_Code: null,

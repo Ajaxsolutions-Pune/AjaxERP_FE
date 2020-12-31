@@ -65,6 +65,7 @@
         <ng-template mat-tab-label>
           <span>Top &nbsp;&nbsp;&nbsp;<i style="color:green" class="fa fa-arrow-up"></i></span>       
        </ng-template>
+       <div class="row" style="background-color:#adc1f0" >
         <div class="col-md-3 pull-left" style="padding-top:15px; background-color:#adc1f0" >
           <div style="background-color: white;">
           <table class="table table-bordered">
@@ -77,10 +78,10 @@
              <tbody>
                <tr *ngFor="let DashboardTop of topDistanceObj">               
                  <td>
-                   <div>{{DashboardTop.userName}}</div>
+                   <span>{{DashboardTop.userName}}</span>
                  </td>
                  <td>
-                   <div class="text-right">{{DashboardTop.distance}}</div>
+                   <span class="text-right">{{DashboardTop.distance}}</span>
                  </td>    
                </tr>   
              </tbody>
@@ -100,10 +101,10 @@
                      <tbody>
                       <tr *ngFor="let PlacesTaggedTop of topPlacesTaggedObj">               
                         <td>
-                          <div>{{PlacesTaggedTop.userName}}</div>
+                          <span>{{PlacesTaggedTop.userName}}</span>
                         </td>
                         <td>
-                          <div class="text-right">{{PlacesTaggedTop.placesTagged}}</div>
+                          <span class="text-right">{{PlacesTaggedTop.placesTagged}}</span>
                         </td>    
                       </tr>   
                      </tbody>
@@ -123,10 +124,10 @@
                      <tbody>
                       <tr *ngFor="let FormsTop of topFormObj">               
                         <td>
-                          <div>{{FormsTop.userName}}</div>
+                          <span>{{FormsTop.userName}}</span>
                         </td>
                         <td>
-                          <div class="text-right">{{FormsTop.formCount}}</div>
+                          <span class="text-right">{{FormsTop.formCount}}</span>
                         </td>    
                       </tr>   
                      </tbody>
@@ -146,22 +147,24 @@
                      <tbody>
                       <tr *ngFor="let PlaceVisitTop of topPlacesVisitObj">               
                         <td>
-                          <div>{{PlaceVisitTop.userName}}</div>
+                          <span>{{PlaceVisitTop.userName}}</span>
                         </td>
                         <td>
-                          <div class="text-right">{{PlaceVisitTop.placesVisit}}</div>
+                          <span class="text-right">{{PlaceVisitTop.placesVisit}}</span>
                         </td>    
                       </tr>   
                      </tbody>
                    </table>    
              </div>
          </div>
+        </div>
       </mat-tab>
 
       <mat-tab >
         <ng-template mat-tab-label>
           <span>Bottom &nbsp;&nbsp;&nbsp;<i style="color:red" class="fa fa-arrow-down"></i></span>       
         </ng-template>
+        <div class="row" style="background-color:#bde4e1" >
         <div class="col-md-3 pull-left" style="padding-top:15px; background-color:#bde4e1">
           <div style="background-color: white;">
           <table class="table table-bordered">
@@ -175,10 +178,10 @@
              <tbody>
                <tr *ngFor="let DistanceBottom of bottomDistanceObj">               
                  <td>
-                   <div>{{DistanceBottom.userName}}</div>
+                   <span>{{DistanceBottom.userName}}</span>
                  </td>
                  <td>
-                   <div>{{DistanceBottom.distance}}</div>
+                   <span>{{DistanceBottom.distance}}</span>
                  </td>    
                </tr>   
              </tbody>
@@ -198,10 +201,10 @@
                      <tbody>
                       <tr *ngFor="let PlaceTaggedBottom of bottomPlacesTaggedObj">               
                         <td>
-                          <div>{{PlaceTaggedBottom.userName}}</div>
+                          <span>{{PlaceTaggedBottom.userName}}</span>
                         </td>
                         <td>
-                          <div>{{PlaceTaggedBottom.placesTagged}}</div>
+                          <span>{{PlaceTaggedBottom.placesTagged}}</span>
                         </td>    
                       </tr>   
                      </tbody>
@@ -221,10 +224,10 @@
                      <tbody>
                       <tr *ngFor="let FormBottom of bottomFormObj">               
                         <td>
-                          <div>{{FormBottom.userName}}</div>
+                          <span>{{FormBottom.userName}}</span>
                         </td>
                         <td>
-                          <div>{{FormBottom.formCount}}</div>
+                          <span>{{FormBottom.formCount}}</span>
                         </td>    
                       </tr>   
                      </tbody>
@@ -244,16 +247,17 @@
                      <tbody>
                       <tr *ngFor="let PlaceVisitBottom of bottomPlacesVisitObj">               
                         <td>
-                          <div>{{PlaceVisitBottom.userName}}</div>
+                          <span>{{PlaceVisitBottom.userName}}</span>
                         </td>
                         <td>
-                          <div>{{PlaceVisitBottom.placesVisit}}</div>
+                          <span>{{PlaceVisitBottom.placesVisit}}</span>
                         </td>    
                       </tr>   
                      </tbody>
                    </table>    
              </div>
          </div>    
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>
