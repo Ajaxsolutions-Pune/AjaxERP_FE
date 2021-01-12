@@ -3,24 +3,25 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { DataSource } from '@angular/cdk/collections';
 
-import { DeviceAssetAddDialogComponent } from './dialogs/add/deviceassetadd.dialog.component';
-import { DeviceAssetEditDialogComponent } from './dialogs/edit/deviceassetedit.dialog.component';
-//import { ProcessDeleteDialogComponent } from './dialogs/delete/processdelete.dialog.component';
 
-import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-//import { UserDeviceDataService } from './userdevicedata.service';
 import { FormComponentBase } from '../../Masters/AngularDemo/infrastructure/form-component-base';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CrossFieldErrorMatcher } from '../../Masters/AngularDemo/infrastructure/cross-field-error-matcher';
 
 import { Device } from '../../../Components/Module/Masters/Device.model';
+import { TransmissionLine } from '../../../Components/Module/Masters/TransmissionLine.model';
+import { AssetGroup } from '../../../Components/Module/Masters/AssetGroup.model';
 import { DeviceTransfarmer } from '../../../Components/Transformer/Masters/Device-Transfarmer';
-import { DeviceService } from '../../../Components/Services/Masters/DeviceService';
+import { TransmissionLineTransfarmer } from '../../../Components/Transformer/Masters/TransmissionLine-Transfarmer';
+import { AssetGroupTransfarmer } from '../../../Components/Transformer/Masters/AssetGroup-Transfarmer';
 
-import { DeviceAssetMapping } from '../../../Components/Module/ProcessSetup/DeviceAssetMapping.model';
+
+import { DeviceService } from '../../../Components/Services/Masters/DeviceService';
+import { TransmissionLineService } from '../../../Components/Services/Masters/TransmissionLineService';
+import { AssetGroupService } from '../../../Components/Services/Masters/AssetGroupService';
+
+import { DeviceAssetMapping, DeviceAssetMapping_Delete } from '../../../Components/Module/ProcessSetup/DeviceAssetMapping.model';
 
 import { DeviceAssetMappingTransfarmer } from '../../../Components/Transformer/ProcessSetup/DeviceAssetMapping-Transfarmer';
 import { DeviceAssetMappingService } from '../../../Components/Services/ProcessSetup/DeviceAssetMappingService';
@@ -42,22 +43,31 @@ export class DeviceAssetMappingComponent extends FormComponentBase
   implements OnInit {
 
   deviceObj: Device[];
-  displayedColumns = ['DeviceAssetMapping', 'AssetText', 'ActiveText', 'actions'];
-  exampleDatabase: DeviceAssetDataService | null;
-  insertData: DeviceAssetDataService | null;
-  dataSource: ExampleDataSource | null;
+  transmissionLineObj: TransmissionLine[];
+  AssetGroupObj: AssetGroup[];
   objDeviceAssetMapping: DeviceAssetMapping[];
+  objDeviceAssetMapping_Delete: DeviceAssetMapping_Delete[];
   index: number;
   id: number;
   DeviceId: string;
+  TransmissionLineCode: string;
+  AssetGroupCode: string;
   mappingId: number;
   addObjDeviceAssetMapping: DeviceAssetMapping;
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
 
+  isDisabled: boolean;
+
   @ViewChild('auto', null) auto: any;
   keyword = 'name';
   data: CustomComboBox[];
+  TransmissionLine_data: CustomComboBox[];
+  Assetgroup_data: CustomComboBox[];
+
+  AssetDelete : any;
+
+
   hidePassword: boolean = true;
 
   selectEvent(item) {
@@ -65,28 +75,59 @@ export class DeviceAssetMappingComponent extends FormComponentBase
       value: item.id,
       text: item.name
     };
+    this.GetTableData(selectedData.value, this.TransmissionLineCode, this.AssetGroupCode)
     this.DeviceId = selectedData.value;
     this.objDeviceAssetMapping = [];
+    this.objDeviceAssetMapping_Delete = [];
+  }
 
-    this.insertData.dataChange.value.splice(0);
+  TransmissionselectEvent(item1) {
+    const selectedData_Transmission = {
+      value: item1.id,
+      text: item1.name
+    };
+    this.GetTableData(this.DeviceId, selectedData_Transmission.value, this.AssetGroupCode)
+    this.TransmissionLineCode = selectedData_Transmission.value;
+    this.objDeviceAssetMapping = [];
+    this.objDeviceAssetMapping_Delete = [];
+  }
 
-    this.exampleDatabase.dataChange.value.splice(0, 10000);
-    this.refreshTable();
-    this.deviceAssetMappingService.getDeviceAssetMapping(selectedData.value).subscribe(
+  AssetGroupselectEvent(item2) {
+    const selectedData_Aseet = {
+      value: item2.id,
+      text: item2.name
+    };
+    this.GetTableData(this.DeviceId, this.TransmissionLineCode, selectedData_Aseet.value)
+    this.AssetGroupCode = selectedData_Aseet.value;
+    this.objDeviceAssetMapping = [];
+    this.objDeviceAssetMapping_Delete = [];
+  }
+
+  GetTableData(deviceid: string, transmissionLineCode: string, assetGroupCode: string) {
+    console.log(this.objDeviceAssetMapping);
+    this.deviceAssetMappingService.getDeviceAssetMappingNew(deviceid, transmissionLineCode, assetGroupCode).subscribe(
       (par) => {
         this.objDeviceAssetMapping = this.deviceAssetMappingTransfarmer.
           DeviceAssetMappingTransfarmers(par);
-        this.objDeviceAssetMapping.forEach(a => {
-          a.deviceId = selectedData.value;
-        });
-        this.objDeviceAssetMapping.forEach(element => {
-          this.exampleDatabase.dataChange.value.push(element);
-          this.refreshTable();
-        });
-
+        //this.objDeviceAssetMapping.forEach(a => {
+        // a.deviceId = deviceid;
+        //a.
+        // });            
       },
       (err: any) => console.log(err));
+
+    this.isDisabled = false;
+
+    // console.log(this.objDeviceAssetMapping.length);
+
+    /*if(this.objDeviceAssetMapping.length > 0) {
+       this.isDisabled = false;
+    }
+    else{
+       this.isDisabled = true;
+    }*/
   }
+
   my() {
     this.hidePassword = !this.hidePassword;
     var name = document.getElementById('auto');
@@ -94,23 +135,21 @@ export class DeviceAssetMappingComponent extends FormComponentBase
     this.auto.focus();
     name.focus();
   }
-  onChangeSearch(val: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
-  }
 
   onFocused(e) {
     this.hidePassword = !this.hidePassword;
     // do something when input is focused
   }
-  myFunction() {
-    // alert('a');
-  }
+
   constructor(public httpClient: HttpClient,
     private router: Router,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private deviceService: DeviceService,
+    private transmissionLineService: TransmissionLineService,
+    private AssetGroupService: AssetGroupService,
     private deviceTransfarmer: DeviceTransfarmer,
+    private transmissionLineTransfarmer: TransmissionLineTransfarmer,
+    private AssetGroupTransfarmer: AssetGroupTransfarmer,
     private deviceAssetMappingTransfarmer: DeviceAssetMappingTransfarmer,
     private deviceAssetMappingService: DeviceAssetMappingService,
     public dialog: MatDialog,
@@ -132,83 +171,87 @@ export class DeviceAssetMappingComponent extends FormComponentBase
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
-
   ngOnInit() {
     this.deviceService.fillDrpAnswers().subscribe(
       (par) => {
         this.deviceObj = this.deviceTransfarmer.DeviceTransfarmers(par);
-
-
         this.data = [];
         this.deviceObj.forEach(a => {
           this.data.push({ id: a.deviceId, name: a.deviceName })
         })
       },
       (err: any) => console.log(err));
-    this.loadData();
+
+    this.transmissionLineService.fillDrpTransmissionLines().subscribe(
+      (par) => {
+        this.transmissionLineObj = this.transmissionLineTransfarmer.TransmissionLineTransfarmers(par);
+        this.TransmissionLine_data = [];
+        this.transmissionLineObj.forEach(a => {
+          this.TransmissionLine_data.push({ id: a.tlCode, name: a.tlNameENG })
+        })
+      },
+      (err: any) => console.log(err));
+
+    this.AssetGroupService.fillAssetGroupDrp().subscribe(
+      (par) => {
+        this.AssetGroupObj = this.AssetGroupTransfarmer.AssetGroupTransfarmers(par);
+        this.Assetgroup_data = [];
+        this.AssetGroupObj.forEach(a => {
+          this.Assetgroup_data.push({ id: a.assetGroupCode, name: a.assetGroupNameENG })
+        })
+      },
+      (err: any) => console.log(err));
+
+    this.isDisabled = true;
   }
 
-  refresh() {
-    this.loadData();
+  checkAllCheckBox(ev) {
+    this.objDeviceAssetMapping.forEach(x => x.assigned = ev.target.checked)
   }
 
-  addNew() {
-    const dialogRef = this.dialog.open(DeviceAssetAddDialogComponent, {
-
-      data: {
-        // isQuestionMandatory: ''.toString(),
-
-        deviceId: this.DeviceId,
-        isActive: ''.toString(),
-        updateFlag: '1'
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
-        this.insertData.dataChange.value.push(this.dataService.getDialogData());
-        this.refreshTable();
-      }
-    });
+  isAllCheckBoxChecked() {
+    // return this.objDeviceAssetMapping.every(p => p.assigned);
   }
 
   save(): void {
-    if (this.DeviceId === undefined) {
-      this.defaultLayoutComponent.Massage('Technical Error Please connect to Ajax Support team',
-        'Please select device name', 'modal-danger');
-      return;
-    }
-    if (this.dataSource.filteredData.length < 1) {
-      this.defaultLayoutComponent.Massage('Technical Error Please connect to Ajax Support team',
-        'No Item Found', 'modal-danger');
-      return;
-    }
-    this.dataSource.filteredData.forEach(element => {
-      element.deviceId = this.DeviceId;
-      element.updateFlag = this.DeviceId;
-      element.createdBy = localStorage.getItem('username');
-      element.createdDate = this.globalService.GerCurrntDateStamp();
-      element.modifiedBy = localStorage.getItem('username');
-      element.modifiedDate = this.globalService.GerCurrntDateStamp();
-    });
-    this.objDeviceAssetMapping = [];
-    this.objDeviceAssetMapping = this.dataSource.filteredData.filter(e => {
-    });
+    this.objDeviceAssetMapping.forEach(x => x.createdBy = localStorage.getItem('username'));
+    this.objDeviceAssetMapping.forEach(x => x.modifiedBy = localStorage.getItem('username'));
+    this.objDeviceAssetMapping.forEach(x => x.createdDate = this.globalService.GerCurrntDateStamp());
+    this.objDeviceAssetMapping.forEach(x => x.modifiedDate = this.globalService.GerCurrntDateStamp());
+    this.objDeviceAssetMapping.forEach(x => x.deviceId = this.DeviceId);
 
+    //for delete filter data
+    this.objDeviceAssetMapping_Delete = this.objDeviceAssetMapping.filter(SubResultProd =>
+      SubResultProd.assigned.toString() === 'false' || SubResultProd.assigned.toString() === 'true'); 
+     
+    this.AssetDelete = this.objDeviceAssetMapping_Delete.map(t=>t.assetCode);  
+
+    this.deviceAssetMappingService.Delete(this.DeviceId,this.AssetDelete).subscribe(
+          (par) => {
+            console.log(par.status);
+            if (par.status === 'Success') {             
+              this.objDeviceAssetMapping_Delete = [];       
+            }            
+          }
+        );
+
+    //for insert filter data
+    this.objDeviceAssetMapping = this.objDeviceAssetMapping.filter(SubResultProd =>
+      (SubResultProd.assigned.toString() === 'true'|| SubResultProd.isActive.toString() === '1'));   
+  
     this.deviceAssetMappingService.Save(this.deviceAssetMappingTransfarmer.
-      ObjectToEntityDeviceAssetMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
+      ObjectToEntityDeviceAssetMappingTransfarmers(this.objDeviceAssetMapping)).subscribe(
         (par) => {
           console.log(par.status);
           if (par.status === 'Success') {
             this.defaultLayoutComponent.Massage('',
-              'Data saved successfully !', 'modal-info');
-            this.router.navigate(['DeviceAssetMapping']);
-            this.DeviceId = this.DeviceId;
-            this.GetRouteData(this.DeviceId);
+            'Data saved successfully !', 'modal-info');
+            this.objDeviceAssetMapping = [];        
+            this.isDisabled = true;           
           }
           else if (par.status === 'Failed') {
             this.defaultLayoutComponent.Massage('',
-              'Asset already exist', 'modal-info');
+              'Asset already exist / Asset unmapped.', 'modal-info');
           } else {
             this.defaultLayoutComponent.Massage('',
               'Technical Error Please connect to Ajax Support team', 'modal-info');
@@ -216,218 +259,4 @@ export class DeviceAssetMappingComponent extends FormComponentBase
         }
       );
   }
-
-  GetRouteData(Device_Id: string): void {
-    const selectedData = {
-      value: Device_Id,
-      text: Device_Id
-    };
-    this.objDeviceAssetMapping = [];
-    this.insertData.dataChange.value.splice(0);
-    this.exampleDatabase.dataChange.value.splice(0, 10000);
-    this.refreshTable();
-    this.deviceAssetMappingService.getDeviceAssetMapping(selectedData.value).subscribe(
-      (par) => {
-        this.objDeviceAssetMapping = this.deviceAssetMappingTransfarmer.
-          DeviceAssetMappingTransfarmers(par);
-        this.objDeviceAssetMapping.forEach(a => {
-          a.deviceId = selectedData.value;
-        });
-        this.objDeviceAssetMapping.forEach(element => {
-          this.exampleDatabase.dataChange.value.push(element);
-          this.refreshTable();
-        });
-      },
-      (err: any) => console.log(err));
-  }
-
-
-  DeviceChange(event) {
-    const target = event.source.selected._element.nativeElement;
-    const selectedData = {
-      value: event.value,
-      text: target.innerText.trim()
-    };
-    this.objDeviceAssetMapping = [];
-
-
-    this.insertData.dataChange.value.splice(0);
-
-    this.exampleDatabase.dataChange.value.splice(0, 10000);
-    this.refreshTable();
-    this.deviceAssetMappingService.getDeviceAssetMapping(selectedData.value).subscribe(
-      (par) => {
-        this.objDeviceAssetMapping = this.deviceAssetMappingTransfarmer.
-          DeviceAssetMappingTransfarmers(par);
-        this.objDeviceAssetMapping.forEach(a => {
-          a.deviceId = selectedData.value;
-        });
-        this.objDeviceAssetMapping.forEach(element => {
-          this.exampleDatabase.dataChange.value.push(element);
-          this.refreshTable();
-        });
-
-      },
-      (err: any) => console.log(err));
-  }
-
-  startEdit(i: number,
-    daId: number,
-    assetCode: string,
-    assetText: string,
-    sortBy: string,
-    isActive: string) {
-    this.id = daId;
-    // index row is used just for debugging proposes and can be removed
-    this.index = i;
-    const dialogRef = this.dialog.open(DeviceAssetEditDialogComponent, {
-      data: {
-        daId: daId,
-        assetCode: assetCode,
-        assetName: assetText,
-        sortBy: sortBy,
-        isActive: isActive,
-        updateFlag: '1'
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.daId === this.id);
-        // Then you update that record using data from dialogData (values you enetered)
-        this.exampleDatabase.dataChange.value[foundIndex] = this.dataService.getDialogData();
-        // Added by ...
-        const findInsertIndex = this.insertData.dataChange.value.findIndex(x => x.daId === this.id);
-        if (findInsertIndex > -1) {
-          this.insertData.dataChange.value[findInsertIndex] = this.dataService.getDialogData();
-        } else {
-          this.insertData.dataChange.value.push(this.exampleDatabase.dataChange.value[foundIndex]);
-        }
-        // And lastly refresh table
-        this.refreshTable();
-      }
-    });
-  }
-
-  private refreshTable() {
-    this.paginator._changePageSize(this.paginator.pageSize);
-  }
-  public loadData() {
-    this.exampleDatabase = new DeviceAssetDataService(this.httpClient);
-    this.insertData = new DeviceAssetDataService(this.httpClient);
-    this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator, this.sort);
-
-  }
 }
-
-export class ExampleDataSource extends DataSource<DeviceAssetMapping> {
-  _filterChange = new BehaviorSubject('');
-
-  get filter(): string {
-    return this._filterChange.value;
-  }
-
-  set filter(filter: string) {
-    this._filterChange.next(filter);
-  }
-
-  filteredData: DeviceAssetMapping[] = [];
-  renderedData: DeviceAssetMapping[] = [];
-
-  constructor(public _exampleDatabase: DeviceAssetDataService,
-    public _paginator: MatPaginator,
-    public _sort: MatSort) {
-    super();
-    // Reset to the first page when the user changes the filter.
-    this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
-  }
-
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<DeviceAssetMapping[]> {
-    // Listen for any changes in the base data, sorting, filtering, or pagination
-    const displayDataChanges = [
-      this._exampleDatabase.dataChange,
-      this._sort.sortChange,
-      this._filterChange,
-      this._paginator.page
-    ];
-    this._exampleDatabase.getAllDeviceAssetMappings();
-
-
-    return merge(...displayDataChanges).pipe(map(() => {
-      // Filter data
-      this.filteredData = this._exampleDatabase.data.slice().filter((deviceAssetMapping: DeviceAssetMapping) => {
-        const searchStr = (deviceAssetMapping.daId + deviceAssetMapping.assetCode
-          + deviceAssetMapping.sortBy + deviceAssetMapping.isActiveText).toLowerCase();
-        return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
-      });
-
-      // Sort filtered data
-      const sortedData = this.sortData(this.filteredData.slice());
-
-      // Grab the page's slice of the filtered sorted data.
-      const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-      this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
-      return this.renderedData;
-    }
-    ));
-  }
-
-  disconnect() { }
-
-  /** Returns a sorted copy of the database data. */
-  sortData(data: DeviceAssetMapping[]): DeviceAssetMapping[] {
-    if (!this._sort.active || this._sort.direction === '') {
-      return data;
-    }
-
-    return data.sort((a, b) => {
-      let propertyA: number | string = '';
-      let propertyB: number | string = '';
-
-      switch (this._sort.active) {
-        case 'DeviceAssetMapping': [propertyA, propertyB] = [a.daId, b.daId]; break;
-        case 'AssetText': [propertyA, propertyB] = [a.assetName, b.assetName]; break;
-        case 'SortBy': [propertyA, propertyB] = [a.sortBy, b.sortBy]; break;
-      }
-
-      const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-      const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
-
-      return (valueA < valueB ? -1 : 1) * (this._sort.direction === 'asc' ? 1 : -1);
-    });
-  }
-}
-
-/*import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { ProcessService1 } from '../../../Components/Services/Masters/ProcessService1';
-import { FormService} from '../../../Components/Services/Masters/FormService';
-
-@Component({
-  selector: 'app-process-form-mapping',
-  templateUrl: './process-form-mapping.component.html',
- // styleUrls: ['./create-account.component.css']
-})
-export class ProcessFormMappingComponent implements OnInit {
-  processFormMappingForm: FormGroup;
-  processes : {};
-  forms: {};
-
-  constructor(private processService1: ProcessService1, private formService: FormService) { }
-  ngOnInit() {
-    this.processService1.fillDrpProcess().subscribe(
-      data => this.processes = data
-    );
-
-    this.formService.fillDrpForms().subscribe(
-      data => this.forms = data
-    );
-
-    this.processFormMappingForm = new FormGroup({
-      country: new FormControl(''),
-      form: new FormControl(''),
-    });
-  }
-}*/

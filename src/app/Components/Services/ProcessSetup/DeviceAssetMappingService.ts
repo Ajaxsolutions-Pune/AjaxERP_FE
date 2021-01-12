@@ -8,6 +8,7 @@ import { DeviceAssetMappingEntity } from '../../Module/ProcessSetup/DeviceAssetM
 @Injectable()
 export class DeviceAssetMappingService {
     str: string;
+    AssetDelete : any;
     env = environment;
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
@@ -26,8 +27,26 @@ export class DeviceAssetMappingService {
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
+    getDeviceAssetMappingNew(deviceId: string,TransmissionLineCode:string,AssetGroupCode:string): Observable<DeviceAssetMappingEntity[]> {
+      return this.httpClient.get<DeviceAssetMappingEntity[]>(
+            this.str + '/GetDeviceAssetMapping/getList/'+deviceId+'/'+AssetGroupCode+'?transmissionLineCode='+TransmissionLineCode
+            , this.env.httpOptions).pipe(catchError(this.handleError));           
+    }
+
+    //GetDeviceAssetMapping/getList/4/2?transmissionLineCode=BB
+
     Save(saveEntityObj: DeviceAssetMappingEntity[]): Observable<Insertstatus> {
         return this.httpClient.post<Insertstatus>(this.str + '/DeviceAssetMapping/createList', saveEntityObj
+            , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+
+    /*Delete(deviceId: string,TransmissionLineCode:string,AssetGroupCode:string): Observable<Insertstatus> {
+        return this.httpClient.post<Insertstatus>(this.str + '/DeviceAssetMapping/createList'
+            , this.env.httpOptions).pipe(catchError(this.handleError));
+    }*/
+
+    Delete(deviceId: string, AssetDelete): Observable<Insertstatus> {
+        return this.httpClient.post<Insertstatus>(this.str + '/DeviceAssetMapping/delete/'+ deviceId, AssetDelete
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 

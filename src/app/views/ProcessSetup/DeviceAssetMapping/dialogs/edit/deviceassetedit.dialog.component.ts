@@ -88,12 +88,12 @@ export class DeviceAssetEditDialogComponent implements OnInit {
   stopEdit(): void {
     this.objnextAssetIdText = this.asset.
       find(element => element.assetCode === this.data.assetCode).assetNameENG;
-    this.data.assetName = this.objnextAssetIdText;
-    if (this.data.isActive.toString() === 'true') {
-      this.data.isActiveText = 'Active';
-    } else {
-      this.data.isActiveText = 'Inactive';
-    }
-    this.dataService.updateDeviceAssetMapping(this.data);
+   // this.data.assetName = this.objnextAssetIdText;
+   // if (this.data.isActive.toString() === 'true') {
+   //   this.data.isActiveText = 'Active';
+   // } else {
+    //  this.data.isActiveText = 'Inactive';
+   // }
+   // this.dataService.updateDeviceAssetMapping(this.data);
   }
 }

@@ -1,32 +1,11 @@
-<!--<div class="row">
-    <div class="col-md-4"></div>
-    <mat-form-field class="col-md-4">
-        <mat-label>Device</mat-label>
-        <mat-select required  [(ngModel)]="DeviceId"
-         (selectionChange)="DeviceChange($event)">
-            <mat-option *ngFor="let device of deviceObj" [value]="device.deviceId">
-              {{device.deviceId}} - {{device.deviceName}}
-            </mat-option>
-        </mat-select>
-        <mat-error>
-            {{formErrors['ControlDeviceCode']}}
-        </mat-error>
-    </mat-form-field>
-  </div>
--->
-  
-
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4" style="padding-bottom:2%;">
-      <div class="ng-autocompletein">
-        <div class="row">
+  <div style="margin-top: -30px;" class="row">
+    <div class="col-md-4 pull-left" style="padding-bottom:2%;">     
+      <div class="ng-autocompletein">      
           <div class="input-container">
             <ng-autocomplete [data]="data" #auto
              [searchKeyword]="keyword" placeHolder="Select Device Name"
               (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
-               id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)' 
-               
+               id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'                
               [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
             </ng-autocomplete>
             <ng-template #itemTemplate let-item>
@@ -34,90 +13,111 @@
             </ng-template>
             <ng-template #notFoundTemplate let-notFound>
               <div [innerHTML]="notFound"></div>
-            </ng-template>
-           <!--<i class="icon" (click)="my()"> 
-             <mat-icon>{{hidePassword ? 'keyboard_arrow_left' : 'keyboard_arrow_down'}}</mat-icon></i>-->
-             
+            </ng-template>         
             <i class="icon" (click)="my()"> 
               <mat-icon>arrow_drop_down</mat-icon></i>
           </div>
+        </div>     
+  </div>
+
+  <div class="col-md-3 pull-left" style="padding-bottom:2%;">
+    <div class="ng-autocompletein">      
+        <div class="input-container">
+          <ng-autocomplete [data]="Assetgroup_data" #auto
+           [searchKeyword]="keyword" placeHolder="Select Asset Group"
+            (selected)='AssetGroupselectEvent($event)' (inputChanged)='onChangeSearch($event)'
+             id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'              
+            [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item1.name"></a>
+          </ng-template>
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>        
+          <i class="icon" (click)="my()"> 
+            <mat-icon>arrow_drop_down</mat-icon></i>
         </div>
       </div>
-      <div class="col-md-4"></div>
-    </div>
-    </div>
-    <div class="container mat-elevation-z8">
-      <mat-table #table [dataSource]="dataSource"
-      [matSortDisableClear]="false"
-      matSort class="mat-cell">
-        ng update @angular/cli @angular/core
-        
-    
-        <ng-container matColumnDef="DeviceAssetMapping">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Map Id</mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.daId}}</mat-cell>
-        </ng-container>   
-    
-        <ng-container matColumnDef="AssetText">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Asset</mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.assetCode}} - {{row.assetName}}</mat-cell>
-        </ng-container>
+  </div>  
+
+  
+  <div class="col-md-5 pull-left" style="padding-bottom:2%;">
+    <div class="ng-autocompletein">      
+        <div class="input-container">
+          <ng-autocomplete [data]="TransmissionLine_data" #auto
+           [searchKeyword]="keyword" placeHolder="Select Transmission Line"
+            (selected)='TransmissionselectEvent($event)' (inputChanged)='onChangeSearch($event)'
+             id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'              
+            [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>        
+          <i class="icon" (click)="my()"> 
+            <mat-icon>arrow_drop_down</mat-icon></i>
+        </div>
+      </div>      
+  </div>
+</div>
+  
+
+
+<table style="margin-top:-20px;" class="table table-responsive-sm table-hover table-outline mb-0">
+  <thead class="thead-light">
+    <tr>
+      <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"> &nbsp; Assign All</th>
+      <th>Asset Code</th>      
+      <!--<th>Asset Code</th> -->
+      <th>Asset Name</th>
+     <!-- <th>Is Active</th> -->
+      <th></th>
+     
+    </tr>
+  </thead>
+  <tbody>
+   <tr *ngFor="let DeviceAssetMapping of objDeviceAssetMapping">     
+      <td>         
+        <mat-checkbox name="chkisActive"                
+         [(ngModel)]="DeviceAssetMapping.assigned">Assign
+        </mat-checkbox>
+      </td>
+     <!-- <td>               
+        <div>{{DeviceAssetMapping.assigned}}</div>
+      </td>-->
+      <td>              
+        <div>{{DeviceAssetMapping.assetCode}}</div>
+      </td>
+      <td>
+        <div>{{DeviceAssetMapping.assetName}}</div>
+      </td>
+      <!--<td>
+        <mat-checkbox     
+         [(ngModel)]="DeviceAssetMapping.isActive">Active
+        </mat-checkbox> 
+      </td>-->
+       <td>
        
-        <!--<ng-container matColumnDef="SortBy">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Sort</mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.sortBy}}</mat-cell>
-        </ng-container>-->
-        
-        <ng-container matColumnDef="ActiveText">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.isActiveText}}</mat-cell>
-        </ng-container> 
-         <!-- actions -->
-        <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef>
-            <button mat-icon-button color="primary" (click)="addNew()">
-              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-            </button>
-          </mat-header-cell>
+      </td>
     
-          <mat-cell *matCellDef="let row; let i=index;">
-            <button mat-icon-button color="accent" (click)="startEdit(i,
-            row.daId,
-            row.assetCode,      
-            row.assetName,      
-            row.sortBy,
-            row.isActive)">
-              <mat-icon aria-label="Edit">edit</mat-icon>
-            </button>
-    
-          </mat-cell>
-        </ng-container>
-    
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
-    
-    
-      <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-        No results
-      </div>
-      <mat-paginator #paginator
-                    [length]="dataSource.filteredData.length"
-                    [pageIndex]="0"
-                    [pageSize]="10"
-                    [pageSizeOptions]="[5, 10, 25, 100]">
-      </mat-paginator>
-    </div>
-    
-    <div class="row" style="padding-top: 20px;">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-          <button mat-raised-button
-          (click)="save()"
-              color="primary">Submit</button>
+    </tr>       
+  </tbody>  
+</table>
+
+<div class="col-md-12" style="margin-top: 10px;">     
+  <div class="text-center">
+      <button mat-raised-button 
+      (click)="save()"
+          color="primary" [disabled]="this.isDisabled">Submit</button>
+          &nbsp; &nbsp;
           <button mat-raised-button color="warn" routerLink="/dashboard">
-              Cancel</button>
-      </div>
-      <div class="col-md-4"></div>
-    </div>
+            Cancel</button>
+  </div>  
+</div>
+
+  
+
     
