@@ -31,8 +31,8 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
-                <input matInput placeholder="Asset Name" required [(ngModel)]="bindObj.assetNameENG" #txtassetNameENG
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagassetNameENG">
+                <input matInput placeholder="Asset Name" [required]="!requiredFlagassetNameENG" [(ngModel)]="bindObj.assetNameENG" #txtassetNameENG
                   (keypress)="special_char_val($event)"
                    maxlength="100" formControlName="ControlassetNameENG"
                   name="txtassetNameENG">
@@ -42,9 +42,9 @@
                   </span>
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagassetGroupCode">
                 <mat-label> Asset Group</mat-label>
-                <mat-select required formControlName="ControlassetGroupCode"
+                <mat-select required formControlName="ControlassetGroupCode" [required]="!requiredFlagassetGroupCode"
                   (selectionChange)="AssetGroupChange($event)" [(ngModel)]="bindObj.assetGroupCode">
                   <mat-option>Asset Group</mat-option>
                   <mat-option *ngFor="let assetGroup of assetGroupObj" [value]="assetGroup.assetGroupCode">
@@ -59,16 +59,16 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
-                <input matInput placeholder="Place Name" required maxlength="100" (keypress)="special_char_val($event)"
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagplaceName">
+                <input matInput placeholder="Place Name"  maxlength="100" (keypress)="special_char_val($event)"
                   formControlName="ControlplaceName" [(ngModel)]="bindObj.placeName" #txtplaceName name="txtplaceName">
                 <mat-error>
                   {{ formErrors['ControlplaceName'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagAssetCategory">
                 <mat-label>Asset Category</mat-label>
-                <mat-select required formControlName="ControlAssetCategory" [(ngModel)]="bindObj.assetCategoryCode">
+                <mat-select [required]="!requiredFlagAssetCategory" formControlName="ControlAssetCategory" [(ngModel)]="bindObj.assetCategoryCode">
                   <mat-option>Asset Category</mat-option>
                   <mat-option *ngFor="let assetCategory of assetCategoryObj" [value]="assetCategory.assetCategoryCode">
                     {{assetCategory.assetCategoryNameENG}}
@@ -81,9 +81,9 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagcustomerCode">
                 <mat-label>Customer</mat-label>
-                <mat-select required formControlName="ControlcustomerCode" [(ngModel)]="bindObj.customerCode">
+                <mat-select [required]="!requiredFlagcustomerCode" formControlName="ControlcustomerCode" [(ngModel)]="bindObj.customerCode">
                   <mat-option>Customer</mat-option>
                   <mat-option *ngFor="let userEntity of CustomerEntityDrp"
                       [value]="userEntity.entityCode">
@@ -94,9 +94,9 @@
                   {{ formErrors['ControlcustomerCode'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagprojectCode">
                 <mat-label>Project</mat-label>
-                <mat-select required formControlName="ControlprojectCode" [(ngModel)]="bindObj.projectCode">
+                <mat-select  [required]="!requiredFlagprojectCode" formControlName="ControlprojectCode" [(ngModel)]="bindObj.projectCode">
                   <mat-option>Project</mat-option>
                   <mat-option *ngFor="let obj of drpProjectObj"
                       [value]="obj.projectCode">
@@ -111,9 +111,9 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagzoneCode">
                 <mat-label>Zone</mat-label>
-                <mat-select required formControlName="ControlzoneCode" [(ngModel)]="bindObj.zoneCode">
+                <mat-select [required]="!requiredFlagzoneCode" formControlName="ControlzoneCode" [(ngModel)]="bindObj.zoneCode">
                   <mat-option>Zone</mat-option>
                   <mat-option *ngFor="let zone of zoneObj" [value]="zone.zoneCode">
                     {{zone.zoneNameENG}}
@@ -123,9 +123,9 @@
                   {{ formErrors['ControlzoneCode'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagcircleCode">
                 <mat-label>Circle</mat-label>
-                <mat-select required formControlName="ControlcircleCode" [(ngModel)]="bindObj.circleCode">
+                <mat-select [required]="!requiredFlagcircleCode" formControlName="ControlcircleCode" [(ngModel)]="bindObj.circleCode">
                   <mat-option>Circle</mat-option>
                   <mat-option *ngFor="let circle of circleObj" [value]="circle.circleCode">
                     {{circle.circleNameENG}}
@@ -139,9 +139,9 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagclusterCode">
                 <mat-label>Cluster</mat-label>
-                <mat-select required formControlName="ControlclusterCode" [(ngModel)]="bindObj.clusterCode">
+                <mat-select [required]="!requiredFlagclusterCode" formControlName="ControlclusterCode" [(ngModel)]="bindObj.clusterCode">
                   <mat-option>Cluster</mat-option>
                   <mat-option *ngFor="let cluster of clusterObj" [value]="cluster.clusterCode">
                     {{cluster.clusterNameENG}}
@@ -151,9 +151,9 @@
                   {{ formErrors['ControlclusterCode'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagregionCode">
                 <mat-label>Region</mat-label>
-                <mat-select required formControlName="ControlregionCode" [(ngModel)]="bindObj.regionCode">
+                <mat-select [required]="!requiredFlagregionCode" formControlName="ControlregionCode" [(ngModel)]="bindObj.regionCode">
                   <mat-option>Region</mat-option>
                   <mat-option *ngFor="let region of regionObj" [value]="region.regionCode">
                     {{region.regionNameENG}}
@@ -167,9 +167,9 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagcountryCode">
                 <mat-label>Country</mat-label>
-                <mat-select required formControlName="ControlcountryCode" [(ngModel)]="bindObj.countryCode">
+                <mat-select [required]="!requiredFlagcountryCode" formControlName="ControlcountryCode" [(ngModel)]="bindObj.countryCode">
                   <mat-option>Country</mat-option>
                   <mat-option *ngFor="let country1 of countryObj" [value]="country1.countryCode">
                     {{country1.Country_Name_ENg}}
@@ -179,9 +179,9 @@
                   {{ formErrors['ControlcountryCode'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagstateCode">
                 <mat-label>State</mat-label>
-                <mat-select required formControlName="ControlstateCode" [(ngModel)]="bindObj.stateCode">
+                <mat-select [required]="!requiredFlagstateCode" formControlName="ControlstateCode" [(ngModel)]="bindObj.stateCode">
                   <mat-option>State</mat-option>
                   <mat-option *ngFor="let state of statesObj" [value]="state.state_Code">
                     {{state.State_Name_Eng}}
@@ -195,15 +195,15 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
-                <input matInput placeholder="Latitude" required maxlength="20" formControlName="Controllatitude"
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlaglatitude">
+                <input matInput placeholder="Latitude" [required]="!requiredFlaglatitude" maxlength="20" formControlName="Controllatitude"
                   [(ngModel)]="bindObj.latitude" #txtlatitude name="txtlatitude">
                 <mat-error>
                   {{ formErrors['Controllatitude'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
-                <input matInput placeholder="Longitude" maxlength="20" [(ngModel)]="bindObj.longitude" required
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlaglongitude">
+                <input matInput placeholder="Longitude" maxlength="20" [(ngModel)]="bindObj.longitude" [required]="!requiredFlaglongitude"
                   formControlName="Controllongitude" #txtlongitude name="txtlongitude">
                 <mat-error>
                   {{ formErrors['Controllongitude'] }}
@@ -213,15 +213,15 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
-                <input matInput placeholder="Radius" formControlName="ControlRedius" required
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagRedius">
+                <input matInput placeholder="Radius" formControlName="ControlRedius" [required]="!requiredFlagRedius"
                   [(ngModel)]="bindObj.redius" #txtredius name="txtredius">
                 <mat-error>
                   {{ formErrors['ControlRedius'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
-                <input matInput placeholder="PIN" maxlength="6" (keypress)="only_number_val($event)"
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagpinCode">
+                <input matInput placeholder="PIN" maxlength="6" (keypress)="only_number_val($event)" [required]="!requiredFlagpinCode"
                   [(ngModel)]="bindObj.pinCode" #txtpinCode formControlName="ControlpinCode" name="txtpinCode">
                 <mat-error>
                   {{ formErrors['ControlpinCode'] }}
@@ -231,9 +231,9 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagcolourCode">
                 <mat-label>Colour</mat-label>
-                <mat-select required formControlName="ControlcolourCode" [(ngModel)]="bindObj.colourCode">
+                <mat-select [required]="!requiredFlagcolourCode" formControlName="ControlcolourCode" [(ngModel)]="bindObj.colourCode">
                   <mat-option>Colour</mat-option>
                   <mat-option *ngFor="let colour of colourObj" [value]="colour.colourCode">
                     {{colour.colourNameENG}}
@@ -243,9 +243,9 @@
                   {{ formErrors['ControlcolourCode'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlaggeofenceCode">
                 <mat-label>Geofence</mat-label>
-                <mat-select required formControlName="ControlgeofenceCode" [(ngModel)]="bindObj.geofenceCode">
+                <mat-select [required]="!requiredFlaggeofenceCode" formControlName="ControlgeofenceCode" [(ngModel)]="bindObj.geofenceCode">
                   <mat-option>Geofence</mat-option>
                   <mat-option value="1">Yes</mat-option>
                   <mat-option value="0">No</mat-option>
@@ -258,9 +258,9 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagsharedCode">
                 <mat-label>Shared</mat-label>
-                <mat-select required formControlName="ControlsharedCode" [(ngModel)]="bindObj.sharedCode">
+                <mat-select [required]="!requiredFlagsharedCode" formControlName="ControlsharedCode" [(ngModel)]="bindObj.sharedCode">
                   <mat-option>Shared</mat-option>
                   <mat-option value="1">Yes</mat-option>
                   <mat-option value="0">No</mat-option>
@@ -269,9 +269,9 @@
                   {{ formErrors['ControlsharedCode'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagcircuitCode">
                 <mat-label>Circuit</mat-label>
-                <mat-select required formControlName="ControlcircuitCode" [(ngModel)]="bindObj.circuitCode">
+                <mat-select [required]="!requiredFlagcircuitCode" formControlName="ControlcircuitCode" [(ngModel)]="bindObj.circuitCode">
                   <mat-option>Circuit</mat-option>
                   <mat-option value="1">Double Circuit</mat-option>
                 </mat-select>
@@ -283,9 +283,9 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagconductorCode">
                 <mat-label>Conductor</mat-label>
-                <mat-select required formControlName="ControlconductorCode" [(ngModel)]="bindObj.conductorCode">
+                <mat-select [required]="!requiredFlagconductorCode" formControlName="ControlconductorCode" [(ngModel)]="bindObj.conductorCode">
                   <mat-option>Conductor</mat-option>
                   <mat-option value="1">
                     NA
@@ -295,9 +295,9 @@
                   {{ formErrors['ControlconductorCode'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagclassificationCode">
                 <mat-label>Classification</mat-label>
-                <mat-select required formControlName="ControlclassificationCode"
+                <mat-select [required]="!requiredFlagclassificationCode" formControlName="ControlclassificationCode"
                   [(ngModel)]="bindObj.classificationCode">
                   <mat-option>Classification</mat-option>
                   <mat-option value="1">
@@ -312,9 +312,9 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagstructureCode">
                 <mat-label>Structure</mat-label>
-                <mat-select required formControlName="ControlstructureCode" [(ngModel)]="bindObj.structureCode">
+                <mat-select [required]="!requiredFlagstructureCode" formControlName="ControlstructureCode" [(ngModel)]="bindObj.structureCode">
                   <mat-option>structure</mat-option>
                   <mat-option value="1">
                     NA
@@ -324,9 +324,9 @@
                   {{ formErrors['ControlstructureCode'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagpositionCode">
                 <mat-label>Position</mat-label>
-                <mat-select required formControlName="ControlpositionCode" [(ngModel)]="bindObj.positionCode">
+                <mat-select [required]="!requiredFlagpositionCode" formControlName="ControlpositionCode" [(ngModel)]="bindObj.positionCode">
                   <mat-option>Position</mat-option>
                   <mat-option value="1">
                     NA
@@ -340,9 +340,9 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagHubCode">
                 <mat-label>HUB</mat-label>
-                <mat-select required formControlName="ControlHubCode" [(ngModel)]="bindObj.hubCode">
+                <mat-select [required]="!requiredFlagHubCode" formControlName="ControlHubCode" [(ngModel)]="bindObj.hubCode">
                   <mat-option>HUB</mat-option>
                   <mat-option *ngFor="let obj of drpHubObj" [value]="obj.hubCode">
                     {{obj.hubNameENG}}
@@ -352,9 +352,9 @@
                   {{ formErrors['ControlHubCode'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagtlCode">
                 <mat-label>Transmission Line</mat-label>
-                <mat-select required formControlName="ControltlCode" [(ngModel)]="bindObj.tlCode">
+                <mat-select [required]="!requiredFlagtlCode" formControlName="ControltlCode" [(ngModel)]="bindObj.tlCode">
                   <mat-option>Transmission Line</mat-option>
                   <mat-option *ngFor="let obj of drpTransmissionLineObj" [value]="obj.tlCode">
                     {{obj.tlNameENG}}
@@ -368,17 +368,17 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-4">
-                <input matInput placeholder="emailId" required maxlength="30"
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagEmailId">
+                <input matInput placeholder="emailId" [required]="!requiredFlagEmailId" maxlength="30"
                  formControlName="ControlemailId"
                   [(ngModel)]="bindObj.emailId" #txtemailId name="txtemailId">
                 <mat-error>
                   {{ formErrors['ControlemailId'] }}
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="col-md-4">
+              <mat-form-field class="col-md-4" *ngIf="!visibleFlagmobileNo">
                 <input matInput placeholder="mobileNo" maxlength="20" 
-                [(ngModel)]="bindObj.mobileNo" required
+                [(ngModel)]="bindObj.mobileNo" [required]="!requiredFlagmobileNo"
                   formControlName="ControlmobileNo" #txtmobileNo name="txtmobileNo">
                 <mat-error>
                   {{ formErrors['ControlmobileNo'] }}
@@ -388,7 +388,7 @@
             </div>
             <div class="row">
               <div class="col-md-2"></div>
-              <mat-form-field class="col-md-8">
+              <mat-form-field class="col-md-8" *ngIf="!visibleFlagaddress">
                 <input matInput placeholder="Address" maxlength="200" [(ngModel)]="bindObj.address" #txtaddress
                   formControlName="Controladdress" name="txtaddress">
               </mat-form-field>

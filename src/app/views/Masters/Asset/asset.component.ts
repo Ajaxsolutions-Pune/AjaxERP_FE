@@ -38,7 +38,7 @@ import { GlobalService } from '../../../Components/Services/GlobalServices/Globa
 import { DeviceService } from '../../../Components/Services/Masters/DeviceService';
 import { DeviceTransfarmer } from '../../../Components/Transformer/Masters/Device-Transfarmer';
 import { Device } from '../../../Components/Module/Masters/Device.model';
-import { assetAsyncValidator } from '../../../helper/async-validator';
+import { answerAsyncValidator } from '../../../helper/async-validator';
 import { TransmissionLine } from '../../../Components/Module/Masters/TransmissionLine.model';
 import { Hub } from '../../../Components/Module/Masters/Hub.model';
 import { TransmissionLineService } from '../../../Components/Services/Masters/TransmissionLineService';
@@ -62,36 +62,99 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
 
   form!: FormGroup;
   errorMatcher = new CrossFieldErrorMatcher();
-  @Input() AssetInput: Asset;  bindObj: Asset;
-  ObjEntity: AssetEntity;  assetGroupObj: AssetGroup[];
-  statesObj: State[];  zoneObj: Zone[];
-  circleObj: Circle[];  clusterObj: Cluster[];
-  regionObj: Region[];  countryObj: Country[];
-  colourObj: Colour[];  deviceObj: Device[];
-  drpHubObj: Hub[];  drpProjectObj: Project[];
+  @Input() AssetInput: Asset; bindObj: Asset;
+  ObjEntity: AssetEntity; assetGroupObj: AssetGroup[];
+  statesObj: State[]; zoneObj: Zone[];
+  circleObj: Circle[]; clusterObj: Cluster[];
+  regionObj: Region[]; countryObj: Country[];
+  colourObj: Colour[]; deviceObj: Device[];
+  drpHubObj: Hub[]; drpProjectObj: Project[];
+
+  visibleFlagasset: boolean;
+  visibleFlagAssetCategory: boolean;
+  visibleFlagassetGroupCode: boolean;
+  visibleFlagprojectCode: boolean;
+  visibleFlagcircleCode: boolean;
+  visibleFlagregionCode: boolean;
+  visibleFlagstateCode: boolean;
+  visibleFlaglongitude: boolean;
+  visibleFlagcolourCode: boolean;
+  visibleFlagsharedCode: boolean;
+  visibleFlagconductorCode: boolean;
+  visibleFlagstructureCode: boolean;
+  visibleFlagEmailId: boolean;
+  visibleFlagassetNameENG: boolean;
+  visibleFlagplaceName: boolean;
+  visibleFlagcustomerCode: boolean;
+  visibleFlagzoneCode: boolean;
+  visibleFlagclusterCode: boolean;
+  visibleFlagcountryCode: boolean;
+  visibleFlaglatitude: boolean;
+  visibleFlagRedius: boolean;
+  visibleFlagpinCode: boolean;
+  visibleFlaggeofenceCode: boolean;
+  visibleFlagcircuitCode: boolean;
+  visibleFlagclassificationCode: boolean;
+  visibleFlagpositionCode: boolean;
+  visibleFlagHubCode: boolean;
+  visibleFlagtlCode: boolean;
+  visibleFlagmobileNo: boolean;
+  visibleFlagaddress: boolean;
+
+  requiredFlagasset: boolean;
+  requiredFlagAssetCategory: boolean;
+  requiredFlagassetGroupCode: boolean;
+  requiredFlagprojectCode: boolean;
+  requiredFlagcircleCode: boolean;
+  requiredFlagregionCode: boolean;
+  requiredFlagstateCode: boolean;
+  requiredFlaglongitude: boolean;
+  requiredFlagcolourCode: boolean;
+  requiredFlagsharedCode: boolean;
+  requiredFlagconductorCode: boolean;
+  requiredFlagstructureCode: boolean;
+  requiredFlagEmailId: boolean;
+  requiredFlagassetNameENG: boolean;
+  requiredFlagplaceName: boolean;
+  requiredFlagcustomerCode: boolean;
+  requiredFlagzoneCode: boolean;
+  requiredFlagclusterCode: boolean;
+  requiredFlagcountryCode: boolean;
+  requiredFlaglatitude: boolean;
+  requiredFlagRedius: boolean;
+  requiredFlagpinCode: boolean;
+  requiredFlaggeofenceCode: boolean;
+  requiredFlagcircuitCode: boolean;
+  requiredFlagclassificationCode: boolean;
+  requiredFlagpositionCode: boolean;
+  requiredFlagHubCode: boolean;
+  requiredFlagtlCode: boolean;
+  requiredFlagmobileNo: boolean;
+  requiredFlagaddress: boolean;
+
   CustomerEntityDrp: UserEntity_[];
   env = environment;
   str: string;
   drpTransmissionLineObj: TransmissionLine[];
   assetCategoryObj: AssetCategory[];
-  constructor(private route: ActivatedRoute,    private httpClient: HttpClient,
-    private _router: Router,    private globalService: GlobalService,
+  constructor(private route: ActivatedRoute, private httpClient: HttpClient,
+    private _router: Router, private globalService: GlobalService,
     private defaultLayoutComponent: DefaultLayoutComponent,
-    private assetService: AssetService,    private assetTransfarmer: AssetTransfarmer,
-    private deviceService: DeviceService,    private deviceTransfarmer: DeviceTransfarmer,
-    private stateService: StateService,    private stateTransfarmer: StateTransfarmer,
-    private assetGroupService: AssetGroupService,    private assetGroupTransfarmer: AssetGroupTransfarmer,
-    private zoneService: ZoneService,    private zoneTransfarmer: ZoneTransfarmer,
-    private circleService: CircleService,    private circleTransfarmer: CircleTransfarmer,
-    private clusterService: ClusterService,    private clusterTransfarmer: ClusterTransfarmer,
-    private regionService: RegionService,    private regionTransfarmer: RegionTransfarmer,
-    private countryService: CountryService,    private countryTransfarmer: CountryTransfarmer,
-    private colourService: ColourService,    private colourTransfarmer: ColourTransfarmer,
-    private assetCategoryService: AssetCategoryService,    private assetCategoryTransfarmer: AssetCategoryTransfarmer,
+    private assetService: AssetService, private assetTransfarmer: AssetTransfarmer,
+    private deviceService: DeviceService, private deviceTransfarmer: DeviceTransfarmer,
+    private stateService: StateService, private stateTransfarmer: StateTransfarmer,
+    private assetGroupService: AssetGroupService, private assetGroupTransfarmer: AssetGroupTransfarmer,
+    private zoneService: ZoneService, private zoneTransfarmer: ZoneTransfarmer,
+    private circleService: CircleService, private circleTransfarmer: CircleTransfarmer,
+    private clusterService: ClusterService, private clusterTransfarmer: ClusterTransfarmer,
+    private regionService: RegionService, private regionTransfarmer: RegionTransfarmer,
+    private countryService: CountryService, private countryTransfarmer: CountryTransfarmer,
+    private colourService: ColourService, private colourTransfarmer: ColourTransfarmer,
+    private assetCategoryService: AssetCategoryService, private assetCategoryTransfarmer: AssetCategoryTransfarmer,
     private transmissionLineService: TransmissionLineService,
     private transmissionLineTransfarmer: TransmissionLineTransfarmer,
-    private hubService: HubService,    private hubTransfarmer: HubTransfarmer,
-    private projectService: ProjectService,    private projectTransfarmer: ProjectTransfarmer,
+    private hubService: HubService, private hubTransfarmer: HubTransfarmer,
+    private projectService: ProjectService, private projectTransfarmer: ProjectTransfarmer,
     private formBuilder: FormBuilder) {
     super();
     this.validationMessages = {
@@ -180,19 +243,19 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       }
     };
     this.formErrors = {
-      ControlassetCode: '',     ControlassetNameENG: '',
-      ControlAssetCategory: '',      ControlplaceName: '',
-      ControlassetGroupCode: '',      ControlcustomerCode: '',
-      ControlprojectCode: '',      ControlzoneCode: '',
-      ControlcircleCode: '',      ControlclusterCode: '',
-      ControlregionCode: '',      ControlcountryCode: '',
-      ControlstateCode: '',      Controllatitude: '',
-      Controllongitude: '',      ControlRedius: '',
-      ControlcolourCode: '',      ControlgeofenceCode: '',
-      ControlsharedCode: '',      ControlcircuitCode: '',
-      ControlconductorCode: '',      ControlclassificationCode: '',
-      ControlstructureCode: '',      ControlpositionCode: '',
-      ControlEmailId: '',      ControlmobileNo: ''
+      ControlassetCode: '', ControlassetNameENG: '',
+      ControlAssetCategory: '', ControlplaceName: '',
+      ControlassetGroupCode: '', ControlcustomerCode: '',
+      ControlprojectCode: '', ControlzoneCode: '',
+      ControlcircleCode: '', ControlclusterCode: '',
+      ControlregionCode: '', ControlcountryCode: '',
+      ControlstateCode: '', Controllatitude: '',
+      Controllongitude: '', ControlRedius: '',
+      ControlcolourCode: '', ControlgeofenceCode: '',
+      ControlsharedCode: '', ControlcircuitCode: '',
+      ControlconductorCode: '', ControlclassificationCode: '',
+      ControlstructureCode: '', ControlpositionCode: '',
+      ControlEmailId: '', ControlmobileNo: ''
     };
     this.str = this.env.apiServiceIPPort;
   }
@@ -224,19 +287,19 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       window.location.href = 'login';
     }
     this.bindObj = {
-      ouCode: this.env.OuCode,      assetCode: null,
-      assetNameENG: null,      deviceId: null,
-      sortBy: null,      source: 'ERP',
-      assetNameUNI: null,      placeName: null,
+      ouCode: this.env.OuCode, assetCode: null,
+      assetNameENG: null, deviceId: null,
+      sortBy: null, source: 'ERP',
+      assetNameUNI: null, placeName: null,
       assetGroupCode: null,
-      assetCategoryCode: null,      customerCode: null,
-      projectCode: null,      zoneCode: null,
-      circleCode: null,      clusterCode: null,
-      countryCode: null,      stateCode: null,
-      latitude: null,      longitude: null,
-      redius: null,      pinCode: null,
-      regionCode: null,      address: null,
-      colourCode: null,      geofenceCode: null,
+      assetCategoryCode: null, customerCode: null,
+      projectCode: null, zoneCode: null,
+      circleCode: null, clusterCode: null,
+      countryCode: null, stateCode: null,
+      latitude: null, longitude: null,
+      redius: null, pinCode: null,
+      regionCode: null, address: null,
+      colourCode: null, geofenceCode: null,
       sharedCode: null,
       circuitCode: null,
       conductorCode: null,
@@ -255,11 +318,9 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       isRetag: '',
       locationName: '',
     };
-
     this.deviceService.getDevices().subscribe(
       (par) => this.deviceObj = this.deviceTransfarmer.DeviceTransfarmers(par),
       (err: any) => console.log(err));
-
     this.stateService.getStates().subscribe(
       (par) => this.statesObj = this.stateTransfarmer.StateTransfarmers(par),
       (err: any) => console.log(err));
@@ -314,68 +375,35 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
 
       this.form = this.formBuilder.group({
         ControlassetCode: ['', []],
-        ControlassetNameENG: ['', [Validators.required],
-         [assetAsyncValidator(this.assetService, str)]],
-        ControlAssetCategory: ['', [
-          Validators.required]],
+        ControlassetNameENG: ['', []],
+        ControlAssetCategory: ['', []],
         ControlassetNameUNI: ['', []],
-        ControlplaceName: ['', [
-          Validators.required]],
-        ControlassetGroupCode: ['', [
-          Validators.required]],
-        ControlcustomerCode: ['', [
-          Validators.required]],
-        ControlprojectCode: ['', [
-          Validators.required]],
-        ControlzoneCode: ['', [
-          Validators.required]],
-        ControlcircleCode: ['', [
-          Validators.required]],
-        ControlclusterCode: ['', [
-          Validators.required]],
-        ControlregionCode: ['', [
-          Validators.required]],
-        ControlcountryCode: ['', [
-          Validators.required]],
-        ControlstateCode: ['', [
-          Validators.required]],
-        Controllatitude: ['', [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(20),
-          Validators.pattern('^[0-9]+(.[0-9]{0,17})?$')
-        ]],
-        Controllongitude: ['', [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(20),
-          Validators.pattern('^[0-9]+(.[0-9]{0,17})?$')
-        ]],
-        ControlRedius: ['', [
-          Validators.required]],
+        ControlplaceName: ['', []],
+        ControlassetGroupCode: ['', []],
+        ControlcustomerCode: ['', []],
+        ControlprojectCode: ['', []],
+        ControlzoneCode: ['', []],
+        ControlcircleCode: ['', []],
+        ControlclusterCode: ['', []],
+        ControlregionCode: ['', []],
+        ControlcountryCode: ['', []],
+        ControlstateCode: ['', []],
+        Controllatitude: ['', []],
+        Controllongitude: ['', []],
+        ControlRedius: ['', []],
         ControlpinCode: ['', []],
-        ControlcolourCode: ['', [
-          Validators.required]],
-        ControlgeofenceCode: ['', [
-          Validators.required]],
-        ControlsharedCode: ['', [
-          Validators.required]],
-        ControlcircuitCode: ['', [
-          Validators.required]],
-        ControlconductorCode: ['', [
-          Validators.required]],
-        ControlclassificationCode: ['', [
-          Validators.required]],
-        ControlstructureCode: ['', [
-          Validators.required]],
-        ControlpositionCode: ['', [
-          Validators.required]],
+        ControlcolourCode: ['', []],
+        ControlgeofenceCode: ['', []],
+        ControlsharedCode: ['', []],
+        ControlcircuitCode: ['', []],
+        ControlconductorCode: ['', []],
+        ControlclassificationCode: ['', []],
+        ControlstructureCode: ['', []],
+        ControlpositionCode: ['', []],
         ControlisActive: ['', []],
         Controladdress: ['', []],
-        ControlHubCode: ['', [
-          Validators.required]],
-        ControltlCode: ['', [
-          Validators.required]],
+        ControlHubCode: ['', []],
+        ControltlCode: ['', []],
         ControlemailId: ['', []],
         ControlmobileNo: ['', []],
         ControlisRetag: ['', []],
@@ -383,6 +411,35 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.form.controls['ControlassetCode'].disable();
     });
 
+    this.requiredFlagassetGroupCode = false;
+    this.requiredFlagplaceName = true;
+    this.requiredFlagAssetCategory = true;
+    this.requiredFlagprojectCode = true;
+    this.requiredFlagzoneCode = true;
+    this.requiredFlagcircleCode = true;
+    this.requiredFlagclusterCode = true;
+    this.requiredFlagregionCode = true;
+    this.requiredFlagsharedCode = true;
+    this.requiredFlagcircuitCode = true;
+    this.requiredFlagconductorCode = true;
+    this.requiredFlagclassificationCode = true;
+    this.requiredFlagstructureCode = true;
+    this.requiredFlagpositionCode = true;
+    this.requiredFlagHubCode = true;
+    this.requiredFlagtlCode = true;;
+    this.requiredFlagasset = true;
+    this.requiredFlagaddress = true;
+    this.requiredFlagcountryCode = true;
+    this.requiredFlagstateCode = true;
+    this.requiredFlaglatitude = true;
+    this.requiredFlaglongitude = true;
+    this.requiredFlagRedius = true;
+    this.requiredFlagpinCode = true;
+    this.requiredFlagcolourCode = true;
+    this.requiredFlaggeofenceCode = true;
+    this.requiredFlagcustomerCode = true;
+    this.requiredFlagEmailId = true;
+    this.requiredFlagmobileNo = true
   }
 
   private getasset(asset_Code: string) {
@@ -393,7 +450,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       assetNameUNI: null,
       placeName: null,
       assetGroupCode: null,
-      assetCategoryCode:  null,
+      assetCategoryCode: null,
       customerCode: null,
       projectCode: null,
       zoneCode: null,
@@ -438,7 +495,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         assetNameUNI: null,
         placeName: null,
         assetGroupCode: null,
-        assetCategoryCode:  null,
+        assetCategoryCode: null,
         customerCode: null,
         projectCode: null,
         zoneCode: null,
@@ -485,7 +542,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         assetNameUNI: null,
         placeName: null,
         assetGroupCode: null,
-        assetCategoryCode:  null,
+        assetCategoryCode: null,
         customerCode: null,
         projectCode: null,
         zoneCode: null,
@@ -583,7 +640,391 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       value: event.value,
       text: target.innerText.trim()
     };
+    
+    console.log(selectedData.value + " " + selectedData.text)
+    if (selectedData.value == "3") {
+      this.visibleFlagassetGroupCode = false;
+      this.visibleFlagplaceName = false;
+      this.visibleFlagAssetCategory = false;
+      this.visibleFlagcustomerCode = false;
+      this.visibleFlagprojectCode = false;
+      this.visibleFlagzoneCode = false;
+      this.visibleFlagcircleCode = false;
+      this.visibleFlagclusterCode = false;
+      this.visibleFlagregionCode = false;
+      this.visibleFlagcountryCode = false;
+      this.visibleFlagstateCode = false;
+      this.visibleFlaglatitude = false;
+      this.visibleFlaglongitude = false;
+      this.visibleFlagRedius = false;
+      this.visibleFlagpinCode = false;
+      this.visibleFlagcolourCode = false;
+      this.visibleFlaggeofenceCode = false;
+      this.visibleFlagsharedCode = false;
+      this.visibleFlagcircuitCode = false;
+      this.visibleFlagconductorCode = false;
+      this.visibleFlagclassificationCode = false;
+      this.visibleFlagstructureCode = false;
+      this.visibleFlagpositionCode = false;
+      this.visibleFlagHubCode = false;
+      this.visibleFlagtlCode = false;
+      this.visibleFlagEmailId = false;
+      this.visibleFlagmobileNo = false;
+      this.visibleFlagasset = false;
+      this.visibleFlagaddress = false;
+      this.visibleFlagplaceName = true;
+      this.visibleFlagclusterCode = true;
+      this.visibleFlagregionCode = true;
+      this.visibleFlagpinCode = true;
+      this.visibleFlagsharedCode = true;
+      this.visibleFlagcircuitCode = true;
+      this.visibleFlagconductorCode = true;
+      this.visibleFlagclassificationCode = true;
+      this.visibleFlagstructureCode = true;
+      this.visibleFlagpositionCode = true;
+      this.visibleFlagHubCode = true;
+      this.visibleFlagtlCode = false;
 
+      this.requiredFlagassetGroupCode = true;
+      this.requiredFlagplaceName = true;
+      this.requiredFlagAssetCategory = true;
+      this.requiredFlagprojectCode = true;
+      this.requiredFlagzoneCode = true;
+      this.requiredFlagcircleCode = true;
+      this.requiredFlagclusterCode = true;
+      this.requiredFlagregionCode = true;
+      this.requiredFlagsharedCode = true;
+      this.requiredFlagcircuitCode = true;
+      this.requiredFlagconductorCode = true;
+      this.requiredFlagclassificationCode = true;
+      this.requiredFlagstructureCode = true;
+      this.requiredFlagpositionCode = true;
+      this.requiredFlagHubCode = true;
+      this.requiredFlagtlCode = true;;
+      this.requiredFlagasset = true;
+      this.requiredFlagaddress = false;
+      this.requiredFlagcountryCode = false;
+      this.requiredFlagstateCode = false;
+      this.requiredFlaglatitude = false;
+      this.requiredFlaglongitude = false;
+      this.requiredFlagRedius = false;
+      this.requiredFlagpinCode = false;
+      this.requiredFlagcolourCode = false;
+      this.requiredFlaggeofenceCode = false;
+      this.requiredFlagcustomerCode = false;
+      this.requiredFlagEmailId = false;
+      this.requiredFlagmobileNo = false
+      this.form.controls['ControlassetCode'].setValidators([]);
+      this.form.controls['ControlassetNameENG'].setValidators([]);
+      this.form.controls['ControlassetGroupCode'].setValidators([]);
+      this.form.controls['ControlAssetCategory'].setValidators([]);
+      this.form.controls['ControlassetNameUNI'].setValidators([]);
+      this.form.controls['ControlplaceName'].setValidators([]);
+      this.form.controls['ControlprojectCode'].setValidators([]);
+      this.form.controls['ControlzoneCode'].setValidators([]);
+      this.form.controls['ControlcircleCode'].setValidators([]);
+      this.form.controls['ControlclusterCode'].setValidators([]);
+      this.form.controls['ControlregionCode'].setValidators([]);
+      this.form.controls['ControlsharedCode'].setValidators([]);
+      this.form.controls['ControlcircuitCode'].setValidators([]);
+      this.form.controls['ControlconductorCode'].setValidators([]);
+      this.form.controls['ControlclassificationCode'].setValidators([]);
+      this.form.controls['ControlstructureCode'].setValidators([]);
+      this.form.controls['ControlpositionCode'].setValidators([]);
+      this.form.controls['ControlisActive'].setValidators([]);
+      this.form.controls['ControlHubCode'].setValidators([]);
+      this.form.controls['ControltlCode'].setValidators([]);
+      this.form.controls['ControlisRetag'].setValidators([]);
+      this.form.controls['ControlplaceName'].setValidators([]);
+      this.form.controls['ControlcustomerCode'].setValidators([Validators.required]);
+      this.form.controls['ControlcountryCode'].setValidators([Validators.required]);
+      this.form.controls['ControlstateCode'].setValidators([Validators.required]);
+      this.form.controls['Controllatitude'].setValidators([Validators.required]);
+      this.form.controls['Controllongitude'].setValidators([Validators.required]);
+      this.form.controls['ControlRedius'].setValidators([Validators.required]);
+      this.form.controls['ControlpinCode'].setValidators([Validators.required]);
+      this.form.controls['ControlcolourCode'].setValidators([Validators.required]);
+      this.form.controls['ControlgeofenceCode'].setValidators([Validators.required]);
+      this.form.controls['Controladdress'].setValidators([Validators.required]);
+      this.form.controls['ControlemailId'].setValidators([Validators.required]);
+      this.form.controls['ControlmobileNo'].setValidators([Validators.required]);
+
+      return;
+    }
+    if (selectedData.value == "4") {
+      this.visibleFlagassetGroupCode = false;
+      this.visibleFlagplaceName = false;
+      this.visibleFlagAssetCategory = false;
+      this.visibleFlagcustomerCode = false;
+      this.visibleFlagprojectCode = false;
+      this.visibleFlagzoneCode = false;
+      this.visibleFlagcircleCode = false;
+      this.visibleFlagclusterCode = false;
+      this.visibleFlagregionCode = false;
+      this.visibleFlagcountryCode = false;
+      this.visibleFlagstateCode = false;
+      this.visibleFlaglatitude = false;
+      this.visibleFlaglongitude = false;
+      this.visibleFlagRedius = false;
+      this.visibleFlagpinCode = false;
+      this.visibleFlagcolourCode = false;
+      this.visibleFlaggeofenceCode = false;
+      this.visibleFlagsharedCode = false;
+      this.visibleFlagcircuitCode = false;
+      this.visibleFlagconductorCode = false;
+      this.visibleFlagclassificationCode = false;
+      this.visibleFlagstructureCode = false;
+      this.visibleFlagpositionCode = false;
+      this.visibleFlagHubCode = false;
+      this.visibleFlagtlCode = false;
+      this.visibleFlagEmailId = false;
+      this.visibleFlagmobileNo = false;
+      this.visibleFlagasset = false;
+      this.visibleFlagaddress = false;
+      this.visibleFlagplaceName = true;
+      this.visibleFlagzoneCode = true;
+      this.visibleFlagcircleCode = true;
+      this.visibleFlagclusterCode = true;
+      this.visibleFlagregionCode = true;
+      this.visibleFlagregionCode = true;
+      this.visibleFlagpinCode = true;
+      this.visibleFlagsharedCode = true;
+      this.visibleFlagcircuitCode = true;
+      this.visibleFlagconductorCode = true;
+      this.visibleFlagclassificationCode = true;
+      this.visibleFlagstructureCode = true;
+      this.visibleFlagpositionCode = true;
+      this.visibleFlagHubCode = true;
+
+      this.requiredFlagplaceName = true;
+      this.requiredFlagAssetCategory = true;
+      this.requiredFlagzoneCode = true;
+      this.requiredFlagcircleCode = true;
+      this.requiredFlagclusterCode = true;
+      this.requiredFlagregionCode = true;
+      this.requiredFlagcountryCode = true;
+      this.requiredFlagstateCode = true;
+      this.requiredFlagpinCode = true;
+      this.requiredFlagcolourCode = true;
+      this.requiredFlagsharedCode = true;
+      this.requiredFlagcircuitCode = true;
+      this.requiredFlagconductorCode = true;
+      this.requiredFlagclassificationCode = true;
+      this.requiredFlagstructureCode = true;
+      this.requiredFlagpositionCode = true;
+      this.requiredFlagHubCode = true;
+      this.requiredFlagtlCode = true;
+      this.requiredFlagEmailId = true;
+      this.requiredFlagmobileNo = true;
+      this.requiredFlagasset = true;
+      this.requiredFlagaddress = true;
+      this.requiredFlaggeofenceCode = false;
+      this.requiredFlaglatitude = false;
+      this.requiredFlaglongitude = false;
+      this.requiredFlagRedius = false;
+      this.requiredFlagcustomerCode = false;
+      this.requiredFlagprojectCode = false;
+      this.form.controls['ControlassetCode'].setValidators([]);
+      this.form.controls['ControlassetNameENG'].setValidators([]);
+      this.form.controls['ControlassetGroupCode'].setValidators([]);
+      this.form.controls['ControlAssetCategory'].setValidators([]);
+      this.form.controls['ControlassetNameUNI'].setValidators([]);
+      this.form.controls['ControlplaceName'].setValidators([]);
+      this.form.controls['ControlzoneCode'].setValidators([]);
+      this.form.controls['ControlcircleCode'].setValidators([]);
+      this.form.controls['ControlclusterCode'].setValidators([]);
+      this.form.controls['ControlregionCode'].setValidators([]);
+      this.form.controls['ControlcountryCode'].setValidators([]);
+      this.form.controls['ControlstateCode'].setValidators([]);
+      this.form.controls['ControlpinCode'].setValidators([]);
+      this.form.controls['ControlcolourCode'].setValidators([]);
+      this.form.controls['ControlsharedCode'].setValidators([]);
+      this.form.controls['ControlcircuitCode'].setValidators([]);
+      this.form.controls['ControlconductorCode'].setValidators([]);
+      this.form.controls['ControlclassificationCode'].setValidators([]);
+      this.form.controls['ControlstructureCode'].setValidators([]);
+      this.form.controls['ControlpositionCode'].setValidators([]);
+      this.form.controls['ControlisActive'].setValidators([]);
+      this.form.controls['Controladdress'].setValidators([]);
+      this.form.controls['ControlHubCode'].setValidators([]);
+      this.form.controls['ControltlCode'].setValidators([]);
+      this.form.controls['ControlemailId'].setValidators([]);
+      this.form.controls['ControlmobileNo'].setValidators([]);
+      this.form.controls['ControlisRetag'].setValidators([]);
+      this.form.controls['ControlplaceName'].setValidators([]);
+      this.form.controls['ControlcustomerCode'].setValidators([Validators.required]);
+      this.form.controls['ControlprojectCode'].setValidators([Validators.required]);
+      this.form.controls['Controllatitude'].setValidators([Validators.required]);
+      this.form.controls['Controllongitude'].setValidators([Validators.required]);
+      this.form.controls['ControlRedius'].setValidators([Validators.required]);
+      this.form.controls['ControlgeofenceCode'].setValidators([Validators.required]);
+      return;
+    }
+    if (selectedData.value == "2" && selectedData.text == "Tower") {
+      this.visibleFlagassetNameENG = false;
+      this.visibleFlagassetGroupCode = false;
+      this.visibleFlagplaceName = false;
+      this.visibleFlagAssetCategory = false;
+      this.visibleFlagcustomerCode = false;
+      this.visibleFlagprojectCode = false;
+      this.visibleFlagcountryCode = false;
+      this.visibleFlagstateCode = false;
+      this.visibleFlaglatitude = false;
+      this.visibleFlaglongitude = false;
+      this.visibleFlagRedius = false;
+      this.visibleFlagcolourCode = false;
+      this.visibleFlaggeofenceCode = false;
+      this.visibleFlagHubCode = false;
+      this.visibleFlagtlCode = false;
+      this.visibleFlagEmailId = false;
+      this.visibleFlagmobileNo = false;
+      this.visibleFlagasset = false;
+      
+      
+      this.visibleFlagaddress = false;
+      this.visibleFlagplaceName = true;
+      this.visibleFlagzoneCode = true;
+      this.visibleFlagcircleCode = true;
+      this.visibleFlagclusterCode = true;
+      this.visibleFlagregionCode = true;
+      this.visibleFlagpinCode = true;
+      this.visibleFlagsharedCode = true;
+      this.visibleFlagcircuitCode = true;
+      this.visibleFlagconductorCode = true;
+      this.visibleFlagclassificationCode = true;
+      this.visibleFlagstructureCode = true;
+      this.visibleFlagpositionCode = true;
+
+
+      this.requiredFlagplaceName = true;
+      this.requiredFlagzoneCode = true;
+      this.requiredFlagcircleCode = true;
+      this.requiredFlagclusterCode = true;
+      this.requiredFlagregionCode = true;
+      this.requiredFlagcountryCode = true;
+      this.requiredFlagstateCode = true;
+      this.requiredFlagpinCode = true;
+      this.requiredFlagcolourCode = true;
+      this.requiredFlagsharedCode = true;
+      this.requiredFlagcircuitCode = true;
+      this.requiredFlagconductorCode = true;
+      this.requiredFlagclassificationCode = true;
+      this.requiredFlagstructureCode = true;
+      this.requiredFlagpositionCode = true;
+      this.requiredFlagHubCode = true;
+      this.requiredFlagEmailId = true;
+      this.requiredFlagmobileNo = true;
+      this.requiredFlagasset = true;
+      this.requiredFlagaddress = true;
+      this.requiredFlagtlCode = false;
+      this.requiredFlaggeofenceCode = false;
+      this.requiredFlaglatitude = false;
+      this.requiredFlaglongitude = false;
+      this.requiredFlagRedius = false;
+      this.requiredFlagAssetCategory = false;
+      this.requiredFlagcustomerCode = false;
+      this.requiredFlagprojectCode = false;
+
+      this.form.controls['ControlassetCode'].setValidators([]);
+      this.form.controls['ControlassetNameENG'].setValidators([]);
+      this.form.controls['ControlassetGroupCode'].setValidators([]);
+    //   this.form.controls['ControlassetNameUNI'].setValidators([]);
+      this.form.controls['ControlplaceName'].setValidators([]);
+      this.form.controls['ControlzoneCode'].setValidators([]);
+      this.form.controls['ControlcircleCode'].setValidators([]);
+      this.form.controls['ControlclusterCode'].setValidators([]);
+      this.form.controls['ControlregionCode'].setValidators([]);
+      this.form.controls['ControlcountryCode'].setValidators([]);
+      this.form.controls['ControlstateCode'].setValidators([]);
+      this.form.controls['ControlpinCode'].setValidators([]);
+      this.form.controls['ControlcolourCode'].setValidators([]);
+      this.form.controls['ControlsharedCode'].setValidators([]);
+      this.form.controls['ControlcircuitCode'].setValidators([]);
+      this.form.controls['ControlconductorCode'].setValidators([]);
+      this.form.controls['ControlclassificationCode'].setValidators([]);
+      this.form.controls['ControlstructureCode'].setValidators([]);
+      this.form.controls['ControlpositionCode'].setValidators([]);
+      this.form.controls['ControlisActive'].setValidators([]);
+      this.form.controls['Controladdress'].setValidators([]);
+      this.form.controls['ControlHubCode'].setValidators([]);
+      this.form.controls['ControlemailId'].setValidators([]);
+      this.form.controls['ControlmobileNo'].setValidators([]);
+      this.form.controls['ControlisRetag'].setValidators([]);
+      this.form.controls['ControlplaceName'].setValidators([]);
+      this.form.controls['ControltlCode'].setValidators([Validators.required]);
+      this.form.controls['ControlgeofenceCode'].setValidators([Validators.required]);
+      this.form.controls['Controllatitude'].setValidators([Validators.required]);
+      this.form.controls['Controllongitude'].setValidators([Validators.required]);
+      this.form.controls['ControlRedius'].setValidators([Validators.required]);
+      this.form.controls['ControlAssetCategory'].setValidators([Validators.required]);
+      this.form.controls['ControlcustomerCode'].setValidators([Validators.required]);
+      this.form.controls['ControlprojectCode'].setValidators([Validators.required]);
+      
+      return;
+    }
+
+    this.visibleFlagassetGroupCode = false;
+    this.visibleFlagplaceName = false;
+    this.visibleFlagAssetCategory = false;
+    this.visibleFlagcustomerCode = false;
+    this.visibleFlagprojectCode = false;
+    this.visibleFlagzoneCode = false;
+    this.visibleFlagcircleCode = false;
+    this.visibleFlagclusterCode = false;
+    this.visibleFlagregionCode = false;
+    this.visibleFlagcountryCode = false;
+    this.visibleFlagstateCode = false;
+    this.visibleFlaglatitude = false;
+    this.visibleFlaglongitude = false;
+    this.visibleFlagRedius = false;
+    this.visibleFlagpinCode = false;
+    this.visibleFlagcolourCode = false;
+    this.visibleFlaggeofenceCode = false;
+    this.visibleFlagsharedCode = false;
+    this.visibleFlagcircuitCode = false;
+    this.visibleFlagconductorCode = false;
+    this.visibleFlagclassificationCode = false;
+    this.visibleFlagstructureCode = false;
+    this.visibleFlagpositionCode = false;
+    this.visibleFlagHubCode = false;
+    this.visibleFlagtlCode = false;
+    this.visibleFlagEmailId = false;
+    this.visibleFlagmobileNo = false;
+    this.visibleFlagasset = false;
+    this.visibleFlagaddress = false;
+
+    
+    this.form.controls['ControlAssetCategory'].setValidators([]);
+    this.form.controls['ControlassetNameUNI'].setValidators([]);
+    this.form.controls['ControlplaceName'].setValidators([]);
+    this.form.controls['ControlcustomerCode'].setValidators([]);
+    this.form.controls['ControlprojectCode'].setValidators([]);
+    this.form.controls['ControlzoneCode'].setValidators([]);
+    this.form.controls['ControlcircleCode'].setValidators([]);
+    this.form.controls['ControlclusterCode'].setValidators([]);
+    this.form.controls['ControlregionCode'].setValidators([]);
+    this.form.controls['ControlcountryCode'].setValidators([]);
+    this.form.controls['ControlstateCode'].setValidators([]);
+    this.form.controls['Controllatitude'].setValidators([]);
+    this.form.controls['Controllongitude'].setValidators([]);
+    this.form.controls['ControlRedius'].setValidators([]);
+    this.form.controls['ControlpinCode'].setValidators([]);
+    this.form.controls['ControlcolourCode'].setValidators([]);
+    this.form.controls['ControlgeofenceCode'].setValidators([]);
+    this.form.controls['ControlsharedCode'].setValidators([]);
+    this.form.controls['ControlcircuitCode'].setValidators([]);
+    this.form.controls['ControlconductorCode'].setValidators([]);
+    this.form.controls['ControlclassificationCode'].setValidators([]);
+    this.form.controls['ControlstructureCode'].setValidators([]);
+    this.form.controls['ControlpositionCode'].setValidators([]);
+    this.form.controls['ControlisActive'].setValidators([]);
+    this.form.controls['Controladdress'].setValidators([]);
+    this.form.controls['ControlHubCode'].setValidators([]);
+    this.form.controls['ControltlCode'].setValidators([]);
+    this.form.controls['ControlemailId'].setValidators([]);
+    this.form.controls['ControlmobileNo'].setValidators([]);
+    this.form.controls['ControlisRetag'].setValidators([]);
+    this.form.controls['ControlplaceName'].setValidators([]);
     this.assetCategoryService.getAssetCategorysByGroupId(selectedData.value).subscribe(
       (par) => this.assetCategoryObj = this.assetCategoryTransfarmer.AssetCategoryTransfarmers(par),
       (err: any) => console.log(err));
