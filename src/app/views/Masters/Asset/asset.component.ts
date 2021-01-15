@@ -183,6 +183,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       ControlcircleCode: {
         required: 'Circle is required.',
       },
+
       ControlclusterCode: {
         required: 'Cluster is required.',
       },
@@ -322,7 +323,9 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       (par) => this.deviceObj = this.deviceTransfarmer.DeviceTransfarmers(par),
       (err: any) => console.log(err));
     this.stateService.getStates().subscribe(
-      (par) => this.statesObj = this.stateTransfarmer.StateTransfarmers(par),
+      (par) =>{
+        this.statesObj = this.stateTransfarmer.StateTransfarmers(par);
+      },
       (err: any) => console.log(err));
     this.assetGroupService.getAssetGroups().subscribe(
       (par) => this.assetGroupObj = this.assetGroupTransfarmer.AssetGroupTransfarmers(par),
@@ -340,7 +343,10 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       (par) => this.regionObj = this.regionTransfarmer.RegionTransfarmers(par),
       (err: any) => console.log(err));
     this.countryService.getCountrys().subscribe(
-      (par) => this.countryObj = this.countryTransfarmer.CountryTransfarmers(par),
+      (par) =>{
+        this.countryObj = this.countryTransfarmer.CountryTransfarmers(par)
+        console.log(this.countryObj);
+      },
       (err: any) => console.log(err));
     this.colourService.fillColoursDrp().subscribe(
       (par) => this.colourObj = this.colourTransfarmer.ColourTransfarmers(par),
@@ -583,7 +589,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
         (par) => {
           this.ObjEntity = par;
           this.bindObj = this.assetTransfarmer.AssetTransfarmerEntity(this.ObjEntity);
-
+          this.VisableElemnt(this.bindObj.assetGroupCode);
 
         },
         (err: any) => console.log(err));
@@ -603,6 +609,78 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
     this.bindObj.createdDate = this.globalService.GerCurrntDateStamp();
     this.bindObj.modifiedBy = localStorage.getItem('username');
     this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
+    
+    if (this.bindObj.assetGroupCode == "3") {
+      this.bindObj.clusterCode ="1"
+      this.bindObj.regionCode ="1"
+      this.bindObj.pinCode ="1"
+      this.bindObj.sharedCode ="1"
+      this.bindObj.circuitCode ="1"
+      this.bindObj.conductorCode ="1"
+      this.bindObj.classificationCode ="1"
+      this.bindObj.structureCode ="1"
+      this.bindObj.positionCode ="1"
+      this.bindObj.hubCode ="1"
+      this.bindObj.tlCode ="1"
+      if(this.bindObj.colourCode===null || this.bindObj.colourCode===undefined || this.bindObj.colourCode==="" )
+      this.bindObj.colourCode ="1"
+      if(this.bindObj.stateCode===null || this.bindObj.stateCode===undefined || this.bindObj.stateCode==="" )
+      this.bindObj.stateCode ="1"
+      if(this.bindObj.countryCode===null || this.bindObj.countryCode===undefined || this.bindObj.countryCode==="" )
+      this.bindObj.countryCode ="1"
+      if(this.bindObj.placeName===null || this.bindObj.placeName===undefined || this.bindObj.placeName==="" )
+      this.bindObj.placeName ="1"
+    }
+    if (this.bindObj.assetGroupCode == "4") {
+      this.bindObj.tlCode ="1"
+      this.bindObj.zoneCode ="1"
+      this.bindObj.circleCode ="1"
+      this.bindObj.clusterCode ="1"
+      this.bindObj.regionCode ="1"
+      this.bindObj.sharedCode ="1"
+      this.bindObj.circuitCode ="1"
+      this.bindObj.conductorCode ="1"
+      this.bindObj.classificationCode ="1"
+      this.bindObj.structureCode ="1"
+      this.bindObj.positionCode ="1"
+      this.bindObj.hubCode ="1"
+      if(this.bindObj.stateCode===null || this.bindObj.stateCode===undefined || this.bindObj.stateCode==="" )
+      this.bindObj.stateCode ="1"
+      if(this.bindObj.countryCode===null || this.bindObj.countryCode===undefined || this.bindObj.countryCode==="" )
+      this.bindObj.countryCode ="1"
+      if(this.bindObj.colourCode===null || this.bindObj.colourCode===undefined || this.bindObj.colourCode==="" )
+      this.bindObj.colourCode ="1"
+      if(this.bindObj.assetCategoryCode===null || this.bindObj.assetCategoryCode===undefined || this.bindObj.assetCategoryCode==="" )
+      this.bindObj.assetCategoryCode ="1"
+      if(this.bindObj.placeName===null || this.bindObj.placeName===undefined || this.bindObj.placeName==="" )
+      this.bindObj.placeName ="1"
+    }
+    if (this.bindObj.assetGroupCode == "2") {
+      this.bindObj.zoneCode ="1"
+      this.bindObj.circleCode ="1"
+      this.bindObj.clusterCode ="1"
+      this.bindObj.regionCode ="1"
+      this.bindObj.pinCode ="1"
+      this.bindObj.sharedCode ="1"
+      this.bindObj.circuitCode ="1"
+      this.bindObj.conductorCode ="1"
+      this.bindObj.classificationCode ="1"
+      this.bindObj.structureCode ="1"
+      this.bindObj.positionCode ="1"
+      
+      if(this.bindObj.stateCode===null || this.bindObj.stateCode===undefined || this.bindObj.stateCode==="" )
+      this.bindObj.stateCode ="1"
+      if(this.bindObj.countryCode===null || this.bindObj.countryCode===undefined || this.bindObj.countryCode==="" )
+      this.bindObj.countryCode ="1"
+      if(this.bindObj.hubCode===null || this.bindObj.hubCode===undefined || this.bindObj.hubCode==="" )
+      this.bindObj.hubCode ="1"
+      if(this.bindObj.colourCode===null || this.bindObj.colourCode===undefined || this.bindObj.colourCode==="" )
+      this.bindObj.colourCode ="1"
+      if(this.bindObj.placeName===null || this.bindObj.placeName===undefined || this.bindObj.placeName==="" )
+      this.bindObj.placeName ="1"
+    }
+
+console.log(this.assetTransfarmer.AssetTransfarmer(this.bindObj));
     if (status !== 'Update') {
       this.bindObj.assetCode = null;
       this.assetService.Save(this.assetTransfarmer.AssetTransfarmer(this.bindObj)).subscribe(
@@ -640,9 +718,15 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       value: event.value,
       text: target.innerText.trim()
     };
+    this.VisableElemnt(selectedData.value);
+    this.assetCategoryService.getAssetCategorysByGroupId(selectedData.value).subscribe(
+      (par) => this.assetCategoryObj = this.assetCategoryTransfarmer.AssetCategoryTransfarmers(par),
+      (err: any) => console.log(err));
+  }
+  VisableElemnt(str: string)
+  {
     
-    console.log(selectedData.value + " " + selectedData.text)
-    if (selectedData.value == "3") {
+    if (str == "3") {
       this.visibleFlagassetGroupCode = false;
       this.visibleFlagplaceName = false;
       this.visibleFlagAssetCategory = false;
@@ -672,7 +756,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.visibleFlagmobileNo = false;
       this.visibleFlagasset = false;
       this.visibleFlagaddress = false;
-      this.visibleFlagplaceName = true;
+     // this.visibleFlagplaceName = true;
       this.visibleFlagclusterCode = true;
       this.visibleFlagregionCode = true;
       this.visibleFlagpinCode = true;
@@ -683,14 +767,10 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.visibleFlagstructureCode = true;
       this.visibleFlagpositionCode = true;
       this.visibleFlagHubCode = true;
-      this.visibleFlagtlCode = false;
+      this.visibleFlagtlCode = true;
 
-      this.requiredFlagassetGroupCode = true;
       this.requiredFlagplaceName = true;
       this.requiredFlagAssetCategory = true;
-      this.requiredFlagprojectCode = true;
-      this.requiredFlagzoneCode = true;
-      this.requiredFlagcircleCode = true;
       this.requiredFlagclusterCode = true;
       this.requiredFlagregionCode = true;
       this.requiredFlagsharedCode = true;
@@ -700,29 +780,29 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.requiredFlagstructureCode = true;
       this.requiredFlagpositionCode = true;
       this.requiredFlagHubCode = true;
-      this.requiredFlagtlCode = true;;
+      this.requiredFlagcountryCode = true;
+      this.requiredFlagstateCode = true;
+      this.requiredFlagtlCode = true;
       this.requiredFlagasset = true;
+      this.requiredFlagEmailId = true;
+      this.requiredFlagcolourCode = true;
+      this.requiredFlagmobileNo = true
+      this.requiredFlagzoneCode = false;
+      this.requiredFlagcircleCode = false;
+      this.requiredFlagassetGroupCode = false;
+      this.requiredFlagprojectCode = false;
       this.requiredFlagaddress = false;
-      this.requiredFlagcountryCode = false;
-      this.requiredFlagstateCode = false;
       this.requiredFlaglatitude = false;
       this.requiredFlaglongitude = false;
       this.requiredFlagRedius = false;
       this.requiredFlagpinCode = false;
-      this.requiredFlagcolourCode = false;
+     
       this.requiredFlaggeofenceCode = false;
       this.requiredFlagcustomerCode = false;
-      this.requiredFlagEmailId = false;
-      this.requiredFlagmobileNo = false
       this.form.controls['ControlassetCode'].setValidators([]);
       this.form.controls['ControlassetNameENG'].setValidators([]);
-      this.form.controls['ControlassetGroupCode'].setValidators([]);
       this.form.controls['ControlAssetCategory'].setValidators([]);
       this.form.controls['ControlassetNameUNI'].setValidators([]);
-      this.form.controls['ControlplaceName'].setValidators([]);
-      this.form.controls['ControlprojectCode'].setValidators([]);
-      this.form.controls['ControlzoneCode'].setValidators([]);
-      this.form.controls['ControlcircleCode'].setValidators([]);
       this.form.controls['ControlclusterCode'].setValidators([]);
       this.form.controls['ControlregionCode'].setValidators([]);
       this.form.controls['ControlsharedCode'].setValidators([]);
@@ -733,25 +813,30 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.form.controls['ControlpositionCode'].setValidators([]);
       this.form.controls['ControlisActive'].setValidators([]);
       this.form.controls['ControlHubCode'].setValidators([]);
+      this.form.controls['ControlcountryCode'].setValidators([]);
+      this.form.controls['ControlstateCode'].setValidators([]);
       this.form.controls['ControltlCode'].setValidators([]);
       this.form.controls['ControlisRetag'].setValidators([]);
       this.form.controls['ControlplaceName'].setValidators([]);
+      this.form.controls['ControlemailId'].setValidators([]);
+      this.form.controls['ControlmobileNo'].setValidators([]);
+      this.form.controls['ControlcolourCode'].setValidators([]);
+      this.form.controls['ControlzoneCode'].setValidators([Validators.required]);
+      this.form.controls['ControlcircleCode'].setValidators([Validators.required]);
+      this.form.controls['ControlassetGroupCode'].setValidators([Validators.required]);
+      this.form.controls['ControlprojectCode'].setValidators([Validators.required]);
       this.form.controls['ControlcustomerCode'].setValidators([Validators.required]);
-      this.form.controls['ControlcountryCode'].setValidators([Validators.required]);
-      this.form.controls['ControlstateCode'].setValidators([Validators.required]);
       this.form.controls['Controllatitude'].setValidators([Validators.required]);
       this.form.controls['Controllongitude'].setValidators([Validators.required]);
       this.form.controls['ControlRedius'].setValidators([Validators.required]);
       this.form.controls['ControlpinCode'].setValidators([Validators.required]);
-      this.form.controls['ControlcolourCode'].setValidators([Validators.required]);
+      
       this.form.controls['ControlgeofenceCode'].setValidators([Validators.required]);
       this.form.controls['Controladdress'].setValidators([Validators.required]);
-      this.form.controls['ControlemailId'].setValidators([Validators.required]);
-      this.form.controls['ControlmobileNo'].setValidators([Validators.required]);
 
       return;
     }
-    if (selectedData.value == "4") {
+    if (str == "4") {
       this.visibleFlagassetGroupCode = false;
       this.visibleFlagplaceName = false;
       this.visibleFlagAssetCategory = false;
@@ -776,12 +861,12 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.visibleFlagstructureCode = false;
       this.visibleFlagpositionCode = false;
       this.visibleFlagHubCode = false;
-      this.visibleFlagtlCode = false;
       this.visibleFlagEmailId = false;
       this.visibleFlagmobileNo = false;
       this.visibleFlagasset = false;
       this.visibleFlagaddress = false;
-      this.visibleFlagplaceName = true;
+      // this.visibleFlagplaceName = true;
+      this.visibleFlagtlCode = true;
       this.visibleFlagzoneCode = true;
       this.visibleFlagcircleCode = true;
       this.visibleFlagclusterCode = true;
@@ -818,6 +903,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.requiredFlagmobileNo = true;
       this.requiredFlagasset = true;
       this.requiredFlagaddress = true;
+      this.requiredFlagassetGroupCode = false;
       this.requiredFlaggeofenceCode = false;
       this.requiredFlaglatitude = false;
       this.requiredFlaglongitude = false;
@@ -826,7 +912,6 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.requiredFlagprojectCode = false;
       this.form.controls['ControlassetCode'].setValidators([]);
       this.form.controls['ControlassetNameENG'].setValidators([]);
-      this.form.controls['ControlassetGroupCode'].setValidators([]);
       this.form.controls['ControlAssetCategory'].setValidators([]);
       this.form.controls['ControlassetNameUNI'].setValidators([]);
       this.form.controls['ControlplaceName'].setValidators([]);
@@ -852,6 +937,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.form.controls['ControlmobileNo'].setValidators([]);
       this.form.controls['ControlisRetag'].setValidators([]);
       this.form.controls['ControlplaceName'].setValidators([]);
+      this.form.controls['ControlassetGroupCode'].setValidators([Validators.required]);
       this.form.controls['ControlcustomerCode'].setValidators([Validators.required]);
       this.form.controls['ControlprojectCode'].setValidators([Validators.required]);
       this.form.controls['Controllatitude'].setValidators([Validators.required]);
@@ -860,7 +946,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.form.controls['ControlgeofenceCode'].setValidators([Validators.required]);
       return;
     }
-    if (selectedData.value == "2" && selectedData.text == "Tower") {
+    if (str == "2") {
       this.visibleFlagassetNameENG = false;
       this.visibleFlagassetGroupCode = false;
       this.visibleFlagplaceName = false;
@@ -882,7 +968,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       
       
       this.visibleFlagaddress = false;
-      this.visibleFlagplaceName = true;
+     // this.visibleFlagplaceName = true;
       this.visibleFlagzoneCode = true;
       this.visibleFlagcircleCode = true;
       this.visibleFlagclusterCode = true;
@@ -916,6 +1002,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.requiredFlagmobileNo = true;
       this.requiredFlagasset = true;
       this.requiredFlagaddress = true;
+      this.requiredFlagassetGroupCode = false;
       this.requiredFlagtlCode = false;
       this.requiredFlaggeofenceCode = false;
       this.requiredFlaglatitude = false;
@@ -927,7 +1014,6 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
 
       this.form.controls['ControlassetCode'].setValidators([]);
       this.form.controls['ControlassetNameENG'].setValidators([]);
-      this.form.controls['ControlassetGroupCode'].setValidators([]);
     //   this.form.controls['ControlassetNameUNI'].setValidators([]);
       this.form.controls['ControlplaceName'].setValidators([]);
       this.form.controls['ControlzoneCode'].setValidators([]);
@@ -951,6 +1037,7 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
       this.form.controls['ControlmobileNo'].setValidators([]);
       this.form.controls['ControlisRetag'].setValidators([]);
       this.form.controls['ControlplaceName'].setValidators([]);
+      this.form.controls['ControlassetGroupCode'].setValidators([Validators.required]);
       this.form.controls['ControltlCode'].setValidators([Validators.required]);
       this.form.controls['ControlgeofenceCode'].setValidators([Validators.required]);
       this.form.controls['Controllatitude'].setValidators([Validators.required]);
@@ -1025,8 +1112,5 @@ export class AssetComponent extends FormComponentBase implements OnInit, AfterVi
     this.form.controls['ControlmobileNo'].setValidators([]);
     this.form.controls['ControlisRetag'].setValidators([]);
     this.form.controls['ControlplaceName'].setValidators([]);
-    this.assetCategoryService.getAssetCategorysByGroupId(selectedData.value).subscribe(
-      (par) => this.assetCategoryObj = this.assetCategoryTransfarmer.AssetCategoryTransfarmers(par),
-      (err: any) => console.log(err));
   }
 }

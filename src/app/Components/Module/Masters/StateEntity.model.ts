@@ -1,8 +1,9 @@
 export class StateEntity {
     stateCode: string;
     countryCode: string;
-    stateNameUni: string;
-    stateNameEng: string;
+    stateNameUNI: string;
+    stateNameENG: string;
     isAuto: string;
     isActive: string;
 }
+

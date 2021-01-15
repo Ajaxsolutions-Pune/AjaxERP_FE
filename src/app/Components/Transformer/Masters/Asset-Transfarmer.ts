@@ -172,6 +172,9 @@ export class AssetTransfarmer {
         this.OjectEntity.hubCode = element.hubCode;
         this.OjectEntity.mobileNo = element.mobileNo;
         this.OjectEntity.emailId = element.emailId;
+
+        
+
         if (element.isActive.toString().trim() === 'true') {
             this.OjectEntity.isActive = '1';
         } else { this.OjectEntity.isActive = '0'; }
@@ -179,6 +182,7 @@ export class AssetTransfarmer {
         if (element.isRetag.toString().trim() === 'true') {
             this.OjectEntity.isRetag = '1';
         } else { this.OjectEntity.isRetag = '0'; }
+        console.log(this.OjectEntity);
         return this.OjectEntity;
     }
 }

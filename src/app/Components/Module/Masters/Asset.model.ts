@@ -41,6 +41,7 @@ export class Asset {
     hubCode: string;
     mobileNo: string;
     emailId: string;
+    
 }
 export class AssetEntity {
     ouCode: string;

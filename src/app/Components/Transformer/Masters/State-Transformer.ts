@@ -22,8 +22,8 @@ export class StateTransfarmer {
             this.state = new State();
             this.state.state_Code = element.stateCode;
             this.state.Country_Code = element.countryCode;
-            this.state.State_Name_Uni = element.stateNameUni;
-            this.state.State_Name_Eng = element.stateNameEng;
+            this.state.State_Name_Uni = element.stateNameUNI;
+            this.state.State_Name_Eng = element.stateNameENG;
             this.state.isAuto = element.isAuto;
             this.state.IsActive = element.isActive;
             this.states.push(this.state);
@@ -34,8 +34,8 @@ export class StateTransfarmer {
         this.statesEntity = new StateEntity();
         this.statesEntity.stateCode = state.state_Code;
         this.statesEntity.countryCode = state.Country_Code;
-        this.statesEntity.stateNameUni = state.State_Name_Uni;
-        this.statesEntity.stateNameEng = state.State_Name_Eng;
+        this.statesEntity.stateNameUNI = state.State_Name_Uni;
+        this.statesEntity.stateNameENG = state.State_Name_Eng;
         this.statesEntity.isAuto = state.isAuto;
         if (state.IsActive === 'true') { this.statesEntity.isActive = '1'; } else { this.statesEntity.isActive = '1'; }
         return this.statesEntity;
@@ -45,8 +45,8 @@ export class StateTransfarmer {
         this.state = new State();
         this.state.state_Code = Entity.stateCode;
         this.state.Country_Code = Entity.countryCode;
-        this.state.State_Name_Uni = Entity.stateNameUni;
-        this.state.State_Name_Eng = Entity.stateNameEng;
+        this.state.State_Name_Uni = Entity.stateNameUNI;
+        this.state.State_Name_Eng = Entity.stateNameENG;
         this.state.isAuto = Entity.isAuto;
         this.state.IsActive = Entity.isActive;
 
