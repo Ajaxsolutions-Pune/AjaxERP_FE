@@ -21,7 +21,7 @@ import { DeviceService } from '../../../Components/Services/Masters/DeviceServic
 import { TransmissionLineService } from '../../../Components/Services/Masters/TransmissionLineService';
 import { AssetGroupService } from '../../../Components/Services/Masters/AssetGroupService';
 
-import { DeviceAssetMapping, DeviceAssetMapping_Delete } from '../../../Components/Module/ProcessSetup/DeviceAssetMapping.model';
+import { DeviceAssetMapping, DeviceAssetMapping_Delete,DeviceAssetMapping_Transmission_Line } from '../../../Components/Module/ProcessSetup/DeviceAssetMapping.model';
 
 import { DeviceAssetMappingTransfarmer } from '../../../Components/Transformer/ProcessSetup/DeviceAssetMapping-Transfarmer';
 import { DeviceAssetMappingService } from '../../../Components/Services/ProcessSetup/DeviceAssetMappingService';
@@ -47,6 +47,7 @@ export class DeviceAssetMappingComponent extends FormComponentBase
   AssetGroupObj: AssetGroup[];
   objDeviceAssetMapping: DeviceAssetMapping[];
   objDeviceAssetMapping_Delete: DeviceAssetMapping_Delete[];
+  objDeviceAssetMapping_Transmission_Line:DeviceAssetMapping_Transmission_Line[];
   index: number;
   id: number;
   DeviceId: string;
@@ -66,6 +67,7 @@ export class DeviceAssetMappingComponent extends FormComponentBase
   Assetgroup_data: CustomComboBox[];
 
   AssetDelete : any;
+  TransmissionLine_List : string[];
 
 
   hidePassword: boolean = true;
@@ -118,6 +120,18 @@ export class DeviceAssetMappingComponent extends FormComponentBase
 
     this.isDisabled = false;
 
+    this.deviceAssetMappingService.getDeviceAssetMapping_Transmission_Line(deviceid, assetGroupCode).subscribe(
+      (par) => {
+        this.TransmissionLine_List = par;
+        console.log(" this.TransmissionLine_List");
+        console.log( this.TransmissionLine_List);
+        //this.objDeviceAssetMapping.forEach(a => {
+        // a.deviceId = deviceid;
+        //a.
+        // });            
+      },
+      (err: any) => console.log(err));    
+    console.log(this.TransmissionLine_List);
     // console.log(this.objDeviceAssetMapping.length);
 
     /*if(this.objDeviceAssetMapping.length > 0) {
@@ -152,8 +166,8 @@ export class DeviceAssetMappingComponent extends FormComponentBase
     private AssetGroupTransfarmer: AssetGroupTransfarmer,
     private deviceAssetMappingTransfarmer: DeviceAssetMappingTransfarmer,
     private deviceAssetMappingService: DeviceAssetMappingService,
-    public dialog: MatDialog,
-    public dataService: DeviceAssetDataService,
+    public  dialog: MatDialog,
+    public  dataService: DeviceAssetDataService,
     private globalService: GlobalService,
     private formBuilder: FormBuilder) {
     super();

@@ -63,7 +63,9 @@ export class LogInComponent implements OnInit {
         this.loginobj = {
           ouCode: this.env.OuCode,
           password: password,
-          username: username
+          username: username,
+          source: "ERP",
+          deviceId: "",
         };
 
         this.logInService.Login(this.loginobj).subscribe(

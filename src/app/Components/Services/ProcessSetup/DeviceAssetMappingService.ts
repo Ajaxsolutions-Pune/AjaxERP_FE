@@ -4,11 +4,12 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../Module/environment';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
-import { DeviceAssetMappingEntity } from '../../Module/ProcessSetup/DeviceAssetMapping.model';
+import { DeviceAssetMappingEntity,DeviceAssetMapping_Transmission_Line } from '../../Module/ProcessSetup/DeviceAssetMapping.model';
 @Injectable()
 export class DeviceAssetMappingService {
     str: string;
     AssetDelete : any;
+    TransmissionLine_List = [];
     env = environment;
     constructor(private httpClient: HttpClient) {
         this.str = this.env.apiServiceIPPort;
@@ -24,6 +25,16 @@ export class DeviceAssetMappingService {
             this.str + '/DeviceAssetMapping/getList?deviceId=' + deviceId)
         return this.httpClient.get<DeviceAssetMappingEntity[]>(
             this.str + '/DeviceAssetMapping/getList?deviceId=' + deviceId
+            , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
+
+    getDeviceAssetMapping_Transmission_Line(deviceId: string, assetgroup:string): Observable<string[]> {    
+        console.log( this.str + '/DeviceAssetMapping/getTransmissionLines?deviceId='
+        +deviceId+'&assetGroupCode='+assetgroup
+        );
+        return this.httpClient.get<string[]>(
+            this.str + '/DeviceAssetMapping/getTransmissionLines?deviceId='
+            +deviceId+'&assetGroupCode='+assetgroup
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 

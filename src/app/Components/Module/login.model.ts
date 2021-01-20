@@ -4,6 +4,9 @@ import { Injectable } from "@angular/core";
 export class LogIn {
     ouCode: string;
     username: string;
-    password: string;
+    password: string;    
+    source: string;
+    deviceId: string;
+
 }
 

@@ -49,3 +49,7 @@ export class DeviceAssetMapping_Delete {
     modifiedDate: string;    
     deviceName: string;   
 }
+
+export class DeviceAssetMapping_Transmission_Line {            
+    transmissionline: string;   
+}
