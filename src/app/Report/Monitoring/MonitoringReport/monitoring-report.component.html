@@ -29,9 +29,8 @@
 
                                 <mat-form-field color="accent" class="col-md-4">
                                     <mat-label>Process</mat-label>
-                                    <mat-select formControlName="ControlProcess"
-                                    [(ngModel)]="processId">
-                                        <!--[(ngModel)]="project.projectGroupCode"-->
+                                    <mat-select formControlName="ControlProcess" (selectionChange)="EntityChange($event)"
+                                    [(ngModel)]="processId">                                      
                                         <mat-option>Select</mat-option>
                                         <mat-option *ngFor="let process of processDrp" [value]="process.processId">
                                             {{process.processName}}

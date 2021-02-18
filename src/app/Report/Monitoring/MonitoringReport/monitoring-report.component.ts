@@ -25,6 +25,7 @@ import { AssetTransfarmer } from '../../../Components/Transformer/Masters/Asset-
 import { ProcessService1 } from '../../../Components/Services/Masters/ProcessService1';
 import { ProcessTransfarmer1 } from '../../../Components/Transformer/Masters/Process-Transfarmer1';
 import { UserEntity_ } from '../../../Components/Module/Masters/UserEntity.model';
+import { threadId } from 'worker_threads';
 @Component({
   selector: 'app-monitoring-report',
   templateUrl: './monitoring-report.component.html',
@@ -59,7 +60,7 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
   fromDateStr: string;
   withImage: string;
   toDateStr: string;
-  assetGroupCode: string; processId: string;
+  assetGroupCode: string; processId: string; processName : string;
   userId: string; customerCode: string; assetCode: string; state: string;
   constructor(private route: ActivatedRoute,
     //private projectService: ProjectService,
@@ -103,16 +104,26 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
       this.withImage = '1';
     } else { this.withImage = '0'; }
     this.globalService.getExcelfil(this.fromDateStr, this.toDateStr, 
-    this.assetGroupCode, this.processId
-    ,this.userId, this.customerCode, this.assetCode, this.withImage);
+    this.assetGroupCode, this.processId, this.processName,
+    this.userId, this.customerCode, this.assetCode, this.withImage);
   }
+
+  EntityChange(event){
+    const target = event.source.selected._element.nativeElement;
+    const selectedData = {
+      value: event.value,
+      text: target.innerText.trim()
+    }
+    this.processName = selectedData.text;
+  }
+
 
   ngOnInit() {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href = 'login';
     }
     this.Date1 = null;
-    this.state = 'All'; this.processId = '1';
+    this.state = 'All'; this.processId = '1';this.processName = 'Day Patrolling';
     this.userId = 'All'; this.customerCode = 'All'; this.assetCode = 'All';
   this.withImage='';
     //Asset Group combo

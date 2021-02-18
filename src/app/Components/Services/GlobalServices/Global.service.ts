@@ -25,6 +25,11 @@ export class GlobalService {
     GerCurrntDateStamp(): string {
         return this.datePipe.transform(this.myDate, 'yyyy-MM-dd HH:mm:ss.sss');
     }
+
+    GetCurrntDateStampShort(): string {
+        return this.datePipe.transform(this.myDate, 'yyyy-MM-dd HH:mm');
+    }
+
     GerCurrntDate(): string {
         return this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
     }
@@ -57,8 +62,11 @@ export class GlobalService {
             + MasterCode, this.env.httpOptions);
     }
 
-    getExcelfil(fromDate: string, toDate: string, assetGroupCode: string, processId: string
-        , userId: string, customerCode: string, assetCode: string,withImage: string) {
+    getExcelfil(fromDate: string, toDate: string, assetGroupCode: string, processId: string,
+       processName:string , userId: string, customerCode: string, assetCode: string,withImage: string) {
+
+        this.GerCurrntDateStamp();
+
         let ReportUrl = '/Report/assetMonitoringRpt?ouCode=' + this.env.OuCode +
             '&loginId=' + localStorage.getItem('username').toString() +
             '&fromDate=' + fromDate + '&toDate=' + toDate + '&' +
@@ -80,14 +88,14 @@ export class GlobalService {
                  let downloadLink = document.createElement('a');
                  downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
                  if (true)
-                     downloadLink.setAttribute('download', 'MonitoringReport.xlsx');
+                     downloadLink.setAttribute('download',processName+'_'+ this.GetCurrntDateStampShort()+'.xlsx');
                  document.body.appendChild(downloadLink);
                  downloadLink.click();
              }
          )
     }
 
-
+    
 
     limitKeypress(event, value, maxLength) {
         if (value !== undefined && value.toString().length >= maxLength) {
