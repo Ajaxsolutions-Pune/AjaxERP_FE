@@ -49,7 +49,7 @@
     const myLatlng2 = new google.maps.LatLng(lat ,lang);     
     if(Status === 'Check In')
     {     
-      var ico = new google.maps.MarkerImage("../../../assets/img/Content/Mobile_CheckIn.png")
+      var ico = new google.maps.MarkerImage("./assets/img/Content/Mobile_CheckIn.png")
        UserCheckIn_Marker = new google.maps.Marker({
       position: myLatlng2,         
       icon: ico ,//{                
@@ -95,7 +95,7 @@
         position: myLatlng2,
         //icon: iconBase + 'Mobile_Inactive.png',
         icon: {                
-                url: '../../../assets/img/Content/Mobile_Inactive.png',   
+                url: './assets/img/Content/Mobile_Inactive.png',   
              },        
         map: map, 
         title: "User Code : " +  UserCode + 
@@ -115,7 +115,7 @@
         position: myLatlng2,
         //icon: iconBase + 'Mobile_Off.png',
         icon: {                
-              url: '../../../assets/img/Content/Mobile_Off.png',               
+              url: './assets/img/Content/Mobile_Off.png',               
             },
         map: map,
         title: "User Code : " +  UserCode + 
@@ -140,7 +140,7 @@
         position: myLatlng2,
         //icon: iconBase + 'Tower.jpg',
         icon: {                
-              url: '../../../assets/img/Content/Tower.png',               
+              url: './assets/img/Content/Tower.png',               
             },
         map: map,
         title: "Tower Name : " +  AssetName + 
@@ -162,7 +162,7 @@
         position: myLatlng2,
         //icon: iconBase + 'SubStation-Icon.png',
         icon: {                
-              url: '../../../assets/img/Content/SubStation-Icon.png',               
+              url: './assets/img/Content/SubStation-Icon.png',               
             },
         map: map,
         title: "Sub Station Name : " +  AssetName + 

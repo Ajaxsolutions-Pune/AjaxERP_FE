@@ -39,11 +39,11 @@ export const navItems: NavData[] = [
       text: 'NEW'
     }
   },
-  /*{
+  {
     name: 'Map',
     url: '/map',
     icon: 'icon-map',   
-  },*/
+  },
   {
     name: 'Monitoring Masters',
     url: '/Masters',

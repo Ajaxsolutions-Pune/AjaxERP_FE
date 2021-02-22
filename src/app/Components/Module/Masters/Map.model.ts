@@ -50,4 +50,17 @@ export class userDetail
     osVersion: string;
     appVersion: string;    
 }
+export class userTracking
+{
+    trackingId: string;
+    loginId: string;
+    userNameENG: string;
+    mobileNo: string;
+    dateTime: string;
+    latitude: string;
+    longitude: string;
+    location: string;
+    batteryPer: string;
+    speed: string;
+}
 
