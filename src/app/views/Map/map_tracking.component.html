@@ -1,0 +1,91 @@
+<form #mapForm="ngForm" autocomplete="off" [formGroup]="form">
+    <div  style="height:200px;position:fixed;top:0px;left:200px;z-index: 9999;">
+    <mat-accordion>
+      <mat-expansion-panel hideToggle >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div>         
+              <span>Map Toolbar</span>        
+           </div>        
+          </mat-panel-title>    
+        </mat-expansion-panel-header>
+        <div style="background-color: #bdffce;padding: 0px;">
+          <mat-tab-group  dynamicHeight>
+               <mat-tab>
+                   <ng-template mat-tab-label>
+                       <h5 class="text-center" style="margin-top:10px;margin-right: 5px;" >User</h5>
+                       <i style="color:green;font-size: 25px;" class="fa fa-user"></i> 
+                   </ng-template>
+                   <div class="col-md-12 pull-left" style="padding-top:15px; background-color:#bde4e1">                
+                      <div class = "row">                  
+                       <mat-form-field class="col-md-6">
+                         <input #tbName id="tbName" matInput
+                           placeholder="User Name"
+                           [(ngModel)]="this.UserName_Search"
+                           formControlName="ControlSearchUser">                        
+                       </mat-form-field> 
+    
+                       <button mat-raised-button color="primary" style="height:35px;width:100px;margin-top:5px;" 
+                       (click)="SearchUser(tbName.value)">Search</button>
+    
+                      </div>                       
+                    </div>                          
+                 </mat-tab>     
+               
+                
+               <mat-tab >
+                   <ng-template mat-tab-label>
+                   <h5 class="text-center" style="margin-top: 10px;margin-right: 5px;" > Map Type</h5>
+                   <i style="color:green;font-size: 25px;" class="fa fa-map"></i>             
+                   </ng-template>
+                   <div class="col-md-12 pull-left" style="padding-top:15px; background-color:#bde4e1">
+                      
+    
+               <ul style="list-style-type:none">
+                  <li>
+                    <input id="ROADMAP" 
+                    type="radio" 
+                    value="ROADMAP" 
+                    name="MAPTYPE" 
+                    formControlName="Maptype" 
+                    (change)="changeMapType($event)">
+                    <label for="ROADMAP">RoadMap</label>
+                  </li>
+                  <li>
+                    <input id="SATELLITE" 
+                    type="radio" 
+                    value="SATELLITE" 
+                    name="MAPTYPE"                 
+                    (change)="changeMapType($event)">
+                    <label for="SATELLITE">Satellite</label>
+                  </li>
+                  <li>
+                    <input id="HYBRID" 
+                    type="radio" 
+                    value="HYBRID" 
+                    name="MAPTYPE"                
+                    (change)="changeMapType($event)">
+                    <label for="HYBRID ">Hybrid</label>    
+                  </li>
+                </ul>    
+                </div>           
+              </mat-tab>           
+            </mat-tab-group>        
+          </div>
+          <button  mat-raised-button color="primary" style="width:200px;margin-top:5px;" 
+      (click)="AutoRefreshStart()">Auto Refresh In  : {{this.Count}} Seconds</button>
+    
+      </mat-expansion-panel> 
+    </mat-accordion>
+    </div>
+    <div class="container-fluid row"  id="googleMap" style="width:100%;height:100vh;"></div>
+    </form>
+    
+    
+    
+    
+    
+    
+    
+    
+      

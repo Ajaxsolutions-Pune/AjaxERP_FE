@@ -1,0 +1,33 @@
+agm-map{
+    height: 400px;
+}
+
+td,th{
+    padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
+        margin-bottom: 0px;
+        height: 5px;
+  }
+
+
+
+  #mydiv {
+    position: absolute;
+    z-index: 9;
+    background-color: #f1f1f1;
+    text-align: center;
+    border: 1px solid #d3d3d3;
+  }
+  
+  #mydivheader {
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+    background-color: #2196F3;
+    color: #fff;
+  }
+
+  .circle{
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+  }

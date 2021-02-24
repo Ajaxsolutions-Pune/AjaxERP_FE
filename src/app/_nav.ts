@@ -45,6 +45,11 @@ export const navItems: NavData[] = [
     icon: 'icon-map',   
   },
   {
+    name: 'Map Tracking',
+    url: '/mapTracking',
+    icon: 'icon-map',   
+  },
+  {
     name: 'Monitoring Masters',
     url: '/Masters',
     //  icon: 'nav-icon icon-layers',

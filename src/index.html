@@ -43,6 +43,8 @@
   var UserOff_Markers = [];
   var UserInactive_Markers = [];
   var coords = [];
+  var UserTracking = [];
+  var UserTrackings = [];
   var mapnew;
 
   function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map ) {                
@@ -95,7 +97,7 @@
         position: myLatlng2,
         //icon: iconBase + 'Mobile_Inactive.png',
         icon: {                
-                url: './assets/img/Content/Mobile_Inactive.png',   
+                url: './assets/img/Content/mobile_iconfff.jpg',   
              },        
         map: map, 
         title: "User Code : " +  UserCode + 
@@ -130,6 +132,36 @@
         UserOff_Markers.push(UserOff_Marker); 
       }
   } 
+
+  //google map user tracking 
+  function myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
+        lang,location,batteryPer,speed,iconBase,map)
+   {
+    const myLatlng2 = new google.maps.LatLng(lat ,lang);
+    UserTracking = new google.maps.Marker({
+      position: myLatlng2,
+        //icon: iconBase + 'Tower.jpg',
+        icon: {                
+              url: './assets/img/Content/Tower.png',               
+            },
+        map: map,
+        title: " Track ID : " +  trackingID + 
+             "--Login ID : " + LoginId + 
+             "--User Name : " +  userNameENG  +           
+             "--Mobile No. : " +  mobileNo + 
+             "--Date Time : " + dateTime + 
+             "--Latitude : " +  lat  + 
+             "--Longitude : " + lang  +
+             "--Location : " + location +
+             "--Batterry Per : " + batteryPer +
+             "--Speed : " + speed
+        });    
+        UserTracking.setMap(map);  
+       // UserTracking.setVisible(false);
+        UserTrackings.push(UserTracking);   
+        coords.push(myLatlng2);
+   }
+  
   
   //google map create asset markers
   function myMapAssetFunction(placeGroupCode,lat,lang,PlaceName,PlaceGroupName,AssetName,Location,PlaceAddress,
@@ -179,6 +211,8 @@
       }     
       mapnew = map;
   }
+
+  
 
   function CreateTransmissionLine()
   {    

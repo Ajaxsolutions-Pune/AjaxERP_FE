@@ -3,6 +3,7 @@ export class mapModel  {
     placeDetail: placeDetail[]; 
     userSummery: userSummery[];
     userDetail: userDetail[];
+    userTracking: userTracking[];
 }
 export class placeSummery  {   
     placeGroupName: string;

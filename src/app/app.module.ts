@@ -312,6 +312,7 @@ import { NotificationObjListComponent } from './views/Masters/Notification/notif
 import { NotificationObjComponent } from './views/Masters/Notification/notification.component';
 
 import { MapComponent } from './views/Map/map.component';
+import { MapTrackingComponent } from './views/Map/map_tracking.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MapService } from './Components/Services/Masters/MapService';
 import { CityListResolverService } from './Components/Resolver/Masters/City-List-Resolver-Service';
@@ -435,7 +436,7 @@ export const MY_FORMATS = {
     UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent,
     ScreenComponent, ScreenListComponent, MonitoringReportComponent, UserGroupListComponent, UserGroupComponent,
     UserGroupMappingComponent, NotificationObjListComponent, NotificationObjComponent,
-    MapComponent
+    MapComponent, MapTrackingComponent,
   ],
   providers: [
     ConfirmDialogService,

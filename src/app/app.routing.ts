@@ -141,6 +141,7 @@ import { NotificationObjComponent } from './views/Masters/Notification/notificat
 import { MapComponent } from './views/Map/map.component';
 import { CityListResolverService } from './Components/Resolver/Masters/City-List-Resolver-Service';
 import { CityGroupListResolverService } from './Components/Resolver/Masters/CityGroup-List-Resolver-Service';
+import { MapTrackingComponent } from './views/Map/map_tracking.component';
 
 export const routes: Routes = [
   {
@@ -195,6 +196,13 @@ export const routes: Routes = [
         component: MapComponent,
         data: {
           title: 'Map'
+        }
+      },
+      {
+        path: 'mapTracking',
+        component: MapTrackingComponent,
+        data: {
+          title: 'Map Tracking'
         }
       },
       {

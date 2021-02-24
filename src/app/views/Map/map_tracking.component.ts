@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Script } from 'vm';
 alasql['private'].externalXlsxLib = require('xlsx');
 import { environment } from '../../Components/Module/environment';
-import{mapModel,placeSummery,placeDetail,userSummery,userDetail} from '../../Components/Module/Masters/Map.model';
+import{mapModel,placeSummery,placeDetail,userSummery,userDetail,userTracking} from '../../Components/Module/Masters/Map.model';
 import{MapService} from '../../Components/Services/Masters/MapService';
 
 //temp
@@ -18,15 +18,16 @@ declare var myMapAssetFunction : Function;
 declare var myMapAssetHideFunction : Function;
 declare var myMapUserHideFunction : Function;
 declare var CreateTransmissionLine : Function;
+declare var myMapUserTrackingFunction : Function;
 declare var dragElement: Function;
 
 @Component({
   selector: 'app-map',  
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']  
+  templateUrl: './map_tracking.component.html',
+  styleUrls: ['./map_tracking.component.css']  
 })
 
-export class MapComponent implements OnInit {
+export class MapTrackingComponent implements OnInit {
   //@Input() FormInput: map;  
   form!: FormGroup;
   config: any;
@@ -50,8 +51,11 @@ export class MapComponent implements OnInit {
   placeDetailObj : placeDetail[];
   userSummaryObj : userSummery[];
   userDetailObj : userDetail[];
+  userTrackingObj : userTracking[];
+
   ResultUser: userDetail[];
   ResultPlace: placeDetail[];
+  ResultUserTracking: userTracking[];
 
   map;
   TowerCount : string = "0";
@@ -74,6 +78,7 @@ export class MapComponent implements OnInit {
       window.location.href = 'login';
     }
     this.ResultUser = this.userDetailObj;
+    this.ResultUserTracking = this.userTrackingObj;
     this.ResultPlace = this.placeDetailObj;
     this.config = {
       itemsPerPage: this.env.paginationPageSize,
@@ -81,6 +86,7 @@ export class MapComponent implements OnInit {
       //totalItems: this.forms.length
     }; 
   } 
+
   AutoRefreshStart(): void {   
     this.Count = 60;
     if(this.isAutoRefresh === 0)
@@ -113,31 +119,18 @@ export class MapComponent implements OnInit {
 
   SearchUser(value): void {       
     this.UserName_Search = value;     
-    this.ResultUser = this.userDetailObj;
+    this.ResultUserTracking = this.userTrackingObj;
     if (this.UserName_Search !== null && this.UserName_Search !== '') {
-      this.ResultUser = this.ResultUser.filter(SubResult =>
+      this.ResultUserTracking = this.ResultUserTracking.filter(SubResult =>
           SubResult.userNameENG.toLowerCase().indexOf(this.UserName_Search.toString().toLowerCase()) !== -1);
-        }       
-  }        
-
-  SearchPlace(value): void {       
-    this.PlaceName_Search = value;  
-    
-    alert(this.PlaceName_Search);
-    
-    this.ResultPlace = this.placeDetailObj;
-    if (this.PlaceName_Search !== null && this.PlaceName_Search !== '') {
-      this.ResultPlace = this.ResultPlace.filter(SubResult =>
-          SubResult.placeName.toLowerCase().indexOf(this.PlaceName_Search.toString().toLowerCase()) !== -1);
         }        
-      if(this.ResultPlace.length !== 0)
+      if(this.ResultUserTracking.length !== 0)
       {          
-        this.map.setCenter({
-          lat : Number(this.ResultPlace[0]['latitude']) ,
-          lng : Number(this.ResultPlace[0]['longitude']) ,         
-        });       
+           this.createMap();
       }
   }        
+
+   
 
   ngOnInit() {    
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
@@ -163,14 +156,15 @@ export class MapComponent implements OnInit {
       placeDetail:[],
       userSummery:[],
       userDetail:[],
-      userTracking:[] //Temp
+      userTracking:[]
     };    
 
     this.placeSummeryObj = [];
     this.placeDetailObj = [];
     this.userSummaryObj = [];
     this.userDetailObj = [];  
-   
+    this.userTrackingObj = []; 
+    
     //Asset data from map service
     this.mapService.getMapData().subscribe(t => {
       this.mapModelObj = t;
@@ -178,13 +172,16 @@ export class MapComponent implements OnInit {
       this.placeDetailObj = this.mapModelObj.placeDetail;   
       this.userSummaryObj = this.mapModelObj.userSummery;
       this.userDetailObj = this.mapModelObj.userDetail;
+      this.userTrackingObj = this.mapModelObj.userTracking;
       this.ResultUser = this.userDetailObj;
+
+      console.log(this.userTrackingObj);
 
       if(this.userDetailObj.length > 0 ) //!= []
       {      
-        this.createMap();
+        //this.createMap();
       }    
-      
+
       if(this.placeSummeryObj.length > 0 ) //
       {
         for (var i=0; i < this.placeSummeryObj.length; i++) 
@@ -227,39 +224,12 @@ export class MapComponent implements OnInit {
 
   changeMapType(e) {
     //console.log(e.target.value);
-    this.MapType = e.target.value;   
-    this.createMap();
+    //this.MapType = e.target.value;   
+    //this.createMap();
   }
 
-  onTowerChange(e) 
-  {        
-    myMapAssetHideFunction('Tower');
-  }
-
-  onSubStationChange(e)
-  {
-    myMapAssetHideFunction('SubStation');
-  }
-
-  onUserCheckInChange(e)
-  {
-    myMapUserHideFunction('Check In');
-  }
-
-  onUserCheckOutChange(e)
-  {
-    myMapUserHideFunction('Check Out');
-  }
-
-  onUserOfChange(e)
-  {
-    myMapUserHideFunction('Off');
-  }
-
-  onUserInactiveChange(e)
-  {
-    myMapUserHideFunction('Inactive');
-  }
+  
+  
 
   createMap()
   {
@@ -282,42 +252,22 @@ export class MapComponent implements OnInit {
     else if(this.MapType === 'ROADMAP')
     {
       this.map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-    }
-
-    //user    
-    for (var i=0; i < this.userDetailObj.length; i++) {     
-      var lat = this.userDetailObj[i]['latitude'];
-      var lang = this.userDetailObj[i]['longitude'];
-      var UserCode = this.userDetailObj[i]['loginId'];
-      var UserName = this.userDetailObj[i]['userNameENG'];
-      var Status = this.userDetailObj[i]['userStatus'];
-      var Battery =  this.userDetailObj[i]['batteryPer'];
-      var Speed =  this.userDetailObj[i]['speed'] ;
-      var LastUpdate = ""; //this.realTimeTrackingDataObj[i]['dateTime'];
-      var Location = this.userDetailObj[i]['googleAddress'];                
-    myMapFunction(lat,lang,UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,this.map);  
-    }
-
-     
+    }  
     
-    //Asset    
-    for (var i=0; i < this.placeDetailObj.length; i++) {    
-      var placeGroupCode = this.placeDetailObj[i]['placeGroupCode'] ;
-      var lat = this.placeDetailObj[i]['latitude'];
-      var lang = this.placeDetailObj[i]['longitude'];
-      var PlaceName = this.placeDetailObj[i]['placeName'];
-      var PlaceGroupName = this.placeDetailObj[i]['placeGroupName'];
-      var AssetName = this.placeDetailObj[i]['assetName'];
-      var PlaceAddress = this.placeDetailObj[i]['placeAddress'];
-      var StateName =  this.placeDetailObj[i]['stateName'];
-      var PinCode =  this.placeDetailObj[i]['pinCode'] ;      
-      var Location = this.placeDetailObj[i]['location'];                  
-      myMapAssetFunction(placeGroupCode,lat,lang,PlaceName, PlaceGroupName,AssetName,
-      Location,PlaceAddress,iconBase,StateName,PinCode,this.map);
-    }    
-
-    //Create transmission line
-    CreateTransmissionLine(); 
-
+    // UserTracking
+    for (var i=0; i < this.ResultUserTracking.length; i++) {    
+      var trackingID = this.ResultUserTracking[i]['trackingId'];
+      var LoginId = this.ResultUserTracking[i]['loginId'];
+      var userNameENG = this.ResultUserTracking[i]['userNameENG'];
+      var mobileNo = this.ResultUserTracking[i]['mobileNo'];
+      var dateTime = this.ResultUserTracking[i]['dateTime'];
+      var lat = this.ResultUserTracking[i]['latitude'];
+      var lang = this.ResultUserTracking[i]['longitude'];
+      var location =  this.ResultUserTracking[i]['location'];
+      var batteryPer =  this.ResultUserTracking[i]['batteryPer'];      
+      var speed = this.ResultUserTracking[i]['speed'];                  
+      myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
+        lang,location,batteryPer,speed,iconBase,this.map);
+    }      
   }
 }
