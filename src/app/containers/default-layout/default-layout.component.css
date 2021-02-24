@@ -102,7 +102,8 @@
   width: 200px;
 }
 .uselog {
-  content: url("../../../assets/img/Content/UserLogin.jpg");
+  content: url("../../../assets/img/Content/Mobile_Inactive.png");
+  /*content: url("../../../assets/img/Content/UserLogin.jpg");*/
   height: 50px;
 }
 .ajaxlog {
