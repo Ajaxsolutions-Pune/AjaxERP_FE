@@ -142,6 +142,30 @@ import { MapComponent } from './views/Map/map.component';
 import { CityListResolverService } from './Components/Resolver/Masters/City-List-Resolver-Service';
 import { CityGroupListResolverService } from './Components/Resolver/Masters/CityGroup-List-Resolver-Service';
 import { MapTrackingComponent } from './views/Map/map_tracking.component';
+import { QualificationListComponent } from './views/HRMS/Qualification/qualification-list/qualification-list.component';
+import { QualificationListResolverService } from './Components/Resolver/HRMS/Qualification-List-Resolver.Service';
+import { QualificationComponent } from './views/HRMS/Qualification/qualification/qualification.component';
+import { GradeSetListResolverService } from './Components/Resolver/HRMS/GradeSet-List-Resolver.Service';
+import { GradeSetListComponent } from './views/HRMS/GradeSet/grade-set-list.component';
+import { GradeSetComponent } from './views/HRMS/GradeSet/grade-set.component';
+import { GradeListComponent } from './views/HRMS/Grade/grade-list.component';
+import { GradeListResolverService } from './Components/Resolver/HRMS/Grade-List-Resolver.Service';
+import { GradeComponent } from './views/HRMS/Grade/grade.component';
+import { JobListComponent } from './views/HRMS/Job/job-list.component';
+import { JobListResolverService } from './Components/Resolver/HRMS/Job-List-Resolver.Service';
+import { JobComponent } from './views/HRMS/Job/job.component';
+import { QualificationLevelListComponent } from './views/HRMS/QualificationLevel/qualification-level-list.component';
+import { QualificationLevelListResolverService } from './Components/Resolver/HRMS/QualificationLevel-List-Resolver.Service';
+import { QualificationLevelComponent } from './views/HRMS/QualificationLevel/qualification-level.component';
+import { SpecializationListComponent } from './views/HRMS/Specialization/specialization-list.component';
+import { SpecializationListResolverService } from './Components/Resolver/HRMS/Specialization-List-Resolver.Service';
+import { SpecializationComponent } from './views/HRMS/Specialization/specialization.component';
+import { QualificationTypeListComponent } from './views/HRMS/QualificationType/qualification-type-list.component';
+import { QualificationTypeListResolverService } from './Components/Resolver/HRMS/QualificationType-List-Resolver.Service';
+import { QualificationTypeComponent } from './views/HRMS/QualificationType/qualification-type.component';
+import { JobLevelListComponent } from './views/HRMS/JobLevel/job-level-list.component';
+import { JobLevelListResolverService } from './Components/Resolver/HRMS/JobLevel-List-Resolver.Service';
+import { JobLevelComponent } from './views/HRMS/JobLevel/job-level.component';
 
 export const routes: Routes = [
   {
@@ -492,6 +516,289 @@ export const routes: Routes = [
           DistrictList: DistrictListResolverService
         },
       },
+
+      {
+        path: 'QualificationList',
+        component: QualificationListComponent,
+        data: {
+          title: ' Qualification List'
+        },
+        resolve: {
+          QualificationList: QualificationListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
+
+      },
+      {
+        path: 'Qualification',
+        component: QualificationComponent,
+        data: {
+          title: 'Add  Qualification'
+        }
+      },
+      {
+        path: 'Qualification/:id',
+        component: QualificationComponent,
+        data: {
+          title: 'Edit  Qualification'
+        }
+      },
+
+      /*{
+        path: 'DepartmentList',
+        component: DepartmentListComponent,
+        data: {
+          title: ' Department List'
+        },
+        resolve: {
+          DepartmentList: DepartmentListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
+      },
+      {
+        path: 'Department',
+        component: DepartmentComponent,
+        data: {
+          title: 'Add  Department'
+        }
+      },
+      {
+        path: 'Department/:id',
+        component: DepartmentComponent,
+        data: {
+          title: 'Edit  Department'
+        }
+      },*/
+
+      {
+        path: 'GradeSetList',
+        component: GradeSetListComponent,
+        data: {
+          title: ' Grade Set List'
+        },
+        resolve: {
+          GradeSetList: GradeSetListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
+      },
+      {
+        path: 'GradeSet',
+        component: GradeSetComponent,
+        data: {
+          title: 'Add  Grade Set'
+        }
+      },
+      {
+        path: 'GradeSet/:id',
+        component: GradeSetComponent,
+        data: {
+          title: 'Edit  Grade Set'
+        }
+      },
+
+      {
+        path: 'GradeList',
+        component: GradeListComponent,
+        data: {
+          title: ' Grade List'
+        },
+        resolve: {
+          GradeList: GradeListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
+      },
+      {
+        path: 'Grade',
+        component: GradeComponent,
+        data: {
+          title: 'Add  Grade'
+        }
+      },
+      {
+        path: 'Grade/:id',
+        component: GradeComponent,
+        data: {
+          title: 'Edit  Grade'
+        }
+      },
+
+     /* {
+        path: 'LocationList',
+        component: LocationListComponent,
+        data: {
+          title: ' Location List'
+        },
+        resolve: {
+          LocationList: LocationListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
+      },
+      {
+        path: 'Location',
+        component: LocationComponent,
+        data: {
+          title: 'Add Location'
+        }
+      },
+      {
+        path: 'Location/:id',
+        component: LocationComponent,
+        data: {
+          title: 'Edit Location'
+        }
+      },*/
+
+      {
+        path: 'JobList',
+        component: JobListComponent,
+        data: {
+          title: ' Job List'
+        },
+        resolve: {
+          JobList: JobListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
+      },
+      {
+        path: 'Job',
+        component: JobComponent,
+        data: {
+          title: 'Add Job'
+        }
+      },
+      {
+        path: 'Job/:id',
+        component: JobComponent,
+        data: {
+          title: 'Edit Job'
+        }
+      },
+      /*{
+        path: 'PositionList',
+        component: PositionListComponent,
+        data: {
+          title: 'Position List'
+        },
+        resolve: {
+          PositionList: PositionListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
+      },
+      {
+        path: 'Position',
+        component: PositionComponent,
+        data: {
+          title: 'Add Position'
+        }
+      },
+      {
+        path: 'Position/:id',
+        component: PositionComponent,
+        data: {
+          title: 'Edit Position'
+        }
+      },*/
+      {
+        path: 'QualificationLevelList',
+        component: QualificationLevelListComponent,
+        data: {
+          title: 'Qualification Level List'
+        },
+        resolve: {
+          QualificationLevelList: QualificationLevelListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
+      },
+      {
+        path: 'QualificationLevel',
+        component: QualificationLevelComponent,
+        data: {
+          title: 'Add Qualification Level'
+        }
+      },
+      {
+        path: 'QualificationLevel/:id',
+        component: QualificationLevelComponent,
+        data: {
+          title: 'Edit Qualification Level'
+        }
+      },
+      {
+        path: 'SpecializationList',
+        component: SpecializationListComponent,
+        data: {
+          title: 'Specialization List'
+        },
+        resolve: {
+          SpecializationList: SpecializationListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
+      },
+      {
+        path: 'Specialization',
+        component: SpecializationComponent,
+        data: {
+          title: 'Add Specialization'
+        }
+      },
+      {
+        path: 'Specialization/:id',
+        component: SpecializationComponent,
+        data: {
+          title: 'Edit Specialization'
+        }
+      },
+      {
+        path: 'QualificationTypeList',
+        component: QualificationTypeListComponent,
+        data: {
+          title: 'Qualification Type List'
+        },
+        resolve: {
+          QualificationTypeList: QualificationTypeListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
+      },
+      {
+        path: 'QualificationType',
+        component: QualificationTypeComponent,
+        data: {
+          title: 'Add Qualification Type'
+        }
+      },
+      {
+        path: 'QualificationType/:id',
+        component: QualificationTypeComponent,
+        data: {
+          title: 'Edit Qualification Type'
+        }
+      },
+      {
+        path: 'JobLevelList',
+        component: JobLevelListComponent,
+        data: {
+          title: 'Job Level List'
+        },
+        resolve: {
+          JobLevelList: JobLevelListResolverService,
+          // ProduReport: ProductionReportResolverService
+        },
+      },
+      {
+        path: 'JobLevel',
+        component: JobLevelComponent,
+        data: {
+          title: 'Add Job Level'
+        }
+      },
+      {
+        path: 'JobLevel/:id',
+        component: JobLevelComponent,
+        data: {
+          title: 'Edit Job Level'
+        }
+      },
+
       {
         path: 'ItemCategoryList',
         component: ItemCategoryListComponent,

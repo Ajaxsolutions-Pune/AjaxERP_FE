@@ -312,13 +312,73 @@ import { NotificationObjListComponent } from './views/Masters/Notification/notif
 import { NotificationObjComponent } from './views/Masters/Notification/notification.component';
 
 import { MapComponent } from './views/Map/map.component';
-import { MapTrackingComponent } from './views/Map/map_tracking.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MapService } from './Components/Services/Masters/MapService';
 import { CityListResolverService } from './Components/Resolver/Masters/City-List-Resolver-Service';
 import { CityTransfarmer } from './Components/Transformer/Masters/City-Transfarmer';
 import { CityGroupListResolverService } from './Components/Resolver/Masters/CityGroup-List-Resolver-Service';
 import { CityGroupTransfarmer } from './Components/Transformer/Masters/CityGroup-Transfarmer';
+
+
+import { GradeSetService } from './Components/Services/HRMS/GradeSetService';
+import { GradeSetTransfarmer } from './Components/Transformer/HRMS/GradeSet-Transfarmer';
+import { GradeSetListResolverService } from './Components/Resolver/HRMS/GradeSet-List-Resolver.Service';
+import { GradeService } from './Components/Services/HRMS/GradeService';
+import { GradeTransfarmer } from './Components/Transformer/HRMS/Grade-Transfarmer';
+import { QualificationTransfarmer } from './Components/Transformer/HRMS/Qualification-Transfarmer';
+import { QualificationListResolverService } from './Components/Resolver/HRMS/Qualification-List-Resolver.Service';
+import { GradeListResolverService } from './Components/Resolver/HRMS/Grade-List-Resolver.Service';
+import { QualificationService } from './Components/Services/HRMS/QualificationService';
+import { QualificationLevelListResolverService } from './Components/Resolver/HRMS/QualificationLevel-List-Resolver.Service';
+import { QualificationLevelService } from './Components/Services/HRMS/QualificationLevelService';
+import { QualificationLevelTransfarmer } from './Components/Transformer/HRMS/QualificationLevel-Transfarmer';
+import { SpecializationListResolverService } from './Components/Resolver/HRMS/Specialization-List-Resolver.Service';
+import { SpecializationService } from './Components/Services/HRMS/SpecializationService';
+import { SpecializationTransfarmer } from './Components/Transformer/HRMS/Specialization-Transfarmer';
+import { QualificationListComponent } from './views/HRMS/Qualification/qualification-list/qualification-list.component';
+import { QualificationComponent } from './views/HRMS/Qualification/qualification/qualification.component';
+//import { DepartmentListComponent } from './views/HRMS/Department/department-list.component';
+//import { DepartmentComponent } from './views/HRMS/Department/department.component';
+import { GradeSetListComponent } from './views/HRMS/GradeSet/grade-set-list.component';
+import { GradeSetComponent } from './views/HRMS/GradeSet/grade-set.component';
+import { GradeListComponent } from './views/HRMS/Grade/grade-list.component';
+import { GradeComponent } from './views/HRMS/Grade/grade.component';
+//import { LocationListComponent } from './views/HRMS/Location/location-list.component';
+//import { LocationComponent } from './views/HRMS/Location/location.component';
+import { JobListComponent } from './views/HRMS/Job/job-list.component';
+import { JobComponent } from './views/HRMS/Job/job.component';
+//import { PositionListComponent } from './views/HRMS/Position/position-list.component';
+//import { PositionComponent } from './views/HRMS/Position/position.component';
+import { QualificationLevelListComponent } from './views/HRMS/QualificationLevel/qualification-level-list.component';
+import { QualificationLevelComponent } from './views/HRMS/QualificationLevel/qualification-level.component';
+import { SpecializationListComponent } from './views/HRMS/Specialization/specialization-list.component';
+import { SpecializationComponent } from './views/HRMS/Specialization/specialization.component';
+import { QualificationTypeListComponent } from './views/HRMS/QualificationType/qualification-type-list.component';
+import { QualificationTypeComponent } from './views/HRMS/QualificationType/qualification-type.component';
+import { JobLevelListComponent } from './views/HRMS/JobLevel/job-level-list.component';
+import { JobLevelComponent } from './views/HRMS/JobLevel/job-level.component';
+//import { DepartmentListResolverService } from './Components/Resolver/HRMS/Department-List-Resolver.Service';
+//import { DepartmentService } from './Components/Services/HRMS/DepartmentService';
+//import { DepartmentTransfarmer } from './Components/Transformer/HRMS/Department-Transfarmer';
+//import { JobListResolverService } from './Components/Resolver/HRMS/Job-List-Resolver.Service';
+import { JobService } from './Components/Services/HRMS/JobService';
+import { JobTransfarmer } from './Components/Transformer/HRMS/Job-Transfarmer';
+import { JobLevelListResolverService } from './Components/Resolver/HRMS/JobLevel-List-Resolver.Service';
+import { JobLevelService } from './Components/Services/HRMS/JobLevelService';
+import { JobLevelTransfarmer } from './Components/Transformer/HRMS/JobLevel-Transfarmer';
+//import { PositionListResolverService } from './Components/Resolver/HRMS/Position-List-Resolver.Service';
+//import { PositionService } from './Components/Services/HRMS/PositionService';
+//import { PositionTransfarmer } from './Components/Transformer/HRMS/Position-Transfarmer';
+//import { EmployeeService } from './Components/Services/Masters/EmployeeService';
+//import { EmployeeTransfarmer } from './Components/Transformer/Masters/Employee-Transfarmer';
+//import { EmployeeListResolverService } from './Components/Resolver/Masters/Employee-List-Resolver.Service';
+//import { LocationService } from './Components/Services/HRMS/LocationService';
+//import { LocationTransfarmer } from './Components/Transformer/HRMS/Location-Transfarmer';
+//import { LocationListResolverService } from './Components/Resolver/HRMS/Location-List-Resolver.Service';
+import { QualificationTypeService } from './Components/Services/HRMS/QualificationTypeService';
+import { QualificationTypeTransfarmer } from './Components/Transformer/HRMS/QualificationType-Transfarmer';
+import { QualificationTypeListResolverService } from './Components/Resolver/HRMS/QualificationType-List-Resolver.Service';
+import { MapTrackingComponent } from './views/Map/map_tracking.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -436,13 +496,36 @@ export const MY_FORMATS = {
     UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent,
     ScreenComponent, ScreenListComponent, MonitoringReportComponent, UserGroupListComponent, UserGroupComponent,
     UserGroupMappingComponent, NotificationObjListComponent, NotificationObjComponent,
-    MapComponent, MapTrackingComponent,
+    MapComponent,
+    MapTrackingComponent,
+    QualificationListComponent,
+    QualificationComponent,
+    //DepartmentListComponent,
+    //DepartmentComponent,
+    GradeSetListComponent,
+    GradeSetComponent,
+    GradeListComponent,
+    GradeComponent,
+    //LocationListComponent,
+    //LocationComponent,
+    JobListComponent,
+    JobComponent,
+    //PositionListComponent,
+    //PositionComponent,
+    QualificationLevelListComponent,
+    QualificationLevelComponent,
+    SpecializationListComponent,
+    SpecializationComponent,
+    QualificationTypeListComponent,
+    QualificationTypeComponent,
+    JobLevelListComponent,
+    JobLevelComponent,
   ],
   providers: [
     ConfirmDialogService,
     LogIn, LogInService, User, UOM, UserService, EditService, ToolbarService,
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
-    CityService,CityTransfarmer, CityGroupTransfarmer, UOMService, DefaultLayoutComponent, CookieService,
+    CityService, CityTransfarmer, CityGroupTransfarmer, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
     HubService, ContactService, AccessService, ModuleobjService, ScreenObjService, UserDeviceDataService,
     CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
@@ -455,7 +538,17 @@ export const MY_FORMATS = {
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer, UserGroupTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
     HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer
-    , ModuleobjTransfarmer, ScreenObjTransfarmer, UserDeviceRegTransfarmer,
+    , ModuleobjTransfarmer, ScreenObjTransfarmer, UserDeviceRegTransfarmer, GradeSetService, GradeSetTransfarmer, GradeSetListResolverService,
+    GradeService, GradeTransfarmer, GradeListResolverService, QualificationListResolverService,
+    QualificationService, QualificationTransfarmer, QualificationLevelListResolverService, QualificationLevelService, QualificationLevelTransfarmer,
+    SpecializationListResolverService, SpecializationService, SpecializationTransfarmer,
+    //DepartmentListResolverService, DepartmentService, DepartmentTransfarmer,JobListResolverService,
+    JobService, JobTransfarmer,
+    JobLevelListResolverService, JobLevelService, JobLevelTransfarmer,
+    //PositionListResolverService, PositionService, PositionTransfarmer,
+    //EmployeeService, EmployeeTransfarmer, EmployeeListResolverService,
+    //LocationService, LocationTransfarmer, LocationListResolverService,
+    QualificationTypeService, QualificationTypeTransfarmer, QualificationTypeListResolverService,
     ZoneService, CircleService, ClusterService, ColourService, DeviceService, UserGroupService,
     FormService, ProcessService1, QuestionService, AssetService, AssetGroupService,
     AssetCategoryService, DataService, UserService, UserDeviceRegService,
@@ -467,7 +560,7 @@ export const MY_FORMATS = {
     AssetCategoryListResolverService, UserListResolverService, DashboardService,
     QuestionListResolverService, TehsilListResolverService, TehsilMasterResolverService,
     DistrictMasterResolverService, DistrictListResolverService, QaTypeListResolverService,
-    CityListResolverService,CityGroupListResolverService,
+    CityListResolverService, CityGroupListResolverService,
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
     DeviceListResolverService, ClusterListResolverService, TransmissionLineListResolverService,
     HubListResolverService, ContactListResolverService, AccessListResolverService

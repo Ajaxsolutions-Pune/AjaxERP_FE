@@ -26,8 +26,19 @@ import { UserGroupService } from '../Components/Services/Masters/UserGroupServic
 import { CityService } from '../Components/Services/Masters/CityService';
 import { CountryService } from '../Components/Services/Masters/CountryService';
 import { DistrictService } from '../Components/Services/Masters/DistrictService';
-import { CityGroupService} from '../Components/Services/Masters/CityGroupService';
-import { TehsilService} from '../Components/Services/Masters/TehsilService';
+import { CityGroupService } from '../Components/Services/Masters/CityGroupService';
+import { TehsilService } from '../Components/Services/Masters/TehsilService';
+import { GradeSetService } from '../Components/Services/HRMS/GradeSetService';
+import { GradeService } from '../Components/Services/HRMS/GradeService';
+import { QualificationService } from '../Components/Services/HRMS/QualificationService';
+import { QualificationLevelService } from '../Components/Services/HRMS/QualificationLevelService';
+import { SpecializationService } from '../Components/Services/HRMS/SpecializationService';
+//import { DepartmentService } from '../Components/Services/HRMS/DepartmentService';
+import { JobService } from '../Components/Services/HRMS/JobService';
+import { JobLevelService } from '../Components/Services/HRMS/JobLevelService';
+//import { PositionService } from '../Components/Services/HRMS/PositionService';
+//import { LocationService } from '../Components/Services/HRMS/LocationService';
+import { QualificationTypeService } from '../Components/Services/HRMS/QualificationTypeService';
 
 
 export const ConfirmPasswordValidator = (globalService: GlobalService, PassFild: string, ConfirmPassFild: string, time: number = 500) => {
@@ -181,7 +192,7 @@ export const hubAsyncValidator = (hubService: HubService, code: string, time: nu
 };
 
 export const hubCodeAsyncValidator = (hubService: HubService, Hubcode: string,
-   time: number = 500) => {
+  time: number = 500) => {
   return (input: FormControl) => {
     return timer(time).pipe(
       switchMap(() => hubService.checkHubByCode(input.value)),
@@ -374,11 +385,11 @@ export const UserLoginAsyncValidator = (userService: UserService,
     );
   };
 };
-export const UserGroupAsyncValidator = (userGroupService: UserGroupService,Code:string,
+export const UserGroupAsyncValidator = (userGroupService: UserGroupService, Code: string,
   time: number = 500) => {
   return (input: FormControl) => {
     return timer(time).pipe(
-      switchMap(() => userGroupService.checkUserGroup(input.value,Code)),
+      switchMap(() => userGroupService.checkUserGroup(input.value, Code)),
       map(res => {
         if (res.status == 'notexist') {
           return null;
@@ -389,11 +400,11 @@ export const UserGroupAsyncValidator = (userGroupService: UserGroupService,Code:
     );
   };
 };
-export const CityAsyncValidator = (cityService: CityService,Code:string,
+export const CityAsyncValidator = (cityService: CityService, Code: string,
   time: number = 500) => {
   return (input: FormControl) => {
     return timer(time).pipe(
-      switchMap(() => cityService.checkCity(input.value,Code)),
+      switchMap(() => cityService.checkCity(input.value, Code)),
       map(res => {
         if (res.status == 'notexist') {
           return null;
@@ -404,11 +415,11 @@ export const CityAsyncValidator = (cityService: CityService,Code:string,
     );
   };
 };
-export const CountryAsyncValidator = (countryService: CountryService,Code:string,
+export const CountryAsyncValidator = (countryService: CountryService, Code: string,
   time: number = 500) => {
   return (input: FormControl) => {
     return timer(time).pipe(
-      switchMap(() => countryService.checkCountry(input.value,Code)),
+      switchMap(() => countryService.checkCountry(input.value, Code)),
       map(res => {
         if (res.status == 'notexist') {
           return null;
@@ -419,27 +430,11 @@ export const CountryAsyncValidator = (countryService: CountryService,Code:string
     );
   };
 };
-export const DistrictAsyncValidator = (districtService: DistrictService,Code:string,
+export const DistrictAsyncValidator = (districtService: DistrictService, Code: string,
   time: number = 500) => {
   return (input: FormControl) => {
     return timer(time).pipe(
-      switchMap(() => districtService.checkDistrict(input.value,Code)),
-      map(res => {
-        if (res.status == 'notexist') {
-          return null;
-        } else {
-          return { queExist: true };
-        }
-      })
-    );
-  };
-};
-
-export const CityGroupAsyncValidator = (cityGroupService: CityGroupService,Code:string,
-  time: number = 500) => {
-  return (input: FormControl) => {
-    return timer(time).pipe(
-      switchMap(() => cityGroupService.checkCityGroup(input.value,Code)),
+      switchMap(() => districtService.checkDistrict(input.value, Code)),
       map(res => {
         if (res.status == 'notexist') {
           return null;
@@ -451,23 +446,206 @@ export const CityGroupAsyncValidator = (cityGroupService: CityGroupService,Code:
   };
 };
 
-  export const TehsilAsyncValidator = (tehsilService: TehsilService,Code:string,
-    time: number = 500) => {
-    return (input: FormControl) => {
-      return timer(time).pipe(
-        switchMap(() => tehsilService.checkTehsil(input.value,Code)),
-        map(res => {
-          if (res.status == 'notexist') {
-            return null;
-          } else {
-            return { queExist: true };
-          }
-        })
-      );
-    };
+export const CityGroupAsyncValidator = (cityGroupService: CityGroupService, Code: string,
+  time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => cityGroupService.checkCityGroup(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
   };
+};
 
-  
+export const TehsilAsyncValidator = (tehsilService: TehsilService, Code: string,
+  time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => tehsilService.checkTehsil(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+export const GradeSetAsyncValidator = (gradeSetService: GradeSetService, Code: string, time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => gradeSetService.checkGradeSet(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+export const GradeAsyncValidator = (gradeService: GradeService, Code: string, time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => gradeService.checkGrade(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+// export const QualificationAsyncValidator = (qualificationService: QualificationService, Code: string, time: number = 500) => {
+//   return (input: FormControl) => {
+//     return timer(time).pipe(
+//       switchMap(() => qualificationService.checkQualification(input.value, Code)),
+//       map(res => {
+//         if (res.status == 'notexist') {
+//           return null;
+//         } else {
+//           return { queExist: true };
+//         }
+//       })
+//     );
+//   };
+// };
+
+export const QualificationLevelAsyncValidator = (qualificationLevelService: QualificationLevelService, Code: string, time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => qualificationLevelService.checkQualificationLevel(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+export const SpecializationAsyncValidator = (specializationService: SpecializationService, Code: string, time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => specializationService.checkSpecialization(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+/*export const DepartmentAsyncValidator = (departmentService: DepartmentService, Code: string, time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => departmentService.checkDepartment(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};*/
+
+
+export const JobAsyncValidator = (jobService: JobService, Code: string, time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => jobService.checkJob(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+export const JobLevelAsyncValidator = (jobLevelService: JobLevelService, Code: string, time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => jobLevelService.checkJobLevel(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+/*export const PositionAsyncValidator = (positionService: PositionService, Code: string, time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => positionService.checkPosition(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+export const LocationAsyncValidator = (locationService: LocationService, Code: string, time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => locationService.checkLocation(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};*/
+
+export const QualificationTypeAsyncValidator = (qualificationTypeService: QualificationTypeService, Code: string, time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => qualificationTypeService.checkQualificationType(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+
+
+
 
 
 

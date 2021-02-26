@@ -1,0 +1,64 @@
+<!-- <p>specification-list works!</p> -->
+<!-- <p>qualification-level-list works!</p> -->
+<!-- <p>position-list works!</p> -->
+<!-- <p>job-list works!</p> -->
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-3">Specialization Code</div>
+        <div class="col-md-3">Specialization Name</div>
+        <div class="col-md-2">Status</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <input id="txtSpecializationCode" required name="SpecializationCode" type="text" class="form-control" placeholder="Specialization Code" (input)="resultChanged()" [(ngModel)]="bindObj.specializationCode">
+
+        </div>
+        <div class="col-md-3">
+            <input id="txtSpecializationName" required name="SpecializationName" type="text" class="form-control" placeholder="Specialization Name" (input)="resultChanged()" [(ngModel)]="bindObj.specializationName">
+        </div>
+
+        <div class="col-md-2">
+            <select id="ShiftId" name="ShiftId" (change)="resultChanged()" [(ngModel)]="bindObj.specializationStatus" class="form-control">
+        <option value="3" selected>All</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+        </div>
+        <div class="col-md-1">
+            <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Specialization" routerLink="/Specialization"></button>
+        </div>
+        <div class="col-md-1">
+            <i class="fa fa-file-excel-o" style="font-size:35px;color: #20a8d8" aria-hidden="true" (click)="ExportToExcel()"></i>
+        </div>
+    </div>
+</div>
+
+<table class="table table-respageChanged ponsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+        <tr>
+            <th>Specialization Code</th>
+            <th>Specialization Name</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let Oject of arrOject  | paginate: config">
+            <td>
+                {{Oject.specializationCode}}
+            </td>
+            <td>
+                {{Oject.specializationName}}
+            </td>
+            <td>
+                {{Oject.specializationStatus}}
+            </td>
+
+            <td> <button mat-icon-button [routerLink]="['/Specialization/',Oject.specializationCode]" color="accent">
+            <mat-icon color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+          </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

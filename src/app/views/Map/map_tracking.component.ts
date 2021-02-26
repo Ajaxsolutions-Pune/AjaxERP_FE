@@ -233,7 +233,7 @@ export class MapTrackingComponent implements OnInit {
 
   createMap()
   {
-    const myLatlng = new google.maps.LatLng(this.userDetailObj[0]['latitude'],this.userDetailObj[0]['longitude']);
+    const myLatlng = new google.maps.LatLng(this.ResultUserTracking[0]['latitude'],this.ResultUserTracking[0]['longitude']);
     const iconBase = '../../../assets/img/Content/';
     const mapProp= {         
       center:myLatlng,      
@@ -254,6 +254,8 @@ export class MapTrackingComponent implements OnInit {
       this.map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
     }  
     
+    console.log(this.ResultUserTracking);
+
     // UserTracking
     for (var i=0; i < this.ResultUserTracking.length; i++) {    
       var trackingID = this.ResultUserTracking[i]['trackingId'];
@@ -267,7 +269,9 @@ export class MapTrackingComponent implements OnInit {
       var batteryPer =  this.ResultUserTracking[i]['batteryPer'];      
       var speed = this.ResultUserTracking[i]['speed'];                  
       myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
-        lang,location,batteryPer,speed,iconBase,this.map);
+        lang,location,batteryPer,speed,iconBase,this.map,i);
+
+        
     }      
   }
 }

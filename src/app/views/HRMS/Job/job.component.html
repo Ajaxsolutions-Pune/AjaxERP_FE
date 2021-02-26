@@ -1,0 +1,109 @@
+<form #JobForm="ngForm" [formGroup]="form" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Job</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput #jobCode spellcheck="false" [(ngModel)]="jobobj.jobCode" placeholder="Job Code *" formControlName="ControlJobCode" #txtControlJobCode name="txtControlJobCode">
+
+                            </mat-form-field>
+                            <div class="col-sm-4" style="padding-top: 20px;">
+                                <mat-checkbox name="jobStatus" #jobStatus formControlName="ControlJobStatus" [(ngModel)]="jobobj.jobStatus">Active
+                                </mat-checkbox>
+                            </div>
+
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Grade</mat-label>
+                                <mat-select required formControlName="ControlGrade" [(ngModel)]="jobobj.gradeCode" (selected)='selectAnswersEvent($event)'>
+                                    <mat-option>Grade code</mat-option>
+                                    <mat-option *ngFor="let obj of gradedrp" [value]="obj.gradeCode">
+                                        {{obj.gradeCode}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlGrade'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="col-md-4">
+                                <mat-label>Start Date</mat-label>
+                                <input matInput [matDatepicker]="picker2" [(ngModel)]="startDate" formControlName="ControlStartDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker2">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                                <mat-error>
+                                    {{ formErrors['ControlStartDate']}}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Job Name *" formControlName="ControlJobName" #txtControlJobName name="txtControlJobName" spellcheck="false" [(ngModel)]="jobobj.jobName" (keypress)="special_char_val($event)">
+                                <mat-error>
+                                    {{ formErrors['ControlJobName'] }}
+                                    <span *ngIf="isJobExist()">
+                                       Job  Name is already taken.
+                                    </span>
+                                </mat-error>
+
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Job Discription" formControlName="ControlJobDiscription" #txtControlJobDiscription name="txtControlJobDiscription" [(ngModel)]="jobobj.jobDescription">
+                                <mat-error>
+                                    {{ formErrors['ControlJobDiscription'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Job Level</mat-label>
+                                <mat-select required formControlName="ControlJobLevel" [(ngModel)]="jobobj.jobLevel" (selected)='selectAnswersEvent($event)'>
+                                    <mat-option>Please Select Job Level</mat-option>
+                                    <mat-option *ngFor="let obj of jobLeveldrp" [value]="obj.jobLevelCode">
+                                        {{obj.jobLevelName}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlJobLevel'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Job Profile" formControlName="ControlJobProfile" #txtControlJobProfile name="txtControlJobProfile" [(ngModel)]="jobobj.jobProfile">
+                            </mat-form-field>
+                            <div class="col-md-2"></div>
+                        </div>
+
+
+
+
+
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button [disabled]="!form.valid" (click)="save()" color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button mat-raised-button color="warn" routerLink="/JobList">
+                                        Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

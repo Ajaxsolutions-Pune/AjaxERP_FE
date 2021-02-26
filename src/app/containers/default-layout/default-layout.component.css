@@ -101,9 +101,8 @@
   content: url("../../../assets/img/brand/Logo_2.jpg");
   width: 200px;
 }
-.uselog {
-  content: url("../../../assets/img/Content/Mobile_Inactive.png");
-  /*content: url("../../../assets/img/Content/UserLogin.jpg");*/
+.uselog {  
+  content: url("../../../assets/img/Content/UserLogin.jpg");
   height: 50px;
 }
 .ajaxlog {

@@ -1,0 +1,85 @@
+<main class="form-main">
+    <form #GradeForm="ngForm" [formGroup]="Gradeform1" autocomplete="off">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-11 container">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Grade </strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput #gradeCode spellcheck="false" [(ngModel)]="gradeobj.gradeCode" placeholder="Grade Code *" formControlName="ControlGradeCode" #txtControlGradeCode name="txtControlGradeCode">
+                                </mat-form-field>
+                                <div class="col-sm-4" style="padding-top: 20px;">
+                                    <mat-checkbox name="gradeStatus" #gradeStatus formControlName="ControlgradeStatus" [(ngModel)]="gradeobj.gradeStatus">Active
+                                    </mat-checkbox>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field class="col-md-4">
+                                    <mat-label>Grade Set Name</mat-label>
+                                    <mat-select required formControlName="ControlGradeSetName" [(ngModel)]="gradeobj.gradeSetCode" (selected)='selectAnswersEvent($event)'>
+                                        <mat-option>Name</mat-option>
+                                        <mat-option *ngFor="let obj of gradeSetdrp" [value]="obj.gradeSetCode">
+                                            {{obj.gradeSetName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        {{ formErrors['ControlGradeSetName'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="fill" class="col-md-4">
+                                    <mat-label>Start Date</mat-label>
+                                    <input matInput [matDatepicker]="picker2" [(ngModel)]="startDate" formControlName="ControlStartDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker2">
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                    <mat-error>
+                                        {{ formErrors['ControlStartDate']}}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Grade Name *" maxlength="100" formControlName="ControlGradeName" #txtControlGradeName name="txtControlGradeName" spellcheck="false" [(ngModel)]="gradeobj.gradeName" (keypress)="special_char_val($event)">
+                                    <mat-error>
+                                        {{ formErrors['ControlGradeName'] }}
+                                        <span *ngIf="isGradeExist()">
+                                           Grade  Name is already taken.
+                                        </span>
+                                    </mat-error>
+
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Grade Description *" maxlength="100" formControlName="ControlGradeDescription" [(ngModel)]="gradeobj.gradeDescription" #txtControlGradeDescription name="txtControlGradeDescription">
+                                    <mat-error>
+                                        {{ formErrors['ControlGradeDescription'] }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <button mat-raised-button [disabled]="!Gradeform1.valid" (click)="save()" color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button mat-raised-button color="warn" routerLink="/GradeList">
+                                        Cancel</button>
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>

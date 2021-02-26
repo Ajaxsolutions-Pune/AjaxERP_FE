@@ -44,11 +44,13 @@ export const navItems: NavData[] = [
     url: '/map',
     icon: 'icon-map',   
   },
+
   {
     name: 'Map Tracking',
     url: '/mapTracking',
     icon: 'icon-map',   
   },
+
   {
     name: 'Monitoring Masters',
     url: '/Masters',
@@ -324,7 +326,6 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },*/
     ]
-
   },
   {
     name: 'Reports',
@@ -337,6 +338,52 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
     ]
-
-  }
+  },
+  {
+    name: 'HRMS',
+    url: '/HRMS',
+    icon: '',
+    children: [
+      {
+        name: 'Qualification',
+        url: '/QualificationList',
+        icon: 'icon-puzzle'
+      },
+	   {
+        name: 'Grade Set',
+        url: '/GradeSetList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Grade',
+        url: '/GradeList',
+        icon: 'icon-puzzle'
+      },
+	   {
+        name: 'Job',
+        url: '/JobList',
+        icon: 'icon-puzzle'
+      },
+	   {
+        name: 'Qualification Level',
+        url: '/QualificationLevelList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Specialization',
+        url: '/SpecializationList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Qualification Type',
+        url: '/QualificationTypeList',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Job Level',
+        url: '/JobLevelList',
+        icon: 'icon-puzzle'
+      },
+    ]
+  },
 ];

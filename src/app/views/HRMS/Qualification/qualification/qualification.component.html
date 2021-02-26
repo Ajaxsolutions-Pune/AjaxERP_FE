@@ -1,0 +1,107 @@
+<form #QualificationForm="ngForm" [formGroup]="form" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Qualification</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput #qualificationCode spellcheck="false" [(ngModel)]="qualificationobj.qualificationCode" placeholder="Qualification Code *" formControlName="ControlQualificationCode" #txtControlQualificationCode name="txtControlQualificationCode">
+
+                            </mat-form-field>
+                            <div class="col-sm-4" style="padding-top: 20px;">
+                                <mat-checkbox name="qualificationStatus" #qualificationStatus formControlName="ControlQualificationStatus" [(ngModel)]="qualificationobj.qualificationStatus">Active
+                                </mat-checkbox>
+                            </div>
+
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Qualification Name *" maxlength="100" formControlName="ControlQualification_Name_Eng" #txtControlQualification_Name_Eng name="txtControlQualification_Name_Eng" spellcheck="false" [(ngModel)]="qualificationobj.qualificationName"
+                                    (keypress)="special_char_val($event)">
+                                <mat-error>
+                                    {{ formErrors['ControlQualification_Name_Eng'] }}
+                                    <span *ngIf="isQualificationExist()">
+                                          Qualification  Name is already taken.
+                                        </span>
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Qualification Description *" maxlength="100" formControlName="ControlQualification_Description" #txtControlQualification_Description name="txtControlQualification_Description" [(ngModel)]="qualificationobj.qualificationDescription">
+                                <mat-error>
+                                    {{ formErrors['ControlQualification_Description'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Qualification Level</mat-label>
+                                <mat-select required formControlName="ControlQualificationLevelCode" [(ngModel)]="qualificationobj.qualificationLevel" (selected)='selectAnswersEvent($event)'>
+                                    <mat-option>Name</mat-option>
+                                    <mat-option *ngFor="let obj of qualificationLeveldrp" [value]="obj.qualificationLevelCode">
+                                        {{obj.qualificationLevelName}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlQualificationLevelCode'] }}
+                                </mat-error>
+
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Specialization</mat-label>
+                                <mat-select required formControlName="ControlSpecialization" [(ngModel)]="qualificationobj.specialization" (selected)='selectAnswersEvent($event)'>
+                                    <mat-option>Name</mat-option>
+                                    <mat-option *ngFor="let obj of specializationdrp" [value]="obj.specializationName">
+                                        {{obj.specializationName}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlSpecialization'] }}
+                                </mat-error>
+
+                            </mat-form-field>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Qualification Type</mat-label>
+                                <mat-select required formControlName="ControlQualificationType" [(ngModel)]="qualificationobj.qualificationType" (selected)='selectAnswersEvent($event)'>
+
+                                    <mat-option *ngFor="let obj of qualificationTypedrp" [value]="obj.qualificationTypeCode">
+                                        {{obj.qualificationTypeName}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlQualificationType'] }}
+                                </mat-error>
+
+                            </mat-form-field>
+                            <div class="col-md-2"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <button mat-raised-button [disabled]="!form.valid" (click)="save()" color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button mat-raised-button color="warn" routerLink="/QualificationList">
+                                Cancel</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

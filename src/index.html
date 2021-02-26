@@ -46,6 +46,8 @@
   var UserTracking = [];
   var UserTrackings = [];
   var mapnew;
+  var line = [];
+
 
   function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map ) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang);     
@@ -133,20 +135,20 @@
       }
   } 
 
+  var towericon = '../assets/img/Content/Tower.png';
   //google map user tracking 
   function myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
-        lang,location,batteryPer,speed,iconBase,map)
+        lang,location,batteryPer,speed,iconBase,map,count)
    {
     const myLatlng2 = new google.maps.LatLng(lat ,lang);
     UserTracking = new google.maps.Marker({
       position: myLatlng2,
         //icon: iconBase + 'Tower.jpg',
         icon: {                
-              url: './assets/img/Content/Tower.png',               
+              url: towericon ,               
             },
         map: map,
-        title: " Track ID : " +  trackingID + 
-             "--Login ID : " + LoginId + 
+        title: "--Login ID : " + LoginId + 
              "--User Name : " +  userNameENG  +           
              "--Mobile No. : " +  mobileNo + 
              "--Date Time : " + dateTime + 
@@ -156,12 +158,26 @@
              "--Batterry Per : " + batteryPer +
              "--Speed : " + speed
         });    
-        UserTracking.setMap(map);  
-       // UserTracking.setVisible(false);
-        UserTrackings.push(UserTracking);   
-        coords.push(myLatlng2);
+        UserTracking.setMap(map);                  
+        coords.push(myLatlng2);  
+        
+        if(count == 0)
+        {         
+          coords = [];               
+        }  
+     
+        line[count] = new google.maps.Polyline({
+        path: coords,
+        geodesic:true,
+        strokeColor: '#fc0703',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+        });       
+        
+        line[count].setMap(map);             
    }
   
+   
   
   //google map create asset markers
   function myMapAssetFunction(placeGroupCode,lat,lang,PlaceName,PlaceGroupName,AssetName,Location,PlaceAddress,

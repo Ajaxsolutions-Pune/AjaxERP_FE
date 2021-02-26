@@ -1,0 +1,64 @@
+<!-- <p>specification works!</p> -->
+<!-- <p>qualification-level works!</p> -->
+<!-- <p>position works!</p> -->
+<!-- <p>job works!</p> -->
+<form #SpecializationForm="ngForm" [formGroup]="form" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Specialization</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Specialization Code *" spellcheck="false" [(ngModel)]="specializationobj.specializationCode" formControlName="ControlSpecializationCode" #txtControlSpecializationCode name="txtControlSpecializationCode" />
+                            </mat-form-field>
+                            <div class="col-sm-4" style="padding-top: 20px">
+                                <mat-checkbox name="Specialization Status" #SpecializationStatus formControlName="ControlSpecializationStatus" [(ngModel)]="specializationobj.specializationStatus">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Specialization Name *" formControlName="ControlSpecializationName" #txtControlSpecializationName name="txtControlSpecializationName" spellcheck="false" [(ngModel)]="specializationobj.specializationName" (keypress)="special_char_val($event)"
+                                />
+                                <mat-error>
+                                    {{ formErrors["ControlSpecializationName"] }}
+                                    <span *ngIf="isSpecializationExist()">
+                                     Specialization Name is already taken.</span>
+
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Specialization Discription" formControlName="ControlSpecializationDiscription" #txtControlSpecializationDiscription name="txtSpecializationDiscription" [(ngModel)]="specializationobj.specializationDesc" />
+                            </mat-form-field>
+
+                            <div class="col-md-2"></div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button [disabled]="!form.valid" (click)="save()" color="primary">
+                                      Submit</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                                    <button mat-raised-button color="warn" routerLink="/SpecializationList">
+                                      Cancel</button>
+
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

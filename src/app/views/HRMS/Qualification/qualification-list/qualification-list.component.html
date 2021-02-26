@@ -1,0 +1,71 @@
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-3">Qualification Code</div>
+        <div class="col-md-3">Qualification Name</div>
+        <div class="col-md-2">Status</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <input id="txtQualificationCode" required name="txtQualification Code" type="text" class="form-control" placeholder="Qualification Code" (input)="resultChanged()" [(ngModel)]="bindObj.qualificationCode">
+
+        </div>
+        <div class="col-md-3">
+            <input id="txtQualificationName" required name="QualificationName" type="text" class="form-control" placeholder="Qualification Name" (input)="resultChanged()" [(ngModel)]="bindObj.qualificationName">
+        </div>
+
+        <div class="col-md-2">
+            <select id="ShiftId" name="ShiftId" (change)="resultChanged()" [(ngModel)]="bindObj.qualificationStatus" class="form-control">
+        <option value="3" selected>All</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+        </div>
+        <div class="col-md-1">
+            <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Qualification" routerLink="/Qualification"></button>
+        </div>
+        <div class="col-md-1">
+            <i class="fa fa-file-excel-o" style="font-size:35px;color: #20a8d8" aria-hidden="true" (click)="ExportToExcel()"></i>
+        </div>
+    </div>
+</div>
+
+<table class="table table-respageChanged ponsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+        <tr>
+            <th>Qualification Code</th>
+            <th>Qualification Name</th>
+            <th>Qualification Level</th>
+            <th>Specialization</th>
+            <th>Qualification Type</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let Oject of arrOject  | paginate: config">
+            <td>
+                <div>{{Oject.qualificationCode}}</div>
+            </td>
+            <td>
+                {{Oject.qualificationName}}
+            </td>
+            <td>
+                {{Oject.qualificationLevel}}
+            </td>
+            <td>
+                {{Oject.specialization}}
+            </td>
+            <td>
+                {{Oject.qualificationType}}
+            </td>
+            <td>
+                {{Oject.qualificationStatus}}
+            </td>
+            <td> <button mat-icon-button [routerLink]="['/Qualification/',Oject.qualificationCode]" color="accent">
+          <mat-icon color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+        </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

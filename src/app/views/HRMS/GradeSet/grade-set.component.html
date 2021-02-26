@@ -1,0 +1,74 @@
+<form #GradeSetForm="ngForm" [formGroup]="form" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Grade Set</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput #gradeSetCode spellcheck="false" [(ngModel)]="gradesetobj.gradeSetCode" placeholder="Grade Set Code *" formControlName="ControlGradeSetCode" #txtControlGradeSetCode name="txtControlGradeSetCode">
+
+                            </mat-form-field>
+                            <div class="col-sm-4" style="padding-top: 20px;">
+                                <mat-checkbox name="gradeSetStatus" #gradeSetStatus formControlName="ControlgradeSetStatus" [(ngModel)]="gradesetobj.gradeSetStatus">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Grade Set Name *" maxlength="100" formControlName="ControlGradeSetName" #txtControlGradeSetName name="txtControlGradeSetName" spellcheck="false" [(ngModel)]="gradesetobj.gradeSetName" (keypress)="special_char_val($event)">
+                                <mat-error>
+                                    {{ formErrors['ControlGradeName'] }}
+                                    <span *ngIf="isGradeSetExist()">
+                                       Grade  Name is already taken.
+                                    </span>
+                                </mat-error>
+
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Grade Set Description *" maxlength="200" [(ngModel)]="gradesetobj.gradeSetDescription" formControlName="ControlGradeSetDescription" #txtControlGradeSetDescription name="txtControlGradeSetDescription">
+                                <mat-error>
+                                    {{ formErrors['ControlGradeSetDescription'] }}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field appearance="fill" class="col-md-4">
+                                <mat-label>Start Date</mat-label>
+                                <input matInput [matDatepicker]="picker2" [(ngModel)]="startDate" formControlName="ControlStartDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker2">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                                <mat-error>
+                                    {{ formErrors['ControlStartDate']}}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button [disabled]="!form.valid" (click)="save()" color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button mat-raised-button color="warn" routerLink="/GradeSetList">
+                                        Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

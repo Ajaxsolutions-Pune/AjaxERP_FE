@@ -1,0 +1,60 @@
+<form #QTForm="ngForm" [formGroup]="form" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Qualification Type</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Qualification Type Code *" spellcheck="false" [(ngModel)]="qualificationTypeobj.qualificationTypeCode" formControlName="ControlQualificationTypeCode" #txtControlQualificationTypeCode name="txtControlQualificationTypeCode">
+
+                            </mat-form-field>
+                            <div class="col-sm-4" style="padding-top: 20px;">
+                                <mat-checkbox name="QualificationType Status" #QualificationTypeStatus formControlName="ControlQualificationTypeStatus" [(ngModel)]="qualificationTypeobj.qualificationTypeStatus">Active
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Qualification Type Name *" formControlName="ControlQualificationTypeName" #txtControlQualificationTypeName name="txtControlQualificationTypeName" spellcheck="false" [(ngModel)]="qualificationTypeobj.qualificationTypeName"
+                                    (keypress)="special_char_val($event)">
+                                <mat-error>
+                                    {{ formErrors["ControlQualificationTypeName"] }}
+                                    <span *ngIf="isQualificationTypeExist()">
+                                        Qualification Type Name is already taken.</span>
+
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Qualification Type Discription" formControlName="ControlQualificationTypeDiscription" #txtControlQualificationTypeDiscription name="txtQualificationTypeDiscription" [(ngModel)]="qualificationTypeobj.qualificationTypeDesc">
+
+                            </mat-form-field>
+
+                            <div class="col-md-2"></div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button [disabled]="!form.valid" (click)="save()" color="primary">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button mat-raised-button color="warn" routerLink="/QualificationTypeList">
+                                        Cancel</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,69 @@
+<!-- <p>qualification-level works!</p> -->
+<!-- <p>position works!</p> -->
+<!-- <p>job works!</p> -->
+<form #QLForm="ngForm" [formGroup]="form" autocomplete="off">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-11 container">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Qualification Level</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput #qualificationLevelCode spellcheck="false" [(ngModel)]="qualificationLevelobj.qualificationLevelCode" placeholder="Qualification Level Code *" formControlName="ControlQualificationLevelCode" #txtControlQualificationLevelCode name="txtControlQualificationLevelCode"
+                                />
+                            </mat-form-field>
+                            <div class="col-sm-4" style="padding-top: 20px">
+                                <mat-checkbox name="Qualification Level Status" #qualificationLevelStatus formControlName="ControlQualificationLevelStatus" [(ngModel)]="qualificationLevelobj.qualificationLevelStatus">Active
+                                </mat-checkbox>
+                            </div>
+
+                            <div class="col-md-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Qualification Level Name *" formControlName="ControlQualificationLevelName" #txtControlQualificationLevelName name="txtControlQualificationLevelName" spellcheck="false" [(ngModel)]="qualificationLevelobj.qualificationLevelName"
+                                    (keypress)="special_char_val($event)" />
+                                <mat-error>
+                                    {{ formErrors["ControlQualificationLevelName"] }}
+                                    <span *ngIf="isQualificationLevelExist()">
+                    QualificationLevel Name is already taken.
+                  </span>
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4">
+                                <input matInput placeholder="Qualification Level Discription" formControlName="ControlQualificationLevelDiscription" #txtControlQualificationLevelDiscription name="txtQualificationLevelDiscription" [(ngModel)]="qualificationLevelobj.qualificationLevelDesc"
+                                />
+                                <mat-error>
+                                    {{ formErrors["ControlQualificationLevelDiscription"] }}
+                                </mat-error>
+                            </mat-form-field>
+
+                            <div class="col-md-2"></div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button [disabled]="!form.valid" (click)="save()" color="primary">
+                    Submit
+                  </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button mat-raised-button color="warn" routerLink="/QualificationLevelList">
+                    Cancel
+                  </button>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
