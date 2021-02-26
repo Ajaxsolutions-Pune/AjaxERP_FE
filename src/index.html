@@ -50,7 +50,8 @@
 
 
   function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map ) {                
-    const myLatlng2 = new google.maps.LatLng(lat ,lang);     
+    const myLatlng2 = new google.maps.LatLng(lat ,lang); 
+    var image = './/assets/img/Content/Mobile_Inactive.png';    
     if(Status === 'Check In')
     {     
       var ico = new google.maps.MarkerImage("./assets/img/Content/Mobile_CheckIn.png")
@@ -78,9 +79,9 @@
       UserCheckOut_Marker = new google.maps.Marker({
         position: myLatlng2,
         //icon: iconBase + 'Mobile_CheckOut.png',
-        icon: ico,// {                
-              //url: '../../../assets/img/Content/Mobile_CheckOut.png',               
-            //},
+        icon:     {           
+              url: 'assets/img/Content/Mobile_CheckOut.png',               
+            },
         map: map,
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -98,9 +99,7 @@
       UserInactive_Marker = new google.maps.Marker({
         position: myLatlng2,
         //icon: iconBase + 'Mobile_Inactive.png',
-        icon: {                
-                url: '../../../assets/img/Content/UserLogin.jpg',   
-             },        
+        icon: image,      
         map: map, 
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -119,7 +118,7 @@
         position: myLatlng2,
         //icon: iconBase + 'Mobile_Off.png',
         icon: {                
-              url: './assets/img/Content/Mobile_Off.png',               
+              url: '..//assets/img/Content/Mobile_Off.png',               
             },
         map: map,
         title: "User Code : " +  UserCode + 
@@ -135,7 +134,8 @@
       }
   } 
 
-  var towericon = '../assets/img/Content/Tower.png';
+  //var towericon = '../assets/img/Content/Tower.png';
+  
   //google map user tracking 
   function myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
         lang,location,batteryPer,speed,iconBase,map,count)
@@ -145,7 +145,7 @@
       position: myLatlng2,
         //icon: iconBase + 'Tower.jpg',
         icon: {                
-              url: towericon ,               
+              url: image ,               
             },
         map: map,
         title: "--Login ID : " + LoginId + 
