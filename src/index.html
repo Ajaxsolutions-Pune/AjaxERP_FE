@@ -51,7 +51,7 @@
 
   function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map ) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang); 
-    var image = './/assets/img/Content/Mobile_Inactive.png';    
+    var image = './assets/img/Content/Mobile_Inactive.png';    
     if(Status === 'Check In')
     {     
       var ico = new google.maps.MarkerImage("./assets/img/Content/Mobile_CheckIn.png")
@@ -117,9 +117,7 @@
       UserOff_Marker = new google.maps.Marker({
         position: myLatlng2,
         //icon: iconBase + 'Mobile_Off.png',
-        icon: {                
-              url: '..//assets/img/Content/Mobile_Off.png',               
-            },
+        icon: "assets/img/Content/Mobile_Off.png",              
         map: map,
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
