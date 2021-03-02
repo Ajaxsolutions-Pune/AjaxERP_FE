@@ -47,6 +47,7 @@
   var UserTrackings = [];
   var mapnew;
   var line = [];
+  var icon_url;
 
 
   function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map ) {                
@@ -136,46 +137,70 @@
   
   //google map user tracking 
   function myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
-        lang,location,batteryPer,speed,iconBase,map,count)
+        lang,location,batteryPer,speed,iconBase,map,count,length)
    {
+    if(count == 0)
+    {
+      icon_url = '//assets/img/Content/Green_Circle.png';
+    }
+    else if(count == length - 1)
+    {
+      icon_url = 'Mobile_CheckIn.png'
+    }
+    else
+    {
+      icon_url = '///assets/img/Content/circle_black.png'
+    }
+    
+    
+    //alert('start');
+    //var declaration = document.styleSheets[0].cssRules[0].style;
+    //var propvalue = declaration.getPropertyValue("color");
+    //alert(declaration);
+    //alert('start 1');
+    //alert(propvalue);
+    //alert('end');
+
     const myLatlng2 = new google.maps.LatLng(lat ,lang);
     UserTracking = new google.maps.Marker({
       position: myLatlng2,
         //icon: iconBase + 'Tower.jpg',
-        icon: {                
-              url: image ,               
-            },
+        icon: {
+          url : icon_url
+        },
         map: map,
-        title: "--Login ID : " + LoginId + 
-             "--User Name : " +  userNameENG  +           
-             "--Mobile No. : " +  mobileNo + 
-             "--Date Time : " + dateTime + 
-             "--Latitude : " +  lat  + 
-             "--Longitude : " + lang  +
-             "--Location : " + location +
-             "--Batterry Per : " + batteryPer +
-             "--Speed : " + speed
+        title: "Login ID : " + LoginId + "\n" +
+             "User Name : " +  userNameENG  +  "\n" +          
+             //"Mobile No. : " +  mobileNo + "\n" +
+             "Date Time : " + dateTime + "\n" +
+             "Latitude : " +  lat  + "\n" +
+             "Longitude : " + lang  + "\n" +
+             "Location : " + location + "\n" +
+             "Batterry Per : " + batteryPer + "\n" +
+             "Speed : " + speed
         });    
-        UserTracking.setMap(map);                  
-        coords.push(myLatlng2);  
-        
+        UserTracking.setMap(map);       
+
         if(count == 0)
         {         
           coords = [];               
-        }  
-     
+        }
+        coords.push(myLatlng2);         
+        
         line[count] = new google.maps.Polyline({
         path: coords,
-        geodesic:true,
+        geodesic:true,       
         strokeColor: '#fc0703',
         strokeOpacity: 1.0,
-        strokeWeight: 2
-        });       
-        
-        line[count].setMap(map);             
+        strokeWeight: 2,
+        //icons: [{
+        //        icon: {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW},               
+        //         offset: '100%',
+        //        fillColor:  element.style.cssText = 'color:red;backgroundColor:yellow',            
+        //    }],
+        });               
+        line[count].setMap(map);          
    }
-  
-   
   
   //google map create asset markers
   function myMapAssetFunction(placeGroupCode,lat,lang,PlaceName,PlaceGroupName,AssetName,Location,PlaceAddress,
