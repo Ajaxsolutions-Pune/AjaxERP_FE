@@ -270,7 +270,6 @@ export class MapTrackingComponent implements OnInit {
       var speed = this.ResultUserTracking[i]['speed'];                  
       myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
         lang,location,batteryPer,speed,iconBase,this.map,i,this.ResultUserTracking.length);
-
         
     }      
   }
