@@ -55,7 +55,7 @@
     var image = './assets/img/Content/Mobile_Inactive.png';    
     if(Status === 'Check In')
     {     
-      var ico = new google.maps.MarkerImage("./assets/img/Content/Mobile_CheckIn.png")
+      var ico = new google.maps.MarkerImage("~/assets/img/Content/Red_Circle.png")
        UserCheckIn_Marker = new google.maps.Marker({
       position: myLatlng2,         
       icon: ico ,//{                
@@ -81,7 +81,7 @@
         position: myLatlng2,
         //icon: iconBase + 'Mobile_CheckOut.png',
         icon:     {           
-              url: 'assets/img/Content/Mobile_CheckOut.png',               
+              url: '../assets/img/Content/Red_Circle.png',               
             },
         map: map,
         title: "User Code : " +  UserCode + 
@@ -118,7 +118,7 @@
       UserOff_Marker = new google.maps.Marker({
         position: myLatlng2,
         //icon: iconBase + 'Mobile_Off.png',
-        icon: "assets/img/Content/Mobile_Off.png",              
+        icon: "assets/img/Content/Red_Circle.png",              
         map: map,
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -141,7 +141,7 @@
    {
     if(count == 0)
     {
-      icon_url = '/assets/img/Content/Green_Circle.png';
+      icon_url = './assets/img/Content/Red_Circle.png';
     }
     else if(count == length - 1)
     {
@@ -149,7 +149,7 @@
     }
     else
     {
-      icon_url = 'assets/img/Content/circle_black.png';
+      icon_url = '../../assets/img/Content/Red_Circle.png';
     }
     
     

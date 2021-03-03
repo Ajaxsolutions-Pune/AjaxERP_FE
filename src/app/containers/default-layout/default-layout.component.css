@@ -113,6 +113,10 @@
   content: url("../../../assets/img/Content/excel.png");
   height: 50px;
 }
+.demo {
+  content: url("../../../assets/img/Content/Red_Circle.png");
+  height: 50px;
+}
 .navH {
   height: 50px;;
   background-color: white;
