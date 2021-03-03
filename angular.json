@@ -17,9 +17,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
             "assets": [
-              "src/assets",
-              "src/assets/img",
-              "src/assets/img/Content"
+              
             ],
             "styles": [
               "node_modules/@coreui/icons/css/coreui-icons.css",
