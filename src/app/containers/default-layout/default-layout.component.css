@@ -113,14 +113,38 @@
   content: url("../../../assets/img/Content/excel.png");
   height: 50px;
 }
-.MapRed_Circle {
-  content: url("../../../assets/img/Content/Red_Circle.png");
-  height: 50px;
-}
 .navH {
   height: 50px;;
   background-color: white;
 }
+
+/*  */
+.Map_Mobile_CheckIn {
+  content: url("../../../assets/img/Content/Mobile_CheckIn.png");  
+}
+.Map_Mobile_CheckOut {
+  content: url("../../../assets/img/Content/Mobile_CheckOut.png");  
+}
+.Map_Mobile_Mobile_Off {
+  content: url("../../../assets/img/Content/Mobile_Off.png");  
+}
+.Map_Mobile_Mobile_Inactive {
+  content: url("../../../assets/img/Content/Mobile_Inactive.png"); 
+}
+.MapTower {
+  content: url("../../../assets/img/Content/Tower.png");  
+}
+
+.MapBlack_Circle {
+  content: url("../../../assets/img/Content/circle_black.png");  
+}
+.MapRed_Circle {
+  content: url("../../../assets/img/Content/Red_Circle.png");  
+}
+.MapGreen_Circle {
+  content: url("../../../assets/img/Content/Green_Circle.png");  
+}
+
 
 
 

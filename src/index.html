@@ -74,15 +74,10 @@
       UserCheckIn_Markers.push(UserCheckIn_Marker);    
     }    
     if(Status === 'Check Out')
-    {
-      //var ico = new google.maps.MarkerImage("https://webdevtrick.com/wp-content/uploads/location.png")    
-      var ico = new google.maps.MarkerImage("https://52.188.136.57/D/Images/Mobile_CheckOut.png?")      
+    {          
       UserCheckOut_Marker = new google.maps.Marker({
         position: myLatlng2,
-        //icon: iconBase + 'Mobile_CheckOut.png',
-        icon:     {           
-              url: '../assets/img/Content/Red_Circle.png',               
-            },
+        icon: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Mobile_CheckOut.png',      
         map: map,
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -98,9 +93,8 @@
     if(Status === 'Inactive')
     {
       UserInactive_Marker = new google.maps.Marker({
-        position: myLatlng2,
-        //icon: iconBase + 'Mobile_Inactive.png',
-        icon: image,      
+        position: myLatlng2,        
+        icon: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Mobile_Inactive.png',      
         map: map, 
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -118,7 +112,7 @@
       UserOff_Marker = new google.maps.Marker({
         position: myLatlng2,
         //icon: iconBase + 'Mobile_Off.png',
-        icon: "assets/img/Content/Red_Circle.png",              
+        icon: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Mobile_Off.png',          
         map: map,
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -141,15 +135,15 @@
    {
     if(count == 0)
     {
-      icon_url = './assets/img/Content/Red_Circle.png';
+      icon_url = 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Green_Circle.png';
     }
     else if(count == length - 1)
     {
-      icon_url = '../../../assets/img/Content/Red_Circle.png';
+      icon_url = 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Red_Circle.png';
     }
     else
     {
-      icon_url = 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Red_Circle.png';
+      icon_url = 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/circle_black.png';
     }
     
     
@@ -207,10 +201,9 @@
     const myLatlng2 = new google.maps.LatLng(lat ,lang);
       if(placeGroupCode === '2'){
         TowerMarker = new google.maps.Marker({
-        position: myLatlng2,
-        //icon: iconBase + 'Tower.jpg',
+        position: myLatlng2,       
         icon: {                
-              url: './assets/img/Content/Tower.png',               
+              url: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Tower.png',      
             },
         map: map,
         title: "Tower Name : " +  AssetName + 
@@ -232,7 +225,8 @@
         position: myLatlng2,
         //icon: iconBase + 'SubStation-Icon.png',
         icon: {                
-              url: '../assets/img/Content/SubStation-Icon.png',               
+              url: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/SubStation-Icon.png',               
+              
             },
         map: map,
         title: "Sub Station Name : " +  AssetName + 
