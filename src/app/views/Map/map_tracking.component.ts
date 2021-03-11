@@ -141,8 +141,7 @@ export class MapTrackingComponent implements OnInit {
     }
   }
 
-  SearchUser(value): void {   
-    alert(value);    
+  SearchUser(value): void {       
     this.UserName_Search = value;     
     this.ResultUserTracking = this.userTrackingObj;
     if (this.UserName_Search !== null && this.UserName_Search !== '') {
@@ -201,7 +200,7 @@ export class MapTrackingComponent implements OnInit {
     this.objloginIdText = selectedData.text;
     // alert(this.data1.questionId);
 
-    alert(this.objloginIdText);
+   // alert(this.objloginIdText);
 
     this.SearchUser(this.objloginIdText);
 
@@ -289,8 +288,7 @@ export class MapTrackingComponent implements OnInit {
   
 
   createMap()
-  {
-    alert('1');
+  {    
     const myLatlng = new google.maps.LatLng(this.ResultUserTracking[0]['latitude'],this.ResultUserTracking[0]['longitude']);
     const iconBase = '../../../assets/img/Content/';
     const mapProp= {         

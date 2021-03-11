@@ -15,7 +15,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class GlobalService {
     str: string;
-    myDate = new Date();
+    myDate: Date;
     env = environment;
     constructor(private datePipe: DatePipe,
         private httpClient: HttpClient,
@@ -23,14 +23,20 @@ export class GlobalService {
         this.str = this.env.apiServiceIPPort;
     }
     GerCurrntDateStamp(): string {
+        this.myDate = new Date();
         return this.datePipe.transform(this.myDate, 'yyyy-MM-dd HH:mm:ss.sss');
     }
+    
 
     GetCurrntDateStampShort(): string {
-        return this.datePipe.transform(this.myDate, 'yyyy-MM-dd HH:mm');
+        this.myDate = new Date();
+        alert(this.myDate);       
+        return new Date(this.myDate).toLocaleString("en-US", {timeZone: "Asia/Kolkata"})
+        //return this.datePipe.transform(this.myDate, 'yyyy-MM-dd HH:mm:ss');
     }
 
     GerCurrntDate(): string {
+        this.myDate = new Date();
         return this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
     }
 

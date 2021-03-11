@@ -207,12 +207,9 @@
   function myMapAssetFunction(placeGroupCode,lat,lang,PlaceName,PlaceGroupName,AssetName,Location,PlaceAddress,
   iconBase,StateName,PinCode,map) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang);
-      if(placeGroupCode === '2'){
-        alert('1');
+      if(placeGroupCode === '2'){       
        
-        const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-       
-        TowerMarker = new google.maps.Marker({
+       TowerMarker = new google.maps.Marker({
         position: myLatlng2,   
         label: labels[i % labels.length],    
         icon: {                
@@ -228,11 +225,7 @@
              "--Pin Code : " + PinCode  
         });    
 
-        new MarkerClusterer(map, markers, {
-        imagePath:
-        "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-
-      });
+      
 
         TowerMarker.setMap(map);  
         TowerMarker.setVisible(false);
