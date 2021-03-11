@@ -29,8 +29,7 @@ export class GlobalService {
     
 
     GetCurrntDateStampShort(): string {
-        this.myDate = new Date();
-        alert(this.myDate);       
+        this.myDate = new Date();              
         return new Date(this.myDate).toLocaleString("en-US", {timeZone: "Asia/Kolkata"})
         //return this.datePipe.transform(this.myDate, 'yyyy-MM-dd HH:mm:ss');
     }

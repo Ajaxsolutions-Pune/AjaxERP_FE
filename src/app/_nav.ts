@@ -39,11 +39,11 @@ export const navItems: NavData[] = [
       text: 'NEW'
     }
   },
-  {
+  /*{
     name: 'Map',
     url: '/map',
     icon: 'icon-map',   
-  },
+  },*/
 
   {
     name: 'Map Tracking',
@@ -339,7 +339,7 @@ export const navItems: NavData[] = [
       },
     ]
   },
-  {
+  /*{
     name: 'HRMS',
     url: '/HRMS',
     icon: '',
@@ -385,5 +385,5 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
     ]
-  },
+  },*/
 ];
