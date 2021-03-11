@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
   <style>
     .errorMessage{
        color: red;
@@ -48,19 +49,16 @@
   var mapnew;
   var line = [];
   var icon_url;
+  var i;
 
 
-  function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map ) {                
-    const myLatlng2 = new google.maps.LatLng(lat ,lang); 
-    var image = './assets/img/Content/Mobile_Inactive.png';    
+  function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map,i ) {                
+    const myLatlng2 = new google.maps.LatLng(lat ,lang);      
     if(Status === 'Check In')
-    {     
-      var ico = new google.maps.MarkerImage("~/assets/img/Content/Red_Circle.png")
+    {          
        UserCheckIn_Marker = new google.maps.Marker({
       position: myLatlng2,         
-      icon: ico ,//{                
-            //  url: '../../../assets/img/Content/Mobile_CheckIn.png',               
-            //},
+      icon: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Mobile_CheckIn.png',
       map: map,
       title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -92,8 +90,10 @@
     }
     if(Status === 'Inactive')
     {
-      UserInactive_Marker = new google.maps.Marker({
-        position: myLatlng2,        
+     // const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";     
+      UserInactive_Marker = new google.maps.Marker({        
+        position: myLatlng2,       
+        label: labels[i % labels.length], 
         icon: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Mobile_Inactive.png',      
         map: map, 
         title: "User Code : " +  UserCode + 
@@ -103,9 +103,17 @@
              "--Speed : " + Speed + 
              "--Last Update : " +  LastUpdate   + 
              "--Location : " + Location   
-        });    
+        });   
         UserInactive_Marker.setMap(map);     
         UserInactive_Markers.push(UserInactive_Marker); 
+        
+       //  new MarkerClusterer(map, UserInactive_Marker, {
+       //   imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+       // });
+
+        
+       // MarkerClusterer.setMap(map);     
+        //UserInactive_Markers.push(UserInactive_Marker); 
     }
     if(Status === 'Off')
     {
@@ -200,20 +208,32 @@
   iconBase,StateName,PinCode,map) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang);
       if(placeGroupCode === '2'){
+        alert('1');
+       
+        const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+       
         TowerMarker = new google.maps.Marker({
-        position: myLatlng2,       
+        position: myLatlng2,   
+        label: labels[i % labels.length],    
         icon: {                
               url: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Tower.png',      
             },
         map: map,
         title: "Tower Name : " +  AssetName + 
              "--Place Name : " + PlaceName + 
-             "--Place Group Name : " +  PlaceGroupName  +           
+             "--Place Group Name : " +  PlaceGroupName  +      
              "--Location : " +  Location + 
              "--Place Address : " + PlaceAddress + 
              "--State Name : " +  StateName  + 
              "--Pin Code : " + PinCode  
         });    
+
+        new MarkerClusterer(map, markers, {
+        imagePath:
+        "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+
+      });
+
         TowerMarker.setMap(map);  
         TowerMarker.setVisible(false);
         TowerMarkers.push(TowerMarker);   

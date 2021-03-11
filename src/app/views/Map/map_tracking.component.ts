@@ -8,9 +8,12 @@ alasql['private'].externalXlsxLib = require('xlsx');
 import { environment } from '../../Components/Module/environment';
 import{mapModel,placeSummery,placeDetail,userSummery,userDetail,userTracking} from '../../Components/Module/Masters/Map.model';
 import{MapService} from '../../Components/Services/Masters/MapService';
-
+import{UserService} from '../../Components/Services/Masters/UserService';
+import{User} from '../../Components/Module/Masters/User.model';
 //temp
 import { Answer,AnswerEntity } from '../../Components/Module/Masters/Answer.model';
+import { UserTransfarmer } from '../../Components/Transformer/Masters/User-Transfarmer';
+import { CustomComboBox } from '../../Components/Module/GlobalModule/CustomComboBox.model';
 
 declare var google: any;
 declare var myMapFunction: Function;
@@ -38,6 +41,13 @@ export class MapTrackingComponent implements OnInit {
   id2 : any;
   isAutoRefresh : number = 0;
   Count : number = 60;
+  
+  user: User[];  
+  objloginIdText: string;    
+  objloginId: string;
+  loginVal: boolean;
+  data: CustomComboBox[];
+  keyword = 'name';
 
   MapType: string = "ROADMAP";
   AssetType: string = "Tower";
@@ -68,22 +78,36 @@ export class MapTrackingComponent implements OnInit {
   polling: any;
 
   answer = Answer;
+
+   
+
+  onChangeSearch(val: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e) {
+    //this.hidePassword = !this.hidePassword;
+    // do something when input is focused
+  }
+
   constructor(private _router: Router,
-    private route: ActivatedRoute,   
-    //private dashboardService: DashboardService,
+    private route: ActivatedRoute,
     private mapService : MapService,
-    private router: Router, private formBuilder: FormBuilder,
+    private userService : UserService,
+    private userTransfarmer: UserTransfarmer,
+    
+  private router: Router, private formBuilder: FormBuilder,
     ) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href = 'login';
     }
     this.ResultUser = this.userDetailObj;
     this.ResultUserTracking = this.userTrackingObj;
-    this.ResultPlace = this.placeDetailObj;
+    this.ResultPlace = this.placeDetailObj;        
     this.config = {
       itemsPerPage: this.env.paginationPageSize,
-      currentPage: 1,
-      //totalItems: this.forms.length
+      currentPage: 1,      
     }; 
   } 
 
@@ -117,7 +141,8 @@ export class MapTrackingComponent implements OnInit {
     }
   }
 
-  SearchUser(value): void {       
+  SearchUser(value): void {   
+    alert(value);    
     this.UserName_Search = value;     
     this.ResultUserTracking = this.userTrackingObj;
     if (this.UserName_Search !== null && this.UserName_Search !== '') {
@@ -134,11 +159,26 @@ export class MapTrackingComponent implements OnInit {
 
   ngOnInit() {    
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href = 'login';
+      window.location.href = 'login';  
     }
+
+     // this.loginFal = true;
+   this.loginVal = true;
+   this.userService.fillDrpUsers().subscribe(
+     (par) =>{
+
+       this.user = this.userTransfarmer.UserTransfarmers(par)
+       this.data = [];
+       this.user.forEach(a => {
+         this.data.push({ id: a.loginID, name: a.userNameENG })
+       });
+      console.log();
+      },
+     (err: any) => console.log(err));
+
     this.MapLoad();        
     this.route.paramMap.subscribe(parameterMap => 
-      {
+    {
       this.form = this.formBuilder.group({
         ControlSearchUser: ['', []],     
       });   
@@ -146,6 +186,25 @@ export class MapTrackingComponent implements OnInit {
         ControlSearchPlace: ['', []],     
       });     
     }); 
+
+  
+        
+  }
+
+  selectEvent(item) {
+    const selectedData = {
+      value: item.id,
+      text: item.name
+    };
+    this.loginVal = false;
+    this.objloginId = selectedData.value;
+    this.objloginIdText = selectedData.text;
+    // alert(this.data1.questionId);
+
+    alert(this.objloginIdText);
+
+    this.SearchUser(this.objloginIdText);
+
   }
 
   MapLoad()
@@ -226,13 +285,12 @@ export class MapTrackingComponent implements OnInit {
     //console.log(e.target.value);
     //this.MapType = e.target.value;   
     //this.createMap();
-  }
-
-  
+  }  
   
 
   createMap()
   {
+    alert('1');
     const myLatlng = new google.maps.LatLng(this.ResultUserTracking[0]['latitude'],this.ResultUserTracking[0]['longitude']);
     const iconBase = '../../../assets/img/Content/';
     const mapProp= {         

@@ -1,7 +1,37 @@
 <form #mapForm="ngForm" autocomplete="off" [formGroup]="form">
-    <div  style="height:200px;position:fixed;top:0px;left:200px;z-index: 9999;">
+
+  <div class="row form" >
+    <div style="position:fixed;left:250px;top:100px;width:500px;">      
+      <div class="ng-autocompletein">
+        <div class="row">
+          <div class="input-container">
+            <ng-autocomplete [data]="data" #auto [searchKeyword]="keyword"
+             (selected)='selectEvent($event)' (inputFocused)='onFocused($event)'
+             (inputFocusedOut)='onFocused($event)'
+              placeHolder="Select Users *" id="autocomplete"
+               [itemTemplate]="itemTemplate"
+              [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.name"></a>
+            </ng-template>
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+            <i class="icon">
+              <mat-icon>arrow_drop_down</mat-icon>
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- <div  style="height:200px;position:fixed;top:0px;left:200px;z-index: 9999;">     
+
     <mat-accordion>
-      <mat-expansion-panel hideToggle >
+      <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
             <div>         
@@ -15,8 +45,12 @@
                    <ng-template mat-tab-label>
                        <h5 class="text-center" style="margin-top:10px;margin-right: 5px;" >User</h5>
                        <i style="color:green;font-size: 25px;" class="fa fa-user"></i> 
-                   </ng-template>
-                   <div class="col-md-12 pull-left" style="padding-top:15px; background-color:#bde4e1">                
+                   </ng-template>-->
+
+                  
+
+
+                <!--   <div class="col-md-12 pull-left" style="padding-top:15px; background-color:#bde4e1">                
                       <div class = "row">                  
                        <mat-form-field class="col-md-6">
                          <input #tbName id="tbName" matInput
@@ -29,8 +63,14 @@
                        (click)="SearchUser(tbName.value)">Search</button>
     
                       </div>                       
-                    </div>                          
-                 </mat-tab>     
+                    </div> -->
+                    
+                  <!--  <div class="col-md-12" style="padding-bottom:2%;">
+                      
+                      <div class="col-md-4"></div>
+                    </div>
+
+                 </mat-tab>   -->  
                
                 
              <!--  <mat-tab >
@@ -70,14 +110,14 @@
                 </ul>    
                 </div>           
               </mat-tab>   -->        
-            </mat-tab-group>        
-          </div>
-          <button  mat-raised-button color="primary" style="width:200px;margin-top:5px;" 
-      (click)="AutoRefreshStart()">Auto Refresh In  : {{this.Count}} Seconds</button>
+           <!-- </mat-tab-group>        
+          </div>-->
+
+         <!-- <button  mat-raised-button color="primary" style="width:200px;margin-top:5px;" 
+      (click)="AutoRefreshStart()">Auto Refresh In : {{this.Count}} Seconds</button>-->
     
-      </mat-expansion-panel> 
-    </mat-accordion>
-    </div>
+      
+    
     <div class="container-fluid row"  id="googleMap" style="width:100%;height:100vh;"></div>
     </form>
     

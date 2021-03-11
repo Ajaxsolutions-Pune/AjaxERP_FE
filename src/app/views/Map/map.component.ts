@@ -295,7 +295,7 @@ export class MapComponent implements OnInit {
       var Speed =  this.userDetailObj[i]['speed'] ;
       var LastUpdate = ""; //this.realTimeTrackingDataObj[i]['dateTime'];
       var Location = this.userDetailObj[i]['googleAddress'];                
-    myMapFunction(lat,lang,UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,this.map);  
+    myMapFunction(lat,lang,UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,this.map,i);  
     }
 
      

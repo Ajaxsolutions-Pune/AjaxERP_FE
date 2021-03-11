@@ -55,8 +55,10 @@ export class UserTransfarmer {
                 this.user.isActive = 'Active'.toString().trim();
             } else { this.user.isActive = 'Inactive'.toString().trim(); }
             this.users.push(this.user);
-        });
+        });        
+        console.log(this.users);
         return this.users;
+       
     }
 
     UserTransfarmerEntity(Entity: UserEntity): User {
