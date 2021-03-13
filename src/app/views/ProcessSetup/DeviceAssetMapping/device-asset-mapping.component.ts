@@ -265,7 +265,7 @@ export class DeviceAssetMappingComponent extends FormComponentBase
           }
           else if (par.status === 'Failed') {
             this.defaultLayoutComponent.Massage('',
-              'Asset already exist / Asset unmapped.', 'modal-info');
+              'Asset Unmapped.', 'modal-info');
           } else {
             this.defaultLayoutComponent.Massage('',
               'Technical Error Please connect to Ajax Support team', 'modal-info');
