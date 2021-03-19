@@ -73,21 +73,23 @@
                                         </mat-option>
                                     </mat-select>
                                     <mat-error>
-                                        {{ formErrors['ControlState'] }}
+                                        {{ formErrors['ControlState']}}
                                     </mat-error>
                                 </mat-form-field>
                                 <div class="col-md-2"></div>
                             </div>
+                            <!--multiple  (selectionChange)="CustomerChange($event)"-->
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <mat-form-field class="col-md-4">
                                   <mat-label>Customer</mat-label>
                                   <mat-select required formControlName="ControlcustomerCode" 
-                                  [(ngModel)]="customerCode">
+                                  [(ngModel)]="customer" 
+                                  >
                                     <mat-option>Customer</mat-option>
                                     <mat-option value="All">All</mat-option>
                                     <mat-option *ngFor="let userEntity of CustomerEntityDrp"
-                                        [value]="userEntity.entityCode">
+                                        [value]="userEntity">
                                         {{userEntity.entityName}}
                                     </mat-option>
                                   </mat-select>

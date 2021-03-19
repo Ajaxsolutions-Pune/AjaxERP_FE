@@ -14,6 +14,7 @@ import{User} from '../../Components/Module/Masters/User.model';
 import { Answer,AnswerEntity } from '../../Components/Module/Masters/Answer.model';
 import { UserTransfarmer } from '../../Components/Transformer/Masters/User-Transfarmer';
 import { CustomComboBox } from '../../Components/Module/GlobalModule/CustomComboBox.model';
+import { DefaultLayoutComponent } from '../../containers';
 
 declare var google: any;
 declare var myMapFunction: Function;
@@ -96,6 +97,7 @@ export class MapTrackingComponent implements OnInit {
     private mapService : MapService,
     private userService : UserService,
     private userTransfarmer: UserTransfarmer,
+    private defaultLayoutComponent: DefaultLayoutComponent,
     
   private router: Router, private formBuilder: FormBuilder,
     ) {
@@ -151,6 +153,20 @@ export class MapTrackingComponent implements OnInit {
       if(this.ResultUserTracking.length !== 0)
       {          
            this.createMap();
+      }
+      else
+      {
+        const myLatlng = new google.maps.LatLng(0,0);
+        const iconBase = '../../../assets/img/Content/';
+        const mapProp= {         
+          center:myLatlng,      
+          zoom:15,          
+        };    
+        this.map = new google.maps.Map(document.getElementById("googleMap"),mapProp);    
+
+        this.defaultLayoutComponent.Massage('',
+              'Data not available for this user.', 'modal-info');
+
       }
   }        
 

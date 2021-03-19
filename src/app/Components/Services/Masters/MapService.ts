@@ -24,7 +24,7 @@ export class MapService {
 
 
     getMapData(): Observable<mapModel> {
-        return this.httpClient.get<mapModel>(this.str + '/Map/getList/Sumit', this.env.httpOptions);
+        return this.httpClient.get<mapModel>(this.str + '/Map/getList/Dp', this.env.httpOptions);
     }   
 
     private handleError(errorResponse: HttpErrorResponse) {

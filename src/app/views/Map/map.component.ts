@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Script } from 'vm';
 alasql['private'].externalXlsxLib = require('xlsx');
 import { environment } from '../../Components/Module/environment';
-import{mapModel,placeSummery,placeDetail,userSummery,userDetail} from '../../Components/Module/Masters/Map.model';
+import{mapModel,placeSummery,placeDetail,userSummery,userDetail,userTracking} from '../../Components/Module/Masters/Map.model';
 import{MapService} from '../../Components/Services/Masters/MapService';
 
 //temp
@@ -50,6 +50,7 @@ export class MapComponent implements OnInit {
   placeDetailObj : placeDetail[];
   userSummaryObj : userSummery[];
   userDetailObj : userDetail[];
+  userTRackingObj : userTracking[];
   ResultUser: userDetail[];
   ResultPlace: placeDetail[];
 
@@ -169,7 +170,8 @@ export class MapComponent implements OnInit {
     this.placeSummeryObj = [];
     this.placeDetailObj = [];
     this.userSummaryObj = [];
-    this.userDetailObj = [];  
+    this.userDetailObj = []; 
+    this.userTRackingObj = [];  
    
     //Asset data from map service
     this.mapService.getMapData().subscribe(t => {
@@ -180,11 +182,17 @@ export class MapComponent implements OnInit {
       this.userDetailObj = this.mapModelObj.userDetail;
       this.ResultUser = this.userDetailObj;
 
+     console.log(this.placeSummeryObj);
+    console.log(this.placeDetailObj);   
+     console.log(this.userSummaryObj);
+     console.log(this.userDetailObj);
+
       if(this.userDetailObj.length > 0 ) //!= []
       {      
         this.createMap();
       }    
       
+      alert(this.placeSummeryObj.length);
       if(this.placeSummeryObj.length > 0 ) //
       {
         for (var i=0; i < this.placeSummeryObj.length; i++) 

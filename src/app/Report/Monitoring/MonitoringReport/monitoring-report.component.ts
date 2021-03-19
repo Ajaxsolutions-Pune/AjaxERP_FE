@@ -62,6 +62,10 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
   toDateStr: string;
   assetGroupCode: string; processId: string; processName : string;
   userId: string; customerCode: string; assetCode: string; state: string;
+
+  customer : string[];
+  customer_code : string;
+
   constructor(private route: ActivatedRoute,
     //private projectService: ProjectService,
     private globalService: GlobalService,
@@ -199,10 +203,13 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
 
   AssetGroupChange(event) {
     const target = event.source.selected._element.nativeElement;
+    console.log(target);
     const selectedData = {
       value: event.value,
       text: target.innerText.trim()
     };
+
+    
 
     this.state = 'All';
     this.userId = 'All'; this.customerCode = 'All'; this.assetCode = 'All';
@@ -215,6 +222,17 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
     this.processService.fillProcessDrpByAssetGroup(selectedData.value).subscribe(
       (par) => { this.processDrp = this.processTransfarmer.processTransfarmers(par); },
       (err: any) => console.log(err));
+  }
+
+  CustomerChange(event){
+    console.log(this.customer);
+    this.customer_code = "";
+    this.customer_code = this.customer[0]['entityCode'];
+    for(var i = 1;this.customer.length > i;i++)
+    {    
+        this.customer_code =  this.customer_code + ',' +  this.customer[i]['entityCode'];      
+    }
+    alert(this.customer_code);
   }
 
 }

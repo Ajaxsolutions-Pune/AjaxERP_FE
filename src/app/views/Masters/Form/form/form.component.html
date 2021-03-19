@@ -29,8 +29,7 @@
                                 <mat-form-field class="col-md-4">
                                   <input matInput
                                     #formName
-                                    spellcheck="false" [(ngModel)]="formobj.formName"
-                                    (keypress)="special_char_val($event)"
+                                    spellcheck="false" [(ngModel)]="formobj.formName"                                   
                                     placeholder="Form Name *"
                                     formControlName="ControlformName" maxlength="50">                                    
                                     <mat-error>
