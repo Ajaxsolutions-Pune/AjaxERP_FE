@@ -58,7 +58,7 @@
     {          
        UserCheckIn_Marker = new google.maps.Marker({
       position: myLatlng2,         
-      icon: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Mobile_CheckIn.png',
+      icon: 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/Mobile_CheckIn.png',
       map: map,
       title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -75,7 +75,7 @@
     {          
       UserCheckOut_Marker = new google.maps.Marker({
         position: myLatlng2,
-        icon: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Mobile_CheckOut.png',      
+        icon: 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/Mobile_CheckOut.png',      
         map: map,
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -94,7 +94,7 @@
       UserInactive_Marker = new google.maps.Marker({        
         position: myLatlng2,       
         label: labels[i % labels.length], 
-        icon: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Mobile_Inactive.png',      
+        icon: 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/Mobile_Inactive.png',      
         map: map, 
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -120,7 +120,7 @@
       UserOff_Marker = new google.maps.Marker({
         position: myLatlng2,
         //icon: iconBase + 'Mobile_Off.png',
-        icon: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Mobile_Off.png',          
+        icon: 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/Mobile_Off.png',          
         map: map,
         title: "User Code : " +  UserCode + 
              "--User Name : " +  UserName  + 
@@ -143,15 +143,15 @@
    {
     if(count == 0)
     {
-      icon_url = 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Green_Circle.png';
+      icon_url = 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/Green_Circle.png';
     }
     else if(count == length - 1)
     {
-      icon_url = 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Red_Circle.png';
+      icon_url = 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/Red_Circle.png';
     }
     else
     {
-      icon_url = 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/circle_black.png';
+      icon_url = 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/circle_black.png';
     }
     
     
