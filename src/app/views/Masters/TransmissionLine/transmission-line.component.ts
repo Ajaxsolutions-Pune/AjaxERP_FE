@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { TransmissionLine, TransmissionLineEntity } from '../../../Components/Module/Masters/TransmissionLine.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormComponentBase } from '../AngularDemo/infrastructure/form-component-base';
@@ -35,9 +35,13 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
   colourdrp: Colour[];
   TransmissionLineTypeDrp: MasterDrp[];
   TransmissionLineGroupDrp: MasterDrp[];
-  projectDrp: Project[];
+  projectDrp: Array<Project> = [];
+  projectDrpWtihFilter: Array<Project> = [];
   env = environment;
   bindObjEntity: TransmissionLineEntity;
+
+  @ViewChild('multiusersearch', { static: false }) multiUsersearchInput: ElementRef;
+
   constructor(private _router: Router, private route: ActivatedRoute,
     private transmissionLineService: TransmissionLineService,
     private defaultLayoutComponent: DefaultLayoutComponent,
@@ -53,7 +57,7 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
     this.validationMessages = {
       ControltlCode: {
         required: 'Transmission Line Code is required.',
-      },      
+      },
       ControlProject: {
         required: 'Project is required.',
       },
@@ -79,31 +83,55 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
     let k;
     k = event.charCode;
     return this.globalService.SpecialCharValidator(k);
-    
+
+  }
+  onInputChange() {
+    console.log(this.multiUsersearchInput.nativeElement.value);
+    const searchInput = this.multiUsersearchInput.nativeElement.value ?
+      this.multiUsersearchInput.nativeElement.value.toLowerCase() : '';
+    if (searchInput != "") {
+      this.projectDrpWtihFilter = this.projectDrp.filter(u => {
+        const name: string = u.projectName.toLowerCase();
+        return name.indexOf(searchInput) > -1;
+      })
+    }
+    else {
+      this.projectDrpWtihFilter = this.projectDrp
+
+    }
+    console.log("onInputChange");
+  }
+  onChangeSearch(val: string) {
+    console.log("onChangeSearch");
+    console.log(val);
   }
   ngOnInit() {
-   
+    this.projectService.fillDrpProjects().subscribe(
+      (par) => {
+        this.projectDrpWtihFilter = this.projectDrp = this.ProjectTransfarmer.ProjectTransfarmers(par);
+      },
+      (err: any) => console.log(err));
     status = '';
     this.colourService.fillColoursDrp().subscribe(
       (par) => {
         this.colourdrp = this.colourTransfarmer.ColourTransfarmers(par);
       },
       (err: any) => console.log(err));
-      this.projectService.fillDrpProjects().subscribe(
-        (par) => {
-          this.projectDrp = this.ProjectTransfarmer.ProjectTransfarmers(par);
-        },
-        (err: any) => console.log(err));
-      this.globalService.fillMasterDrp('TRLTY').subscribe(
-        (par) => {
-          this.TransmissionLineTypeDrp = par;
-        },
-        (err: any) => console.log(err));
-        this.globalService.fillMasterDrp('TRLGR').subscribe(
-          (par) => {
-            this.TransmissionLineGroupDrp = par;
-          },
-          (err: any) => console.log(err));
+    // this.projectService.fillDrpProjects().subscribe(
+    //   (par) => {
+    //     this.projectDrp = this.ProjectTransfarmer.ProjectTransfarmers(par);
+    //   },
+    //   (err: any) => console.log(err));
+    this.globalService.fillMasterDrp('TRLTY').subscribe(
+      (par) => {
+        this.TransmissionLineTypeDrp = par;
+      },
+      (err: any) => console.log(err));
+    this.globalService.fillMasterDrp('TRLGR').subscribe(
+      (par) => {
+        this.TransmissionLineGroupDrp = par;
+      },
+      (err: any) => console.log(err));
     this.bindObj = {
       ouCode: this.env.OuCode,
       projectCode: null,
@@ -118,7 +146,7 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
       modifiedBy: localStorage.getItem('username'),
       modifiedDate: this.globalService.GerCurrntDateStamp(),
     };
-    
+
 
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
@@ -127,7 +155,7 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
       this.form = this.formBuilder.group({
         ControltlCode: ['', [Validators.required]],
         ControltlNameENG: ['', [Validators.required],
-         [transmissionAsyncValidator(this.transmissionLineService,str)] ],
+          [transmissionAsyncValidator(this.transmissionLineService, str)]],
         ControlTransmissionLineNameUNI: ['', []],
         ControlProject: ['', [
           Validators.required]],
@@ -153,12 +181,12 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
     this.bindObj.modifiedBy = localStorage.getItem('username');
     this.bindObj.modifiedDate = this.globalService.GerCurrntDateStamp();
     if (status !== 'Update') {
-      
+
       this.transmissionLineService.getTransmissionLine(this.bindObj.tlCode).subscribe(
         (par) => {
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
-            'This Transmission Line code already exist !', 'modal-danger');
+              'This Transmission Line code already exist !', 'modal-danger');
             return;
           }
           this.transmissionLineService.Save(this.transmissionLineTransfarmer.
@@ -232,13 +260,13 @@ export class TransmissionLineComponent extends FormComponentBase implements OnIn
         (par) => {
           //this.form.controls['ControltlCode'].disable();
           if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-            window.location.href='login';
+            window.location.href = 'login';
           }
           this.bindObjEntity = par;
           this.bindObj = this.transmissionLineTransfarmer.
             TransmissionLineTransfarmerEntity(this.bindObjEntity);
 
-            
+
         },
         (err: any) => console.log(err));
       status = 'Update';

@@ -166,6 +166,7 @@ import { QualificationTypeComponent } from './views/HRMS/QualificationType/quali
 import { JobLevelListComponent } from './views/HRMS/JobLevel/job-level-list.component';
 import { JobLevelListResolverService } from './Components/Resolver/HRMS/JobLevel-List-Resolver.Service';
 import { JobLevelComponent } from './views/HRMS/JobLevel/job-level.component';
+import { MonitoringReportNewComponent } from './Report/Monitoring/MonitoringReportNew/monitoring-report-new.component';
 
 export const routes: Routes = [
   {
@@ -1602,6 +1603,13 @@ export const routes: Routes = [
         component: MonitoringReportComponent,
         data: {
           title: 'Monitoring Report'
+        }
+      },
+      {
+        path: 'MonitoringReportNew',
+        component: MonitoringReportNewComponent,
+        data: {
+          title: 'Monitoring Report New'
         }
       },
 

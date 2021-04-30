@@ -124,7 +124,7 @@ export class MapComponent implements OnInit {
   SearchPlace(value): void {       
     this.PlaceName_Search = value;  
     
-    alert(this.PlaceName_Search);
+    //alert(this.PlaceName_Search);
     
     this.ResultPlace = this.placeDetailObj;
     if (this.PlaceName_Search !== null && this.PlaceName_Search !== '') {
@@ -192,7 +192,7 @@ export class MapComponent implements OnInit {
         this.createMap();
       }    
       
-      alert(this.placeSummeryObj.length);
+      //alert(this.placeSummeryObj.length);
       if(this.placeSummeryObj.length > 0 ) //
       {
         for (var i=0; i < this.placeSummeryObj.length; i++) 
@@ -275,7 +275,7 @@ export class MapComponent implements OnInit {
     const iconBase = '../../../assets/img/Content/';
     const mapProp= {         
       center:myLatlng,      
-      zoom:15,          
+      zoom:7,          
     };    
     this.map = new google.maps.Map(document.getElementById("googleMap"),mapProp);          
     
@@ -303,10 +303,8 @@ export class MapComponent implements OnInit {
       var Speed =  this.userDetailObj[i]['speed'] ;
       var LastUpdate = ""; //this.realTimeTrackingDataObj[i]['dateTime'];
       var Location = this.userDetailObj[i]['googleAddress'];                
-    myMapFunction(lat,lang,UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,this.map,i);  
-    }
-
-     
+    myMapFunction(lat,lang,UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,this.map,i,this.userDetailObj.length);  
+    }     
     
     //Asset    
     for (var i=0; i < this.placeDetailObj.length; i++) {    
@@ -321,7 +319,7 @@ export class MapComponent implements OnInit {
       var PinCode =  this.placeDetailObj[i]['pinCode'] ;      
       var Location = this.placeDetailObj[i]['location'];                  
       myMapAssetFunction(placeGroupCode,lat,lang,PlaceName, PlaceGroupName,AssetName,
-      Location,PlaceAddress,iconBase,StateName,PinCode,this.map);
+      Location,PlaceAddress,iconBase,StateName,PinCode,this.map,i,this.placeDetailObj.length);
     }    
 
     //Create transmission line

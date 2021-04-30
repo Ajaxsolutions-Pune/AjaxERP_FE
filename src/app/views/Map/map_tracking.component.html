@@ -1,16 +1,27 @@
 <form #mapForm="ngForm" autocomplete="off" [formGroup]="form">
-
+  
   <div class="row form" >
     <div style="position:fixed;left:220px;top:100px;width:300px;z-index:999;">      
+      <ul style="list-style-type: none;">
+        <li>
+          <label>
+             <input type="checkbox"  (change)="onTowerChange($event)" />    
+            Tower    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+          </label>
+          <label>
+              {{this.TowerCount}}
+          </label>
+        </li>
+      </ul>
       <div class="ng-autocompletein">
         <div class="row">
           <div class="input-container">
             <ng-autocomplete [data]="data" #auto [searchKeyword]="keyword"
              (selected)='selectEvent($event)' (inputFocused)='onFocused($event)'
              (inputFocusedOut)='onFocused($event)'
-              placeHolder="Select Users *" id="autocomplete"
+               id="autocomplete"
                [itemTemplate]="itemTemplate"
-              [notFoundTemplate]="notFoundTemplate">
+              [notFoundTemplate]="notFoundTemplate" placeHolder="Select Users *" >
             </ng-autocomplete>
             <ng-template #itemTemplate let-item>
               <a [innerHTML]="item.name"></a>

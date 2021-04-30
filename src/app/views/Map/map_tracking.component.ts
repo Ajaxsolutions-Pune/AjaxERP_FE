@@ -309,7 +309,7 @@ export class MapTrackingComponent implements OnInit {
     const iconBase = '../../../assets/img/Content/';
     const mapProp= {         
       center:myLatlng,      
-      zoom:15,          
+      zoom:3,          
     };    
     this.map = new google.maps.Map(document.getElementById("googleMap"),mapProp);          
     
@@ -341,8 +341,29 @@ export class MapTrackingComponent implements OnInit {
       var batteryPer =  this.ResultUserTracking[i]['batteryPer'];      
       var speed = this.ResultUserTracking[i]['speed'];                  
       myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
-        lang,location,batteryPer,speed,iconBase,this.map,i,this.ResultUserTracking.length);
-        
+        lang,location,batteryPer,speed,iconBase,this.map,i,this.ResultUserTracking.length);        
     }      
+
+     //Asset    
+     for (var i=0; i < this.placeDetailObj.length; i++) {    
+      var placeGroupCode = this.placeDetailObj[i]['placeGroupCode'] ;
+      var lat = this.placeDetailObj[i]['latitude'];
+      var lang = this.placeDetailObj[i]['longitude'];
+      var PlaceName = this.placeDetailObj[i]['placeName'];
+      var PlaceGroupName = this.placeDetailObj[i]['placeGroupName'];
+      var AssetName = this.placeDetailObj[i]['assetName'];
+      var PlaceAddress = this.placeDetailObj[i]['placeAddress'];
+      var StateName =  this.placeDetailObj[i]['stateName'];
+      var PinCode =  this.placeDetailObj[i]['pinCode'] ;      
+      var Location = this.placeDetailObj[i]['location'];                  
+      myMapAssetFunction(placeGroupCode,lat,lang,PlaceName, PlaceGroupName,AssetName,
+      Location,PlaceAddress,iconBase,StateName,PinCode,this.map,i,this.placeDetailObj.length);
+    }    
+  }
+
+  onTowerChange(e) 
+  {        
+    myMapAssetHideFunction('Tower');
+    myMapAssetHideFunction('SubStation');
   }
 }

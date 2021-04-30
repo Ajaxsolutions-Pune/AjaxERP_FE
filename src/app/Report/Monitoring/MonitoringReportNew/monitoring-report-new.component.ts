@@ -26,12 +26,13 @@ import { ProcessService1 } from '../../../Components/Services/Masters/ProcessSer
 import { ProcessTransfarmer1 } from '../../../Components/Transformer/Masters/Process-Transfarmer1';
 import { UserEntity_ } from '../../../Components/Module/Masters/UserEntity.model';
 import { threadId } from 'worker_threads';
+//import { NgxSpinnerService } from "ngx-spinner";  
 @Component({
-  selector: 'app-monitoring-report',
-  templateUrl: './monitoring-report.component.html',
-  styleUrls: ['./monitoring-report.component.scss']
+  selector: 'app-monitoring-report-new',
+  templateUrl: './monitoring-report-new.component.html',
+  styleUrls: ['./monitoring-report-new.component.scss']
 })
-export class MonitoringReportComponent extends FormComponentBase implements OnInit, AfterViewInit {
+export class MonitoringReportNewComponent extends FormComponentBase implements OnInit, AfterViewInit {
   // @ts-ignore
   // @ViewChild('txtProjectID') firstItem: ElementRef;
   form!: FormGroup;
@@ -62,8 +63,11 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
   toDateStr: string;
   assetGroupCode: string; processId: string; processName : string;
   userId: string; customerCode: string; assetCode: string; state: string;
-  constructor(private route: ActivatedRoute,
-    //private projectService: ProjectService,
+  Is_ALL: Boolean;
+  user_array : string[];
+  user_id : string;
+
+  constructor(private route: ActivatedRoute,    
     private globalService: GlobalService,
     private assetGroupService: AssetGroupService,
     private assetGroupTransfarmer: AssetGroupTransfarmer,
@@ -74,7 +78,8 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
     private httpClient: HttpClient,
     private datepipe: DatePipe,
     private defaultLayoutComponent: DefaultLayoutComponent,
-    private router: Router, private formBuilder: FormBuilder
+    private router: Router, 
+    private formBuilder: FormBuilder
   ) {
     super();
     this.datePickerConfig = Object.assign({},
@@ -98,15 +103,16 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
     return this.httpClient.get<Asset[]>(this.str + '/Asset/getList', this.env.httpOptions);
   }
   save(): void {
-    alert(this.userId);
+   
     this.fromDateStr = this.datepipe.transform(this.fromDate, 'yyyy-MM-dd');
     this.toDateStr = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
     if (this.withImage.toString().trim() === 'true') {
       this.withImage = '1';
     } else { this.withImage = '0'; }
-    this.globalService.getExcelfil(this.fromDateStr, this.toDateStr, 
+    this.globalService.getExcelfileMutipleValue(this.fromDateStr, this.toDateStr, 
     this.assetGroupCode, this.processId, this.processName,
-    this.userId, this.customerCode, this.assetCode, this.withImage);
+    this.user_id, this.customerCode, this.assetCode, this.withImage);   
+
   }
 
   EntityChange(event){
@@ -120,6 +126,7 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
 
 
   ngOnInit() {
+    
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href = 'login';
     }
@@ -184,6 +191,7 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
       '/GetEntity/getList/' + localStorage.getItem('username').toString() + '/' + this.env.OuCode +
       '?entityGroupCode=' + GroupEntity + '&entityCode=NULL&activeStatus=1', this.env.httpOptions);
   }
+
   ngAfterViewInit(): void {
     setTimeout(() => {
       // this.firstItem.nativeElement.focus();
@@ -200,22 +208,56 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
 
   AssetGroupChange(event) {
     const target = event.source.selected._element.nativeElement;
+    console.log(target);
     const selectedData = {
       value: event.value,
       text: target.innerText.trim()
-    };
+  };    
 
-    this.state = 'All';
-    this.userId = 'All'; this.customerCode = 'All'; this.assetCode = 'All';
-    //Asset combo
-    this.assetService.fillDrpAssetsByAssetGruopCode(selectedData.value).subscribe(
-      (par) => { this.assetDrp = this.assetTransfarmer.AssetTransfarmers(par); },
-      (err: any) => console.log(err));
+  this.state = 'All';
+  this.userId = 'All'; 
+  this.customerCode = 'All'; 
+  this.assetCode = 'All';
+
+  //Asset combo
+  this.assetService.fillDrpAssetsByAssetGruopCode(selectedData.value).subscribe(
+    (par) => { this.assetDrp = this.assetTransfarmer.AssetTransfarmers(par); },
+    (err: any) => console.log(err));
 
     //Process combo
     this.processService.fillProcessDrpByAssetGroup(selectedData.value).subscribe(
-      (par) => { this.processDrp = this.processTransfarmer.processTransfarmers(par); },
-      (err: any) => console.log(err));
+    (par) => { this.processDrp = this.processTransfarmer.processTransfarmers(par); },
+    (err: any) => console.log(err));
   }
 
+  UserChange(event){   
+    
+    //alert(event.value);  
+    //alert(event.value);
+    //alert(event.selected.innerText);
+    
+
+    //alert(this.user_array); 
+    
+    this.Is_ALL = this.user_array.indexOf('All') > -1;
+
+    if(this.Is_ALL === false)
+    {
+      console.log(this.user_array);    
+      this.user_id = "";
+      this.user_id =  this.user_array[0]['loginID'];
+      for(var i = 1;this.user_array.length > i;i++)
+      {    
+          this.user_id =  this.user_id + ',' +   this.user_array[i]['loginID'];      
+      }
+    }
+    else
+    {
+      this.user_id = "ALL";
+    }
+    //alert(this.user_id);
+    
+    //this.user_id = this.user_id + "'";
+    //alert(this.user_id);
+  }
 }

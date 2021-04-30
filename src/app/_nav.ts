@@ -223,7 +223,7 @@ export const navItems: NavData[] = [
         url: '/CircleList',
         icon: 'icon-puzzle'
       },
-      {
+      /*{
         name: 'Country',
         url: '/CountryList',
         icon: 'icon-puzzle'
@@ -257,7 +257,7 @@ export const navItems: NavData[] = [
      //   name: 'Unit',
      //   url: '/UnitList',
      //   icon: 'icon-puzzle'
-     // },
+     // },*/
     
     ]
 
@@ -335,6 +335,11 @@ export const navItems: NavData[] = [
       {
         name: 'Monitoring Report',
         url: '/MonitoringReport',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Monitoring Report New',
+        url: '/MonitoringReportNew',
         icon: 'icon-puzzle'
       },
     ]

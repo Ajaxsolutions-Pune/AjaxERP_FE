@@ -70,7 +70,7 @@ export class GlobalService {
     getExcelfil(fromDate: string, toDate: string, assetGroupCode: string, processId: string,
        processName:string , userId: string, customerCode: string, assetCode: string,withImage: string) {
 
-        this.GerCurrntDateStamp();
+       this.GerCurrntDateStamp();
 
         let ReportUrl = '/Report/assetMonitoringRpt?ouCode=' + this.env.OuCode +
             '&loginId=' + localStorage.getItem('username').toString() +
@@ -98,15 +98,44 @@ export class GlobalService {
                  downloadLink.click();
              }
          )
-    }
+    }    
 
-    
+
+    getExcelfileMutipleValue(fromDate: string, toDate: string, assetGroupCode: string, processId: string,
+        processName:string , userId: string, customerCode: string, assetCode: string,withImage: string) {
+            
+        this.GerCurrntDateStamp(); 
+         let ReportUrl = '/Report/assetMonitoringRptForMultipleValues/?ouCode=' + this.env.OuCode +
+             '&loginId=' + localStorage.getItem('username').toString() +
+             '&fromDate=' + fromDate + '&toDate=' + toDate + '&' +
+             'assetGroupCode=' + assetGroupCode + '&processId=' + processId +
+              '&userId=' + userId + '&customerCode=' + customerCode
+               + '&assetCode=' + assetCode + '&withImage='+ withImage;
+          const baseUrl = this.str + ReportUrl;
+          const token = localStorage.getItem('token').toString();
+          const headers = new HttpHeaders().set('authorization', 'Bearer ' + token);
+          this.httpClient.get(baseUrl, { headers, responseType: 'blob' as 'json' }).subscribe(
+              (response: any) => {
+                  let dataType = response.type;
+                  let binaryData = [];
+                  binaryData.push(response);
+                  if(binaryData[0].size<=0){
+                     alert("No Data Found");
+                     return;
+                  }
+                  let downloadLink = document.createElement('a');
+                  downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
+                  if (true)
+                      downloadLink.setAttribute('download',processName+'_'+ this.GetCurrntDateStampShort()+'.xlsx');
+                  document.body.appendChild(downloadLink);
+                  downloadLink.click();
+              }
+          )
+     }    
 
     limitKeypress(event, value, maxLength) {
         if (value !== undefined && value.toString().length >= maxLength) {
             event.preventDefault();
         }
     }
-
-
 }

@@ -288,6 +288,7 @@ import { ScreenListComponent } from './views/Masters/Screen/screen-list.componen
 import { AssetListComponent } from './views/Masters/Asset/asset-list.component';
 import { AssetComponent } from './views/Masters/Asset/asset.component';
 import { MonitoringReportComponent } from './Report/Monitoring/MonitoringReport/monitoring-report.component';
+
 import { DashboardService } from './Components/Services/Masters/DashboardService';
 import { UserGroupListResolverService } from './Components/Resolver/Masters/UserGroup-List-Resolver.Service';
 import { UserGroupService } from './Components/Services/Masters/UserGroupService';
@@ -379,6 +380,7 @@ import { QualificationTypeService } from './Components/Services/HRMS/Qualificati
 import { QualificationTypeTransfarmer } from './Components/Transformer/HRMS/QualificationType-Transfarmer';
 import { QualificationTypeListResolverService } from './Components/Resolver/HRMS/QualificationType-List-Resolver.Service';
 import { MapTrackingComponent } from './views/Map/map_tracking.component';
+import { MonitoringReportNewComponent } from './Report/Monitoring/MonitoringReportNew/monitoring-report-new.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -494,7 +496,7 @@ export const MY_FORMATS = {
     DeviceAssetMappingComponent, ContactListComponent, ContactComponent,
     AccessListComponent, AccessComponent, RolelevelComponent, RolelevelListComponent,
     UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent,
-    ScreenComponent, ScreenListComponent, MonitoringReportComponent, UserGroupListComponent, UserGroupComponent,
+    ScreenComponent, ScreenListComponent, MonitoringReportComponent,MonitoringReportNewComponent, UserGroupListComponent, UserGroupComponent,
     UserGroupMappingComponent, NotificationObjListComponent, NotificationObjComponent,
     MapComponent,
     MapTrackingComponent,

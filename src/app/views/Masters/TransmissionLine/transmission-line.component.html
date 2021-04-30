@@ -44,7 +44,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4"></div>
-                            <mat-form-field class="col-md-4">
+                           <!-- <mat-form-field class="col-md-4">
                                 <mat-label>Project</mat-label>
                                 <mat-select required 
                                 formControlName="ControlProject"
@@ -54,6 +54,20 @@
                                   [value]="obj.projectCode">
                                    {{obj.projectName}}
                                  </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    {{ formErrors['ControlProject'] }}
+                                </mat-error>
+                            </mat-form-field>-->
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Project</mat-label>
+                                <mat-select required formControlName="ControlProject" [(ngModel)]="bindObj.projectCode">
+
+                                    <input class="form-control mr-sm-2" matInput type="text" placeholder="Search" autocomplete="on" #multiusersearch (input)="onInputChange()" (inputChanged)="onChangeSearch($event)">
+
+                                    <mat-option *ngFor="let obj of projectDrpWtihFilter" [value]="obj.projectCode">
+                                        {{obj.projectName}}
+                                    </mat-option>
                                 </mat-select>
                                 <mat-error>
                                     {{ formErrors['ControlProject'] }}
