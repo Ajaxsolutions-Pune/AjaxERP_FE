@@ -119,7 +119,7 @@ export class GlobalService {
                   let dataType = response.type;
                   let binaryData = [];
                   binaryData.push(response);
-                  if(binaryData[0].size<=0){
+                  if(binaryData[0].size<=0) {
                      alert("No Data Found");
                      return;
                   }
