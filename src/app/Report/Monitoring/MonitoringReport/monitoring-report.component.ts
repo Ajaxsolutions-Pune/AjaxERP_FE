@@ -98,7 +98,7 @@ export class MonitoringReportComponent extends FormComponentBase implements OnIn
     return this.httpClient.get<Asset[]>(this.str + '/Asset/getList', this.env.httpOptions);
   }
   save(): void {
-    alert(this.userId);
+   
     this.fromDateStr = this.datepipe.transform(this.fromDate, 'yyyy-MM-dd');
     this.toDateStr = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
     if (this.withImage.toString().trim() === 'true') {

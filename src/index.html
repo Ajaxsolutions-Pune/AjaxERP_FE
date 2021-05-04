@@ -149,6 +149,14 @@
   //var towericon = '../assets/img/Content/Tower.png';
   
   //google map user tracking 
+  setTimeout(function() {
+    var marker = new google.maps.Marker({
+      map: map,
+      position: new google.maps.LatLng(lat,long),
+      title: "Latitude: " +  lat + "\nLongitude: " + long,
+    });
+  }, 1000);
+  
   function myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
         lang,location,batteryPer,speed,iconBase,map,count,length)
    {

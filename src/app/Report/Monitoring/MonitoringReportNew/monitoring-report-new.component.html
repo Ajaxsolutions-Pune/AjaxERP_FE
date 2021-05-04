@@ -121,7 +121,7 @@
                                     <mat-select formControlName="ControlUser" multiple
                                     [(ngModel)]="user_array" (selectionChange)="UserChange($event)">
                                         <!--[(ngModel)]="project.projectGroupCode"-->
-                                        <mat-option>Select</mat-option>
+                                        <!--<mat-option>Select</mat-option>-->
                                         <mat-option value="All">All</mat-option>
                                         <mat-option *ngFor="let user of userDrp" [value]="user">
                                             {{user.userNameENG}}

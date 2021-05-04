@@ -92,7 +92,7 @@ export class MonitoringReportNewComponent extends FormComponentBase implements O
   }
 
   fillUserDrp(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.str + '/User/getList', this.env.httpOptions);
+    return this.httpClient.get<User[]>(this.str + '/User/getListASC', this.env.httpOptions);
   }
 
   fillStateDrp(): Observable<StateEntity[]> {

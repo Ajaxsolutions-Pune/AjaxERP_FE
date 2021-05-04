@@ -332,13 +332,13 @@ export const navItems: NavData[] = [
     url: '/Reports',
     //   icon: 'fa fa-newspaper-o',
     children: [
-      {
+      /*{
         name: 'Monitoring Report',
         url: '/MonitoringReport',
         icon: 'icon-puzzle'
-      },
+      },*/
       {
-        name: 'Monitoring Report New',
+        name: 'Monitoring Report',
         url: '/MonitoringReportNew',
         icon: 'icon-puzzle'
       },

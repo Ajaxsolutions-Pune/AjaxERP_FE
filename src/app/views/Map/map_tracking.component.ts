@@ -309,7 +309,7 @@ export class MapTrackingComponent implements OnInit {
     const iconBase = '../../../assets/img/Content/';
     const mapProp= {         
       center:myLatlng,      
-      zoom:3,          
+      zoom:10,          
     };    
     this.map = new google.maps.Map(document.getElementById("googleMap"),mapProp);          
     
