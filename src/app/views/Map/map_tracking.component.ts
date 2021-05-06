@@ -329,7 +329,13 @@ export class MapTrackingComponent implements OnInit {
     console.log(this.ResultUserTracking);
 
     // UserTracking
-    for (var i=0; i < this.ResultUserTracking.length; i++) {    
+    
+   // this.ResultUserTracking.forEach((name, i) => {
+   //  setTimeout(() => {
+        
+     
+    
+    for (var i=0; i < this.ResultUserTracking.length; i++) {     
       var trackingID = this.ResultUserTracking[i]['trackingId'];
       var LoginId = this.ResultUserTracking[i]['loginId'];
       var userNameENG = this.ResultUserTracking[i]['userNameENG'];
@@ -339,10 +345,14 @@ export class MapTrackingComponent implements OnInit {
       var lang = this.ResultUserTracking[i]['longitude'];
       var location =  this.ResultUserTracking[i]['location'];
       var batteryPer =  this.ResultUserTracking[i]['batteryPer'];      
-      var speed = this.ResultUserTracking[i]['speed'];                  
+      var speed = this.ResultUserTracking[i]['speed'];   
       myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
-        lang,location,batteryPer,speed,iconBase,this.map,i,this.ResultUserTracking.length);        
-    }      
+        lang,location,batteryPer,speed,iconBase,this.map,i,this.ResultUserTracking.length);       
+      }
+   // }, i * 5000);
+  //});   
+
+    
 
      //Asset    
      for (var i=0; i < this.placeDetailObj.length; i++) {    
@@ -361,6 +371,7 @@ export class MapTrackingComponent implements OnInit {
     }    
   }
 
+  
   onTowerChange(e) 
   {        
     myMapAssetHideFunction('Tower');

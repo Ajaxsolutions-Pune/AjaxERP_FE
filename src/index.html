@@ -159,7 +159,7 @@
   
   function myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
         lang,location,batteryPer,speed,iconBase,map,count,length)
-   {
+   {    
     if(count == 0)
     {
       icon_url = 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/Green_Circle.png';
@@ -211,7 +211,8 @@
                 offset: '100%',                     
             }],
         });               
-        line[count].setMap(map);         
+        line[count].setMap(map);   
+        
    }
   
   //google map create asset markers
