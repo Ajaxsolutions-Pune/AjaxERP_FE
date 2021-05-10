@@ -1,18 +1,125 @@
 <form #mapForm="ngForm" autocomplete="off" [formGroup]="form">
+
+<div style="margin-left:-30px;position: fixed;z-index: 9999;"> 
+  <button mat-raised-button color="primary" style="position: fixed;top:2px;margin-left:0px;margin-top: 5px;z-index: 9999;" (click)=toggleDisplayDiv() >Toolbar</button>
+  
+  <div class="col-md-4" style="padding: 15px; position:fixed;top: 40px;background-color: aquamarine;margin-top: 5px;" [hidden]="isShowDiv">
+    
+    <div class="ng-autocompletein">
+      <div class="row">
+        <div class="input-container">
+          <ng-autocomplete [data]="data" #auto [searchKeyword]="keyword"
+           (selected)='selectEvent($event)' (inputFocused) = 'onFocused($event)'
+           (inputFocusedOut)='onFocused($event)'
+             id="autocomplete"
+             [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate" placeHolder="Select Users *" >
+          </ng-autocomplete>
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+          <i class="icon">
+            <mat-icon>arrow_drop_down</mat-icon>
+          </i>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="fill" class="col-md-6">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="picker2"
+        (keypress)="Date_char_val($event)"
+        [(ngModel)]="startDate"
+        formControlName="ControlStartDate" >
+        <mat-datepicker-toggle matSuffix [for]="picker2">
+        </mat-datepicker-toggle>
+        <mat-datepicker  #picker2></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="col-md-6">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="picker3"
+        (keypress)="Date_char_val($event)"
+        formControlName="ControlEndDate"
+        [(ngModel)]="endDate">
+        <mat-datepicker-toggle matSuffix [for]="picker3">
+        </mat-datepicker-toggle>
+        <mat-datepicker  #picker3></mat-datepicker>      
+      </mat-form-field>
+    </div>
+    
+    <ul style="list-style-type: none;">
+      <li>
+        <label>
+           <input type="checkbox"  (change)="onTowerChange($event)" />    
+          Tower    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+        </label>
+        <label>
+            {{this.TowerCount}}
+        </label>
+      </li>
+    </ul>
+
+    <button mat-raised-button color="primary" style="height:35px;width:100px;margin-top:5px;" 
+    (click)="SearchUser(tbName.value)">Search</button>
+
+    <button mat-raised-button color="primary" style="height:35px;width:100px;margin-top:5px;" 
+    (click)="NextSpeed()">1 X >></button>
+    <button mat-raised-button color="primary" style="height:35px;width:100px;margin-top:5px;" 
+    (click)="PrevSpeed()">1 X </button>
+
+  </div>
+</div>
+  <!--<div  style="height:200px;position:fixed;top:0px;left:200px;z-index: 9999;">
+    <mat-accordion>
+      <mat-expansion-panel hideToggle >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div>         
+              <span>Map Toolbar</span>        
+           </div>        
+          </mat-panel-title>    
+        </mat-expansion-panel-header>
+        <div style="background-color: #bdffce;padding: 0px;">
+          <mat-tab-group  dynamicHeight>
+               <mat-tab>
+                   <ng-template mat-tab-label>
+                       <h5 class="text-center" style="margin-top:10px;margin-right: 5px;" >User</h5>
+                       <i style="color:green;font-size: 25px;" class="fa fa-user"></i> 
+                   </ng-template>
+
+
+                   <ul style="list-style-type: none;">
+                    <li>
+                      <label>
+                         <input type="checkbox"  (change)="onTowerChange($event)" />    
+                        Tower    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+                      </label>
+                      <label>
+                          {{this.TowerCount}}
+                      </label>
+                    </li>
+                  </ul>
+                   
+                   <button mat-raised-button color="primary" style="height:35px;width:100px;margin-top:5px;" 
+                    (click)="SearchUser(tbName.value)">Search</button>
+    
+               </mat-tab>               
+          </mat-tab-group>        
+          </div>
+          <button  mat-raised-button color="primary" style="width:200px;margin-top:5px;" 
+      (click)="AutoRefreshStart()">Auto Refresh In  : {{this.Count}} Seconds</button>
+    
+      </mat-expansion-panel> 
+    </mat-accordion>
+    </div>
   
   <div class="row form" >
     <div style="position:fixed;left:220px;top:100px;width:300px;z-index:999;">      
-      <ul style="list-style-type: none;">
-        <li>
-          <label>
-             <input type="checkbox"  (change)="onTowerChange($event)" />    
-            Tower    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
-          </label>
-          <label>
-              {{this.TowerCount}}
-          </label>
-        </li>
-      </ul>
+      
       <div class="ng-autocompletein">
         <div class="row">
           <div class="input-container">
@@ -36,7 +143,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
+
+
 
 
    <!-- <div  style="height:200px;position:fixed;top:0px;left:200px;z-index: 9999;">     

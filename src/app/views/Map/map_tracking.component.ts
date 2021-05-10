@@ -80,7 +80,13 @@ export class MapTrackingComponent implements OnInit {
 
   answer = Answer;
 
-   
+  isShowDiv = true;
+
+  map_replay_interval = 1000;
+
+  toggleDisplayDiv() {
+    this.isShowDiv = !this.isShowDiv;
+  }
 
   onChangeSearch(val: string) {
     // fetch remote data from here
@@ -302,6 +308,10 @@ export class MapTrackingComponent implements OnInit {
     //this.createMap();
   }  
   
+  NextSpeed(){
+    this.map_replay_interval = this.map_replay_interval + 1000;
+    alert(this.map_replay_interval);
+  }
 
   createMap()
   {    
@@ -330,12 +340,12 @@ export class MapTrackingComponent implements OnInit {
 
     // UserTracking
     
-   // this.ResultUserTracking.forEach((name, i) => {
-   //  setTimeout(() => {
+    this.ResultUserTracking.forEach((name, i) => {
+    setTimeout(() => {
         
      
     
-    for (var i=0; i < this.ResultUserTracking.length; i++) {     
+    //for (var i=0; i < this.ResultUserTracking.length; i++) {     
       var trackingID = this.ResultUserTracking[i]['trackingId'];
       var LoginId = this.ResultUserTracking[i]['loginId'];
       var userNameENG = this.ResultUserTracking[i]['userNameENG'];
@@ -348,9 +358,9 @@ export class MapTrackingComponent implements OnInit {
       var speed = this.ResultUserTracking[i]['speed'];   
       myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
         lang,location,batteryPer,speed,iconBase,this.map,i,this.ResultUserTracking.length);       
-      }
-   // }, i * 5000);
-  //});   
+      //}
+    }, i * this.map_replay_interval);
+  });   
 
     
 
