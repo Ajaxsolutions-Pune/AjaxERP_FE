@@ -381,6 +381,7 @@ import { QualificationTypeTransfarmer } from './Components/Transformer/HRMS/Qual
 import { QualificationTypeListResolverService } from './Components/Resolver/HRMS/QualificationType-List-Resolver.Service';
 import { MapTrackingComponent } from './views/Map/map_tracking.component';
 import { MonitoringReportNewComponent } from './Report/Monitoring/MonitoringReportNew/monitoring-report-new.component';
+import { MapReplayService } from './Components/Services/Masters/MapReplayService';
 
 export const MY_FORMATS = {
   parse: {
@@ -498,7 +499,7 @@ export const MY_FORMATS = {
     UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent,
     ScreenComponent, ScreenListComponent, MonitoringReportComponent,MonitoringReportNewComponent, UserGroupListComponent, UserGroupComponent,
     UserGroupMappingComponent, NotificationObjListComponent, NotificationObjComponent,
-    MapComponent,
+    MapComponent, 
     MapTrackingComponent,
     QualificationListComponent,
     QualificationComponent,
@@ -573,7 +574,7 @@ export const MY_FORMATS = {
     DialogService, RolelevelListResolverService,
     RoleService, RolelevelService, RoleTransfarmer, RolelevelTransfarmer, UserTransfarmer,
     ProjectService, ProjectTransfarmer, ProjectListResolverService,
-    MapService,
+    MapService, MapReplayService,
     ProcessFormMappingService, ProcessFormMappingTransfarmer, ProcessDataService, UserDeviceDataService,
     ProcessDataService,
     UserDeviceMappingService, UserDeviceMappingTransfarmer, UserTransfarmer, DeviceAssetMappingService,

@@ -1,10 +1,10 @@
 <form #mapForm="ngForm" autocomplete="off" [formGroup]="form">
 
-<div style="margin-left:-30px;position: fixed;z-index: 9999;"> 
-  <button mat-raised-button color="primary" style="position: fixed;top:2px;margin-left:0px;margin-top: 5px;z-index: 9999;" (click)=toggleDisplayDiv() >Toolbar</button>
+<div style="margin-left:-30px;position: fixed;z-index: 999;"> 
+  <button mat-raised-button color="primary" style="position: fixed;top:2px;margin-left:0px;margin-top: 5px;z-index: 9999;" (click)=toggleDisplayDiv() >Map Toolbar</button>
   
-  <div class="col-md-4" style="padding: 15px; position:fixed;top: 40px;background-color: aquamarine;margin-top: 5px;" [hidden]="isShowDiv">
-    
+  <div class="col-md-4" style="padding: 15px; position:fixed;top: 40px;background-color: #c6ccf5;margin-top: 5px;" [hidden]="isShowDiv">
+    <label>Select User</label>
     <div class="ng-autocompletein">
       <div class="row">
         <div class="input-container">
@@ -28,48 +28,35 @@
       </div>
     </div>
 
-    <div class="row">
-      <mat-form-field appearance="fill" class="col-md-6">
-        <mat-label>Start Date</mat-label>
-        <input matInput [matDatepicker]="picker2"
-        (keypress)="Date_char_val($event)"
-        [(ngModel)]="startDate"
-        formControlName="ControlStartDate" >
-        <mat-datepicker-toggle matSuffix [for]="picker2">
-        </mat-datepicker-toggle>
-        <mat-datepicker  #picker2></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="col-md-6">
-        <mat-label>End Date</mat-label>
-        <input matInput [matDatepicker]="picker3"
-        (keypress)="Date_char_val($event)"
-        formControlName="ControlEndDate"
-        [(ngModel)]="endDate">
-        <mat-datepicker-toggle matSuffix [for]="picker3">
-        </mat-datepicker-toggle>
-        <mat-datepicker  #picker3></mat-datepicker>      
-      </mat-form-field>
+    <div>   
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Select From Date" (dateChange)="onChangeStartDate($event)" >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker ></mat-datepicker>
+      </mat-form-field>    
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker1" placeholder="Select To Date" (dateChange)="onChangeEndDate($event)" >
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1 ></mat-datepicker>
+      </mat-form-field>     
+    </div>    
+   
+    <div>    
+      <label>
+         <input type="checkbox"  (change)="onTowerChange($event)" />    
+         Show Tower   
+      </label> 
     </div>
-    
-    <ul style="list-style-type: none;">
-      <li>
-        <label>
-           <input type="checkbox"  (change)="onTowerChange($event)" />    
-          Tower    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
-        </label>
-        <label>
-            {{this.TowerCount}}
-        </label>
-      </li>
-    </ul>
+         
+     
 
-    <button mat-raised-button color="primary" style="height:35px;width:100px;margin-top:5px;" 
-    (click)="SearchUser(tbName.value)">Search</button>
+   <button mat-raised-button color="primary" style="height:35px;width:100px;margin-top:5px;" 
+    (click)="SearchUser(this.objloginId)">Start Replay</button>
 
-    <button mat-raised-button color="primary" style="height:35px;width:100px;margin-top:5px;" 
+   <!-- <button mat-raised-button color="primary" style="height:35px;width:100px;margin-top:5px;" 
     (click)="NextSpeed()">1 X >></button>
     <button mat-raised-button color="primary" style="height:35px;width:100px;margin-top:5px;" 
-    (click)="PrevSpeed()">1 X </button>
+    (click)="PrevSpeed()">1 X </button>-->
 
   </div>
 </div>

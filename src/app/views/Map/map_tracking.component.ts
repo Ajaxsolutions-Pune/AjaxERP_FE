@@ -6,10 +6,11 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Script } from 'vm';
 alasql['private'].externalXlsxLib = require('xlsx');
 import { environment } from '../../Components/Module/environment';
-import{mapModel,placeSummery,placeDetail,userSummery,userDetail,userTracking} from '../../Components/Module/Masters/Map.model';
-import{MapService} from '../../Components/Services/Masters/MapService';
+import{mapReplayModel,assetData,trackingData} from '../../Components/Module/Masters/Map.Replay.model';
+import{MapReplayService} from '../../Components/Services/Masters/MapReplayService';
 import{UserService} from '../../Components/Services/Masters/UserService';
 import{User} from '../../Components/Module/Masters/User.model';
+import { DatePipe } from '@angular/common';
 //temp
 import { Answer,AnswerEntity } from '../../Components/Module/Masters/Answer.model';
 import { UserTransfarmer } from '../../Components/Transformer/Masters/User-Transfarmer';
@@ -54,19 +55,18 @@ export class MapTrackingComponent implements OnInit {
   AssetType: string = "Tower";
   Checked : string = "false";
 
-  UserName_Search : string = "";
-  PlaceName_Search : string = "";
+  LoginId : string = "";
+  Start_Date: Date;
+  Start_DateStr: string;
+  End_Date : Date;
+  End_DateStr: string;
 
-  mapModelObj : mapModel;
-  placeSummeryObj : placeSummery[];
-  placeDetailObj : placeDetail[];
-  userSummaryObj : userSummery[];
-  userDetailObj : userDetail[];
-  userTrackingObj : userTracking[];
+  mapModelObj : mapReplayModel;  
+  placeDetailObj : assetData[];
+  userTrackingObj : trackingData[];
 
-  ResultUser: userDetail[];
-  ResultPlace: placeDetail[];
-  ResultUserTracking: userTracking[];
+  ResultPlace: assetData[];
+  ResultUserTracking: trackingData[];
 
   map;
   TowerCount : string = "0";
@@ -84,6 +84,8 @@ export class MapTrackingComponent implements OnInit {
 
   map_replay_interval = 1000;
 
+  DaysCount : any;
+
   toggleDisplayDiv() {
     this.isShowDiv = !this.isShowDiv;
   }
@@ -100,9 +102,10 @@ export class MapTrackingComponent implements OnInit {
 
   constructor(private _router: Router,
     private route: ActivatedRoute,
-    private mapService : MapService,
+    private mapReplayService : MapReplayService,
     private userService : UserService,
     private userTransfarmer: UserTransfarmer,
+    private datepipe: DatePipe,
     private defaultLayoutComponent: DefaultLayoutComponent,
     
   private router: Router, private formBuilder: FormBuilder,
@@ -110,7 +113,7 @@ export class MapTrackingComponent implements OnInit {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href = 'login';
     }
-    this.ResultUser = this.userDetailObj;
+    //this.ResultUser = this.userDetailObj;
     this.ResultUserTracking = this.userTrackingObj;
     this.ResultPlace = this.placeDetailObj;        
     this.config = {
@@ -123,11 +126,12 @@ export class MapTrackingComponent implements OnInit {
     this.Count = 60;
     if(this.isAutoRefresh === 0)
     {
+      this.Start_DateStr = this.datepipe.transform(this.Start_Date, 'yyyy-MM-dd');
+      this.End_DateStr = this.datepipe.transform(this.End_Date, 'yyyy-MM-dd');
       this.id = setInterval(() => {        
-        this.MapLoad(); 
+        this.MapLoad(this.LoginId,this.Start_DateStr,this.End_DateStr);  
         }, 60000);
       this.isAutoRefresh = 1;
-
       this.id2 = setInterval(() => {        
         this.Count--;
         if(this.Count === 0)
@@ -149,34 +153,28 @@ export class MapTrackingComponent implements OnInit {
     }
   }
 
+
+  onChangeStartDate(event) : void{
+    this.Start_Date = event.value;
+    this.Start_DateStr = this.datepipe.transform(this.Start_Date, 'MM-dd-yyyy')
+    this.DateValidation(this.Start_Date,this.End_Date);
+  }
+
+  onChangeEndDate(event) : void{
+    this.End_Date = event.value;
+    this.End_DateStr = this.datepipe.transform(this.End_Date, 'MM-dd-yyyy')
+    this.DateValidation(this.Start_Date,this.End_Date);
+  }
+
+  DateValidation(date1, date2) : void{ 
+    this.DaysCount =  new Date(date2 - date1).getDate();    
+  }
+
   SearchUser(value): void {       
-    this.UserName_Search = value;     
-    this.ResultUserTracking = this.userTrackingObj;
-    if (this.UserName_Search !== null && this.UserName_Search !== '') {
-      this.ResultUserTracking = this.ResultUserTracking.filter(SubResult =>
-          SubResult.userNameENG.toLowerCase().indexOf(this.UserName_Search.toString().toLowerCase()) !== -1);
-        }        
-      if(this.ResultUserTracking.length !== 0)
-      {          
-           this.createMap();
-      }
-      else
-      {
-        const myLatlng = new google.maps.LatLng(0,0);
-        const iconBase = '../../../assets/img/Content/';
-        const mapProp= {         
-          center:myLatlng,      
-          zoom:15,          
-        };    
-        this.map = new google.maps.Map(document.getElementById("googleMap"),mapProp);    
-
-        this.defaultLayoutComponent.Massage('',
-              'Data not available for this user.', 'modal-info');
-
-      }
+      this.LoginId = value;     
+      this.MapLoad(this.LoginId,this.Start_DateStr,this.End_DateStr); 
   }        
-
-   
+  
 
   ngOnInit() {    
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
@@ -187,7 +185,6 @@ export class MapTrackingComponent implements OnInit {
    this.loginVal = true;
    this.userService.fillDrpUsers().subscribe(
      (par) =>{
-
        this.user = this.userTransfarmer.UserTransfarmers(par)
        this.data = [];
        this.user.forEach(a => {
@@ -197,7 +194,7 @@ export class MapTrackingComponent implements OnInit {
       },
      (err: any) => console.log(err));
 
-    this.MapLoad();        
+      
     this.route.paramMap.subscribe(parameterMap => 
     {
       this.form = this.formBuilder.group({
@@ -206,10 +203,7 @@ export class MapTrackingComponent implements OnInit {
       this.form = this.formBuilder.group({
         ControlSearchPlace: ['', []],     
       });     
-    }); 
-
-  
-        
+    });         
   }
 
   selectEvent(item) {
@@ -219,87 +213,75 @@ export class MapTrackingComponent implements OnInit {
     };
     this.loginVal = false;
     this.objloginId = selectedData.value;
-    this.objloginIdText = selectedData.text;
-    // alert(this.data1.questionId);
-
-   // alert(this.objloginIdText);
-
-    this.SearchUser(this.objloginIdText);
-
+    this.objloginIdText = selectedData.text;  
+    //this.SearchUser(this.objloginId);
   }
 
-  MapLoad()
+  Clear_Map(){
+    //for clear map
+    const myLatlng = new google.maps.LatLng(0,0);
+    const iconBase = '../../../assets/img/Content/';
+    const mapProp= {         
+      center:myLatlng,      
+      zoom:15,          
+    };    
+    this.map = new google.maps.Map(document.getElementById("googleMap"),mapProp);    
+    this.defaultLayoutComponent.Massage('',
+          'Data not available for this user.', 'modal-info');
+  }
+
+  MapLoad(LoginId:String, Start_Date:String, End_Date:String)
   {
+    
+    if(this.DaysCount <= 5)
+    {
     this.mapModelObj
     this.mapModelObj = {
-      placeSummery:[],
-      placeDetail:[],
-      userSummery:[],
-      userDetail:[],
-      userTracking:[]
-    };    
+      assetData:[],
+      trackingData:[]
+    }; 
 
-    this.placeSummeryObj = [];
     this.placeDetailObj = [];
-    this.userSummaryObj = [];
-    this.userDetailObj = [];  
     this.userTrackingObj = []; 
     
     //Asset data from map service
-    this.mapService.getMapData().subscribe(t => {
-      this.mapModelObj = t;
-      this.placeSummeryObj = this.mapModelObj.placeSummery;
-      this.placeDetailObj = this.mapModelObj.placeDetail;   
-      this.userSummaryObj = this.mapModelObj.userSummery;
-      this.userDetailObj = this.mapModelObj.userDetail;
-      this.userTrackingObj = this.mapModelObj.userTracking;
-      this.ResultUser = this.userDetailObj;
-
-      console.log(this.userTrackingObj);
-
-      if(this.userDetailObj.length > 0 ) //!= []
-      {      
-        //this.createMap();
-      }    
-
-      if(this.placeSummeryObj.length > 0 ) //
+    this.mapReplayService.getMapReplayData(LoginId, Start_Date, End_Date).subscribe(t => {
+      this.mapModelObj = t;     
+      this.placeDetailObj = this.mapModelObj.assetData;
+      this.userTrackingObj = this.mapModelObj.trackingData;       
+      
+      //console.log(this.userTrackingObj);
+      //console.log(this.placeDetailObj);
+     
+      //alert(this.userTrackingObj.length);      
+      if(this.userTrackingObj !== null)
       {
-        for (var i=0; i < this.placeSummeryObj.length; i++) 
-        {
-            if(this.placeSummeryObj[i]['placeGroupName'] === 'Tower')
-            {
-              this.TowerCount = this.placeSummeryObj[i]['placeCount'];
-            }
-            if(this.placeSummeryObj[i]['placeGroupName'] === 'Sub Station')
-            {
-              this.SubStationCount = this.placeSummeryObj[i]['placeCount'];
-            }
-        }   
+      if(this.userTrackingObj.length !== 0 )
+      {          
+         this.createMap();
       }
-
-      if(this.userSummaryObj.length > 0)
+      else
       {
-        for (var i=0; i < this.userSummaryObj.length; i++) 
-        {
-            if(this.userSummaryObj[i]['userStatus'] === 'Check In')
-            {
-              this.CheckIn = this.userSummaryObj[i]['userStatusCount'];
-            }
-            else if(this.userSummaryObj[i]['userStatus'] === 'Check Out')
-            {
-              this.CheckOut = this.userSummaryObj[i]['userStatusCount'];
-            }
-            else if(this.userSummaryObj[i]['userStatus'] === 'Inactive')
-            {
-              this.Inactive = this.userSummaryObj[i]['userStatusCount'];
-            }
-            else if(this.userSummaryObj[i]['userStatus'] === 'Off')
-            {
-              this.Off = this.userSummaryObj[i]['userStatusCount'];
-            }           
-        }   
+        this.Clear_Map();
+      }
+      }
+      else{
+        this.Clear_Map();
       }
     }); 
+    }
+    else
+    {   
+      const myLatlng = new google.maps.LatLng(0,0);
+      const iconBase = '../../../assets/img/Content/';
+      const mapProp= {         
+          center:myLatlng,      
+          zoom:15,          
+        };    
+      this.map = new google.maps.Map(document.getElementById("googleMap"),mapProp);    
+      this.defaultLayoutComponent.Massage('',
+      'You can select maximum 5 days for map replay.', 'modal-info');
+    }
   }
 
   changeMapType(e) {
@@ -310,12 +292,12 @@ export class MapTrackingComponent implements OnInit {
   
   NextSpeed(){
     this.map_replay_interval = this.map_replay_interval + 1000;
-    alert(this.map_replay_interval);
+    //alert(this.map_replay_interval);
   }
 
   createMap()
   {    
-    const myLatlng = new google.maps.LatLng(this.ResultUserTracking[0]['latitude'],this.ResultUserTracking[0]['longitude']);
+    const myLatlng = new google.maps.LatLng(this.userTrackingObj[0]['latitude'],this.userTrackingObj[0]['longitude']);
     const iconBase = '../../../assets/img/Content/';
     const mapProp= {         
       center:myLatlng,      
@@ -336,33 +318,27 @@ export class MapTrackingComponent implements OnInit {
       this.map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
     }  
     
-    console.log(this.ResultUserTracking);
-
+    console.log(this.userTrackingObj);
     // UserTracking
     
-    this.ResultUserTracking.forEach((name, i) => {
-    setTimeout(() => {
-        
-     
-    
-    //for (var i=0; i < this.ResultUserTracking.length; i++) {     
-      var trackingID = this.ResultUserTracking[i]['trackingId'];
-      var LoginId = this.ResultUserTracking[i]['loginId'];
-      var userNameENG = this.ResultUserTracking[i]['userNameENG'];
-      var mobileNo = this.ResultUserTracking[i]['mobileNo'];
-      var dateTime = this.ResultUserTracking[i]['dateTime'];
-      var lat = this.ResultUserTracking[i]['latitude'];
-      var lang = this.ResultUserTracking[i]['longitude'];
-      var location =  this.ResultUserTracking[i]['location'];
-      var batteryPer =  this.ResultUserTracking[i]['batteryPer'];      
-      var speed = this.ResultUserTracking[i]['speed'];   
+    this.userTrackingObj.forEach((name, i) => {
+    setTimeout(() => {         
+    //for (var i=0; i < this.userTrackingObj.length; i++) {     
+      var trackingID = this.userTrackingObj[i]['trackingId'];
+      var LoginId = this.userTrackingObj[i]['loginId'];
+      var userNameENG = this.userTrackingObj[i]['userNameENG'];
+      var mobileNo = this.userTrackingObj[i]['mobileNo'];
+      var dateTime = this.userTrackingObj[i]['dateTime'];
+      var lat = this.userTrackingObj[i]['latitude'];
+      var lang = this.userTrackingObj[i]['longitude'];
+      var location =  this.userTrackingObj[i]['location'];
+      var batteryPer =  this.userTrackingObj[i]['batteryPer'];      
+      var speed = this.userTrackingObj[i]['speed'];   
       myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
-        lang,location,batteryPer,speed,iconBase,this.map,i,this.ResultUserTracking.length);       
+        lang,location,batteryPer,speed,iconBase,this.map,i,this.userTrackingObj.length);       
       //}
     }, i * this.map_replay_interval);
-  });   
-
-    
+  });       
 
      //Asset    
      for (var i=0; i < this.placeDetailObj.length; i++) {    

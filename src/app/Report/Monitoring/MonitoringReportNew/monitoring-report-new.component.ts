@@ -102,8 +102,7 @@ export class MonitoringReportNewComponent extends FormComponentBase implements O
   fillAssetDrp(): Observable<Asset[]> {
     return this.httpClient.get<Asset[]>(this.str + '/Asset/getList', this.env.httpOptions);
   }
-  save(): void  {
-   
+  save(): void  {   
     this.fromDateStr = this.datepipe.transform(this.fromDate, 'yyyy-MM-dd');
     this.toDateStr = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
     if (this.withImage.toString().trim() === 'true') {
@@ -112,7 +111,6 @@ export class MonitoringReportNewComponent extends FormComponentBase implements O
     this.globalService.getExcelfileMutipleValue(this.fromDateStr, this.toDateStr, 
     this.assetGroupCode, this.processId, this.processName,
     this.user_id, this.customerCode, this.assetCode, this.withImage);   
-
   }
 
   EntityChange(event){
