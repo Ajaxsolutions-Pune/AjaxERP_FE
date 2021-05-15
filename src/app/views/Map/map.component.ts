@@ -18,6 +18,7 @@ declare var myMapAssetFunction : Function;
 declare var myMapAssetHideFunction : Function;
 declare var myMapUserHideFunction : Function;
 declare var CreateTransmissionLine : Function;
+declare var clearAllFunction : Function
 declare var dragElement: Function;
 
 @Component({
@@ -144,6 +145,7 @@ export class MapComponent implements OnInit {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href = 'login';
     }
+    clearAllFunction();  
     this.MapLoad();        
     this.route.paramMap.subscribe(parameterMap => 
       {
@@ -183,7 +185,7 @@ export class MapComponent implements OnInit {
       this.ResultUser = this.userDetailObj;
 
      console.log(this.placeSummeryObj);
-    console.log(this.placeDetailObj);   
+     console.log(this.placeDetailObj);   
      console.log(this.userSummaryObj);
      console.log(this.userDetailObj);
 
@@ -324,6 +326,5 @@ export class MapComponent implements OnInit {
 
     //Create transmission line
     CreateTransmissionLine(); 
-
   }
 }

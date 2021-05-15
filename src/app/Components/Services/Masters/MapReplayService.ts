@@ -11,7 +11,7 @@ import { DialogService } from '../MatServices/Dialog.service';
 export class MapReplayService {
 
     str: string;
-    mapModelObj: mapReplayModel;
+    mapReplayModelObj: mapReplayModel;
 
     env = environment;  
 

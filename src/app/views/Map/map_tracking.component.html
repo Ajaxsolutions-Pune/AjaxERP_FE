@@ -43,7 +43,7 @@
    
     <div>    
       <label>
-         <input type="checkbox"  (change)="onTowerChange($event)" />    
+         <input type="checkbox" [(ngModel)]="checkBox_Check" [checked]="checkBox_Check"  (change)="onTowerChange($event)" />    
          Show Tower   
       </label> 
     </div>

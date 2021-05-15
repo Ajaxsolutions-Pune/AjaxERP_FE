@@ -21,6 +21,7 @@ declare var google: any;
 declare var myMapFunction: Function;
 declare var myMapAssetFunction : Function; 
 declare var myMapAssetHideFunction : Function;
+declare var clearAllFunction : Function
 declare var myMapUserHideFunction : Function;
 declare var CreateTransmissionLine : Function;
 declare var myMapUserTrackingFunction : Function;
@@ -61,9 +62,9 @@ export class MapTrackingComponent implements OnInit {
   End_Date : Date;
   End_DateStr: string;
 
-  mapModelObj : mapReplayModel;  
-  placeDetailObj : assetData[];
-  userTrackingObj : trackingData[];
+  mapReplayModelObj : mapReplayModel;  
+  assetDataObj : assetData[];
+  trackingDataObj : trackingData[];
 
   ResultPlace: assetData[];
   ResultUserTracking: trackingData[];
@@ -77,6 +78,8 @@ export class MapTrackingComponent implements OnInit {
   Off : string = "0";
   Inactive : string = "0";
   polling: any;
+
+  checkBox_Check : boolean;
 
   answer = Answer;
 
@@ -114,8 +117,8 @@ export class MapTrackingComponent implements OnInit {
       window.location.href = 'login';
     }
     //this.ResultUser = this.userDetailObj;
-    this.ResultUserTracking = this.userTrackingObj;
-    this.ResultPlace = this.placeDetailObj;        
+    this.ResultUserTracking = this.trackingDataObj;
+    this.ResultPlace = this.assetDataObj;        
     this.config = {
       itemsPerPage: this.env.paginationPageSize,
       currentPage: 1,      
@@ -170,9 +173,12 @@ export class MapTrackingComponent implements OnInit {
     this.DaysCount =  new Date(date2 - date1).getDate();    
   }
 
-  SearchUser(value): void {       
-      this.LoginId = value;     
-      this.MapLoad(this.LoginId,this.Start_DateStr,this.End_DateStr); 
+  SearchUser(value): void {    
+    this.checkBox_Check = true;
+    clearAllFunction();   
+    this.checkBox_Check = false;      
+    this.LoginId = value;     
+    this.MapLoad(this.LoginId,this.Start_DateStr,this.End_DateStr); 
   }        
   
 
@@ -232,31 +238,36 @@ export class MapTrackingComponent implements OnInit {
 
   MapLoad(LoginId:String, Start_Date:String, End_Date:String)
   {
+    //this.mapModelObj.assetData = [];
+    //this.mapModelObj.trackingData = [];
+    this.assetDataObj = [];
+    this.trackingDataObj = [];
     
     if(this.DaysCount <= 5)
     {
-    this.mapModelObj
-    this.mapModelObj = {
+
+    this.mapReplayModelObj
+    this.mapReplayModelObj = {
       assetData:[],
       trackingData:[]
     }; 
 
-    this.placeDetailObj = [];
-    this.userTrackingObj = []; 
+    this.assetDataObj = [];
+    this.trackingDataObj = []; 
     
     //Asset data from map service
     this.mapReplayService.getMapReplayData(LoginId, Start_Date, End_Date).subscribe(t => {
-      this.mapModelObj = t;     
-      this.placeDetailObj = this.mapModelObj.assetData;
-      this.userTrackingObj = this.mapModelObj.trackingData;       
+      this.mapReplayModelObj = t;     
+      this.assetDataObj = this.mapReplayModelObj.assetData;
+      this.trackingDataObj = this.mapReplayModelObj.trackingData;       
       
       //console.log(this.userTrackingObj);
       //console.log(this.placeDetailObj);
      
       //alert(this.userTrackingObj.length);      
-      if(this.userTrackingObj !== null)
+      if(this.trackingDataObj !== null)
       {
-      if(this.userTrackingObj.length !== 0 )
+      if(this.trackingDataObj.length !== 0 )
       {          
          this.createMap();
       }
@@ -297,7 +308,7 @@ export class MapTrackingComponent implements OnInit {
 
   createMap()
   {    
-    const myLatlng = new google.maps.LatLng(this.userTrackingObj[0]['latitude'],this.userTrackingObj[0]['longitude']);
+    const myLatlng = new google.maps.LatLng(this.trackingDataObj[0]['latitude'],this.trackingDataObj[0]['longitude']);
     const iconBase = '../../../assets/img/Content/';
     const mapProp= {         
       center:myLatlng,      
@@ -318,48 +329,50 @@ export class MapTrackingComponent implements OnInit {
       this.map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
     }  
     
-    console.log(this.userTrackingObj);
+    console.log(this.trackingDataObj);
     // UserTracking
     
-    this.userTrackingObj.forEach((name, i) => {
+    this.trackingDataObj.forEach((name, i) => {
     setTimeout(() => {         
     //for (var i=0; i < this.userTrackingObj.length; i++) {     
-      var trackingID = this.userTrackingObj[i]['trackingId'];
-      var LoginId = this.userTrackingObj[i]['loginId'];
-      var userNameENG = this.userTrackingObj[i]['userNameENG'];
-      var mobileNo = this.userTrackingObj[i]['mobileNo'];
-      var dateTime = this.userTrackingObj[i]['dateTime'];
-      var lat = this.userTrackingObj[i]['latitude'];
-      var lang = this.userTrackingObj[i]['longitude'];
-      var location =  this.userTrackingObj[i]['location'];
-      var batteryPer =  this.userTrackingObj[i]['batteryPer'];      
-      var speed = this.userTrackingObj[i]['speed'];   
+      var trackingID = this.trackingDataObj[i]['trackingId'];
+      var LoginId = this.trackingDataObj[i]['loginId'];
+      var userNameENG = this.trackingDataObj[i]['userNameENG'];
+      var mobileNo = this.trackingDataObj[i]['mobileNo'];
+      var dateTime = this.trackingDataObj[i]['dateTime'];
+      var lat = this.trackingDataObj[i]['latitude'];
+      var lang = this.trackingDataObj[i]['longitude'];
+      var location =  this.trackingDataObj[i]['location'];
+      var batteryPer =  this.trackingDataObj[i]['batteryPer'];      
+      var speed = this.trackingDataObj[i]['speed'];   
       myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
-        lang,location,batteryPer,speed,iconBase,this.map,i,this.userTrackingObj.length);       
-      //}
+        lang,location,batteryPer,speed,iconBase,this.map,i,this.trackingDataObj.length); 
+        
     }, i * this.map_replay_interval);
   });       
 
      //Asset    
-     for (var i=0; i < this.placeDetailObj.length; i++) {    
-      var placeGroupCode = this.placeDetailObj[i]['placeGroupCode'] ;
-      var lat = this.placeDetailObj[i]['latitude'];
-      var lang = this.placeDetailObj[i]['longitude'];
-      var PlaceName = this.placeDetailObj[i]['placeName'];
-      var PlaceGroupName = this.placeDetailObj[i]['placeGroupName'];
-      var AssetName = this.placeDetailObj[i]['assetName'];
-      var PlaceAddress = this.placeDetailObj[i]['placeAddress'];
-      var StateName =  this.placeDetailObj[i]['stateName'];
-      var PinCode =  this.placeDetailObj[i]['pinCode'] ;      
-      var Location = this.placeDetailObj[i]['location'];                  
+     for (var i=0; i < this.assetDataObj.length; i++) {    
+      var placeGroupCode = this.assetDataObj[i]['placeGroupCode'] ;
+      var lat = this.assetDataObj[i]['latitude'];
+      var lang = this.assetDataObj[i]['longitude'];
+      var PlaceName = this.assetDataObj[i]['placeName'];
+      var PlaceGroupName = this.assetDataObj[i]['placeGroupName'];
+      var AssetName = this.assetDataObj[i]['assetName'];
+      var PlaceAddress = this.assetDataObj[i]['placeAddress'];
+      var StateName =  this.assetDataObj[i]['stateName'];
+      var PinCode =  this.assetDataObj[i]['pinCode'] ;      
+      var Location = this.assetDataObj[i]['location'];                  
       myMapAssetFunction(placeGroupCode,lat,lang,PlaceName, PlaceGroupName,AssetName,
-      Location,PlaceAddress,iconBase,StateName,PinCode,this.map,i,this.placeDetailObj.length);
+      Location,PlaceAddress,iconBase,StateName,PinCode,this.map,i,this.assetDataObj.length);
     }    
   }
 
-  
   onTowerChange(e) 
-  {        
+  {       
+    if(this.checkBox_Check == false){
+      this.checkBox_Check = true;
+    }
     myMapAssetHideFunction('Tower');
     myMapAssetHideFunction('SubStation');
   }
