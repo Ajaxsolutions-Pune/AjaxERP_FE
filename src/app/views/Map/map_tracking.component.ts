@@ -79,6 +79,8 @@ export class MapTrackingComponent implements OnInit {
   Inactive : string = "0";
   polling: any;
 
+  IsLoopStart : number = 0;
+
   checkBox_Check : boolean;
 
   answer = Answer;
@@ -173,7 +175,8 @@ export class MapTrackingComponent implements OnInit {
     this.DaysCount =  new Date(date2 - date1).getDate();    
   }
 
-  SearchUser(value): void {    
+  SearchUser(value): void {  
+    this.IsLoopStart = 1;  
     this.checkBox_Check = true;
     clearAllFunction();   
     this.checkBox_Check = false;      
@@ -330,10 +333,13 @@ export class MapTrackingComponent implements OnInit {
     }  
     
     console.log(this.trackingDataObj);
+
     // UserTracking
-    
-    this.trackingDataObj.forEach((name, i) => {
-    setTimeout(() => {         
+    this.IsLoopStart = 0;
+   
+    this.trackingDataObj.forEach((name, i) => {       
+      {
+    setTimeout(() => {        
     //for (var i=0; i < this.userTrackingObj.length; i++) {     
       var trackingID = this.trackingDataObj[i]['trackingId'];
       var LoginId = this.trackingDataObj[i]['loginId'];
@@ -346,10 +352,17 @@ export class MapTrackingComponent implements OnInit {
       var batteryPer =  this.trackingDataObj[i]['batteryPer'];      
       var speed = this.trackingDataObj[i]['speed'];   
       myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
-        lang,location,batteryPer,speed,iconBase,this.map,i,this.trackingDataObj.length); 
-        
-    }, i * this.map_replay_interval);
+        lang,location,batteryPer,speed,iconBase,this.map,i,this.trackingDataObj.length);           
+       
+    }, i * this.map_replay_interval);  
+
+
+   
+
+  }  
   });       
+
+
 
      //Asset    
      for (var i=0; i < this.assetDataObj.length; i++) {    
