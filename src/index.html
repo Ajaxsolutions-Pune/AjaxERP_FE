@@ -57,6 +57,7 @@
   var UserCluster_Markers = [];
   var AssetCluster_Markers = [];
   var Asset_Area = [];
+  var red = 0;
 
 
   function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map,i,length) {                
@@ -220,7 +221,7 @@
   
   //google map create asset markers
   function myMapAssetFunction(placeGroupCode,lat,lang,PlaceName,PlaceGroupName,AssetName,Location,PlaceAddress,
-  iconBase,StateName,PinCode,map,i,length) {                
+  iconBase,StateName,PinCode,Redius,map,i,length) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang);
       if(placeGroupCode === '2'){      
        
@@ -244,9 +245,11 @@
         coords.push(myLatlng2);
         AssetCluster_Markers.push(TowerMarker)
 
+        alert(Redius);
+
         var circle = new google.maps.Circle({
           map: map,
-          radius: 100,    // 10 miles in metres
+          radius: 100,    // in metres
           fillColor: '#C64D45',
           strokeColor: '#800000',
           strokeOpacity: 1.0,

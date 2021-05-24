@@ -375,9 +375,10 @@ export class MapTrackingComponent implements OnInit {
       var PlaceAddress = this.assetDataObj[i]['placeAddress'];
       var StateName =  this.assetDataObj[i]['stateName'];
       var PinCode =  this.assetDataObj[i]['pinCode'] ;      
-      var Location = this.assetDataObj[i]['location'];                  
+      var Location = this.assetDataObj[i]['location'];   
+      var Redius = this.assetDataObj[i]['redius'];                 
       myMapAssetFunction(placeGroupCode,lat,lang,PlaceName, PlaceGroupName,AssetName,
-      Location,PlaceAddress,iconBase,StateName,PinCode,this.map,i,this.assetDataObj.length);
+      Location,PlaceAddress,iconBase,StateName,PinCode,Redius,this.map,i,this.assetDataObj.length);
     }    
   }
 

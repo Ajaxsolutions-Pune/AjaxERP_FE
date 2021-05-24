@@ -15,8 +15,8 @@ export class assetData
     placeAddress: string;
     pinCode: string;
     stateName: string;
-    countryName: string;   
-    
+    countryName: string; 
+    redius: string;
 }
 
 export class trackingData

@@ -25,6 +25,7 @@ export class placeDetail
     pinCode: string;
     stateName: string;
     countryName: string;   
+    redius: string;
 }
 export class userSummery
 {

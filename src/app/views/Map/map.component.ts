@@ -319,9 +319,10 @@ export class MapComponent implements OnInit {
       var PlaceAddress = this.placeDetailObj[i]['placeAddress'];
       var StateName =  this.placeDetailObj[i]['stateName'];
       var PinCode =  this.placeDetailObj[i]['pinCode'] ;      
-      var Location = this.placeDetailObj[i]['location'];                  
+      var Location = this.placeDetailObj[i]['location'];    
+      var Redius = this.placeDetailObj[i]['redius'];              
       myMapAssetFunction(placeGroupCode,lat,lang,PlaceName, PlaceGroupName,AssetName,
-      Location,PlaceAddress,iconBase,StateName,PinCode,this.map,i,this.placeDetailObj.length);
+      Location,PlaceAddress,iconBase,StateName,PinCode,Redius,this.map,i,this.placeDetailObj.length);
     }    
 
     //Create transmission line
