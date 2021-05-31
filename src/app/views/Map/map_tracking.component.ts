@@ -82,6 +82,7 @@ export class MapTrackingComponent implements OnInit {
   IsLoopStart : number = 0;
 
   checkBox_Check : boolean;
+  checkBox_Zoom : boolean;
 
   answer = Answer;
 
@@ -90,6 +91,7 @@ export class MapTrackingComponent implements OnInit {
   map_replay_interval = 1000;
 
   DaysCount : any;
+
 
   toggleDisplayDiv() {
     this.isShowDiv = !this.isShowDiv;
@@ -179,7 +181,8 @@ export class MapTrackingComponent implements OnInit {
     this.IsLoopStart = 1;  
     this.checkBox_Check = true;
     clearAllFunction();   
-    this.checkBox_Check = false;      
+    this.checkBox_Check = false;     
+    
     this.LoginId = value;     
     this.MapLoad(this.LoginId,this.Start_DateStr,this.End_DateStr); 
   }        
@@ -191,6 +194,7 @@ export class MapTrackingComponent implements OnInit {
     }
 
      // this.loginFal = true;
+   this.checkBox_Zoom = true;
    this.loginVal = true;
    this.userService.fillDrpUsers().subscribe(
      (par) =>{
@@ -264,10 +268,10 @@ export class MapTrackingComponent implements OnInit {
       this.assetDataObj = this.mapReplayModelObj.assetData;
       this.trackingDataObj = this.mapReplayModelObj.trackingData;       
       
-      //console.log(this.userTrackingObj);
-      //console.log(this.placeDetailObj);
+      //console.log(this.assetDataObj);
+      //console.log(this.trackingDataObj);
      
-      //alert(this.userTrackingObj.length);      
+      //alert(this.trackingDataObj.length);      
       if(this.trackingDataObj !== null)
       {
       if(this.trackingDataObj.length !== 0 )
@@ -315,7 +319,7 @@ export class MapTrackingComponent implements OnInit {
     const iconBase = '../../../assets/img/Content/';
     const mapProp= {         
       center:myLatlng,      
-      zoom:10,          
+      zoom:12,          
     };    
     this.map = new google.maps.Map(document.getElementById("googleMap"),mapProp);          
     
@@ -352,19 +356,23 @@ export class MapTrackingComponent implements OnInit {
       var batteryPer =  this.trackingDataObj[i]['batteryPer'];      
       var speed = this.trackingDataObj[i]['speed'];   
       myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
-        lang,location,batteryPer,speed,iconBase,this.map,i,this.trackingDataObj.length);           
-       
+        lang,location,batteryPer,speed,iconBase,this.map,i,this.trackingDataObj.length);     
+        
+      if(this.checkBox_Zoom == true){         
+        this.map.setCenter({
+          lat : Number(this.trackingDataObj[i]['latitude']) ,
+          lng : Number(this.trackingDataObj[i]['longitude']) ,         
+        });   
+      }
+
+        
     }, i * this.map_replay_interval);  
 
+    }    
+  });     
+  
 
-   
-
-  }  
-  });       
-
-
-
-     //Asset    
+    //Asset    
      for (var i=0; i < this.assetDataObj.length; i++) {    
       var placeGroupCode = this.assetDataObj[i]['placeGroupCode'] ;
       var lat = this.assetDataObj[i]['latitude'];
@@ -383,11 +391,23 @@ export class MapTrackingComponent implements OnInit {
   }
 
   onTowerChange(e) 
-  {       
+  {     
+  
     if(this.checkBox_Check == false){
       this.checkBox_Check = true;
     }
     myMapAssetHideFunction('Tower');
     myMapAssetHideFunction('SubStation');
+  }
+
+  onZoomCenterChange(e) 
+  {    
+    alert(this.checkBox_Zoom);  
+    if(this.checkBox_Zoom == true){      
+      this.checkBox_Zoom = false;
+    }  
+    else if(this.checkBox_Zoom == false){
+      this.checkBox_Zoom = true;
+    }
   }
 }
