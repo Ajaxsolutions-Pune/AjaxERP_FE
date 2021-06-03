@@ -402,7 +402,7 @@ export class MapTrackingComponent implements OnInit {
 
   onZoomCenterChange(e) 
   {    
-    alert(this.checkBox_Zoom);  
+    
     if(this.checkBox_Zoom == true){
       
       this.checkBox_Zoom = false;
