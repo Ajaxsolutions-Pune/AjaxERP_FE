@@ -57,6 +57,13 @@
   var UserCluster_Markers = [];
   var AssetCluster_Markers = [];
   var Asset_Area = [];
+  var Redius_Array = [];
+  var red = 0;
+
+  var firstLat;
+  var firstLong;
+  var lastLat;
+  var lastLong;
 
 
   function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map,i,length) {                
@@ -214,13 +221,39 @@
         });               
         line[count].setMap(map);       
 
-       
         
+
+        if(count == 0)
+        {
+          firstLat = lat;
+          firstLong = lang;
+        }
+        if(count == length - 1)
+        {
+          lastLat = lat;
+          lastLong = lang;
+        }
+
+        if(count == length - 1)
+        {
+            //alert('H');
+            var len = length - 1;
+            //alert(len);
+            var Item_1 = new google.maps.LatLng(firstLat,firstLong);
+            var myPlace = new google.maps.LatLng(lastLat ,lastLong);
+            //alert('Hi');
+            //alert(Item_1);  
+            //alert(myPlace);  
+            console.log(Item_1,myPlace);
+            var bounds = new google.maps.LatLngBounds(Item_1,myPlace);
+            map.fitBounds(bounds); 
+            map.setZoom(9);           
+        }              
    }
-  
+     
   //google map create asset markers
   function myMapAssetFunction(placeGroupCode,lat,lang,PlaceName,PlaceGroupName,AssetName,Location,PlaceAddress,
-  iconBase,StateName,PinCode,map,i,length) {                
+  iconBase,StateName,PinCode,Redius,map,i,length) {                
     const myLatlng2 = new google.maps.LatLng(lat ,lang);
       if(placeGroupCode === '2'){      
        
@@ -244,15 +277,22 @@
         coords.push(myLatlng2);
         AssetCluster_Markers.push(TowerMarker)
 
+        //Redius_Array.push(Redius);
+
+        //alert(Redius);
+       
         var circle = new google.maps.Circle({
           map: map,
-          radius: 100,    // 10 miles in metres
+         // radius: Redius_Array[0],  //Math.Number(Redius),    // in metres
           fillColor: '#C64D45',
           strokeColor: '#800000',
           strokeOpacity: 1.0,
           strokeWeight: 1,
           fillOpacity: 0.5,
         });
+
+        circle.setRadius(parseFloat(Redius));
+
         circle.bindTo('center', TowerMarker, 'position');
         circle.setVisible(false);
         Asset_Area.push(circle);      

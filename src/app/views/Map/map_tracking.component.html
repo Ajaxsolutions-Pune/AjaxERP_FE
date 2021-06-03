@@ -47,6 +47,13 @@
          Show Tower   
       </label> 
     </div>
+
+    <div>    
+      <label>
+         <input type="checkbox" [(ngModel)]="checkBox_Zoom" [checked]="checkBox_Zoom"  (change)="onZoomCenterChange($event)" />    
+         Zoom Center
+      </label> 
+    </div>
          
      
 
