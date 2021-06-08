@@ -169,6 +169,7 @@ export class EditDialogComponent implements OnInit {
   }
 
   stopEdit(): void {
+    console.log(this.answersObj);
     this.objanswerIdText = this.answersObj.
       find(element => element.answerId === this.data.answerId).answer;
     this.objquestionIdText = this.questionsObj.

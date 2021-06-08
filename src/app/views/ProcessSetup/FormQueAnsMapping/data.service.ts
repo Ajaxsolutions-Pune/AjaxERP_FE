@@ -29,6 +29,7 @@ export class DataService {
   }
 
   updateFormQueAnsMapping(formQueAnsMapping: FormQueAnsMapping): void {
+    console.log(FormQueAnsMapping);
     this.dialogData = formQueAnsMapping;
   }
 
