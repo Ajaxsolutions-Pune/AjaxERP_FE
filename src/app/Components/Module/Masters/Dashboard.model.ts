@@ -18,6 +18,13 @@ export class dashboardCount {
     idle: string;
     leave: string;
     inactive: string;
+    assetRetag: string;
+    incompleteProcess: string;
+    incompleteProcessUser: string;
+    withoutImgSyncUser: string;
+    withoutImgSyncRecord: string;
+    trackingActiveUser: string;
+    trackingRecordsUser: string;
     total: string;
 }
 export class topDistance  {   

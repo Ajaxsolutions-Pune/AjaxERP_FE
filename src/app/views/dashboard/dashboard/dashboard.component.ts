@@ -79,6 +79,13 @@ export class DashboardComponent implements OnInit {
       idle: null,
       inactive: null,
       leave: null,
+      assetRetag: null,
+      incompleteProcess: null,
+      incompleteProcessUser: null,
+      withoutImgSyncUser: null,
+      withoutImgSyncRecord: null,
+      trackingActiveUser: null,
+      trackingRecordsUser: null,
       total: null,
     }
 
