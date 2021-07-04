@@ -184,7 +184,7 @@ export class ProcessFormMappingComponent extends FormComponentBase
       ObjectToEntityProcessFormMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
         (par) => {
           if (par.status === 'Success') {
-            this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+            this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['ProcessFormMapping']);
             this.ProcessId = this.ProcessId;

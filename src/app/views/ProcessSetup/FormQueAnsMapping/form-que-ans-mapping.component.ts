@@ -201,7 +201,7 @@ export class FormQueAnsMappingComponent extends FormComponentBase
       .ObjectToEntityFormQueAnsMappingTransfarmers(this.insertData.dataChange.value)).subscribe(
         (par) => {
           if (par.status === 'Success') {
-            this.defaultLayoutComponent.Massage('Insert Sucsessfuly',
+            this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.FormId = this.FormId;
             this.GetRouteData(this.FormId);
