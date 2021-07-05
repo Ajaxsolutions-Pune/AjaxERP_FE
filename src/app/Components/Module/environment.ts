@@ -3,9 +3,9 @@ import { HttpHeaders } from '@angular/common/http';
 export const environment = {
     //apiServiceIPPort: 'http://ajaxservercl.eastus.cloudapp.azure.com:8090/AjaxErpBackEnd',
     
-    apiServiceIPPort: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:8085/AjaxErpBackEnd',
+    //apiServiceIPPort: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:8085/AjaxErpBackEnd',
 
-    //apiServiceIPPort: 'http://20.197.24.149:8080/AjaxErpBackEnd',
+    apiServiceIPPort: 'http://20.197.24.149:8080/AjaxErpBackEnd',
     //http://jbserp.centralindia.cloudapp.azure.com:4200/login
 
     SessionTimeOut: 15,
