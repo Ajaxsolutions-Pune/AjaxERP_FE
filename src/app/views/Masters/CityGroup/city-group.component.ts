@@ -107,7 +107,7 @@ export class CityGroupComponent extends FormComponentBase implements OnInit, Aft
     
   }
 
-  save(CityGroupForm: NgForm): void {
+  save(): void {
     this.citygroup.createdBy=localStorage.getItem('username');
     this.citygroup.createdDate=this.globalService.GerCurrntDateStamp();
     this.citygroup.modifiedBy=localStorage.getItem('username');

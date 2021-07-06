@@ -152,7 +152,7 @@ console.log(this.tehsilDrp);
     return this.globalService.SpecialCharValidator(k);
     
   }
-  save(CityForm: NgForm): void {
+  save(): void {
     this.city.createdBy=localStorage.getItem('username');
     this.city.createdDate=this.globalService.GerCurrntDateStamp();
     this.city.modifiedBy=localStorage.getItem('username');

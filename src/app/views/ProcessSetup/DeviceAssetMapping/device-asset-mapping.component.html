@@ -20,7 +20,7 @@
           <div class="input-container">
             <ng-autocomplete [data]="data" #auto
              [searchKeyword]="keyword" placeHolder="Select Device Name"
-              (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+              (selected)='selectEvent($event)' 
                id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'                
               [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
             </ng-autocomplete>
@@ -41,7 +41,7 @@
         <div class="input-container">
           <ng-autocomplete [data]="Assetgroup_data" #auto
            [searchKeyword]="keyword" placeHolder="Select Asset Group"
-            (selected)='AssetGroupselectEvent($event)' (inputChanged)='onChangeSearch($event)'
+            (selected)='AssetGroupselectEvent($event)' 
              id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'              
             [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
           </ng-autocomplete>
@@ -61,7 +61,7 @@
         <div class="input-container">
           <ng-autocomplete [data]="TransmissionLine_data" #auto
            [searchKeyword]="keyword" placeHolder="Select Transmission Line"
-            (selected)='TransmissionselectEvent($event)' (inputChanged)='onChangeSearch($event)'
+            (selected)='TransmissionselectEvent($event)' 
              id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'              
             [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
           </ng-autocomplete>

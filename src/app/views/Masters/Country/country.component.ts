@@ -133,7 +133,7 @@ export class CountryComponent  extends FormComponentBase implements OnInit, Afte
       status = 'Update';
     }
   }
-  save(CountryForm: NgForm): void {
+  save(): void {
     this.country.CreatedBy = localStorage.getItem('username');
     this.country.CreDate = this.globalService.GerCurrntDateStamp();
     this.country.ModifiedBy = localStorage.getItem('username');
