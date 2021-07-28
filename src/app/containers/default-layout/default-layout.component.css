@@ -145,6 +145,13 @@
   content: url("../../../assets/img/Content/Green_Circle.png");  
 }
 
+.Map_Tracking_Start {
+  content: url("../../../assets/img/Content/Start Position.png");  
+}
+.Map_Tracking_Current {
+  content: url("../../../assets/img/Content/Current_Position.png");  
+}
+
 
 
 
