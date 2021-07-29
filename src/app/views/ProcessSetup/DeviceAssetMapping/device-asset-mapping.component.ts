@@ -21,7 +21,7 @@ import { DeviceService } from '../../../Components/Services/Masters/DeviceServic
 import { TransmissionLineService } from '../../../Components/Services/Masters/TransmissionLineService';
 import { AssetGroupService } from '../../../Components/Services/Masters/AssetGroupService';
 
-import { DeviceAssetMapping, DeviceAssetMapping_Delete,DeviceAssetMapping_Transmission_Line } from '../../../Components/Module/ProcessSetup/DeviceAssetMapping.model';
+import { DeviceAssetMapping, DeviceAssetMapping_Delete, DeviceAssetMapping_Transmission_Line } from '../../../Components/Module/ProcessSetup/DeviceAssetMapping.model';
 
 import { DeviceAssetMappingTransfarmer } from '../../../Components/Transformer/ProcessSetup/DeviceAssetMapping-Transfarmer';
 import { DeviceAssetMappingService } from '../../../Components/Services/ProcessSetup/DeviceAssetMappingService';
@@ -47,7 +47,7 @@ export class DeviceAssetMappingComponent extends FormComponentBase
   AssetGroupObj: AssetGroup[];
   objDeviceAssetMapping: DeviceAssetMapping[];
   objDeviceAssetMapping_Delete: DeviceAssetMapping_Delete[];
-  objDeviceAssetMapping_Transmission_Line:DeviceAssetMapping_Transmission_Line[];
+  objDeviceAssetMapping_Transmission_Line: DeviceAssetMapping_Transmission_Line[];
   index: number;
   id: number;
   DeviceId: string;
@@ -66,8 +66,8 @@ export class DeviceAssetMappingComponent extends FormComponentBase
   TransmissionLine_data: CustomComboBox[];
   Assetgroup_data: CustomComboBox[];
 
-  AssetDelete : any;
-  TransmissionLine_List : string[];
+  AssetDelete: any;
+  TransmissionLine_List: string[];
 
 
   hidePassword: boolean = true;
@@ -124,13 +124,13 @@ export class DeviceAssetMappingComponent extends FormComponentBase
       (par) => {
         this.TransmissionLine_List = par;
         console.log(" this.TransmissionLine_List");
-        console.log( this.TransmissionLine_List);
+        console.log(this.TransmissionLine_List);
         //this.objDeviceAssetMapping.forEach(a => {
         // a.deviceId = deviceid;
         //a.
         // });            
       },
-      (err: any) => console.log(err));    
+      (err: any) => console.log(err));
     console.log(this.TransmissionLine_List);
     // console.log(this.objDeviceAssetMapping.length);
 
@@ -149,6 +149,10 @@ export class DeviceAssetMappingComponent extends FormComponentBase
     this.auto.focus();
     name.focus();
   }
+  onChangeSearch(val: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
 
   onFocused(e) {
     this.hidePassword = !this.hidePassword;
@@ -166,8 +170,8 @@ export class DeviceAssetMappingComponent extends FormComponentBase
     private AssetGroupTransfarmer: AssetGroupTransfarmer,
     private deviceAssetMappingTransfarmer: DeviceAssetMappingTransfarmer,
     private deviceAssetMappingService: DeviceAssetMappingService,
-    public  dialog: MatDialog,
-    public  dataService: DeviceAssetDataService,
+    public dialog: MatDialog,
+    public dataService: DeviceAssetDataService,
     private globalService: GlobalService,
     private formBuilder: FormBuilder) {
     super();
@@ -236,32 +240,32 @@ export class DeviceAssetMappingComponent extends FormComponentBase
 
     //for delete filter data
     this.objDeviceAssetMapping_Delete = this.objDeviceAssetMapping.filter(SubResultProd =>
-      SubResultProd.assigned.toString() === 'false' || SubResultProd.assigned.toString() === 'true'); 
-     
-    this.AssetDelete = this.objDeviceAssetMapping_Delete.map(t=>t.assetCode);  
+      SubResultProd.assigned.toString() === 'false' || SubResultProd.assigned.toString() === 'true');
 
-    this.deviceAssetMappingService.Delete(this.DeviceId,this.AssetDelete).subscribe(
-          (par) => {
-            console.log(par.status);
-            if (par.status === 'Success') {             
-              this.objDeviceAssetMapping_Delete = [];       
-            }            
-          }
-        );
+    this.AssetDelete = this.objDeviceAssetMapping_Delete.map(t => t.assetCode);
+
+    this.deviceAssetMappingService.Delete(this.DeviceId, this.AssetDelete).subscribe(
+      (par) => {
+        console.log(par.status);
+        if (par.status === 'Success') {
+          this.objDeviceAssetMapping_Delete = [];
+        }
+      }
+    );
 
     //for insert filter data
     this.objDeviceAssetMapping = this.objDeviceAssetMapping.filter(SubResultProd =>
-      (SubResultProd.assigned.toString() === 'true'|| SubResultProd.isActive.toString() === '1'));   
-  
+      (SubResultProd.assigned.toString() === 'true' || SubResultProd.isActive.toString() === '1'));
+
     this.deviceAssetMappingService.Save(this.deviceAssetMappingTransfarmer.
       ObjectToEntityDeviceAssetMappingTransfarmers(this.objDeviceAssetMapping)).subscribe(
         (par) => {
           console.log(par.status);
           if (par.status === 'Success') {
             this.defaultLayoutComponent.Massage('',
-            'Data saved successfully !', 'modal-info');
-            this.objDeviceAssetMapping = [];        
-            this.isDisabled = true;           
+              'Data saved successfully !', 'modal-info');
+            this.objDeviceAssetMapping = [];
+            this.isDisabled = true;
           }
           else if (par.status === 'Failed') {
             this.defaultLayoutComponent.Massage('',

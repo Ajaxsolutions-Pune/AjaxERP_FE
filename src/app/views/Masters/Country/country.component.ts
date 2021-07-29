@@ -14,7 +14,7 @@ import { CountryAsyncValidator } from '../../../helper/async-validator';
   templateUrl: './country.component.html',
   styleUrls: ['./country.component.scss']
 })
-export class CountryComponent  extends FormComponentBase implements OnInit, AfterViewInit {
+export class CountryComponent extends FormComponentBase implements OnInit, AfterViewInit {
   country: Country;
   countryEntity: CountryEntity;
   str: string;
@@ -22,57 +22,57 @@ export class CountryComponent  extends FormComponentBase implements OnInit, Afte
   form!: FormGroup;
   constructor(private route: ActivatedRoute,
     private defaultLayoutComponent: DefaultLayoutComponent,
-    private countryService:CountryService,
+    private countryService: CountryService,
     private router: Router,
     private countryTransfarmer: CountryTransfarmer,
     private globalService: GlobalService,
 
     private formBuilder: FormBuilder) {
-      super();
-      const status='';
-      this.validationMessages = {
-        ControlCountryCode: {
-          required: 'Country Code is required.',
-        },     
-        ControlCountry_Name_Eng: {
-          required: 'Country Name Eng is required.',
-        },
-        ControlCountry_Name_Uni: {
-          required: 'Country Name Uni is required.',
-        },
-      };
-      this.formErrors = {
-        ControlisActive: '',
-      };
-    }
-    isCountryExist(): boolean {
-      return this.form.get('ControlCountry_Name_Eng').hasError('queExist');
-      
-    }
+    super();
+    const status = '';
+    this.validationMessages = {
+      ControlCountryCode: {
+        required: 'Country Code is required.',
+      },
+      ControlCountry_Name_Eng: {
+        required: 'Country Name Eng is required.',
+      },
+      ControlCountry_Name_Uni: {
+        required: 'Country Name Uni is required.',
+      },
+    };
+    this.formErrors = {
+      ControlisActive: '',
+    };
+  }
+  isCountryExist(): boolean {
+    return this.form.get('ControlCountry_Name_Eng').hasError('queExist');
+
+  }
   ngOnInit() {
     status = '';
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href='login';
+      window.location.href = 'login';
     }
-     this.country = {
-       id:null,
-       countryCode:null,
-       Country_Name_Eng:null,
-       Country_Name_Uni:null,
-       CreDate: this.globalService.GerCurrntDateStamp(),
-       CreatedBy:localStorage.getItem('username'),
-       ModDate:localStorage.getItem('username'),
-       ModifiedBy: this.globalService.GerCurrntDateStamp(),
-       isActive:'true',
+    this.country = {
+      id: null,
+      countryCode: null,
+      Country_Name_Eng: null,
+      Country_Name_Uni: null,
+      CreDate: this.globalService.GerCurrntDateStamp(),
+      CreatedBy: localStorage.getItem('username'),
+      ModDate: localStorage.getItem('username'),
+      ModifiedBy: this.globalService.GerCurrntDateStamp(),
+      isActive: 'true',
     };
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       console.log(str);
       this.getcountry(str);
       this.form = this.formBuilder.group({
-        ControlCountryCode: ['', []],   
+        ControlCountryCode: ['', []],
         ControlCountry_Name_Eng: ['', [Validators.required],
-        [CountryAsyncValidator(this.countryService, str)]],
+          [CountryAsyncValidator(this.countryService, str)]],
         ControlCountry_Name_Uni: ['', []],
         ControlisActive: ['', []],
 
@@ -91,7 +91,7 @@ export class CountryComponent  extends FormComponentBase implements OnInit, Afte
     let k;
     k = event.charCode;
     return this.globalService.SpecialCharValidator(k);
-    
+
   }
   private getcountry(Id: string) {
     this.country = {
@@ -99,12 +99,12 @@ export class CountryComponent  extends FormComponentBase implements OnInit, Afte
       id: null,
       Country_Name_Eng: null,
       Country_Name_Uni: null,
-      CreatedBy : localStorage.getItem('username'),
-      CreDate : this.globalService.GerCurrntDateStamp(),
-      ModifiedBy : localStorage.getItem('username'),
-      ModDate : this.globalService.GerCurrntDateStamp(),
-      isActive:'true',
-      
+      CreatedBy: localStorage.getItem('username'),
+      CreDate: this.globalService.GerCurrntDateStamp(),
+      ModifiedBy: localStorage.getItem('username'),
+      ModDate: this.globalService.GerCurrntDateStamp(),
+      isActive: 'true',
+
     };
     if (Id === null || Id === '0' || Id === '') {
       this.country = {
@@ -112,11 +112,11 @@ export class CountryComponent  extends FormComponentBase implements OnInit, Afte
         id: null,
         Country_Name_Eng: null,
         Country_Name_Uni: null,
-        CreatedBy : localStorage.getItem('username'),
-        CreDate : this.globalService.GerCurrntDateStamp(),
-        ModifiedBy : localStorage.getItem('username'),
-        ModDate : this.globalService.GerCurrntDateStamp(),
-        isActive:'true',
+        CreatedBy: localStorage.getItem('username'),
+        CreDate: this.globalService.GerCurrntDateStamp(),
+        ModifiedBy: localStorage.getItem('username'),
+        ModDate: this.globalService.GerCurrntDateStamp(),
+        isActive: 'true',
       };
       status = '';
     } else {
@@ -124,16 +124,16 @@ export class CountryComponent  extends FormComponentBase implements OnInit, Afte
         (par) => {
           this.countryEntity = par;
           if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-            window.location.href='login';
+            window.location.href = 'login';
           }
-          this.country = this.countryTransfarmer.CountryTransfarmerEntity(this.countryEntity);   
-                 
+          this.country = this.countryTransfarmer.CountryTransfarmerEntity(this.countryEntity);
+
         },
         (err: any) => console.log(err));
       status = 'Update';
     }
   }
-  save(CountryForm: NgForm): void {
+  save(): void {
     this.country.CreatedBy = localStorage.getItem('username');
     this.country.CreDate = this.globalService.GerCurrntDateStamp();
     this.country.ModifiedBy = localStorage.getItem('username');
@@ -145,7 +145,7 @@ export class CountryComponent  extends FormComponentBase implements OnInit, Afte
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
-              this.router.navigate(['CountryList']);
+            this.router.navigate(['CountryList']);
           } else {
             this.defaultLayoutComponent.Massage('',
               'Technical Error Please connect to Ajax Support team', 'modal-info');
@@ -154,22 +154,22 @@ export class CountryComponent  extends FormComponentBase implements OnInit, Afte
       );
 
 
-   } else {
-     this.countryService.Update(this.countryTransfarmer.
-       CountryTransfarmer(this.country)).subscribe(
-         (par) => {
-           if (par !== null) {
-             this.defaultLayoutComponent.Massage('',
-               'Data saved successfully !', 'modal-info');
-               this.router.navigate(['CountryList']);
-           } else {
-             this.defaultLayoutComponent.Massage('',
-               'Technical Error Please connect to Ajax Support team', 'modal-info');
-           }
-         }
-       );
-   }
- }
+    } else {
+      this.countryService.Update(this.countryTransfarmer.
+        CountryTransfarmer(this.country)).subscribe(
+          (par) => {
+            if (par !== null) {
+              this.defaultLayoutComponent.Massage('',
+                'Data saved successfully !', 'modal-info');
+              this.router.navigate(['CountryList']);
+            } else {
+              this.defaultLayoutComponent.Massage('',
+                'Technical Error Please connect to Ajax Support team', 'modal-info');
+            }
+          }
+        );
+    }
+  }
 
-  
+
 }

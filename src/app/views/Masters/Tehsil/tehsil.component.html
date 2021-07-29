@@ -1,4 +1,4 @@
-<form #tehsilForm="ngForm" (ngSubmit)="save(tehsilForm);" autocomplete="off">
+<form #tehsilForm="ngForm" (ngSubmit)="save();" autocomplete="off">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-11 container">
@@ -11,8 +11,7 @@
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label" for="txtTehsilCode">Tehsil Code</label>
                             <div class="col-sm-4">
-                                <input id="tehsilCode" [(ngModel)]="tehsil.tehsilCode" name="tehsilCode" type="text"
-                                    class="form-control form-control-sm">
+                                <input id="tehsilCode" [(ngModel)]="tehsil.tehsilCode" name="tehsilCode" type="text" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
@@ -21,8 +20,7 @@
                             <label class="col-md-2 col-form-label" for="txtTehsil_DescriptionEng">Tehsil Name Eng
                                 (Eng)</label>
                             <div class="col-sm-4">
-                                <input id="txttehsilNameEng" [(ngModel)]="tehsil.tehsilNameEng" required name="tehsilNameEng"
-                                    type="text" class="form-control form-control-sm">
+                                <input id="txttehsilNameEng" [(ngModel)]="tehsil.tehsilNameEng" required name="tehsilNameEng" type="text" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
@@ -32,25 +30,24 @@
                                 Tehsil Name Uni
                                 (Uni)</label>
                             <div class="col-sm-4">
-                                <input id="txttehsilNameUni" [(ngModel)]="tehsil.tehsilNameUni" required name="tehsilNameUni"
-                                    type="text" class="form-control form-control-sm">
+                                <input id="txttehsilNameUni" [(ngModel)]="tehsil.tehsilNameUni" required name="tehsilNameUni" type="text" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3"></div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-3"></div>
-                          <label class="col-md-2 col-form-label">
+                            <label class="col-md-2 col-form-label">
                             Tehsil</label>
-                          <div class="col-md-4">
-                            <select id="DistrictCode" name="DistrictCode" [(ngModel)]="tehsil.districtCode" class="form-control form-control-sm">
+                            <div class="col-md-4">
+                                <select id="DistrictCode" name="DistrictCode" [(ngModel)]="tehsil.districtCode" class="form-control form-control-sm">
                               <option value="-1">Select District Code</option>
                               <option *ngFor="let Drpobj of districtDrpList" [value]="Drpobj.districtCode">
                                 {{Drpobj.districtNameEng}}
                               </option>
                             </select>
-                          </div>
+                            </div>
                         </div>
-                            <div class="row">
+                        <div class="row">
                             <div class="col-md-3"></div>
                             <label class="col-md-2 col-form-label" for="chkTehsilActive">Active</label>
                             <div class="col-sm-4">
