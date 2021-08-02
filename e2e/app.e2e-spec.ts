@@ -9,6 +9,6 @@ describe('core-ui App', function() {
 
   it('should display footer containing creativeLabs', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toContain('creativeLabs');
+    expect(page.getParagraphText()).toContain('creativeLabs') ;
   });
 });
