@@ -42,13 +42,13 @@ export const navItems: NavData[] = [
  {
     name: 'Map',
     url: '/map',
-    icon: 'icon-map',   
+    icon: 'icon-map',
   },
 
   {
     name: 'Map Tracking',
     url: '/mapTracking',
-    icon: 'icon-map',   
+    icon: 'icon-map',
   },
 
   {
@@ -88,17 +88,17 @@ export const navItems: NavData[] = [
       //   icon: 'icon-puzzle'
       // },X
       {
-        name: 'Asset Category',
+        name: 'Warehouse Category',
         url: '/AssetCategoryList',
         icon: 'icon-puzzle'
       },
+      // {
+      //   name: 'Warehouse Group',
+      //   url: '/AssetGroupList',
+      //   icon: 'icon-puzzle'
+      // },
       {
-        name: 'Asset Group',
-        url: '/AssetGroupList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Asset',
+        name: 'Warehouse',
         url: '/AssetList',
         icon: 'icon-puzzle'
       },
@@ -108,16 +108,16 @@ export const navItems: NavData[] = [
         url: '/DeviceList',
         icon: 'icon-puzzle'
       },
-      {
-        name: 'Transmission Line',
-        url: '/TransmissionLineList',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'HUB',
-        url: '/HubList',
-        icon: 'icon-puzzle'
-      },
+      // {
+      //   name: 'Transmission Line',
+      //   url: '/TransmissionLineList',
+      //   icon: 'icon-puzzle'
+      // },
+      // {
+      //   name: 'HUB',
+      //   url: '/HubList',
+      //   icon: 'icon-puzzle'
+      // },
       // {
       //   name: 'Brand',
       // url: '/BrandList',
@@ -182,7 +182,7 @@ export const navItems: NavData[] = [
         icon: 'icon-puzzle'
       },
       {
-        name: 'Device Asset Map',
+        name: 'Warehouse Map',
         url: '/DeviceAssetMapping',
         icon: 'icon-puzzle'
       },
@@ -193,7 +193,7 @@ export const navItems: NavData[] = [
       },*/
     ]
   },
-  {
+ /* {
     name: 'Territory Master',
     url: '/Reports',
     //   icon: 'fa fa-newspaper-o',
@@ -257,11 +257,11 @@ export const navItems: NavData[] = [
      //   name: 'Unit',
      //   url: '/UnitList',
      //   icon: 'icon-puzzle'
-     // },*/
-    
+     // },
+
     ]
 
-  },
+  }, */
   // {
   //  name: 'CRM',
   //  url: '/CRM',

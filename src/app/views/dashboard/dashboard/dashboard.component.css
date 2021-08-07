@@ -14,14 +14,14 @@ td > div{
 
 .dashboard-main
 {
-    border-radius:10px 0px 0px 10px; 
-    border-left: solid 10px #2ff563; 
-    height:100px; 
-    background-color:whitesmoke;
-    padding : 10px;   
+    border-radius:10px 0px 0px 10px;
+    border-left: solid 10px #2ff563;
+    height:100px;
+    background-color:rgb(255, 255, 255);
+    padding : 10px;
 }
-    
-.dashboard-main div 
+
+.dashboard-main div
 {
    padding :10px 0px;
 }
@@ -30,8 +30,8 @@ td > div{
 
 .headline
 {
-    font-weight: bold; 
-    font-size: 15px;        
+    font-weight: bold;
+    font-size: 15px;
 }
 
 .dash-line
@@ -39,7 +39,7 @@ td > div{
         display:block;
         height: 2px;
         background-color:#2ff563;
-        margin-top: 5px;        
+        margin-top: 5px;
     }
 
     .dash-count
