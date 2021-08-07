@@ -96,12 +96,32 @@
       transform: rotate(360deg);
     }
   }
-  
+
 .logo {
-  content: url("../../../assets/img/brand/Logo_2.jpg");
+  /* content: url("../../../assets/img/brand/2.png"); */
   width: 200px;
+  /* color: rgb(199, 9, 9);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 20px; */
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
 }
-.uselog {  
+.logoimg{
+  width: 85%;
+  height: 100px;
+  position: absolute;
+  top: 7px;
+}
+
+.app-body{
+  z-index: 5;
+  background-color: #F5F5F5;
+}
+
+.uselog {
   content: url("../../../assets/img/Content/UserLogin.jpg");
   height: 50px;
 }
@@ -118,43 +138,7 @@
   background-color: white;
 }
 
-/*  */
-.Map_Mobile_CheckIn {
-  content: url("../../../assets/img/Content/Mobile_CheckIn.png");  
-}
-.Map_Mobile_CheckOut {
-  content: url("../../../assets/img/Content/Mobile_CheckOut.png");  
-}
-.Map_Mobile_Mobile_Off {
-  content: url("../../../assets/img/Content/Mobile_Off.png");  
-}
-.Map_Mobile_Mobile_Inactive {
-  content: url("../../../assets/img/Content/Mobile_Inactive.png"); 
-}
-.MapTower {
-  content: url("../../../assets/img/Content/Tower.png");  
-}
-
-.MapBlack_Circle {
-  content: url("../../../assets/img/Content/circle_black.png");  
-}
-.MapRed_Circle {
-  content: url("../../../assets/img/Content/Red_Circle.png");  
-}
-.MapGreen_Circle {
-  content: url("../../../assets/img/Content/Green_Circle.png");  
-}
-
-.Map_Tracking_Start {
-  content: url("../../../assets/img/Content/Start Position.png");  
-}
-.Map_Tracking_Current {
-  content: url("../../../assets/img/Content/Current_Position.png");  
-}
 
 
 
 
-  
-
-  

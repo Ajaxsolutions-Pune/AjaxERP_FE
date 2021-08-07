@@ -9,18 +9,20 @@ mat-card {
   display: flex;
   justify-content: center;
   background-repeat: no-repeat;
-  align-items: center;; 
+  align-items: center;;
 }
 
 .subdiv {
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("../../../assets/img/Content/electricity.jpg"); 
+  background-image: url("../../../assets/img/brand/World-Quality-Day_Main-image.jpg");
+  height: 100%;
 }
 
 .logo {
   width: 100%;
-  content: url("../../../assets/img/brand/Logo_2.jpg");
+  height: 250px;
+  content: url("../../../assets/img/brand/2.png");
 }
 .ajaxlog {
   content: url("../../../assets/img/brand/ajax_logo.png");

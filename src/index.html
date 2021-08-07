@@ -1,481 +1,274 @@
 <!doctype html>
 <html>
- <head>
 
-  <link rel="stylesheet" type="text/html" href="styles.css" />
-  <link href="MaterialIcons.css" rel="stylesheet" type="text/html">
-  <base href="/">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="author" content="Ajax Solutions">
-	<link rel="shortcut icon" href="assets/img/brand/Logo.png">
-  <title>JBS Enterpeises Pvt Ltd.</title>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvO0AHfg1cuND1KXbw3t5xZr5p4PVrEk4"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+<head>
 
-  
-  <style>
-    .errorMessage{
-       color: red;
-     }
-     .has-error .form-control{
-    border-color: lightcoral !important;
-    }
+    <link rel="stylesheet" type="text/html" href="styles.css" />
+    <link href="MaterialIcons.css" rel="stylesheet" type="text/html">
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Ajax Solutions">
+    <link rel="shortcut icon" href="assets/img/brand/Logo.png">
+    <title>Bureau Veritas India</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvO0AHfg1cuND1KXbw3t5xZr5p4PVrEk4"></script>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <script src="http://cdn.jsdelivr.net/alasql/0.2/alasql.min.js"></script> -->
 
-    .CssCheckIn{
-    content: url("assets/img/brand/Logo_2.jpg");    
-  }  
-  </style>
-
-<script>
-  //google map create user markers
-  //var UserMarker;
-  var TowerMarker;
-  var SubStationMarker;
-  var UserCheckIn_Marker;
-  var UserCheckOut_Marker;
-  var UserOff_Marker;
-  var UserInactive_Marker; 
-  var TowerMarkers = [];
-  var SubStationMarkers = [];
-  var UserCheckIn_Markers = [];
-  var UserCheckOut_Markers = [];
-  var UserOff_Markers = [];
-  var UserInactive_Markers = [];
-  var coords = [];
-  var UserTracking = [];
-  var UserTrackings = [];
-  var mapnew;
-  var line = [];
-  var icon_url;
-  var i;
-  let markerCluster;
-  let assetCluster;
-  var UserCluster_Markers = [];
-  var AssetCluster_Markers = [];
-  var Asset_Area = [];
-  var Redius_Array = [];
-  var red = 0;
-
-  var firstLat;
-  var firstLong;
-  var lastLat;
-  var lastLong;
-
-
-  function myMapFunction(lat,lang, UserCode,UserName,Status,Battery,Speed,LastUpdate,Location,iconBase,map,i,length) {                
-    const myLatlng2 = new google.maps.LatLng(lat ,lang);      
-    if(Status === 'Check In')
-    {          
-      UserCheckIn_Marker = new google.maps.Marker({
-      position: myLatlng2,         
-      icon: 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/Mobile_CheckIn.png',
-      //map: map,
-      title: "User Code : " +  UserCode + "\n" + 
-             "User Name : " +  UserName  + "\n" +
-             "status : " +  Status  + "\n" + 
-             "Battery : " +  Battery + "\n" +
-             "Speed : " + Speed + "\n" +
-             "Last Update : " +  LastUpdate   + "\n" + 
-             "Location : " + Location   
-      });    
-      //UserCheckIn_Marker.setMap(map);     
-      UserCheckIn_Markers.push(UserCheckIn_Marker);    
-      UserCluster_Markers.push(UserCheckIn_Marker);
-    }    
-    if(Status === 'Check Out')
-    {          
-      UserCheckOut_Marker = new google.maps.Marker({
-        position: myLatlng2,
-        icon: 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/Mobile_CheckOut.png',      
-        //map: map,
-        title: "User Code : " +  UserCode + "\n" +
-             "User Name : " +  UserName  + "\n" +
-             "status : " +  Status  + "\n" + 
-             "Battery : " +  Battery + "\n" + 
-             "Speed : " + Speed + "\n" +
-             "Last Update : " +  LastUpdate   + "\n" + 
-             "Location : " + Location   
-        });    
-        //UserCheckOut_Marker.setMap(map);     
-        UserCheckOut_Markers.push(UserCheckOut_Marker); 
-        UserCluster_Markers.push(UserCheckOut_Marker);
-    }
-    if(Status === 'Inactive')
-    {       
-      UserInactive_Marker = new google.maps.Marker({        
-        position: myLatlng2,            
-        icon: 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/Mobile_Inactive.png',      
-        //map: map, 
-        title: "User Code : " +  UserCode + "\n" + 
-             "User Name : " +  UserName  + "\n" + 
-             "status : " +  Status  + "\n" + 
-             "Battery : " +  Battery + "\n" + 
-             "Speed : " + Speed + "\n" + 
-             "Last Update : " +  LastUpdate  + "\n" +
-             "Location : " + Location   
-        });   
-        //UserInactive_Marker.setMap(map);     
-        UserInactive_Markers.push(UserInactive_Marker);     
-        UserCluster_Markers.push(UserInactive_Marker);
-    }
-    if(Status === 'Off')
-    {
-      UserOff_Marker = new google.maps.Marker({
-        position: myLatlng2,
-        //icon: iconBase + 'Mobile_Off.png',
-        icon: 'http://ajaxservercl.eastus.cloudapp.azure.com:4200/Mobile_Off.png',          
-        //map: map,
-        title: "User Code : " +  UserCode + "\n" + 
-             "User Name : " +  UserName  + "\n" + 
-             "status : " +  Status  + "\n" +
-             "Battery : " +  Battery + "\n" + 
-             "Speed : " + Speed + "\n" +
-             "Last Update : " +  LastUpdate   + "\n" +
-             "Location : " + Location   
-        });    
-        //UserOff_Marker.setMap(map);     
-        UserOff_Markers.push(UserOff_Marker);    
-        UserCluster_Markers.push(UserOff_Marker);     
-      }
-
-      //map cluster
-      if(i == length-1)
-      {
-        //alert('start');
-        markerCluster = new MarkerClusterer(map, UserCluster_Markers, {
-          ignoreHidden: true,
-          imagePath:
-          "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-        });
-      }
-  } 
-
-  //var towericon = '../assets/img/Content/Tower.png';
-  
-  //google map user tracking 
-  setTimeout(function() {
-    var marker = new google.maps.Marker({
-      map: map,
-      position: new google.maps.LatLng(lat,long),
-      title: "Latitude: " +  lat + "\nLongitude: " + long,
-    });
-  }, 1000);
-  
-  function myMapUserTrackingFunction(trackingID,LoginId,userNameENG,mobileNo, dateTime,lat,
-        lang,location,batteryPer,speed,iconBase,map,count,length)
-   {    
-    if(count == 0)
-    {
-      icon_url = 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Green_Circle.png';
-    }
-    else if(count == length - 1)
-    {
-      icon_url = 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Red_Circle.png';
-    }
-    else
-    {
-      icon_url = 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/circle_black.png';
-     }  
-    
-
-    const myLatlng2 = new google.maps.LatLng(lat ,lang);
-    UserTracking = new google.maps.Marker({
-      position: myLatlng2,
-        //icon: iconBase + 'Tower.jpg',
-        icon: {
-          url : icon_url
-        },
-        map: map,
-        title: "Login ID : " + LoginId + "\n" +
-             "User Name : " +  userNameENG  +  "\n" +          
-             //"Mobile No. : " +  mobileNo + "\n" +
-             "Date Time : " + dateTime + "\n" +
-             "Latitude : " +  lat  + "\n" +
-             "Longitude : " + lang  + "\n" +
-             "Location : " + location + "\n" +
-             "Batterry Per : " + batteryPer + "\n" +
-             "Speed : " + speed
-        });    
-        UserTracking.setMap(map);  
-
-        if(count == 0)
-        {         
-          coords = [];               
-        }
-        coords.push(myLatlng2);         
-        
-        line[count] = new google.maps.Polyline({
-        path: coords,
-        geodesic:true,       
-        strokeColor: '#fc0703',
-        strokeOpacity: 1.0,
-        strokeWeight: 2,
-        icons: [{
-                icon: {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW},               
-                offset: '100%',                     
-            }],
-        });               
-        line[count].setMap(map);       
-
-        
-
-        if(count == 0)
-        {
-          firstLat = lat;
-          firstLong = lang;
-        }
-        if(count == length - 1)
-        {
-          lastLat = lat;
-          lastLong = lang;
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+    <style>
+        .errorMessage {
+            color: red;
         }
 
-        if(count == length - 1)
-        {
-            //alert('H');
-            var len = length - 1;
-            //alert(len);
-            var Item_1 = new google.maps.LatLng(firstLat,firstLong);
-            var myPlace = new google.maps.LatLng(lastLat ,lastLong);
-            //alert('Hi');
-            //alert(Item_1);  
-            //alert(myPlace);  
-            console.log(Item_1,myPlace);
-            var bounds = new google.maps.LatLngBounds(Item_1,myPlace);
-            map.fitBounds(bounds); 
-            map.setZoom(9);           
-        }              
-   }
-     
-  //google map create asset markers
-  function myMapAssetFunction(placeGroupCode,lat,lang,PlaceName,PlaceGroupName,AssetName,Location,PlaceAddress,
-  iconBase,StateName,PinCode,Redius,map,i,length) {                
-    const myLatlng2 = new google.maps.LatLng(lat ,lang);
-      if(placeGroupCode === '2'){      
-       
-       TowerMarker = new google.maps.Marker({
-        position: myLatlng2,          
-        icon: {                
-              url: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/Tower.png',      
-            },
-        //map: map,
-        title: "Tower Name : " +  AssetName + "\n" +
-             "Place Name : " + PlaceName +  "\n" +
-             "Place Group Name : " +  PlaceGroupName  + "\n" +  
-             "Location : " +  Location + "\n" + 
-             "Place Address : " + PlaceAddress + "\n" + 
-             "State Name : " +  StateName  + "\n" + 
-             "Pin Code : " + PinCode  
-        });         
-        //TowerMarker.setMap(map);  
-        TowerMarker.setVisible(false);
-        TowerMarkers.push(TowerMarker);   
-        coords.push(myLatlng2);
-        AssetCluster_Markers.push(TowerMarker)
-
-        //Redius_Array.push(Redius);
-
-        //alert(Redius);
-       
-        var circle = new google.maps.Circle({
-          map: map,
-         // radius: Redius_Array[0],  //Math.Number(Redius),    // in metres
-          fillColor: '#C64D45',
-          strokeColor: '#800000',
-          strokeOpacity: 1.0,
-          strokeWeight: 1,
-          fillOpacity: 0.5,
-        });
-
-        circle.setRadius(parseFloat(Redius));
-
-        circle.bindTo('center', TowerMarker, 'position');
-        circle.setVisible(false);
-        Asset_Area.push(circle);      
-      }
-
-      if(placeGroupCode === '3'){
-        SubStationMarker = new google.maps.Marker({
-        position: myLatlng2,
-        //icon: iconBase + 'SubStation-Icon.png',
-        icon: {                
-              url: 'http://ajaxdevdbcl.eastus.cloudapp.azure.com:4200/SubStation-Icon.png',             
-              
-            },
-        //map: map,
-        title: "Sub Station Name : " +  AssetName + "\n" +
-             "Place Name : " + PlaceName + "\n" + 
-             "Place Group Name : " +  PlaceGroupName  + "\n" +           
-             "Location : " +  Location + "\n" + 
-             "Place Address : " + PlaceAddress + "\n" + 
-             "State Name : " +  StateName + "\n" + 
-             "Pin Code : " + PinCode  
-        });    
-        //SubStationMarker.setMap(map);  
-        SubStationMarker.setVisible(false);
-        SubStationMarkers.push(SubStationMarker);  
-        AssetCluster_Markers.push(SubStationMarker)        
-      }     
-      mapnew = map;
-       //map cluster
-      if(i == length-1)
-      {
-        //alert('Substation start');
-        assetCluster = new MarkerClusterer(map, AssetCluster_Markers, {
-          ignoreHidden: true,
-          imagePath:
-          "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-        });
-      }
-  }
-
-  
-
-  function CreateTransmissionLine()
-  {    
-    /*var line= new google.maps.Polyline({
-      path: coords,
-      geodesic: true,
-      strokeColor: '#FF0000',
-      strokeOpacity: 1.0,
-      strokeWeight: 2
-      });
-      line.setMap(mapnew);*/
-  }
-
-
-  //google map user hide 
-  function myMapUserHideFunction(UserType) {    
-    if(UserType === 'Check In')
-    {                 
-      for (i = 0; i < UserCheckIn_Markers.length; i++)
-      {            
-        var marker = UserCheckIn_Markers[i];
-        if (!marker.getVisible()) {
-          marker.setVisible(true);
-        } else {
-          marker.setVisible(false);
+        .has-error .form-control {
+            border-color: lightcoral !important;
         }
-        markerCluster.repaint();
-      }
-    }
-    if(UserType === 'Check Out')
-    {            
-      for (i = 0; i < UserCheckOut_Markers.length; i++)
-      {         
-        var marker = UserCheckOut_Markers[i];
-        if (!marker.getVisible()) {
-          marker.setVisible(true);
-        } else {
-          marker.setVisible(false);
-        }
-        markerCluster.repaint();
-      }
-    }
-    if(UserType === 'Inactive')
-    {                 
-      for (i = 0; i < UserInactive_Markers.length; i++)
-      {        
-       var marker = UserInactive_Markers[i];
-        if (!marker.getVisible()) {
-          marker.setVisible(true);
-        } else {
-          marker.setVisible(false);
-        }
-        markerCluster.repaint();
-      }
-    }
-    if(UserType === 'Off') 
-    {               
-      for (i = 0; i < UserOff_Markers.length; i++)
-      {        
-        var marker = UserOff_Markers[i];
-        if (!marker.getVisible()) {
-          marker.setVisible(true);
-        } else {
-          marker.setVisible(false);
-        }
-        markerCluster.repaint();
-      }
-    }
-  }
 
-  //google map hide tower
-  function myMapAssetHideFunction(AssetType) {    
-    if(AssetType === 'Tower')
-    {           
-      for (i = 0; i < TowerMarkers.length; i++)
-      {
-        var marker = TowerMarkers[i];
-        var assetarea = Asset_Area[i];
-        
-        if (!marker.getVisible()) {
-          marker.setVisible(true);
-          assetarea.setVisible(true);
-         
-        /*  var circle = new google.maps.Circle({
-          map: map,
-          radius: 200,    // 10 miles in metres
-          fillColor: '#AA0000'
-          });
-          circle.bindTo('center', marker, 'position');*/
-          
-
-        } else {
-          marker.setVisible(false);
-          assetarea.setVisible(false);
+        .CssCheckIn {
+            content: url("assets/img/brand/Logo_2.jpg");
         }
-        assetCluster.repaint();
-      }
-    }
-    if(AssetType === "SubStation")
-    {
-      for (i = 0; i < SubStationMarkers.length; i++)
-      {
-        var marker = SubStationMarkers[i];
-        if (!marker.getVisible()) {
-          marker.setVisible(true);
-        } else {
-          marker.setVisible(false);
+    </style>
+
+    <script>
+        //google map create user markers
+        //var UserMarker;
+        var TowerMarker;
+        var SubStationMarker;
+        var UserCheckIn_Marker;
+        var UserCheckOut_Marker;
+        var UserOff_Marker;
+        var UserInactive_Marker;
+        var TowerMarkers = [];
+        var SubStationMarkers = [];
+        var UserCheckIn_Markers = [];
+        var UserCheckOut_Markers = [];
+        var UserOff_Markers = [];
+        var UserInactive_Markers = [];
+        var coords = [];
+        var mapnew;
+
+        function myMapFunction(lat, lang, UserCode, UserName, Status, Battery, Speed, LastUpdate, Location, iconBase, map) {
+            const myLatlng2 = new google.maps.LatLng(lat, lang);
+            if (Status === 'Check In') {
+                var ico = new google.maps.MarkerImage("../../../assets/img/Content/Mobile_CheckIn.png")
+                UserCheckIn_Marker = new google.maps.Marker({
+                    position: myLatlng2,
+                    icon: ico, //{
+                    //  url: '../../../assets/img/Content/Mobile_CheckIn.png',
+                    //},
+                    map: map,
+                    title: "User Code : " + UserCode +
+                        "--User Name : " + UserName +
+                        "--status : " + Status +
+                        "--Battery : " + Battery +
+                        "--Speed : " + Speed +
+                        "--Last Update : " + LastUpdate +
+                        "--Location : " + Location
+                });
+                UserCheckIn_Marker.setMap(map);
+                UserCheckIn_Markers.push(UserCheckIn_Marker);
+            }
+            if (Status === 'Check Out') {
+                //var ico = new google.maps.MarkerImage("https://webdevtrick.com/wp-content/uploads/location.png")
+                var ico = new google.maps.MarkerImage("https://52.188.136.57/D/Images/Mobile_CheckOut.png?")
+                UserCheckOut_Marker = new google.maps.Marker({
+                    position: myLatlng2,
+                    //icon: iconBase + 'Mobile_CheckOut.png',
+                    icon: ico, // {
+                    //url: '../../../assets/img/Content/Mobile_CheckOut.png',
+                    //},
+                    map: map,
+                    title: "User Code : " + UserCode +
+                        "--User Name : " + UserName +
+                        "--status : " + Status +
+                        "--Battery : " + Battery +
+                        "--Speed : " + Speed +
+                        "--Last Update : " + LastUpdate +
+                        "--Location : " + Location
+                });
+                UserCheckOut_Marker.setMap(map);
+                UserCheckOut_Markers.push(UserCheckOut_Marker);
+            }
+            if (Status === 'Inactive') {
+                UserInactive_Marker = new google.maps.Marker({
+                    position: myLatlng2,
+                    //icon: iconBase + 'Mobile_Inactive.png',
+                    icon: {
+                        url: '../../../assets/img/Content/Mobile_Inactive.png',
+                    },
+                    map: map,
+                    title: "User Code : " + UserCode +
+                        "--User Name : " + UserName +
+                        "--status : " + Status +
+                        "--Battery : " + Battery +
+                        "--Speed : " + Speed +
+                        "--Last Update : " + LastUpdate +
+                        "--Location : " + Location
+                });
+                UserInactive_Marker.setMap(map);
+                UserInactive_Markers.push(UserInactive_Marker);
+            }
+            if (Status === 'Off') {
+                UserOff_Marker = new google.maps.Marker({
+                    position: myLatlng2,
+                    //icon: iconBase + 'Mobile_Off.png',
+                    icon: {
+                        url: '../../../assets/img/Content/Mobile_Off.png',
+                    },
+                    map: map,
+                    title: "User Code : " + UserCode +
+                        "--User Name : " + UserName +
+                        "--status : " + Status +
+                        "--Battery : " + Battery +
+                        "--Speed : " + Speed +
+                        "--Last Update : " + LastUpdate +
+                        "--Location : " + Location
+                });
+                UserOff_Marker.setMap(map);
+                UserOff_Markers.push(UserOff_Marker);
+            }
         }
-        assetCluster.repaint();
-      }
-    }
-  }
+
+        //google map create asset markers
+        function myMapAssetFunction(placeGroupCode, lat, lang, PlaceName, PlaceGroupName, AssetName, Location, PlaceAddress,
+            iconBase, StateName, PinCode, map) {
+            const myLatlng2 = new google.maps.LatLng(lat, lang);
+            if (placeGroupCode === '2') {
+                TowerMarker = new google.maps.Marker({
+                    position: myLatlng2,
+                    //icon: iconBase + 'Tower.jpg',
+                    icon: {
+                        url: '../../../assets/img/Content/Tower.png',
+                    },
+                    map: map,
+                    title: "Tower Name : " + AssetName +
+                        "--Place Name : " + PlaceName +
+                        "--Place Group Name : " + PlaceGroupName +
+                        "--Location : " + Location +
+                        "--Place Address : " + PlaceAddress +
+                        "--State Name : " + StateName +
+                        "--Pin Code : " + PinCode
+                });
+                TowerMarker.setMap(map);
+                TowerMarker.setVisible(false);
+                TowerMarkers.push(TowerMarker);
+                coords.push(myLatlng2);
+            }
+
+            if (placeGroupCode === '3') {
+                SubStationMarker = new google.maps.Marker({
+                    position: myLatlng2,
+                    //icon: iconBase + 'SubStation-Icon.png',
+                    icon: {
+                        url: '../../../assets/img/Content/SubStation-Icon.png',
+                    },
+                    map: map,
+                    title: "Sub Station Name : " + AssetName +
+                        "--Place Name : " + PlaceName +
+                        "--Place Group Name : " + PlaceGroupName +
+                        "--Location : " + Location +
+                        "--Place Address : " + PlaceAddress +
+                        "--State Name : " + StateName +
+                        "--Pin Code : " + PinCode
+                });
+                SubStationMarker.setMap(map);
+                SubStationMarker.setVisible(false);
+                SubStationMarkers.push(SubStationMarker);
+            }
+            mapnew = map;
+        }
+
+        function CreateTransmissionLine() {
+            /*var line= new google.maps.Polyline({
+              path: coords,
+              geodesic: true,
+              strokeColor: '#FF0000',
+              strokeOpacity: 1.0,
+              strokeWeight: 2
+              });
+              line.setMap(mapnew);*/
+        }
 
 
-  //Clear all
-  function clearAllFunction(){ 
-    //alert('clear start');
-     TowerMarkers = [];
-     Asset_Area = [];
-     assetarea = [];
-     SubStationMarkers = [];
-     UserCheckIn_Markers = [];
-     UserCheckOut_Markers = [];
-     UserOff_Markers = [];
-     UserInactive_Markers = [];
-     coords = [];
-     UserTracking = [];
-     UserTrackings = [];  
-     line = []; 
-     UserCluster_Markers = [];
-     AssetCluster_Markers = [];
-     //markerCluster.repaint();
-     //assetCluster.repaint(); 
-     //alert('clear end');
-  }
+        //google map user hide
+        function myMapUserHideFunction(UserType) {
+            if (UserType === 'Check In') {
+                for (i = 0; i < UserCheckIn_Markers.length; i++) {
+                    var marker = UserCheckIn_Markers[i];
+                    if (!marker.getVisible()) {
+                        marker.setVisible(true);
+                    } else {
+                        marker.setVisible(false);
+                    }
+                }
+            }
+            if (UserType === 'Check Out') {
+                for (i = 0; i < UserCheckOut_Markers.length; i++) {
+                    var marker = UserCheckOut_Markers[i];
+                    if (!marker.getVisible()) {
+                        marker.setVisible(true);
+                    } else {
+                        marker.setVisible(false);
+                    }
+                }
+            }
+            if (UserType === 'Inactive') {
+                for (i = 0; i < UserInactive_Markers.length; i++) {
+                    var marker = UserInactive_Markers[i];
+                    if (!marker.getVisible()) {
+                        marker.setVisible(true);
+                    } else {
+                        marker.setVisible(false);
+                    }
+                }
+            }
+            if (UserType === 'Off') {
+                for (i = 0; i < UserOff_Markers.length; i++) {
+                    var marker = UserOff_Markers[i];
+                    if (!marker.getVisible()) {
+                        marker.setVisible(true);
+                    } else {
+                        marker.setVisible(false);
+                    }
+                }
+            }
+        }
 
-</script>
+        //google map hide tower
+        function myMapAssetHideFunction(AssetType) {
+            if (AssetType === 'Tower') {
+                for (i = 0; i < TowerMarkers.length; i++) {
+                    var marker = TowerMarkers[i];
+                    if (!marker.getVisible()) {
+                        marker.setVisible(true);
+                    } else {
+                        marker.setVisible(false);
+                    }
+                }
+            }
+            if (AssetType === "SubStation") {
+                for (i = 0; i < SubStationMarkers.length; i++) {
+                    var marker = SubStationMarkers[i];
+                    if (!marker.getVisible()) {
+                        marker.setVisible(true);
+                    } else {
+                        marker.setVisible(false);
+                    }
+                }
+            }
+        }
+    </script>
 
 </head>
-<body class="app">   
-  <app-root>
-   
-  </app-root>
+
+<body class="app">
+    <app-root>
+
+    </app-root>
 </body>
+
 </html>
