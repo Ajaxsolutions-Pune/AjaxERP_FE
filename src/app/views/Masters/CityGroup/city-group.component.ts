@@ -26,70 +26,70 @@ import { CityGroupAsyncValidator } from '../../../helper/async-validator';
   templateUrl: './city-group.component.html',
   styleUrls: ['./city-group.component.scss']
 })
-export class CityGroupComponent extends FormComponentBase implements OnInit, AfterViewInit{
+export class CityGroupComponent extends FormComponentBase implements OnInit, AfterViewInit {
   citygroup: CityGroup;
-  form! :FormGroup;
+  form!: FormGroup;
   str: string;
   citygroupList: CityGroup[];
-  citygroupEntity: CityGroupEntity; 
+  citygroupEntity: CityGroupEntity;
 
   constructor(private route: ActivatedRoute,
     private defaultLayoutComponent: DefaultLayoutComponent,
     private citygroupTransfarmer: CityGroupTransfarmer,
-    private citygroupService: CityGroupService, 
-    private globalService: GlobalService, 
+    private citygroupService: CityGroupService,
+    private globalService: GlobalService,
     private router: Router,
-   
-    private formBuilder: FormBuilder ) {
-      super();
-      const status='';
-      this.validationMessages = {
-        ControlCityGroup_Code: {
-          required: 'CityGroup Code is required.',
-        },     
-        ControlCityGroup_Name_ENG: {
-          required: 'CityGroup Name Eng is required.',
-        },
-        ControlCityGroup_Name_UNI: {
-          required: 'CityGroup Name Uni is required.',
-        }
-      };
-      this.formErrors = {
-        ControlIsActive: '',
-      };
+
+    private formBuilder: FormBuilder) {
+    super();
+    const status = '';
+    this.validationMessages = {
+      ControlCityGroup_Code: {
+        required: 'CityGroup Code is required.',
+      },
+      ControlCityGroup_Name_ENG: {
+        required: 'CityGroup Name Eng is required.',
+      },
+      ControlCityGroup_Name_UNI: {
+        required: 'CityGroup Name Uni is required.',
+      }
+    };
+    this.formErrors = {
+      ControlIsActive: '',
+    };
   }
   isCityGroupExist(): boolean {
     return this.form.get('ControlCityGroup_Name_ENG').hasError('queExist');
-    
+
   }
   ngOnInit() {
     status = '';
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-      window.location.href='login';
+      window.location.href = 'login';
     }
     this.citygroup = {
-    CityGroup_Code: null,
-    CityGroup_Name_ENG: null,
-    CityGroup_Name_UNI: null,
-    IsActive:'true',
-    createdBy:localStorage.getItem('username'),
-    createdDate:this.globalService.GerCurrntDateStamp(),
-    modifiedBy:this.globalService.GerCurrntDateStamp(),
-    modifiedDate:localStorage.getItem('username'),
-     
+      CityGroup_Code: null,
+      CityGroup_Name_ENG: null,
+      CityGroup_Name_UNI: null,
+      IsActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: this.globalService.GerCurrntDateStamp(),
+      modifiedDate: localStorage.getItem('username'),
+
     };
-    
+
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getregion(str);
       this.form = this.formBuilder.group({
-        ControlCityGroup_Code:['',[]],
+        ControlCityGroup_Code: ['', []],
         ControlCityGroup_Name_ENG: ['', [Validators.required],
-        [CityGroupAsyncValidator(this.citygroupService, str)]],
+          [CityGroupAsyncValidator(this.citygroupService, str)]],
         ControlCityGroup_Name_UNI: ['', []],
         ControlIsActive: ['', []],
       });
-     
+
       this.form.controls['ControlCityGroup_Code'].disable();
 
     });
@@ -104,21 +104,21 @@ export class CityGroupComponent extends FormComponentBase implements OnInit, Aft
     let k;
     k = event.charCode;
     return this.globalService.SpecialCharValidator(k);
-    
+
   }
 
-  save(CityGroupForm: NgForm): void {
-    this.citygroup.createdBy=localStorage.getItem('username');
-    this.citygroup.createdDate=this.globalService.GerCurrntDateStamp();
-    this.citygroup.modifiedBy=localStorage.getItem('username');
-    this.citygroup.modifiedDate=this.globalService.GerCurrntDateStamp();
+  save(): void {
+    this.citygroup.createdBy = localStorage.getItem('username');
+    this.citygroup.createdDate = this.globalService.GerCurrntDateStamp();
+    this.citygroup.modifiedBy = localStorage.getItem('username');
+    this.citygroup.modifiedDate = this.globalService.GerCurrntDateStamp();
     if (status !== 'Update') {
       this.citygroupService.Save(this.citygroupTransfarmer.CityGroupTransfarmer(this.citygroup)).subscribe(
         (par) => {
           if (par !== null) {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
-              this.router.navigate(['CityGroupList']);
+            this.router.navigate(['CityGroupList']);
           } else {
             this.defaultLayoutComponent.Massage('',
               'Technical Error Please connect to Ajax Support team', 'modal-info');
@@ -127,63 +127,63 @@ export class CityGroupComponent extends FormComponentBase implements OnInit, Aft
       );
 
 
-   } else {
-     this.citygroupService.Update(this.citygroupTransfarmer.CityGroupTransfarmer(this.citygroup)).subscribe(
-         (par) => {
-           if (par !== null) {
-             this.defaultLayoutComponent.Massage('',
-               'Data saved successfully !', 'modal-info');
-               this.router.navigate(['CityGroupList']);
-           } else {
-             this.defaultLayoutComponent.Massage('',
-               'Technical Error Please connect to Ajax Support team', 'modal-info');
-           }
-         }
-       );
-   }
- }
-
-
- 
- private getregion(Id: string) {
-  this.citygroup = {
-    CityGroup_Code: null,
-    CityGroup_Name_ENG: null,
-    CityGroup_Name_UNI: null,
-    IsActive:'true',
-    createdBy:localStorage.getItem('username'),
-    createdDate:this.globalService.GerCurrntDateStamp(),
-    modifiedBy:this.globalService.GerCurrntDateStamp(),
-    modifiedDate:localStorage.getItem('username'),
-     
-  };
-  if (Id === null || Id === '0' || Id === '') {
-    this.citygroup = {
-    CityGroup_Code: null,
-    CityGroup_Name_ENG: null,
-    CityGroup_Name_UNI: null,
-    IsActive:'true',
-    createdBy:localStorage.getItem('username'),
-    createdDate:this.globalService.GerCurrntDateStamp(),
-    modifiedBy:this.globalService.GerCurrntDateStamp(),
-    modifiedDate:localStorage.getItem('username'),
-     
-    };
-    status = '';
-  } else {
-    this.citygroupService.getCityGroup(Id).subscribe(
-      (par) => {
-        this.citygroupEntity = par;
-        //this.form.controls['ControlhubCode'].disable();
-        if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
-          window.location.href='login';
+    } else {
+      this.citygroupService.Update(this.citygroupTransfarmer.CityGroupTransfarmer(this.citygroup)).subscribe(
+        (par) => {
+          if (par !== null) {
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            this.router.navigate(['CityGroupList']);
+          } else {
+            this.defaultLayoutComponent.Massage('',
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
+          }
         }
-        this.citygroup = this.citygroupTransfarmer.CityGroupTransfarmerEntity(this.citygroupEntity);   
-              
-      },
-      (err: any) => console.log(err));
-    status = 'Update';
+      );
+    }
   }
-  
-}
+
+
+
+  private getregion(Id: string) {
+    this.citygroup = {
+      CityGroup_Code: null,
+      CityGroup_Name_ENG: null,
+      CityGroup_Name_UNI: null,
+      IsActive: 'true',
+      createdBy: localStorage.getItem('username'),
+      createdDate: this.globalService.GerCurrntDateStamp(),
+      modifiedBy: this.globalService.GerCurrntDateStamp(),
+      modifiedDate: localStorage.getItem('username'),
+
+    };
+    if (Id === null || Id === '0' || Id === '') {
+      this.citygroup = {
+        CityGroup_Code: null,
+        CityGroup_Name_ENG: null,
+        CityGroup_Name_UNI: null,
+        IsActive: 'true',
+        createdBy: localStorage.getItem('username'),
+        createdDate: this.globalService.GerCurrntDateStamp(),
+        modifiedBy: this.globalService.GerCurrntDateStamp(),
+        modifiedDate: localStorage.getItem('username'),
+
+      };
+      status = '';
+    } else {
+      this.citygroupService.getCityGroup(Id).subscribe(
+        (par) => {
+          this.citygroupEntity = par;
+          //this.form.controls['ControlhubCode'].disable();
+          if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+            window.location.href = 'login';
+          }
+          this.citygroup = this.citygroupTransfarmer.CityGroupTransfarmerEntity(this.citygroupEntity);
+
+        },
+        (err: any) => console.log(err));
+      status = 'Update';
+    }
+
+  }
 }

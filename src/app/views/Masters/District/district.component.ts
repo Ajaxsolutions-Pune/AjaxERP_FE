@@ -110,7 +110,7 @@ export class DistrictComponent extends FormComponentBase implements OnInit, Afte
     return this.globalService.SpecialCharValidator(k);
     
   }
-  save(DistrictForm: NgForm): void {
+  save(): void {
     if (status !== 'Update') {
       this.districtService.Save(this.districtTransfarmer.DistrictTransfarmer(this.district)).subscribe(
         (par) => {

@@ -152,7 +152,7 @@ export class QualificationComponent extends FormComponentBase implements OnInit,
     }
     alert('Registration Complete');
   }
-  save(form: NgForm): void {
+  save(): void {
     this.qualificationobj.createdBy = localStorage.getItem('username');
     this.qualificationobj.createdDate = this.globalService.GerCurrntDateStamp();
     this.qualificationobj.modifiedBy = localStorage.getItem('username');
