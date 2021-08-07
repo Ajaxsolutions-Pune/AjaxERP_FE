@@ -116,6 +116,10 @@
   top: 7px;
 }
 
+.imgdummy{
+  content: url("../../../assets/img/brand/image.png");
+}
+
 .app-body{
   z-index: 5;
   background-color: #F5F5F5;
