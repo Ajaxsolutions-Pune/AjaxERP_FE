@@ -5,13 +5,13 @@
       <div class="col-md11 container">
         <div class="card">
           <div class="card-header">
-            <strong>Asset</strong>
+            <strong>Warehouse</strong>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4">
-                <input matInput placeholder="Asset Code" [(ngModel)]="bindObj.assetCode" #txtassetCode
+                <input matInput placeholder="Warehouse Code" [(ngModel)]="bindObj.assetCode" #txtassetCode
                   formControlName="ControlassetCode" name="txtassetCode">
               </mat-form-field>
               <div class="col-sm-2" style="padding-left: 6%;">
@@ -25,28 +25,28 @@
                 </mat-checkbox>
               </div>
               <mat-form-field class="col-md-4" style="display: none;">
-                <input matInput placeholder="Asset Name UNI" [(ngModel)]="bindObj.assetNameUNI" #txtassetNameUNI
+                <input matInput placeholder="Warehouse Name UNI" [(ngModel)]="bindObj.assetNameUNI" #txtassetNameUNI
                   formControlName="ControlassetNameUNI" name="txtassetNameUNI">
               </mat-form-field>
             </div>
             <div class="row">
               <div class="col-md-2"></div>
               <mat-form-field class="col-md-4" *ngIf="!visibleFlagassetNameENG">
-                <input matInput placeholder="Asset Name" [required]="!requiredFlagassetNameENG" [(ngModel)]="bindObj.assetNameENG" #txtassetNameENG
+                <input matInput placeholder="Warehouse Name" [required]="!requiredFlagassetNameENG" [(ngModel)]="bindObj.assetNameENG" #txtassetNameENG
                   (keypress)="special_char_val($event)"
                    maxlength="100" formControlName="ControlassetNameENG"
                   name="txtassetNameENG">
                 <mat-error>
                   <span *ngIf="isQueExist()">
-                    Asset is already taken.
+                    Warehouse is already taken.
                   </span>
                 </mat-error>
               </mat-form-field>
               <mat-form-field class="col-md-4" *ngIf="!visibleFlagassetGroupCode">
-                <mat-label> Asset Group</mat-label>
+                <mat-label> Warehouse Group</mat-label>
                 <mat-select required formControlName="ControlassetGroupCode" [required]="!requiredFlagassetGroupCode"
                   (selectionChange)="AssetGroupChange($event)" [(ngModel)]="bindObj.assetGroupCode">
-                  <mat-option>Asset Group</mat-option>
+                  <mat-option>Warehouse Group</mat-option>
                   <mat-option *ngFor="let assetGroup of assetGroupObj" [value]="assetGroup.assetGroupCode">
                     {{assetGroup.assetGroupNameENG}}
                   </mat-option>
@@ -67,9 +67,9 @@
                 </mat-error>
               </mat-form-field>
               <mat-form-field class="col-md-4" *ngIf="!visibleFlagAssetCategory">
-                <mat-label>Asset Category</mat-label>
+                <mat-label>Warehouse Category</mat-label>
                 <mat-select [required]="!requiredFlagAssetCategory" formControlName="ControlAssetCategory" [(ngModel)]="bindObj.assetCategoryCode">
-                  <mat-option>Asset Category</mat-option>
+                  <mat-option>Warehouse Category</mat-option>
                   <mat-option *ngFor="let assetCategory of assetCategoryObj" [value]="assetCategory.assetCategoryCode">
                     {{assetCategory.assetCategoryNameENG}}
                   </mat-option>
@@ -377,7 +377,7 @@
                 </mat-error>
               </mat-form-field>
               <mat-form-field class="col-md-4" *ngIf="!visibleFlagmobileNo">
-                <input matInput placeholder="mobileNo" maxlength="20" 
+                <input matInput placeholder="mobileNo" maxlength="20"
                 [(ngModel)]="bindObj.mobileNo" [required]="!requiredFlagmobileNo"
                   formControlName="ControlmobileNo" #txtmobileNo name="txtmobileNo">
                 <mat-error>

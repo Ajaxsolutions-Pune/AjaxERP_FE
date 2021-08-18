@@ -406,7 +406,7 @@ export const routes: Routes = [
           // ProduReport: ProductionReportResolverService
         },
       },
-      
+
 
       {
         path: 'CityGroup',
@@ -1108,7 +1108,7 @@ export const routes: Routes = [
         path: 'AssetGroupList',
         component: AssetGroupListComponent,
         data: {
-          title: 'Asset Group List'
+          title: 'Warehouse Group List'
         },
         resolve: {
           AssetGroupList: AssetGroupListResolverService
@@ -1118,14 +1118,14 @@ export const routes: Routes = [
         path: 'AssetGroup',
         component: AssetGroupComponent,
         data: {
-          title: 'Add Asset Group'
+          title: 'Add Warehouse Group'
         },
       },
       {
         path: 'AssetGroup/:id',
         component: AssetGroupComponent,
         data: {
-          title: 'Edit Asset Group'
+          title: 'Edit Warehouse Group'
         }
       },
       {
@@ -1180,7 +1180,7 @@ export const routes: Routes = [
         path: 'AssetCategoryList',
         component: AssetCategoryListComponent,
         data: {
-          title: 'Asset Category List'
+          title: 'Warehouse Category List'
         },
         resolve: {
           AssetCategoryList1: AssetCategoryListResolverService
@@ -1190,21 +1190,21 @@ export const routes: Routes = [
         path: 'AssetCategory',
         component: AssetCategoryComponent,
         data: {
-          title: 'Add Asset Category'
+          title: 'Add Warehouse Category'
         },
       },
       {
         path: 'AssetCategory/:id',
         component: AssetCategoryComponent,
         data: {
-          title: 'Edit Asset Category'
+          title: 'Edit Warehouse Category'
         }
       },
       {
         path: 'AssetList',
         component: AssetListComponent,
         data: {
-          title: 'Asset List'
+          title: 'Warehouse List'
         },
         resolve: {
           AssetList: AssetListResolverService
@@ -1214,14 +1214,14 @@ export const routes: Routes = [
         path: 'Asset/:id',
         component: AssetComponent,
         data: {
-          title: 'Edit Asset'
+          title: 'Edit Warehouse'
         }
       },
       {
         path: 'Asset',
         component: AssetComponent,
         data: {
-          title: 'Add Asset'
+          title: 'Add Warehouse'
         },
         resolve: {
           AssetList: AssetListResolverService
@@ -1468,7 +1468,7 @@ export const routes: Routes = [
         path: 'DeviceAssetMapping',
         component: DeviceAssetMappingComponent,
         data: {
-          title: 'Device Asset Mapping'
+          title: 'Device Warehouse Mapping'
         },
       },
       {
@@ -1478,7 +1478,7 @@ export const routes: Routes = [
           title: 'User Group Mapping'
         },
       },
-      
+
       {
         path: 'RoleList',
         component: RoleListComponent,
@@ -1596,8 +1596,8 @@ export const routes: Routes = [
           title: 'Edit User Group'
         }
       },
-      /////Reports 
-      
+      /////Reports
+
       {
         path: 'MonitoringReport',
         component: MonitoringReportComponent,

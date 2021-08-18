@@ -1,18 +1,18 @@
 <form #ObjForm="ngForm" [formGroup]="form" autocomplete="off">
     <div class="animated fadeIn">
-                
+
         <div class="row">
             <div class="col-md-11 container">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Asset Group</strong>
+                        <strong>Warehouse Group</strong>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Asset Group Code"
+                                placeholder="Warehouse Group Code"
                                 [(ngModel)]="bindObj.assetGroupCode"
                                 formControlName="ControlassetGroupCode"
                                 #txtassetGroupCode
@@ -27,7 +27,7 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Asset Group Name"
+                                placeholder="Warehouse Group Name"
                                 (keypress)="special_char_val($event)"
                                 [(ngModel)]="bindObj.assetGroupNameENG" required
                                 formControlName="ControlassetGroupNameENG" maxlength="50"
@@ -35,8 +35,8 @@
                                 name="txtassetGroupNameENG">
                                 <mat-error>
                                     <span *ngIf="isQueExist()">
-                                        Asset group is already taken.
-                                    </span> 
+                                      Warehouse group is already taken.
+                                    </span>
                                 </mat-error>
                             </mat-form-field>
                             <div class="col-md-4"></div>
@@ -45,7 +45,7 @@
                             <div class="col-md-4"></div>
                             <mat-form-field class="col-md-4">
                                 <input matInput
-                                placeholder="Asset Group Name UNI"
+                                placeholder="Warehouse Group Name UNI"
                                 [(ngModel)]="bindObj.assetGroupNameUNI"
                                 formControlName="ControlassetGroupNameUNI"
                                 #txtassetGroupNameUNI
@@ -72,7 +72,7 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <button mat-raised-button [disabled]="!form.valid" 
+                                <button mat-raised-button [disabled]="!form.valid"
                                 (click)="save(ObjForm)"
                                     color="primary">Submit</button>
                                     &nbsp; &nbsp; &nbsp; &nbsp;

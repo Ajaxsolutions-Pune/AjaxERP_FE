@@ -1,21 +1,21 @@
 <div class="form-group">
   <div class="row">
 
-    <div class="col-md-3">Asset Category Code</div>
-    <div class="col-md-3">Asset Category Name</div>
+    <div class="col-md-3">Warehouse Category Code</div>
+    <div class="col-md-3">Warehouse Category Name</div>
     <div class="col-md-2">Status</div>
   </div>
   <div class="row">
     <div class="col-md-3">
-        <input id="txtassetCategoryCode" required name="txtassetCategoryCode" 
-        type="text" class="form-control" placeholder="Asset Category Code" 
+        <input id="txtassetCategoryCode" required name="txtassetCategoryCode"
+        type="text" class="form-control" placeholder="Warehouse Category Code"
         (input)="resultChanged()" [(ngModel)]="bindObj.assetCategoryCode">
     </div>
     <div class="col-md-3">
-        <input id="txtassetCategoryNameENG" required 
-        name="txtassetCategoryNameENG" type="text" class="form-control" 
-        placeholder="Asset Category"
-        (input)="resultChanged()" 
+        <input id="txtassetCategoryNameENG" required
+        name="txtassetCategoryNameENG" type="text" class="form-control"
+        placeholder="Warehouse Category"
+        (input)="resultChanged()"
         [(ngModel)]="bindObj.assetCategoryNameENG">
     </div>
     <div class="col-md-2">
@@ -27,7 +27,7 @@
       </select>
     </div>
     <div class="col-md-1">
-        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" 
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus"
         title="Create assetCategory" routerLink="/AssetCategory"></button>
     </div>
     <div class="col-md-1">
@@ -40,10 +40,10 @@
 <table class="table table-responsive-sm table-hover table-outline mb-0">
     <thead class="thead-light">
       <tr>
-        <th>Asset Category Code</th>
-        <th>Asset Category Name</th>
-        <th>Asset Group</th>
-        <th>Asset Colour</th>
+        <th>Warehouse Category Code</th>
+        <th>Warehouse Category Name</th>
+        <th>Warehouse Group</th>
+        <th>Warehouse Colour</th>
         <th>Status</th>
         <th>Action</th>
       </tr>

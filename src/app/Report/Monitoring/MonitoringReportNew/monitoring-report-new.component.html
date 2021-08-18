@@ -11,7 +11,7 @@
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <mat-form-field color="accent" class="col-md-4">
-                                    <mat-label>Asset Group</mat-label>
+                                    <mat-label>Warehouse Group</mat-label>
                                     <mat-select formControlName="ControlAssetGroup"
                                     (selectionChange)="AssetGroupChange($event)"
                                     [(ngModel)]="assetGroupCode">
@@ -30,7 +30,7 @@
                                 <mat-form-field color="accent" class="col-md-4">
                                     <mat-label>Process</mat-label>
                                     <mat-select formControlName="ControlProcess" (selectionChange)="EntityChange($event)"
-                                    [(ngModel)]="processId">                                      
+                                    [(ngModel)]="processId">
                                         <mat-option>Select</mat-option>
                                         <mat-option *ngFor="let process of processDrp" [value]="process.processId">
                                             {{process.processName}}
@@ -45,13 +45,13 @@
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <mat-form-field color="accent" class="col-md-4">
-                                    <mat-label>Asset</mat-label>
+                                    <mat-label>Warehouse</mat-label>
                                     <mat-select formControlName="ControlAsset"
                                     [(ngModel)]="assetCode">
                                         <!--[(ngModel)]="project.projectGroupCode"-->
                                         <mat-option>Select</mat-option>
                                         <mat-option value="All">All</mat-option>
-                                        <mat-option *ngFor="let asset of assetDrp" 
+                                        <mat-option *ngFor="let asset of assetDrp"
                                         [value]="asset.assetCode">
                                             {{asset.assetNameENG}}
                                         </mat-option>
@@ -81,11 +81,11 @@
                             <!--multiple  (selectionChange)="CustomerChange($event)"-->
                             <div class="row">
                                 <div class="col-md-2"></div>
-                               
+
 
                                 <mat-form-field class="col-md-4">
                                     <mat-label>Customer</mat-label>
-                                    <mat-select required formControlName="ControlcustomerCode" 
+                                    <mat-select required formControlName="ControlcustomerCode"
                                     [(ngModel)]="customerCode" >
                                       <mat-option>Customer</mat-option>
                                       <mat-option value="All">All</mat-option>
@@ -101,8 +101,8 @@
 
                                 <!--<mat-form-field class="col-md-4">
                                   <mat-label>Customer</mat-label>
-                                  <mat-select required formControlName="ControlcustomerCode" 
-                                  [(ngModel)]="customer" 
+                                  <mat-select required formControlName="ControlcustomerCode"
+                                  [(ngModel)]="customer"
                                   >
                                     <mat-option>Customer</mat-option>
                                     <mat-option value="All">All</mat-option>
@@ -132,7 +132,7 @@
                                     </mat-error>
                                 </mat-form-field>
                                 <div class="col-sm-1" style="padding-top: 20px;">
-                                    <mat-checkbox name="ControlisImage" 
+                                    <mat-checkbox name="ControlisImage"
                                     [(ngModel)]="withImage"
                                     #chkisImage formControlName="ControlisImage">With
                                         Image
@@ -145,8 +145,8 @@
                                 <div class="col-md-2"></div>
                                 <mat-form-field appearance="fill" class="col-md-4">
                                     <mat-label>Start Date</mat-label>
-                                    <input matInput [matDatepicker]="picker1" 
-                                     formControlName="ControlStartDate" 
+                                    <input matInput [matDatepicker]="picker1"
+                                     formControlName="ControlStartDate"
                                      [(ngModel)]="fromDate"
                                      [formControl]="date">
                                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -157,8 +157,8 @@
                                   </mat-form-field>
                                   <mat-form-field appearance="fill" class="col-md-4">
                                       <mat-label>End Date</mat-label>
-                                      <input matInput [matDatepicker]="picker2" 
-                                       formControlName="ControlEndDate" 
+                                      <input matInput [matDatepicker]="picker2"
+                                       formControlName="ControlEndDate"
                                        [(ngModel)]="toDate"
                                        [formControl]="date">
                                       <mat-datepicker-toggle matSuffix [for]="picker2">
@@ -187,7 +187,7 @@
                                 <div class="col-md-5"></div>
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>

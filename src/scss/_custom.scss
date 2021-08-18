@@ -1,1 +1,4 @@
 // Here you can add other styles
+.my-pagination::ng-deep .ngx-pagination .current {
+  background: #c70822;
+}

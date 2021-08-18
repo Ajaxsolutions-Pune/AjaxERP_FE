@@ -1,27 +1,27 @@
 <table style="margin-top:-30px;" class="table table-responsive-sm table-hover table-outline mb-0">
   <thead class="thead-light">
-    <tr >      
-      <th style="padding:5px 5px 5px 10px">Mapped Transmission Line</th>        
+    <tr >
+      <th style="padding:5px 5px 5px 10px">Mapped Transmission Line</th>
      </tr>
   </thead>
   <tbody>
    <tr>
       <td style="padding:5px 5px 5px 10px">
         <div>{{TransmissionLine_List}}</div>
-      </td>      
-    </tr>       
-  </tbody>  
+      </td>
+    </tr>
+  </tbody>
 </table>
-  
-  
+
+
   <div style="margin-top: 10px;" class="row">
-    <div class="col-md-4 pull-left" style="padding-bottom:2%;">     
-      <div class="ng-autocompletein">      
+    <div class="col-md-4 pull-left" style="padding-bottom:2%;">
+      <div class="ng-autocompletein">
           <div class="input-container">
             <ng-autocomplete [data]="data" #auto
              [searchKeyword]="keyword" placeHolder="Select Device Name"
               (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
-               id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'                
+               id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'
               [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
             </ng-autocomplete>
             <ng-template #itemTemplate let-item>
@@ -29,20 +29,20 @@
             </ng-template>
             <ng-template #notFoundTemplate let-notFound>
               <div [innerHTML]="notFound"></div>
-            </ng-template>         
-            <i class="icon" (click)="my()"> 
+            </ng-template>
+            <i class="icon" (click)="my()">
               <mat-icon>arrow_drop_down</mat-icon></i>
           </div>
-        </div>     
+        </div>
   </div>
 
   <div class="col-md-3 pull-left" style="padding-bottom:2%;">
-    <div class="ng-autocompletein">      
+    <div class="ng-autocompletein">
         <div class="input-container">
           <ng-autocomplete [data]="Assetgroup_data" #auto
-           [searchKeyword]="keyword" placeHolder="Select Asset Group"
+           [searchKeyword]="keyword" placeHolder="Select Warehouse Group"
             (selected)='AssetGroupselectEvent($event)' (inputChanged)='onChangeSearch($event)'
-             id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'              
+             id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'
             [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
           </ng-autocomplete>
           <ng-template #itemTemplate let-item>
@@ -50,19 +50,19 @@
           </ng-template>
           <ng-template #notFoundTemplate let-notFound>
             <div [innerHTML]="notFound"></div>
-          </ng-template>        
-          <i class="icon" (click)="my()"> 
+          </ng-template>
+          <i class="icon" (click)="my()">
             <mat-icon>arrow_drop_down</mat-icon></i>
         </div>
       </div>
-  </div>   
+  </div>
   <div class="col-md-5 pull-left" style="padding-bottom:2%;">
-    <div class="ng-autocompletein">      
+    <div class="ng-autocompletein">
         <div class="input-container">
           <ng-autocomplete [data]="TransmissionLine_data" #auto
            [searchKeyword]="keyword" placeHolder="Select Transmission Line"
             (selected)='TransmissionselectEvent($event)' (inputChanged)='onChangeSearch($event)'
-             id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'              
+             id="autocomplete" (inputFocused)='onFocused($event)' (inputFocusedOut)='onFocused($event)'
             [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
           </ng-autocomplete>
           <ng-template #itemTemplate let-item>
@@ -70,16 +70,16 @@
           </ng-template>
           <ng-template #notFoundTemplate let-notFound>
             <div [innerHTML]="notFound"></div>
-          </ng-template>        
-          <i class="icon" (click)="my()"> 
+          </ng-template>
+          <i class="icon" (click)="my()">
             <mat-icon>arrow_drop_down</mat-icon></i>
         </div>
-      </div>      
+      </div>
   </div>
-</div>  
-<div class="col-md-12" style="margin-top: -20px;">     
+</div>
+<div class="col-md-12" style="margin-top: -20px;">
   <div class="text-center">
-      <button mat-raised-button 
+      <button mat-raised-button
       (click)="save()"
           color="primary" [disabled]="this.isDisabled">Submit</button>
           &nbsp; &nbsp;
@@ -92,42 +92,41 @@
   <thead class="thead-light">
     <tr>
       <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"> &nbsp; Map All</th>
-      <th>Asset Code</th>      
+      <th>Warehouse Code</th>
       <!--<th>Asset Code</th> -->
-      <th>Asset Name</th>
+      <th>Warehouse Name</th>
      <!-- <th>Is Active</th> -->
-      <th></th>     
+      <th></th>
     </tr>
   </thead>
   <tbody>
-   <tr *ngFor="let DeviceAssetMapping of objDeviceAssetMapping">     
-      <td>         
-        <mat-checkbox name="chkisActive"                
+   <tr *ngFor="let DeviceAssetMapping of objDeviceAssetMapping">
+      <td>
+        <mat-checkbox name="chkisActive"
          [(ngModel)]="DeviceAssetMapping.assigned">Map
         </mat-checkbox>
       </td>
-     <!-- <td>               
+     <!-- <td>
         <div>{{DeviceAssetMapping.assigned}}</div>
       </td>-->
-      <td>              
+      <td>
         <div>{{DeviceAssetMapping.assetCode}}</div>
       </td>
       <td>
         <div>{{DeviceAssetMapping.assetName}}</div>
       </td>
       <!--<td>
-        <mat-checkbox     
+        <mat-checkbox
          [(ngModel)]="DeviceAssetMapping.isActive">Active
-        </mat-checkbox> 
+        </mat-checkbox>
       </td>-->
-       <td>       
-      </td>    
-    </tr>       
-  </tbody>  
+       <td>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 
 
-  
 
-    
+

@@ -1,8 +1,8 @@
 <div class="container">
-    <h3 mat-dialog-title>Edit Device Asset Mapping</h3>
-  
+    <h3 mat-dialog-title>Edit Device Warehouse Mapping</h3>
+
     <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" autocomplete="off">
-  
+
       <div class="form">
         <mat-form-field color="accent">
           <input matInput #input class="form-control" placeholder="DeviceAssetMapping"
@@ -10,7 +10,7 @@
            [(ngModel)]="data.daId" name="daId" required >
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
-      </div>   
+      </div>
 
       <div class="row form">
         <div class="col-md-12" style="padding-bottom:2%;">
@@ -37,7 +37,7 @@
         </div>
       </div>
       <!--<div class="form">
-        <mat-form-field color="accent">        
+        <mat-form-field color="accent">
           <mat-label>Asset</mat-label>
           <mat-select  (selectionChange)="AssetsChange($event)"
           required name="Assets" #input
@@ -56,21 +56,21 @@
         <mat-form-field color="accent">
           <input matInput #input class="form-control" maxlength="5"
           type="number"
-          oninput="javascript: if (this.value.length > this.maxLength) 
+          oninput="javascript: if (this.value.length > this.maxLength)
           this.value = this.value.slice(0, this.maxLength);"
           #input
           placeholder="Sort"
            [(ngModel)]="data.sortBy" name="sortBy">
           <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
-      </div>  
+      </div>
 
-      <div class="form">       
+      <div class="form">
         <mat-checkbox name="chkActive" [(ngModel)]="data.isActive">Active</mat-checkbox>
       </div>
 
       <div mat-dialog-actions>
-        <button mat-raised-button [type]="submit" 
+        <button mat-raised-button [type]="submit"
         [disabled]="!formControl.valid" [mat-dialog-close]="1"
         (click)="stopEdit()"
             color="primary">Save</button>
@@ -80,4 +80,3 @@
       </div>
     </form>
   </div>
-  
