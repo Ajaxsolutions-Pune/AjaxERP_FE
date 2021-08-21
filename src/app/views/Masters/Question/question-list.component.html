@@ -26,11 +26,11 @@
       </select>
     </div>
     <div class="col-md-1">
-      <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Add Question"
+      <button class="col-md-12 btn btn-outline-danger icons font-1xl icon-plus" title="Add Question"
         routerLink="/Question"></button>
     </div>
     <div class="col-md-1">
-      <i class="fa fa-file-excel-o"  style="font-size:35px;color: #20a8d8" aria-hidden="true" (click)="ExportToExcel()"></i>
+      <i class="fa fa-file-excel-o"  style="font-size:35px;color: #c70822" aria-hidden="true" (click)="ExportToExcel()"></i>
     </div>
   </div>
 
@@ -66,11 +66,11 @@
       </td>
       <td [ngSwitch]="1">
           <button mat-icon-button [routerLink]="['/Question/',Oject.questionId]"
-           color="accent">
-            <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+          style="color: #c70822;">
+            <mat-icon   style="color: #c70822;" aria-label="Edit">edit</mat-icon>
           </button>
       </td>
     </tr>
   </tbody>
 </table>
-<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+<pagination-controls class="my-pagination" (pageChange)="pageChanged($event)"></pagination-controls>

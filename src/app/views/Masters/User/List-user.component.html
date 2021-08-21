@@ -1,18 +1,18 @@
 <div class="form-group">
-  <div class="row">  
+  <div class="row">
     <div class="col-md-3">Login ID</div>
     <div class="col-md-3">User Name</div>
-    <div class="col-md-2">Status</div>      
+    <div class="col-md-2">Status</div>
   </div>
 
   <div class="row">
     <div class="col-md-3">
-      <input id="txtLoginID" required name="txtLoginID" 
+      <input id="txtLoginID" required name="txtLoginID"
       type="text" class="form-control" placeholder="Login ID"
         (input)="resultChanged()" [(ngModel)]="objUser.loginID">
     </div>
     <div class="col-md-3">
-      <input id="txtUserName" required name="txtuserName" type="text" class="form-control" 
+      <input id="txtUserName" required name="txtuserName" type="text" class="form-control"
       placeholder="User Name"
         (input)="resultChanged()" [(ngModel)]="objUser.userNameENG">
     </div>
@@ -29,7 +29,7 @@
         routerLink="/User"></button>
     </div>
     <div class="col-md-1">
-      <i class="fa fa-file-excel-o"  style="font-size:35px;color: #20a8d8" aria-hidden="true" (click)="ExportToExcel()"></i>
+      <i class="fa fa-file-excel-o"  style="font-size:35px;color: #c70822" aria-hidden="true" (click)="ExportToExcel()"></i>
     </div>
   </div>
 </div>
@@ -39,14 +39,14 @@
     <tr>
       <th>Id</th>
       <th>Login Id</th>
-      <th>User Name</th>  
-      <th>Mobile</th>     
+      <th>User Name</th>
+      <th>Mobile</th>
       <th>Status</th>
-      <th>Action</th>   
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let User of users | paginate: config">     
+    <tr *ngFor="let User of users | paginate: config">
       <td>
         <div>{{User.id}}</div>
       </td>
@@ -55,10 +55,10 @@
       </td>
       <td>
         {{User.userNameENG}}
-      </td>  
+      </td>
       <td>
         {{User.mobileNo}}
-      </td>          
+      </td>
       <td>
         {{User.isActive}}
       </td>
@@ -71,4 +71,4 @@
     </tr>
   </tbody>
 </table>
-<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls> 
+<pagination-controls class="my-pagination" (pageChange)="pageChanged($event)"></pagination-controls>

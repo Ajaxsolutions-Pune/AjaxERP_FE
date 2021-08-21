@@ -1,20 +1,20 @@
 <div class="form-group">
     <div class="row">
-  
+
       <div class="col-md-3">Project ID</div>
       <div class="col-md-3">Project</div>
       <div class="col-md-2">Status</div>
     </div>
-  
+
     <div class="row">
       <div class="col-md-3">
-        <input id="txtProjectID" required name="txtProjectID" 
+        <input id="txtProjectID" required name="txtProjectID"
         type="text" class="form-control" placeholder="Project ID"
           (input)="resultChanged()" [(ngModel)]="objProject.projectCode">
       </div>
 
       <div class="col-md-3">
-        <input id="txtProject" required name="txtproject" type="text" class="form-control" 
+        <input id="txtProject" required name="txtproject" type="text" class="form-control"
         placeholder="Project"
           (input)="resultChanged()" [(ngModel)]="objProject.projectName">
       </div>
@@ -28,15 +28,15 @@
         </select>
       </div>
       <div class="col-md-1">
-        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Add project"
+        <button class="col-md-12 btn btn-outline-danger icons font-1xl icon-plus" title="Add project"
           routerLink="/Project"></button>
       </div>
      <div class="col-md-1">
-        <i class="fa fa-file-excel-o"  style="font-size:35px;color: #20a8d8" aria-hidden="true" (click)="ExportToExcel()"></i>
+        <i class="fa fa-file-excel-o"  style="font-size:35px;color: #c70822" aria-hidden="true" (click)="ExportToExcel()"></i>
       </div>
     </div>
   </div>
-  
+
   <table class="table table-responsive-sm table-hover table-outline mb-0">
     <thead class="thead-light">
       <tr>
@@ -103,6 +103,6 @@
       </tr>
     </tbody>
   </table>
-  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+  <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)"></pagination-controls>
 
  <!-- <div> {{projects | json}}</div>-->

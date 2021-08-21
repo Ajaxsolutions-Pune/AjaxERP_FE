@@ -26,10 +26,10 @@
       </select>
     </div>
     <div class="col-md-1">
-        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus" title="Create Warehouse" routerLink="/Asset"></button>
+        <button class="col-md-12 btn btn-outline-danger icons font-1xl icon-plus" title="Create Warehouse" routerLink="/Asset"></button>
     </div>
     <div class="col-md-1">
-      <i class="fa fa-file-excel-o"  style="font-size:35px;color: #20a8d8" aria-hidden="true" (click)="ExportToExcel()"></i>
+      <i class="fa fa-file-excel-o"  style="font-size:35px;color: #c70822" aria-hidden="true" (click)="ExportToExcel()"></i>
     </div>
 </div>
 </div>
@@ -63,4 +63,4 @@
       </tr>
     </tbody>
   </table>
-  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+  <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)"></pagination-controls>

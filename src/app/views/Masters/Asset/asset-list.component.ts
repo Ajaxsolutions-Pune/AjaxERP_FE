@@ -24,7 +24,7 @@ export class AssetListComponent implements OnInit {
   env = environment;
   constructor(private _router: Router,
     objTrans: AssetTransfarmer,
-    private route: ActivatedRoute) {   
+    private route: ActivatedRoute) {
       if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
         window.location.href='login';
       }
@@ -32,7 +32,7 @@ export class AssetListComponent implements OnInit {
     this.arrOject = objTrans.AssetTransfarmers(this.arrOjectEntity);
     this.WithoutFilterObj = this.arrOject;
     this.config = {
-      itemsPerPage: 100,
+      itemsPerPage: this.env.paginationPageSize,
       currentPage: 1,
       totalItems: this.arrOject.length
     };

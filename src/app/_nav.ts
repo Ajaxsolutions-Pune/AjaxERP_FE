@@ -342,6 +342,11 @@ export const navItems: NavData[] = [
         url: '/MonitoringReportNew',
         icon: 'icon-puzzle'
       },
+      {
+        name: 'Inception Report',
+        url: '/InceptionReport',
+        icon: 'icon-puzzle'
+      },
     ]
   },
   /*{

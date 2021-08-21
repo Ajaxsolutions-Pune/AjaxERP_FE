@@ -382,6 +382,7 @@ import { QualificationTypeListResolverService } from './Components/Resolver/HRMS
 import { MapTrackingComponent } from './views/Map/map_tracking.component';
 import { MonitoringReportNewComponent } from './Report/Monitoring/MonitoringReportNew/monitoring-report-new.component';
 import { MapReplayService } from './Components/Services/Masters/MapReplayService';
+import { InceptionReportComponent } from './Report/Inception Report/inception-report/inception-report.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -523,6 +524,7 @@ export const MY_FORMATS = {
     QualificationTypeComponent,
     JobLevelListComponent,
     JobLevelComponent,
+    InceptionReportComponent,
   ],
   providers: [
     ConfirmDialogService,

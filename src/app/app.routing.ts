@@ -167,6 +167,7 @@ import { JobLevelListComponent } from './views/HRMS/JobLevel/job-level-list.comp
 import { JobLevelListResolverService } from './Components/Resolver/HRMS/JobLevel-List-Resolver.Service';
 import { JobLevelComponent } from './views/HRMS/JobLevel/job-level.component';
 import { MonitoringReportNewComponent } from './Report/Monitoring/MonitoringReportNew/monitoring-report-new.component';
+import { InceptionReportComponent } from './Report/Inception Report/inception-report/inception-report.component';
 
 export const routes: Routes = [
   {
@@ -1612,7 +1613,13 @@ export const routes: Routes = [
           title: 'Monitoring Report New'
         }
       },
-
+      {
+        path: 'InceptionReport',
+        component: InceptionReportComponent,
+        data: {
+          title: 'Inception Report'
+        }
+      },
     ]
   },
   {

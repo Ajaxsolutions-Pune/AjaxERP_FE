@@ -2,10 +2,16 @@ td{
     padding-top: 0px; margin-top: 0px; padding-bottom: 0px;
         margin-bottom: 0px;
   }
-  
+
 div.sticky {
   position: sticky;
   top: 0;
   background-color: #c8ced3;
   height: 30px;
+}
+.my-pagination::ng-deep .ngx-pagination .current {
+  background: #c70822;
+}
+.btn-outline-danger{
+  border: 3px solid #c70822;
 }

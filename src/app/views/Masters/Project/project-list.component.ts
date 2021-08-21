@@ -10,7 +10,7 @@ import { environment } from '../../../Components/Module/environment';
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  //styleUrls: ['./Answer-list.component.scss']
+  styleUrls: ['./project-list.component.scss']
 })
 export class ProjectListComponent implements OnInit {
   @Input() ProjectInput: Project;
@@ -44,7 +44,7 @@ export class ProjectListComponent implements OnInit {
   ngOnInit() {
     this.WithoutFilterProject = this.projects;
     this.objProject = {
-      ouCode : null,      
+      ouCode : null,
       projectName: null,
       projectCode: null,
       projectDescription: null,
@@ -73,7 +73,7 @@ export class ProjectListComponent implements OnInit {
   resultChanged(): void {
     this.SerachCri = 0;
     this.Resultproject = this.WithoutFilterProject;
-    
+
     if (this.objProject.projectName !== null && this.objProject.projectName !== '') {
       this.Resultproject = this.Resultproject.filter(SubResult =>
         SubResult.projectName.toLowerCase().indexOf(this.objProject.projectName.toString().toLowerCase()) !== -1);
