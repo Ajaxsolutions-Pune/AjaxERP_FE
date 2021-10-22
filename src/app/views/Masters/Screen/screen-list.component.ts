@@ -42,18 +42,11 @@ export class ScreenListComponent implements OnInit {
   ngOnInit() {
     this.WithoutFilterObj = this.arrOject;
     this.bindObj = {
-      screenId: null,
-      moduleId: null,
+      screenID:null,
+      parentID: null,
       screenName: null,
-      workMode: null,
-      checkOrder: null,
-      imagePath: null,
-      associateScreenId: null,
-      associateLevel: null,
-      isSubLinks: null,
-      actionName: null,
-      menuLink: null,
-      isActive: '3',
+      actionPath: null,
+      is_Active: '3',
       createdBy: null,
       createdDate: null,
       modifiedBy: null,
@@ -73,19 +66,19 @@ export class ScreenListComponent implements OnInit {
         !== -1);
       this.SerachCri = 1;
     }
-    if (this.bindObj.screenId !== null && this.bindObj.screenId.toString() !== '') {
+    if (this.bindObj.screenID !== null && this.bindObj.screenID.toString() !== '') {
       this.ResultOject = this.ResultOject.filter(SubResult =>
-        SubResult.screenId.toString().toLowerCase().indexOf(
-          this.bindObj.screenId.toString().toLowerCase()) !== -1);
+        SubResult.screenID.toString().toLowerCase().indexOf(
+          this.bindObj.screenID.toString().toLowerCase()) !== -1);
       this.SerachCri = 1;
     }
-    if (this.bindObj.isActive !== null && this.bindObj.isActive.toString() !== '-1') {
-      if (this.bindObj.isActive.toString() === '3') {
+    if (this.bindObj.is_Active !== null && this.bindObj.is_Active.toString() !== '-1') {
+      if (this.bindObj.is_Active.toString() === '3') {
         this.ResultOject = this.ResultOject.filter(SubResultProd =>
-          SubResultProd.isActive.toString() === 'Active' || SubResultProd.isActive.toString() === 'Inactive');
+          SubResultProd.is_Active.toString() === 'Active' || SubResultProd.is_Active.toString() === 'Inactive');
       } else {
         this.ResultOject = this.ResultOject.filter(SubResultProd =>
-          SubResultProd.isActive.toString() === this.bindObj.isActive.toString());
+          SubResultProd.is_Active.toString() === this.bindObj.is_Active.toString());
       }
       this.SerachCri = 1;
     }

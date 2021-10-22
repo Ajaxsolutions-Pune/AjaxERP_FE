@@ -63,14 +63,13 @@ export class RoleComponent extends FormComponentBase implements OnInit, AfterVie
       this.globalService.fillMasterDrp('USERT').subscribe(
         (par) => this.drproleCreateFor = par,
         (err: any) => console.log(err));
-  
+
 
     this.form = this.formBuilder.group({
       ControlroleId: ['', []],
       ControlroleName: ['', [Validators.required]],
       ControlroleDescription: ['', []],
       ControlroleCreateFor: ['', []],
-      ControlroleLevel: ['', []],
       ControlisActive: ['', []],
     });
     this.form.controls['ControlroleId'].disable();
@@ -83,7 +82,6 @@ export class RoleComponent extends FormComponentBase implements OnInit, AfterVie
       roleName: null,
       roleDescription: null,
       roleCreateFor: null,
-      roleLevel: null,
       isActive: null,
       createdBy: null,
       createdDate: null,
@@ -152,7 +150,6 @@ export class RoleComponent extends FormComponentBase implements OnInit, AfterVie
       roleName: null,
       roleDescription: null,
       roleCreateFor: null,
-      roleLevel: null,
       isActive: 'true',
       createdBy: null,
       createdDate: null,
@@ -166,7 +163,6 @@ export class RoleComponent extends FormComponentBase implements OnInit, AfterVie
         roleName: null,
         roleDescription: null,
         roleCreateFor: null,
-        roleLevel: null,
         isActive: 'true',
         createdBy: null,
         createdDate: null,
@@ -182,7 +178,6 @@ export class RoleComponent extends FormComponentBase implements OnInit, AfterVie
         roleName: null,
         roleDescription: null,
         roleCreateFor: null,
-        roleLevel: null,
         isActive: null,
         createdBy: null,
         createdDate: null,

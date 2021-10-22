@@ -25,7 +25,7 @@ export class AccessListComponent implements OnInit {
   env = environment;
   constructor(private _router: Router,
     objTrans: AccessTransfarmer,
-    private route: ActivatedRoute) {      
+    private route: ActivatedRoute) {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href='login';
     }

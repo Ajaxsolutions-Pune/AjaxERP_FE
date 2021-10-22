@@ -280,16 +280,16 @@ export const navItems: NavData[] = [
     url: '/User Setup',
     //   icon: 'fa fa-newspaper-o',
     children: [
-      /*{
+      {
         name: 'Access',
         url: '/AccessList',
         icon: 'icon-puzzle'
       },
-      {
-        name: 'Module',
-        url: '/ModuleList',
-        icon: 'icon-puzzle'
-      },
+      // {
+      //   name: 'Module',
+      //   url: '/ModuleList',
+      //   icon: 'icon-puzzle'
+      // },
       {
         name: 'Screen',
         url: '/ScreenList',
@@ -300,11 +300,11 @@ export const navItems: NavData[] = [
         url: '/RoleList',
         icon: 'icon-puzzle'
       },
-      {
-        name: 'Role Level',
-        url: '/RolelevelList',
-        icon: 'icon-puzzle'
-      },*/
+      // {
+      //   name: 'Role Level',
+      //   url: '/RolelevelList',
+      //   icon: 'icon-puzzle'
+      // },
       {
         name: 'User',
         url: '/UserList',
@@ -345,6 +345,11 @@ export const navItems: NavData[] = [
       {
         name: 'Inception Report',
         url: '/InceptionReport',
+        icon: 'icon-puzzle'
+      },
+      {
+        name: 'Import Data',
+        url: '/ImportData',
         icon: 'icon-puzzle'
       },
     ]

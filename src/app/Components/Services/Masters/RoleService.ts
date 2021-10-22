@@ -18,34 +18,34 @@ export class RoleService {
     }
     Listrole: Role[];
     getRoles(): Observable<RoleEntity[]> {
-        return this.httpClient.get<RoleEntity[]>(this.str + '/Role/getList',
+        return this.httpClient.get<RoleEntity[]>(this.str + '/RoleNew/getList',
             this.env.httpOptions);
     }
 
-    fillDrpAnswers(): Observable<RoleEntity[]> {
-        return this.httpClient.get<RoleEntity[]>(this.str + '/Answer/getList?status=1',
+    fillDrpRoleNew(): Observable<RoleEntity[]> {
+        return this.httpClient.get<RoleEntity[]>(this.str + '/RoleNew/getList?status=1',
             this.env.httpOptions);
     }
 
     getRole(RoleCode: string): Observable<RoleEntity> {
-        return this.httpClient.get<RoleEntity>(this.str + '/Role/' + RoleCode,
+        return this.httpClient.get<RoleEntity>(this.str + '/RoleNew/' + RoleCode,
             this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     Save(saveEntityObj: Role): Observable<Insertstatus> {
         saveEntityObj.roleId = null;
-        return this.httpClient.post<Insertstatus>(this.str + '/Role',
+        return this.httpClient.post<Insertstatus>(this.str + '/RoleNew',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    // checkRole(access: string): Observable<CommonEntity> {
-    //    return this.httpClient.get<CommonEntity>(this.str + '/Role/getAccessByName?name=' + access
-    //        , this.env.httpOptions).pipe(catchError(this.handleError));
-    // }
+    checkRole(access: string): Observable<RoleEntity> {
+       return this.httpClient.get<RoleEntity>(this.str + '/RoleNew/getAccessByName?name=' + access
+           , this.env.httpOptions).pipe(catchError(this.handleError));
+    }
     Update(updateEntityObj: RoleEntity): Observable<Insertstatus> {
         const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<Insertstatus>(this.str + '/Role', updateEntityObj
+        return this.httpClient.post<Insertstatus>(this.str + '/RoleNew', updateEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 

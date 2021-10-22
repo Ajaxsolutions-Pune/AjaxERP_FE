@@ -53,7 +53,7 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
   special_char_val(event) {
     let k;
     k = event.charCode;
-    return this.globalService.SpecialCharValidator(k);    
+    return this.globalService.SpecialCharValidator(k);
   }
   ngOnInit() {
     this.moduleService.fillDrpModuleobjs().subscribe(
@@ -66,18 +66,11 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
     }
     status = '';
     this.screenobj = {
-      screenId: null,
-      moduleId: null,
+      screenID:null,
+      parentID: null,
       screenName: null,
-      workMode: null,
-      checkOrder: null,
-      imagePath: null,
-      associateScreenId: null,
-      associateLevel: null,
-      isSubLinks: null,
-      actionName: null,
-      menuLink: null,
-      isActive: 'true',
+      actionPath: null,
+      is_Active: '3',
       createdBy: localStorage.getItem('username'),
       createdDate: this.globalService.GerCurrntDateStamp(),
       modifiedBy: localStorage.getItem('username'),
@@ -88,13 +81,10 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
       this.form = this.formBuilder.group({
         ControlscreenName: ['', [Validators.required],
           [ScreenAsyncValidator(this.screenService, str)]],
-        ControlimagePath: ['', []],
-        ControlscreenId: ['', []],
-        ControlisActive: ['', []],
-        ControlcheckOrder: ['', []],
-        ControlmoduleId: ['', []]
+        ControlscreenID: ['', []],
+        ControlisActive: ['', []]
       });
-      this.form.controls['ControlscreenId'].disable();
+      this.form.controls['ControlscreenID'].disable();
     });
   }
 
@@ -118,7 +108,7 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
     this.screenobj.modifiedBy = localStorage.getItem('username');
     this.screenobj.modifiedDate = this.globalService.GerCurrntDateStamp();
     if (status !== 'Update') {
-      this.screenobj.screenId = null;
+      this.screenobj.screenID = null;
       this.screenService.Save(this.screenTransfarmer.ScreenTransfarmer(this.screenobj)).subscribe(
         (par) => {
           if (par.status === 'Inserted') {
@@ -150,18 +140,11 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
 
   private getScreen(Screen_Code: string) {
     this.screenobj = {
-      screenId: null,
-      moduleId: null,
+      screenID:null,
+      parentID: null,
       screenName: null,
-      workMode: null,
-      checkOrder: null,
-      imagePath: null,
-      associateScreenId: null,
-      associateLevel: null,
-      isSubLinks: null,
-      actionName: null,
-      menuLink: null,
-      isActive: 'true',
+      actionPath: null,
+      is_Active: '3',
       createdBy: localStorage.getItem('username'),
       createdDate: this.globalService.GerCurrntDateStamp(),
       modifiedBy: localStorage.getItem('username'),
@@ -169,18 +152,11 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
     };
     if (Screen_Code === null || Screen_Code === '') {
       this.screenobj = {
-        screenId: null,
-        moduleId: null,
+        screenID:null,
+        parentID: null,
         screenName: null,
-        workMode: null,
-        checkOrder: null,
-        imagePath: null,
-        associateScreenId: null,
-        associateLevel: null,
-        isSubLinks: null,
-        actionName: null,
-        menuLink: null,
-        isActive: 'true',
+        actionPath: null,
+        is_Active: '3',
         createdBy: localStorage.getItem('username'),
         createdDate: this.globalService.GerCurrntDateStamp(),
         modifiedBy: localStorage.getItem('username'),

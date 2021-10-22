@@ -168,6 +168,7 @@ import { JobLevelListResolverService } from './Components/Resolver/HRMS/JobLevel
 import { JobLevelComponent } from './views/HRMS/JobLevel/job-level.component';
 import { MonitoringReportNewComponent } from './Report/Monitoring/MonitoringReportNew/monitoring-report-new.component';
 import { InceptionReportComponent } from './Report/Inception Report/inception-report/inception-report.component';
+import { ImportDataComponent } from './Report/Import Data/import-data/import-data.component';
 
 export const routes: Routes = [
   {
@@ -1618,6 +1619,13 @@ export const routes: Routes = [
         component: InceptionReportComponent,
         data: {
           title: 'Inception Report'
+        }
+      },
+      {
+        path: 'ImportData',
+        component: ImportDataComponent,
+        data: {
+          title: 'Import Data'
         }
       },
     ]

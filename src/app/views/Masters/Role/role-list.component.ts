@@ -9,12 +9,12 @@ alasql['private'].externalXlsxLib = require('xlsx');
 
 @Component({
     selector: 'app-role-list',
-    templateUrl: './Role-list.component.html'
-    //styleUrls: ['./Answer-list.component.scss']
+    templateUrl: './Role-list.component.html',
+    styleUrls : ['./Role-list.component.scss']
   })
 
 
-  export class RoleListComponent implements OnInit 
+  export class RoleListComponent implements OnInit
   {
     @Input() RoleInput: Role;
     roles: Role[];
@@ -42,7 +42,7 @@ alasql['private'].externalXlsxLib = require('xlsx');
         totalItems: this.roles.length
       };
     }
-    
+
     ngOnInit() {
         this.WithoutFilterRole = this.roles;
         this.objRole = {
@@ -50,12 +50,11 @@ alasql['private'].externalXlsxLib = require('xlsx');
             roleName: null,
             roleDescription : null,
             roleCreateFor : null,
-            roleLevel : null,    
             isActive  : '3' ,
             createdBy: null,
             createdDate : null,
             modifiedBy: null,
-            modifiedDate: null  
+            modifiedDate: null
          };
       }
 
@@ -78,7 +77,7 @@ alasql['private'].externalXlsxLib = require('xlsx');
             SubResult.roleId.toString().toLowerCase().indexOf(this.objRole.roleId.toString().toLowerCase()) !== -1);
           this.SerachCri = 1;
         }
-    
+
         if (this.objRole.isActive !== null && this.objRole.isActive.toString() !== '-1') {
           if (this.objRole.isActive.toString() === '3') {
             this.Resultrole = this.Resultrole.filter(SubResultProd =>

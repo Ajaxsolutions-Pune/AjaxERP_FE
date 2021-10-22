@@ -16,29 +16,29 @@ export class ScreenObjService {
         this.str = this.env.apiServiceIPPort;
     }
     getScreens(): Observable<ScreenObjEntity[]> {
-        return this.httpClient.get<ScreenObjEntity[]>(this.str + '/Screen/getList', this.env.httpOptions);
+        return this.httpClient.get<ScreenObjEntity[]>(this.str + '/ScreenNew/getList', this.env.httpOptions);
     }
 
     fillDrpScreens(): Observable<ScreenObjEntity[]> {
-        return this.httpClient.get<ScreenObjEntity[]>(this.str + '/Screen/getList?status=1', this.env.httpOptions);
+        return this.httpClient.get<ScreenObjEntity[]>(this.str + '/ScreenNew/getList?status=1', this.env.httpOptions);
     }
 
     getScreen(ScreenCode: string): Observable<ScreenObjEntity> {
-        return this.httpClient.get<ScreenObjEntity>(this.str + '/Screen/' + ScreenCode,
+        return this.httpClient.get<ScreenObjEntity>(this.str + '/ScreenNew/' + ScreenCode,
             this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: ScreenObjEntity): Observable<Insertstatus> {
-        return this.httpClient.post<Insertstatus>(this.str + '/Screen',
+        return this.httpClient.post<Insertstatus>(this.str + '/ScreenNew',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     checkScreen(Screen: string, Code: string): Observable<CommonEntity> {
-        return this.httpClient.get<CommonEntity>(this.str + '/Screen/getScreenByName?name=' +
+        return this.httpClient.get<CommonEntity>(this.str + '/ScreenNew/getScreenByName?name=' +
             Screen + '&code=' + Code
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Update(updateEntityObj: ScreenObjEntity): Observable<Insertstatus> {
-        return this.httpClient.post<Insertstatus>(this.str + '/Screen', updateEntityObj
+        return this.httpClient.post<Insertstatus>(this.str + '/ScreenNew', updateEntityObj
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 

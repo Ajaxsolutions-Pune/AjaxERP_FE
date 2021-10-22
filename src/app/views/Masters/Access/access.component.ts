@@ -72,7 +72,7 @@ export class AccessComponent extends FormComponentBase implements OnInit, AfterV
     let k;
     k = event.charCode;
     return this.globalService.SpecialCharValidator(k);
-    
+
   }
   ngAfterViewInit(): void {
     setTimeout(() => {

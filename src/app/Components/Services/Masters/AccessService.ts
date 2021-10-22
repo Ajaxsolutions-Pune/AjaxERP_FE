@@ -17,30 +17,30 @@ export class AccessService {
         this.str = this.env.apiServiceIPPort;
     }
     getAccesss(): Observable<AccessEntity[]> {
-        return this.httpClient.get<AccessEntity[]>(this.str + '/Access/getList', this.env.httpOptions);
+        return this.httpClient.get<AccessEntity[]>(this.str + '/AccessNew/getList', this.env.httpOptions);
     }
 
     fillDrpAccesss(): Observable<AccessEntity[]> {
-        return this.httpClient.get<AccessEntity[]>(this.str + '/Access/getList?status=1', this.env.httpOptions);
+        return this.httpClient.get<AccessEntity[]>(this.str + '/AccessNew/getList?status=1', this.env.httpOptions);
     }
 
     getAccess(AccessCode: string): Observable<AccessEntity> {
-        return this.httpClient.get<AccessEntity>(this.str + '/Access/' + AccessCode,
+        return this.httpClient.get<AccessEntity>(this.str + '/AccessNew/' + AccessCode,
             this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Save(saveEntityObj: AccessEntity): Observable<Insertstatus> {
      //   saveEntityObj.tlCode = null;
-        return this.httpClient.post<Insertstatus>(this.str + '/Access',
+        return this.httpClient.post<Insertstatus>(this.str + '/AccessNew',
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
     checkAccess(access : string,Code : string): Observable<CommonEntity> {
-        return this.httpClient.get<CommonEntity>(this.str + '/Access/getAccessByName?name=' + access +
+        return this.httpClient.get<CommonEntity>(this.str + '/AccessNew/getAccessByName?name=' + access +
         '&id=' + Code, this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Update(updateEntityObj: AccessEntity): Observable<Insertstatus> {
         // tslint:disable-next-line:max-line-length
-        return this.httpClient.post<Insertstatus>(this.str + '/Access', updateEntityObj
+        return this.httpClient.post<Insertstatus>(this.str + '/AccessNew', updateEntityObj
         , this.env.httpOptions).pipe(catchError(this.handleError));
     }
 

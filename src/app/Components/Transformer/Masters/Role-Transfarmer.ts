@@ -26,7 +26,6 @@ export class RoleTransfarmer {
             this.role.roleId = element.roleId;
             this.role.roleName = element.roleName;
             this.role.roleDescription = element.roleDescription;
-            this.role.roleLevel = element.roleLevel;
             this.role.roleCreateFor = element.roleCreateFor;
             if (element.isActive === '1') {
                 this.role.isActive = 'Active'.toString().trim();
@@ -42,7 +41,6 @@ export class RoleTransfarmer {
         this.role.roleId = Entity.roleId;
         this.role.roleName = Entity.roleName;
         this.role.roleDescription = Entity.roleDescription;
-        this.role.roleLevel = Entity.roleLevel;
         this.role.roleCreateFor = Entity.roleCreateFor;
         if (Entity.isActive === '1') {
             this.role.isActive = 'true'.toString().trim();
@@ -55,7 +53,6 @@ export class RoleTransfarmer {
         this.roleEntity.roleId = Role1.roleId;
         this.roleEntity.roleName = Role1.roleName;
         this.roleEntity.roleDescription = Role1.roleDescription;
-        this.roleEntity.roleLevel = Role1.roleLevel;
         this.roleEntity.roleCreateFor = Role1.roleCreateFor;
         this.roleEntity.isActive = Role1.isActive;
         if (Role1.isActive.toString().trim() === 'true') {
