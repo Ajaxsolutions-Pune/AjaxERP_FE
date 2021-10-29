@@ -1,0 +1,86 @@
+<main class="form-main">
+  <form #formScreen="ngForm" [formGroup]="form" autocomplete="off">
+    <div class="animated fadeIn">
+      <div class="row">
+        <div class="col-md-11 container">
+          <div class="card">
+            <div class="card-header">
+              <strong>Role User Mapping</strong>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4"></div>
+                <mat-form-field class="col-md-4">
+                  <mat-label>Role ID</mat-label>
+                  <mat-select formControlName="ControlroleID" [(ngModel)]="roleUserobj.roleId" >
+                    <mat-option>Role ID</mat-option>
+                    <mat-option *ngFor="let obj of roleIddrp" [value]="obj.roleId">
+                      {{obj.roleId}}
+                  </mat-option>
+                  </mat-select>
+                  <mat-error>
+                    {{ formErrors["ControlroleID"] }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <div class="col-md-4"></div>
+                <mat-form-field class="col-md-4">
+                  <mat-label>Login ID</mat-label>
+                  <mat-select formControlName="ControlloginID" [(ngModel)]="roleUserobj.loginId">
+                    <mat-option>Login ID</mat-option>
+                    <mat-option *ngFor="let obj of loginIddrp" [value]="obj.loginId">
+                      {{obj.loginId}}
+                  </mat-option>
+                  </mat-select>
+                  <mat-error>
+                    {{ formErrors["ControlloginID"] }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-sm-3">
+                  <mat-checkbox
+                    name="chkisActive"
+                    #chkisActive
+                    formControlName="ControlisActive"
+                    [(ngModel)]="roleUserobj.isActive">Active
+                  </mat-checkbox>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                  <button
+                    mat-raised-button
+                    [disabled]="!form.valid"
+                    (click)="save()"
+                    color="primary"
+                  >
+                    Submit
+                  </button>
+                  &nbsp; &nbsp; &nbsp; &nbsp;
+                  <button
+                    mat-raised-button
+                    color="warn"
+                    routerLink="/RoleUserMappingList"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/.row-->
+    </div>
+  </form>
+</main>
+<!-- <div style="display: none;"> {{screenobj | json}}</div> -->

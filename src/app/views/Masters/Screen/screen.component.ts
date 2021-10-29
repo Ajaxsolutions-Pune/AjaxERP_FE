@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { log } from 'console';
 import { Moduleobj } from '../../../Components/Module/Masters/Module.model';
 import { ScreenObj, ScreenObjEntity } from '../../../Components/Module/Masters/Screen.model';
 import { GlobalService } from '../../../Components/Services/GlobalServices/Global.service';
@@ -56,11 +57,7 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
     return this.globalService.SpecialCharValidator(k);
   }
   ngOnInit() {
-    this.moduleService.fillDrpModuleobjs().subscribe(
-      (par) => {
-        this.moduledrp = this.moduleTransfarmer.ModuleobjTransfarmers(par);
-      },
-      (err: any) => console.log(err));
+
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href = 'login';
     }
@@ -70,14 +67,16 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
       parentID: null,
       screenName: null,
       actionPath: null,
-      is_Active: '3',
-      createdBy: localStorage.getItem('username'),
-      createdDate: this.globalService.GerCurrntDateStamp(),
-      modifiedBy: localStorage.getItem('username'),
-      modifiedDate: this.globalService.GerCurrntDateStamp(),
+      is_Active: 'true',
+      created_By: localStorage.getItem('username'),
+      created_Date: this.globalService.GerCurrntDateStamp(),
+      modified_By: localStorage.getItem('username'),
+      modified_Date: this.globalService.GerCurrntDateStamp(),
     };
     this.route.paramMap.subscribe(parameterMap => {
-      const str = parameterMap.get('id'); this.getScreen(str);
+      const str = parameterMap.get('id');
+      this.getScreen(str);
+      console.log(str)
       this.form = this.formBuilder.group({
         ControlscreenName: ['', [Validators.required],
           [ScreenAsyncValidator(this.screenService, str)]],
@@ -103,14 +102,17 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
   }
 
   save(): void {
-    this.screenobj.createdBy = localStorage.getItem('username');
-    this.screenobj.createdDate = this.globalService.GerCurrntDateStamp();
-    this.screenobj.modifiedBy = localStorage.getItem('username');
-    this.screenobj.modifiedDate = this.globalService.GerCurrntDateStamp();
+    this.screenobj.created_By= localStorage.getItem('username'),
+    this.screenobj.created_Date= this.globalService.GerCurrntDateStamp(),
+    this.screenobj.modified_By= localStorage.getItem('username'),
+    this.screenobj.modified_Date= this.globalService.GerCurrntDateStamp()
     if (status !== 'Update') {
       this.screenobj.screenID = null;
+      this.screenobj.parentID = "";
+
       this.screenService.Save(this.screenTransfarmer.ScreenTransfarmer(this.screenobj)).subscribe(
         (par) => {
+          console.log(this.screenobj)
           if (par.status === 'Inserted') {
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
@@ -123,9 +125,12 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
       );
 
     } else {
+      this.screenobj.parentID = "";
       this.screenService.Update(this.screenTransfarmer.ScreenTransfarmer(this.screenobj)).subscribe(
         (par) => {
+          console.log(this.screenobj)
           if (par.status === 'Updated') {
+
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['ScreenList']);
@@ -144,11 +149,11 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
       parentID: null,
       screenName: null,
       actionPath: null,
-      is_Active: '3',
-      createdBy: localStorage.getItem('username'),
-      createdDate: this.globalService.GerCurrntDateStamp(),
-      modifiedBy: localStorage.getItem('username'),
-      modifiedDate: this.globalService.GerCurrntDateStamp(),
+      is_Active: 'true',
+      created_By: localStorage.getItem('username'),
+      created_Date: this.globalService.GerCurrntDateStamp(),
+      modified_By: localStorage.getItem('username'),
+      modified_Date: this.globalService.GerCurrntDateStamp(),
     };
     if (Screen_Code === null || Screen_Code === '') {
       this.screenobj = {
@@ -156,11 +161,11 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
         parentID: null,
         screenName: null,
         actionPath: null,
-        is_Active: '3',
-        createdBy: localStorage.getItem('username'),
-        createdDate: this.globalService.GerCurrntDateStamp(),
-        modifiedBy: localStorage.getItem('username'),
-        modifiedDate: this.globalService.GerCurrntDateStamp(),
+        is_Active: 'true',
+        created_By: localStorage.getItem('username'),
+        created_Date: this.globalService.GerCurrntDateStamp(),
+        modified_By: localStorage.getItem('username'),
+        modified_Date: this.globalService.GerCurrntDateStamp(),
       };
       status = '';
 
@@ -169,6 +174,8 @@ export class ScreenComponent extends FormComponentBase implements OnInit, AfterV
         (par) => {
           this.screenEntity = par;
           this.screenobj = this.screenTransfarmer.ScreenTransfarmerEntity(this.screenEntity);
+
+
         },
         (err: any) => console.log(err));
       status = 'Update';

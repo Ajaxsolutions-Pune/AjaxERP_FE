@@ -6,6 +6,7 @@ import { environment } from '../../Module/environment';
 import { Role, RoleEntity } from '../../Module/Masters/Role.model';
 import { Insertstatus } from '../../Module/Masters/Insert_status.model';
 import { DialogService } from '../MatServices/Dialog.service';
+import { CommonEntity } from '../../Module/common.model';
 
 @Injectable()
 export class RoleService {
@@ -38,8 +39,8 @@ export class RoleService {
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    checkRole(access: string): Observable<RoleEntity> {
-       return this.httpClient.get<RoleEntity>(this.str + '/RoleNew/getAccessByName?name=' + access
+    checkRole(role: string): Observable<CommonEntity> {
+       return this.httpClient.get<CommonEntity>(this.str + '/RoleNew/getRoleByName?name=' + role
            , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Update(updateEntityObj: RoleEntity): Observable<Insertstatus> {

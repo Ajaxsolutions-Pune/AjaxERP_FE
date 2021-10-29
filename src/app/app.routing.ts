@@ -169,6 +169,9 @@ import { JobLevelComponent } from './views/HRMS/JobLevel/job-level.component';
 import { MonitoringReportNewComponent } from './Report/Monitoring/MonitoringReportNew/monitoring-report-new.component';
 import { InceptionReportComponent } from './Report/Inception Report/inception-report/inception-report.component';
 import { ImportDataComponent } from './Report/Import Data/import-data/import-data.component';
+import { RoleUserMappingListComponent } from './views/Masters/role-user-mapping/role-user-mapping-list/role-user-mapping-list.component';
+import { RoleUserMappingListResolverService } from './Components/Resolver/Masters/Role-User-Mapping-List-Resolver.Service';
+import { RoleUserMappingComponent } from './views/Masters/role-user-mapping/role-user-mapping.component';
 
 export const routes: Routes = [
   {
@@ -1336,6 +1339,30 @@ export const routes: Routes = [
         resolve: {
           AssetList: AssetListResolverService
         }
+      },
+      {
+        path: 'RoleUserMappingList',
+        component: RoleUserMappingListComponent,
+        data: {
+          title: 'RoleUserMapping List'
+        },
+        resolve: {
+          RoleUserMappingList: RoleUserMappingListResolverService
+        }
+      },
+      {
+        path: 'RoleUserMapping/:id',
+        component: RoleUserMappingComponent,
+        data: {
+          title: 'Edit RoleUserMapping'
+        }
+      },
+      {
+        path: 'RoleUserMapping',
+        component: RoleUserMappingComponent,
+        data: {
+          title: 'Add RoleUserMapping'
+        },
       },
       {
         path: 'TransmissionLineList',

@@ -306,6 +306,11 @@ export const navItems: NavData[] = [
       //   icon: 'icon-puzzle'
       // },
       {
+        name: 'Role User Mapping',
+        url: '/RoleUserMappingList',
+        icon: 'icon-puzzle'
+      },
+      {
         name: 'User',
         url: '/UserList',
         icon: 'icon-puzzle'

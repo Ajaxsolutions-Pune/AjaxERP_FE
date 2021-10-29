@@ -47,10 +47,10 @@ export class ScreenListComponent implements OnInit {
       screenName: null,
       actionPath: null,
       is_Active: '3',
-      createdBy: null,
-      createdDate: null,
-      modifiedBy: null,
-      modifiedDate: null
+      created_By: null,
+      created_Date: null,
+      modified_By: null,
+      modified_Date: null
     }
   }
 

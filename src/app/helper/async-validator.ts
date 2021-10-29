@@ -39,6 +39,8 @@ import { JobLevelService } from '../Components/Services/HRMS/JobLevelService';
 //import { PositionService } from '../Components/Services/HRMS/PositionService';
 //import { LocationService } from '../Components/Services/HRMS/LocationService';
 import { QualificationTypeService } from '../Components/Services/HRMS/QualificationTypeService';
+import { RoleService } from '../Components/Services/Masters/RoleService';
+import { RoleUserMappingService } from '../Components/Services/Masters/RoleUserMappingService';
 
 
 export const ConfirmPasswordValidator = (globalService: GlobalService, PassFild: string, ConfirmPassFild: string, time: number = 500) => {
@@ -343,7 +345,7 @@ export const ScreenAsyncValidator = (ScreenService: ScreenObjService, Code: stri
   time: number = 500) => {
   return (input: FormControl) => {
     return timer(time).pipe(
-      switchMap(() => ScreenService.checkScreen(input.value, Code)),
+      switchMap(() => ScreenService.checkScreen(input.value)),
       map(res => {
         if (res.status == 'notexist') {
           return null;
@@ -355,11 +357,42 @@ export const ScreenAsyncValidator = (ScreenService: ScreenObjService, Code: stri
   };
 };
 
+
 export const UserAsyncValidator = (userService: UserService, Code: string,
   time: number = 500) => {
   return (input: FormControl) => {
     return timer(time).pipe(
       switchMap(() => userService.checkUser(input.value, Code)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+export const RoleAsyncValidator = (roleService: RoleService, Code: string,
+  time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => roleService.checkRole(input.value)),
+      map(res => {
+        if (res.status == 'notexist') {
+          return null;
+        } else {
+          return { queExist: true };
+        }
+      })
+    );
+  };
+};
+export const RoleUserMappingAsyncValidator = (roleusermappingService: RoleUserMappingService, Code: string,
+  time: number = 500) => {
+  return (input: FormControl) => {
+    return timer(time).pipe(
+      switchMap(() => roleusermappingService.checkRoleUserMappings(input.value)),
       map(res => {
         if (res.status == 'notexist') {
           return null;

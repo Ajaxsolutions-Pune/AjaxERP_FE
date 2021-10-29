@@ -1,0 +1,84 @@
+<div class="form-group">
+  <div class="row">
+    <div class="col-md-3">Role ID</div>
+    <div class="col-md-3">Login ID</div>
+    <div class="col-md-2">Status</div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+        <input id="txtRoleID" required name="txtRoleID"
+        type="text" class="form-control" placeholder="Role ID"
+        (input)="resultChanged()" [(ngModel)]="bindObj.roleId">
+    </div>
+    <div class="col-md-3">
+        <input id="txtScreenID" required
+        name="txtLoginID" type="text" class="form-control"
+        placeholder="Login ID"
+        (input)="resultChanged()"
+        [(ngModel)]="bindObj.loginId">
+    </div>
+    <div class="col-md-2">
+      <select id="ShiftId" name="ShiftId" (change)="resultChanged()" [(ngModel)]="bindObj.isActive"
+        class="form-control">
+        <option value="3">All</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+    </div>
+    <div class="col-md-1">
+        <button class="col-md-12 btn btn-primary icons font-1xl icon-plus"
+        title="Create Role Details" routerLink="/RoleUserMapping"></button>
+    </div>
+    <div class="col-md-1">
+      <i class="fa fa-file-excel-o" style="font-size:35px;color: #c70822" aria-hidden="true"
+        (click)="ExportToExcel()"></i>
+    </div>
+</div>
+</div>
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>ID</th>
+        <th>Role ID</th>
+        <th>Login ID</th>
+        <th>Role Belongs To</th>
+        <th>Effective From Date</th>
+        <th>Effective To Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Oject of arrOject | paginate: config">
+        <td>
+          <div>{{Oject.roleLoginTrnId}}</div>
+        </td>
+        <td>
+          <div>{{Oject.roleId}}</div>
+        </td>
+        <td>
+          <div>{{Oject.loginId}}</div>
+        </td>
+        <td>
+          <div>{{Oject.roleBelongsTo}}</div>
+        </td>
+        <td>
+          <div>{{Oject.effectiveFromDate}}</div>
+        </td>
+        <td>
+          <div>{{Oject.effectiveToDate}}</div>
+        </td>
+        <td>
+          <div>{{Oject.isActive}}</div>
+        </td>
+        <td>
+        <button mat-icon-button [routerLink]="['/RoleUserMapping/',Oject.roleLoginTrnId]"
+         color="accent">
+          <mat-icon  color="#FFFFFF" aria-label="Edit">edit</mat-icon>
+        </button>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

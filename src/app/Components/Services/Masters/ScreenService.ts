@@ -32,9 +32,9 @@ export class ScreenObjService {
             saveEntityObj, this.env.httpOptions).pipe(catchError(this.handleError));
     }
 
-    checkScreen(Screen: string, Code: string): Observable<CommonEntity> {
+    checkScreen(Screen: string): Observable<CommonEntity> {
         return this.httpClient.get<CommonEntity>(this.str + '/ScreenNew/getScreenByName?name=' +
-            Screen + '&code=' + Code
+            Screen
             , this.env.httpOptions).pipe(catchError(this.handleError));
     }
     Update(updateEntityObj: ScreenObjEntity): Observable<Insertstatus> {

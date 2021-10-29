@@ -12,6 +12,7 @@ import { RoleLevel } from '../../../Components/Module/Masters/RoleLevel.model';
 import { RolelevelService } from '../../../Components/Services/Masters/RolelevelService';
 import { RolelevelTransfarmer } from '../../../Components/Transformer/Masters/Role-level.Transfarmer';
 import { MasterDrp } from '../../../Components/Module/Masters/MasterDrp.model';
+import { RoleAsyncValidator } from '../../../helper/async-validator';
 
 @Component({
   selector: 'app-role',
@@ -43,7 +44,7 @@ export class RoleComponent extends FormComponentBase implements OnInit, AfterVie
         required: 'Role id is required.',
       },
       ControlroleName: {
-        required: 'Role is required.',
+        required: 'Role Name is required.',
       }
     };
 
@@ -65,14 +66,7 @@ export class RoleComponent extends FormComponentBase implements OnInit, AfterVie
         (err: any) => console.log(err));
 
 
-    this.form = this.formBuilder.group({
-      ControlroleId: ['', []],
-      ControlroleName: ['', [Validators.required]],
-      ControlroleDescription: ['', []],
-      ControlroleCreateFor: ['', []],
-      ControlisActive: ['', []],
-    });
-    this.form.controls['ControlroleId'].disable();
+
     if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
       window.location.href = 'login';
     }
@@ -91,6 +85,16 @@ export class RoleComponent extends FormComponentBase implements OnInit, AfterVie
     this.route.paramMap.subscribe(parameterMap => {
       const str = parameterMap.get('id');
       this.getrole(str);
+      this.form = this.formBuilder.group({
+
+        ControlroleId: ['', []],
+        ControlroleName: ['', [Validators.required],
+        [RoleAsyncValidator(this.roleService, str)]],
+        ControlroleDescription: ['', []],
+        ControlroleCreateFor: ['', []],
+        ControlisActive: ['', []],
+      });
+      this.form.controls['ControlroleId'].disable();
     });
   }
 
@@ -108,7 +112,7 @@ export class RoleComponent extends FormComponentBase implements OnInit, AfterVie
     alert('Registration Complete');
   }
 
-  save(roleForm: NgForm): void {
+  save(): void {
 
     this.role.createdBy = localStorage.getItem('username');
     this.role.createdDate = this.globalService.GerCurrntDateStamp();
@@ -124,21 +128,27 @@ export class RoleComponent extends FormComponentBase implements OnInit, AfterVie
         (par) => {
           console.log(par);
           if (par.status === 'Inserted') {
-            roleForm.reset();
             this.defaultLayoutComponent.Massage('',
               'Data saved successfully !', 'modal-info');
             this.router.navigate(['RoleList']);
+          }else {
+            this.defaultLayoutComponent.Massage('',
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
           }
         }
       );
     }
     else {
       this.roleService.Update(this.roleTransfarmer.RoleTransfarmer(this.role)).subscribe(
-        () => {
-          roleForm.reset();
-          this.defaultLayoutComponent.Massage('',
-            'Data saved successfully !', 'modal-info');
-          this.router.navigate(['RoleList']);
+        (par) => {
+          if (par.status === 'Updated') {
+            this.defaultLayoutComponent.Massage('',
+              'Data saved successfully !', 'modal-info');
+            this.router.navigate(['RoleList']);
+          } else {
+            this.defaultLayoutComponent.Massage('',
+              'Technical Error Please connect to Ajax Support team', 'modal-info');
+          }
         }
       );
     }
@@ -173,17 +183,7 @@ export class RoleComponent extends FormComponentBase implements OnInit, AfterVie
 
     }
     else {
-      this.roleEntity = {
-        roleId: null,
-        roleName: null,
-        roleDescription: null,
-        roleCreateFor: null,
-        isActive: null,
-        createdBy: null,
-        createdDate: null,
-        modifiedBy: null,
-        modifiedDate: null
-      };
+
       this.roleService.getRole(role_Code).subscribe(
         (par) => {
           this.roleEntity = par;

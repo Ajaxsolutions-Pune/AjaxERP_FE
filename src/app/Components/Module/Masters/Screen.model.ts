@@ -4,10 +4,10 @@ export class ScreenObjEntity {
   screenName: string;
   actionPath: string;
   is_Active: string;
-  createdBy: string;
-  createdDate: string;
-  modifiedBy: string;
-  modifiedDate: string;
+  created_By: string;
+  created_Date: string;
+  modified_By: string;
+  modified_Date: string;
 }
 export class ScreenObj {
 screenID:string;
@@ -15,8 +15,8 @@ parentID: string;
 screenName: string;
 actionPath: string;
 is_Active: string;
-createdBy: string;
-createdDate: string;
-modifiedBy: string;
-modifiedDate: string;
+created_By: string;
+created_Date: string;
+modified_By: string;
+modified_Date: string;
 }

@@ -384,6 +384,11 @@ import { MonitoringReportNewComponent } from './Report/Monitoring/MonitoringRepo
 import { MapReplayService } from './Components/Services/Masters/MapReplayService';
 import { InceptionReportComponent } from './Report/Inception Report/inception-report/inception-report.component';
 import { ImportDataComponent } from './Report/Import Data/import-data/import-data.component';
+import { RoleUserMappingComponent } from './views/Masters/role-user-mapping/role-user-mapping.component';
+import { RoleUserMappingListComponent } from './views/Masters/role-user-mapping/role-user-mapping-list/role-user-mapping-list.component';
+import { RoleUserMappingListResolverService } from './Components/Resolver/Masters/Role-User-Mapping-List-Resolver.Service';
+import { RoleUserMappingService } from './Components/Services/Masters/RoleUserMappingService';
+import { RoleUserMappingTransfarmer } from './Components/Transformer/Masters/Role-User-Mapping-Transfarmer';
 
 export const MY_FORMATS = {
   parse: {
@@ -501,7 +506,7 @@ export const MY_FORMATS = {
     UserDeviceRegListComponent, UserDeviceRegComponent, ModuleListComponent, ModuleComponent,
     ScreenComponent, ScreenListComponent, MonitoringReportComponent,MonitoringReportNewComponent, UserGroupListComponent, UserGroupComponent,
     UserGroupMappingComponent, NotificationObjListComponent, NotificationObjComponent,
-    MapComponent, 
+    MapComponent,
     MapTrackingComponent,
     QualificationListComponent,
     QualificationComponent,
@@ -527,6 +532,8 @@ export const MY_FORMATS = {
     JobLevelComponent,
     InceptionReportComponent,
     ImportDataComponent,
+    RoleUserMappingComponent,
+    RoleUserMappingListComponent,
   ],
   providers: [
     ConfirmDialogService,
@@ -534,7 +541,7 @@ export const MY_FORMATS = {
     CountryService, BnNgIdleService, DashboardService, CastCategoryService,
     CityService, CityTransfarmer, CityGroupTransfarmer, UOMService, DefaultLayoutComponent, CookieService,
     QaTypeService, BrandService, StateService, MFGService, TransmissionLineService,
-    HubService, ContactService, AccessService, ModuleobjService, ScreenObjService, UserDeviceDataService,
+    HubService, ContactService, AccessService, RoleUserMappingService, ModuleobjService, ScreenObjService, UserDeviceDataService,
     CityGroupService, ItemSubGroupService, RegionService, FormQueAnsMappingService,
     ItemGroupService, DistrictService, TaxCategoryService, CastService, BrandTransformer,
     TehsilService, ItemCategoryService, AnswerService, FormTransfarmer, QaTypeTransfarmer,
@@ -544,7 +551,7 @@ export const MY_FORMATS = {
     DeviceTransfarmer, AssetCategoryTransfarmer, NotificationObjService, NotificationObjListResolverService, NotificationObjTransfarmer,
     ClusterTransfarmer, RegionTransfarmer, ColourTransfarmer, UserGroupTransfarmer,
     StateTransfarmer, CountryTransfarmer, DistrictTransfarmer, TransmissionLineTransfarmer,
-    HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer
+    HubTransfarmer, StateTransfarmer, ContactTransfarmer, AccessTransfarmer,RoleUserMappingTransfarmer
     , ModuleobjTransfarmer, ScreenObjTransfarmer, UserDeviceRegTransfarmer, GradeSetService, GradeSetTransfarmer, GradeSetListResolverService,
     GradeService, GradeTransfarmer, GradeListResolverService, QualificationListResolverService,
     QualificationService, QualificationTransfarmer, QualificationLevelListResolverService, QualificationLevelService, QualificationLevelTransfarmer,
@@ -571,7 +578,7 @@ export const MY_FORMATS = {
     AssetGroupListResolverService, ZoneListResolverService, CircleListResolverService,
     DeviceListResolverService, ClusterListResolverService, TransmissionLineListResolverService,
     HubListResolverService, ContactListResolverService, AccessListResolverService
-    , ModuleobjListResolverService, ScreenObjListResolverService,
+    , ModuleobjListResolverService, ScreenObjListResolverService,RoleUserMappingListResolverService,
     UserDeviceRegListResolverService,
     ProcessListResolverService, RoleListResolverService,
     DialogTemplateComponent,
